@@ -52,7 +52,6 @@
 		B823AB6A23F156D600DE13EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B823AB7A23F15EB600DE13EA /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 			);
 			path = Scenes;
@@ -87,10 +86,9 @@
 		B823AB7423F15D5F00DE13EA /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
 				B823AB7523F15DD700DE13EA /* Onboarding */,
-				B823AB7923F15E8400DE13EA /* Login */,
-				B823AB7823F15E7300DE13EA /* Registration */,
+				B823AB7923F15E8400DE13EA /* SignUp */,
+				B823AB7823F15E7300DE13EA /* SignIn */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -103,26 +101,18 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		B823AB7823F15E7300DE13EA /* Registration */ = {
+		B823AB7823F15E7300DE13EA /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Registration;
+			path = SignIn;
 			sourceTree = "<group>";
 		};
-		B823AB7923F15E8400DE13EA /* Login */ = {
+		B823AB7923F15E8400DE13EA /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		B823AB7A23F15EB600DE13EA /* Launch */ = {
-			isa = PBXGroup;
-			children = (
-				B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */,
-			);
-			path = Launch;
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		B823AB7B23F15F6E00DE13EA /* cells */ = {
@@ -145,6 +135,15 @@
 			children = (
 			);
 			path = storyboards;
+			sourceTree = "<group>";
+		};
+		B823AB8223F1D20A00DE13EA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
+				B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		B870197823ED50EA00625D61 = {
@@ -171,6 +170,7 @@
 				B823AB6C23F156EE00DE13EA /* Networking */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B823AB6D23F1570F00DE13EA /* Reusable */,
+				B823AB8223F1D20A00DE13EA /* Storyboards */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
 				B823AB6923F156C600DE13EA /* Resources */,
 			);
