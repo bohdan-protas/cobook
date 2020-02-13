@@ -10,10 +10,17 @@ import UIKit
 
 enum Onboarding {
 
+    enum ButtonActionType {
+        case next
+        case finish
+    }
+
     struct ViewModel {
         var title: String
         var subtitle: String
         var image: UIImage?
+        var actionTitle: String
+        var action: ButtonActionType
     }
 
 
