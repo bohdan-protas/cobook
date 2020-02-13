@@ -54,6 +54,7 @@ class OnboardingViewController: UIViewController {
         setup()
     }
 
+    // MARK: Privates
     private func setup() {
         let pageWidth = collectionView.frame.width
         let currentOffset = collectionView.contentOffset.x + pageWidth
@@ -62,6 +63,11 @@ class OnboardingViewController: UIViewController {
         progressView.setProgress(currentProgress, animated: false)
     }
     
+    /// Routing
+    func goToSignUp() {
+        self.performSegue(withIdentifier: SignUpViewController.segueId, sender: self)
+    }
+
 
 }
 
@@ -97,7 +103,7 @@ extension OnboardingViewController: OnboardingPageCollectionViewCellDelegate {
             }
             collectionView.scrollToItem(at: IndexPath(row: currentPage+1, section: 0), at: .centeredHorizontally, animated: true)
         case .finish:
-            print("Navigation to register")
+            goToSignUp()
         }
     }
 

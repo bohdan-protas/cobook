@@ -14,4 +14,12 @@ extension UIViewController {
         return String.init(describing: self.self)
     }
 
+    static var segueId: String {
+        return "goTo\(String(describing: self.self))"
+    }
+
+    static var unwindSegueId: String {
+        return "unwindTo\(String(describing: self.self))"
+    }
+
 }
