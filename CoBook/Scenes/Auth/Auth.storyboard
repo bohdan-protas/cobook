@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0vd-fA-VJG">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Onboarding View Controller-->
+        <scene sceneID="JBC-ko-4ml">
+            <objects>
+                <viewController id="0vd-fA-VJG" customClass="OnboardingViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ub8-kG-WhQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BuO-Xo-8SW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="563"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Pwy-bt-de6">
+                                    <size key="itemSize" width="377" height="509"/>
+                                    <size key="estimatedItemSize" width="373" height="538"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0vd-fA-VJG" id="CZj-Ip-acr"/>
+                                    <outlet property="delegate" destination="0vd-fA-VJG" id="ndI-6z-nHU"/>
+                                </connections>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZr-sr-CUw">
+                                <rect key="frame" x="0.0" y="563" width="375" height="104"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOB-te-tFY">
+                                        <rect key="frame" x="40" y="24" width="295" height="50"/>
+                                        <color key="backgroundColor" name="Theme_Accent"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="cn2-eG-EUW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" name="Theme_Black-Middle"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onNextButtonTapped:" destination="0vd-fA-VJG" eventType="touchUpInside" id="J2R-0C-heN"/>
+                                        </connections>
+                                    </button>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bdo-da-PJ7" customClass="CustomProgressView" customModule="CoBook" customModuleProvider="target">
+                                        <rect key="frame" x="-3" y="98" width="381" height="6"/>
+                                        <color key="tintColor" name="Theme_Green"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="6" id="E9I-9s-Bro"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="bdo-da-PJ7" firstAttribute="leading" secondItem="dZr-sr-CUw" secondAttribute="leading" constant="-3" id="XaJ-KR-Hea"/>
+                                    <constraint firstItem="uOB-te-tFY" firstAttribute="top" secondItem="dZr-sr-CUw" secondAttribute="top" constant="24" id="Z6U-EJ-uk6"/>
+                                    <constraint firstAttribute="trailing" secondItem="uOB-te-tFY" secondAttribute="trailing" constant="40" id="aKQ-l5-6kg"/>
+                                    <constraint firstAttribute="bottom" secondItem="bdo-da-PJ7" secondAttribute="bottom" id="fb1-6g-nkh"/>
+                                    <constraint firstAttribute="trailing" secondItem="bdo-da-PJ7" secondAttribute="trailing" constant="-3" id="hXU-mc-s24"/>
+                                    <constraint firstItem="bdo-da-PJ7" firstAttribute="top" secondItem="uOB-te-tFY" secondAttribute="bottom" constant="24" id="mvL-sv-9lf"/>
+                                    <constraint firstItem="uOB-te-tFY" firstAttribute="leading" secondItem="dZr-sr-CUw" secondAttribute="leading" constant="40" id="sgp-qK-YxS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BuO-Xo-8SW" firstAttribute="leading" secondItem="tPW-iW-Daj" secondAttribute="leading" id="0my-Uj-VPs"/>
+                            <constraint firstItem="tPW-iW-Daj" firstAttribute="bottom" secondItem="dZr-sr-CUw" secondAttribute="bottom" id="JXH-t9-xGH"/>
+                            <constraint firstItem="BuO-Xo-8SW" firstAttribute="top" secondItem="tPW-iW-Daj" secondAttribute="top" id="SFz-2o-Wjh"/>
+                            <constraint firstItem="BuO-Xo-8SW" firstAttribute="trailing" secondItem="tPW-iW-Daj" secondAttribute="trailing" id="hlG-Ck-0sd"/>
+                            <constraint firstItem="dZr-sr-CUw" firstAttribute="trailing" secondItem="tPW-iW-Daj" secondAttribute="trailing" id="im3-Lq-2fk"/>
+                            <constraint firstItem="dZr-sr-CUw" firstAttribute="top" secondItem="BuO-Xo-8SW" secondAttribute="bottom" id="tTK-Xx-zIv"/>
+                            <constraint firstItem="dZr-sr-CUw" firstAttribute="leading" secondItem="tPW-iW-Daj" secondAttribute="leading" id="ugJ-27-ffr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tPW-iW-Daj"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="BuO-Xo-8SW" id="tmK-6V-TRN"/>
+                        <outlet property="nextButton" destination="uOB-te-tFY" id="pTq-lG-R7A"/>
+                        <outlet property="progressView" destination="bdo-da-PJ7" id="bTh-1f-gcU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C5s-50-4sL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="40.799999999999997" y="158.77061469265368"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Theme_Accent">
+            <color red="1" green="0.85490196078431369" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14901960784313725" green="0.18431372549019609" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green">
+            <color red="0.4823529411764706" green="0.73333333333333328" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

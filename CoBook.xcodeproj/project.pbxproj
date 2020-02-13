@@ -12,6 +12,12 @@
 		B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */; };
 		B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B823AB7623F15E3600DE13EA /* Auth.storyboard */; };
 		B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */; };
+		B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */; };
+		B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */; };
+		B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */; };
+		B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573FB23F5567700C8CBF8 /* UIFont + Extensions.swift */; };
+		B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* CustomProgressView.swift */; };
+		B826B0F223F459A1009041DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0F123F459A1009041DD /* Onboarding.swift */; };
 		B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870198423ED50EA00625D61 /* AppDelegate.swift */; };
 		B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B870198D23ED50EC00625D61 /* Assets.xcassets */; };
 		B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */; };
@@ -23,6 +29,12 @@
 		B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7623F15E3600DE13EA /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingPageCollectionViewCell.xib; sourceTree = "<group>"; };
+		B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
+		B82573FB23F5567700C8CBF8 /* UIFont + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extensions.swift"; sourceTree = "<group>"; };
+		B826B0E523F4109C009041DD /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		B826B0F123F459A1009041DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		B870198123ED50EA00625D61 /* CoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B870198423ED50EA00625D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B870198D23ED50EC00625D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,6 +64,7 @@
 		B823AB6A23F156D600DE13EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B826B0EB23F442AC009041DD /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 			);
 			path = Scenes;
@@ -63,6 +76,8 @@
 				B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */,
 				B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */,
 				B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */,
+				B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */,
+				B82573FB23F5567700C8CBF8 /* UIFont + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -74,18 +89,19 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		B823AB6D23F1570F00DE13EA /* Reusable */ = {
+		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B823AB7D23F15FA900DE13EA /* storyboards */,
-				B823AB7C23F15F8800DE13EA /* views */,
+				B82573F123F545C900C8CBF8 /* Cells */,
+				B826B0E523F4109C009041DD /* CustomProgressView.swift */,
 			);
-			path = Reusable;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B823AB7423F15D5F00DE13EA /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
 				B823AB7523F15DD700DE13EA /* Onboarding */,
 				B823AB7923F15E8400DE13EA /* SignUp */,
 				B823AB7823F15E7300DE13EA /* SignIn */,
@@ -115,35 +131,44 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		B823AB7B23F15F6E00DE13EA /* cells */ = {
+		B82573F123F545C900C8CBF8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B82573F223F545D000C8CBF8 /* OnboardingPageCollectionViewCell */,
 			);
-			path = cells;
+			path = Cells;
 			sourceTree = "<group>";
 		};
-		B823AB7C23F15F8800DE13EA /* views */ = {
+		B82573F223F545D000C8CBF8 /* OnboardingPageCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				B823AB7B23F15F6E00DE13EA /* cells */,
+				B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */,
+				B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */,
 			);
-			path = views;
+			path = OnboardingPageCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		B823AB7D23F15FA900DE13EA /* storyboards */ = {
+		B826B0EB23F442AC009041DD /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = storyboards;
-			sourceTree = "<group>";
-		};
-		B823AB8223F1D20A00DE13EA /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
 				B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */,
 			);
-			path = Storyboards;
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		B826B0F023F45973009041DD /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		B826B0F323F45ED8009041DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B826B0F123F459A1009041DD /* Onboarding.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B870197823ED50EA00625D61 = {
@@ -165,12 +190,13 @@
 		B870198323ED50EA00625D61 /* CoBook */ = {
 			isa = PBXGroup;
 			children = (
+				B826B0F023F45973009041DD /* New Group */,
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B870199223ED50EC00625D61 /* Info.plist */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
-				B823AB6D23F1570F00DE13EA /* Reusable */,
-				B823AB8223F1D20A00DE13EA /* Storyboards */,
+				B826B0F323F45ED8009041DD /* Models */,
+				B823AB6D23F1570F00DE13EA /* Views */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
 				B823AB6923F156C600DE13EA /* Resources */,
 			);
@@ -235,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
 				B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */,
 				B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */,
 				B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */,
@@ -248,9 +275,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
+				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
+				B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
+				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
+				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
 				B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */,
 			);
