@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  CoBook
+
+  Created by protas on 2/13/20.
+  Copyright © 2020 CoBook. All rights reserved.
+*/
+
+"Onboarding.Title01" = "Title.01";
+"Onboarding.Subtitle01" = "Subtitle01";
+"Onboarding.Title02" = "Title 02";
+"Onboarding.Subtitle02" = "Subtitle 02";
+"Onboarding.Title03" = "Title 03";
+"Onboarding.Subtitle03" = "Subtitle 03";
+"Onboarding.Next" = "Next";
+"Onboarding.Start" = "Start";
