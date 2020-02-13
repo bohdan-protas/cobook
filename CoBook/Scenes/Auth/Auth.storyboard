@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BuO-Xo-8SW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="661"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Pwy-bt-de6">
                                     <size key="itemSize" width="377" height="509"/>
@@ -33,68 +33,33 @@
                                     <outlet property="delegate" destination="0vd-fA-VJG" id="ndI-6z-nHU"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZr-sr-CUw">
-                                <rect key="frame" x="0.0" y="563" width="375" height="104"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOB-te-tFY">
-                                        <rect key="frame" x="40" y="24" width="295" height="50"/>
-                                        <color key="backgroundColor" name="Theme_Accent"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="cn2-eG-EUW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" name="Theme_Black-Middle"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onNextButtonTapped:" destination="0vd-fA-VJG" eventType="touchUpInside" id="J2R-0C-heN"/>
-                                        </connections>
-                                    </button>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bdo-da-PJ7" customClass="CustomProgressView" customModule="CoBook" customModuleProvider="target">
-                                        <rect key="frame" x="-3" y="98" width="381" height="6"/>
-                                        <color key="tintColor" name="Theme_Green"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="6" id="E9I-9s-Bro"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </progressView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bdo-da-PJ7" customClass="CustomProgressView" customModule="CoBook" customModuleProvider="target">
+                                <rect key="frame" x="-3" y="661" width="381" height="6"/>
+                                <color key="tintColor" name="Theme_Green"/>
                                 <constraints>
-                                    <constraint firstItem="bdo-da-PJ7" firstAttribute="leading" secondItem="dZr-sr-CUw" secondAttribute="leading" constant="-3" id="XaJ-KR-Hea"/>
-                                    <constraint firstItem="uOB-te-tFY" firstAttribute="top" secondItem="dZr-sr-CUw" secondAttribute="top" constant="24" id="Z6U-EJ-uk6"/>
-                                    <constraint firstAttribute="trailing" secondItem="uOB-te-tFY" secondAttribute="trailing" constant="40" id="aKQ-l5-6kg"/>
-                                    <constraint firstAttribute="bottom" secondItem="bdo-da-PJ7" secondAttribute="bottom" id="fb1-6g-nkh"/>
-                                    <constraint firstAttribute="trailing" secondItem="bdo-da-PJ7" secondAttribute="trailing" constant="-3" id="hXU-mc-s24"/>
-                                    <constraint firstItem="bdo-da-PJ7" firstAttribute="top" secondItem="uOB-te-tFY" secondAttribute="bottom" constant="24" id="mvL-sv-9lf"/>
-                                    <constraint firstItem="uOB-te-tFY" firstAttribute="leading" secondItem="dZr-sr-CUw" secondAttribute="leading" constant="40" id="sgp-qK-YxS"/>
+                                    <constraint firstAttribute="height" constant="6" id="E9I-9s-Bro"/>
                                 </constraints>
-                            </view>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BuO-Xo-8SW" firstAttribute="leading" secondItem="tPW-iW-Daj" secondAttribute="leading" id="0my-Uj-VPs"/>
-                            <constraint firstItem="tPW-iW-Daj" firstAttribute="bottom" secondItem="dZr-sr-CUw" secondAttribute="bottom" id="JXH-t9-xGH"/>
+                            <constraint firstItem="bdo-da-PJ7" firstAttribute="leading" secondItem="Ub8-kG-WhQ" secondAttribute="leading" constant="-3" id="4Lh-Sz-vO8"/>
+                            <constraint firstAttribute="trailing" secondItem="bdo-da-PJ7" secondAttribute="trailing" constant="-3" id="HdB-tr-n5a"/>
+                            <constraint firstItem="tPW-iW-Daj" firstAttribute="bottom" secondItem="bdo-da-PJ7" secondAttribute="bottom" id="O9B-gM-nW3"/>
                             <constraint firstItem="BuO-Xo-8SW" firstAttribute="top" secondItem="tPW-iW-Daj" secondAttribute="top" id="SFz-2o-Wjh"/>
+                            <constraint firstItem="bdo-da-PJ7" firstAttribute="top" secondItem="BuO-Xo-8SW" secondAttribute="bottom" id="WCV-lQ-s8U"/>
                             <constraint firstItem="BuO-Xo-8SW" firstAttribute="trailing" secondItem="tPW-iW-Daj" secondAttribute="trailing" id="hlG-Ck-0sd"/>
-                            <constraint firstItem="dZr-sr-CUw" firstAttribute="trailing" secondItem="tPW-iW-Daj" secondAttribute="trailing" id="im3-Lq-2fk"/>
-                            <constraint firstItem="dZr-sr-CUw" firstAttribute="top" secondItem="BuO-Xo-8SW" secondAttribute="bottom" id="tTK-Xx-zIv"/>
-                            <constraint firstItem="dZr-sr-CUw" firstAttribute="leading" secondItem="tPW-iW-Daj" secondAttribute="leading" id="ugJ-27-ffr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tPW-iW-Daj"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="BuO-Xo-8SW" id="tmK-6V-TRN"/>
-                        <outlet property="nextButton" destination="uOB-te-tFY" id="pTq-lG-R7A"/>
                         <outlet property="progressView" destination="bdo-da-PJ7" id="bTh-1f-gcU"/>
                     </connections>
                 </viewController>
@@ -104,14 +69,8 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Theme_Accent">
-            <color red="1" green="0.85490196078431369" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Theme_Black-Middle">
-            <color red="0.14901960784313725" green="0.18431372549019609" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Theme_Green">
-            <color red="0.4823529411764706" green="0.73333333333333328" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48199999332427979" green="0.73299998044967651" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
