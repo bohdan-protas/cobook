@@ -27,20 +27,20 @@ class OnboardingViewController: UIViewController {
     }()
 
     private var dataSource: [Onboarding.ViewModel] = [
-        Onboarding.ViewModel(title: "Title 01",
-                             subtitle: "Опис особливостей додатку фічі, переваги, тощо",
+        Onboarding.ViewModel(title: "Onboarding.Title01".localized,
+                             subtitle: "Onboarding.Subtitle01".localized,
                              image: UIImage(named: "ic_businessman"),
-                             actionTitle: "Продовжити",
+                             actionTitle: "Onboarding.Next".localized,
                              action: Onboarding.ButtonActionType.next),
-        Onboarding.ViewModel(title: "Title 02",
-                             subtitle: "Опис особливостей додатку фічі, переваги, тощо",
+        Onboarding.ViewModel(title: "Onboarding.Title02".localized,
+                             subtitle: "Onboarding.Subtitle02".localized,
                              image: UIImage(named: "ic_business_plan"),
-                             actionTitle: "Продовжити",
+                             actionTitle: "Onboarding.Next".localized,
                              action: Onboarding.ButtonActionType.next),
-        Onboarding.ViewModel(title: "Title 03",
-                             subtitle: "Опис особливостей додатку фічі, переваги, тощо реваги, реваги, реваги, реваги, реваги, ",
+        Onboarding.ViewModel(title: "Onboarding.Title03".localized,
+                             subtitle: "Onboarding.Subtitle03".localized,
                              image: UIImage(named: "ic_business_deal"),
-                             actionTitle: "Розпочати",
+                             actionTitle: "Onboarding.Start".localized,
                              action: Onboarding.ButtonActionType.finish)
     ]
 

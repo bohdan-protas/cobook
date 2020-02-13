@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  CoBook
+
+  Created by protas on 2/13/20.
+  Copyright © 2020 CoBook. All rights reserved.
+*/
+
+"Onboarding.Title01" = "Заголовок 01";
+"Onboarding.Subtitle01" = "Описособливостей додатку\nфічі, переваги, тощо";
+"Onboarding.Title02" = "Заголовок 02";
+"Onboarding.Subtitle02" = "Описособливостей додатку\nфічі, переваги, тощо";
+"Onboarding.Title03" = "Заголовок 03";
+"Onboarding.Subtitle03" = "Описособливостей додатку\nфічі, переваги, тощо";
+"Onboarding.Next" = "Продовжити";
+"Onboarding.Start" = "Розпочати";

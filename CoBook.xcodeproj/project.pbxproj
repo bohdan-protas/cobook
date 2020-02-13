@@ -34,6 +34,8 @@
 		B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B825740D23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf */; };
 		B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B825740E23F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf */; };
 		B825742123F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B825740F23F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf */; };
+		B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B825742623F57E0600C8CBF8 /* Localizable.strings */; };
+		B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742823F5808400C8CBF8 /* String + Extensions.swift */; };
 		B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* CustomProgressView.swift */; };
 		B826B0F223F459A1009041DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0F123F459A1009041DD /* Onboarding.swift */; };
 		B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870198423ED50EA00625D61 /* AppDelegate.swift */; };
@@ -69,6 +71,9 @@
 		B825740D23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueCyr-HeavyItalic.ttf"; sourceTree = "<group>"; };
 		B825740E23F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueCyr-BlackItalic.ttf"; sourceTree = "<group>"; };
 		B825740F23F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueCyr-Italic.ttf"; sourceTree = "<group>"; };
+		B825742523F57E0600C8CBF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B825742723F57E3B00C8CBF8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B825742823F5808400C8CBF8 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		B826B0E523F4109C009041DD /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		B826B0F123F459A1009041DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		B870198123ED50EA00625D61 /* CoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +99,7 @@
 			children = (
 				B82573FD23F561D100C8CBF8 /* Fonts */,
 				B870198D23ED50EC00625D61 /* Assets.xcassets */,
+				B825742623F57E0600C8CBF8 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -115,6 +121,7 @@
 				B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */,
 				B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */,
 				B82573FB23F5567700C8CBF8 /* UIFont + Extensions.swift */,
+				B825742823F5808400C8CBF8 /* String + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -307,6 +314,7 @@
 			knownRegions = (
 				en,
 				Base,
+				uk,
 			);
 			mainGroup = B870197823ED50EA00625D61;
 			productRefGroup = B870198223ED50EA00625D61 /* Products */;
@@ -325,6 +333,7 @@
 			files = (
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
+				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
@@ -360,6 +369,7 @@
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
 				B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */,
+				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
@@ -371,6 +381,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		B825742623F57E0600C8CBF8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B825742523F57E0600C8CBF8 /* en */,
+				B825742723F57E3B00C8CBF8 /* uk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -386,6 +405,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -446,6 +466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
