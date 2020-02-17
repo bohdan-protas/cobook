@@ -16,14 +16,9 @@ protocol SignUpViewProtocol: class {
 // MARK: Presenter -
 protocol SignUpPresenterProtocol: class {
 	var view: SignUpViewProtocol? { get set }
-    func setup()
 }
 
 class SignUpPresenter: SignUpPresenterProtocol {
 
     weak var view: SignUpViewProtocol?
-
-    func setup() {
-
-    }
 }

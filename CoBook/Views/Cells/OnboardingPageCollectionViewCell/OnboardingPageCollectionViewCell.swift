@@ -26,7 +26,7 @@ class OnboardingPageCollectionViewCell: UICollectionViewCell {
         delegate?.actionButtonDidTapped(self, actionType: action)
     }
 
-    func fill(_ model: Onboarding.ViewModel) {
+    func fill(_ model: Onboarding.PageModel) {
         self.titleImageView.image = model.image
         self.titleLabel.text = model.title
         self.descriptionLabel.text = model.subtitle

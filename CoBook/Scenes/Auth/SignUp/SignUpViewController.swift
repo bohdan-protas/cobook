@@ -7,43 +7,67 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
 
 class SignUpViewController: UIViewController, SignUpViewProtocol {
 
+    enum Defaults {
+        static let bottomContainerHeight: CGFloat = 80
+    }
+
+    // MARK: IBOutlets
     @IBOutlet var imageContainer: UIView!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var titleImageView: UIImageView!
+
+    // MARK: Properties
     var presenter: SignUpPresenterProtocol = SignUpPresenter()
 
+    // MARK: Lifecycle
 	override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter.view = self
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
         hideKeyboardWhenTappedAround()
     }
 
-    @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            bottomContainerConstraint.constant = keyboardSize.height
-            UIView.animate(withDuration: 0.1) {
-                self.imageContainer.isHidden = true
-                self.view.layoutIfNeeded()
-            }
-        }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObserver()
     }
 
-    @objc func keyboardWillHide(notification: Notification) {
-        bottomContainerConstraint.constant = 80
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboardObserver()
+    }
+
+
+}
+
+// MARK: - Private
+private extension SignUpViewController {
+
+    private func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChangeFrame), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    // MARK: - Observer
+    @objc private func keyboardChangeFrame(notification: NSNotification) {
+        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let isKeyboardBecomeHide = notification.name == UIResponder.keyboardWillHideNotification
+        bottomContainerConstraint.constant = isKeyboardBecomeHide ? Defaults.bottomContainerHeight : keyboardSize.height
         UIView.animate(withDuration: 0.1) {
-            self.imageContainer.isHidden = false
+            self.imageContainer.isHidden = !isKeyboardBecomeHide
             self.view.layoutIfNeeded()
         }
     }
+
 
 }

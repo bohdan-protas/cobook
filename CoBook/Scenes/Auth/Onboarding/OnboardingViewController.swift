@@ -24,18 +24,18 @@ class OnboardingViewController: UIViewController {
         return flowLayout
     }()
 
-    private var dataSource: [Onboarding.ViewModel] = [
-        Onboarding.ViewModel(title: "Onboarding.Title01".localized,
+    private var dataSource: [Onboarding.PageModel] = [
+        Onboarding.PageModel(title: "Onboarding.Title01".localized,
                              subtitle: "Onboarding.Subtitle01".localized,
                              image: UIImage(named: "ic_businessman"),
                              actionTitle: "Onboarding.Next".localized,
                              action: Onboarding.ButtonActionType.next),
-        Onboarding.ViewModel(title: "Onboarding.Title02".localized,
+        Onboarding.PageModel(title: "Onboarding.Title02".localized,
                              subtitle: "Onboarding.Subtitle02".localized,
                              image: UIImage(named: "ic_business_plan"),
                              actionTitle: "Onboarding.Next".localized,
                              action: Onboarding.ButtonActionType.next),
-        Onboarding.ViewModel(title: "Onboarding.Title03".localized,
+        Onboarding.PageModel(title: "Onboarding.Title03".localized,
                              subtitle: "Onboarding.Subtitle03".localized,
                              image: UIImage(named: "ic_business_deal"),
                              actionTitle: "Onboarding.Start".localized,
@@ -51,19 +51,24 @@ class OnboardingViewController: UIViewController {
 
         setup()
     }
+    
+    /// Routing
+    func goToSignUp() {
+        self.performSegue(withIdentifier: SignUpViewController.segueId, sender: self)
+    }
 
-    // MARK: Privates
+
+}
+
+// MARK: - Privates
+private extension OnboardingViewController {
+
     private func setup() {
         let pageWidth = collectionView.frame.width
         let currentOffset = collectionView.contentOffset.x + pageWidth
         let fullOffset = CGFloat(self.dataSource.count) * pageWidth
         let currentProgress: Float = Float(currentOffset / fullOffset)
         progressView.setProgress(currentProgress, animated: false)
-    }
-    
-    /// Routing
-    func goToSignUp() {
-        self.performSegue(withIdentifier: SignUpViewController.segueId, sender: self)
     }
 
 
@@ -86,6 +91,7 @@ extension OnboardingViewController: UICollectionViewDataSource {
 
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
