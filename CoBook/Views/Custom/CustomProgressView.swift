@@ -14,11 +14,13 @@ class CustomProgressView: UIProgressView {
         super.layoutSubviews()
 
         // Set the rounded edge for the outer bar
-        self.layer.cornerRadius = self.cornerRadius
+        self.layer.cornerRadius = self.frame.height * 0.5
         self.clipsToBounds = true
 
+        self.layer.sublayers?[0].backgroundColor = UIColor.white.cgColor
+
         // Set the rounded edge for the inner bar
-        self.layer.sublayers?[1].cornerRadius = self.cornerRadius
+        self.layer.sublayers?[1].cornerRadius = self.frame.height * 0.5
         self.subviews[1].clipsToBounds = true
     }
 

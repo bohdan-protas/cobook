@@ -19,15 +19,6 @@ extension UIView {
         return UINib.init(nibName: self.identifier, bundle: Bundle.init(for: self.self))
     }
 
-    @IBInspectable var cornerRadius: CGFloat {
-        set {
-            layer.cornerRadius = newValue
-        }
-        get {
-            return layer.cornerRadius
-        }
-    }
-
     
 }
 

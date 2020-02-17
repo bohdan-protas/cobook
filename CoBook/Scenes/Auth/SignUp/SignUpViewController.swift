@@ -22,6 +22,10 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     // MARK: Properties
     var presenter: SignUpPresenterProtocol = SignUpPresenter()
 
+    @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
+        sender.isLoading.toggle()
+    }
+
     // MARK: Lifecycle
 	override func viewDidLoad() {
         super.viewDidLoad()
