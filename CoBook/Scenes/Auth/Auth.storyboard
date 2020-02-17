@@ -9,6 +9,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="HelveticaNeueCyr-Bold.ttf">
+            <string>HelveticaNeueCyr-Bold</string>
+        </array>
+        <array key="HelveticaNeueCyr-Roman.ttf">
+            <string>HelveticaNeueCyr-Roman</string>
+        </array>
         <array key="SFProDisplay-Medium.ttf">
             <string>SFProDisplay-Medium</string>
         </array>
@@ -105,8 +111,8 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="KSs-AB-lKJ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="24"/>
+                                                <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -124,8 +130,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="150"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_business_deal" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="295" height="150"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="295.00000000000006" height="150"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -197,7 +203,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="Продовжити">
                                             <color key="titleColor" name="Theme_Black-Middle"/>
                                         </state>
                                         <state key="disabled">
@@ -242,32 +248,41 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndJ-BG-QLR" userLabel="Bottom Container">
                                 <rect key="frame" x="0.0" y="597" width="375" height="60"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3ET-xK-C7x">
-                                        <rect key="frame" x="27" y="20" width="321" height="20"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="9kg-Qe-QIE" userLabel="someQuestionStackView">
+                                        <rect key="frame" x="10" y="20" width="355" height="20"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вже маєте аккаунт?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFT-0E-nUf">
-                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gJF-03-fFg">
+                                                <rect key="frame" x="0.0" y="0.0" width="72" height="20"/>
+                                            </view>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вже маєте аккаунт?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6YP-2W-RYg">
+                                                <rect key="frame" x="75" y="0.0" width="142" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
+                                                <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CaZ-ot-cbN">
-                                                <rect key="frame" x="160.5" y="0.0" width="160.5" height="20"/>
-                                                <state key="normal" title="фак"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E46-yR-0JZ">
+                                                <rect key="frame" x="220" y="0.0" width="60" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="15"/>
+                                                <state key="normal" title="Увійдіть">
+                                                    <color key="titleColor" name="Theme_Green"/>
+                                                </state>
                                             </button>
+                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="D49-SM-mdP">
+                                                <rect key="frame" x="283" y="0.0" width="72" height="20"/>
+                                            </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="lxq-CX-S8O"/>
+                                            <constraint firstItem="gJF-03-fFg" firstAttribute="width" secondItem="D49-SM-mdP" secondAttribute="width" id="XQB-f4-ohP"/>
+                                            <constraint firstAttribute="height" constant="20" id="kAo-F6-7Dh"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="3ET-xK-C7x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ndJ-BG-QLR" secondAttribute="leading" constant="24" id="7el-7c-SZr"/>
+                                    <constraint firstAttribute="trailing" secondItem="9kg-Qe-QIE" secondAttribute="trailing" constant="10" id="UOK-Dm-FNJ"/>
+                                    <constraint firstItem="9kg-Qe-QIE" firstAttribute="centerY" secondItem="ndJ-BG-QLR" secondAttribute="centerY" id="VDA-cF-Ijl"/>
                                     <constraint firstAttribute="height" constant="60" id="p7I-BU-Ur4"/>
-                                    <constraint firstItem="3ET-xK-C7x" firstAttribute="centerX" secondItem="ndJ-BG-QLR" secondAttribute="centerX" id="pIY-aM-pN7"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3ET-xK-C7x" secondAttribute="trailing" constant="24" id="xPX-fg-IP4"/>
-                                    <constraint firstItem="3ET-xK-C7x" firstAttribute="centerY" secondItem="ndJ-BG-QLR" secondAttribute="centerY" id="zAo-CL-5pE"/>
+                                    <constraint firstItem="9kg-Qe-QIE" firstAttribute="leading" secondItem="ndJ-BG-QLR" secondAttribute="leading" constant="10" id="rri-hW-MDN"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -316,7 +331,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_business_deal" width="250" height="190"/>
+        <image name="ic_mobile_life" width="196" height="130"/>
         <namedColor name="Theme_Accent">
             <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
