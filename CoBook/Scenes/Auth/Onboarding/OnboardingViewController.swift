@@ -21,8 +21,6 @@ class OnboardingViewController: UIViewController {
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
-        flowLayout.itemSize = collectionView.bounds.size
-
         return flowLayout
     }()
 
@@ -85,6 +83,14 @@ extension OnboardingViewController: UICollectionViewDataSource {
         return cell
     }
 
+
+}
+
+extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.bounds.size
+    }
 
 }
 
