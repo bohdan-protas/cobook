@@ -51,7 +51,7 @@ extension UIColor {
 
 
         enum TextField {
-            static let boderActive = UIColor.init(named: "Theme_TextField-boderActive")
+            static let borderActive = UIColor.init(named: "Theme_TextField-borderActive")
             static let borderInactive = UIColor.init(named: "Theme_TextField-borderInactive")
         }
 

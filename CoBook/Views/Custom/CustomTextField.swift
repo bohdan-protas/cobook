@@ -11,6 +11,7 @@ import UIKit
 @IBDesignable
 class CustomTextField: UITextField {
 
+    // MARK: Properties
     @IBInspectable public var bottomTextInset: CGFloat = 0 {
         didSet { textPadding.bottom = bottomTextInset }
     }
@@ -39,8 +40,12 @@ class CustomTextField: UITextField {
         didSet { setBorderWidth(value: borderWidth) }
     }
 
-    @IBInspectable var borderColor: UIColor = .white {
-        didSet { setBorderColor(value: borderColor) }
+    @IBInspectable var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.white {
+        didSet { refreshBorderColor() }
+    }
+
+    @IBInspectable var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.white {
+        didSet { refreshBorderColor() }
     }
 
     var textPadding = UIEdgeInsets.zero {
@@ -65,6 +70,11 @@ class CustomTextField: UITextField {
         sharedInit()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        refreshBorderColor()
+    }
+
     // MARK: Setup
     func sharedInit() {
         self.clipsToBounds = true
@@ -72,8 +82,7 @@ class CustomTextField: UITextField {
         setPlaceholderColor(value: placeholderColor)
         setCorners(value: cornerRadius)
         setBorderWidth(value: borderWidth)
-        setBorderWidth(value: borderWidth)
-        setBorderColor(value: borderColor)
+        refreshBorderColor()
     }
 
     // MARK: Text rect padding
@@ -98,8 +107,8 @@ class CustomTextField: UITextField {
         layer.borderWidth = value
     }
 
-    private func setBorderColor(value: UIColor) {
-        layer.borderColor = value.cgColor
+    private func refreshBorderColor() {
+        layer.borderColor = isEditing ? enabledBorderColor.cgColor : disabledBorderColor.cgColor
     }
 
     private func setCorners(value: CGFloat) {
