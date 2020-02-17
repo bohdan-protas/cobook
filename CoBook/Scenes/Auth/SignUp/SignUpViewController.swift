@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class SignUpViewController: UIViewController, SignUpViewProtocol {
 
@@ -17,7 +18,7 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         presenter.view = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -40,7 +41,7 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     @objc func keyboardWillHide(notification: Notification) {
         bottomContainerConstraint.constant = 80
         UIView.animate(withDuration: 0.1) {
-            self.imageContainer.isHidden = true
+            self.imageContainer.isHidden = false
             self.view.layoutIfNeeded()
         }
     }
