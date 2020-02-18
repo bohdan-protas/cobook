@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     @IBOutlet var imageContainer: UIView!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var titleImageView: UIImageView!
+    @IBOutlet var shadowContainerView: UIView!
 
     // MARK: Properties
     var presenter: SignUpPresenterProtocol = SignUpPresenter()

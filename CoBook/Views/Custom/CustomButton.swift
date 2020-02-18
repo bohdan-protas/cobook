@@ -116,9 +116,7 @@ class CustomButton: UIButton {
     // MARK: Setup
     func sharedInit() {
         self.clipsToBounds = true
-
         setCorners(value: cornerRadius)
-
     }
 
     // MARK: Helpers
