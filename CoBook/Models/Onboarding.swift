@@ -15,7 +15,7 @@ enum Onboarding {
         case finish
     }
 
-    struct ViewModel {
+    struct PageModel {
         var title: String
         var subtitle: String
         var image: UIImage?

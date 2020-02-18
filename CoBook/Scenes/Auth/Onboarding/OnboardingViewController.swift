@@ -21,23 +21,21 @@ class OnboardingViewController: UIViewController {
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
-        flowLayout.itemSize = collectionView.bounds.size
-
         return flowLayout
     }()
 
-    private var dataSource: [Onboarding.ViewModel] = [
-        Onboarding.ViewModel(title: "Onboarding.Title01".localized,
+    private var dataSource: [Onboarding.PageModel] = [
+        Onboarding.PageModel(title: "Onboarding.Title01".localized,
                              subtitle: "Onboarding.Subtitle01".localized,
                              image: UIImage(named: "ic_businessman"),
                              actionTitle: "Onboarding.Next".localized,
                              action: Onboarding.ButtonActionType.next),
-        Onboarding.ViewModel(title: "Onboarding.Title02".localized,
+        Onboarding.PageModel(title: "Onboarding.Title02".localized,
                              subtitle: "Onboarding.Subtitle02".localized,
                              image: UIImage(named: "ic_business_plan"),
                              actionTitle: "Onboarding.Next".localized,
                              action: Onboarding.ButtonActionType.next),
-        Onboarding.ViewModel(title: "Onboarding.Title03".localized,
+        Onboarding.PageModel(title: "Onboarding.Title03".localized,
                              subtitle: "Onboarding.Subtitle03".localized,
                              image: UIImage(named: "ic_business_deal"),
                              actionTitle: "Onboarding.Start".localized,
@@ -53,6 +51,17 @@ class OnboardingViewController: UIViewController {
 
         setup()
     }
+    
+    /// Routing
+    func goToSignUp() {
+        self.performSegue(withIdentifier: SignUpViewController.segueId, sender: self)
+    }
+
+
+}
+
+// MARK: - Privates
+private extension OnboardingViewController {
 
     private func setup() {
         let pageWidth = collectionView.frame.width
@@ -61,7 +70,7 @@ class OnboardingViewController: UIViewController {
         let currentProgress: Float = Float(currentOffset / fullOffset)
         progressView.setProgress(currentProgress, animated: false)
     }
-    
+
 
 }
 
@@ -82,6 +91,15 @@ extension OnboardingViewController: UICollectionViewDataSource {
 
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.bounds.size
+    }
+
+}
+
 // MARK: - OnboardingPageCollectionViewCellDelegate
 extension OnboardingViewController: OnboardingPageCollectionViewCellDelegate {
 
@@ -97,7 +115,7 @@ extension OnboardingViewController: OnboardingPageCollectionViewCellDelegate {
             }
             collectionView.scrollToItem(at: IndexPath(row: currentPage+1, section: 0), at: .centeredHorizontally, animated: true)
         case .finish:
-            print("Navigation to register")
+            goToSignUp()
         }
     }
 
