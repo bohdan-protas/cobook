@@ -13,6 +13,7 @@
 		B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */; };
 		B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */; };
 		B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */; };
+		B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */; };
 		B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */; };
 		B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */; };
 		B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */; };
@@ -78,6 +79,7 @@
 		B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTelephoneNumberViewController.swift; sourceTree = "<group>"; };
 		B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTelephoneNumberPresenter.swift; sourceTree = "<group>"; };
+		B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
@@ -139,8 +141,8 @@
 		B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */ = {
 			isa = PBXGroup;
 			children = (
-				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
 				B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */,
+				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
 			);
 			path = ConfirmTelephoneNumber;
 			sourceTree = "<group>";
@@ -175,6 +177,7 @@
 				B82573FB23F5567700C8CBF8 /* UIFont + Extensions.swift */,
 				B825742823F5808400C8CBF8 /* String + Extensions.swift */,
 				B823A6A723FD34A0007540D0 /* Array + Extensions.swift */,
+				B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -332,8 +335,8 @@
 			children = (
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B870199223ED50EC00625D61 /* Info.plist */,
-				B826B0F023F45973009041DD /* Services */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
+				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B826B0F323F45ED8009041DD /* Models */,
 				B823AB6D23F1570F00DE13EA /* Views */,
@@ -465,6 +468,7 @@
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
+				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
 				B8625AC823FAD6C80044605C /* CustomTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* CustomButton.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,

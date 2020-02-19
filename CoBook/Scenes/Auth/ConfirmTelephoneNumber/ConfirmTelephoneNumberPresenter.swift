@@ -23,7 +23,7 @@ protocol ConfirmTelephoneNumberPresenterProtocol: class {
 class ConfirmTelephoneNumberPresenter: ConfirmTelephoneNumberPresenterProtocol {
     var view: ConfirmTelephoneNumberViewProtocol?
 
-
+    
 
 
 }

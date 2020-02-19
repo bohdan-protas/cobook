@@ -1,5 +1,5 @@
 //
-//  Array + Extensions.swift
+//  Collection + Extensions.swift
 //  CoBook
 //
 //  Created by protas on 2/19/20.
@@ -8,11 +8,10 @@
 
 import Foundation
 
-extension Array {
+extension Collection {
 
     subscript(safe index: Index) -> Element? {
-        let isValidIndex = index >= 0 && index < count
-        return isValidIndex ? self[index] : nil
+        return indices.contains(index) ? self[index] : nil
     }
 
     
