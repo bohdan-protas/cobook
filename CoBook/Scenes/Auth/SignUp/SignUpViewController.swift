@@ -15,11 +15,7 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     }
 
     // MARK: IBOutlets
-    @IBOutlet var imageContainer: UIView!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
-    @IBOutlet var titleImageView: UIImageView!
-    @IBOutlet var shadowContainerView: UIView!
-
     @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
     @IBOutlet var userNameTextField: CustomTextField!
     @IBOutlet var telephoneNumberTextField: CustomTextField!
@@ -48,7 +44,7 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addKeyboardObserver()
+        setupLayout()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,27 +55,18 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 
 }
 
-// MARK: - UITextFieldDelegate
-extension SignUpViewController: UITextFieldDelegate {
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case userNameTextField:
-            telephoneNumberTextField.becomeFirstResponder()
-        case telephoneNumberTextField:
-            emailTextField.becomeFirstResponder()
-        case emailTextField:
-            view.endEditing(true)
-        default:
-            view.endEditing(true)
-        }
-
-        return true
-    }
-}
-
 // MARK: - Private
 private extension SignUpViewController {
+
+    func setupLayout() {
+        /// In small screen devices disable title image
+        if UIDevice().isSmallScreenType {
+            fieldToTitleConstraint.isActive = true
+            view.layoutIfNeeded()
+        } else {
+            addKeyboardObserver()
+        }
+    }
 
     private func addKeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(obKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -91,7 +78,7 @@ private extension SignUpViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    // MARK: - Observers
+    // MARK: Observers
     @objc private func obKeyboardWillShow(notification: NSNotification) {
         let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
@@ -118,4 +105,23 @@ private extension SignUpViewController {
     }
 
 
+}
+
+// MARK: - UITextFieldDelegate
+extension SignUpViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case userNameTextField:
+            telephoneNumberTextField.becomeFirstResponder()
+        case telephoneNumberTextField:
+            emailTextField.becomeFirstResponder()
+        case emailTextField:
+            view.endEditing(true)
+        default:
+            view.endEditing(true)
+        }
+
+        return true
+    }
 }

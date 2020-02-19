@@ -124,7 +124,7 @@
                                             <constraint firstItem="Knn-GO-XXv" firstAttribute="leading" secondItem="7C9-tT-k89" secondAttribute="leading" constant="16" id="rgW-qi-mCa"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB" userLabel="Image Container">
                                         <rect key="frame" x="8" y="86" width="311" height="176"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
@@ -395,10 +395,7 @@
                         <outlet property="continueButton" destination="C7e-D1-uuF" id="YjZ-la-jrd"/>
                         <outlet property="emailTextField" destination="pQ0-b1-5dq" id="mTo-Kt-SDw"/>
                         <outlet property="fieldToTitleConstraint" destination="hlS-Of-J8f" id="nPC-Ay-MVG"/>
-                        <outlet property="imageContainer" destination="kqV-LX-vFB" id="jLQ-ub-9Hj"/>
-                        <outlet property="shadowContainerView" destination="nYz-58-TRF" id="A8N-sS-AqJ"/>
                         <outlet property="telephoneNumberTextField" destination="l9w-LB-IQc" id="uKH-Dv-0xE"/>
-                        <outlet property="titleImageView" destination="jqD-Mj-wPr" id="Lre-up-jg9"/>
                         <outlet property="userNameTextField" destination="Wsn-BH-QOy" id="CUE-Lr-pYR"/>
                     </connections>
                 </viewController>
