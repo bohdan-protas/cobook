@@ -17,6 +17,7 @@ class ConfirmTelephoneNumberViewController: UIViewController {
     // MARK: IBOutlets
     @IBOutlet var smsCodeTextFields: [UITextField]!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
+    @IBOutlet var continueButton: LoaderButton!
 
     //MARK: Actions
     @IBAction func smsTextFieldDidChanged(_ sender: UITextField) {
@@ -30,6 +31,13 @@ class ConfirmTelephoneNumberViewController: UIViewController {
             smsCodeTextFields[safe: index+1]?.becomeFirstResponder()
         }
 
+        /// if each text field is no empty
+        let arrayOfTruth = smsCodeTextFields.map { !($0.text ?? "").isEmpty }
+        continueButton.isEnabled = !arrayOfTruth.contains(false)
+    }
+
+    @IBAction func continueButtonTapped(_ sender: LoaderButton) {
+
     }
 
     // MARK: Lifecycle
@@ -41,7 +49,6 @@ class ConfirmTelephoneNumberViewController: UIViewController {
     deinit {
         removeKeyboardObserver()
     }
-    
 
     /*
     // MARK: - Navigation
@@ -52,6 +59,7 @@ class ConfirmTelephoneNumberViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }
 

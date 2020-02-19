@@ -117,10 +117,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB" userLabel="Image Container">
-                                        <rect key="frame" x="8" y="86" width="311" height="175"/>
+                                        <rect key="frame" x="8" y="86" width="311" height="189"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
-                                                <rect key="frame" x="0.0" y="0.0" width="311.00000000000006" height="130"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="144"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -132,7 +132,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-Rd-0iZ" userLabel="Fields Stack View">
-                                        <rect key="frame" x="8" y="261" width="311" height="168"/>
+                                        <rect key="frame" x="8" y="275" width="311" height="168"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Прізвище, імя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="CustomTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
@@ -332,23 +332,23 @@
                                         <rect key="frame" x="10" y="20" width="355" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gJF-03-fFg">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="20"/>
                                             </view>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вже маєте аккаунт?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6YP-2W-RYg">
-                                                <rect key="frame" x="75" y="0.0" width="142" height="20"/>
+                                                <rect key="frame" x="76" y="0.0" width="143" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
                                                 <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E46-yR-0JZ">
-                                                <rect key="frame" x="220" y="0.0" width="60" height="20"/>
+                                                <rect key="frame" x="222" y="0.0" width="57" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="15"/>
                                                 <state key="normal" title="Увійдіть">
                                                     <color key="titleColor" name="Theme_Green"/>
                                                 </state>
                                             </button>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="D49-SM-mdP">
-                                                <rect key="frame" x="283" y="0.0" width="72" height="20"/>
+                                                <rect key="frame" x="282" y="0.0" width="73" height="20"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -423,10 +423,10 @@
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46F-ZB-tZF" userLabel="Title View">
-                                        <rect key="frame" x="0.0" y="32" width="327" height="44"/>
+                                        <rect key="frame" x="0.0" y="32" width="327" height="56"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Підтвердьте номер телефону" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slK-jZ-rWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="HGH-7f-O4Z"/>
                                                 </constraints>
@@ -444,7 +444,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTV-JR-GM0" userLabel="Subtitle View">
-                                        <rect key="frame" x="0.0" y="96" width="327" height="20"/>
+                                        <rect key="frame" x="0.0" y="108" width="327" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введіть код із смс-повідомлення" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB0-hw-F8D">
                                                 <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
@@ -465,7 +465,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQy-TG-Dxs" userLabel="Fields View">
-                                        <rect key="frame" x="0.0" y="148" width="327" height="56"/>
+                                        <rect key="frame" x="0.0" y="160" width="327" height="56"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Ja2-xs-q5x">
                                                 <rect key="frame" x="74.5" y="0.0" width="178" height="56"/>
@@ -592,7 +592,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdp-gq-8RF">
-                                        <rect key="frame" x="0.0" y="228" width="327" height="20"/>
+                                        <rect key="frame" x="0.0" y="240" width="327" height="20"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6y-tS-4Y0">
                                                 <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
@@ -613,7 +613,7 @@
                                             <constraint firstItem="u6y-tS-4Y0" firstAttribute="top" secondItem="fdp-gq-8RF" secondAttribute="top" id="b0U-aa-oFA"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKo-FM-UJ3" userLabel="Continue Button" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKo-FM-UJ3" userLabel="Continue Button" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
                                         <rect key="frame" x="16" y="465" width="295" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="vve-go-Yrk"/>
@@ -643,6 +643,9 @@
                                                 <color key="value" name="Theme_Accent"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="continueButtonTapped:" destination="LDQ-N8-u8m" eventType="touchUpInside" id="gSD-cN-h7f"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -692,6 +695,7 @@
                     <navigationItem key="navigationItem" id="n5Y-X7-x4U"/>
                     <connections>
                         <outlet property="bottomContainerConstraint" destination="mQD-nB-dLZ" id="NkY-vn-OE1"/>
+                        <outlet property="continueButton" destination="EKo-FM-UJ3" id="klf-un-oSB"/>
                         <outletCollection property="smsCodeTextFields" destination="VcM-CC-HeV" collectionClass="NSMutableArray" id="rFV-AN-VPS"/>
                         <outletCollection property="smsCodeTextFields" destination="2Io-a5-4uE" collectionClass="NSMutableArray" id="hKW-M8-sTv"/>
                         <outletCollection property="smsCodeTextFields" destination="aH5-MD-8Fa" collectionClass="NSMutableArray" id="xdK-cU-ROw"/>
