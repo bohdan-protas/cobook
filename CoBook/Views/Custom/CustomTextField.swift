@@ -70,6 +70,12 @@ class CustomTextField: UITextField {
         refreshBorderColor()
     }
 
+    override func resignFirstResponder() -> Bool {
+        let resigned = super.resignFirstResponder()
+        self.layoutIfNeeded()
+        return resigned
+    }
+
     // MARK: Setup
     func sharedInit() {
         self.clipsToBounds = true

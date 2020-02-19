@@ -56,11 +56,9 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 extension SignUpViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
         switch textField {
         case userNameTextField:
             telephoneNumberTextField.becomeFirstResponder()
-            return false
         case telephoneNumberTextField:
             emailTextField.becomeFirstResponder()
         case emailTextField:
