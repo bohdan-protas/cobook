@@ -1,0 +1,96 @@
+//
+//  CreatePasswordViewController.swift
+//  CoBook
+//
+//  Created by protas on 2/19/20.
+//  Copyright © 2020 CoBook. All rights reserved.
+//
+
+import UIKit
+
+class CreatePasswordViewController: UIViewController, CreatePasswordViewProtocol {
+
+    enum Defaults {
+        static let bottomContainerHeight: CGFloat = 80
+    }
+
+    // MARK: IBOutlets
+    @IBOutlet var telephoneNumberTextField: CustomTextField!
+    @IBOutlet var passwordTextField: CustomTextField!
+    @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
+    @IBOutlet var continueButton: LoaderButton!
+
+    var presenter: CreatePasswordPresenterProtocol = CreatePasswordPresenter()
+
+    // MARK: Actions
+    @IBAction func passwordTextFieldDidChangeValue(_ sender: UITextField) {
+        continueButton.isEnabled = presenter.checkField(password: sender.text)
+    }
+
+    @IBAction func continueButtonTapped(_ sender: Any) {
+
+    }
+
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter.set(view: self)
+        setupLayout()
+    }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+
+// MARK: - Privates
+private extension CreatePasswordViewController {
+
+    func setupLayout() {
+        self.navigationItem.title = "Вітаємо в спільноті CoBook"
+        self.navigationItem.setHidesBackButton(true, animated: false)
+
+        telephoneNumberTextField.placeholder = presenter.currentTelephoneNumberToShow
+        addKeyboardObserver()
+        passwordTextField.becomeFirstResponder()
+    }
+
+    private func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    // MARK: Observers
+    @objc private func onKeyboardWillShow(notification: NSNotification) {
+        let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        bottomContainerConstraint.constant = keyboardSize.height
+    }
+
+    @objc private func onKeyboardWillHide(notification: NSNotification) {
+        bottomContainerConstraint.constant = Defaults.bottomContainerHeight
+    }
+
+
+}
+
+// MARK: - UITextFieldDelegate
+extension CreatePasswordViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return false
+    }
+
+
+}

@@ -41,13 +41,13 @@ extension UIColor {
 extension UIColor {
 
     enum Theme {
-        static let accent = UIColor(named: "Theme_Accent")
-        static let grayBG = UIColor(named: "Theme_Gray-Background")
-        static let grayUI = UIColor(named: "Theme_Gray-UI")
-        static let blackMiddle = UIColor(named: "Theme_Black-Middle")
-        static let greenDark = UIColor(named: "Theme_Green-Dark")
-        static let green = UIColor(named: "Theme_Green")
-        static let border = UIColor(named: "Theme_Border")
+        static let accent = UIColor(named: "Theme_Accent")!
+        static let grayBG = UIColor(named: "Theme_Gray-Background")!
+        static let grayUI = UIColor(named: "Theme_Gray-UI")!
+        static let blackMiddle = UIColor(named: "Theme_Black-Middle")!
+        static let greenDark = UIColor(named: "Theme_Green-Dark")!
+        static let green = UIColor(named: "Theme_Green")!
+        static let border = UIColor(named: "Theme_Border")!
 
 
         enum TextField {

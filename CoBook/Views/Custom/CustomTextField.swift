@@ -48,12 +48,7 @@ class CustomTextField: UITextField {
         didSet { refreshBorderColor() }
     }
 
-    var textPadding = UIEdgeInsets.zero {
-        didSet {
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-        }
-    }
+    var textPadding = UIEdgeInsets.zero
 
     // MARK: Initializers
     override init(frame: CGRect) {
@@ -73,6 +68,12 @@ class CustomTextField: UITextField {
     override func layoutSubviews() {
         super.layoutSubviews()
         refreshBorderColor()
+    }
+
+    override func resignFirstResponder() -> Bool {
+        let resigned = super.resignFirstResponder()
+        self.layoutIfNeeded()
+        return resigned
     }
 
     // MARK: Setup
