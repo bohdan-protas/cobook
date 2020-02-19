@@ -16,6 +16,7 @@
 		B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */; };
 		B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */; };
 		B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */; };
+		B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BF23FDE244007540D0 /* SignInViewController.swift */; };
 		B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */; };
 		B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */; };
 		B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */; };
@@ -84,6 +85,7 @@
 		B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection + Extensions.swift"; sourceTree = "<group>"; };
 		B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewController.swift; sourceTree = "<group>"; };
 		B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordPresenter.swift; sourceTree = "<group>"; };
+		B823A6BF23FDE244007540D0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
@@ -160,6 +162,14 @@
 			path = CreatePassword;
 			sourceTree = "<group>";
 		};
+		B823A6BE23FDE20B007540D0 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				B823A6BF23FDE244007540D0 /* SignInViewController.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 		B823AB6923F156C600DE13EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +185,7 @@
 			children = (
 				B826B0EB23F442AC009041DD /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
+				B823AB6923F156C600DE13EA /* Resources */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -217,6 +228,7 @@
 				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
 				B823AB7523F15DD700DE13EA /* Onboarding */,
 				B823AB7923F15E8400DE13EA /* SignUp */,
+				B823A6BE23FDE20B007540D0 /* SignIn */,
 				B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */,
 				B823A6B923FDD47F007540D0 /* CreatePassword */,
 			);
@@ -355,7 +367,6 @@
 				B826B0F323F45ED8009041DD /* Models */,
 				B823AB6D23F1570F00DE13EA /* Views */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
-				B823AB6923F156C600DE13EA /* Resources */,
 			);
 			path = CoBook;
 			sourceTree = "<group>";
@@ -489,6 +500,7 @@
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */,
+				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,

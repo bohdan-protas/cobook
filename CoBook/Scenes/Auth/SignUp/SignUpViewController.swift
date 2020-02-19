@@ -36,6 +36,12 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
                                                          email: emailTextField.text)
     }
 
+    @IBAction func signInButtonTapped(_ sender: UIButton) {
+        let controller: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+        controller.modalPresentationStyle = .overFullScreen
+        self.present(controller, animated: true, completion: nil)
+    }
+
     // MARK: Lifecycle
 	override func viewDidLoad() {
         super.viewDidLoad()
