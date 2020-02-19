@@ -24,6 +24,7 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     @IBOutlet var userNameTextField: CustomTextField!
     @IBOutlet var telephoneNumberTextField: CustomTextField!
     @IBOutlet var emailTextField: CustomTextField!
+    @IBOutlet var continueButton: LoaderButton!
 
     // MARK: Properties
     var presenter: SignUpPresenterProtocol = SignUpPresenter()
@@ -31,6 +32,12 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     // MARK: Actions
     @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
 
+    }
+
+    @IBAction func textFieldEditingChanged(_ sender: CustomTextField) {
+        continueButton.isEnabled = presenter.checkFields(name: userNameTextField.text,
+                                                         telephone: telephoneNumberTextField.text,
+                                                         email: emailTextField.text)
     }
 
     // MARK: Lifecycle
