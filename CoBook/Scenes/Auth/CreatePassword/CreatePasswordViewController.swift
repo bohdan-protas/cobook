@@ -1,5 +1,5 @@
 //
-//  ConfirmTelephoneNumberViewController.swift
+//  CreatePasswordViewController.swift
 //  CoBook
 //
 //  Created by protas on 2/19/20.
@@ -8,46 +8,34 @@
 
 import UIKit
 
-class ConfirmTelephoneNumberViewController: UIViewController {
+class CreatePasswordViewController: UIViewController, CreatePasswordViewProtocol {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
     }
 
     // MARK: IBOutlets
-    @IBOutlet var smsCodeTextFields: [UITextField]!
+    @IBOutlet var telephoneNumberTextField: CustomTextField!
+    @IBOutlet var passwordTextField: CustomTextField!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var continueButton: LoaderButton!
 
-    //MARK: Actions
-    @IBAction func smsTextFieldDidChanged(_ sender: UITextField) {
-        guard let index: Int = smsCodeTextFields.firstIndex(of: sender) else {
-            return
-        }
+    var presenter: CreatePasswordPresenterProtocol = CreatePasswordPresenter()
 
-        if (sender.text ?? "").isEmpty {
-            smsCodeTextFields[safe: index-1]?.becomeFirstResponder()
-        } else {
-            smsCodeTextFields[safe: index+1]?.becomeFirstResponder()
-        }
-
-        /// if each text field is no empty
-        let arrayOfTruth = smsCodeTextFields.map { !($0.text ?? "").isEmpty }
-        continueButton.isEnabled = !arrayOfTruth.contains(false)
+    // MARK: Actions
+    @IBAction func passwordTextFieldDidChangeValue(_ sender: UITextField) {
+        continueButton.isEnabled = presenter.checkField(password: sender.text)
     }
 
-    @IBAction func continueButtonTapped(_ sender: LoaderButton) {
-        self.performSegue(withIdentifier: CreatePasswordViewController.segueId, sender: nil)
+    @IBAction func continueButtonTapped(_ sender: Any) {
+
     }
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.set(view: self)
         setupLayout()
-    }
-
-    deinit {
-        removeKeyboardObserver()
     }
 
     /*
@@ -60,18 +48,18 @@ class ConfirmTelephoneNumberViewController: UIViewController {
     }
     */
 
-
 }
 
 // MARK: - Privates
-private extension ConfirmTelephoneNumberViewController {
+private extension CreatePasswordViewController {
 
     func setupLayout() {
         self.navigationItem.title = "Вітаємо в спільноті CoBook"
         self.navigationItem.setHidesBackButton(true, animated: false)
 
+        telephoneNumberTextField.placeholder = presenter.currentTelephoneNumberToShow
         addKeyboardObserver()
-        smsCodeTextFields[safe: 0]?.becomeFirstResponder()
+        passwordTextField.becomeFirstResponder()
     }
 
     private func addKeyboardObserver() {
@@ -98,15 +86,7 @@ private extension ConfirmTelephoneNumberViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension ConfirmTelephoneNumberViewController: UITextFieldDelegate {
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string.isEmpty {
-            return true
-        } else {
-            return textField.text?.isEmpty ?? false
-        }
-    }
+extension CreatePasswordViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return false

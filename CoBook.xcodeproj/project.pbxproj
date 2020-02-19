@@ -14,6 +14,8 @@
 		B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */; };
 		B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */; };
 		B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */; };
+		B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */; };
+		B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */; };
 		B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */; };
 		B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */; };
 		B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */; };
@@ -80,6 +82,8 @@
 		B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTelephoneNumberPresenter.swift; sourceTree = "<group>"; };
 		B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection + Extensions.swift"; sourceTree = "<group>"; };
+		B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewController.swift; sourceTree = "<group>"; };
+		B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordPresenter.swift; sourceTree = "<group>"; };
 		B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
@@ -141,10 +145,19 @@
 		B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */ = {
 			isa = PBXGroup;
 			children = (
-				B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */,
 				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
+				B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */,
 			);
 			path = ConfirmTelephoneNumber;
+			sourceTree = "<group>";
+		};
+		B823A6B923FDD47F007540D0 /* CreatePassword */ = {
+			isa = PBXGroup;
+			children = (
+				B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */,
+				B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */,
+			);
+			path = CreatePassword;
 			sourceTree = "<group>";
 		};
 		B823AB6923F156C600DE13EA /* Resources */ = {
@@ -205,6 +218,7 @@
 				B823AB7523F15DD700DE13EA /* Onboarding */,
 				B823AB7923F15E8400DE13EA /* SignUp */,
 				B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */,
+				B823A6B923FDD47F007540D0 /* CreatePassword */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -220,8 +234,8 @@
 		B823AB7923F15E8400DE13EA /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */,
 				B825742B23F592F600C8CBF8 /* SignUpViewController.swift */,
+				B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -465,6 +479,7 @@
 				B82B6DB623FC118900BB0EFA /* ShadowView.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
+				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
@@ -479,6 +494,7 @@
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
+				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
