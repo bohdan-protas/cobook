@@ -32,7 +32,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BuO-Xo-8SW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="661"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="617"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Pwy-bt-de6">
                                     <size key="itemSize" width="377" height="509"/>
@@ -91,17 +91,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вітаємо у спільноті CoBook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umF-hR-IOY">
-                                <rect key="frame" x="20" y="28" width="335" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="3sL-sT-cTN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="15"/>
-                                <color key="textColor" name="Theme_Black-Middle"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-58-TRF" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="24" y="67" width="327" height="520"/>
+                                <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C9-tT-k89" userLabel="Title Container">
                                         <rect key="frame" x="0.0" y="10" width="327" height="76"/>
@@ -125,10 +116,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB" userLabel="Image Container">
-                                        <rect key="frame" x="8" y="86" width="311" height="176"/>
+                                        <rect key="frame" x="8" y="86" width="311" height="189"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="131"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="144"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -140,7 +131,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-Rd-0iZ" userLabel="Fields Stack View">
-                                        <rect key="frame" x="8" y="262" width="311" height="168"/>
+                                        <rect key="frame" x="8" y="275" width="311" height="168"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Прізвище, імя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="CustomTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
@@ -261,8 +252,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7e-D1-uuF" userLabel="Continue Button" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="454" width="295" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7e-D1-uuF" userLabel="Continue Button" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="467" width="295" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="KcQ-yB-2eM"/>
                                         </constraints>
@@ -377,19 +368,16 @@
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="ndJ-BG-QLR" firstAttribute="leading" secondItem="HF5-1H-6Mi" secondAttribute="leading" id="4PJ-48-WU1"/>
-                            <constraint firstItem="umF-hR-IOY" firstAttribute="top" secondItem="HF5-1H-6Mi" secondAttribute="top" constant="28" id="5Wq-m7-jUP"/>
-                            <constraint firstItem="nYz-58-TRF" firstAttribute="top" secondItem="umF-hR-IOY" secondAttribute="bottom" constant="21" id="66x-fg-7DE"/>
+                            <constraint firstItem="nYz-58-TRF" firstAttribute="top" secondItem="HF5-1H-6Mi" secondAttribute="top" constant="10" id="Eie-mV-D4T"/>
                             <constraint firstItem="HF5-1H-6Mi" firstAttribute="trailing" secondItem="ndJ-BG-QLR" secondAttribute="trailing" id="ThQ-Wm-06Y"/>
-                            <constraint firstItem="umF-hR-IOY" firstAttribute="leading" secondItem="HF5-1H-6Mi" secondAttribute="leading" constant="20" id="d59-AI-lgd"/>
                             <constraint firstItem="HF5-1H-6Mi" firstAttribute="trailing" secondItem="nYz-58-TRF" secondAttribute="trailing" constant="24" id="geH-Mq-GA4"/>
                             <constraint firstItem="nYz-58-TRF" firstAttribute="leading" secondItem="HF5-1H-6Mi" secondAttribute="leading" constant="24" id="l0e-wp-GZ6"/>
-                            <constraint firstItem="HF5-1H-6Mi" firstAttribute="trailing" secondItem="umF-hR-IOY" secondAttribute="trailing" constant="20" id="lIx-aG-OZW"/>
                             <constraint firstItem="HF5-1H-6Mi" firstAttribute="bottom" secondItem="nYz-58-TRF" secondAttribute="bottom" constant="80" id="lYH-2h-lDg"/>
                             <constraint firstItem="HF5-1H-6Mi" firstAttribute="bottom" secondItem="ndJ-BG-QLR" secondAttribute="bottom" constant="10" id="yiK-wB-unm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HF5-1H-6Mi"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NR1-pg-PO8"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="NR1-pg-PO8"/>
                     <connections>
                         <outlet property="bottomContainerConstraint" destination="lYH-2h-lDg" id="8w5-SV-MLu"/>
                         <outlet property="continueButton" destination="C7e-D1-uuF" id="YjZ-la-jrd"/>
@@ -397,18 +385,20 @@
                         <outlet property="fieldToTitleConstraint" destination="hlS-Of-J8f" id="nPC-Ay-MVG"/>
                         <outlet property="telephoneNumberTextField" destination="l9w-LB-IQc" id="uKH-Dv-0xE"/>
                         <outlet property="userNameTextField" destination="Wsn-BH-QOy" id="CUE-Lr-pYR"/>
+                        <segue destination="LDQ-N8-u8m" kind="show" identifier="goToConfirmTelephoneNumberViewController" id="2eG-kn-x2A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YH1-ng-l4X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1780" y="874.81259370314854"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="g5c-zM-LVi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="BJY-n2-UDX" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BJY-n2-UDX" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yre-MU-f57">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -419,6 +409,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWA-5n-KFZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2" y="875"/>
+        </scene>
+        <!--Confirm Telephone Number View Controller-->
+        <scene sceneID="W9V-zd-2ZX">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmTelephoneNumberViewController" id="LDQ-N8-u8m" customClass="ConfirmTelephoneNumberViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dk9-WA-u2Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <viewLayoutGuide key="safeArea" id="TVu-Ym-gaF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="n5Y-X7-x4U"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7eZ-5g-Pvb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2632.8000000000002" y="874.81259370314854"/>
         </scene>
     </scenes>
     <resources>

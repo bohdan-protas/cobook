@@ -27,7 +27,7 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 
     // MARK: Actions
     @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
-
+        self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
     }
 
     @IBAction func textFieldEditingChanged(_ sender: CustomTextField) {
@@ -59,6 +59,9 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 private extension SignUpViewController {
 
     func setupLayout() {
+        self.navigationItem.title = "Вітаємо в спільноті CoBook"
+        self.navigationItem.setHidesBackButton(true, animated: false)
+
         /// In small screen devices disable title image
         if UIDevice().isSmallScreenType {
             fieldToTitleConstraint.isActive = true
@@ -116,8 +119,6 @@ extension SignUpViewController: UITextFieldDelegate {
             telephoneNumberTextField.becomeFirstResponder()
         case telephoneNumberTextField:
             emailTextField.becomeFirstResponder()
-        case emailTextField:
-            view.endEditing(true)
         default:
             view.endEditing(true)
         }

@@ -10,6 +10,8 @@
 		B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6A723FD34A0007540D0 /* Array + Extensions.swift */; };
 		B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6AC23FD3924007540D0 /* RegularExpression.swift */; };
 		B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6AE23FD3F29007540D0 /* UIDevice + Extensions.swift */; };
+		B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */; };
+		B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */; };
 		B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */; };
 		B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */; };
 		B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */; };
@@ -72,6 +74,8 @@
 		B823A6A723FD34A0007540D0 /* Array + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Extensions.swift"; sourceTree = "<group>"; };
 		B823A6AC23FD3924007540D0 /* RegularExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpression.swift; sourceTree = "<group>"; };
 		B823A6AE23FD3F29007540D0 /* UIDevice + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice + Extensions.swift"; sourceTree = "<group>"; };
+		B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTelephoneNumberViewController.swift; sourceTree = "<group>"; };
+		B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
@@ -130,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
+			);
+			path = ConfirmTelephoneNumber;
+			sourceTree = "<group>";
+		};
 		B823AB6923F156C600DE13EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +198,7 @@
 				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
 				B823AB7523F15DD700DE13EA /* Onboarding */,
 				B823AB7923F15E8400DE13EA /* SignUp */,
+				B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -289,6 +302,7 @@
 				B826B0E523F4109C009041DD /* CustomProgressView.swift */,
 				B8625AC723FAD6C80044605C /* CustomTextField.swift */,
 				B82B6DB523FC118900BB0EFA /* ShadowView.swift */,
+				B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -441,7 +455,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* ShadowView.swift in Sources */,
+				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
