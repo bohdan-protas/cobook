@@ -12,7 +12,7 @@ class ConfirmTelephoneNumberViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupLayout()
         // Do any additional setup after loading the view.
     }
     
@@ -29,6 +29,7 @@ class ConfirmTelephoneNumberViewController: UIViewController {
 
 }
 
+// MARK: - Privates
 private extension ConfirmTelephoneNumberViewController {
 
     func setupLayout() {

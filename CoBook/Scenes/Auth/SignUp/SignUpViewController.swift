@@ -72,7 +72,7 @@ private extension SignUpViewController {
     }
 
     private func addKeyboardObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(obKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
@@ -82,10 +82,10 @@ private extension SignUpViewController {
     }
 
     // MARK: Observers
-    @objc private func obKeyboardWillShow(notification: NSNotification) {
+    @objc private func onKeyboardWillShow(notification: NSNotification) {
         let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+        let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
 
         bottomContainerConstraint.constant = keyboardSize.height
         fieldToTitleConstraint.isActive = true
@@ -97,7 +97,7 @@ private extension SignUpViewController {
 
     @objc private func onKeyboardWillHide(notification: NSNotification) {
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+        let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
 
         bottomContainerConstraint.constant = Defaults.bottomContainerHeight
         fieldToTitleConstraint.isActive = false
@@ -125,4 +125,6 @@ extension SignUpViewController: UITextFieldDelegate {
 
         return true
     }
+
+
 }
