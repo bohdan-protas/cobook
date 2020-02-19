@@ -49,7 +49,7 @@ private extension LoaderButton {
     func startLoaderAnimating() {
         lastTitle = self.titleLabel?.text
         setTitle("", for: .normal)
-        isUserInteractionEnabled = false
+        //isUserInteractionEnabled = false
         activityIndicator.startAnimating()
     }
 

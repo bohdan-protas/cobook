@@ -178,7 +178,6 @@
 				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
 				B823AB7523F15DD700DE13EA /* Onboarding */,
 				B823AB7923F15E8400DE13EA /* SignUp */,
-				B823AB7823F15E7300DE13EA /* SignIn */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -189,13 +188,6 @@
 				B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		B823AB7823F15E7300DE13EA /* SignIn */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SignIn;
 			sourceTree = "<group>";
 		};
 		B823AB7923F15E8400DE13EA /* SignUp */ = {

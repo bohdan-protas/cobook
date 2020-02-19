@@ -20,19 +20,23 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     @IBOutlet var titleImageView: UIImageView!
     @IBOutlet var shadowContainerView: UIView!
 
+    @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
+    @IBOutlet var userNameTextField: CustomTextField!
+    @IBOutlet var telephoneNumberTextField: CustomTextField!
+    @IBOutlet var emailTextField: CustomTextField!
+
     // MARK: Properties
     var presenter: SignUpPresenterProtocol = SignUpPresenter()
 
+    // MARK: Actions
     @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
-        sender.isLoading.toggle()
+
     }
 
     // MARK: Lifecycle
 	override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter.view = self
-        hideKeyboardWhenTappedAround()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,30 +52,64 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 
 }
 
+// MARK: - UITextFieldDelegate
+extension SignUpViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        switch textField {
+        case userNameTextField:
+            telephoneNumberTextField.becomeFirstResponder()
+            return false
+        case telephoneNumberTextField:
+            emailTextField.becomeFirstResponder()
+        case emailTextField:
+            view.endEditing(true)
+        default:
+            view.endEditing(true)
+        }
+
+        return true
+    }
+}
+
 // MARK: - Private
 private extension SignUpViewController {
 
     private func addKeyboardObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChangeFrame), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(obKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     private func removeKeyboardObserver() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    // MARK: - Observer
-    @objc private func keyboardChangeFrame(notification: NSNotification) {
-        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
-        let isKeyboardBecomeHide = notification.name == UIResponder.keyboardWillHideNotification
-        bottomContainerConstraint.constant = isKeyboardBecomeHide ? Defaults.bottomContainerHeight : keyboardSize.height
-        UIView.animate(withDuration: 0.1) {
-            self.imageContainer.isHidden = !isKeyboardBecomeHide
+    // MARK: - Observers
+    @objc private func obKeyboardWillShow(notification: NSNotification) {
+        let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+
+        bottomContainerConstraint.constant = keyboardSize.height
+        fieldToTitleConstraint.isActive = true
+
+        UIView.animate(withDuration: duration, delay: 0.0, options: UIView.AnimationOptions(rawValue: curve), animations: {
             self.view.layoutIfNeeded()
-        }
+        }, completion: nil)
+    }
+
+    @objc private func onKeyboardWillHide(notification: NSNotification) {
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+
+        bottomContainerConstraint.constant = Defaults.bottomContainerHeight
+        fieldToTitleConstraint.isActive = false
+
+        UIView.animate(withDuration: duration, delay: 0.0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 
 

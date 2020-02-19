@@ -48,12 +48,7 @@ class CustomTextField: UITextField {
         didSet { refreshBorderColor() }
     }
 
-    var textPadding = UIEdgeInsets.zero {
-        didSet {
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-        }
-    }
+    var textPadding = UIEdgeInsets.zero
 
     // MARK: Initializers
     override init(frame: CGRect) {
