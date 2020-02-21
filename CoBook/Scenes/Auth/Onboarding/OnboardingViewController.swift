@@ -54,7 +54,7 @@ class OnboardingViewController: UIViewController {
     
     /// Routing
     func goToSignUp() {
-        self.performSegue(withIdentifier: SignUpViewController.segueId, sender: self)
+        self.performSegue(withIdentifier: SignUpNavigationController.segueId, sender: self)
     }
 
 

@@ -59,6 +59,12 @@
 		B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870198423ED50EA00625D61 /* AppDelegate.swift */; };
 		B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B870198D23ED50EC00625D61 /* Assets.xcassets */; };
 		B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */; };
+		B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */; };
+		B88906B723FFD508002E91F7 /* SignInPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B623FFD508002E91F7 /* SignInPresentable.swift */; };
+		B88906B923FFDB47002E91F7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B823FFDB47002E91F7 /* TestViewController.swift */; };
+		B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */; };
+		B88906BE240006D0002E91F7 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906BD240006D0002E91F7 /* OnboardingNavigationController.swift */; };
+		B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906BF24000858002E91F7 /* SignInPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -130,6 +136,12 @@
 		B870198D23ED50EC00625D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B870199023ED50EC00625D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B870199223ED50EC00625D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
+		B88906B623FFD508002E91F7 /* SignInPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentable.swift; sourceTree = "<group>"; };
+		B88906B823FFDB47002E91F7 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationController.swift; sourceTree = "<group>"; };
+		B88906BD240006D0002E91F7 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
+		B88906BF24000858002E91F7 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +159,8 @@
 		B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */ = {
 			isa = PBXGroup;
 			children = (
-				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
 				B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */,
+				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
 			);
 			path = ConfirmTelephoneNumber;
 			sourceTree = "<group>";
@@ -156,8 +168,8 @@
 		B823A6B923FDD47F007540D0 /* CreatePassword */ = {
 			isa = PBXGroup;
 			children = (
-				B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */,
 				B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */,
+				B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */,
 			);
 			path = CreatePassword;
 			sourceTree = "<group>";
@@ -165,6 +177,7 @@
 		B823A6BE23FDE20B007540D0 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				B88906BF24000858002E91F7 /* SignInPresenter.swift */,
 				B823A6BF23FDE244007540D0 /* SignInViewController.swift */,
 			);
 			path = SignIn;
@@ -186,6 +199,7 @@
 				B826B0EB23F442AC009041DD /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B823AB6923F156C600DE13EA /* Resources */,
+				B88906B823FFDB47002E91F7 /* TestViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -216,6 +230,7 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B88906BA240002B5002E91F7 /* Navigation */,
 				B8625AC223FA94A70044605C /* Custom */,
 				B82573F123F545C900C8CBF8 /* Cells */,
 			);
@@ -246,8 +261,8 @@
 		B823AB7923F15E8400DE13EA /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				B825742B23F592F600C8CBF8 /* SignUpViewController.swift */,
 				B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */,
+				B825742B23F592F600C8CBF8 /* SignUpViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -334,7 +349,7 @@
 				B826B0E523F4109C009041DD /* CustomProgressView.swift */,
 				B8625AC723FAD6C80044605C /* CustomTextField.swift */,
 				B82B6DB523FC118900BB0EFA /* ShadowView.swift */,
-				B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */,
+				B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -364,11 +379,30 @@
 				B823AB6C23F156EE00DE13EA /* Networking */,
 				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
+				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B826B0F323F45ED8009041DD /* Models */,
 				B823AB6D23F1570F00DE13EA /* Views */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
 			);
 			path = CoBook;
+			sourceTree = "<group>";
+		};
+		B88906B523FFD4EA002E91F7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B88906B623FFD508002E91F7 /* SignInPresentable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B88906BA240002B5002E91F7 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */,
+				B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */,
+				B88906BD240006D0002E91F7 /* OnboardingNavigationController.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,14 +523,18 @@
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* ShadowView.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
+				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
+				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
+				B88906B923FFDB47002E91F7 /* TestViewController.swift in Sources */,
 				B8625AC823FAD6C80044605C /* CustomTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* CustomButton.swift in Sources */,
+				B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */,
@@ -505,9 +543,11 @@
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
+				B88906BE240006D0002E91F7 /* OnboardingNavigationController.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
+				B88906B723FFD508002E91F7 /* SignInPresentable.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
 				B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */,

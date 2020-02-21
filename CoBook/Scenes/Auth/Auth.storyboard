@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BJY-n2-UDX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aru-BO-r6E">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -77,12 +77,12 @@
                     <connections>
                         <outlet property="collectionView" destination="BuO-Xo-8SW" id="tmK-6V-TRN"/>
                         <outlet property="progressView" destination="bdo-da-PJ7" id="bTh-1f-gcU"/>
-                        <segue destination="iqt-wc-tgP" kind="presentation" identifier="goToSignUpViewController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Y13-Eq-zbn"/>
+                        <segue destination="iqt-wc-tgP" kind="presentation" identifier="goToSignUpNavigationController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Kqj-0P-oN2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C5s-50-4sL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1594" y="1536"/>
+            <point key="canvasLocation" x="-1722" y="1533"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="v6U-Tm-Bc5">
@@ -117,10 +117,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB" userLabel="Image Container">
-                                        <rect key="frame" x="8" y="86" width="311" height="175"/>
+                                        <rect key="frame" x="8" y="86" width="311" height="189"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
-                                                <rect key="frame" x="0.0" y="0.0" width="311.00000000000006" height="130"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="144"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -132,7 +132,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-Rd-0iZ" userLabel="Fields Stack View">
-                                        <rect key="frame" x="8" y="261" width="311" height="168"/>
+                                        <rect key="frame" x="8" y="275" width="311" height="168"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Прізвище, імя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="CustomTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
@@ -332,26 +332,26 @@
                                         <rect key="frame" x="10" y="20" width="355" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gJF-03-fFg">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="20"/>
                                             </view>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вже маєте аккаунт?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6YP-2W-RYg">
-                                                <rect key="frame" x="75" y="0.0" width="142" height="20"/>
+                                                <rect key="frame" x="76" y="0.0" width="143" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
                                                 <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E46-yR-0JZ">
-                                                <rect key="frame" x="220" y="0.0" width="60" height="20"/>
+                                                <rect key="frame" x="222" y="0.0" width="57" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="15"/>
                                                 <state key="normal" title="Увійдіть">
                                                     <color key="titleColor" name="Theme_Green"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signInButtonTapped:" destination="fTX-yw-dca" eventType="touchUpInside" id="TeG-9o-p2S"/>
+                                                    <segue destination="F97-Yl-JnX" kind="presentation" modalPresentationStyle="fullScreen" id="lZW-my-AUf"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="D49-SM-mdP">
-                                                <rect key="frame" x="283" y="0.0" width="72" height="20"/>
+                                                <rect key="frame" x="282" y="0.0" width="73" height="20"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -396,10 +396,10 @@
             </objects>
             <point key="canvasLocation" x="153" y="1535"/>
         </scene>
-        <!--Custom Navigation Controller-->
+        <!--Sign Up Navigation Controller-->
         <scene sceneID="QJc-gr-9JJ">
             <objects>
-                <navigationController id="iqt-wc-tgP" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SignUpNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iqt-wc-tgP" customClass="SignUpNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="0yi-nR-6cb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gLC-BX-Ueb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -413,42 +413,98 @@
             </objects>
             <point key="canvasLocation" x="-687" y="1536"/>
         </scene>
-        <!--Sign In View Controller-->
-        <scene sceneID="kYj-8z-ov3">
+        <!--Custom Navigation Controller-->
+        <scene sceneID="uKK-O6-q3I">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" id="F97-Yl-JnX" customClass="SignInViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="s66-4Y-56G">
+                <navigationController id="aru-BO-r6E" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2oO-fG-gaZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ogh-Do-0Uz" kind="relationship" relationship="rootViewController" id="vuL-G6-yXK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8eh-JY-Aq4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1658" y="3140"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="JHW-j3-si0">
+            <objects>
+                <viewController id="ogh-Do-0Uz" customClass="TestViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IZ6-el-QCk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lul-5x-bKi">
-                                <rect key="frame" x="160.5" y="318.5" width="54" height="30"/>
-                                <state key="normal" title="Sign Up"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sg-Bv-kVx">
+                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="signUpButtonTapped:" destination="F97-Yl-JnX" eventType="touchUpInside" id="53L-2g-2P2"/>
+                                    <action selector="go:" destination="ogh-Do-0Uz" eventType="touchUpInside" id="jgT-a2-s6k"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="lul-5x-bKi" firstAttribute="centerX" secondItem="s66-4Y-56G" secondAttribute="centerX" id="cYw-8q-3oK"/>
-                            <constraint firstItem="lul-5x-bKi" firstAttribute="centerY" secondItem="s66-4Y-56G" secondAttribute="centerY" id="hQ0-AG-hqL"/>
+                            <constraint firstItem="0sg-Bv-kVx" firstAttribute="centerX" secondItem="IZ6-el-QCk" secondAttribute="centerX" id="0uR-cc-znr"/>
+                            <constraint firstItem="0sg-Bv-kVx" firstAttribute="centerY" secondItem="IZ6-el-QCk" secondAttribute="centerY" id="EL1-du-PeD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UCe-wH-Jlj"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="t9t-IG-Wa5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ov-1l-RNo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-481" y="3140"/>
+        </scene>
+        <!--SignInViewController-->
+        <scene sceneID="kYj-8z-ov3">
+            <objects>
+                <viewController storyboardIdentifier="SignInViewController" title="SignInViewController" id="F97-Yl-JnX" customClass="SignInViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s66-4Y-56G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqO-51-e7S" customClass="TransparentNavigationBar" customModule="CoBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7bH-f7-VLF"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="JN2-Zf-9id"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Welcome on board" id="rhk-Y9-O7g">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="Wll-t7-VoU">
+                                            <connections>
+                                                <action selector="signUpButtonTapped:" destination="F97-Yl-JnX" id="VZb-N8-VCw"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fqO-51-e7S" firstAttribute="top" secondItem="KLR-gR-XXG" secondAttribute="top" id="C8D-6l-QNO"/>
+                            <constraint firstItem="fqO-51-e7S" firstAttribute="trailing" secondItem="KLR-gR-XXG" secondAttribute="trailing" id="KLF-ah-8kR"/>
+                            <constraint firstItem="fqO-51-e7S" firstAttribute="leading" secondItem="KLR-gR-XXG" secondAttribute="leading" id="RPr-hQ-1L3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KLR-gR-XXG"/>
                     </view>
-                    <navigationItem key="navigationItem" id="l5f-bJ-dGH"/>
+                    <navigationItem key="navigationItem" title="title" id="rUj-tS-RtB"/>
                     <connections>
-                        <segue destination="iqt-wc-tgP" kind="presentation" identifier="goToSignUpViewController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="8Qe-3F-SwZ"/>
+                        <segue destination="YHt-xW-dOj" kind="unwind" identifier="unwindToSignUpNavigationController" unwindAction="myUnwindActionWithUnwindSegue:" id="7C2-iu-IyO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lT-4G-bsA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="YHt-xW-dOj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="153" y="756"/>
+            <point key="canvasLocation" x="153" y="2343"/>
         </scene>
-        <!--Custom Navigation Controller-->
+        <!--Onboarding Navigation Controller-->
         <scene sceneID="g5c-zM-LVi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BJY-n2-UDX" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnboardingCustomNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="BJY-n2-UDX" customClass="OnboardingNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yre-MU-f57">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -461,7 +517,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWA-5n-KFZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2434" y="1536"/>
+            <point key="canvasLocation" x="-2524" y="1534"/>
         </scene>
         <!--Confirm Telephone Number View Controller-->
         <scene sceneID="W9V-zd-2ZX">
@@ -475,10 +531,10 @@
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46F-ZB-tZF" userLabel="Title View">
-                                        <rect key="frame" x="0.0" y="32" width="327" height="44"/>
+                                        <rect key="frame" x="0.0" y="32" width="327" height="56"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Підтвердьте номер телефону" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slK-jZ-rWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="HGH-7f-O4Z"/>
                                                 </constraints>
@@ -496,7 +552,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTV-JR-GM0" userLabel="Subtitle View">
-                                        <rect key="frame" x="0.0" y="96" width="327" height="20"/>
+                                        <rect key="frame" x="0.0" y="108" width="327" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введіть код із смс-повідомлення" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB0-hw-F8D">
                                                 <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
@@ -517,7 +573,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQy-TG-Dxs" userLabel="Fields View">
-                                        <rect key="frame" x="0.0" y="148" width="327" height="56"/>
+                                        <rect key="frame" x="0.0" y="160" width="327" height="56"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Ja2-xs-q5x">
                                                 <rect key="frame" x="74.5" y="0.0" width="178" height="56"/>
@@ -644,7 +700,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdp-gq-8RF">
-                                        <rect key="frame" x="0.0" y="228" width="327" height="20"/>
+                                        <rect key="frame" x="0.0" y="240" width="327" height="20"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6y-tS-4Y0">
                                                 <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
@@ -1011,7 +1067,4 @@
             <color red="0.92900002002716064" green="0.92900002002716064" blue="0.92900002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Y13-Eq-zbn"/>
-    </inferredMetricsTieBreakers>
 </document>

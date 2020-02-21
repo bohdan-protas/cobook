@@ -37,9 +37,10 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     }
 
     @IBAction func signInButtonTapped(_ sender: UIButton) {
-        let controller: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-        controller.modalPresentationStyle = .overFullScreen
-        self.present(controller, animated: true, completion: nil)
+        (self.navigationController as? CustomNavigationController)?.presentSignIn()
+    }
+
+    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
     }
 
     // MARK: Lifecycle
@@ -65,9 +66,6 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 private extension SignUpViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Вітаємо в спільноті CoBook"
-        self.navigationItem.setHidesBackButton(true, animated: false)
-
         /// In small screen devices disable title image
         if UIDevice().isSmallScreenType {
             fieldToTitleConstraint.isActive = true

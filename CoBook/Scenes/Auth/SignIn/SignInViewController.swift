@@ -10,31 +10,21 @@ import UIKit
 
 class SignInViewController: UIViewController {
 
-    @IBAction func signUpButtonTapped(_ sender: UIButton) {
-
-        //self.performSegue(withIdentifier: SignUpViewController.segueId, sender: self)
-        self.dismiss(animated: true, completion: nil)
-//        let controller: SignUpViewController = UIStoryboard.auth.initiateViewControllerFromType()
-//        controller.modalPresentationStyle = .overFullScreen
-//        self.present(controller, animated: true, completion: nil)
-
+    @IBAction func signUpButtonTapped(_ sender: Any) {
+        if presentingViewController is SignUpNavigationController {
+            performSegue(withIdentifier: SignUpNavigationController.unwindSegueId, sender: self)
+        } else {
+            let navigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+            navigationController.modalTransitionStyle = .crossDissolve
+            navigationController.modalPresentationStyle = .overFullScreen
+            present(navigationController, animated: true, completion: nil)
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
