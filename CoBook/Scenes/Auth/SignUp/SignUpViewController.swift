@@ -36,10 +36,6 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
                                                          email: emailTextField.text)
     }
 
-    @IBAction func signInButtonTapped(_ sender: UIButton) {
-        (self.navigationController as? CustomNavigationController)?.presentSignIn()
-    }
-
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
     }
 

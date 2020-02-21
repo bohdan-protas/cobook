@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomNavigationController: UINavigationController, SignInPresentable {
+class CustomNavigationController: UINavigationController {
 
     private weak var proxyDelegate: UINavigationControllerDelegate?
 

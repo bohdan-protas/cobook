@@ -54,9 +54,6 @@ class CreatePasswordViewController: UIViewController, CreatePasswordViewProtocol
 private extension CreatePasswordViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Вітаємо в спільноті CoBook"
-        self.navigationItem.setHidesBackButton(true, animated: false)
-
         telephoneNumberTextField.placeholder = presenter.currentTelephoneNumberToShow
         addKeyboardObserver()
         passwordTextField.becomeFirstResponder()

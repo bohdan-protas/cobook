@@ -8,10 +8,26 @@
 
 import Foundation
 
-protocol SignInView: class {
-    
+protocol SignInView: BaseView {
+    var presenter: SignInPresenter { get set }
 }
 
-class SignInPresenter {
+class SignInPresenter: BasePresenter {
+    private weak var view: SignInView?
 
+    var login: String?
+    var password: String?
+
+    func attachView(_ view: SignInView) {
+        self.view = view
+    }
+
+    func detachView() {
+        view = nil
+    }
+
+    func set(login: String?, password: String?) {
+        self.login = login
+        self.password = password
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: View -
 protocol SignUpViewProtocol: class {
-
+    
 }
 
 // MARK: Presenter -

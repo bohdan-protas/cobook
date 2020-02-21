@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+public protocol BaseView: class {
+    func startLoading()
+    func finishLoading()
+}
+
+extension BaseView {
+    func startLoading() { }
+    func finishLoading() { }
+}
