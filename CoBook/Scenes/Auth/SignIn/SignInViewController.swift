@@ -1,72 +1,101 @@
 //
-//  SignUpViewController.swift
+//  SignInViewController.swift
 //  CoBook
 //
-//  Created by protas on 2/13/20.
+//  Created by protas on 2/19/20.
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController, SignUpViewProtocol {
+class SignInViewController: UIViewController, SignInView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
     }
 
     // MARK: IBOutlets
+    @IBOutlet var loginTextField: DesignableTextField!
+    @IBOutlet var passwordTextField: DesignableTextField!
+    @IBOutlet var signInButton: LoaderButton!
+
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
-    @IBOutlet var userNameTextField: DesignableTextField!
-    @IBOutlet var telephoneNumberTextField: DesignableTextField!
-    @IBOutlet var emailTextField: DesignableTextField!
-    @IBOutlet var continueButton: LoaderButton!
 
     // MARK: Properties
-    var presenter = SignUpPresenter()
+    var presenter: SignInPresenter = SignInPresenter()
+
+    private lazy var forgotPasswordAlert: UIAlertController = {
+        let alertController = UIAlertController(title: "Forgot password?",
+                                                message: "Enter ypor telephone number to reset",
+                                                preferredStyle: .alert)
+
+        alertController.addTextField { (textField: UITextField) -> Void in
+            textField.keyboardType = .phonePad
+            textField.placeholder = "Login"
+        }
+
+        let saveAction = UIAlertAction(title: "YES", style: .default, handler: { alert -> Void in
+            let telephone = alertController.textFields?.first?.text
+            print(telephone ?? "empty")
+        })
+        let cancelAction = UIAlertAction(title: "NO", style: .default, handler: nil)
+
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+
+        return alertController
+    }()
+
+    @IBAction func textFieldDidChanged(_ sender: Any) {
+        signInButton.isEnabled = !(loginTextField.text ?? "").isEmpty && !(passwordTextField.text ?? "").isEmpty
+    }
 
     // MARK: Actions
-    @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
-        self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
+    @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
+        removeKeyboardObserver()
+        self.present(forgotPasswordAlert, animated: true, completion: {
+            self.addKeyboardObserver()
+        })
     }
 
-    @IBAction func textFieldEditingChanged(_ sender: DesignableTextField) {
-        presenter.set(name: userNameTextField.text, telephone: telephoneNumberTextField.text, email: emailTextField.text)
+    @IBAction func signInButtonTapped(_ sender: LoaderButton) {
+
     }
 
-    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
+    @IBAction func signUpButtonTapped(_ sender: UIButton) {
+        goToSignUp()
     }
 
     // MARK: Lifecycle
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.view = self
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        presenter.attachView(self)
         setupLayout()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        removeKeyboardObserver()
     }
 
     deinit {
         presenter.detachView()
     }
 
-    // MARK: SignUpView
-    func setContinueButton(actived: Bool) {
-        continueButton.isEnabled = actived
+    // MARK: Navigation
+    func goToSignUp() {
+        if presentingViewController is SignUpNavigationController {
+            performSegue(withIdentifier: SignUpNavigationController.unwindSegueId, sender: self)
+        } else {
+            let navigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+            navigationController.modalTransitionStyle = .crossDissolve
+            navigationController.modalPresentationStyle = .overFullScreen
+            present(navigationController, animated: true, completion: nil)
+        }
     }
 
 
 }
 
 // MARK: - Private
-private extension SignUpViewController {
+private extension SignInViewController {
 
     func setupLayout() {
         /// In small screen devices disable title image
@@ -118,16 +147,14 @@ private extension SignUpViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension SignUpViewController: UITextFieldDelegate {
+extension SignInViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case userNameTextField:
-            telephoneNumberTextField.becomeFirstResponder()
-        case telephoneNumberTextField:
-            emailTextField.becomeFirstResponder()
+        case loginTextField:
+            passwordTextField.becomeFirstResponder()
         default:
-            view.endEditing(true)
+            dismissKeyboard()
         }
 
         return true

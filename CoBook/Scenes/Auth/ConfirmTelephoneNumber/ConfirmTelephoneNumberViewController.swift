@@ -67,9 +67,6 @@ class ConfirmTelephoneNumberViewController: UIViewController {
 private extension ConfirmTelephoneNumberViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Вітаємо в спільноті CoBook"
-        self.navigationItem.setHidesBackButton(true, animated: false)
-
         addKeyboardObserver()
         smsCodeTextFields[safe: 0]?.becomeFirstResponder()
     }

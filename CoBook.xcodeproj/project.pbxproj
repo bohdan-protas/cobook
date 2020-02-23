@@ -16,6 +16,7 @@
 		B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */; };
 		B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */; };
 		B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */; };
+		B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BF23FDE244007540D0 /* SignInViewController.swift */; };
 		B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */; };
 		B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */; };
 		B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */; };
@@ -47,17 +48,24 @@
 		B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742823F5808400C8CBF8 /* String + Extensions.swift */; };
 		B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */; };
 		B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742B23F592F600C8CBF8 /* SignUpViewController.swift */; };
-		B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* CustomProgressView.swift */; };
+		B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* DesignableProgressView.swift */; };
 		B826B0F223F459A1009041DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0F123F459A1009041DD /* Onboarding.swift */; };
 		B82B6DB623FC118900BB0EFA /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* ShadowView.swift */; };
 		B8625ABE23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */; };
 		B8625ABF23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B8625AC423FA94D30044605C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* CustomButton.swift */; };
+		B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* DesignableButton.swift */; };
 		B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC523FAC88C0044605C /* LoaderButton.swift */; };
-		B8625AC823FAD6C80044605C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC723FAD6C80044605C /* CustomTextField.swift */; };
+		B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC723FAD6C80044605C /* DesignableTextField.swift */; };
 		B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870198423ED50EA00625D61 /* AppDelegate.swift */; };
 		B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B870198D23ED50EC00625D61 /* Assets.xcassets */; };
 		B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */; };
+		B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */; };
+		B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */; };
+		B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */; };
+		B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906BF24000858002E91F7 /* SignInPresenter.swift */; };
+		B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C1240020F4002E91F7 /* BasePresenter.swift */; };
+		B88906C424003B6B002E91F7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* BaseView.swift */; };
+		B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C72400515B002E91F7 /* OnboardingPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +92,7 @@
 		B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection + Extensions.swift"; sourceTree = "<group>"; };
 		B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewController.swift; sourceTree = "<group>"; };
 		B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordPresenter.swift; sourceTree = "<group>"; };
+		B823A6BF23FDE244007540D0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
@@ -116,18 +125,25 @@
 		B825742823F5808400C8CBF8 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		B825742B23F592F600C8CBF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		B826B0E523F4109C009041DD /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		B826B0E523F4109C009041DD /* DesignableProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableProgressView.swift; sourceTree = "<group>"; };
 		B826B0F123F459A1009041DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
-		B8625AC323FA94D30044605C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		B8625AC323FA94D30044605C /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		B8625AC523FAC88C0044605C /* LoaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderButton.swift; sourceTree = "<group>"; };
-		B8625AC723FAD6C80044605C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		B8625AC723FAD6C80044605C /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		B870198123ED50EA00625D61 /* CoBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B870198423ED50EA00625D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B870198D23ED50EC00625D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B870199023ED50EC00625D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B870199223ED50EC00625D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataManager.swift; sourceTree = "<group>"; };
+		B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
+		B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationController.swift; sourceTree = "<group>"; };
+		B88906BF24000858002E91F7 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
+		B88906C1240020F4002E91F7 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
+		B88906C324003B6B002E91F7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		B88906C72400515B002E91F7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +161,8 @@
 		B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */ = {
 			isa = PBXGroup;
 			children = (
-				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
 				B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */,
+				B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */,
 			);
 			path = ConfirmTelephoneNumber;
 			sourceTree = "<group>";
@@ -154,10 +170,19 @@
 		B823A6B923FDD47F007540D0 /* CreatePassword */ = {
 			isa = PBXGroup;
 			children = (
-				B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */,
 				B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */,
+				B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */,
 			);
 			path = CreatePassword;
+			sourceTree = "<group>";
+		};
+		B823A6BE23FDE20B007540D0 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				B88906BF24000858002E91F7 /* SignInPresenter.swift */,
+				B823A6BF23FDE244007540D0 /* SignInViewController.swift */,
+			);
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		B823AB6923F156C600DE13EA /* Resources */ = {
@@ -205,7 +230,12 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B8625AC223FA94A70044605C /* Custom */,
+				B82B6DB523FC118900BB0EFA /* ShadowView.swift */,
+				B8625AC723FAD6C80044605C /* DesignableTextField.swift */,
+				B826B0E523F4109C009041DD /* DesignableProgressView.swift */,
+				B88906BA240002B5002E91F7 /* NavigationControllers */,
+				B88906CB2400540C002E91F7 /* Buttons */,
+				B88906C9240053DE002E91F7 /* NavigationBar */,
 				B82573F123F545C900C8CBF8 /* Cells */,
 			);
 			path = Views;
@@ -217,6 +247,7 @@
 				B823AB7623F15E3600DE13EA /* Auth.storyboard */,
 				B823AB7523F15DD700DE13EA /* Onboarding */,
 				B823AB7923F15E8400DE13EA /* SignUp */,
+				B823A6BE23FDE20B007540D0 /* SignIn */,
 				B823A6B023FD70D2007540D0 /* ConfirmTelephoneNumber */,
 				B823A6B923FDD47F007540D0 /* CreatePassword */,
 			);
@@ -226,6 +257,8 @@
 		B823AB7523F15DD700DE13EA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */,
+				B88906C72400515B002E91F7 /* OnboardingPresenter.swift */,
 				B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
@@ -234,8 +267,8 @@
 		B823AB7923F15E8400DE13EA /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				B825742B23F592F600C8CBF8 /* SignUpViewController.swift */,
 				B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */,
+				B825742B23F592F600C8CBF8 /* SignUpViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -314,19 +347,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B8625AC223FA94A70044605C /* Custom */ = {
-			isa = PBXGroup;
-			children = (
-				B8625AC323FA94D30044605C /* CustomButton.swift */,
-				B8625AC523FAC88C0044605C /* LoaderButton.swift */,
-				B826B0E523F4109C009041DD /* CustomProgressView.swift */,
-				B8625AC723FAD6C80044605C /* CustomTextField.swift */,
-				B82B6DB523FC118900BB0EFA /* ShadowView.swift */,
-				B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */,
-			);
-			path = Custom;
-			sourceTree = "<group>";
-		};
 		B870197823ED50EA00625D61 = {
 			isa = PBXGroup;
 			children = (
@@ -349,15 +369,51 @@
 			children = (
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B870199223ED50EC00625D61 /* Info.plist */,
+				B823AB6B23F156DE00DE13EA /* Extensions */,
+				B88906B523FFD4EA002E91F7 /* Protocols */,
+				B826B0F323F45ED8009041DD /* Models */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
 				B826B0F023F45973009041DD /* Services */,
-				B823AB6B23F156DE00DE13EA /* Extensions */,
-				B826B0F323F45ED8009041DD /* Models */,
 				B823AB6D23F1570F00DE13EA /* Views */,
-				B823AB6A23F156D600DE13EA /* Scenes */,
 				B823AB6923F156C600DE13EA /* Resources */,
+				B823AB6A23F156D600DE13EA /* Scenes */,
 			);
 			path = CoBook;
+			sourceTree = "<group>";
+		};
+		B88906B523FFD4EA002E91F7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B88906C1240020F4002E91F7 /* BasePresenter.swift */,
+				B88906C324003B6B002E91F7 /* BaseView.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B88906BA240002B5002E91F7 /* NavigationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */,
+				B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */,
+			);
+			path = NavigationControllers;
+			sourceTree = "<group>";
+		};
+		B88906C9240053DE002E91F7 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		B88906CB2400540C002E91F7 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				B8625AC323FA94D30044605C /* DesignableButton.swift */,
+				B8625AC523FAC88C0044605C /* LoaderButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,25 +532,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
+				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* ShadowView.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
+				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
+				B88906C424003B6B002E91F7 /* BaseView.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
+				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
-				B8625AC823FAD6C80044605C /* CustomTextField.swift in Sources */,
-				B8625AC423FA94D30044605C /* CustomButton.swift in Sources */,
+				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
+				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
+				B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
-				B826B0E623F4109C009041DD /* CustomProgressView.swift in Sources */,
+				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
+				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
+				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
+				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
@@ -647,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S8SL25HNRJ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -661,6 +726,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook.CoBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -670,6 +736,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S8SL25HNRJ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -684,6 +751,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook.CoBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

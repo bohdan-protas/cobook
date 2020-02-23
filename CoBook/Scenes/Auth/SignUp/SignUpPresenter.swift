@@ -9,36 +9,37 @@
 import Foundation
 
 // MARK: View -
-protocol SignUpViewProtocol: class {
-
+protocol SignUpViewProtocol: BaseView {
+    func setContinueButton(actived: Bool)
 }
 
-// MARK: Presenter -
-protocol SignUpPresenterProtocol: class {
-	var view: SignUpViewProtocol? { get set }
-    func signUp()
-    func checkFields(name: String?, telephone: String?, email: String?) -> Bool
-}
-
-class SignUpPresenter: SignUpPresenterProtocol {
+class SignUpPresenter: BasePresenter {
     weak var view: SignUpViewProtocol?
 
+    // MARK: Properties
     var name: String = ""
     var telephone: String = ""
     var email: String = ""
+
+    // MARK: Public
+    func attachView(_ view: SignUpViewProtocol) {
+        self.view = view
+    }
+
+    func detachView() {
+        self.view = nil
+    }
 
     func signUp() {
         // TODO call to server
     }
 
-    func checkFields(name: String?, telephone: String?, email: String?) -> Bool {
+    func set(name: String?, telephone: String?, email: String?) {
         self.name = name ?? ""
         self.telephone = telephone ?? ""
         self.email = email ?? ""
 
-        return
-            !self.name.isEmpty &&
-            !self.telephone.isEmpty &&
-            RegularExpression(pattern: .email).match(in: self.email)
+        let actived = !self.name.isEmpty && !self.telephone.isEmpty && !self.email.isEmpty
+        view?.setContinueButton(actived: actived)
     }
 }

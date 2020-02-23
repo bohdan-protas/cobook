@@ -8,11 +8,11 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class OnboardingViewController: UIViewController, OnboardingView {
 
     // MARK: IBOutlets
     @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var progressView: CustomProgressView!
+    @IBOutlet var progressView: DesignableProgressView!
 
     // MARK: Properties
     private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
@@ -24,37 +24,39 @@ class OnboardingViewController: UIViewController {
         return flowLayout
     }()
 
-    private var dataSource: [Onboarding.PageModel] = [
-        Onboarding.PageModel(title: "Onboarding.Title01".localized,
-                             subtitle: "Onboarding.Subtitle01".localized,
-                             image: UIImage(named: "ic_businessman"),
-                             actionTitle: "Onboarding.Next".localized,
-                             action: Onboarding.ButtonActionType.next),
-        Onboarding.PageModel(title: "Onboarding.Title02".localized,
-                             subtitle: "Onboarding.Subtitle02".localized,
-                             image: UIImage(named: "ic_business_plan"),
-                             actionTitle: "Onboarding.Next".localized,
-                             action: Onboarding.ButtonActionType.next),
-        Onboarding.PageModel(title: "Onboarding.Title03".localized,
-                             subtitle: "Onboarding.Subtitle03".localized,
-                             image: UIImage(named: "ic_business_deal"),
-                             actionTitle: "Onboarding.Start".localized,
-                             action: Onboarding.ButtonActionType.finish)
-    ]
+    var dataManager: OnboardingDataManager = OnboardingDataManager()
+    lazy var presenter: OnboardingPresenter = {
+        let presenter = OnboardingPresenter(dataManager: dataManager)
+        return presenter
+    }()
 
     // MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectionView.dataSource = dataManager
         collectionView.register(OnboardingPageCollectionViewCell.nib, forCellWithReuseIdentifier: OnboardingPageCollectionViewCell.identifier)
         collectionView.collectionViewLayout = collectionViewLayout
 
-        setup()
+        presenter.attachView(self)
+        setupLayout()
+    }
+
+    deinit {
+        presenter.detachView()
     }
     
-    /// Routing
+    // MARK: - OnboardingView
     func goToSignUp() {
-        self.performSegue(withIdentifier: SignUpViewController.segueId, sender: self)
+        self.performSegue(withIdentifier: SignUpNavigationController.segueId, sender: self)
+    }
+
+    func scrollToItem(at indexPath: IndexPath) {
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+
+    func page(for cell: UICollectionViewCell) -> Int? {
+        return collectionView.indexPath(for: cell)?.item
     }
 
 
@@ -63,29 +65,12 @@ class OnboardingViewController: UIViewController {
 // MARK: - Privates
 private extension OnboardingViewController {
 
-    private func setup() {
+    private func setupLayout() {
         let pageWidth = collectionView.frame.width
         let currentOffset = collectionView.contentOffset.x + pageWidth
-        let fullOffset = CGFloat(self.dataSource.count) * pageWidth
+        let fullOffset = CGFloat(dataManager.dataSource.count) * pageWidth
         let currentProgress: Float = Float(currentOffset / fullOffset)
         progressView.setProgress(currentProgress, animated: false)
-    }
-
-
-}
-
-// MARK: - UICollectionViewDataSource
-extension OnboardingViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingPageCollectionViewCell.identifier, for: indexPath) as! OnboardingPageCollectionViewCell
-        cell.fill(dataSource[indexPath.row])
-        cell.delegate = self
-        return cell
     }
 
 
@@ -100,34 +85,13 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
 
 }
 
-// MARK: - OnboardingPageCollectionViewCellDelegate
-extension OnboardingViewController: OnboardingPageCollectionViewCellDelegate {
-
-    func actionButtonDidTapped(_ cell: OnboardingPageCollectionViewCell, actionType: Onboarding.ButtonActionType?) {
-        guard let action = actionType else {
-            return
-        }
-
-        switch action {
-        case .next:
-            guard let currentPage = collectionView.indexPath(for: cell)?.item else {
-                return
-            }
-            collectionView.scrollToItem(at: IndexPath(row: currentPage+1, section: 0), at: .centeredHorizontally, animated: true)
-        case .finish:
-            goToSignUp()
-        }
-    }
-
-}
-
 // MARK: - ScrollViewDelegate
 extension OnboardingViewController: UIScrollViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageWidth = scrollView.frame.width
         let currentOffset = scrollView.contentOffset.x + pageWidth
-        let fullOffset = CGFloat(self.dataSource.count) * pageWidth
+        let fullOffset = CGFloat(dataManager.dataSource.count) * pageWidth
         let currentProgress: Float = Float(currentOffset / fullOffset)
         progressView.setProgress(currentProgress, animated: true)
     }

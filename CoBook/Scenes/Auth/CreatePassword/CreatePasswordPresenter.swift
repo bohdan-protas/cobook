@@ -29,7 +29,7 @@ class CreatePasswordPresenter: CreatePasswordPresenterProtocol {
     private var password: String = ""
 
     var currentTelephoneNumberToShow: String {
-        return "Не визначено"
+        return "+38xxxxxxxxxx"
     }
 
     // MARK: Public

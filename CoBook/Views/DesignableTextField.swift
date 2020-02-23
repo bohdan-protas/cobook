@@ -9,42 +9,51 @@
 import UIKit
 
 @IBDesignable
-class CustomTextField: UITextField {
+class DesignableTextField: UITextField {
 
     // MARK: Properties
-    @IBInspectable public var bottomTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var bottomTextInset: CGFloat = 0 {
         didSet { textPadding.bottom = bottomTextInset }
     }
 
-    @IBInspectable public var leftTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var leftTextInset: CGFloat = 0 {
         didSet { textPadding.left = leftTextInset }
     }
 
-    @IBInspectable public var rightTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var rightTextInset: CGFloat = 0 {
         didSet { textPadding.right = rightTextInset }
     }
 
-    @IBInspectable public var topTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var topTextInset: CGFloat = 0 {
         didSet { textPadding.top = topTextInset }
     }
 
-    @IBInspectable var placeholderColor: UIColor = .black {
+    @IBInspectable
+    var placeholderColor: UIColor = .black {
         didSet { setPlaceholderColor(value: placeholderColor) }
     }
 
-    @IBInspectable var cornerRadius: CGFloat = 0 {
+    @IBInspectable
+    var cornerRadius: CGFloat = 0 {
         didSet { setCorners(value: cornerRadius) }
     }
 
-    @IBInspectable var borderWidth: CGFloat = 0 {
+    @IBInspectable
+    var borderWidth: CGFloat = 0 {
         didSet { setBorderWidth(value: borderWidth) }
     }
 
-    @IBInspectable var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.white {
+    @IBInspectable
+    var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.white {
         didSet { refreshBorderColor() }
     }
 
-    @IBInspectable var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.white {
+    @IBInspectable
+    var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.white {
         didSet { refreshBorderColor() }
     }
 

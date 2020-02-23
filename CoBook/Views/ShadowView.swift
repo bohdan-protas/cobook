@@ -15,6 +15,7 @@ class ShadowView: UIView {
     @IBInspectable var shadowColor: UIColor = .black
     @IBInspectable var shadowRadius: CGFloat = 0
     @IBInspectable var shadowOpacity: Float = 0
+    @IBInspectable var cornerRadius: CGFloat = 0
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -24,7 +25,7 @@ class ShadowView: UIView {
         layer.shadowColor = shadowColor.cgColor
         layer.shadowRadius = shadowRadius
         layer.shadowOpacity = shadowOpacity
-        layer.cornerRadius = shadowRadius
+        layer.cornerRadius = cornerRadius
 
         let backgroundCGColor = backgroundColor?.cgColor
         backgroundColor = nil

@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class LoaderButton: CustomButton {
+class LoaderButton: DesignableButton {
 
     // MARK: Properties
     @IBInspectable var spinnerColor: UIColor = .black {
