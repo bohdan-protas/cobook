@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class CustomTextField: UITextField {
+class DesignableTextField: UITextField {
 
     // MARK: Properties
     @IBInspectable

@@ -15,8 +15,8 @@ class SignInViewController: UIViewController, SignInView {
     }
 
     // MARK: IBOutlets
-    @IBOutlet var loginTextField: CustomTextField!
-    @IBOutlet var passwordTextField: CustomTextField!
+    @IBOutlet var loginTextField: DesignableTextField!
+    @IBOutlet var passwordTextField: DesignableTextField!
     @IBOutlet var signInButton: LoaderButton!
 
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
@@ -64,6 +64,23 @@ class SignInViewController: UIViewController, SignInView {
     }
 
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
+        goToSignUp()
+    }
+
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        presenter.attachView(self)
+        setupLayout()
+    }
+
+    deinit {
+        presenter.detachView()
+    }
+
+    // MARK: Navigation
+    func goToSignUp() {
         if presentingViewController is SignUpNavigationController {
             performSegue(withIdentifier: SignUpNavigationController.unwindSegueId, sender: self)
         } else {
@@ -72,16 +89,6 @@ class SignInViewController: UIViewController, SignInView {
             navigationController.modalPresentationStyle = .overFullScreen
             present(navigationController, animated: true, completion: nil)
         }
-    }
-
-    // MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupLayout()
-    }
-
-    deinit {
-        presenter.detachView()
     }
 
 

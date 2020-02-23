@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomProgressView: UIProgressView {
+class DesignableProgressView: UIProgressView {
 
     override func layoutSubviews() {
         super.layoutSubviews()

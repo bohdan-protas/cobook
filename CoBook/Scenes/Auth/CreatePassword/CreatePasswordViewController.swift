@@ -15,8 +15,8 @@ class CreatePasswordViewController: UIViewController, CreatePasswordViewProtocol
     }
 
     // MARK: IBOutlets
-    @IBOutlet var telephoneNumberTextField: CustomTextField!
-    @IBOutlet var passwordTextField: CustomTextField!
+    @IBOutlet var telephoneNumberTextField: DesignableTextField!
+    @IBOutlet var passwordTextField: DesignableTextField!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var continueButton: LoaderButton!
 

@@ -17,23 +17,21 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     // MARK: IBOutlets
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
-    @IBOutlet var userNameTextField: CustomTextField!
-    @IBOutlet var telephoneNumberTextField: CustomTextField!
-    @IBOutlet var emailTextField: CustomTextField!
+    @IBOutlet var userNameTextField: DesignableTextField!
+    @IBOutlet var telephoneNumberTextField: DesignableTextField!
+    @IBOutlet var emailTextField: DesignableTextField!
     @IBOutlet var continueButton: LoaderButton!
 
     // MARK: Properties
-    var presenter: SignUpPresenterProtocol = SignUpPresenter()
+    var presenter = SignUpPresenter()
 
     // MARK: Actions
     @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
         self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
     }
 
-    @IBAction func textFieldEditingChanged(_ sender: CustomTextField) {
-        continueButton.isEnabled = presenter.checkFields(name: userNameTextField.text,
-                                                         telephone: telephoneNumberTextField.text,
-                                                         email: emailTextField.text)
+    @IBAction func textFieldEditingChanged(_ sender: DesignableTextField) {
+        presenter.set(name: userNameTextField.text, telephone: telephoneNumberTextField.text, email: emailTextField.text)
     }
 
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
@@ -53,6 +51,15 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeKeyboardObserver()
+    }
+
+    deinit {
+        presenter.detachView()
+    }
+
+    // MARK: SignUpView
+    func setContinueButton(actived: Bool) {
+        continueButton.isEnabled = actived
     }
 
 

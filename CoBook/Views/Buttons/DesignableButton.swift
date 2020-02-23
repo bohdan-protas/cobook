@@ -10,7 +10,7 @@ import UIKit
 import ObjectiveC
 
 @IBDesignable
-class CustomButton: UIButton {
+class DesignableButton: UIButton {
 
     // MARK: Properties
     var disabledColorHandle: UInt8 = 0
