@@ -6,6 +6,7 @@
   Copyright © 2020 CoBook. All rights reserved.
 */
 
+// MARK: - Onboarding
 "Onboarding.Title01" = "Title.01";
 "Onboarding.Subtitle01" = "Subtitle01";
 "Onboarding.Title02" = "Title 02";
@@ -14,3 +15,6 @@
 "Onboarding.Subtitle03" = "Subtitle 03";
 "Onboarding.Next" = "Next";
 "Onboarding.Start" = "Start";
+
+// MARK: - SignUp
+"SignUp.title" = "SignUp.title";
