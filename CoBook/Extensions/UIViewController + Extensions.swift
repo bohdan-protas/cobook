@@ -14,4 +14,22 @@ extension UIViewController {
         return String.init(describing: self.self)
     }
 
+    static var segueId: String {
+        return "goTo\(String(describing: self.self))"
+    }
+
+    static var unwindSegueId: String {
+        return "unwindTo\(String(describing: self.self))"
+    }
+
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
 }

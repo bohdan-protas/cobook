@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  CoBook
+
+  Created by protas on 2/13/20.
+  Copyright © 2020 CoBook. All rights reserved.
+*/
+
+// MARK: - Onboarding
+"Onboarding.Title01" = "Заголовок 01";
+"Onboarding.Subtitle01" = "Описособливостей додатку\nфічі, переваги, тощо";
+"Onboarding.Title02" = "Заголовок 02";
+"Onboarding.Subtitle02" = "Описособливостей додатку\nфічі, переваги, тощо";
+"Onboarding.Title03" = "Заголовок 03";
+"Onboarding.Subtitle03" = "Описособливостей додатку\nфічі, переваги, тощо";
+"Onboarding.Next" = "Продовжити";
+"Onboarding.Start" = "Розпочати";
+
+// MARK: - SignUp
+"SignUp.title" = "Вітаємо в спільноті CoBook";
+
+// MARK: - SighIn
+"SignIn.title" = "Вітаємо в спільноті CoBook";
+
+// MARK: - Validation
+"Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
+"Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
+"Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
+"Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
+"Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";

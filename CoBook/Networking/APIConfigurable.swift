@@ -1,0 +1,48 @@
+//
+//  APIConfiguration.swift
+//  CoBook
+//
+//  Created by protas on 2/23/20.
+//  Copyright © 2020 CoBook. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+
+protocol APIConfigurable: URLRequestConvertible {
+    var useAuthirizationToken: Bool { get }
+    var method: HTTPMethod { get }
+    var path: String { get }
+    var parameters: Parameters? { get }
+}
+
+// MARK: - Base configuration
+extension APIConfigurable {
+
+    func asURLRequest() throws -> URLRequest {
+        /// Base URL
+        let url = try APIConstants.baseURLPath.asURL()
+        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+
+        /// HTTP Method
+        urlRequest.httpMethod = method.rawValue
+
+        /// Common Headers
+        urlRequest.headers.add(.contentType(ContentType.json.rawValue))
+        if useAuthirizationToken {
+            urlRequest.headers.add(.authorization(bearerToken: ""))
+        }
+
+        /// Parameters
+        if let parameters = parameters {
+            do {
+                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            } catch {
+                throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
+            }
+        }
+
+        return urlRequest
+    }
+    
+}

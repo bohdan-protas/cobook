@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  CoBook
+
+  Created by protas on 2/13/20.
+  Copyright © 2020 CoBook. All rights reserved.
+*/
+
+// MARK: - Onboarding
+"Onboarding.Title01" = "Title.01";
+"Onboarding.Subtitle01" = "Subtitle01";
+"Onboarding.Title02" = "Title 02";
+"Onboarding.Subtitle02" = "Subtitle 02";
+"Onboarding.Title03" = "Title 03";
+"Onboarding.Subtitle03" = "Subtitle 03";
+"Onboarding.Next" = "Next";
+"Onboarding.Start" = "Start";
+
+// MARK: - SignUp
+"SignUp.title" = "SignUp.title descr";
+
+// MARK: - SighIn
+"SignIn.title" = "SignIn.title descr";
+
+// MARK: - Validation
+"Error.Validation.email" = "Error.Validation.email descr";
+"Error.Validation.firstName" = "Error.Validation.firstName descr";
+"Error.Validation.lastName" = "Error.Validation.lastName descr";
+"Error.Validation.telephone" = "Error.Validation.telephone descr";
+"Error.Validation.password" = "Error.Validation.password descr";

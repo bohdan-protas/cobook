@@ -9,15 +9,18 @@
 import UIKit
 
 private enum StoryboardNames {
-    static let onboarding: String = "Auth"
-
+    static let auth: String = "Auth"
 }
 
 extension UIStoryboard {
 
+    static var auth: UIStoryboard {
+        return UIStoryboard(name: StoryboardNames.auth, bundle: nil)
+    }
+
     func initiateViewControllerFromType<T: UIViewController>() -> T {
         guard let vc = self.instantiateViewController(withIdentifier: T.describing) as? T else {
-            fatalError("Some error with initiating view controller with specified type, check if cpecified right storyboard id for it!")
+            fatalError("Some error with initiating view controller with specified type")
         }
         return vc
     }
