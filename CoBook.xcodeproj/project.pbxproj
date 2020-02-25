@@ -73,8 +73,13 @@
 		B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */; };
 		B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906BF24000858002E91F7 /* SignInPresenter.swift */; };
 		B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C1240020F4002E91F7 /* BasePresenter.swift */; };
-		B88906C424003B6B002E91F7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* BaseView.swift */; };
+		B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */; };
 		B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C72400515B002E91F7 /* OnboardingPresenter.swift */; };
+		B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */; };
+		B8CB0E7724053E2700AF431B /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7624053E2700AF431B /* UserDataManager.swift */; };
+		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
+		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
+		B8CB0E80240551A400AF431B /* FinishRegistratrationAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7F240551A400AF431B /* FinishRegistratrationAPIResponseData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -160,8 +165,13 @@
 		B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationController.swift; sourceTree = "<group>"; };
 		B88906BF24000858002E91F7 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 		B88906C1240020F4002E91F7 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
-		B88906C324003B6B002E91F7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDisplayableView.swift; sourceTree = "<group>"; };
 		B88906C72400515B002E91F7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
+		B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAPIResponseData.swift; sourceTree = "<group>"; };
+		B8CB0E7624053E2700AF431B /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		B8CB0E7F240551A400AF431B /* FinishRegistratrationAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRegistratrationAPIResponseData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,7 +359,9 @@
 		B826B0F023F45973009041DD /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B8CB0E7824053E6B00AF431B /* KeychainWrapper */,
 				B823A6AC23FD3924007540D0 /* RegularExpression.swift */,
+				B8CB0E7624053E2700AF431B /* UserDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -377,6 +389,8 @@
 			children = (
 				B84B94F0240337390007EB60 /* BaseApiResponse.swift */,
 				B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */,
+				B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */,
+				B8CB0E7F240551A400AF431B /* FinishRegistratrationAPIResponseData.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -428,7 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				B88906C1240020F4002E91F7 /* BasePresenter.swift */,
-				B88906C324003B6B002E91F7 /* BaseView.swift */,
+				B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -457,6 +471,15 @@
 				B8625AC523FAC88C0044605C /* LoaderButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		B8CB0E7824053E6B00AF431B /* KeychainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */,
+				B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */,
+			);
+			path = KeychainWrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,13 +604,14 @@
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
+				B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
 				B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */,
 				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
-				B88906C424003B6B002E91F7 /* BaseView.swift in Sources */,
+				B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
@@ -597,16 +621,20 @@
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
+				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpRouter.swift in Sources */,
+				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
+				B8CB0E7724053E2700AF431B /* UserDataManager.swift in Sources */,
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
+				B8CB0E80240551A400AF431B /* FinishRegistratrationAPIResponseData.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B84B94E82403299F0007EB60 /* APIConfigurable.swift in Sources */,

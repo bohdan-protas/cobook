@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SignInView: BaseView {
+protocol SignInView: LoadDisplayableView {
     var presenter: SignInPresenter { get set }
 }
 

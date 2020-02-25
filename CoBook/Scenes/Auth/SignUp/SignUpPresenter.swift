@@ -8,23 +8,23 @@
 
 import Foundation
 
-// MARK: View -
-protocol SignUpViewProtocol: BaseView, AlertDisplayableView {
+// MARK: SignUpView
+protocol SignUpView: LoadDisplayableView, AlertDisplayableView {
     func setContinueButton(actived: Bool)
     func goToConfirmTelephoneNumber()
 }
 
 class SignUpPresenter: BasePresenter {
-    weak var view: SignUpViewProtocol?
+    weak var view: SignUpView?
 
     // MARK: Properties
-    var firstName: String = ""
-    var lastName: String = ""
-    var telephone: String = ""
-    var email: String = ""
+    private var firstName: String = ""
+    private var lastName: String = ""
+    private var telephone: String = ""
+    private var email: String = ""
 
     // MARK: Public
-    func attachView(_ view: SignUpViewProtocol) {
+    func attachView(_ view: SignUpView) {
         self.view = view
     }
 
@@ -46,6 +46,8 @@ class SignUpPresenter: BasePresenter {
             case .success(let response):
                 switch response.status {
                 case .ok:
+                    UserDataManager.default.accessToken = response.data?.accessToken
+                    UserDataManager.default.telephone = self.telephone
                     self.view?.goToConfirmTelephoneNumber()
                 case .error:
                     self.view?.infoAlert(title: nil, message: response.errorDescription)
@@ -71,12 +73,12 @@ class SignUpPresenter: BasePresenter {
     }
 
 
-
 }
 
 // MARK: - Privates
 private extension SignUpPresenter {
 
+    // TODO: move this code to separated validaiton manager
     func validateFields() -> String? {
         if firstName.count > 12 || firstName.count < 3 {
             return "Error.Validation.firstName".localized

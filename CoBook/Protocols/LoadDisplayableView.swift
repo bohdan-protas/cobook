@@ -8,14 +8,9 @@
 
 import UIKit
 
-public protocol BaseView: class {
+public protocol LoadDisplayableView: class {
     func startLoading()
     func stopLoading()
-}
-
-extension BaseView {
-    func startLoading() { }
-    func stopLoading() { }
 }
 
 protocol AlertDisplayableView {
