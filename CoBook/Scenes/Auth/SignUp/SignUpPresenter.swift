@@ -78,22 +78,21 @@ class SignUpPresenter: BasePresenter {
 // MARK: - Privates
 private extension SignUpPresenter {
 
-    // TODO: move this code to separated validaiton manager
     func validateFields() -> String? {
-        if firstName.count > 12 || firstName.count < 3 {
-            return "Error.Validation.firstName".localized
+        if let error = ValidationManager.validate(firstName: firstName) {
+            return error
         }
 
-        if lastName.count > 12 || lastName.count < 3 {
-            return "Error.Validation.lastName".localized
+        if let error = ValidationManager.validate(lastName: lastName) {
+            return error
         }
 
-        if !RegularExpression.init(pattern: .telephone).match(in: telephone) {
-             return "Error.Validation.telephone".localized
+        if let error = ValidationManager.validate(telephone: telephone) {
+            return error
         }
 
-        if !RegularExpression.init(pattern: .email).match(in: email) {
-            return "Error.Validation.email".localized
+        if let error = ValidationManager.validate(email: email) {
+            return error
         }
 
         return nil

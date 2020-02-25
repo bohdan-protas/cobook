@@ -77,14 +77,13 @@ class CreatePasswordPresenter: BasePresenter {
 // MARK: - Privates
 private extension CreatePasswordPresenter {
 
-    // TODO: move this code to separated validaiton manager
     func validateFields() -> String? {
-        if password.count > 25 || password.count < 6 {
-            return "Error.Validation.password".localized
+        if let error = ValidationManager.validate(password: password) {
+            return error
         }
 
-        if !RegularExpression.init(pattern: .telephone).match(in: telephone) {
-             return "Error.Validation.telephone".localized
+        if let error = ValidationManager.validate(telephone: telephone) {
+            return error
         }
 
         return nil

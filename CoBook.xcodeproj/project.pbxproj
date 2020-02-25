@@ -80,6 +80,7 @@
 		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
 		B8CB0E80240551A400AF431B /* FinishRegistratrationAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7F240551A400AF431B /* FinishRegistratrationAPIResponseData.swift */; };
+		B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E8124057B1700AF431B /* ValidationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -172,6 +173,7 @@
 		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		B8CB0E7F240551A400AF431B /* FinishRegistratrationAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRegistratrationAPIResponseData.swift; sourceTree = "<group>"; };
+		B8CB0E8124057B1700AF431B /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,8 +362,9 @@
 			isa = PBXGroup;
 			children = (
 				B8CB0E7824053E6B00AF431B /* KeychainWrapper */,
-				B823A6AC23FD3924007540D0 /* RegularExpression.swift */,
 				B8CB0E7624053E2700AF431B /* UserDataManager.swift */,
+				B823A6AC23FD3924007540D0 /* RegularExpression.swift */,
+				B8CB0E8124057B1700AF431B /* ValidationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
 				B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
+				B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,

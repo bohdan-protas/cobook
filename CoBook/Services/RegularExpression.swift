@@ -11,7 +11,7 @@ import Foundation
 enum RegexPattern: String {
     case email      = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     case password   = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()-_=+{}|?>.<,:;~`’]{5,}$"
-    case telephone  = "^[+0-9]{10,}$"
+    case telephone  = "^[+]+[0-9]{9,}$"
 }
 
 struct RegularExpression: ExpressibleByStringLiteral {
