@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, SignUpViewProtocol {
+class SignUpViewController: UIViewController, SignUpView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -27,11 +27,11 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
 
     // MARK: Actions
     @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
-        self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
+        presenter.signUp()
     }
 
     @IBAction func textFieldEditingChanged(_ sender: DesignableTextField) {
-        presenter.set(name: userNameTextField.text, telephone: telephoneNumberTextField.text, email: emailTextField.text)
+        presenter.set(fullName: userNameTextField.text, telephone: telephoneNumberTextField.text, email: emailTextField.text)
     }
 
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
@@ -58,8 +58,20 @@ class SignUpViewController: UIViewController, SignUpViewProtocol {
     }
 
     // MARK: SignUpView
+    func startLoading() {
+        continueButton.isLoading = true
+    }
+
+    func stopLoading() {
+        continueButton.isLoading = false
+    }
+
     func setContinueButton(actived: Bool) {
         continueButton.isEnabled = actived
+    }
+
+    func goToConfirmTelephoneNumber() {
+        self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
     }
 
 

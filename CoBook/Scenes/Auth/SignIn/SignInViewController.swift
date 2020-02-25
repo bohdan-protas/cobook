@@ -79,6 +79,14 @@ class SignInViewController: UIViewController, SignInView {
         presenter.detachView()
     }
 
+    func startLoading() {
+
+    }
+
+    func stopLoading() {
+
+    }
+
     // MARK: Navigation
     func goToSignUp() {
         if presentingViewController is SignUpNavigationController {

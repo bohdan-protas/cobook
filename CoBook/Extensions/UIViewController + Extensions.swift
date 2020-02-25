@@ -33,10 +33,3 @@ extension UIViewController {
     }
 
 }
-
-extension UIViewController {
-
-
-
-
-}

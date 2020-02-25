@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreatePasswordViewController: UIViewController, CreatePasswordViewProtocol {
+class CreatePasswordViewController: UIViewController, CreatePasswordView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -20,33 +20,38 @@ class CreatePasswordViewController: UIViewController, CreatePasswordViewProtocol
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var continueButton: LoaderButton!
 
-    var presenter: CreatePasswordPresenterProtocol = CreatePasswordPresenter()
+    var presenter: CreatePasswordPresenter = CreatePasswordPresenter()
 
     // MARK: Actions
     @IBAction func passwordTextFieldDidChangeValue(_ sender: UITextField) {
-        continueButton.isEnabled = presenter.checkField(password: sender.text)
+        presenter.set(password: sender.text)
     }
 
     @IBAction func continueButtonTapped(_ sender: Any) {
-
+        presenter.finishRegistration()
     }
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.set(view: self)
+
+        presenter.attachView(self)
         setupLayout()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: Public
+    func setContinueButton(enabled: Bool) {
+        continueButton.isEnabled = enabled
     }
-    */
+
+    func startLoading() {
+        continueButton.isLoading = true
+    }
+
+    func stopLoading() {
+        continueButton.isLoading = false
+    }
+
 
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfirmTelephoneNumberViewController: UIViewController {
+class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNumberView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -18,6 +18,9 @@ class ConfirmTelephoneNumberViewController: UIViewController {
     @IBOutlet var smsCodeTextFields: [UITextField]!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var continueButton: LoaderButton!
+
+    // MARK: Properties
+    var presenter = ConfirmTelephoneNumberPresenter()
 
     //MARK: Actions
     @IBAction func smsTextFieldDidChanged(_ sender: UITextField) {
@@ -37,28 +40,35 @@ class ConfirmTelephoneNumberViewController: UIViewController {
     }
 
     @IBAction func continueButtonTapped(_ sender: LoaderButton) {
-        self.performSegue(withIdentifier: CreatePasswordViewController.segueId, sender: nil)
+        let code = smsCodeTextFields.map { $0.text ?? "" }.reduce("", { $0 + $1 })
+        presenter.verify(with: code)
     }
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.attachView(self)
         setupLayout()
     }
 
     deinit {
+        presenter.detachView()
         removeKeyboardObserver()
     }
 
-    /*
-    // MARK: - Navigation
+    // MARK - Public
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func startLoading() {
+        continueButton.isLoading = true
     }
-    */
+
+    func stopLoading() {
+        continueButton.isLoading = false
+    }
+
+    func goToCreatePasswordController() {
+        self.performSegue(withIdentifier: CreatePasswordViewController.segueId, sender: nil)
+    }
 
 
 }
