@@ -54,9 +54,12 @@
 		B84B94E3240323ED0007EB60 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B84B94E2240323ED0007EB60 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B84B94E4240324890007EB60 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84B94E2240323ED0007EB60 /* Alamofire.framework */; };
 		B84B94E82403299F0007EB60 /* APIConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E72403299F0007EB60 /* APIConfigurable.swift */; };
-		B84B94EA240329D50007EB60 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E9240329D50007EB60 /* Constants.swift */; };
-		B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94EC24032ADE0007EB60 /* SignUpEndpoint.swift */; };
+		B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E9240329D50007EB60 /* APIConstants.swift */; };
+		B84B94ED24032ADE0007EB60 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94EC24032ADE0007EB60 /* SignUpRouter.swift */; };
 		B84B94EF24032B860007EB60 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94EE24032B860007EB60 /* SignUp.swift */; };
+		B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F0240337390007EB60 /* BaseApiResponse.swift */; };
+		B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F424033B3E0007EB60 /* APIClient.swift */; };
+		B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */; };
 		B8625ABE23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */; };
 		B8625ABF23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* DesignableButton.swift */; };
@@ -137,9 +140,12 @@
 		B82B6DB523FC118900BB0EFA /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		B84B94E2240323ED0007EB60 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		B84B94E72403299F0007EB60 /* APIConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurable.swift; sourceTree = "<group>"; };
-		B84B94E9240329D50007EB60 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B84B94EC24032ADE0007EB60 /* SignUpEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEndpoint.swift; sourceTree = "<group>"; };
+		B84B94E9240329D50007EB60 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		B84B94EC24032ADE0007EB60 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
 		B84B94EE24032B860007EB60 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		B84B94F0240337390007EB60 /* BaseApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiResponse.swift; sourceTree = "<group>"; };
+		B84B94F424033B3E0007EB60 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIResponseData.swift; sourceTree = "<group>"; };
 		B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		B8625AC323FA94D30044605C /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		B8625AC523FAC88C0044605C /* LoaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderButton.swift; sourceTree = "<group>"; };
@@ -236,8 +242,10 @@
 		B823AB6C23F156EE00DE13EA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B84B94E9240329D50007EB60 /* APIConstants.swift */,
+				B84B94F424033B3E0007EB60 /* APIClient.swift */,
 				B84B94E72403299F0007EB60 /* APIConfigurable.swift */,
-				B84B94EB24032A760007EB60 /* Endpoints */,
+				B84B94EB24032A760007EB60 /* Routers */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -349,18 +357,28 @@
 		B826B0F323F45ED8009041DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B84B94F224033B030007EB60 /* API */,
 				B826B0F123F459A1009041DD /* Onboarding.swift */,
 				B84B94EE24032B860007EB60 /* SignUp.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B84B94EB24032A760007EB60 /* Endpoints */ = {
+		B84B94EB24032A760007EB60 /* Routers */ = {
 			isa = PBXGroup;
 			children = (
-				B84B94EC24032ADE0007EB60 /* SignUpEndpoint.swift */,
+				B84B94EC24032ADE0007EB60 /* SignUpRouter.swift */,
 			);
-			path = Endpoints;
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		B84B94F224033B030007EB60 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B84B94F0240337390007EB60 /* BaseApiResponse.swift */,
+				B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		B8625ABC23FA8BDE0044605C /* Frameworks */ = {
@@ -394,7 +412,6 @@
 			children = (
 				B870199223ED50EC00625D61 /* Info.plist */,
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
-				B84B94E9240329D50007EB60 /* Constants.swift */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B826B0F323F45ED8009041DD /* Models */,
@@ -561,10 +578,13 @@
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* ShadowView.swift in Sources */,
+				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
+				B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */,
+				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B88906C424003B6B002E91F7 /* BaseView.swift in Sources */,
@@ -578,7 +598,7 @@
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
-				B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */,
+				B84B94ED24032ADE0007EB60 /* SignUpRouter.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
@@ -595,7 +615,7 @@
 				B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */,
 				B84B94EF24032B860007EB60 /* SignUp.swift in Sources */,
 				B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */,
-				B84B94EA240329D50007EB60 /* Constants.swift in Sources */,
+				B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

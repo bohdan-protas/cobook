@@ -7,27 +7,27 @@
 //
 
 import Foundation
+import Alamofire
 
-struct Defaults {
+enum APIConstants {
 
-    struct ProductionServer {
-        static let baseURL = "https://3.124.214.212/api/v1"
+    static var baseURLPath: URLComponents {
+        get {
+            var components = URLComponents()
+            components.scheme = "https"
+            components.host = "3.124.214.212"
+            components.path = "/api/v1"
+            return components
+        }
     }
 
-    struct APIParameterKey {
+    enum ParameterKey {
         static let password = "password"
         static let email = "email"
         static let firstName = "first_name"
         static let lastName = "last_name"
         static let telephone = "telephone"
     }
-}
-
-enum HTTPHeaderField: String {
-    case authentication = "Authorization"
-    case contentType = "Content-Type"
-    case acceptType = "Accept"
-    case acceptEncoding = "Accept-Encoding"
 }
 
 enum ContentType: String {

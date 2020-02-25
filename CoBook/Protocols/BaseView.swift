@@ -6,14 +6,37 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public protocol BaseView: class {
     func startLoading()
-    func finishLoading()
+    func stopLoading()
 }
 
 extension BaseView {
     func startLoading() { }
-    func finishLoading() { }
+    func stopLoading() { }
+}
+
+protocol AlertDisplayableView {
+    func defaultErrorAlert()
+    func infoAlert(title: String?, message: String?)
+}
+
+extension AlertDisplayableView where Self: UIViewController {
+
+    func infoAlert(title: String? = "", message: String?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    func defaultErrorAlert() {
+        let alertController = UIAlertController(title: "Error", message: "Some error occured. Try again later.", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
 }
