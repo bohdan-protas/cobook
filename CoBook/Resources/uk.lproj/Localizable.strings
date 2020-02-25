@@ -19,6 +19,9 @@
 // MARK: - SignUp
 "SignUp.title" = "Вітаємо в спільноті CoBook";
 
+// MARK: - SighIn
+"SignIn.title" = "Вітаємо в спільноті CoBook";
+
 // MARK: - Validation
 "Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
 "Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";

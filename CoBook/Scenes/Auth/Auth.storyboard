@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iqt-wc-tgP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0vd-fA-VJG">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -433,7 +433,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="JN2-Zf-9id"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Вітаємо у спільноті CoBook" id="rhk-Y9-O7g"/>
+                                    <navigationItem id="rhk-Y9-O7g"/>
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bo-yh-juf" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
@@ -708,6 +708,7 @@
                         <outlet property="bottomContainerConstraint" destination="Ihi-FU-6qB" id="dCD-IS-OjL"/>
                         <outlet property="fieldToTitleConstraint" destination="E2A-vq-XIa" id="SYy-8b-gbk"/>
                         <outlet property="loginTextField" destination="y1w-rc-cAA" id="wo6-cK-YCA"/>
+                        <outlet property="navBar" destination="fqO-51-e7S" id="2Wd-f7-iJA"/>
                         <outlet property="passwordTextField" destination="wOZ-DN-Hf3" id="Evh-oX-f0h"/>
                         <outlet property="signInButton" destination="hQy-Ru-7gM" id="uGQ-0d-dB8"/>
                         <segue destination="YHt-xW-dOj" kind="unwind" identifier="unwindToSignUpNavigationController" unwindAction="myUnwindActionWithUnwindSegue:" id="7C2-iu-IyO"/>

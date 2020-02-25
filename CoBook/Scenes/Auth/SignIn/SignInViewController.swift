@@ -18,6 +18,8 @@ class SignInViewController: UIViewController, SignInView {
     @IBOutlet var loginTextField: DesignableTextField!
     @IBOutlet var passwordTextField: DesignableTextField!
     @IBOutlet var signInButton: LoaderButton!
+    @IBOutlet var navBar: TransparentNavigationBar!
+
 
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
@@ -80,11 +82,11 @@ class SignInViewController: UIViewController, SignInView {
     }
 
     func startLoading() {
-
+        signInButton.isLoading = true
     }
 
     func stopLoading() {
-
+        signInButton.isLoading = false
     }
 
     // MARK: Navigation
@@ -106,6 +108,8 @@ class SignInViewController: UIViewController, SignInView {
 private extension SignInViewController {
 
     func setupLayout() {
+        navBar.topItem?.title = "SignIn.title".localized
+
         /// In small screen devices disable title image
         if UIDevice().isSmallScreenType {
             fieldToTitleConstraint.isActive = true

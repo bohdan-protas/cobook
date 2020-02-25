@@ -17,11 +17,14 @@
 "Onboarding.Start" = "Start";
 
 // MARK: - SignUp
-"SignUp.title" = "SignUp.title";
+"SignUp.title" = "SignUp.title descr";
+
+// MARK: - SighIn
+"SignIn.title" = "SignIn.title descr";
 
 // MARK: - Validation
-"Error.Validation.email" = "Error.Validation.email desr";
-"Error.Validation.firstName" = "Error.Validation.firstName desr";
-"Error.Validation.lastName" = "Error.Validation.lastName desr";
-"Error.Validation.telephone" = "Error.Validation.telephone desr";
-"Error.Validation.password" = "Error.Validation.password desr";
+"Error.Validation.email" = "Error.Validation.email descr";
+"Error.Validation.firstName" = "Error.Validation.firstName descr";
+"Error.Validation.lastName" = "Error.Validation.lastName descr";
+"Error.Validation.telephone" = "Error.Validation.telephone descr";
+"Error.Validation.password" = "Error.Validation.password descr";
