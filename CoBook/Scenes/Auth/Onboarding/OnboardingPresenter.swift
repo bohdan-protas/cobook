@@ -52,6 +52,7 @@ class OnboardingPresenter: BasePresenter {
     func detachView() { view = nil }
 }
 
+// MARK: - OnboardingPageCollectionViewCellDelegate
 extension OnboardingPresenter: OnboardingPageCollectionViewCellDelegate {
     func actionButtonDidTapped(_ cell: OnboardingPageCollectionViewCell, actionType: Onboarding.ButtonActionType?) {
         guard let action = actionType else {
@@ -66,6 +67,7 @@ extension OnboardingPresenter: OnboardingPageCollectionViewCellDelegate {
             let nextIndexPath = IndexPath(item: page+1, section: 0)
             view?.scrollToItem(at: nextIndexPath)
         case .finish:
+            AppStorage.isUserCompletedRegistration = true
             view?.goToSignUp()
         }
     }

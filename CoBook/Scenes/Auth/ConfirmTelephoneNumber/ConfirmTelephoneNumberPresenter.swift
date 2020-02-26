@@ -15,7 +15,7 @@ protocol ConfirmTelephoneNumberView: LoadDisplayableView, AlertDisplayableView {
 
 // MARK: - ConfirmTelephoneNumberPresenter
 class ConfirmTelephoneNumberPresenter: BasePresenter {
-    weak var view: ConfirmTelephoneNumberView?
+    private weak var view: ConfirmTelephoneNumberView?
 
     // MARK: Public
     func attachView(_ view: ConfirmTelephoneNumberView) {
@@ -29,7 +29,7 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
     func verify(with smsCode: String) {
         view?.startLoading()
 
-        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: UserDataManager.default.accessToken ?? "") { (result) in
+        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: AppStorage.accessToken ?? "") { (result) in
             self.view?.stopLoading()
 
             switch result {
@@ -38,13 +38,12 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
                     self.view?.goToCreatePasswordController()
                 } else {
                     self.view?.infoAlert(title: nil, message: response.errorLocalizadMessage)
-                    UserDataManager.default.accessToken = nil
                 }
             case let .failure(error):
-                UserDataManager.default.accessToken = nil
                 self.view?.defaultErrorAlert()
                 debugPrint(error.localizedDescription)
             }
+
         }
     }
 

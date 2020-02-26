@@ -24,6 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func applicationWillTerminate(_ application: UIApplication) {
+        if AppStorage.isUserInitiatedRegistration && !AppStorage.isUserCompletedRegistration {
+            AppStorage.accessToken = nil
+            AppStorage.refreshToken = nil
+            AppStorage.profile = nil
+            AppStorage.isUserCompletedRegistration = false
+            AppStorage.isUserInitiatedRegistration = false
+        }
+    }
+
 
 }
 

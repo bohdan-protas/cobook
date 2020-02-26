@@ -476,7 +476,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-9w-2Sf" userLabel="Fields Stack View">
-                                        <rect key="frame" x="16" y="261" width="295" height="120"/>
+                                        <rect key="frame" x="16" y="261" width="295" height="148"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логін" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1w-rc-cAA" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
@@ -557,7 +557,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xj-uY-QYt">
-                                                <rect key="frame" x="0.0" y="120" width="295" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="120" width="295" height="28"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Забули пароль?">
                                                     <color key="titleColor" name="Theme_Green"/>

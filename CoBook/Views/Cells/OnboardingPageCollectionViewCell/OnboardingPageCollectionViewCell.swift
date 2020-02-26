@@ -26,6 +26,13 @@ class OnboardingPageCollectionViewCell: UICollectionViewCell {
         delegate?.actionButtonDidTapped(self, actionType: action)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = ""
+        descriptionLabel.text = ""
+        titleImageView.image = nil
+    }
+
     func fill(_ model: Onboarding.PageModel) {
         self.titleImageView.image = model.image
         self.titleLabel.text = model.title

@@ -57,7 +57,6 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
     }
 
     // MARK - Public
-
     func startLoading() {
         continueButton.isLoading = true
     }
