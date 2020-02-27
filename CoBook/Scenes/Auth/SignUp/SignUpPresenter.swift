@@ -22,6 +22,11 @@ class SignUpPresenter: BasePresenter {
     private var lastName: String = ""
     private var telephone: String = ""
     private var email: String = ""
+    private var smsResendLeftInSeconds: TimeInterval = 0
+
+    var smsCodetimeLeft: TimeInterval {
+        return smsResendLeftInSeconds
+    }
 
     // MARK: Public
     func attachView(_ view: SignUpView) {
@@ -47,9 +52,11 @@ class SignUpPresenter: BasePresenter {
                 switch response.status {
                 case .ok:
                     AppStorage.isUserInitiatedRegistration = true
-                    AppStorage.profile.telephone.number = self.telephone
-                    AppStorage.profile.email.address = self.email
                     AppStorage.accessToken = response.data?.accessToken
+                    AppStorage.profile?.telephone.number = self.telephone
+                    AppStorage.profile?.email.address = self.email
+
+                    self.smsResendLeftInSeconds = (response.data?.smsResendLeftInMiliseconds ?? 0) * 0.001
                     self.view?.goToConfirmTelephoneNumber()
                 case .error:
                     self.view?.infoAlert(title: nil, message: response.errorDescription)
@@ -99,5 +106,6 @@ private extension SignUpPresenter {
 
         return nil
     }
+    
 
 }

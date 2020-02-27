@@ -18,9 +18,11 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
     @IBOutlet var smsCodeTextFields: [UITextField]!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var continueButton: LoaderButton!
-
+    @IBOutlet var timerLabel: UILabel!
+    @IBOutlet var resendSmsButton: LoaderButton!
+    
     // MARK: Properties
-    var presenter = ConfirmTelephoneNumberPresenter()
+    var presenter: ConfirmTelephoneNumberPresenter?
 
     //MARK: Actions
     @IBAction func smsTextFieldDidChanged(_ sender: UITextField) {
@@ -41,22 +43,39 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
 
     @IBAction func continueButtonTapped(_ sender: LoaderButton) {
         let code = smsCodeTextFields.map { $0.text ?? "" }.reduce("", { $0 + $1 })
-        presenter.verify(with: code)
+        presenter?.verify(with: code)
+    }
+    
+    @IBAction func resendSmsButtonTapped(_ sender: Any) {
+        presenter?.resendSms()
     }
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
+        presenter?.attachView(self)
         setupLayout()
     }
 
     deinit {
-        presenter.detachView()
+        presenter?.detachView()
         removeKeyboardObserver()
     }
 
     // MARK - Public
+    func setFormatedTimer(label: String) {
+        self.timerLabel.text = label
+    }
+
+    func setTimerLabel(isHidden: Bool) {
+        timerLabel.isHidden = isHidden
+        resendSmsButton.isHidden = !isHidden
+    }
+
+    func setResendButton(isLoading: Bool) {
+        resendSmsButton.isLoading = isLoading
+    }
+
     func startLoading() {
         continueButton.isLoading = true
     }

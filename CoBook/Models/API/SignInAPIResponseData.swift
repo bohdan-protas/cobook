@@ -10,15 +10,15 @@ import Foundation
 
 struct SignInAPIResponseData {
     var accessToken: String?
-    var smsResendLeft: Int?
+    var smsResendLeftInMiliseconds: TimeInterval?
 }
 
 extension SignInAPIResponseData: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case accessToken = "s_id"
-        case smsResendLeft = "sms_resend_left"
+        case smsResendLeftInMiliseconds = "sms_resend_left"
     }
-
-
 }
+
+

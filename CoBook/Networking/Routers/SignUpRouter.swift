@@ -20,6 +20,9 @@ enum SignUpRouter: APIConfigurable {
     ///Finish registration session
     case finish(accessToken: String, password: String)
 
+    ///Request resend sms
+    case resend(accessToken: String)
+
     // MARK: - Auth token usage
     var useAuthirizationToken: Bool {
         return false
@@ -39,6 +42,8 @@ enum SignUpRouter: APIConfigurable {
             return "/sign_up/verify"
         case .finish:
             return "/sign_up/finish"
+        case .resend:
+            return "/sign_up/resend"
         }
     }
 
@@ -64,6 +69,11 @@ enum SignUpRouter: APIConfigurable {
             return [
                 APIConstants.ParameterKey.token: accessToken,
                 APIConstants.ParameterKey.password: password
+            ]
+
+        case .resend(let accessToken):
+            return [
+                APIConstants.ParameterKey.token: accessToken,
             ]
 
 

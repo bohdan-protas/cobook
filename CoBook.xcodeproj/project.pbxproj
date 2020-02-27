@@ -58,6 +58,7 @@
 		B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F242406FFD200AFE578 /* Optional + Extensions.swift */; };
 		B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F262406FFF300AFE578 /* AnyOptional.swift */; };
 		B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F282407001800AFE578 /* AlertDisplayableView.swift */; };
+		B83B6D192407E9A500190006 /* TimeInterval + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83B6D182407E9A500190006 /* TimeInterval + Extensions.swift */; };
 		B84B94E3240323ED0007EB60 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B84B94E2240323ED0007EB60 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B84B94E4240324890007EB60 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84B94E2240323ED0007EB60 /* Alamofire.framework */; };
 		B84B94E82403299F0007EB60 /* APIConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E72403299F0007EB60 /* APIConfigurable.swift */; };
@@ -157,6 +158,7 @@
 		B8307F242406FFD200AFE578 /* Optional + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional + Extensions.swift"; sourceTree = "<group>"; };
 		B8307F262406FFF300AFE578 /* AnyOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyOptional.swift; sourceTree = "<group>"; };
 		B8307F282407001800AFE578 /* AlertDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayableView.swift; sourceTree = "<group>"; };
+		B83B6D182407E9A500190006 /* TimeInterval + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval + Extensions.swift"; sourceTree = "<group>"; };
 		B84B94E2240323ED0007EB60 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		B84B94E72403299F0007EB60 /* APIConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurable.swift; sourceTree = "<group>"; };
 		B84B94E9240329D50007EB60 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				B823A6A723FD34A0007540D0 /* Array + Extensions.swift */,
 				B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */,
 				B8307F242406FFD200AFE578 /* Optional + Extensions.swift */,
+				B83B6D182407E9A500190006 /* TimeInterval + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -305,8 +308,8 @@
 		B823AB7523F15DD700DE13EA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */,
 				B88906C72400515B002E91F7 /* OnboardingPresenter.swift */,
+				B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */,
 				B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
@@ -642,6 +645,7 @@
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */,
+				B83B6D192407E9A500190006 /* TimeInterval + Extensions.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,

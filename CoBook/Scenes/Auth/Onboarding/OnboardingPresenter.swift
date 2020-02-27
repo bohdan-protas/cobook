@@ -54,6 +54,7 @@ class OnboardingPresenter: BasePresenter {
 
 // MARK: - OnboardingPageCollectionViewCellDelegate
 extension OnboardingPresenter: OnboardingPageCollectionViewCellDelegate {
+
     func actionButtonDidTapped(_ cell: OnboardingPageCollectionViewCell, actionType: Onboarding.ButtonActionType?) {
         guard let action = actionType else {
             return
@@ -61,7 +62,7 @@ extension OnboardingPresenter: OnboardingPageCollectionViewCellDelegate {
 
         switch action {
         case .next:
-            guard let page = view?.page(for: cell) else {
+            guard let page = view?.page(for: cell), page < dataManager.dataSource.count else {
                 return
             }
             let nextIndexPath = IndexPath(item: page+1, section: 0)
@@ -71,4 +72,6 @@ extension OnboardingPresenter: OnboardingPageCollectionViewCellDelegate {
             view?.goToSignUp()
         }
     }
+
+
 }

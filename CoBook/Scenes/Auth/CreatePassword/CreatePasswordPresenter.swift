@@ -19,7 +19,7 @@ class CreatePasswordPresenter: BasePresenter {
     // MARK: Properties
     private weak var view: CreatePasswordView?
     private var password: String = ""
-    private var telephone: String = AppStorage.profile.telephone.number ?? "Undefined"
+    private var telephone: String = AppStorage.profile?.telephone.number ?? "Undefined"
 
     var currentTelephoneNumberToShow: String {
         return telephone
@@ -50,7 +50,7 @@ class CreatePasswordPresenter: BasePresenter {
             case let .success(response):
                 switch response.status {
                 case .ok:
-                    self.view?.infoAlert(title: nil, message: "Success created")
+                    self.view?.infoAlert(title: nil, message: "Success")
 
                     AppStorage.isUserCompletedRegistration = true
                     AppStorage.isUserInitiatedRegistration = false
@@ -88,5 +88,6 @@ private extension CreatePasswordPresenter {
 
         return nil
     }
+    
 
 }

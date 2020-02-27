@@ -67,6 +67,13 @@ extension APIClient {
         performRequest(router: router, completion: completion)
     }
 
+    func resendSmsRequest(accessToken: String,
+                          completion: @escaping (AFResult<APIResponse<SignInAPIResponseData>>) -> Void) {
+
+        let router = SignUpRouter.resend(accessToken: accessToken)
+        performRequest(router: router, completion: completion)
+    }
+
     func signUpFinishRequest(accessToken: String,
                              password: String,
                              completion: @escaping (AFResult<APIResponse<FinishRegistratrationAPIResponseData>>) -> Void) {

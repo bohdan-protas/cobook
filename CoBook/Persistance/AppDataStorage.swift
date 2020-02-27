@@ -35,8 +35,8 @@ enum AppStorage {
     @KeychainStringValueStorage(key: Keys.refreshToken.rawValue, defaultValue: nil, storage: KeychainWrapper.auth)
     static var refreshToken: String?
 
-    @UserDefaultObjectStorage(key: Keys.profile.rawValue, defaultValue: nil)
-    static var profile: Profile!
+    @UserDefaultObjectStorage(key: Keys.profile.rawValue, defaultValue: Profile())
+    static var profile: Profile?
 
     static func deleteAllData() {
         KeychainWrapper.auth.removeAllKeys()

@@ -70,8 +70,18 @@ class SignUpViewController: UIViewController, SignUpView {
         continueButton.isEnabled = actived
     }
 
+    // MARK: Navigation
     func goToConfirmTelephoneNumber() {
         self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case ConfirmTelephoneNumberViewController.segueId:
+            let confirmTelephoneNumberPresenter = ConfirmTelephoneNumberPresenter(smsResendLeftInSeconds: presenter.smsCodetimeLeft)
+            (segue.destination as? ConfirmTelephoneNumberViewController)?.presenter = confirmTelephoneNumberPresenter
+        default:break
+        }
     }
 
 
