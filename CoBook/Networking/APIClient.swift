@@ -47,6 +47,7 @@ class APIClient {
 // MARK: - Sign Up
 extension APIClient {
 
+    // MARK: Sign Up
     /// Initialize registration session
     func signUpInitializationRequest(email: String,
                                      telephone: String,
@@ -67,6 +68,7 @@ extension APIClient {
         performRequest(router: router, completion: completion)
     }
 
+    /// Request resend sms
     func resendSmsRequest(accessToken: String,
                           completion: @escaping (AFResult<APIResponse<SignInAPIResponseData>>) -> Void) {
 
@@ -74,6 +76,7 @@ extension APIClient {
         performRequest(router: router, completion: completion)
     }
 
+    /// Finish initialization registration session
     func signUpFinishRequest(accessToken: String,
                              password: String,
                              completion: @escaping (AFResult<APIResponse<FinishRegistratrationAPIResponseData>>) -> Void) {

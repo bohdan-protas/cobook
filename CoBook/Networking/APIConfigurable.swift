@@ -30,7 +30,7 @@ extension APIConfigurable {
         /// Common Headers
         urlRequest.headers.add(.contentType(ContentType.json.rawValue))
         if useAuthirizationToken {
-            urlRequest.headers.add(.authorization(bearerToken: ""))
+            urlRequest.headers.add(.authorization(bearerToken: AppStorage.accessToken ?? ""))
         }
 
         /// Parameters

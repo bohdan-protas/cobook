@@ -17,13 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        if AppStorage.isUserCompletedTutorial {
-            let rootController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = rootController
+
+        if AppStorage.refreshToken.isNil {
+
+            if AppStorage.isUserCompletedTutorial {
+                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signUpNavigationController
+            } else {
+                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = onboardingViewController
+            }
+
         } else {
-            let rootController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = rootController
+            let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+            window?.rootViewController = signInViewController
         }
+
+
         window?.makeKeyAndVisible()
 
         return true

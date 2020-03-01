@@ -19,16 +19,12 @@ protocol ConfirmTelephoneNumberView: LoadDisplayableView, AlertDisplayableView {
 // MARK: - ConfirmTelephoneNumberPresenter
 class ConfirmTelephoneNumberPresenter: BasePresenter {
 
+    // MARK: Properties
     private weak var view: ConfirmTelephoneNumberView?
-    private var smsResendLeftInSeconds: TimeInterval = 0
-
+    private var smsResendLeftInSec: TimeInterval = 0
     private var resendSmsTimer: Timer?
 
     // MARK: Public
-    init(smsResendLeftInSeconds: TimeInterval) {
-        self.smsResendLeftInSeconds = smsResendLeftInSeconds
-    }
-
     func attachView(_ view: ConfirmTelephoneNumberView) {
         self.view = view
     }
@@ -62,17 +58,18 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
     func resendSms() {
         view?.setResendButton(isLoading: true)
         APIClient.default.resendSmsRequest(accessToken: AppStorage.accessToken ?? "") { (result) in
-            self.view?.setResendButton(isLoading: true)
+            self.view?.setResendButton(isLoading: false)
             switch result {
             case let .success(response):
                 switch response.status {
                 case .ok:
                     AppStorage.accessToken = response.data?.accessToken
-                    let leftInMs = response.data?.smsResendLeftInMiliseconds ?? 0
-                    self.smsResendLeftInSeconds = leftInMs * 0.01
+                    let leftInMs = response.data?.smsResendLeftInMs ?? 0
+                    self.smsResendLeftInSec = leftInMs * 0.001
                     self.runTimer()
                 case .error:
                     self.view?.infoAlert(title: nil, message: response.errorLocalizadMessage)
+                    debugPrint(response.errorDescription ?? "")
                 }
             case let .failure(error):
                 self.view?.defaultErrorAlert()
@@ -89,7 +86,8 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 private extension ConfirmTelephoneNumberPresenter {
 
     func runTimer() {
-        if resendSmsTimer.isNil && smsResendLeftInSeconds > 0 {
+
+        if resendSmsTimer.isNil && smsResendLeftInSec > 0 {
             view?.setTimerLabel(isHidden: false)
             resendSmsTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                                   target: self,
@@ -101,9 +99,14 @@ private extension ConfirmTelephoneNumberPresenter {
     }
 
     @objc func updateTimer() {
-        self.smsResendLeftInSeconds -= 1
-        self.view?.setFormatedTimer(label: self.smsResendLeftInSeconds.minuteSecond)
-        if self.smsResendLeftInSeconds == 0 {
+        self.smsResendLeftInSec -= 1
+
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+
+        self.view?.setFormatedTimer(label: formatter.string(from: smsResendLeftInSec) ?? "00:00")
+        if self.smsResendLeftInSec == 0 {
             self.view?.setTimerLabel(isHidden: true)
             resendSmsTimer?.invalidate()
             resendSmsTimer = nil

@@ -22,7 +22,7 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
     @IBOutlet var resendSmsButton: LoaderButton!
     
     // MARK: Properties
-    var presenter: ConfirmTelephoneNumberPresenter?
+    var presenter: ConfirmTelephoneNumberPresenter? = ConfirmTelephoneNumberPresenter()
 
     //MARK: Actions
     @IBAction func smsTextFieldDidChanged(_ sender: UITextField) {
