@@ -8,17 +8,26 @@
 
 import Foundation
 
-enum APIRequestStatus: String, Codable {
+enum APIRequestStatus: String, Decodable {
     case ok
     case error
 }
 
 /// Used for unique data
 struct APIResponse<EmbadedData: Decodable>: Decodable {
+    /// Status of request returned from server
     var status: APIRequestStatus
+
+    /// Error identifier. Null if success
     var errorId: String?
+
+    /// Error message localized based on localization header
     var errorLocalizadMessage: String?
+
+    ///Internal dev error description
     var errorDescription: String?
+
+    /// Response payload
     var data: EmbadedData?
 
     enum CodingKeys: String, CodingKey {

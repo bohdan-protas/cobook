@@ -70,6 +70,7 @@ class SignUpViewController: UIViewController, SignUpView {
         continueButton.isEnabled = actived
     }
 
+    // MARK: Navigation
     func goToConfirmTelephoneNumber() {
         self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
     }

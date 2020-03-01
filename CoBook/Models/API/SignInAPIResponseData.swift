@@ -9,16 +9,19 @@
 import Foundation
 
 struct SignInAPIResponseData {
+    /// UUID represented session identifier
     var accessToken: String?
-    var smsResendLeft: Int?
+
+    /// time in ms left to resend message
+    var smsResendLeftInMs: TimeInterval?
 }
 
 extension SignInAPIResponseData: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case accessToken = "s_id"
-        case smsResendLeft = "sms_resend_left"
+        case smsResendLeftInMs = "sms_resend_left"
     }
-
-
 }
+
+

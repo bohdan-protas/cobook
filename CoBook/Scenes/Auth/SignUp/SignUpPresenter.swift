@@ -46,8 +46,10 @@ class SignUpPresenter: BasePresenter {
             case .success(let response):
                 switch response.status {
                 case .ok:
-                    UserDataManager.default.accessToken = response.data?.accessToken
-                    UserDataManager.default.telephone = self.telephone
+                    AppStorage.isUserInitiatedRegistration = true
+                    AppStorage.accessToken = response.data?.accessToken
+                    AppStorage.profile?.telephone.number = self.telephone
+                    AppStorage.profile?.email.address = self.email
                     self.view?.goToConfirmTelephoneNumber()
                 case .error:
                     self.view?.infoAlert(title: nil, message: response.errorDescription)
@@ -97,5 +99,6 @@ private extension SignUpPresenter {
 
         return nil
     }
+    
 
 }

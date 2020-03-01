@@ -16,12 +16,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        let rootController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-//        window?.rootViewController = rootController
-//        window?.makeKeyAndVisible()
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        if AppStorage.refreshToken.isNil {
+
+            if AppStorage.isUserCompletedTutorial {
+                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signUpNavigationController
+            } else {
+                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = onboardingViewController
+            }
+
+        } else {
+            let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+            window?.rootViewController = signInViewController
+        }
+
+
+        window?.makeKeyAndVisible()
 
         return true
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        if AppStorage.isUserInitiatedRegistration && !AppStorage.isUserCompletedRegistration {
+            AppStorage.accessToken = nil
+            AppStorage.refreshToken = nil
+            AppStorage.profile = nil
+            AppStorage.isUserCompletedRegistration = false
+            AppStorage.isUserInitiatedRegistration = false
+        }
     }
 
 

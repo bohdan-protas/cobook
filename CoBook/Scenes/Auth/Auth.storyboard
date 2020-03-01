@@ -416,7 +416,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxP-ar-CIh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-663" y="1534"/>
+            <point key="canvasLocation" x="-689" y="1533"/>
         </scene>
         <!--SignInViewController-->
         <scene sceneID="kYj-8z-ov3">
@@ -902,7 +902,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdp-gq-8RF">
                                         <rect key="frame" x="0.0" y="240" width="327" height="20"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6y-tS-4Y0">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2a-oM-Zzj">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="cOe-tt-dEz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
+                                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6y-tS-4Y0" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="ZVD-Lo-BsQ"/>
@@ -911,14 +920,21 @@
                                                 <state key="normal" title="Не надійшла СМС?">
                                                     <color key="titleColor" name="Theme_Green"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="resendSmsButtonTapped:" destination="LDQ-N8-u8m" eventType="touchUpInside" id="85S-cB-vIk"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="c2a-oM-Zzj" secondAttribute="trailing" id="7Wk-k4-kSP"/>
                                             <constraint firstAttribute="trailing" secondItem="u6y-tS-4Y0" secondAttribute="trailing" id="8i6-AC-bLf"/>
                                             <constraint firstItem="u6y-tS-4Y0" firstAttribute="leading" secondItem="fdp-gq-8RF" secondAttribute="leading" id="PSk-5J-7nj"/>
+                                            <constraint firstAttribute="bottom" secondItem="c2a-oM-Zzj" secondAttribute="bottom" id="Vjo-lK-dzi"/>
                                             <constraint firstAttribute="bottom" secondItem="u6y-tS-4Y0" secondAttribute="bottom" id="WjK-CT-uoj"/>
+                                            <constraint firstItem="c2a-oM-Zzj" firstAttribute="top" secondItem="fdp-gq-8RF" secondAttribute="top" id="YMV-LR-YDJ"/>
                                             <constraint firstItem="u6y-tS-4Y0" firstAttribute="top" secondItem="fdp-gq-8RF" secondAttribute="top" id="b0U-aa-oFA"/>
+                                            <constraint firstItem="c2a-oM-Zzj" firstAttribute="leading" secondItem="fdp-gq-8RF" secondAttribute="leading" id="iD7-dw-jhR"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKo-FM-UJ3" userLabel="Continue Button" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
@@ -1007,6 +1023,8 @@
                     <connections>
                         <outlet property="bottomContainerConstraint" destination="mQD-nB-dLZ" id="NkY-vn-OE1"/>
                         <outlet property="continueButton" destination="EKo-FM-UJ3" id="klf-un-oSB"/>
+                        <outlet property="resendSmsButton" destination="u6y-tS-4Y0" id="d6K-Ai-VVt"/>
+                        <outlet property="timerLabel" destination="c2a-oM-Zzj" id="3Bz-zJ-iVY"/>
                         <outletCollection property="smsCodeTextFields" destination="VcM-CC-HeV" collectionClass="NSMutableArray" id="rFV-AN-VPS"/>
                         <outletCollection property="smsCodeTextFields" destination="2Io-a5-4uE" collectionClass="NSMutableArray" id="hKW-M8-sTv"/>
                         <outletCollection property="smsCodeTextFields" destination="aH5-MD-8Fa" collectionClass="NSMutableArray" id="xdK-cU-ROw"/>
