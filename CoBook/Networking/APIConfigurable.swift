@@ -20,20 +20,20 @@ protocol APIConfigurable: URLRequestConvertible {
 extension APIConfigurable {
 
     func asURLRequest() throws -> URLRequest {
-        /// Base URL
+        // Base URL
         let url = try APIConstants.baseURLPath.asURL()
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
 
-        /// HTTP Method
+        // HTTP Method
         urlRequest.httpMethod = method.rawValue
 
         /// Common Headers
         urlRequest.headers.add(.contentType(ContentType.json.rawValue))
         if useAuthirizationToken {
-            urlRequest.headers.add(.authorization(bearerToken: ""))
+            urlRequest.headers.add(.authorization(bearerToken: AppStorage.accessToken ?? ""))
         }
 
-        /// Parameters
+        // Parameters
         if let parameters = parameters {
             do {
                 urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])

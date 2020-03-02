@@ -25,7 +25,8 @@ open class KeychainWrapper {
 
     /// Default keychain wrapper access
     public static let standard = KeychainWrapper()
-    
+    public static let auth = KeychainWrapper(serviceName: "com.auth.keychainWrapper")
+
     /// ServiceName is used for the kSecAttrService property to uniquely identify this keychain accessor. If no service name is specified, KeychainWrapper will default to using the bundleIdentifier.
     private (set) public var serviceName: String
     
@@ -318,6 +319,7 @@ open class KeychainWrapper {
     }
 
     /// Remove all keychain data added through KeychainWrapper. This will only delete items matching the currnt ServiceName and AccessGroup if one is set.
+    @discardableResult
     open func removeAllKeys() -> Bool {
         // Setup dictionary to access keychain and specify we are using a generic password (rather than a certificate, internet password, etc)
         var keychainQueryDictionary: [String:Any] = [SecClass:kSecClassGenericPassword]

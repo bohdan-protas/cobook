@@ -46,17 +46,22 @@ class SignUpPresenter: BasePresenter {
             case .success(let response):
                 switch response.status {
                 case .ok:
-                    UserDataManager.default.accessToken = response.data?.accessToken
-                    UserDataManager.default.telephone = self.telephone
+
+                    AppStorage.isUserInitiatedRegistration = true
+                    AppStorage.accessToken = response.data?.accessToken
+                    AppStorage.profile?.telephone.number = self.telephone
+                    AppStorage.profile?.email.address = self.email
+
                     self.view?.goToConfirmTelephoneNumber()
+
                 case .error:
-                    self.view?.infoAlert(title: nil, message: response.errorDescription)
-                    debugPrint(response.errorDescription ?? "")
+                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
+                    self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
 
             case .failure(let error):
-                self.view?.defaultErrorAlert()
-                debugPrint(error.localizedDescription)
+                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
+                self.view?.errorAlert(message: error.localizedDescription)
             }
         }
     }
@@ -78,25 +83,25 @@ class SignUpPresenter: BasePresenter {
 // MARK: - Privates
 private extension SignUpPresenter {
 
-    // TODO: move this code to separated validaiton manager
     func validateFields() -> String? {
-        if firstName.count > 12 || firstName.count < 3 {
-            return "Error.Validation.firstName".localized
+        if let error = ValidationManager.validate(firstName: firstName) {
+            return error
         }
 
-        if lastName.count > 12 || lastName.count < 3 {
-            return "Error.Validation.lastName".localized
+        if let error = ValidationManager.validate(lastName: lastName) {
+            return error
         }
 
-        if !RegularExpression.init(pattern: .telephone).match(in: telephone) {
-             return "Error.Validation.telephone".localized
+        if let error = ValidationManager.validate(telephone: telephone) {
+            return error
         }
 
-        if !RegularExpression.init(pattern: .email).match(in: email) {
-            return "Error.Validation.email".localized
+        if let error = ValidationManager.validate(email: email) {
+            return error
         }
 
         return nil
     }
+    
 
 }

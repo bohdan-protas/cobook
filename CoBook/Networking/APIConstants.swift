@@ -28,6 +28,8 @@ enum APIConstants {
         static let telephone    = "telephone"
         static let token        = "s_id"
         static let code         = "code"
+        static let login        = "login"
+        static let refreshToken = "refresh_token"
     }
 
 

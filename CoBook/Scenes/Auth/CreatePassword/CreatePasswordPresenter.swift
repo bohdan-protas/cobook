@@ -19,10 +19,10 @@ class CreatePasswordPresenter: BasePresenter {
     // MARK: Properties
     private weak var view: CreatePasswordView?
     private var password: String = ""
-    private var telephone: String = UserDataManager.default.telephone ?? ""
+    private var telephone: String = AppStorage.profile?.telephone.number ?? "Undefined"
 
     var currentTelephoneNumberToShow: String {
-        return UserDataManager.default.telephone ?? "Undefined"
+        return telephone
     }
 
     // MARK: Public
@@ -45,28 +45,27 @@ class CreatePasswordPresenter: BasePresenter {
             return
         }
 
-        APIClient.default.signUpFinishRequest(accessToken: UserDataManager.default.accessToken ?? "", password: self.password) { (result) in
+        APIClient.default.signUpFinishRequest(accessToken: AppStorage.accessToken ?? "", password: self.password) { (result) in
             switch result {
             case let .success(response):
                 switch response.status {
                 case .ok:
-                    self.view?.infoAlert(title: nil, message: "Success created")
+                    AppStorage.isUserCompletedRegistration = true
+                    AppStorage.isUserInitiatedRegistration = false
+                    AppStorage.profile = response.data?.profile
+                    AppStorage.accessToken = response.data?.assessToken
+                    AppStorage.refreshToken = response.data?.refreshToken
 
-                    UserDataManager.default.password = self.password
-                    UserDataManager.default.accessToken = response.data?.assessToken
-                    UserDataManager.default.refreshToken = response.data?.refreshToken
-
+                    self.view?.infoAlert(title: nil, message: "Success")
                     // TODO: go to main screen
 
                 case .error:
-                    self.view?.infoAlert(title: nil, message: response.errorLocalizadMessage)
-                    UserDataManager.default.accessToken = nil
-                    debugPrint(response.errorDescription ?? "")
+                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
+                    self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
             case let .failure(error):
-                self.view?.defaultErrorAlert()
-                UserDataManager.default.accessToken = nil
-                debugPrint(error.localizedDescription)
+                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
+                self.view?.errorAlert(message: error.localizedDescription.description)
             }
         }
     }
@@ -77,17 +76,17 @@ class CreatePasswordPresenter: BasePresenter {
 // MARK: - Privates
 private extension CreatePasswordPresenter {
 
-    // TODO: move this code to separated validaiton manager
     func validateFields() -> String? {
-        if password.count > 25 || password.count < 6 {
-            return "Error.Validation.password".localized
+        if let error = ValidationManager.validate(password: password) {
+            return error
         }
 
-        if !RegularExpression.init(pattern: .telephone).match(in: telephone) {
-             return "Error.Validation.telephone".localized
+        if let error = ValidationManager.validate(telephone: telephone) {
+            return error
         }
 
         return nil
     }
+    
 
 }
