@@ -46,19 +46,22 @@ class SignUpPresenter: BasePresenter {
             case .success(let response):
                 switch response.status {
                 case .ok:
+
                     AppStorage.isUserInitiatedRegistration = true
                     AppStorage.accessToken = response.data?.accessToken
                     AppStorage.profile?.telephone.number = self.telephone
                     AppStorage.profile?.email.address = self.email
+
                     self.view?.goToConfirmTelephoneNumber()
+
                 case .error:
-                    self.view?.infoAlert(title: nil, message: response.errorDescription)
-                    debugPrint(response.errorDescription ?? "")
+                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
+                    self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
 
             case .failure(let error):
-                self.view?.defaultErrorAlert()
-                debugPrint(error.localizedDescription)
+                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
+                self.view?.errorAlert(message: error.localizedDescription)
             }
         }
     }

@@ -20,7 +20,6 @@ class SignInViewController: UIViewController, SignInView {
     @IBOutlet var signInButton: LoaderButton!
     @IBOutlet var navBar: TransparentNavigationBar!
 
-
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
 
@@ -28,32 +27,32 @@ class SignInViewController: UIViewController, SignInView {
     var presenter: SignInPresenter = SignInPresenter()
 
     private lazy var forgotPasswordAlert: UIAlertController = {
-        let alertController = UIAlertController(title: "Forgot password?",
-                                                message: "Enter ypor telephone number to reset",
+        let alertController = UIAlertController(title: "ForgotPassword.title".localized,
+                                                message: "ForgotPassword.subtitle".localized,
                                                 preferredStyle: .alert)
 
         alertController.addTextField { (textField: UITextField) -> Void in
             textField.keyboardType = .phonePad
-            textField.placeholder = "Login"
+            textField.placeholder = "Login.placeholder".localized
         }
 
-        let saveAction = UIAlertAction(title: "YES", style: .default, handler: { alert -> Void in
+        let okAction = UIAlertAction(title: "OK".localized, style: .default, handler: { alert -> Void in
             let telephone = alertController.textFields?.first?.text
-            print(telephone ?? "empty")
+            self.presenter.forgotPassword(with: telephone)
         })
-        let cancelAction = UIAlertAction(title: "NO", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .destructive, handler: nil)
 
-        alertController.addAction(saveAction)
+        alertController.addAction(okAction)
         alertController.addAction(cancelAction)
 
         return alertController
     }()
 
+    // MARK: Actions
     @IBAction func textFieldDidChanged(_ sender: Any) {
-        signInButton.isEnabled = !(loginTextField.text ?? "").isEmpty && !(passwordTextField.text ?? "").isEmpty
+        presenter.set(login: loginTextField.text, password: passwordTextField.text)
     }
 
-    // MARK: Actions
     @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
         removeKeyboardObserver()
         self.present(forgotPasswordAlert, animated: true, completion: {
@@ -62,7 +61,7 @@ class SignInViewController: UIViewController, SignInView {
     }
 
     @IBAction func signInButtonTapped(_ sender: LoaderButton) {
-
+        presenter.signIn()
     }
 
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
@@ -81,12 +80,17 @@ class SignInViewController: UIViewController, SignInView {
         presenter.detachView()
     }
 
+    // MARK: Public
     func startLoading() {
         signInButton.isLoading = true
     }
 
     func stopLoading() {
         signInButton.isLoading = false
+    }
+
+    func setSignInButton(enabled: Bool) {
+        signInButton.isEnabled = enabled
     }
 
     // MARK: Navigation

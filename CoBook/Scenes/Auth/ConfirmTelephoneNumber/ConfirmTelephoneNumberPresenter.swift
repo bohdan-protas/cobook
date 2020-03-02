@@ -68,12 +68,12 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
                     self.smsResendLeftInSec = leftInMs * 0.001
                     self.runTimer()
                 case .error:
-                    self.view?.infoAlert(title: nil, message: response.errorLocalizadMessage)
-                    debugPrint(response.errorDescription ?? "")
+                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
+                    self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
             case let .failure(error):
-                self.view?.defaultErrorAlert()
-                debugPrint(error.localizedDescription)
+                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
+                self.view?.errorAlert(message: error.localizedDescription.description)
             }
         }
 
@@ -86,7 +86,6 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 private extension ConfirmTelephoneNumberPresenter {
 
     func runTimer() {
-
         if resendSmsTimer.isNil && smsResendLeftInSec > 0 {
             view?.setTimerLabel(isHidden: false)
             resendSmsTimer = Timer.scheduledTimer(timeInterval: 1.0,

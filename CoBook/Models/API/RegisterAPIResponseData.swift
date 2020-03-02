@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct FinishRegistratrationAPIResponseData {
+struct RegisterAPIResponseData {
     var profile: Profile?
-    var assessToken: String
-    var refreshToken: String
+    var assessToken: String?
+    var refreshToken: String?
 }
 
-extension FinishRegistratrationAPIResponseData: Decodable {
+extension RegisterAPIResponseData: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case profile

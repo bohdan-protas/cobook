@@ -13,6 +13,12 @@ enum APIRequestStatus: String, Decodable {
     case error
 }
 
+// MARK: - VoidResponseData
+/// described void response from server
+struct VoidResponseData: Decodable {
+}
+
+// MAKR: - APIResponse
 /// Used for unique data
 struct APIResponse<EmbadedData: Decodable>: Decodable {
     /// Status of request returned from server

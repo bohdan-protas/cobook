@@ -6,6 +6,12 @@
   Copyright © 2020 CoBook. All rights reserved.
 */
 
+// MARK: - Base
+"OK" = "OK";
+"Cancel" = "Відмінити";
+"Error" = "Помилка";
+"Login.placeholder" = "Логін";
+
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";
 "Onboarding.Subtitle01" = "Описособливостей додатку\nфічі, переваги, тощо";
@@ -28,3 +34,8 @@
 "Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
 "Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
 "Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
+
+// MARK: - Forgot Password
+"ForgotPassword.title" = "Забули пароль?";
+"ForgotPassword.subtitle" = "Введіть ваш телефон для відновлення";
+"ForgotPassword.successMessage" = "Запит на відновлення паролю успішно наліслано.";

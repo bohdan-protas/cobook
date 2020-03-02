@@ -6,6 +6,12 @@
   Copyright © 2020 CoBook. All rights reserved.
 */
 
+// MARK: - Base
+"OK" = "OK";
+"Cancel" = "Cancel";
+"Error" = "Error";
+"Login.placeholder" = "Login";
+
 // MARK: - Onboarding
 "Onboarding.Title01" = "Title.01";
 "Onboarding.Subtitle01" = "Subtitle01";
@@ -28,3 +34,8 @@
 "Error.Validation.lastName" = "Error.Validation.lastName descr";
 "Error.Validation.telephone" = "Error.Validation.telephone descr";
 "Error.Validation.password" = "Error.Validation.password descr";
+
+// MARK: - Forgot Password
+"ForgotPassword.title" = "ForgotPassword.title description";
+"ForgotPassword.subtitle" = "ForgotPassword.subtitle description";
+"ForgotPassword.successMessage" = "ForgotPassword.successMessage description";
