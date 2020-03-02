@@ -8,7 +8,6 @@
 
 import UIKit
 
-// MARK: -
 extension UIView {
 
     static var identifier: String {

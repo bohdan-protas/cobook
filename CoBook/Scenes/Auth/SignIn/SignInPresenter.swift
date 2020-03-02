@@ -8,15 +8,20 @@
 
 import Foundation
 
-protocol SignInView: LoadDisplayableView {
+// MARK: - SignInView
+protocol SignInView: LoadDisplayableView, AlertDisplayableView {
     var presenter: SignInPresenter { get set }
+    func setSignInButton(enabled: Bool)
 }
 
+// MARK: - SignInPresenter
 class SignInPresenter: BasePresenter {
+
+    // MARK: Properties
     private weak var view: SignInView?
 
-    var login: String?
-    var password: String?
+    private var login: String = ""
+    private var password: String = ""
 
     func attachView(_ view: SignInView) {
         self.view = view
@@ -26,8 +31,89 @@ class SignInPresenter: BasePresenter {
         view = nil
     }
 
+    // MARK: Public
     func set(login: String?, password: String?) {
-        self.login = login
-        self.password = password
+        self.login = login ?? ""
+        self.password = password ?? ""
+
+        let isEnabled = !self.login.isEmpty && !self.password.isEmpty
+        view?.setSignInButton(enabled: isEnabled)
     }
+
+    func signIn() {
+        if let validationErrorDescription = validateFields() {
+            view?.infoAlert(title: nil, message: validationErrorDescription)
+            return
+        }
+
+        APIClient.default.signInRequest(login: self.login, password: self.password) { (result) in
+            switch result {
+            case let .success(response):
+                switch response.status {
+
+                case .ok:
+                    self.view?.infoAlert(title: nil, message: "Success")
+
+                    AppStorage.profile = response.data?.profile
+                    AppStorage.accessToken = response.data?.assessToken
+                    AppStorage.refreshToken = response.data?.refreshToken
+
+                case .error:
+                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
+                    self.view?.errorAlert(message: response.errorLocalizadMessage)
+                }
+
+            case let .failure(error):
+                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
+                self.view?.errorAlert(message: error.localizedDescription.description)
+            }
+        }
+
+    }
+
+    func forgotPassword(with telephone: String?) {
+        self.login = telephone ?? ""
+
+        if let validationErrorDescription = validateFields() {
+            view?.infoAlert(title: nil, message: validationErrorDescription)
+            return
+        }
+
+        APIClient.default.forgotPasswordRequest(telephone: login) { (result) in
+            switch result {
+            case let .success(response):
+                switch response.status {
+                case .ok:
+                    self.view?.infoAlert(title: nil, message: "ForgotPassword.successMessage".localized)
+                case .error:
+                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
+                    self.view?.errorAlert(message: response.errorLocalizadMessage)
+                }
+            case let .failure(error):
+                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
+                self.view?.errorAlert(message: error.localizedDescription.description)
+            }
+        }
+    }
+
+
+}
+
+// MARK: - Privates
+private extension SignInPresenter {
+
+    /**
+     Validate inputed fields
+     - returns: First error of validation or nil (in second case validation successed).
+    */
+    func validateFields() -> String? {
+
+        if let error = ValidationManager.validate(telephone: login) {
+            return error
+        }
+
+        return nil
+    }
+
+
 }

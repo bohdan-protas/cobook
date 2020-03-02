@@ -527,7 +527,7 @@
                                                     <constraint firstAttribute="height" constant="48" id="37G-X5-KBV"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="continue" secureTextEntry="YES" textContentType="one-time-code"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="continue" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                         <real key="value" value="1"/>
@@ -552,7 +552,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="textFieldDidChanged:" destination="F97-Yl-JnX" eventType="editingDidEnd" id="hLf-rc-K3y"/>
+                                                    <action selector="textFieldDidChanged:" destination="F97-Yl-JnX" eventType="editingChanged" id="PG3-Lg-ro7"/>
                                                     <outlet property="delegate" destination="F97-Yl-JnX" id="G2b-qg-IL4"/>
                                                 </connections>
                                             </textField>
@@ -780,6 +780,7 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VcM-CC-HeV" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="56"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="KEt-QS-hMj"/>
                                                         </constraints>
@@ -807,6 +808,7 @@
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Io-a5-4uE" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="46" y="0.0" width="40" height="56"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="GLB-QM-ULh"/>
                                                         </constraints>
@@ -834,6 +836,7 @@
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aH5-MD-8Fa" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="92" y="0.0" width="40" height="56"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="Irc-mc-AOb"/>
                                                         </constraints>
@@ -861,6 +864,7 @@
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oK3-Ou-Bxi" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="138" y="0.0" width="40" height="56"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="Mae-8V-y2d"/>
                                                         </constraints>

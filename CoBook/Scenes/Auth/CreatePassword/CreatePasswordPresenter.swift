@@ -50,23 +50,22 @@ class CreatePasswordPresenter: BasePresenter {
             case let .success(response):
                 switch response.status {
                 case .ok:
-                    self.view?.infoAlert(title: nil, message: "Success")
-
                     AppStorage.isUserCompletedRegistration = true
                     AppStorage.isUserInitiatedRegistration = false
                     AppStorage.profile = response.data?.profile
                     AppStorage.accessToken = response.data?.assessToken
                     AppStorage.refreshToken = response.data?.refreshToken
 
+                    self.view?.infoAlert(title: nil, message: "Success")
                     // TODO: go to main screen
 
                 case .error:
-                    self.view?.infoAlert(title: nil, message: response.errorLocalizadMessage)
-                    debugPrint(response.errorDescription ?? "")
+                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
+                    self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
             case let .failure(error):
-                self.view?.defaultErrorAlert()
-                debugPrint(error.localizedDescription)
+                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
+                self.view?.errorAlert(message: error.localizedDescription.description)
             }
         }
     }
