@@ -10,12 +10,17 @@ import UIKit
 
 private enum StoryboardNames {
     static let auth: String = "Auth"
+    static let account: String = "Account"
 }
 
 extension UIStoryboard {
 
     static var auth: UIStoryboard {
         return UIStoryboard(name: StoryboardNames.auth, bundle: nil)
+    }
+
+    static var account: UIStoryboard {
+        return UIStoryboard(name: StoryboardNames.account, bundle: nil)
     }
 
     func initiateViewControllerFromType<T: UIViewController>() -> T {

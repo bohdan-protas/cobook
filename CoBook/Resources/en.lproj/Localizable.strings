@@ -12,6 +12,8 @@
 "Error" = "Error";
 "Login.placeholder" = "Login";
 
+"Account" = "Account";
+
 // MARK: - Onboarding
 "Onboarding.Title01" = "Title.01";
 "Onboarding.Subtitle01" = "Subtitle01";

@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+protocol AccountView: AlertDisplayableView, LoadDisplayableView {
+
+}
+
+class AccountPresenter {
+
+}
