@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -66,16 +66,12 @@
 		B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F262406FFF300AFE578 /* AnyOptional.swift */; };
 		B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F282407001800AFE578 /* AlertDisplayableView.swift */; };
 		B8357DB3240C6372006AB78E /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8357DB2240C6372006AB78E /* SignInRouter.swift */; };
-		B84B94E3240323ED0007EB60 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B84B94E2240323ED0007EB60 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B84B94E4240324890007EB60 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84B94E2240323ED0007EB60 /* Alamofire.framework */; };
 		B84B94E82403299F0007EB60 /* APIConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E72403299F0007EB60 /* APIConfigurable.swift */; };
 		B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E9240329D50007EB60 /* APIConstants.swift */; };
 		B84B94ED24032ADE0007EB60 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94EC24032ADE0007EB60 /* SignUpRouter.swift */; };
 		B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F0240337390007EB60 /* BaseApiResponse.swift */; };
 		B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F424033B3E0007EB60 /* APIClient.swift */; };
 		B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */; };
-		B8625ABE23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */; };
-		B8625ABF23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* DesignableButton.swift */; };
 		B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC523FAC88C0044605C /* LoaderButton.swift */; };
 		B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC723FAD6C80044605C /* DesignableTextField.swift */; };
@@ -95,21 +91,6 @@
 		B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7F240551A400AF431B /* RegisterAPIResponseData.swift */; };
 		B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E8124057B1700AF431B /* ValidationManager.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		B8625AC023FA8BDE0044605C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B84B94E3240323ED0007EB60 /* Alamofire.framework in Embed Frameworks */,
-				B8625ABF23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B82200B6240FB87000A17D2C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -207,8 +188,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B84B94E4240324890007EB60 /* Alamofire.framework in Frameworks */,
-				B8625ABE23FA8BDE0044605C /* IQKeyboardManagerSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,8 +545,6 @@
 				B870197D23ED50EA00625D61 /* Sources */,
 				B870197E23ED50EA00625D61 /* Frameworks */,
 				B870197F23ED50EA00625D61 /* Resources */,
-				B8625AC023FA8BDE0044605C /* Embed Frameworks */,
-				B8625AC123FA8BF60044605C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -645,28 +622,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B8625AC123FA8BF60044605C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"$(SRCROOT)/input.xcfilelist",
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/output.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B870197D23ED50EA00625D61 /* Sources */ = {
