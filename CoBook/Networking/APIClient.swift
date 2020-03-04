@@ -36,10 +36,8 @@ class APIClient {
                                               completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
 
         return session.request(router)
-            .cURLDescription{ (description) in
-                print(description)
-            }
             .responseDecodable(of: APIResponse<T>.self, queue: .main, decoder: decoder) { (response) in
+                debugPrint(response.error.debugDescription)
                 completion(response.result)
             }
     }

@@ -9,12 +9,12 @@
 import Foundation
 
 struct Telephone: Codable {
-    var id: String?
+    var id: Int?
     var number: String?
 }
 
 struct Email: Codable {
-    var id: String?
+    var id: Int?
     var address: String?
 }
 

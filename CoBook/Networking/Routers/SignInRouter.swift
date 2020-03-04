@@ -34,7 +34,7 @@ enum SignInRouter: APIConfigurable {
     var path: String {
         switch self {
         case .login:
-            return "/sing_in"
+            return "/sign_in"
         }
     }
 
