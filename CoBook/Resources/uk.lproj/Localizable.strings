@@ -12,6 +12,8 @@
 "Error" = "Помилка";
 "Login.placeholder" = "Логін";
 
+"Account" = "Аккаунт";
+
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";
 "Onboarding.Subtitle01" = "Описособливостей додатку\nфічі, переваги, тощо";
