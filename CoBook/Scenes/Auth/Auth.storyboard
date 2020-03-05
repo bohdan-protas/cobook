@@ -94,7 +94,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-58-TRF" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-58-TRF" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C9-tT-k89" userLabel="Title Container">
@@ -121,7 +121,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB" userLabel="Image Container">
                                         <rect key="frame" x="8" y="86" width="311" height="189"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_registration" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="144"/>
                                             </imageView>
                                         </subviews>
@@ -436,7 +436,7 @@
                                     <navigationItem id="rhk-Y9-O7g"/>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bo-yh-juf" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bo-yh-juf" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVv-S3-gEV" userLabel="Title Container">
@@ -461,10 +461,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8gR-LW-xGF" userLabel="Image Container">
-                                        <rect key="frame" x="8" y="86" width="311" height="175"/>
+                                        <rect key="frame" x="8" y="86" width="311" height="169"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="oHs-EN-K3K">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="130"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_login" translatesAutoresizingMaskIntoConstraints="NO" id="oHs-EN-K3K">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="124"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -476,7 +476,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-9w-2Sf" userLabel="Fields Stack View">
-                                        <rect key="frame" x="16" y="261" width="295" height="148"/>
+                                        <rect key="frame" x="16" y="255" width="295" height="120"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логін" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1w-rc-cAA" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
@@ -557,7 +557,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xj-uY-QYt">
-                                                <rect key="frame" x="0.0" y="120" width="295" height="28"/>
+                                                <rect key="frame" x="0.0" y="120" width="295" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Забули пароль?">
                                                     <color key="titleColor" name="Theme_Green"/>
@@ -727,7 +727,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z04-Fr-TSW" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z04-Fr-TSW" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46F-ZB-tZF" userLabel="Title View">
@@ -1048,7 +1048,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDu-ft-cWr" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDu-ft-cWr" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5TJ-1t-GG1" userLabel="Title Container">
@@ -1275,7 +1275,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_mobile_life" width="196" height="130"/>
+        <image name="ic_login" width="98" height="124"/>
+        <image name="ic_registration" width="196" height="130"/>
         <namedColor name="Theme_Accent">
             <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

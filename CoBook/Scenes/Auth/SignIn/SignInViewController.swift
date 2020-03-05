@@ -105,6 +105,12 @@ class SignInViewController: UIViewController, SignInView {
         }
     }
 
+    func goTo(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.modalTransitionStyle = .crossDissolve
+        self.present(viewController, animated: true, completion: nil)
+    }
+
 
 }
 

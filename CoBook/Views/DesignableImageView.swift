@@ -1,20 +1,21 @@
 //
-//  ShadowView.swift
+//  PlaceholderImageView.swift
 //  CoBook
 //
-//  Created by protas on 2/18/20.
+//  Created by protas on 3/5/20.
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
 import UIKit
 
 @IBDesignable
-class ShadowView: UIView {
+class DesignableImageView: UIImageView {
 
     @IBInspectable var shadowOffset: CGSize = CGSize.zero
     @IBInspectable var shadowColor: UIColor = .black
     @IBInspectable var shadowRadius: CGFloat = 0
     @IBInspectable var shadowOpacity: Float = 0
+
     @IBInspectable var cornerRadius: CGFloat = 0
 
     override func layoutSubviews() {
