@@ -47,21 +47,21 @@ enum Account {
             get {
                 switch self {
                 case .createPersonalCard:
-                    return "Create personal business card"
+                    return "Account.item.createPersonalCard".localized//Create personal business card"
                 case .createBusinessCard:
-                    return "Create personalCard"
+                    return "Account.item.createBusinessCard".localized//Create personalCard"
                 case .inviteFriends:
-                    return "Invite friends"
+                    return "Account.item.inviteFriends".localized//Invite friends"
                 case .statictics:
-                    return "Statistics"
+                    return "Account.item.statictics".localized//Statistics"
                 case .generateQrCode:
-                    return "Generate QR code"
+                    return "Account.item.generateQrCode".localized
                 case .faq:
-                    return "FAQ"
+                    return "Account.item.faq".localized
                 case .startMakingMoney:
-                    return "Start making money with CoBook"
+                    return "Account.item.startMakingMoney".localized
                 case .quitAccount:
-                    return "Quit account"
+                    return "Account.item.quitAccount".localized
                 }
             }
         }

@@ -47,7 +47,9 @@ class SignInPresenter: BasePresenter {
             return
         }
 
+        view?.startLoading()
         APIClient.default.signInRequest(login: self.login, password: self.password) { (result) in
+            self.view?.stopLoading()
             switch result {
             case let .success(response):
                 switch response.status {

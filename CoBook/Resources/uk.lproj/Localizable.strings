@@ -41,3 +41,13 @@
 "ForgotPassword.title" = "Забули пароль?";
 "ForgotPassword.subtitle" = "Введіть ваш телефон для відновлення";
 "ForgotPassword.successMessage" = "Запит на відновлення паролю успішно наліслано.";
+
+// MARK: - Account
+"Account.item.createPersonalCard" = "Створити персональну візитку;
+"Account.item.createBusinessCard" = "Створити бізнес візитку";
+"Account.item.inviteFriends" = "Запросити друзів";
+"Account.item.statictics" = "Статистика";
+"Account.item.generateQrCode" = "Згенерувати QR-code";
+"Account.item.faq" = "FAQ";
+"Account.item.startMakingMoney" = "Почати заробляти з CoBook";
+"Account.item.quitAccount" = "Вийти з аккаунту";

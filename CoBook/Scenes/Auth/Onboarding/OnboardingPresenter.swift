@@ -68,7 +68,7 @@ extension OnboardingPresenter: OnboardingPageCollectionViewCellDelegate {
             let nextIndexPath = IndexPath(item: page+1, section: 0)
             view?.scrollToItem(at: nextIndexPath)
         case .finish:
-            AppStorage.isUserCompletedRegistration = true
+            AppStorage.isUserCompletedTutorial = true
             view?.goToSignUp()
         }
     }
