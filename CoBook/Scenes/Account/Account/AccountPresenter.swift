@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AccountView: AlertDisplayableView, LoadDisplayableView {
-
+    func fillHeader(with profile: Profile?)
 }
 
 class AccountPresenter: BasePresenter {
@@ -17,6 +17,7 @@ class AccountPresenter: BasePresenter {
     var dataSource = AccountDataSource()
 
     func setup() {
+        // Setup data source
         dataSource.sections = [
 
             Account.Section(items: [
@@ -35,7 +36,11 @@ class AccountPresenter: BasePresenter {
                 Account.Item.action(type: .quitAccount),
             ])
         ]
+
+        //setup header
+        view?.fillHeader(with: AppStorage.profile)
     }
+    
 
     func attachView(_ view: AccountView) { self.view = view }
     func detachView() { view = nil }

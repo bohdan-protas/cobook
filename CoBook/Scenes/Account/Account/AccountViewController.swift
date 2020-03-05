@@ -12,6 +12,8 @@ class AccountViewController: UIViewController, AccountView {
 
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
+        static let headerHeight: CGFloat = 308
+        static let sectionHeaderHeight: CGFloat = 12
     }
 
     // MARK: IBOutlets
@@ -26,7 +28,7 @@ class AccountViewController: UIViewController, AccountView {
         super.viewDidLoad()
         presenter.attachView(self)
 
-        self.setup()
+        setupLayout()
         presenter.setup()
     }
 
@@ -35,6 +37,10 @@ class AccountViewController: UIViewController, AccountView {
     }
 
     // MARK: Public
+    func fillHeader(with profile: Profile?) {
+        (tableView.tableHeaderView as? AccountHeaderView)?.fill(with: profile)
+    }
+
     func startLoading() {
 
     }
@@ -48,10 +54,12 @@ class AccountViewController: UIViewController, AccountView {
 
 // MARK: - Privates
 private extension AccountViewController {
-    func setup() {
+
+    func setupLayout() {
         tableView.register(AccountBusinessCardTableViewCell.nib, forCellReuseIdentifier: AccountBusinessCardTableViewCell.identifier)
         tableView.register(AccountItemTableViewCell.nib, forCellReuseIdentifier: AccountItemTableViewCell.identifier)
 
+        tableView.tableHeaderView = AccountHeaderView(frame:  CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: Defaults.headerHeight))
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
 
@@ -74,7 +82,7 @@ extension AccountViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 12
+        return Defaults.sectionHeaderHeight
     }
 
 }

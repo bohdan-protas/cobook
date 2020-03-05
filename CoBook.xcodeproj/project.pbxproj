@@ -71,6 +71,11 @@
 		B84A15E52410F2DA00C4DC11 /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */; };
 		B84A15E92410F65500C4DC11 /* AccountBusinessCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E72410F65500C4DC11 /* AccountBusinessCardTableViewCell.swift */; };
 		B84A15EA2410F65500C4DC11 /* AccountBusinessCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84A15E82410F65500C4DC11 /* AccountBusinessCardTableViewCell.xib */; };
+		B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15EC2411108800C4DC11 /* AccountHeaderView.swift */; };
+		B84A15F02411130800C4DC11 /* AccountHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84A15EF2411130800C4DC11 /* AccountHeaderView.xib */; };
+		B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */; };
+		B84A15F424111F5F00C4DC11 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F324111F5F00C4DC11 /* DesignableImageView.swift */; };
+		B84A15F72411256800C4DC11 /* DesignableTextPlaceholderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F62411256800C4DC11 /* DesignableTextPlaceholderImageView.swift */; };
 		B84B94E82403299F0007EB60 /* APIConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E72403299F0007EB60 /* APIConfigurable.swift */; };
 		B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E9240329D50007EB60 /* APIConstants.swift */; };
 		B84B94ED24032ADE0007EB60 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94EC24032ADE0007EB60 /* SignUpRouter.swift */; };
@@ -84,7 +89,6 @@
 		B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B870198D23ED50EC00625D61 /* Assets.xcassets */; };
 		B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */; };
 		B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */; };
-		B8858877240FE56E00158751 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8858876240FE56E00158751 /* AccountHeaderView.swift */; };
 		B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */; };
 		B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */; };
 		B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */; };
@@ -166,6 +170,11 @@
 		B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataSource.swift; sourceTree = "<group>"; };
 		B84A15E72410F65500C4DC11 /* AccountBusinessCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBusinessCardTableViewCell.swift; sourceTree = "<group>"; };
 		B84A15E82410F65500C4DC11 /* AccountBusinessCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountBusinessCardTableViewCell.xib; sourceTree = "<group>"; };
+		B84A15EC2411108800C4DC11 /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
+		B84A15EF2411130800C4DC11 /* AccountHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeaderView.xib; sourceTree = "<group>"; };
+		B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFromNibView.swift; sourceTree = "<group>"; };
+		B84A15F324111F5F00C4DC11 /* DesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
+		B84A15F62411256800C4DC11 /* DesignableTextPlaceholderImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextPlaceholderImageView.swift; sourceTree = "<group>"; };
 		B84B94E2240323ED0007EB60 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		B84B94E72403299F0007EB60 /* APIConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurable.swift; sourceTree = "<group>"; };
 		B84B94E9240329D50007EB60 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -183,7 +192,6 @@
 		B870199023ED50EC00625D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B870199223ED50EC00625D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataManager.swift; sourceTree = "<group>"; };
-		B8858876240FE56E00158751 /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
 		B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItemTableViewCell.swift; sourceTree = "<group>"; };
 		B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemTableViewCell.xib; sourceTree = "<group>"; };
 		B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
@@ -242,6 +250,7 @@
 		B82200BD240FBBF700A17D2C /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				B84A15EB2411106100C4DC11 /* views */,
 				B82200BE240FBC1C00A17D2C /* AccountViewController.swift */,
 				B82200C0240FBC2C00A17D2C /* AccountPresenter.swift */,
 				B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */,
@@ -327,15 +336,16 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B8858876240FE56E00158751 /* AccountHeaderView.swift */,
+				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
 				B82B6DB523FC118900BB0EFA /* DesignableView.swift */,
+				B84A15F62411256800C4DC11 /* DesignableTextPlaceholderImageView.swift */,
+				B84A15F324111F5F00C4DC11 /* DesignableImageView.swift */,
 				B8625AC723FAD6C80044605C /* DesignableTextField.swift */,
 				B826B0E523F4109C009041DD /* DesignableProgressView.swift */,
 				B82200B5240FB84B00A17D2C /* TabBarController */,
 				B88906BA240002B5002E91F7 /* NavigationControllers */,
 				B88906CB2400540C002E91F7 /* Buttons */,
 				B88906C9240053DE002E91F7 /* NavigationBar */,
-				B82573F123F545C900C8CBF8 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -356,6 +366,7 @@
 		B823AB7523F15DD700DE13EA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				B84A15F5241123BD00C4DC11 /* views */,
 				B88906C72400515B002E91F7 /* OnboardingPresenter.swift */,
 				B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */,
 				B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */,
@@ -370,16 +381,6 @@
 				B825742B23F592F600C8CBF8 /* SignUpViewController.swift */,
 			);
 			path = SignUp;
-			sourceTree = "<group>";
-		};
-		B82573F123F545C900C8CBF8 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				B84A15E62410F63100C4DC11 /* AccountBusinessCardTableViewCell */,
-				B8858878240FE58500158751 /* AccountItemTableViewCell */,
-				B82573F223F545D000C8CBF8 /* OnboardingPageCollectionViewCell */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		B82573F223F545D000C8CBF8 /* OnboardingPageCollectionViewCell */ = {
@@ -462,6 +463,33 @@
 				B84A15E82410F65500C4DC11 /* AccountBusinessCardTableViewCell.xib */,
 			);
 			path = AccountBusinessCardTableViewCell;
+			sourceTree = "<group>";
+		};
+		B84A15EB2411106100C4DC11 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B84A15EE241112EF00C4DC11 /* AccountHeaderView */,
+				B84A15E62410F63100C4DC11 /* AccountBusinessCardTableViewCell */,
+				B8858878240FE58500158751 /* AccountItemTableViewCell */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		B84A15EE241112EF00C4DC11 /* AccountHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				B84A15EC2411108800C4DC11 /* AccountHeaderView.swift */,
+				B84A15EF2411130800C4DC11 /* AccountHeaderView.xib */,
+			);
+			path = AccountHeaderView;
+			sourceTree = "<group>";
+		};
+		B84A15F5241123BD00C4DC11 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B82573F223F545D000C8CBF8 /* OnboardingPageCollectionViewCell */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 		B84B94EB24032A760007EB60 /* Routers */ = {
@@ -652,6 +680,7 @@
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
+				B84A15F02411130800C4DC11 /* AccountHeaderView.xib in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
@@ -750,21 +779,24 @@
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
 				B82200BF240FBC1C00A17D2C /* AccountViewController.swift in Sources */,
+				B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */,
 				B84A15E92410F65500C4DC11 /* AccountBusinessCardTableViewCell.swift in Sources */,
 				B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
-				B8858877240FE56E00158751 /* AccountHeaderView.swift in Sources */,
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
+				B84A15F424111F5F00C4DC11 /* DesignableImageView.swift in Sources */,
 				B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */,
 				B8307F192406AED800AFE578 /* Profile.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
+				B84A15F72411256800C4DC11 /* DesignableTextPlaceholderImageView.swift in Sources */,
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpRouter.swift in Sources */,
+				B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,

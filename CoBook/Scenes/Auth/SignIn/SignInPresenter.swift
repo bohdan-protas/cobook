@@ -6,12 +6,13 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - SignInView
 protocol SignInView: LoadDisplayableView, AlertDisplayableView {
     var presenter: SignInPresenter { get set }
     func setSignInButton(enabled: Bool)
+    func goTo(viewController: UIViewController)
 }
 
 // MARK: - SignInPresenter
@@ -52,11 +53,11 @@ class SignInPresenter: BasePresenter {
                 switch response.status {
 
                 case .ok:
-                    self.view?.infoAlert(title: nil, message: "Success")
-
                     AppStorage.profile = response.data?.profile
                     AppStorage.accessToken = response.data?.assessToken
                     AppStorage.refreshToken = response.data?.refreshToken
+
+                    self.view?.goTo(viewController: MainTabBarController())
 
                 case .error:
                     debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
