@@ -8,22 +8,74 @@
 
 import UIKit
 
-class AccountViewController: UIViewController {
+class AccountViewController: UIViewController, AccountView {
 
+    enum Defaults {
+        static let estimatedRowHeight: CGFloat = 44
+    }
+
+    // MARK: IBOutlets
+    @IBOutlet var tableView: UITableView!
+
+    // MARK: Properties
+    var presenter = AccountPresenter()
+
+
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
+        presenter.attachView(self)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        self.setup()
+        presenter.setup()
     }
-    */
+
+    deinit {
+        presenter.detachView()
+    }
+
+    // MARK: Public
+    func startLoading() {
+
+    }
+
+    func stopLoading() {
+
+    }
+
 
 }
+
+// MARK: - Privates
+private extension AccountViewController {
+    func setup() {
+        tableView.register(AccountBusinessCardTableViewCell.nib, forCellReuseIdentifier: AccountBusinessCardTableViewCell.identifier)
+        tableView.register(AccountItemTableViewCell.nib, forCellReuseIdentifier: AccountItemTableViewCell.identifier)
+
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
+
+        tableView.dataSource = presenter.dataSource
+        tableView.delegate = self
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension AccountViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 12
+    }
+
+}
+

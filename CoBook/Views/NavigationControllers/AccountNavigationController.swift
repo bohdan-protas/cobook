@@ -15,6 +15,12 @@ class AccountNavigationController: CustomNavigationController {
 
         // Do any additional setup after loading the view.
     }
+
+    override func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        super.navigationController(navigationController, willShow: viewController, animated: animated)
+
+        viewController.navigationController?.setNavigationBarHidden(viewController is AccountViewController, animated: true)
+    }
     
 
 }

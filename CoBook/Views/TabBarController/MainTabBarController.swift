@@ -19,7 +19,6 @@ class MainTabBarController: UITabBarController {
 
         let accountController: AccountNavigationController = UIStoryboard.account.initiateViewControllerFromType()
         accountController.tabBarItem = UITabBarItem(title: "Account".localized, image: #imageLiteral(resourceName: "ic_tabbar_account_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_account_active"))
-
         accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .normal)
         accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .selected)
         accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
