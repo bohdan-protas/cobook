@@ -66,14 +66,13 @@ class SignUpPresenter: BasePresenter {
         }
     }
 
-    func set(fullName: String?, telephone: String?, email: String?) {
-        self.firstName = (fullName ?? "").components(separatedBy: " ")[safe: 0] ?? ""
-        self.lastName = (fullName ?? "").components(separatedBy: " ")[safe: 1] ?? ""
-
+    func set(firstName: String?,lastName: String?, telephone: String?, email: String?) {
+        self.firstName = firstName ?? ""
+        self.lastName = lastName ?? ""
         self.telephone = telephone ?? ""
         self.email = email ?? ""
 
-        let actived = !self.firstName.isEmpty && !lastName.isEmpty && !self.telephone.isEmpty && !self.email.isEmpty
+        let actived = !self.firstName.isEmpty && !self.lastName.isEmpty && !self.telephone.isEmpty && !self.email.isEmpty
         view?.setContinueButton(actived: actived)
     }
 

@@ -6,11 +6,12 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - View protocol
 protocol CreatePasswordView: LoadDisplayableView, AlertDisplayableView {
     func setContinueButton(enabled: Bool)
+    func goTo(viewController: UIViewController)
 }
 
 // MARK: - ConfirmTelephoneNumberPresenter
@@ -56,8 +57,10 @@ class CreatePasswordPresenter: BasePresenter {
                     AppStorage.accessToken = response.data?.assessToken
                     AppStorage.refreshToken = response.data?.refreshToken
 
-                    self.view?.infoAlert(title: nil, message: "Success")
+                    self.view?.infoAlert(title: nil, message: "Успішно зареєстровано!")
+
                     // TODO: go to main screen
+                    //self.view?.goTo(viewController: MainTabBarController())
 
                 case .error:
                     debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")

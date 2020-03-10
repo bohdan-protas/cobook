@@ -12,6 +12,8 @@
 "Error" = "Error";
 "Login.placeholder" = "Login";
 
+"Account" = "Account";
+
 // MARK: - Onboarding
 "Onboarding.Title01" = "Title.01";
 "Onboarding.Subtitle01" = "Subtitle01";
@@ -39,3 +41,13 @@
 "ForgotPassword.title" = "ForgotPassword.title description";
 "ForgotPassword.subtitle" = "ForgotPassword.subtitle description";
 "ForgotPassword.successMessage" = "ForgotPassword.successMessage description";
+
+// MARK: - Account
+"Account.item.createPersonalCard" = "Create personal business card";
+"Account.item.createBusinessCard" = "Create personalCard";
+"Account.item.inviteFriends" = "Invite friends";
+"Account.item.statictics" = "Statistics";
+"Account.item.generateQrCode" = "Generate QR code";
+"Account.item.faq" = "faxq";
+"Account.item.startMakingMoney" = "Start making modey with CoBook";
+"Account.item.quitAccount" = "Qui account";

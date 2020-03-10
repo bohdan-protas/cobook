@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,23 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        if AppStorage.refreshToken.isNil {
-
-            if AppStorage.isUserCompletedTutorial {
-                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                window?.rootViewController = signUpNavigationController
-            } else {
-                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-                window?.rootViewController = onboardingViewController
-            }
-
+        if AppStorage.isUserCompletedTutorial {
+            let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+            window?.rootViewController = signUpNavigationController
         } else {
-            let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = signInViewController
+            let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+            window?.rootViewController = onboardingViewController
         }
 
-
         window?.makeKeyAndVisible()
+        IQKeyboardManager.shared.enable = true
 
         return true
     }

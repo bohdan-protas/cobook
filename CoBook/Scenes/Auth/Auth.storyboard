@@ -94,7 +94,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-58-TRF" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-58-TRF" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C9-tT-k89" userLabel="Title Container">
@@ -121,7 +121,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB" userLabel="Image Container">
                                         <rect key="frame" x="8" y="86" width="311" height="189"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_registration" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="144"/>
                                             </imageView>
                                         </subviews>
@@ -136,46 +136,103 @@
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-Rd-0iZ" userLabel="Fields Stack View">
                                         <rect key="frame" x="16" y="275" width="295" height="168"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Прізвище, імя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIn-Tu-MOa">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
-                                                <color key="tintColor" name="Theme_TextField-borderActive"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                </accessibility>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dNK-MC-EhC">
+                                                        <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Імя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="48"/>
+                                                                <color key="tintColor" name="Theme_TextField-borderActive"/>
+                                                                <accessibility key="accessibilityConfiguration">
+                                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                                </accessibility>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="Fak-dx-eCr"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                        <color key="value" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                                        <real key="value" value="16"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                                        <real key="value" value="16"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBorderColor">
+                                                                        <color key="value" name="Theme_TextField-borderInactive"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="enabledBorderColor">
+                                                                        <color key="value" name="Theme_TextField-borderActive"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="textFieldEditingChanged:" destination="fTX-yw-dca" eventType="editingChanged" id="Coj-Yr-Va6"/>
+                                                                    <outlet property="delegate" destination="fTX-yw-dca" id="7fe-pQ-gRS"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Прізвище" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Brs-c2-PMN" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                                <rect key="frame" x="153.5" y="0.0" width="141.5" height="48"/>
+                                                                <color key="tintColor" name="Theme_TextField-borderActive"/>
+                                                                <accessibility key="accessibilityConfiguration">
+                                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                                </accessibility>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="2Yk-QZ-N4f"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                        <color key="value" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                                        <real key="value" value="16"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                                        <real key="value" value="16"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBorderColor">
+                                                                        <color key="value" name="Theme_TextField-borderInactive"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="enabledBorderColor">
+                                                                        <color key="value" name="Theme_TextField-borderActive"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="textFieldEditingChanged:" destination="fTX-yw-dca" eventType="editingChanged" id="E0N-jy-ONV"/>
+                                                                    <outlet property="delegate" destination="fTX-yw-dca" id="3Ot-uV-pOs"/>
+                                                                </connections>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="Fak-dx-eCr"/>
+                                                    <constraint firstItem="dNK-MC-EhC" firstAttribute="top" secondItem="cIn-Tu-MOa" secondAttribute="top" id="6vq-ho-FEq"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dNK-MC-EhC" secondAttribute="bottom" id="DXy-nC-iIm"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dNK-MC-EhC" secondAttribute="trailing" id="Nix-5z-caN"/>
+                                                    <constraint firstAttribute="height" constant="48" id="dOH-qT-QS5"/>
+                                                    <constraint firstItem="dNK-MC-EhC" firstAttribute="leading" secondItem="cIn-Tu-MOa" secondAttribute="leading" id="dar-pQ-r7S"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                        <color key="value" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
-                                                        <real key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
-                                                        <real key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBorderColor">
-                                                        <color key="value" name="Theme_TextField-borderInactive"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="enabledBorderColor">
-                                                        <color key="value" name="Theme_TextField-borderActive"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="textFieldEditingChanged:" destination="fTX-yw-dca" eventType="editingChanged" id="K6u-NM-9Rs"/>
-                                                    <outlet property="delegate" destination="fTX-yw-dca" id="ce7-Rt-Bx3"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Робочий номер телефону" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-LB-IQc" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                            </view>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+380xxxxxxxxx" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-LB-IQc" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="60" width="295" height="48"/>
                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -392,8 +449,9 @@
                         <outlet property="continueButton" destination="C7e-D1-uuF" id="YjZ-la-jrd"/>
                         <outlet property="emailTextField" destination="pQ0-b1-5dq" id="mTo-Kt-SDw"/>
                         <outlet property="fieldToTitleConstraint" destination="hlS-Of-J8f" id="nPC-Ay-MVG"/>
+                        <outlet property="firstNameTextField" destination="Wsn-BH-QOy" id="zks-YZ-omO"/>
+                        <outlet property="lastNameTextField" destination="Brs-c2-PMN" id="XfX-2v-sqH"/>
                         <outlet property="telephoneNumberTextField" destination="l9w-LB-IQc" id="uKH-Dv-0xE"/>
-                        <outlet property="userNameTextField" destination="Wsn-BH-QOy" id="CUE-Lr-pYR"/>
                         <segue destination="LDQ-N8-u8m" kind="show" identifier="goToConfirmTelephoneNumberViewController" id="2eG-kn-x2A"/>
                     </connections>
                 </viewController>
@@ -436,7 +494,7 @@
                                     <navigationItem id="rhk-Y9-O7g"/>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bo-yh-juf" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bo-yh-juf" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVv-S3-gEV" userLabel="Title Container">
@@ -461,10 +519,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8gR-LW-xGF" userLabel="Image Container">
-                                        <rect key="frame" x="8" y="86" width="311" height="175"/>
+                                        <rect key="frame" x="8" y="86" width="311" height="169"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_mobile_life" translatesAutoresizingMaskIntoConstraints="NO" id="oHs-EN-K3K">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="130"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_login" translatesAutoresizingMaskIntoConstraints="NO" id="oHs-EN-K3K">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="124"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -476,7 +534,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-9w-2Sf" userLabel="Fields Stack View">
-                                        <rect key="frame" x="16" y="261" width="295" height="120"/>
+                                        <rect key="frame" x="16" y="255" width="295" height="120"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логін" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1w-rc-cAA" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
@@ -527,7 +585,7 @@
                                                     <constraint firstAttribute="height" constant="48" id="37G-X5-KBV"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="continue" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="continue"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                         <real key="value" value="1"/>
@@ -727,7 +785,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z04-Fr-TSW" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z04-Fr-TSW" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46F-ZB-tZF" userLabel="Title View">
@@ -834,7 +892,7 @@
                                                             <outlet property="delegate" destination="LDQ-N8-u8m" id="8FC-v2-ejA"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aH5-MD-8Fa" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aH5-MD-8Fa" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="92" y="0.0" width="40" height="56"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -1048,7 +1106,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDu-ft-cWr" userLabel="Shadow container" customClass="ShadowView" customModule="CoBook" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDu-ft-cWr" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="24" y="54" width="327" height="533"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5TJ-1t-GG1" userLabel="Title Container">
@@ -1275,7 +1333,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_mobile_life" width="196" height="130"/>
+        <image name="ic_login" width="98" height="124"/>
+        <image name="ic_registration" width="196" height="130"/>
         <namedColor name="Theme_Accent">
             <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

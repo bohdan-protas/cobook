@@ -17,7 +17,8 @@ class SignUpViewController: UIViewController, SignUpView {
     // MARK: IBOutlets
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
     @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
-    @IBOutlet var userNameTextField: DesignableTextField!
+    @IBOutlet var firstNameTextField: DesignableTextField!
+    @IBOutlet var lastNameTextField: DesignableTextField!
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
     @IBOutlet var emailTextField: DesignableTextField!
     @IBOutlet var continueButton: LoaderButton!
@@ -31,7 +32,10 @@ class SignUpViewController: UIViewController, SignUpView {
     }
 
     @IBAction func textFieldEditingChanged(_ sender: DesignableTextField) {
-        presenter.set(fullName: userNameTextField.text, telephone: telephoneNumberTextField.text, email: emailTextField.text)
+        presenter.set(firstName: firstNameTextField.text,
+                      lastName: lastNameTextField.text,
+                      telephone: telephoneNumberTextField.text,
+                      email: emailTextField.text)
     }
 
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
@@ -135,7 +139,9 @@ extension SignUpViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case userNameTextField:
+        case firstNameTextField:
+            lastNameTextField.becomeFirstResponder()
+        case lastNameTextField:
             telephoneNumberTextField.becomeFirstResponder()
         case telephoneNumberTextField:
             emailTextField.becomeFirstResponder()
