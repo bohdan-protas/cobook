@@ -29,6 +29,7 @@ extension APIConfigurable {
 
         /// Common Headers
         urlRequest.headers.add(.contentType(ContentType.json.rawValue))
+        urlRequest.headers.add(.init(name: "locale", value: "UKR"))
         if useAuthirizationToken {
             urlRequest.headers.add(.authorization(bearerToken: AppStorage.accessToken ?? ""))
         }

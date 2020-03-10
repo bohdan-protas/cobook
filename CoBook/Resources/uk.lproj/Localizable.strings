@@ -43,7 +43,7 @@
 "ForgotPassword.successMessage" = "Запит на відновлення паролю успішно наліслано.";
 
 // MARK: - Account
-"Account.item.createPersonalCard" = "Створити персональну візитку;
+"Account.item.createPersonalCard" = "Створити персональну візитку";
 "Account.item.createBusinessCard" = "Створити бізнес візитку";
 "Account.item.inviteFriends" = "Запросити друзів";
 "Account.item.statictics" = "Статистика";
