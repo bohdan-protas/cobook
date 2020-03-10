@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppStorage.accessToken = nil
             AppStorage.refreshToken = nil
             AppStorage.profile = nil
-            AppStorage.isUserCompletedRegistration = false
             AppStorage.isUserInitiatedRegistration = false
         }
     }

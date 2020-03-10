@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNumberView {
 
@@ -55,6 +56,16 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
         super.viewDidLoad()
         presenter?.attachView(self)
         setupLayout()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
 
     deinit {
