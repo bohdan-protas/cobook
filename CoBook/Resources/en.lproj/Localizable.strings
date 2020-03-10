@@ -48,6 +48,6 @@
 "Account.item.inviteFriends" = "Invite friends";
 "Account.item.statictics" = "Statistics";
 "Account.item.generateQrCode" = "Generate QR code";
-"Account.item.faq" = "faxq";
+"Account.item.faq" = "faq";
 "Account.item.startMakingMoney" = "Start making modey with CoBook";
-"Account.item.quitAccount" = "Qui account";
+"Account.item.quitAccount" = "Quit account";

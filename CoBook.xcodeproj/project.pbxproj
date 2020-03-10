@@ -102,6 +102,8 @@
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
 		B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7F240551A400AF431B /* RegisterAPIResponseData.swift */; };
 		B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E8124057B1700AF431B /* ValidationManager.swift */; };
+		B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */; };
+		B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,6 +207,8 @@
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		B8CB0E7F240551A400AF431B /* RegisterAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E8124057B1700AF431B /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
+		B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardViewController.swift; sourceTree = "<group>"; };
+		B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardPresenter.swift; sourceTree = "<group>"; };
 		C93E9765F0DA3748E1CC0BAA /* Pods-CoBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.release.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.release.xcconfig"; sourceTree = "<group>"; };
 		D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -243,6 +247,7 @@
 			children = (
 				B82200B9240FB8A400A17D2C /* Account.storyboard */,
 				B82200BD240FBBF700A17D2C /* Account */,
+				B8DD431724178F0200C7D940 /* CreatePersonalCard */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -252,8 +257,8 @@
 			children = (
 				B84A15EB2411106100C4DC11 /* views */,
 				B82200BE240FBC1C00A17D2C /* AccountViewController.swift */,
-				B82200C0240FBC2C00A17D2C /* AccountPresenter.swift */,
 				B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */,
+				B82200C0240FBC2C00A17D2C /* AccountPresenter.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -616,6 +621,15 @@
 			path = KeychainWrapper;
 			sourceTree = "<group>";
 		};
+		B8DD431724178F0200C7D940 /* CreatePersonalCard */ = {
+			isa = PBXGroup;
+			children = (
+				B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */,
+				B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */,
+			);
+			path = CreatePersonalCard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -770,6 +784,7 @@
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
 				B82200B7240FB87000A17D2C /* MainTabBarController.swift in Sources */,
 				B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */,
+				B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */,
 				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
@@ -781,6 +796,7 @@
 				B82200BF240FBC1C00A17D2C /* AccountViewController.swift in Sources */,
 				B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */,
 				B84A15E92410F65500C4DC11 /* AccountBusinessCardTableViewCell.swift in Sources */,
+				B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */,
 				B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,

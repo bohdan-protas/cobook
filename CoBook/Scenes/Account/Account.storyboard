@@ -41,6 +41,21 @@
             </objects>
             <point key="canvasLocation" x="1189.5999999999999" y="-124.58770614692655"/>
         </scene>
+        <!--Create Personal Card View Controller-->
+        <scene sceneID="IAu-Gg-hD5">
+            <objects>
+                <viewController storyboardIdentifier="CreatePersonalCardViewController" hidesBottomBarWhenPushed="YES" id="bwU-0T-gly" customClass="CreatePersonalCardViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zs3-Y2-Swa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="f52-DX-Znk"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qV4-TM-hWs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="-125"/>
+        </scene>
         <!--Account Navigation Controller-->
         <scene sceneID="Azw-7v-TXN">
             <objects>

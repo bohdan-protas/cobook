@@ -17,14 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = MainTabBarController()
 
-        if AppStorage.isUserCompletedTutorial {
-            let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = signUpNavigationController
-        } else {
-            let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = onboardingViewController
-        }
+//        if AppStorage.isUserCompletedTutorial {
+//            let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+//            window?.rootViewController = signUpNavigationController
+//        } else {
+//            let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+//            window?.rootViewController = onboardingViewController
+//        }
 
         window?.makeKeyAndVisible()
         IQKeyboardManager.shared.enable = true

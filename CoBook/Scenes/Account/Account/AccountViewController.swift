@@ -49,6 +49,10 @@ class AccountViewController: UIViewController, AccountView {
 
     }
 
+    func push(controller: UIViewController) {
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
 
 }
 
@@ -73,6 +77,7 @@ extension AccountViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.selectedRow(at: indexPath)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
