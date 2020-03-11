@@ -104,6 +104,17 @@
 		B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E8124057B1700AF431B /* ValidationManager.swift */; };
 		B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */; };
 		B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */; };
+		B8DE5E352418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E342418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib */; };
+		B8DE5E372418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E362418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift */; };
+		B8DE5E392418DACF00F4F60B /* CreatePersonalCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */; };
+		B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E3F2418E25000F4F60B /* TextFieldTableViewCell.swift */; };
+		B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E402418E25000F4F60B /* TextFieldTableViewCell.xib */; };
+		B8DE5E452418E82600F4F60B /* SectionHeaderSeparatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E442418E82600F4F60B /* SectionHeaderSeparatorView.xib */; };
+		B8DE5E472418E83800F4F60B /* SectionHeaderSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E462418E83800F4F60B /* SectionHeaderSeparatorView.swift */; };
+		B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E492418E99900F4F60B /* SectionTitleTableViewCell.swift */; };
+		B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E4A2418E99900F4F60B /* SectionTitleTableViewCell.xib */; };
+		B8DE5E4E2418EE4800F4F60B /* PersonalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E4D2418EE4800F4F60B /* PersonalCard.swift */; };
+		B8DE5E512419227A00F4F60B /* UITableView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E502419227A00F4F60B /* UITableView + Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -209,6 +220,17 @@
 		B8CB0E8124057B1700AF431B /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardViewController.swift; sourceTree = "<group>"; };
 		B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardPresenter.swift; sourceTree = "<group>"; };
+		B8DE5E342418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCardPhotoManagmentView.xib; sourceTree = "<group>"; };
+		B8DE5E362418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardPhotoManagmentView.swift; sourceTree = "<group>"; };
+		B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSource.swift; sourceTree = "<group>"; };
+		B8DE5E3F2418E25000F4F60B /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		B8DE5E402418E25000F4F60B /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		B8DE5E442418E82600F4F60B /* SectionHeaderSeparatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderSeparatorView.xib; sourceTree = "<group>"; };
+		B8DE5E462418E83800F4F60B /* SectionHeaderSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderSeparatorView.swift; sourceTree = "<group>"; };
+		B8DE5E492418E99900F4F60B /* SectionTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewCell.swift; sourceTree = "<group>"; };
+		B8DE5E4A2418E99900F4F60B /* SectionTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTitleTableViewCell.xib; sourceTree = "<group>"; };
+		B8DE5E4D2418EE4800F4F60B /* PersonalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCard.swift; sourceTree = "<group>"; };
+		B8DE5E502419227A00F4F60B /* UITableView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extensions.swift"; sourceTree = "<group>"; };
 		C93E9765F0DA3748E1CC0BAA /* Pods-CoBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.release.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.release.xcconfig"; sourceTree = "<group>"; };
 		D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -257,8 +279,8 @@
 			children = (
 				B84A15EB2411106100C4DC11 /* views */,
 				B82200BE240FBC1C00A17D2C /* AccountViewController.swift */,
-				B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */,
 				B82200C0240FBC2C00A17D2C /* AccountPresenter.swift */,
+				B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -323,6 +345,7 @@
 				B823A6A723FD34A0007540D0 /* Array + Extensions.swift */,
 				B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */,
 				B8307F242406FFD200AFE578 /* Optional + Extensions.swift */,
+				B8DE5E502419227A00F4F60B /* UITableView + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -341,6 +364,8 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B8DE5E432418E5C400F4F60B /* SectionHeaderSeparatorView */,
+				B8DE5E3A2418E1C600F4F60B /* Cells */,
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
 				B82B6DB523FC118900BB0EFA /* DesignableView.swift */,
 				B84A15F62411256800C4DC11 /* DesignableTextPlaceholderImageView.swift */,
@@ -446,6 +471,7 @@
 				B826B0F123F459A1009041DD /* Onboarding.swift */,
 				B8307F182406AED800AFE578 /* Profile.swift */,
 				B84A15E22410E50900C4DC11 /* Account.swift */,
+				B8DE5E4D2418EE4800F4F60B /* PersonalCard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -624,10 +650,65 @@
 		B8DD431724178F0200C7D940 /* CreatePersonalCard */ = {
 			isa = PBXGroup;
 			children = (
+				B8DE5E322418D60900F4F60B /* views */,
 				B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */,
 				B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */,
+				B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */,
 			);
 			path = CreatePersonalCard;
+			sourceTree = "<group>";
+		};
+		B8DE5E322418D60900F4F60B /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B8DE5E332418D62200F4F60B /* CreatePersonalCardHeaderView */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		B8DE5E332418D62200F4F60B /* CreatePersonalCardHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				B8DE5E342418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib */,
+				B8DE5E362418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift */,
+			);
+			path = CreatePersonalCardHeaderView;
+			sourceTree = "<group>";
+		};
+		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */,
+				B8DE5E3B2418E1D900F4F60B /* TextFieldTableViewCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		B8DE5E3B2418E1D900F4F60B /* TextFieldTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8DE5E3F2418E25000F4F60B /* TextFieldTableViewCell.swift */,
+				B8DE5E402418E25000F4F60B /* TextFieldTableViewCell.xib */,
+			);
+			path = TextFieldTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8DE5E432418E5C400F4F60B /* SectionHeaderSeparatorView */ = {
+			isa = PBXGroup;
+			children = (
+				B8DE5E462418E83800F4F60B /* SectionHeaderSeparatorView.swift */,
+				B8DE5E442418E82600F4F60B /* SectionHeaderSeparatorView.xib */,
+			);
+			path = SectionHeaderSeparatorView;
+			sourceTree = "<group>";
+		};
+		B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8DE5E492418E99900F4F60B /* SectionTitleTableViewCell.swift */,
+				B8DE5E4A2418E99900F4F60B /* SectionTitleTableViewCell.xib */,
+			);
+			path = SectionTitleTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -693,12 +774,15 @@
 			files = (
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
+				B8DE5E352418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
 				B84A15F02411130800C4DC11 /* AccountHeaderView.xib in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
+				B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */,
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
 				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
+				B8DE5E452418E82600F4F60B /* SectionHeaderSeparatorView.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
 				B825741223F5621500C8CBF8 /* HelveticaNeueCyr-Medium.ttf in Resources */,
@@ -710,6 +794,7 @@
 				B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */,
 				B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */,
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
+				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
 				B825741723F5621500C8CBF8 /* HelveticaNeueCyr-MediumItalic.ttf in Resources */,
@@ -787,6 +872,7 @@
 				B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */,
 				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
+				B8DE5E512419227A00F4F60B /* UITableView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
@@ -810,8 +896,10 @@
 				B84A15F72411256800C4DC11 /* DesignableTextPlaceholderImageView.swift in Sources */,
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
+				B8DE5E392418DACF00F4F60B /* CreatePersonalCardDataSource.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpRouter.swift in Sources */,
+				B8DE5E472418E83800F4F60B /* SectionHeaderSeparatorView.swift in Sources */,
 				B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
@@ -820,6 +908,7 @@
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
 				B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */,
+				B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */,
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorage.swift in Sources */,
@@ -830,14 +919,17 @@
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */,
+				B8DE5E4E2418EE4800F4F60B /* PersonalCard.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B8357DB3240C6372006AB78E /* SignInRouter.swift in Sources */,
+				B8DE5E372418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift in Sources */,
 				B84B94E82403299F0007EB60 /* APIConfigurable.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
 				B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */,
 				B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */,
 				B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */,
+				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
 				B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

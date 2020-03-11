@@ -10,6 +10,22 @@ import UIKit
 
 enum Account {
 
+    struct Section {
+        var items: [Item]
+    }
+
+    enum Item {
+        case action(type: ActionType)
+        case businessCard(model: BusinessCard)
+    }
+
+    struct BusinessCard {
+        var image: String
+        var name: String
+        var profession: String
+        var telephone: String
+    }
+
     enum ActionType {
         case createPersonalCard
         case createBusinessCard
@@ -65,22 +81,6 @@ enum Account {
                 }
             }
         }
-    }
-
-    struct Section {
-        var items: [Item]
-    }
-
-    enum Item {
-        case action(type: ActionType)
-        case businessCard(model: BusinessCard)
-    }
-
-    struct BusinessCard {
-        var image: String
-        var name: String
-        var profession: String
-        var telephone: String
     }
 
 

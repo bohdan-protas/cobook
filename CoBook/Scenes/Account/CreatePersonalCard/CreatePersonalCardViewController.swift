@@ -10,15 +10,25 @@ import UIKit
 
 class CreatePersonalCardViewController: UIViewController, CreatePersonalCardView {
 
+    enum Defaults {
+        static let estimatedRowHeight: CGFloat = 44
+        static let headerHeight: CGFloat = 120
+        static let sectionHeaderHeight: CGFloat = 28
+    }
+
+    // MARK: IBOutlets
+    @IBOutlet var tableView: UITableView!
+
     // MARK: Properties
     var presenter = CreatePersonalCardPresenter()
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
 
         presenter.attachView(self)
-        setupLayout()
+        presenter.setup()
     }
 
     // MARK: Public
@@ -34,6 +44,23 @@ private extension CreatePersonalCardViewController {
 
     func setupLayout() {
         self.navigationItem.title = "Create Personal Card"
+
+        tableView.delegate = self
+        tableView.tableHeaderView = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
+    }
+
+
+}
+
+// MARK: - UITableViewDelegate
+extension CreatePersonalCardViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return SectionHeaderSeparatorView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Defaults.sectionHeaderHeight
     }
 
 
