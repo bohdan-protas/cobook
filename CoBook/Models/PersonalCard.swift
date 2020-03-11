@@ -18,6 +18,7 @@ enum PersonalCard {
         case title(text: String)
         case textField(type: TextType)
         case textFieldAction(type: ActionType)
+        case textView
     }
 
     enum TextType {
@@ -29,8 +30,8 @@ enum PersonalCard {
     }
 
     enum ActionType {
-        case activity                       // Вид діяльності
-        case placeOfLiving                  // Місце проживання
+        case activityType                       // Вид діяльності
+        case placeOfLiving                      // Місце проживання
     }
 
 

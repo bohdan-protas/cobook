@@ -1,5 +1,5 @@
 //
-//  SectionTitleTableViewCell.swift
+//  TextViewTableViewCell.swift
 //  CoBook
 //
 //  Created by protas on 3/11/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SectionTitleTableViewCell: UITableViewCell {
+class TextViewTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

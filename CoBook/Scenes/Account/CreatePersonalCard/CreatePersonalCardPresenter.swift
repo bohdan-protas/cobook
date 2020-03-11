@@ -32,10 +32,11 @@ class CreatePersonalCardPresenter: BasePresenter {
             PersonalCard.Section(items: [
                 .title(text: "Діяльність"),
                 .textField(type: .activityDescription),
+                .textFieldAction(type: .activityType),
+                .textFieldAction(type: .placeOfLiving),
                 .textField(type: .activityRegion),
                 .textField(type: .occupiedPosition),
-                .textField(type: .workingEmailForCommunication),
-                .textField(type: .workingPhoneNumber),
+                .textView
             ]),
 
             PersonalCard.Section(items: [

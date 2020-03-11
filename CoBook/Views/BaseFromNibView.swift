@@ -8,14 +8,13 @@
 
 import UIKit
 
-//MARK: - Main section
-//Base custom view which autocreating from nib-file
+/// Base custom view which autocreating from nib-file
 class BaseFromNibView: UIView {
 
-    //MARK: outlets
+    // MARK: outlets
     @IBOutlet var contentView: UIView!
 
-    //MARK: lifecycle
+    // MARK: lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         nibSetup()
@@ -31,7 +30,7 @@ class BaseFromNibView: UIView {
     }
 }
 
-//MARK: - private section
+// MARK: - Private section
 fileprivate extension BaseFromNibView {
     func nibSetup() {
         contentView = loadViewFromNib()

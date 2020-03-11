@@ -71,6 +71,7 @@ class DesignableTextField: UITextField {
     }
 
     override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
         sharedInit()
     }
 
