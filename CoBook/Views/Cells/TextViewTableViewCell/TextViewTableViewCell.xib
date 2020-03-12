@@ -58,7 +58,6 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
                                 <real key="value" value="16"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="placeholder"/>
                             <userDefinedRuntimeAttribute type="string" keyPath="pText" value="placeholder"/>
                             <userDefinedRuntimeAttribute type="color" keyPath="pTextColor">
                                 <color key="value" name="Theme_TextField-placeholder"/>
@@ -77,6 +76,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="textView" destination="oVL-qY-rZE" id="TuA-i2-imR"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="184.15178571428569"/>
         </tableViewCell>
     </objects>

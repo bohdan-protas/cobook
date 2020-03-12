@@ -57,6 +57,15 @@ class DesignableTextView: UITextView {
     @IBInspectable public var pRightTextInset: CGFloat = 16
     @IBInspectable public var pTopTextInset: CGFloat = 16
 
+    private weak var proxyDelegate: UITextViewDelegate?
+    override weak var delegate: UITextViewDelegate? {
+        willSet {
+            if newValue !== self {
+                proxyDelegate = newValue
+            }
+        }
+    }
+
     // MARK: - Initializers
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -70,7 +79,7 @@ class DesignableTextView: UITextView {
     // MARK: Layout
     override func awakeFromNib() {
         super.awakeFromNib()
-        delegate = self
+        self.delegate = self
         configure()
     }
 
@@ -153,17 +162,20 @@ private extension DesignableTextView {
 extension DesignableTextView: UITextViewDelegate {
 
     /// When the UITextView did change, show or hide the label based on if the UITextView is empty or not
-    public func textViewDidChange(_ textView: UITextView) {
-        placeholderLabel.isHidden = textView.text.count > 0
+    func textViewDidChange(_ textView: UITextView) {
+        self.placeholderLabel?.isHidden = textView.text.count > 0
+        proxyDelegate?.textViewDidChange?(self)
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
         isEnabled = true
+        proxyDelegate?.textViewDidBeginEditing?(self)
     }
 
 
     func textViewDidEndEditing(_ textView: UITextView) {
         isEnabled = false
+        proxyDelegate?.textViewDidEndEditing?(self)
     }
 
 

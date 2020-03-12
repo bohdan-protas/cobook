@@ -31,24 +31,41 @@ class CreatePersonalCardPresenter: BasePresenter {
 
             PersonalCard.Section(items: [
                 .title(text: "Діяльність"),
-                .textField(type: .activityDescription),
-                .textFieldAction(type: .activityType),
-                .textFieldAction(type: .placeOfLiving),
-                .textField(type: .activityRegion),
-                .textField(type: .occupiedPosition),
-                .textView
+                .textField(type: .occupiedPosition, action: nil),
+                .textField(type: .activityType, action: .listOfActivities),
+                .textField(type: .placeOfLiving, action: .placeAutocomplete),
+                .textField(type: .activityRegion, action: nil),
+                .textView(type: .activityDescription)
             ]),
 
             PersonalCard.Section(items: [
                 .title(text: "Контактні дані"),
-                .textField(type: .workingEmailForCommunication),
-                .textField(type: .workingPhoneNumber)
+                .textField(type: .workingEmailForCommunication, action: nil),
+                .textField(type: .workingPhoneNumber, action: nil)
             ])
-
 
         ]
 
+        dataSource?.cellsDelegate = self
         dataSource?.tableView.reloadData()
     }
 
+}
+
+// MARK: - CreatePersonalCardPresenter
+extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate, TextFieldTableViewCellDelegate {
+
+    func didChangedText(_ cell: TextViewTableViewCell, updatedText text: String?, textTypeIdentifier identifier: String?) {
+        print("text changed on:\(cell),  text: \(text ?? ""), type: \(identifier ?? "")")
+    }
+
+    func didChangedText(_ cell: TextFieldTableViewCell, updatedText text: String?, textTypeIdentifier identifier: String?) {
+        print("text changed on:\(cell),  text: \(text ?? ""), type: \(identifier ?? "")")
+    }
+
+    func didOccuredAction(_ cell: TextFieldTableViewCell, actionIdentifier identifier: String?) {
+        print("action occured on:\(cell),  id: \(identifier ?? "")")
+    }
+
+    
 }

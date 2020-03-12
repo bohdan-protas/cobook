@@ -48,6 +48,9 @@
                                 <color key="value" name="Theme_TextField-placeholder"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="textViewEditingChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="uv4-Y0-Nl7"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>
@@ -58,6 +61,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="textView" destination="jtr-2U-Cgs" id="kZx-fZ-jr4"/>
+            </connections>
             <point key="canvasLocation" x="177.536231884058" y="160.04464285714286"/>
         </tableViewCell>
     </objects>
