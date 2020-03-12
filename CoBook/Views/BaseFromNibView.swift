@@ -28,6 +28,9 @@ class BaseFromNibView: UIView {
     func getNib() -> UINib {
         fatalError("Method should be overriden")
     }
+
+    func setup() {
+    }
 }
 
 // MARK: - Private section
@@ -39,6 +42,8 @@ fileprivate extension BaseFromNibView {
         contentView.translatesAutoresizingMaskIntoConstraints = true
 
         addSubview(contentView)
+
+        setup()
     }
 
     func loadViewFromNib() -> UIView {

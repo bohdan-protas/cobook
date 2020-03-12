@@ -56,6 +56,8 @@
 		B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742B23F592F600C8CBF8 /* SignUpViewController.swift */; };
 		B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* DesignableProgressView.swift */; };
 		B826B0F223F459A1009041DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0F123F459A1009041DD /* Onboarding.swift */; };
+		B8282828241A6FC40003D056 /* CardSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8282827241A6FC40003D056 /* CardSaveView.swift */; };
+		B828282A241A6FE80003D056 /* CardSaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8282829241A6FE80003D056 /* CardSaveView.xib */; };
 		B828C34B240CE0A800F8C371 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828C34A240CE0A800F8C371 /* AuthRouter.swift */; };
 		B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */; };
 		B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* DesignableView.swift */; };
@@ -171,6 +173,8 @@
 		B825742B23F592F600C8CBF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B826B0E523F4109C009041DD /* DesignableProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableProgressView.swift; sourceTree = "<group>"; };
 		B826B0F123F459A1009041DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		B8282827241A6FC40003D056 /* CardSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSaveView.swift; sourceTree = "<group>"; };
+		B8282829241A6FE80003D056 /* CardSaveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardSaveView.xib; sourceTree = "<group>"; };
 		B828C34A240CE0A800F8C371 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenAPIResponseData.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
@@ -372,12 +376,12 @@
 			children = (
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
 				B8DE5E5724192ADC00F4F60B /* Designable */,
-				B8DE5E3A2418E1C600F4F60B /* Cells */,
+				B8282826241A6F780003D056 /* CardSaveView */,
 				B8DE5E432418E5C400F4F60B /* SectionHeaderSeparatorView */,
 				B82200B5240FB84B00A17D2C /* TabBarController */,
 				B88906BA240002B5002E91F7 /* NavigationControllers */,
-				B88906CB2400540C002E91F7 /* Buttons */,
 				B88906C9240053DE002E91F7 /* NavigationBar */,
+				B8DE5E3A2418E1C600F4F60B /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -476,6 +480,15 @@
 				B8DE5E4D2418EE4800F4F60B /* PersonalCard.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B8282826241A6F780003D056 /* CardSaveView */ = {
+			isa = PBXGroup;
+			children = (
+				B8282827241A6FC40003D056 /* CardSaveView.swift */,
+				B8282829241A6FE80003D056 /* CardSaveView.xib */,
+			);
+			path = CardSaveView;
 			sourceTree = "<group>";
 		};
 		B8307F1F2406FED000AFE578 /* Persistance */ = {
@@ -663,18 +676,18 @@
 		B8DE5E322418D60900F4F60B /* views */ = {
 			isa = PBXGroup;
 			children = (
-				B8DE5E332418D62200F4F60B /* CreatePersonalCardHeaderView */,
+				B8DE5E332418D62200F4F60B /* PersonalCardPhotoManagmentView */,
 			);
 			path = views;
 			sourceTree = "<group>";
 		};
-		B8DE5E332418D62200F4F60B /* CreatePersonalCardHeaderView */ = {
+		B8DE5E332418D62200F4F60B /* PersonalCardPhotoManagmentView */ = {
 			isa = PBXGroup;
 			children = (
 				B8DE5E342418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib */,
 				B8DE5E362418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift */,
 			);
-			path = CreatePersonalCardHeaderView;
+			path = PersonalCardPhotoManagmentView;
 			sourceTree = "<group>";
 		};
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
@@ -726,6 +739,7 @@
 		B8DE5E5724192ADC00F4F60B /* Designable */ = {
 			isa = PBXGroup;
 			children = (
+				B88906CB2400540C002E91F7 /* Buttons */,
 				B82B6DB523FC118900BB0EFA /* DesignableView.swift */,
 				B84A15F324111F5F00C4DC11 /* DesignableImageView.swift */,
 				B826B0E523F4109C009041DD /* DesignableProgressView.swift */,
@@ -806,6 +820,7 @@
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
 				B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */,
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
+				B828282A241A6FE80003D056 /* CardSaveView.xib in Resources */,
 				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
 				B8DE5E452418E82600F4F60B /* SectionHeaderSeparatorView.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
@@ -881,6 +896,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8282828241A6FC40003D056 /* CardSaveView.swift in Sources */,
 				B84A15E52410F2DA00C4DC11 /* AccountDataSource.swift in Sources */,
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,

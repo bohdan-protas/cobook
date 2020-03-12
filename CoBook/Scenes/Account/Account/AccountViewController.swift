@@ -13,6 +13,7 @@ class AccountViewController: UIViewController, AccountView {
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
         static let headerHeight: CGFloat = 308
+        static let footerHeight: CGFloat = 124
         static let sectionHeaderHeight: CGFloat = 12
     }
 

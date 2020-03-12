@@ -13,6 +13,7 @@ class CreatePersonalCardViewController: UIViewController, CreatePersonalCardView
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
         static let headerHeight: CGFloat = 120
+        static let footerHeight: CGFloat = 124
         static let sectionHeaderHeight: CGFloat = 28
     }
 
@@ -47,6 +48,7 @@ private extension CreatePersonalCardViewController {
 
         tableView.delegate = self
         tableView.tableHeaderView = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
+        tableView.tableFooterView = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
     }
 
 
