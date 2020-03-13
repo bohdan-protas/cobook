@@ -15,7 +15,6 @@ class DesignableImageView: UIImageView {
     @IBInspectable var shadowColor: UIColor = .black
     @IBInspectable var shadowRadius: CGFloat = 0
     @IBInspectable var shadowOpacity: Float = 0
-
     @IBInspectable var cornerRadius: CGFloat = 0
 
     override func layoutSubviews() {

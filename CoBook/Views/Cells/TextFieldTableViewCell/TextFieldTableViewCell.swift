@@ -9,8 +9,8 @@
 import UIKit
 
 protocol TextFieldTableViewCellDelegate: class {
-    func didChangedText(_ cell: TextFieldTableViewCell, updatedText text: String?, textTypeIdentifier identifier: String?)
-    func didOccuredAction(_ cell: TextFieldTableViewCell, actionIdentifier identifier: String?)
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?)
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?)
 }
 
 class TextFieldTableViewCell: UITableViewCell {
@@ -43,14 +43,14 @@ class TextFieldTableViewCell: UITableViewCell {
 
     // MARK: Actions
     @IBAction func textViewEditingChanged(_ sender: UITextField) {
-        delegate?.didChangedText(self, updatedText: sender.text, textTypeIdentifier: textTypeIdentifier)
+        delegate?.textFieldTableViewCell(self, didUpdatedText: sender.text, textTypeIdentifier: textTypeIdentifier)
     }
 
     @objc func actionButtonTapped() {
         guard let rightViewActionIdentifier = rightViewActionIdentifier else {
             return
         }
-        delegate?.didOccuredAction(self, actionIdentifier: rightViewActionIdentifier)
+        delegate?.textFieldTableViewCell(self, didOccuredAction: rightViewActionIdentifier)
     }
 
 

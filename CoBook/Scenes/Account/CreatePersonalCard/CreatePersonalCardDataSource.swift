@@ -14,7 +14,16 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
     var source: [PersonalCard.Section] = []
 
     unowned var tableView: UITableView
-    weak var cellsDelegate: (TextViewTableViewCellDelegate & TextFieldTableViewCellDelegate)?
+    weak var cellsDelegate: (TextViewTableViewCellDelegate & TextFieldTableViewCellDelegate & InterestsSelectionTableViewCellDelegate)?
+
+    subscript(indexPath: IndexPath) -> PersonalCard.Item? {
+        get {
+            return source[safe: indexPath.section]?.items[safe: indexPath.row]
+        }
+        set(newValue) {
+            source[safe: indexPath.section]?.items[safe: indexPath.row] = newValue
+        }
+    }
 
     // MARK: Lifecycle
     init(tableView: UITableView, source: [PersonalCard.Section] = []) {
@@ -26,6 +35,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         tableView.register(SectionTitleTableViewCell.nib, forCellReuseIdentifier: SectionTitleTableViewCell.identifier)
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.identifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.identifier)
+        tableView.register(InterestsSelectionTableViewCell.nib, forCellReuseIdentifier: InterestsSelectionTableViewCell.identifier)
     }
 
     // MARK:  UITableViewDataSource
@@ -61,6 +71,12 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier, for: indexPath) as! TextViewTableViewCell
             cell.textView.pText = type.placeholder
             cell.delegate = cellsDelegate
+            return cell
+
+        case .interests(let list):
+            let cell = tableView.dequeueReusableCell(withIdentifier: InterestsSelectionTableViewCell.identifier, for: indexPath) as! InterestsSelectionTableViewCell
+            cell.delegate = cellsDelegate
+            cell.dataSource = list
             return cell
         }
 

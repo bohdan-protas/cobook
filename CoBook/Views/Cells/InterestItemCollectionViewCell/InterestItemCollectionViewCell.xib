@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="InterestItemCollectionViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="171" height="24"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="171" height="24"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGF-mn-nXq" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="171" height="24"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XD-xA-Ms1">
+                                <rect key="frame" x="12" y="5" width="128" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="yUG-0T-GRB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99r-tc-lj2">
+                                <rect key="frame" x="147" y="0.0" width="24" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="num-w8-ubY"/>
+                                    <constraint firstAttribute="height" constant="24" id="wGZ-Wf-2rC"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="ic_interests_plus"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.4823529411764706" green="0.73333333333333328" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="99r-tc-lj2" firstAttribute="centerY" secondItem="6XD-xA-Ms1" secondAttribute="centerY" id="2Ou-fn-P7x"/>
+                            <constraint firstItem="99r-tc-lj2" firstAttribute="leading" secondItem="6XD-xA-Ms1" secondAttribute="trailing" constant="7" id="UkK-ya-Z1K"/>
+                            <constraint firstAttribute="bottom" secondItem="6XD-xA-Ms1" secondAttribute="bottom" constant="5" id="ZLT-Ej-JrO"/>
+                            <constraint firstItem="6XD-xA-Ms1" firstAttribute="top" secondItem="kGF-mn-nXq" secondAttribute="top" constant="5" id="bhy-TJ-3fp"/>
+                            <constraint firstAttribute="trailing" secondItem="99r-tc-lj2" secondAttribute="trailing" id="cVR-39-APt"/>
+                            <constraint firstItem="6XD-xA-Ms1" firstAttribute="leading" secondItem="kGF-mn-nXq" secondAttribute="leading" constant="12" id="qN7-Iz-exU"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="kGF-mn-nXq" secondAttribute="bottom" id="7R9-J2-QZ7"/>
+                <constraint firstItem="kGF-mn-nXq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="HzB-Fw-Aep"/>
+                <constraint firstItem="kGF-mn-nXq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KYa-1o-NhJ"/>
+                <constraint firstAttribute="trailing" secondItem="kGF-mn-nXq" secondAttribute="trailing" id="YHQ-6I-aKq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="171" height="24"/>
+            <connections>
+                <outlet property="actionButton" destination="99r-tc-lj2" id="vhi-LO-nXj"/>
+                <outlet property="containerView" destination="kGF-mn-nXq" id="bV9-g7-lmR"/>
+                <outlet property="titleLabel" destination="6XD-xA-Ms1" id="WKv-DN-YpK"/>
+            </connections>
+            <point key="canvasLocation" x="225.36231884057972" y="144.64285714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ic_interests_plus" width="11" height="11"/>
+    </resources>
+</document>

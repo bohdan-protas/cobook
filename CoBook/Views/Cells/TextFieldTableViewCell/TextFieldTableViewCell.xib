@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jtr-2U-Cgs" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                        <rect key="frame" x="16" y="8" width="343" height="48"/>
+                        <rect key="frame" x="24" y="8" width="327" height="48"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="Bbk-Qq-ifF"/>
                         </constraints>
@@ -56,8 +56,8 @@
                 <constraints>
                     <constraint firstItem="jtr-2U-Cgs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="0ac-NC-JcE"/>
                     <constraint firstAttribute="bottom" secondItem="jtr-2U-Cgs" secondAttribute="bottom" constant="8" id="62e-zy-n1N"/>
-                    <constraint firstItem="jtr-2U-Cgs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="GTk-NG-uUZ"/>
-                    <constraint firstAttribute="trailing" secondItem="jtr-2U-Cgs" secondAttribute="trailing" constant="16" id="SzO-wo-21D"/>
+                    <constraint firstItem="jtr-2U-Cgs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="GTk-NG-uUZ"/>
+                    <constraint firstAttribute="trailing" secondItem="jtr-2U-Cgs" secondAttribute="trailing" constant="24" id="SzO-wo-21D"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -24,7 +24,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oVL-qY-rZE" customClass="DesignableTextView" customModule="CoBook" customModuleProvider="target">
-                        <rect key="frame" x="16" y="8" width="288" height="120"/>
+                        <rect key="frame" x="24" y="8" width="272" height="120"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="120" id="f2N-H0-SOC"/>
@@ -69,9 +69,9 @@
                     </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="oVL-qY-rZE" secondAttribute="trailing" constant="16" id="0VU-zr-npG"/>
+                    <constraint firstAttribute="trailing" secondItem="oVL-qY-rZE" secondAttribute="trailing" constant="24" id="0VU-zr-npG"/>
                     <constraint firstItem="oVL-qY-rZE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="FqC-Gk-W7p"/>
-                    <constraint firstItem="oVL-qY-rZE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="L30-5X-o8V"/>
+                    <constraint firstItem="oVL-qY-rZE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="L30-5X-o8V"/>
                     <constraint firstAttribute="bottom" secondItem="oVL-qY-rZE" secondAttribute="bottom" constant="8" id="bFx-nH-4Tg"/>
                 </constraints>
             </tableViewCellContentView>

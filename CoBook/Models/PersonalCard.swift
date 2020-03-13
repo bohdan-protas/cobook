@@ -18,6 +18,7 @@ enum PersonalCard {
         case title(text: String)
         case textField(type: TextType, action: ActionType?)
         case textView(type: TextType)
+        case interests(list: [Interest])
     }
 
     enum TextType: String {
@@ -55,6 +56,11 @@ enum PersonalCard {
     enum ActionType: String {
         case listOfActivities
         case placeAutocomplete
+    }
+
+    struct Interest {
+        var title: String
+        var isSelected: Bool = false
     }
 
 
