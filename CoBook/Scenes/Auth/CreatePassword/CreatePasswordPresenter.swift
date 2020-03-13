@@ -53,22 +53,20 @@ class CreatePasswordPresenter: BasePresenter {
                 case .ok:
                     AppStorage.isUserCompletedRegistration = true
                     AppStorage.isUserInitiatedRegistration = false
+
                     AppStorage.profile = response.data?.profile
                     AppStorage.accessToken = response.data?.assessToken
                     AppStorage.refreshToken = response.data?.refreshToken
 
-                    self.view?.infoAlert(title: nil, message: "Успішно зареєстровано!")
-
-                    // TODO: go to main screen
-                    //self.view?.goTo(viewController: MainTabBarController())
+                    self.view?.goTo(viewController: MainTabBarController())
 
                 case .error:
                     debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
-                    self.view?.errorAlert(message: response.errorLocalizadMessage)
+                    self.view?.errorAlert(message: response.errorLocalizadMessage, handler: nil)
                 }
             case let .failure(error):
                 debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
-                self.view?.errorAlert(message: error.localizedDescription.description)
+                self.view?.errorAlert(message: error.localizedDescription.description, handler: nil)
             }
         }
     }

@@ -167,3 +167,17 @@ extension APIClient {
     }
 
 }
+
+// MARK: -
+extension APIClient {
+
+    /**
+     Request localized list of interests
+    */
+    func interestsListRequest(completion: @escaping (AFResult<APIResponse<[PersonalCard.Interest]>>) -> Void) {
+        let router = InterestsRouter.list
+        performRequest(router: router, completion: completion)
+    }
+
+
+}

@@ -17,16 +17,7 @@ class CreatePersonalCardPresenter: BasePresenter {
     var dataSource: CreatePersonalCardDataSource?
 
 
-    var interests: [PersonalCard.Interest] = [.init(title: "1"),
-                                              .init(title: "2"),
-                      .init(title: "3"),
-                      .init(title: "4"),
-                      .init(title: "5"),
-                      .init(title: "6"),
-                      .init(title: "7"),
-                      .init(title: "8"),
-                      .init(title: "9")
-    ]
+    var interests: [PersonalCard.Interest] = []
 
     func attachView(_ view: CreatePersonalCardView) {
         self.view = view

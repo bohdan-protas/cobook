@@ -12,6 +12,7 @@ protocol AlertDisplayableView {
     func defaultErrorAlert()
     func infoAlert(title: String?, message: String?)
     func errorAlert(message: String?)
+    func errorAlert(message: String?, handler: ((UIAlertAction) -> Void)?) 
 }
 
 extension AlertDisplayableView where Self: UIViewController {
@@ -23,11 +24,19 @@ extension AlertDisplayableView where Self: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    func errorAlert(message: String?) {
+    func errorAlert(message: String?, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: "Error".localized, message: message, preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+        let OKAction = UIAlertAction(title: "OK".localized, style: .default, handler: handler)
         alertController.addAction(OKAction)
-        self.present(alertController, animated: true, completion: nil)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+    func errorAlert(message: String?) {
+        errorAlert(message: message, handler: nil)
     }
 
     func defaultErrorAlert() {

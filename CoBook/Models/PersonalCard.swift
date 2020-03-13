@@ -58,9 +58,15 @@ enum PersonalCard {
         case placeAutocomplete
     }
 
-    struct Interest {
+    struct Interest: Decodable {
+        var id: String
         var title: String
         var isSelected: Bool = false
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case title
+        }
     }
 
 

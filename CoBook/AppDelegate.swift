@@ -16,19 +16,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
         window = UIWindow(frame: UIScreen.main.bounds)
-
-        window?.rootViewController = MainTabBarController()
-
-//        if AppStorage.isUserCompletedTutorial {
-//            let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-//            window?.rootViewController = signUpNavigationController
-//        } else {
-//            let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-//            window?.rootViewController = onboardingViewController
-//        }
-
         window?.makeKeyAndVisible()
+
+        if AppStorage.refreshToken == nil {
+            if AppStorage.profile == nil {
+                if AppStorage.isUserCompletedTutorial {
+                    let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                    window?.rootViewController = signUpNavigationController
+                } else {
+                    let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                    window?.rootViewController = onboardingViewController
+                }
+            } else {
+                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signInViewController
+            }
+
+
+        } else {
+            window?.rootViewController = MainTabBarController()
+
+//            window?.rootViewController = LaunchScreenLoaderViewController()
+//            APIClient.default.refreshTokenRequest(refreshToken: AppStorage.refreshToken ?? "") { [weak self] (result) in
+//                guard let strongSelf = self else { return }
+//
+//                switch result {
+//                case .success(let response):
+//                    switch response.status {
+//                    case .ok:
+//                        AppStorage.accessToken = response.data?.accessToken
+//                        strongSelf.window?.rootViewController = MainTabBarController()
+//                        print("current user token: \(AppStorage.accessToken)")
+//                    case .error:
+//                        let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+//                        strongSelf.window?.rootViewController = signUpNavigationController
+//                        debugPrint("Error: \(response.errorId ?? ""), \(response.errorDescription ?? "")")
+//                    }
+//                case .failure(let error):
+//                    let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+//                    strongSelf.window?.rootViewController = signUpNavigationController
+//                    debugPrint(error.localizedDescription)
+//                }
+//
+//            }
+        }
+
         IQKeyboardManager.shared.enable = true
 
         return true

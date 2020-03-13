@@ -59,9 +59,7 @@ class SignInPresenter: BasePresenter {
                     AppStorage.accessToken = response.data?.assessToken
                     AppStorage.refreshToken = response.data?.refreshToken
 
-                    self.view?.infoAlert(title: nil, message: "Успішно виконано вхід!")
-                    //self.view?.goTo(viewController: MainTabBarController())
-
+                    self.view?.goTo(viewController: MainTabBarController())
                 case .error:
                     debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
                     self.view?.errorAlert(message: response.errorLocalizadMessage)

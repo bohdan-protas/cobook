@@ -10,6 +10,10 @@
 		9D8EE06CDCE7F5D068B3EBFF /* Pods_CoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */; };
 		B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A5B241B6A690066700C /* InterestItemCollectionViewCell.swift */; };
 		B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */; };
+		B8212A62241BCDDF0066700C /* InterestsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A61241BCDDF0066700C /* InterestsRouter.swift */; };
+		B8212A65241BD3480066700C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A64241BD3480066700C /* BaseViewController.swift */; };
+		B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A69241BE15F0066700C /* LaunchScreenLoaderViewController.swift */; };
+		B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8212A6A241BE15F0066700C /* LaunchScreenLoaderViewController.xib */; };
 		B82200B7240FB87000A17D2C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82200B6240FB87000A17D2C /* MainTabBarController.swift */; };
 		B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B82200B9240FB8A400A17D2C /* Account.storyboard */; };
 		B82200BC240FB99D00A17D2C /* AccountNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */; };
@@ -131,6 +135,10 @@
 		5EAA0B323D42D9D8EC7633F5 /* Pods-CoBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.debug.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.debug.xcconfig"; sourceTree = "<group>"; };
 		B8212A5B241B6A690066700C /* InterestItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		B8212A61241BCDDF0066700C /* InterestsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsRouter.swift; sourceTree = "<group>"; };
+		B8212A64241BD3480066700C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B8212A69241BE15F0066700C /* LaunchScreenLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenLoaderViewController.swift; sourceTree = "<group>"; };
+		B8212A6A241BE15F0066700C /* LaunchScreenLoaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreenLoaderViewController.xib; sourceTree = "<group>"; };
 		B82200B6240FB87000A17D2C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B82200B9240FB8A400A17D2C /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationController.swift; sourceTree = "<group>"; };
@@ -293,6 +301,23 @@
 			path = InterestItemCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		B8212A63241BD32C0066700C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B8212A64241BD3480066700C /* BaseViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B8212A66241BE0770066700C /* LaunchScreenLoader */ = {
+			isa = PBXGroup;
+			children = (
+				B8212A69241BE15F0066700C /* LaunchScreenLoaderViewController.swift */,
+				B8212A6A241BE15F0066700C /* LaunchScreenLoaderViewController.xib */,
+			);
+			path = LaunchScreenLoader;
+			sourceTree = "<group>";
+		};
 		B82200B5240FB84B00A17D2C /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,9 +452,9 @@
 			isa = PBXGroup;
 			children = (
 				B84A15F5241123BD00C4DC11 /* views */,
+				B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */,
 				B88906C72400515B002E91F7 /* OnboardingPresenter.swift */,
 				B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */,
-				B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -480,6 +505,7 @@
 		B826B0EB23F442AC009041DD /* Launch */ = {
 			isa = PBXGroup;
 			children = (
+				B8212A66241BE0770066700C /* LaunchScreenLoader */,
 				B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */,
 			);
 			path = Launch;
@@ -577,6 +603,7 @@
 				B84B94EC24032ADE0007EB60 /* SignUpRouter.swift */,
 				B8357DB2240C6372006AB78E /* SignInRouter.swift */,
 				B828C34A240CE0A800F8C371 /* AuthRouter.swift */,
+				B8212A61241BCDDF0066700C /* InterestsRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -635,6 +662,7 @@
 				B82200B5240FB84B00A17D2C /* TabBarControllers */,
 				B88906C9240053DE002E91F7 /* NavigationBars */,
 				B88906BA240002B5002E91F7 /* NavigationControllers */,
+				B8212A63241BD32C0066700C /* ViewControllers */,
 				B815A14C241ACE6B008BBD4D /* FlowLayouts */,
 				B823AB6D23F1570F00DE13EA /* Views */,
 				B823AB6923F156C600DE13EA /* Resources */,
@@ -876,6 +904,7 @@
 				B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */,
 				B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */,
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
+				B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
@@ -942,6 +971,7 @@
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
 				B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */,
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
+				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
@@ -988,6 +1018,7 @@
 				B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
+				B8212A62241BCDDF0066700C /* InterestsRouter.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B8307F212406FF3200AFE578 /* UserDefaultsStorage.swift in Sources */,
 				B8282831241A98780003D056 /* AlignedCollectionViewFlowLayout.swift in Sources */,
@@ -997,6 +1028,7 @@
 				B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */,
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
+				B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorage.swift in Sources */,
 				B82200BC240FB99D00A17D2C /* AccountNavigationController.swift in Sources */,
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
