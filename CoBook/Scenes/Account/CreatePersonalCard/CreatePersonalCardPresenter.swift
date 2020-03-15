@@ -16,7 +16,6 @@ class CreatePersonalCardPresenter: BasePresenter {
     weak var view: CreatePersonalCardView?
     var dataSource: CreatePersonalCardDataSource?
 
-
     var interests: [PersonalCard.Interest] = []
 
     func attachView(_ view: CreatePersonalCardView) {
@@ -30,8 +29,34 @@ class CreatePersonalCardPresenter: BasePresenter {
     }
 
     func setup() {
-        dataSource?.source = [
 
+        view?.startLoading()
+
+        APIClient.default.interestsListRequest { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+
+            switch result {
+            case let .success(response):
+                strongSelf.interests = (response.data ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
+                strongSelf.setupDataSource()
+            case let .failure(error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+                debugPrint(error.localizedDescription)
+            }
+        }
+
+    }
+
+
+
+}
+
+// MARK: - CreatePersonalCardPresenter
+private extension CreatePersonalCardPresenter {
+
+    func setupDataSource() {
+        dataSource?.source = [
             PersonalCard.Section(items: [
                 .title(text: "Діяльність"),
                 .textField(type: .occupiedPosition, action: nil),
@@ -57,6 +82,7 @@ class CreatePersonalCardPresenter: BasePresenter {
         dataSource?.cellsDelegate = self
         dataSource?.tableView.reloadData()
     }
+
 
 }
 

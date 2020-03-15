@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzO-QA-mqp">
-                        <rect key="frame" x="24" y="0.0" width="327" height="136"/>
+                        <rect key="frame" x="24" y="16" width="327" height="104"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="136" id="pxF-yq-42y"/>
+                            <constraint firstAttribute="height" constant="104" id="pxF-yq-42y"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="J4T-BN-ppU" customClass="AlignedCollectionViewFlowLayout" customModule="CoBook" customModuleProvider="target">
                             <size key="itemSize" width="100" height="24"/>
@@ -34,9 +34,9 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="qzO-QA-mqp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Vws-MW-X1N"/>
-                    <constraint firstAttribute="bottom" secondItem="qzO-QA-mqp" secondAttribute="bottom" id="mba-lm-aXv"/>
+                    <constraint firstAttribute="bottom" secondItem="qzO-QA-mqp" secondAttribute="bottom" constant="16" id="mba-lm-aXv"/>
                     <constraint firstAttribute="trailing" secondItem="qzO-QA-mqp" secondAttribute="trailing" constant="24" id="pBT-IN-TIz"/>
-                    <constraint firstItem="qzO-QA-mqp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pPZ-KA-gJD"/>
+                    <constraint firstItem="qzO-QA-mqp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="pPZ-KA-gJD"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

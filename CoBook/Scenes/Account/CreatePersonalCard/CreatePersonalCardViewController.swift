@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreatePersonalCardViewController: UIViewController, CreatePersonalCardView {
+class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
 
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
@@ -31,11 +31,6 @@ class CreatePersonalCardViewController: UIViewController, CreatePersonalCardView
         presenter.attachView(self)
         presenter.setup()
     }
-
-    // MARK: Public
-    func startLoading() { }
-
-    func stopLoading() { }
 
 
 }

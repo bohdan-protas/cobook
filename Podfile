@@ -5,5 +5,6 @@ target 'CoBook' do
 
   pod 'Alamofire', '~> 5.0'
   pod 'IQKeyboardManagerSwift'
+  pod 'MBProgressHUD', '~> 1.2.0'
 
 end

@@ -59,8 +59,8 @@ enum PersonalCard {
     }
 
     struct Interest: Decodable {
-        var id: String
-        var title: String
+        var id: Int
+        var title: String?
         var isSelected: Bool = false
 
         enum CodingKeys: String, CodingKey {

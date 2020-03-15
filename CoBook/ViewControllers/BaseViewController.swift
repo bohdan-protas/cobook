@@ -7,7 +7,22 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class BaseViewController: UIViewController {
-    
+class BaseViewController: UIViewController, LoadDisplayableView {
+
+    lazy var progressHUD: MBProgressHUD? = {
+        let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
+        return progressHUD
+    }()
+
+    func startLoading() {
+        progressHUD?.show(animated: true)
+    }
+
+    func stopLoading() {
+        progressHUD?.hide(animated: true)
+    }
+
+
 }
