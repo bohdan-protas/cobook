@@ -13,11 +13,14 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
 }
 
 class CreatePersonalCardPresenter: BasePresenter {
+
+    // MARK: Properties
     weak var view: CreatePersonalCardView?
-    var dataSource: CreatePersonalCardDataSource?
 
-    var interests: [PersonalCard.Interest] = []
+    private var dataSource: CreatePersonalCardDataSource?
+    private var interests: [PersonalCard.Interest] = []
 
+    // MARK: Public
     func attachView(_ view: CreatePersonalCardView) {
         self.view = view
         self.dataSource = CreatePersonalCardDataSource(tableView: view.tableView)
@@ -45,6 +48,10 @@ class CreatePersonalCardPresenter: BasePresenter {
                 debugPrint(error.localizedDescription)
             }
         }
+
+    }
+
+    func userImagePicked(_ image: UIImage?) {
 
     }
 

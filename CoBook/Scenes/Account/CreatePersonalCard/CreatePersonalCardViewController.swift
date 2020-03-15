@@ -19,9 +19,28 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 
     // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
+    var imagePicker = UIImagePickerController()
 
     // MARK: Properties
     var presenter = CreatePersonalCardPresenter()
+
+    private lazy var imagePickerController: UIImagePickerController = {
+        let controller = UIImagePickerController()
+        controller.delegate = self
+        controller.allowsEditing = false
+        controller.sourceType = .photoLibrary
+        return controller
+    }()
+
+    private lazy var personalCardPhotoManagmentView: PersonalCardPhotoManagmentView = {
+        let view = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
+        view.delegate = self
+        return view
+    }()
+
+    private lazy var cardSaveView: CardSaveView = {
+        return CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+    }()
 
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -42,8 +61,40 @@ private extension CreatePersonalCardViewController {
         self.navigationItem.title = "Create Personal Card"
 
         tableView.delegate = self
-        tableView.tableHeaderView = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
-        tableView.tableFooterView = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+        tableView.tableHeaderView = personalCardPhotoManagmentView
+        tableView.tableFooterView = cardSaveView
+    }
+
+
+}
+
+// MARK: - PersonalCardPhotoManagmentViewDelegate
+extension CreatePersonalCardViewController: PersonalCardPhotoManagmentViewDelegate {
+
+    func cardPhotoManagmentViewDidAddPhoto(_ view: PersonalCardPhotoManagmentView) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+
+    func cardPhotoManagmentViewDidChangePhoto(_ view: PersonalCardPhotoManagmentView) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+
+
+}
+
+// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
+extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        guard let image = info[.originalImage] as? UIImage else { return }
+        presenter.userImagePicked(image)
+        personalCardPhotoManagmentView.setImage(image)
     }
 
 
