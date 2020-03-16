@@ -12,6 +12,8 @@ import GooglePlaces
 protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
     func showAutocompleteController(completion: ((GMSPlace) -> Void)?)
+    func setSaveButtonEnabled(_ isEnabled: Bool)
+    func popController()
 }
 
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
@@ -22,6 +24,13 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     private var dataSource: CreatePersonalCardDataSource?
     private var interests: [PersonalCard.Interest] = []
     private var practices: [PersonalCard.Practice] = []
+
+    private var createPersonalCardParameters = PersonalCardAPI.Request.CreationParameters() {
+        didSet {
+            print("changed personal card parameter")
+            view?.setSaveButtonEnabled(createPersonalCardParameters.isRequiredDataIsFilled)
+        }
+    }
 
     // MARK: Public
     func attachView(_ view: CreatePersonalCardView) {
@@ -39,6 +48,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
         let group = DispatchGroup()
         view?.startLoading()
 
+        // fetch practices
         group.enter()
         APIClient.default.practicesTypesListRequest { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -57,6 +67,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
             }
         }
 
+        // fetch interests
         group.enter()
         APIClient.default.interestsListRequest { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -90,7 +101,28 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func userImagePicked(_ image: UIImage?) {
-        
+
+    }
+
+    func createPerconalCard() {
+        view?.startLoading()
+        APIClient.default.createPersonalCard(parameters: self.createPersonalCardParameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+
+            switch result {
+            case let .success(response):
+                if response.status == .error {
+                    strongSelf.view?.errorAlert(message: response.errorLocalizadMessage ?? "")
+                }
+                strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { [weak self] (_) in
+                    self?.view?.popController()
+                })
+            case let .failure(error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
 
 
@@ -108,7 +140,7 @@ private extension CreatePersonalCardPresenter {
                 .textField(type: .occupiedPosition),
                 .actionTextField(type: .activityType(list: practices)),
                 .actionTextField(type: .placeOfLiving),
-                .textField(type: .activityRegion),
+                .actionTextField(type: .activityRegion),
                 .textView(type: .activityDescription)
             ]),
 
@@ -141,8 +173,11 @@ extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
          }
 
          if case .interests(var list) = data {
-             list[safe: index]?.isSelected = true
-             dataSource?[indexPath] = .interests(list: list)
+            list[safe: index]?.isSelected = true
+            createPersonalCardParameters.interestsIds = list
+                .filter { $0.isSelected }
+                .compactMap { $0.id }
+            dataSource?[indexPath] = .interests(list: list)
          }
      }
 
@@ -164,7 +199,20 @@ extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
 extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 
     func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
-        print("text changed on:\(cell),  text: \(text ?? ""), type: \(identifier ?? "")")
+        guard let textType = PersonalCard.TextType.init(rawValue: identifier ?? "") else {
+            return
+        }
+
+        switch textType {
+        case .occupiedPosition:
+            createPersonalCardParameters.position = text
+        case .activityDescription:
+            createPersonalCardParameters.description = text
+        case .workingPhoneNumber:
+            createPersonalCardParameters.contactTelephone = text
+        case .workingEmailForCommunication:
+            createPersonalCardParameters.contactEmail = text
+        }
     }
 
 
@@ -174,7 +222,20 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
-        print("text changed on:\(cell),  text: \(text ?? ""), type: \(identifier ?? "")")
+        guard let textType = PersonalCard.TextType.init(rawValue: identifier ?? "") else {
+            return
+        }
+
+        switch textType {
+        case .occupiedPosition:
+            createPersonalCardParameters.position = text
+        case .activityDescription:
+            createPersonalCardParameters.description = text
+        case .workingPhoneNumber:
+            createPersonalCardParameters.contactTelephone = text
+        case .workingEmailForCommunication:
+            createPersonalCardParameters.contactEmail = text
+        }
     }
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {
@@ -184,11 +245,18 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
         switch action {
         case .activityType:
-            break
+            let selectedPractice = cell.textView.text
+            createPersonalCardParameters.practiseTypeId = self.practices.first(where: { $0.title == selectedPractice })?.id
         case .placeOfLiving:
-            view?.showAutocompleteController(completion: { (fetchedPlace) in
+            view?.showAutocompleteController(completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
+                self?.createPersonalCardParameters.cityPlaceId = fetchedPlace.placeID
             })
+        case .activityRegion:
+            view?.showAutocompleteController(completion: { [weak self] (fetchedPlace) in
+                cell.textView.text = fetchedPlace.name
+                self?.createPersonalCardParameters.regionPlaceId = fetchedPlace.placeID
+             })
         }
     }
 

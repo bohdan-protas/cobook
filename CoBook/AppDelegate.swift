@@ -24,49 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
-        if AppStorage.refreshToken == nil {
-            if AppStorage.profile == nil {
-                if AppStorage.isUserCompletedTutorial {
-                    let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                    window?.rootViewController = signUpNavigationController
-                } else {
-                    let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-                    window?.rootViewController = onboardingViewController
-                }
+        if AppStorage.profile == nil {
+            if AppStorage.isUserCompletedTutorial {
+                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signUpNavigationController
             } else {
-                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-                window?.rootViewController = signInViewController
+                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = onboardingViewController
             }
-
-
         } else {
-            window?.rootViewController = LaunchScreenLoaderViewController()
-
-            APIClient.default.refreshTokenRequest(refreshToken: AppStorage.refreshToken ?? "") { [weak self] (result) in
-                guard let strongSelf = self else { return }
-
-                switch result {
-                case .success(let response):
-                    switch response.status {
-                    case .ok:
-                        AppStorage.accessToken = response.data?.accessToken
-                        strongSelf.window?.rootViewController = MainTabBarController()
-                        print("current user token: \(String(describing: AppStorage.accessToken))")
-                    case .error:
-                        let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                        strongSelf.window?.rootViewController = signUpNavigationController
-                        debugPrint("Error: \(response.errorId ?? ""), \(response.errorDescription ?? "")")
-                    }
-                case .failure(let error):
-                    let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                    strongSelf.window?.rootViewController = signUpNavigationController
-                    debugPrint(error.localizedDescription)
-                }
-
-            }
+            let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+            window?.rootViewController = signInViewController
         }
-
-
 
         return true
     }

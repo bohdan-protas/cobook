@@ -23,6 +23,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
     var imagePicker = UIImagePickerController()
 
     // MARK: Properties
+    private var placeCompletion: ((GMSPlace) -> Void)?
     var presenter = CreatePersonalCardPresenter()
 
     private lazy var imagePickerController: UIImagePickerController = {
@@ -46,7 +47,11 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
     }()
 
     private lazy var cardSaveView: CardSaveView = {
-        return CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+        view.onSaveTapped = { [weak self] in
+            self?.presenter.createPerconalCard()
+        }
+        return view
     }()
 
     // MARK: Lifecycle
@@ -58,10 +63,17 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         presenter.setup()
     }
 
-    var placeCompletion: ((GMSPlace) -> Void)?
+    func popController() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
     func showAutocompleteController(completion: ((GMSPlace) -> Void)?) {
         placeCompletion = completion
         present(autocompleteViewController, animated: true, completion: nil)
+    }
+
+    func setSaveButtonEnabled(_ isEnabled: Bool) {
+        cardSaveView.saveButton.isEnabled = isEnabled
     }
 
 
@@ -71,7 +83,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 private extension CreatePersonalCardViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Create Personal Card"
+        self.navigationItem.title = "Створення персональної візитки"
 
         tableView.delegate = self
         tableView.tableHeaderView = personalCardPhotoManagmentView

@@ -37,6 +37,7 @@ class APIClient {
 
         return session.request(router)
             .responseDecodable(of: APIResponse<T>.self, queue: .main, decoder: decoder) { (response) in
+
                 debugPrint(response.error.debugDescription)
                 completion(response.result)
             }
@@ -182,7 +183,7 @@ extension APIClient {
 
 }
 
-// MARK: - PracticeTypesRouter
+// MARK: - PracticeTypesRouter request
 extension APIClient {
 
     /**
@@ -194,5 +195,21 @@ extension APIClient {
         return performRequest(router: router, completion: completion)
     }
 
+
+}
+
+// MARK: - CardsRouter requests
+extension APIClient {
+
+    /**
+     Request create personal card
+    */
+    @discardableResult
+    func createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters,
+                            completion: @escaping (AFResult<APIResponse<VoidResponseData>>) -> Void) -> DataRequest {
+
+        let router = CardsRouter.createPersonalCard(parameters: parameters)
+        return performRequest(router: router, completion: completion)
+    }
 
 }

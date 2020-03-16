@@ -24,7 +24,7 @@ enum PersonalCard {
 
     enum TextType: String {
         case occupiedPosition               // Займана посада
-        case activityRegion                 // Регіон діяльності
+
         case activityDescription            // Опис діяльності
         case workingPhoneNumber             // Робочий номер телефону
         case workingEmailForCommunication   // Робочий емейл для зв'язку
@@ -34,8 +34,6 @@ enum PersonalCard {
                 switch self {
                 case .occupiedPosition:
                     return "Займана посада"
-                case .activityRegion:
-                    return "Регіон діяльності"
                 case .activityDescription:
                     return "Опис діяльності"
                 case .workingPhoneNumber:
@@ -50,8 +48,6 @@ enum PersonalCard {
             switch self {
             case .occupiedPosition:
                 return .default
-            case .activityRegion:
-                return .default
             case .activityDescription:
                 return .default
             case .workingPhoneNumber:
@@ -64,8 +60,9 @@ enum PersonalCard {
     }
 
     enum ActionType: RawRepresentable {
-        case activityType(list: [Practice])             // Вид діяльності
-        case placeOfLiving                              // Місце проживання
+        case activityType(list: [Practice])     // Вид діяльності
+        case placeOfLiving                      // Місце проживання
+        case activityRegion                     // Регіон діяльності
 
         var placeholder: String {
             switch self {
@@ -73,6 +70,8 @@ enum PersonalCard {
                 return "Вид діяльності"
             case .placeOfLiving:
                 return "Місце проживання"
+            case .activityRegion:
+                return "Регіон діяльності"
             }
         }
 
@@ -81,8 +80,9 @@ enum PersonalCard {
         /// Failable Initalizer
         public init?(rawValue: RawValue) {
             switch rawValue {
-            case "activityType":  self = .activityType(list: [])
-            case "placeOfLiving": self = .placeOfLiving
+            case "activityType":    self = .activityType(list: [])
+            case "placeOfLiving":   self = .placeOfLiving
+            case "activityRegion":  self = .activityRegion
             default:
                 return nil
             }
@@ -93,6 +93,8 @@ enum PersonalCard {
             switch self {
             case .activityType:     return "activityType"
             case .placeOfLiving:    return "placeOfLiving"
+            case .activityRegion:   return "activityRegion"
+
             }
         }
 

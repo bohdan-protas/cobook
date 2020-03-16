@@ -13,9 +13,14 @@ class CardSaveView: BaseFromNibView {
     @IBOutlet var saveButton: LoaderButton!
     @IBOutlet var topShadowView: UIView!
 
+    var onSaveTapped: (() -> Void)?
+
     override func getNib() -> UINib {
         return CardSaveView.nib
     }
     
+    @IBAction func onSaveButtonTapped(_ sender: LoaderButton) {
+        onSaveTapped?()
+    }
 
 }

@@ -65,6 +65,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
         case .textField(let type):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
+            cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
             cell.textView.placeholder = type.placeholder
             cell.textView.keyboardType = type.keyboardType
@@ -73,8 +74,8 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
         case .actionTextField(let action):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
-            cell.textView.placeholder = action.placeholder
             cell.delegate = cellsDelegate
+            cell.textView.placeholder = action.placeholder
             cell.rightViewActionIdentifier = action.rawValue
 
             switch action {
@@ -83,7 +84,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
                 pickerView.dataSource = cell
                 cell.pickerListDataSource = list.compactMap { $0.title }
                 cell.textView.inputView = pickerView
-            case .placeOfLiving:
+            case .placeOfLiving, .activityRegion:
                 cell.actionControlView.isUserInteractionEnabled = true
                 cell.textView.isUserInteractionEnabled = false
             }
@@ -91,8 +92,9 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
         case .textView(let type):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier, for: indexPath) as! TextViewTableViewCell
-            cell.textView.pText = type.placeholder
             cell.delegate = cellsDelegate
+            cell.textTypeIdentifier = type.rawValue
+            cell.textView.pText = type.placeholder
             return cell
 
         case .interests(let list):

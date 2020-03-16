@@ -79,6 +79,9 @@
                             <color key="value" name="Theme_Accent"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onSaveButtonTapped:" destination="-1" eventType="touchUpInside" id="B07-37-InK"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
