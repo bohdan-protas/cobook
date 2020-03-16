@@ -31,11 +31,13 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         controller.delegate = self
         controller.allowsEditing = false
         controller.sourceType = .photoLibrary
+        controller.modalPresentationStyle = .overFullScreen
         return controller
     }()
 
     private lazy var autocompleteViewController: GMSAutocompleteViewController = {
         let acController = GMSAutocompleteViewController()
+        acController.modalPresentationStyle = .overFullScreen
         acController.delegate = self
         return acController
     }()
@@ -143,8 +145,9 @@ extension CreatePersonalCardViewController: UITableViewDelegate {
 extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegate {
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        placeCompletion?(place)
-        dismiss(animated: true, completion: nil)
+        self.placeCompletion?(place)
+        self.placeCompletion = nil
+        viewController.dismiss(animated: true, completion: nil)
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
