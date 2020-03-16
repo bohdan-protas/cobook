@@ -29,7 +29,7 @@
                     <rect key="frame" x="24" y="22.5" width="75" height="75"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="xoG-G5-kQW">
-                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                            <rect key="frame" x="10" y="10" width="55" height="55"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -37,10 +37,10 @@
                         <constraint firstAttribute="width" constant="75" id="7pq-kC-Yq8"/>
                         <constraint firstAttribute="height" constant="75" id="DLP-nI-beQ"/>
                         <constraint firstItem="xoG-G5-kQW" firstAttribute="centerX" secondItem="6lA-3h-30f" secondAttribute="centerX" id="PVN-3P-O9b"/>
-                        <constraint firstItem="xoG-G5-kQW" firstAttribute="leading" secondItem="6lA-3h-30f" secondAttribute="leading" id="bnl-nJ-31X"/>
-                        <constraint firstAttribute="bottom" secondItem="xoG-G5-kQW" secondAttribute="bottom" id="c0f-iF-9it"/>
-                        <constraint firstItem="xoG-G5-kQW" firstAttribute="top" secondItem="6lA-3h-30f" secondAttribute="top" id="j6f-9a-dZB"/>
-                        <constraint firstAttribute="trailing" secondItem="xoG-G5-kQW" secondAttribute="trailing" id="jf2-3A-viA"/>
+                        <constraint firstItem="xoG-G5-kQW" firstAttribute="leading" secondItem="6lA-3h-30f" secondAttribute="leading" constant="10" id="bnl-nJ-31X"/>
+                        <constraint firstAttribute="bottom" secondItem="xoG-G5-kQW" secondAttribute="bottom" constant="10" id="c0f-iF-9it"/>
+                        <constraint firstItem="xoG-G5-kQW" firstAttribute="top" secondItem="6lA-3h-30f" secondAttribute="top" constant="10" id="j6f-9a-dZB"/>
+                        <constraint firstAttribute="trailing" secondItem="xoG-G5-kQW" secondAttribute="trailing" constant="10" id="jf2-3A-viA"/>
                         <constraint firstItem="xoG-G5-kQW" firstAttribute="centerY" secondItem="6lA-3h-30f" secondAttribute="centerY" id="pDJ-ev-M3t"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -50,7 +50,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQU-4k-Zma">
-                    <rect key="frame" x="112" y="38" width="247" height="44"/>
+                    <rect key="frame" x="102" y="38" width="257" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="zey-Ka-hHF"/>
                     </constraints>

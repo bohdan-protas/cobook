@@ -7,21 +7,28 @@
 //
 
 import UIKit
-import MBProgressHUD
+import JGProgressHUD
 
 class BaseViewController: UIViewController, LoadDisplayableView {
-
-    lazy var progressHUD: MBProgressHUD? = {
-        let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
-        return progressHUD
-    }()
+    let hud = JGProgressHUD(style: .extraLight)
 
     func startLoading() {
-        progressHUD?.show(animated: true)
+        DispatchQueue.main.async {
+            self.showSimpleHUD()
+        }
+
     }
 
     func stopLoading() {
-        progressHUD?.hide(animated: true)
+        DispatchQueue.main.async {
+            self.hud.dismiss()
+        }
+    }
+
+    func showSimpleHUD() {
+        hud.vibrancyEnabled = true
+        hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 5.0, opacity: 0.2)
+        hud.show(in: self.view)
     }
 
 

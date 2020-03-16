@@ -18,7 +18,9 @@ class CreatePersonalCardPresenter: BasePresenter {
     weak var view: CreatePersonalCardView?
 
     private var dataSource: CreatePersonalCardDataSource?
+
     private var interests: [PersonalCard.Interest] = []
+    private var practices: [PersonalCard.Practice] = []
 
     // MARK: Public
     func attachView(_ view: CreatePersonalCardView) {
@@ -33,20 +35,57 @@ class CreatePersonalCardPresenter: BasePresenter {
 
     func setup() {
 
+        var errors: [String] = []
+
+        let group = DispatchGroup()
         view?.startLoading()
 
+        group.enter()
+        APIClient.default.practicesTypesListRequest { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case let .success(response):
+                if response.status == .error {
+                    errors.append(response.errorLocalizadMessage ?? "")
+                    return
+                }
+
+                strongSelf.practices = (response.data ?? []).map { PersonalCard.Practice(id: $0.id, title: $0.title) }
+                group.leave()
+            case let .failure(error):
+                errors.append(error.localizedDescription)
+                group.leave()
+            }
+        }
+
+        group.enter()
         APIClient.default.interestsListRequest { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case let .success(response):
+                if response.status == .error {
+                    errors.append(response.errorLocalizadMessage ?? "")
+                    return
+                }
+
+                strongSelf.interests = (response.data ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
+                group.leave()
+            case let .failure(error):
+                errors.append(error.localizedDescription)
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
-            switch result {
-            case let .success(response):
-                strongSelf.interests = (response.data ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
-                strongSelf.setupDataSource()
-            case let .failure(error):
-                strongSelf.view?.errorAlert(message: error.localizedDescription)
-                debugPrint(error.localizedDescription)
+            if !errors.isEmpty {
+                errors.forEach {
+                    self?.view?.errorAlert(message: $0)
+                }
             }
+            strongSelf.setupDataSource()
         }
 
     }
