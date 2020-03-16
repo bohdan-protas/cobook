@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GooglePlaces
 
 class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
 
@@ -32,6 +33,12 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         return controller
     }()
 
+    private lazy var autocompleteViewController: GMSAutocompleteViewController = {
+        let acController = GMSAutocompleteViewController()
+        acController.delegate = self
+        return acController
+    }()
+
     private lazy var personalCardPhotoManagmentView: PersonalCardPhotoManagmentView = {
         let view = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
         view.delegate = self
@@ -49,6 +56,12 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 
         presenter.attachView(self)
         presenter.setup()
+    }
+
+    var placeCompletion: ((GMSPlace) -> Void)?
+    func showAutocompleteController(completion: ((GMSPlace) -> Void)?) {
+        placeCompletion = completion
+        present(autocompleteViewController, animated: true, completion: nil)
     }
 
 
@@ -109,6 +122,28 @@ extension CreatePersonalCardViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Defaults.sectionHeaderHeight
+    }
+
+
+}
+
+// MARK: - GMSAutocompleteViewControllerDelegate
+extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegate {
+
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        placeCompletion?(place)
+        dismiss(animated: true, completion: nil)
+    }
+
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        debugPrint(error.localizedDescription)
+        viewController.dismiss(animated: true, completion: { [weak self] in
+            self?.errorAlert(message: error.localizedDescription)
+        })
+    }
+
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 
 

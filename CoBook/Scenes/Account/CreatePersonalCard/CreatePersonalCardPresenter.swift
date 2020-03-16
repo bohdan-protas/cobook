@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import GooglePlaces
 
 protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
+    func showAutocompleteController(completion: ((GMSPlace) -> Void)?)
 }
 
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
@@ -18,7 +20,6 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     weak var view: CreatePersonalCardView?
 
     private var dataSource: CreatePersonalCardDataSource?
-
     private var interests: [PersonalCard.Interest] = []
     private var practices: [PersonalCard.Practice] = []
 
@@ -34,9 +35,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func setup() {
-
         var errors: [String] = []
-
         let group = DispatchGroup()
         view?.startLoading()
 
@@ -91,7 +90,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func userImagePicked(_ image: UIImage?) {
-
+        
     }
 
 
@@ -102,6 +101,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 private extension CreatePersonalCardPresenter {
 
     func setupDataSource() {
+
         dataSource?.source = [
             PersonalCard.Section(items: [
                 .title(text: "Діяльність"),
@@ -132,30 +132,36 @@ private extension CreatePersonalCardPresenter {
 
 }
 
-// MARK: - CreatePersonalCardPresenter
-extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate, InterestsSelectionTableViewCellDelegate {
+// MARK: - InterestsSelectionTableViewCell Delegation
+extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
 
     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
-        guard let indexPath = view?.tableView.indexPath(for: cell), let data = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.row] else {
-            return
-        }
+         guard let indexPath = view?.tableView.indexPath(for: cell), let data = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.row] else {
+             return
+         }
 
-        if case .interests(var list) = data {
-            list[safe: index]?.isSelected = true
-            dataSource?[indexPath] = .interests(list: list)
-        }
-    }
+         if case .interests(var list) = data {
+             list[safe: index]?.isSelected = true
+             dataSource?[indexPath] = .interests(list: list)
+         }
+     }
 
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
-        guard let indexPath = view?.tableView.indexPath(for: cell), let data = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.row] else {
-            return
-        }
+     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+         guard let indexPath = view?.tableView.indexPath(for: cell), let data = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.row] else {
+             return
+         }
 
-        if case .interests(var list) = data {
-            list[safe: index]?.isSelected = false
-            dataSource?[indexPath] = .interests(list: list)
-        }
-    }
+         if case .interests(var list) = data {
+             list[safe: index]?.isSelected = false
+             dataSource?[indexPath] = .interests(list: list)
+         }
+     }
+
+
+}
+
+// MARK: - TextViewTableViewCell Delegation
+extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 
     func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
         print("text changed on:\(cell),  text: \(text ?? ""), type: \(identifier ?? "")")
@@ -178,11 +184,12 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
         switch action {
         case .activityType:
-            print("action occured on:\(cell),  id: \(action.rawValue)")
+            break
         case .placeOfLiving:
-             print("action occured on:\(cell),  id: \(action.rawValue)")
+            view?.showAutocompleteController(completion: { (fetchedPlace) in
+                cell.textView.text = fetchedPlace.name
+            })
         }
-
     }
 
 

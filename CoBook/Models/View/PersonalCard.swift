@@ -6,7 +6,7 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum PersonalCard {
 
@@ -43,6 +43,21 @@ enum PersonalCard {
                 case .workingEmailForCommunication:
                     return "Робочий емейл для зв'язку"
                 }
+            }
+        }
+
+        var keyboardType: UIKeyboardType {
+            switch self {
+            case .occupiedPosition:
+                return .default
+            case .activityRegion:
+                return .default
+            case .activityDescription:
+                return .default
+            case .workingPhoneNumber:
+                return .phonePad
+            case .workingEmailForCommunication:
+                return .emailAddress
             }
         }
 

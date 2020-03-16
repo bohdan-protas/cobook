@@ -67,8 +67,10 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
             cell.textTypeIdentifier = type.rawValue
             cell.textView.placeholder = type.placeholder
+            cell.textView.keyboardType = type.keyboardType
+            cell.textView.reloadInputViews()
             return cell
-            
+
         case .actionTextField(let action):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
             cell.textView.placeholder = action.placeholder
@@ -83,6 +85,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
                 cell.textView.inputView = pickerView
             case .placeOfLiving:
                 cell.actionControlView.isUserInteractionEnabled = true
+                cell.textView.isUserInteractionEnabled = false
             }
             return cell
 

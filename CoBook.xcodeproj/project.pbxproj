@@ -843,6 +843,7 @@
 				B870197E23ED50EA00625D61 /* Frameworks */,
 				B870197F23ED50EA00625D61 /* Resources */,
 				F43CCDA31D238B08D9A6B6B5 /* [CP] Embed Pods Frameworks */,
+				97F90E3F0D6B2631D15DE3A4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -934,6 +935,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		97F90E3F0D6B2631D15DE3A4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoBook/Pods-CoBook-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoBook/Pods-CoBook-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoBook/Pods-CoBook-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AB8E410583B10B2877FEC488 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

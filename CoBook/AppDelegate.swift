@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+
+        IQKeyboardManager.shared.enable = true
+        GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
         if AppStorage.refreshToken == nil {
             if AppStorage.profile == nil {
@@ -62,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        IQKeyboardManager.shared.enable = true
+
 
         return true
     }

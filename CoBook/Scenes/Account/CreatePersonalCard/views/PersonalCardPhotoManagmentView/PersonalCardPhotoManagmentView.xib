@@ -50,7 +50,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQU-4k-Zma">
-                    <rect key="frame" x="102" y="38" width="257" height="44"/>
+                    <rect key="frame" x="115" y="38" width="244" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="zey-Ka-hHF"/>
                     </constraints>
@@ -70,9 +70,9 @@
                 <constraint firstItem="6lA-3h-30f" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="FXO-P2-mYJ"/>
                 <constraint firstItem="WQU-4k-Zma" firstAttribute="centerY" secondItem="xoG-G5-kQW" secondAttribute="centerY" id="WXE-HI-f8i"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6lA-3h-30f" secondAttribute="bottom" constant="22.5" id="iEl-vE-DxO"/>
+                <constraint firstItem="WQU-4k-Zma" firstAttribute="leading" secondItem="6lA-3h-30f" secondAttribute="trailing" constant="16" id="kmB-GW-1zX"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WQU-4k-Zma" secondAttribute="trailing" constant="16" id="mAr-yp-fp7"/>
                 <constraint firstItem="6lA-3h-30f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="tVA-9y-39R"/>
-                <constraint firstItem="WQU-4k-Zma" firstAttribute="leading" secondItem="xoG-G5-kQW" secondAttribute="trailing" constant="13" id="wpA-vG-CZF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
