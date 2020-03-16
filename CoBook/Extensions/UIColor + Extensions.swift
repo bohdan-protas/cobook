@@ -55,6 +55,10 @@ extension UIColor {
             static let borderInactive = UIColor.init(named: "Theme_TextField-borderInactive")
         }
 
+        enum Button {
+            static let textDisabled = UIColor(named: "Theme_Button-text-disabled")!
+        }
+
     }
 
 

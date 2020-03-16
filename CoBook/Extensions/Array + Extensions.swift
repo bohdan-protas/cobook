@@ -10,9 +10,21 @@ import Foundation
 
 extension Array {
 
+    func indexIsValid(index: Index) -> Bool {
+        return index >= 0 && index < count
+    }
+
     subscript(safe index: Index) -> Element? {
-        let isValidIndex = index >= 0 && index < count
-        return isValidIndex ? self[index] : nil
+        get {
+            let isValidIndex = indexIsValid(index: index)
+            return isValidIndex ? self[index] : nil
+        }
+        set {
+            if indexIsValid(index: index), let value = newValue {
+                self[index] = value
+            }
+        }
+
     }
 
     

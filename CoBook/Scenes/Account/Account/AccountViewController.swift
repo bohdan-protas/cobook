@@ -13,6 +13,7 @@ class AccountViewController: UIViewController, AccountView {
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
         static let headerHeight: CGFloat = 308
+        static let footerHeight: CGFloat = 124
         static let sectionHeaderHeight: CGFloat = 12
     }
 
@@ -49,6 +50,10 @@ class AccountViewController: UIViewController, AccountView {
 
     }
 
+    func push(controller: UIViewController) {
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
 
 }
 
@@ -73,6 +78,7 @@ extension AccountViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.selectedRow(at: indexPath)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -10,11 +10,33 @@ import UIKit
 
 protocol AlertDisplayableView {
     func defaultErrorAlert()
-    func infoAlert(title: String?, message: String?)
+
     func errorAlert(message: String?)
+    func errorAlert(message: String?, handler: ((UIAlertAction) -> Void)?)
+
+    func infoAlert(title: String?, message: String?)
+    func infoAlert(title: String?, message: String?, handler: ((UIAlertAction) -> Void)?)
 }
 
 extension AlertDisplayableView where Self: UIViewController {
+
+    func infoAlert(title: String? = "", message: String?, handler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK".localized, style: .default, handler: handler)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    func errorAlert(message: String?, handler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: "Error".localized, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK".localized, style: .default, handler: handler)
+        alertController.addAction(OKAction)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.present(alertController, animated: true, completion: nil)
+        }
+    }
 
     func infoAlert(title: String? = "", message: String?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -24,10 +46,7 @@ extension AlertDisplayableView where Self: UIViewController {
     }
 
     func errorAlert(message: String?) {
-        let alertController = UIAlertController(title: "Error".localized, message: message, preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-        alertController.addAction(OKAction)
-        self.present(alertController, animated: true, completion: nil)
+        errorAlert(message: message, handler: nil)
     }
 
     func defaultErrorAlert() {

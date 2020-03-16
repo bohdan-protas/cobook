@@ -20,6 +20,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Used for record video or take photos for your posts and profile.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used for uploading images and videos from gallery.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>HelveticaNeueCyr-Black.ttf</string>

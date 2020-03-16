@@ -32,6 +32,10 @@ enum APIConstants {
         static let refreshToken = "refresh_token"
     }
 
+    enum Google {
+        static let placesApiKey: String = "AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"//"AIzaSyD5F_F9Y_6Ypim3LldWIKA3I"
+    }
+
 
 }
 

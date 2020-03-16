@@ -28,7 +28,7 @@ class DesignableButton: UIButton {
         set {
             if let color = newValue {
                 self.setBackgroundColor(color, for: .disabled)
-                self.setTitleColor(.white, for: .disabled)
+                self.setTitleColor(UIColor.init(hexString: "#BDBDBD") ?? .white, for: .disabled)
                 objc_setAssociatedObject(self, &disabledColorHandle, color, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             } else {
                 self.setBackgroundImage(nil, for: .disabled)
