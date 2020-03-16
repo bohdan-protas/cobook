@@ -10,25 +10,24 @@ import UIKit
 import JGProgressHUD
 
 class BaseViewController: UIViewController, LoadDisplayableView {
-    let hud = JGProgressHUD(style: .extraLight)
+
+    var hud: JGProgressHUD = {
+        let hud = JGProgressHUD(style: .extraLight)
+        hud.vibrancyEnabled = true
+        hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 5.0, opacity: 0.2)
+        return hud
+    }()
 
     func startLoading() {
         DispatchQueue.main.async {
-            self.showSimpleHUD()
+            self.hud.show(in: self.view)
         }
-
     }
 
     func stopLoading() {
         DispatchQueue.main.async {
             self.hud.dismiss()
         }
-    }
-
-    func showSimpleHUD() {
-        hud.vibrancyEnabled = true
-        hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 5.0, opacity: 0.2)
-        hud.show(in: self.view)
     }
 
 

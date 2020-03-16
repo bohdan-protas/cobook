@@ -679,8 +679,8 @@
 				B8212A63241BD32C0066700C /* ViewControllers */,
 				B815A14C241ACE6B008BBD4D /* FlowLayouts */,
 				B823AB6D23F1570F00DE13EA /* Views */,
-				B823AB6923F156C600DE13EA /* Resources */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
+				B823AB6923F156C600DE13EA /* Resources */,
 			);
 			path = CoBook;
 			sourceTree = "<group>";

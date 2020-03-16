@@ -12,7 +12,7 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
 }
 
-class CreatePersonalCardPresenter: BasePresenter {
+class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     // MARK: Properties
     weak var view: CreatePersonalCardView?
@@ -105,17 +105,17 @@ private extension CreatePersonalCardPresenter {
         dataSource?.source = [
             PersonalCard.Section(items: [
                 .title(text: "Діяльність"),
-                .textField(type: .occupiedPosition, action: nil),
-                .textField(type: .activityType, action: .listOfActivities),
-                .textField(type: .placeOfLiving, action: .placeAutocomplete),
-                .textField(type: .activityRegion, action: nil),
+                .textField(type: .occupiedPosition),
+                .actionTextField(type: .activityType(list: practices)),
+                .actionTextField(type: .placeOfLiving),
+                .textField(type: .activityRegion),
                 .textView(type: .activityDescription)
             ]),
 
             PersonalCard.Section(items: [
                 .title(text: "Контактні дані"),
-                .textField(type: .workingEmailForCommunication, action: nil),
-                .textField(type: .workingPhoneNumber, action: nil)
+                .textField(type: .workingEmailForCommunication),
+                .textField(type: .workingPhoneNumber)
             ]),
 
             PersonalCard.Section(items: [
@@ -133,7 +133,7 @@ private extension CreatePersonalCardPresenter {
 }
 
 // MARK: - CreatePersonalCardPresenter
-extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate, TextFieldTableViewCellDelegate, InterestsSelectionTableViewCellDelegate {
+extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate, InterestsSelectionTableViewCellDelegate {
 
     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
         guard let indexPath = view?.tableView.indexPath(for: cell), let data = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.row] else {
@@ -161,14 +161,29 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate, TextFieldT
         print("text changed on:\(cell),  text: \(text ?? ""), type: \(identifier ?? "")")
     }
 
+
+}
+
+// MARK: - TextFieldTableViewCell Delegation
+extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
+
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
         print("text changed on:\(cell),  text: \(text ?? ""), type: \(identifier ?? "")")
     }
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {
-         print("action occured on:\(cell),  id: \(identifier ?? "")")
+        guard let action = PersonalCard.ActionType.init(rawValue: identifier ?? "") else {
+            return
+        }
+
+        switch action {
+        case .activityType:
+            print("action occured on:\(cell),  id: \(action.rawValue)")
+        case .placeOfLiving:
+             print("action occured on:\(cell),  id: \(action.rawValue)")
+        }
+
     }
 
 
-    
 }

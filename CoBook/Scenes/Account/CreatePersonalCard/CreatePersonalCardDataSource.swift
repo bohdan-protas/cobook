@@ -16,6 +16,11 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
     unowned var tableView: UITableView
     weak var cellsDelegate: (TextViewTableViewCellDelegate & TextFieldTableViewCellDelegate & InterestsSelectionTableViewCellDelegate)?
 
+    private lazy var pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        return pickerView
+    }()
+
     subscript(indexPath: IndexPath) -> PersonalCard.Item? {
         get {
             return source[safe: indexPath.section]?.items[safe: indexPath.row]
@@ -26,8 +31,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
     }
 
     // MARK: Lifecycle
-    init(tableView: UITableView, source: [PersonalCard.Section] = []) {
-        self.source = source
+    init(tableView: UITableView) {
         self.tableView = tableView
         super.init()
 
@@ -59,12 +63,27 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             cell.titleLabel.text = text
             return cell
 
-        case .textField(let type, let action):
+        case .textField(let type):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
             cell.textTypeIdentifier = type.rawValue
-            cell.rightViewActionIdentifier = action?.rawValue
             cell.textView.placeholder = type.placeholder
+            return cell
+            
+        case .actionTextField(let action):
+            let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
+            cell.textView.placeholder = action.placeholder
             cell.delegate = cellsDelegate
+            cell.rightViewActionIdentifier = action.rawValue
+
+            switch action {
+            case .activityType(let list):
+                pickerView.delegate = cell
+                pickerView.dataSource = cell
+                cell.pickerListDataSource = list.compactMap { $0.title }
+                cell.textView.inputView = pickerView
+            case .placeOfLiving:
+                cell.actionControlView.isUserInteractionEnabled = true
+            }
             return cell
 
         case .textView(let type):
@@ -79,6 +98,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             cell.dataSource = list
             return cell
         }
+
 
     }
 

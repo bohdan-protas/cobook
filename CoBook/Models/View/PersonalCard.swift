@@ -16,15 +16,14 @@ enum PersonalCard {
 
     enum Item {
         case title(text: String)
-        case textField(type: TextType, action: ActionType?)
+        case textField(type: TextType)
+        case actionTextField(type: ActionType)
         case textView(type: TextType)
         case interests(list: [Interest])
     }
 
     enum TextType: String {
         case occupiedPosition               // Займана посада
-        case activityType                   // Вид діяльності
-        case placeOfLiving                  // Місце проживання
         case activityRegion                 // Регіон діяльності
         case activityDescription            // Опис діяльності
         case workingPhoneNumber             // Робочий номер телефону
@@ -35,10 +34,6 @@ enum PersonalCard {
                 switch self {
                 case .occupiedPosition:
                     return "Займана посада"
-                case .activityType:
-                    return "Вид діяльності"
-                case .placeOfLiving:
-                    return "Місце проживання"
                 case .activityRegion:
                     return "Регіон діяльності"
                 case .activityDescription:
@@ -53,9 +48,40 @@ enum PersonalCard {
 
     }
 
-    enum ActionType: String {
-        case listOfActivities
-        case placeAutocomplete
+    enum ActionType: RawRepresentable {
+        case activityType(list: [Practice])             // Вид діяльності
+        case placeOfLiving                              // Місце проживання
+
+        var placeholder: String {
+            switch self {
+            case .activityType:
+                return "Вид діяльності"
+            case .placeOfLiving:
+                return "Місце проживання"
+            }
+        }
+
+        public typealias RawValue = String
+
+        /// Failable Initalizer
+        public init?(rawValue: RawValue) {
+            switch rawValue {
+            case "activityType":  self = .activityType(list: [])
+            case "placeOfLiving": self = .placeOfLiving
+            default:
+                return nil
+            }
+        }
+
+        /// Backing raw value
+        public var rawValue: RawValue {
+            switch self {
+            case .activityType:     return "activityType"
+            case .placeOfLiving:    return "placeOfLiving"
+            }
+        }
+
+
     }
 
     struct Interest {
