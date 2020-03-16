@@ -31,12 +31,13 @@ class APIClient {
 
     // MARK: Public
     @discardableResult
-    private func performRequest<T: Decodable>(router: APIConfigurable,
+    private func performRequest<T: Decodable>(router: Router,
                                               decoder: JSONDecoder = JSONDecoder(),
                                               completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
 
         return session.request(router)
             .responseDecodable(of: APIResponse<T>.self, queue: .main, decoder: decoder) { (response) in
+
                 debugPrint(response.error.debugDescription)
                 completion(response.result)
             }
@@ -164,6 +165,51 @@ extension APIClient {
 
         let router = AuthRouter.forgotPassword(telephone: telephone)
         performRequest(router: router, completion: completion)
+    }
+
+}
+
+// MARK: - Interests router requests
+extension APIClient {
+
+    /**
+     Request localized list of interests
+    */
+    func interestsListRequest(completion: @escaping (AFResult<APIResponse<[PersonalCardAPI.Response.Interest]>>) -> Void) {
+        let router = InterestsRouter.list
+        performRequest(router: router, completion: completion)
+    }
+
+
+}
+
+// MARK: - PracticeTypesRouter request
+extension APIClient {
+
+    /**
+     Request localized list of practice types
+    */
+    @discardableResult
+    func practicesTypesListRequest(completion: @escaping (AFResult<APIResponse<[PersonalCardAPI.Response.Practice]>>) -> Void) -> DataRequest{
+        let router = PracticeTypesRouter.list
+        return performRequest(router: router, completion: completion)
+    }
+
+
+}
+
+// MARK: - CardsRouter requests
+extension APIClient {
+
+    /**
+     Request create personal card
+    */
+    @discardableResult
+    func createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters,
+                            completion: @escaping (AFResult<APIResponse<VoidResponseData>>) -> Void) -> DataRequest {
+
+        let router = CardsRouter.createPersonalCard(parameters: parameters)
+        return performRequest(router: router, completion: completion)
     }
 
 }

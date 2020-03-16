@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,18 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
         window = UIWindow(frame: UIScreen.main.bounds)
-
-        if AppStorage.isUserCompletedTutorial {
-            let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = signUpNavigationController
-        } else {
-            let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = onboardingViewController
-        }
-
         window?.makeKeyAndVisible()
+
         IQKeyboardManager.shared.enable = true
+        GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
+
+        if AppStorage.profile == nil {
+            if AppStorage.isUserCompletedTutorial {
+                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signUpNavigationController
+            } else {
+                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = onboardingViewController
+            }
+        } else {
+            let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+            window?.rootViewController = signInViewController
+        }
 
         return true
     }

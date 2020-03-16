@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum SignUpRouter: APIConfigurable {
+enum SignUpRouter: Router {
 
     /// Initialize registration session
     case initialize(email: String, telephone: String, firstName: String, lastName: String)

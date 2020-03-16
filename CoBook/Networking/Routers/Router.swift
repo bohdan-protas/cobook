@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol APIConfigurable: URLRequestConvertible {
+protocol Router: URLRequestConvertible {
     var useAuthirizationToken: Bool { get }
     var method: HTTPMethod { get }
     var path: String { get }
@@ -17,7 +17,7 @@ protocol APIConfigurable: URLRequestConvertible {
 }
 
 // MARK: - Base configuration
-extension APIConfigurable {
+extension Router {
 
     func asURLRequest() throws -> URLRequest {
         // Base URL
@@ -30,6 +30,7 @@ extension APIConfigurable {
         /// Common Headers
         urlRequest.headers.add(.contentType(ContentType.json.rawValue))
         urlRequest.headers.add(.init(name: "locale", value: "UKR"))
+
         if useAuthirizationToken {
             urlRequest.headers.add(.authorization(bearerToken: AppStorage.accessToken ?? ""))
         }

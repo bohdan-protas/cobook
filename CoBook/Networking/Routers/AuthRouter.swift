@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum AuthRouter: APIConfigurable {
+enum AuthRouter: Router {
 
     /**
      Request new credentials via login router
