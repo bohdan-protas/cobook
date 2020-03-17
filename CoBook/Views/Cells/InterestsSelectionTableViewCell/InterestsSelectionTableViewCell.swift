@@ -28,8 +28,8 @@ class InterestsSelectionTableViewCell: UITableViewCell {
         interestsCollectionView.allowsMultipleSelection = true
 
         // Set up the flow layout's cell alignment:
-        let flowLayout = interestsCollectionView?.collectionViewLayout as? AlignedCollectionViewFlowLayout
-        flowLayout?.horizontalAlignment = .left
+        let flowLayout = interestsCollectionView?.collectionViewLayout as? LeftAlignedCollectionViewFlowLayout
+        //flowLayout?.horizontalAlignment = .left
         flowLayout?.estimatedItemSize = .init(width: 100, height: 24)
     }
 

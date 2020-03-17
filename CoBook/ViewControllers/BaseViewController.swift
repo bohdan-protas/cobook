@@ -11,7 +11,7 @@ import JGProgressHUD
 
 class BaseViewController: UIViewController, LoadDisplayableView {
 
-    var hud: JGProgressHUD = {
+    lazy var hud: JGProgressHUD = {
         let hud = JGProgressHUD(style: .extraLight)
         hud.vibrancyEnabled = true
         hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 5.0, opacity: 0.2)
@@ -19,15 +19,19 @@ class BaseViewController: UIViewController, LoadDisplayableView {
     }()
 
     func startLoading() {
-        DispatchQueue.main.async {
-            self.hud.show(in: self.view)
+        let view: UIView
+        if let viewForHud = UIApplication.shared.keyWindow {
+            view = viewForHud
+        } else if let viewForHud = navigationController?.view {
+            view = viewForHud
+        } else {
+            view = self.view
         }
+        self.hud.show(in: view)
     }
 
     func stopLoading() {
-        DispatchQueue.main.async {
-            self.hud.dismiss()
-        }
+        self.hud.dismiss(animated: true)
     }
 
 

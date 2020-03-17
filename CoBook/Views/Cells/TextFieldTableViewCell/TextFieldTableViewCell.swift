@@ -19,12 +19,13 @@ class TextFieldTableViewCell: UITableViewCell {
     @IBOutlet var textView: DesignableTextField!
     @IBOutlet var actionControlView: UIControl!
 
-    private lazy var rightViewButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "ic_arrow_bottom"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 16)
-        button.isUserInteractionEnabled = false
-        return button
+    private lazy var rightView: UIView = {
+        let iconView = UIImageView(frame: CGRect(x: -15, y: 0, width: 10, height: 10))
+        iconView.image = UIImage(named: "ic_arrow_bottom")
+        let iconContainerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        iconContainerView.addSubview(iconView)
+
+        return iconContainerView
     }()
 
     weak var delegate: TextFieldTableViewCellDelegate?
@@ -40,7 +41,7 @@ class TextFieldTableViewCell: UITableViewCell {
     // MARK: Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        textView.rightView = rightViewButton
+        textView.rightView = rightView
     }
 
     // MARK: Actions

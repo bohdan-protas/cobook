@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
             window?.rootViewController = signInViewController
         }
+        //
 
         return true
     }

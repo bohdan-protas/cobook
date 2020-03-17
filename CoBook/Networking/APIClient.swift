@@ -16,7 +16,14 @@ class APIClient {
     public static var `default`: APIClient = {
         let evaluators = [APIConstants.baseURLPath.host ?? "": DisabledEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
-        let session = Session(serverTrustManager: manager)
+
+
+        let monitor = ClosureEventMonitor()
+        monitor.requestDidCompleteTaskWithError = { (request, task, error) in
+            print(request)
+        }
+
+        let session = Session(serverTrustManager: manager, eventMonitors: [monitor])
 
         let apiClient = APIClient(session: session)
         return apiClient
@@ -36,9 +43,10 @@ class APIClient {
                                               completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
 
         return session.request(router)
+            .cURLDescription(calling: { (description) in
+                print(description)
+            })
             .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
-
-                debugPrint(response.error.debugDescription)
                 completion(response.result)
             }
     }

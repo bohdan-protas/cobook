@@ -62,7 +62,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="jtr-2U-Cgs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="0ac-NC-JcE"/>
-                    <constraint firstAttribute="height" secondItem="jtr-2U-Cgs" secondAttribute="height" multiplier="1.33333" id="1tx-Wq-2Sq"/>
                     <constraint firstAttribute="bottom" secondItem="jtr-2U-Cgs" secondAttribute="bottom" constant="8" id="62e-zy-n1N"/>
                     <constraint firstItem="v3S-SN-sjj" firstAttribute="width" secondItem="jtr-2U-Cgs" secondAttribute="width" id="9TF-n4-FHl"/>
                     <constraint firstItem="jtr-2U-Cgs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="GTk-NG-uUZ"/>

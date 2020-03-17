@@ -52,10 +52,12 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
         group.enter()
         APIClient.default.practicesTypesListRequest { [weak self] (result) in
             guard let strongSelf = self else { return }
+
             switch result {
             case let .success(response):
                 if response.status == .error {
                     errors.append(response.errorLocalizadMessage ?? "")
+                    group.leave()
                     return
                 }
 
@@ -71,10 +73,12 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
         group.enter()
         APIClient.default.interestsListRequest { [weak self] (result) in
             guard let strongSelf = self else { return }
+
             switch result {
             case let .success(response):
                 if response.status == .error {
                     errors.append(response.errorLocalizadMessage ?? "")
+                    group.leave()
                     return
                 }
 
