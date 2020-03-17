@@ -9,6 +9,25 @@
 import Foundation
 import Alamofire
 
+final class LoggerEventMonitor: EventMonitor {
+
+    func requestDidResume(_ request: Request) {
+        request.cURLDescription { (description) in
+            Log.httpRequest(description)
+        }
+    }
+
+    // Event called whenever a DataRequest has parsed a response.
+    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
+        let response = response.data
+        if let degubResponseString = response?.prettyPrintedJSONString {
+            Log.info("Received response from request: \(request.description)")
+            debugPrint(degubResponseString)
+        }
+    }
+
+}
+
 class APIClient {
 
     // MARK: Properties
@@ -18,12 +37,8 @@ class APIClient {
         let manager = ServerTrustManager(evaluators: evaluators)
 
 
-        let monitor = ClosureEventMonitor()
-        monitor.requestDidCompleteTaskWithError = { (request, task, error) in
-            print(request)
-        }
-
-        let session = Session(serverTrustManager: manager, eventMonitors: [monitor])
+        let loggerMonitor = LoggerEventMonitor()
+        let session = Session(serverTrustManager: manager, eventMonitors: [loggerMonitor])
 
         let apiClient = APIClient(session: session)
         return apiClient
@@ -43,9 +58,6 @@ class APIClient {
                                               completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
 
         return session.request(router)
-            .cURLDescription(calling: { (description) in
-                print(description)
-            })
             .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
                 completion(response.result)
             }
