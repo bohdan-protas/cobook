@@ -71,6 +71,8 @@
 		B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */; };
 		B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A21142421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		B82A211724212CB600D0D9F5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A211624212CB600D0D9F5 /* Logger.swift */; };
+		B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */; };
+		B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */; };
 		B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* DesignableView.swift */; };
 		B8307F192406AED800AFE578 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F182406AED800AFE578 /* Profile.swift */; };
 		B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F1A2406C8C700AFE578 /* AppStorage.swift */; };
@@ -202,6 +204,8 @@
 		B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenAPIResponseData.swift; sourceTree = "<group>"; };
 		B82A21142421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		B82A211624212CB600D0D9F5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Extensions.swift"; sourceTree = "<group>"; };
+		B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerEventMonitor.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		B8307F182406AED800AFE578 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		B8307F1A2406C8C700AFE578 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 				B823A6B723FDBC92007540D0 /* Collection + Extensions.swift */,
 				B8307F242406FFD200AFE578 /* Optional + Extensions.swift */,
 				B8DE5E502419227A00F4F60B /* UITableView + Extensions.swift */,
+				B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 			children = (
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
 				B84B94F424033B3E0007EB60 /* APIClient.swift */,
+				B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */,
 				B84B94EB24032A760007EB60 /* Routers */,
 			);
 			path = Networking;
@@ -1028,6 +1034,7 @@
 				B82200C1240FBC2C00A17D2C /* AccountPresenter.swift in Sources */,
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */,
+				B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */,
 				B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
@@ -1070,6 +1077,7 @@
 				B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
+				B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */,
 				B8212A62241BCDDF0066700C /* InterestsRouter.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B8307F212406FF3200AFE578 /* UserDefaultsStorage.swift in Sources */,

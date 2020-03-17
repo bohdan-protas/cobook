@@ -9,25 +9,6 @@
 import Foundation
 import Alamofire
 
-final class LoggerEventMonitor: EventMonitor {
-
-    func requestDidResume(_ request: Request) {
-        request.cURLDescription { (description) in
-            Log.httpRequest(description)
-        }
-    }
-
-    // Event called whenever a DataRequest has parsed a response.
-    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
-        let response = response.data
-        if let degubResponseString = response?.prettyPrintedJSONString {
-            Log.info("Received response from request: \(request.description)")
-            debugPrint(degubResponseString)
-        }
-    }
-
-}
-
 class APIClient {
 
     // MARK: Properties
@@ -35,7 +16,6 @@ class APIClient {
     public static var `default`: APIClient = {
         let evaluators = [APIConstants.baseURLPath.host ?? "": DisabledEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
-
 
         let loggerMonitor = LoggerEventMonitor()
         let session = Session(serverTrustManager: manager, eventMonitors: [loggerMonitor])
