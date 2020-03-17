@@ -14,7 +14,7 @@ class AccountViewController: UIViewController, AccountView {
         static let estimatedRowHeight: CGFloat = 44
         static let headerHeight: CGFloat = 308
         static let footerHeight: CGFloat = 124
-        static let sectionHeaderHeight: CGFloat = 12
+        static let sectionHeaderHeight: CGFloat = 28
     }
 
     // MARK: IBOutlets
@@ -82,14 +82,13 @@ extension AccountViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
+        return SectionHeaderSeparatorView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Defaults.sectionHeaderHeight
     }
+
 
 }
 
