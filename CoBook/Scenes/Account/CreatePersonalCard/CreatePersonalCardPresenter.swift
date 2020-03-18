@@ -12,7 +12,7 @@ import Alamofire
 
 protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
-    func showAutocompleteController(completion: ((GMSPlace) -> Void)?)
+    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setImage(image: UIImage?)
     func popController()
@@ -280,12 +280,16 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             let selectedPractice = cell.textView.text
             createPersonalCardParameters.practiseTypeId = self.practices.first(where: { $0.title == selectedPractice })?.id
         case .placeOfLiving:
-            view?.showAutocompleteController(completion: { [weak self] (fetchedPlace) in
+            let filter = GMSAutocompleteFilter()
+            filter.type = .city
+            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
                 self?.createPersonalCardParameters.cityPlaceId = fetchedPlace.placeID
             })
         case .activityRegion:
-            view?.showAutocompleteController(completion: { [weak self] (fetchedPlace) in
+            let filter = GMSAutocompleteFilter()
+            filter.type = .geocode
+            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
                 self?.createPersonalCardParameters.regionPlaceId = fetchedPlace.placeID
              })
