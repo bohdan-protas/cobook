@@ -60,7 +60,6 @@
 		B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742823F5808400C8CBF8 /* String + Extensions.swift */; };
 		B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */; };
 		B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825742B23F592F600C8CBF8 /* SignUpViewController.swift */; };
-		B825FA9C242217D50022689A /* ErrorHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FA9B242217D50022689A /* ErrorHandlerView.swift */; };
 		B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* DesignableProgressView.swift */; };
 		B826B0F223F459A1009041DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0F123F459A1009041DD /* Onboarding.swift */; };
 		B8282828241A6FC40003D056 /* CardSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8282827241A6FC40003D056 /* CardSaveView.swift */; };
@@ -117,6 +116,7 @@
 		B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C1240020F4002E91F7 /* BasePresenter.swift */; };
 		B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */; };
 		B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C72400515B002E91F7 /* OnboardingPresenter.swift */; };
+		B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */; };
 		B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */; };
 		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
@@ -195,7 +195,6 @@
 		B825742823F5808400C8CBF8 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		B825742B23F592F600C8CBF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		B825FA9B242217D50022689A /* ErrorHandlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerView.swift; sourceTree = "<group>"; };
 		B826B0E523F4109C009041DD /* DesignableProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableProgressView.swift; sourceTree = "<group>"; };
 		B826B0F123F459A1009041DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		B8282827241A6FC40003D056 /* CardSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSaveView.swift; sourceTree = "<group>"; };
@@ -256,6 +255,7 @@
 		B88906C1240020F4002E91F7 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDisplayableView.swift; sourceTree = "<group>"; };
 		B88906C72400515B002E91F7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
+		B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
 		B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
@@ -428,6 +428,7 @@
 				B8307F242406FFD200AFE578 /* Optional + Extensions.swift */,
 				B8DE5E502419227A00F4F60B /* UITableView + Extensions.swift */,
 				B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */,
+				B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -729,7 +730,6 @@
 				B88906C1240020F4002E91F7 /* BasePresenter.swift */,
 				B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */,
 				B8307F282407001800AFE578 /* AlertDisplayableView.swift */,
-				B825FA9B242217D50022689A /* ErrorHandlerView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1075,7 +1075,6 @@
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
 				B84A15F72411256800C4DC11 /* DesignableTextPlaceholderImageView.swift in Sources */,
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
-				B825FA9C242217D50022689A /* ErrorHandlerView.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B8DE5E392418DACF00F4F60B /* CreatePersonalCardDataSource.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
@@ -1084,6 +1083,7 @@
 				B8DE5E472418E83800F4F60B /* SectionHeaderSeparatorView.swift in Sources */,
 				B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
+				B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */,
 				B8212A62241BCDDF0066700C /* InterestsRouter.swift in Sources */,

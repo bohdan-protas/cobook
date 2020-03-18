@@ -41,7 +41,6 @@ class APIClient {
         return session.request(router)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
-                Log.debug(response)
                 completion(response.result)
             }
     }

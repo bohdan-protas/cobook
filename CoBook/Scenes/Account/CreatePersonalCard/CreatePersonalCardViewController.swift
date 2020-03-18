@@ -78,6 +78,11 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         cardSaveView.saveButton.isEnabled = isEnabled
     }
 
+    func setupHeaderFooterViews() {
+        tableView.tableHeaderView = personalCardPhotoManagmentView
+        tableView.tableFooterView = cardSaveView
+    }
+
 
 }
 
@@ -88,8 +93,7 @@ private extension CreatePersonalCardViewController {
         self.navigationItem.title = "Створення персональної візитки"
 
         tableView.delegate = self
-        tableView.tableHeaderView = personalCardPhotoManagmentView
-        tableView.tableFooterView = cardSaveView
+
     }
 
 

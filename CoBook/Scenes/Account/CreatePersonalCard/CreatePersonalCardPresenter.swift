@@ -10,11 +10,12 @@ import UIKit
 import GooglePlaces
 import Alamofire
 
-protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, ErrorHandlerView {
+protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
     func showAutocompleteController(completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func popController()
+    func setupHeaderFooterViews()
 }
 
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
@@ -86,13 +87,12 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
             strongSelf.view?.stopLoading()
 
             if practicesTypesListRequestError != nil {
-                strongSelf.view?.handle(error: practicesTypesListRequestError)
-                strongSelf.setupDataSource()
+                strongSelf.view?.errorAlert(message: practicesTypesListRequestError?.localizedDescription)
                 return
             }
 
             if interestsListRequestError != nil  {
-                strongSelf.view?.handle(error: interestsListRequestError)
+                strongSelf.view?.errorAlert(message: interestsListRequestError?.localizedDescription)
             }
 
             strongSelf.setupDataSource()
@@ -133,6 +133,8 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 private extension CreatePersonalCardPresenter {
 
     func setupDataSource() {
+
+        view?.setupHeaderFooterViews()
 
         dataSource?.source = [
             PersonalCard.Section(items: [
