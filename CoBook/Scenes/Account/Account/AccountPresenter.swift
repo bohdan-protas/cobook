@@ -40,7 +40,7 @@ class AccountPresenter: BasePresenter {
         ]
 
         //setup header
-        view?.fillHeader(with: AppStorage.profile)
+        view?.fillHeader(with: AppStorage.User.profile)
     }
 
     func selectedRow(at indexPath: IndexPath) {

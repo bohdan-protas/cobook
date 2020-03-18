@@ -8,8 +8,9 @@
 
 import UIKit
 import GooglePlaces
+import Alamofire
 
-protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
+protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, ErrorHandlerView {
     var tableView: UITableView! { get set }
     func showAutocompleteController(completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
@@ -27,7 +28,6 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     private var createPersonalCardParameters = PersonalCardAPI.Request.CreationParameters() {
         didSet {
-            print("changed personal card parameter")
             view?.setSaveButtonEnabled(createPersonalCardParameters.isRequiredDataIsFilled)
         }
     }
@@ -44,8 +44,11 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func setup() {
-        var errors: [String] = []
         let group = DispatchGroup()
+
+        var practicesTypesListRequestError: AFError?
+        var interestsListRequestError: AFError?
+
         view?.startLoading()
 
         // fetch practices
@@ -55,16 +58,10 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
             switch result {
             case let .success(response):
-                if response.status == .error {
-                    errors.append(response.errorLocalizadMessage ?? "")
-                    group.leave()
-                    return
-                }
-
                 strongSelf.practices = (response.data ?? []).map { PersonalCard.Practice(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
-                errors.append(error.localizedDescription)
+                practicesTypesListRequestError = error
                 group.leave()
             }
         }
@@ -76,16 +73,10 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
             switch result {
             case let .success(response):
-                if response.status == .error {
-                    errors.append(response.errorLocalizadMessage ?? "")
-                    group.leave()
-                    return
-                }
-
                 strongSelf.interests = (response.data ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
-                errors.append(error.localizedDescription)
+                interestsListRequestError = error
                 group.leave()
             }
         }
@@ -94,11 +85,16 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
-            if !errors.isEmpty {
-                errors.forEach {
-                    self?.view?.errorAlert(message: $0)
-                }
+            if practicesTypesListRequestError != nil {
+                strongSelf.view?.handle(error: practicesTypesListRequestError)
+                strongSelf.setupDataSource()
+                return
             }
+
+            if interestsListRequestError != nil  {
+                strongSelf.view?.handle(error: interestsListRequestError)
+            }
+
             strongSelf.setupDataSource()
         }
 

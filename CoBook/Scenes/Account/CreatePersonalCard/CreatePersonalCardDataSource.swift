@@ -68,8 +68,11 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
             cell.textView.placeholder = type.placeholder
+
+            cell.textView.textContentType = type.contentType
             cell.textView.keyboardType = type.keyboardType
             cell.textView.reloadInputViews()
+
             return cell
 
         case .actionTextField(let action):

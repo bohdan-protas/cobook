@@ -37,7 +37,7 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 
     func verify(with smsCode: String) {
         view?.startLoading()
-        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: AppStorage.accessToken ?? "") { (result) in
+        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: AppStorage.Auth.accessToken ?? "") { (result) in
             self.view?.stopLoading()
 
             switch result {
@@ -57,22 +57,20 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 
     func resendSms() {
         view?.setResendButton(isLoading: true)
-        APIClient.default.resendSmsRequest(accessToken: AppStorage.accessToken ?? "") { (result) in
+        APIClient.default.resendSmsRequest(accessToken: AppStorage.Auth.accessToken ?? "") { (result) in
             self.view?.setResendButton(isLoading: false)
             switch result {
             case let .success(response):
                 switch response.status {
                 case .ok:
-                    AppStorage.accessToken = response.data?.accessToken
+                    AppStorage.Auth.accessToken = response.data?.accessToken
                     let leftInMs = response.data?.smsResendLeftInMs ?? 0
                     self.smsResendLeftInSec = leftInMs * 0.001
                     self.runTimer()
                 case .error:
-                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
                     self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
             case let .failure(error):
-                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
                 self.view?.errorAlert(message: error.localizedDescription.description)
             }
         }
