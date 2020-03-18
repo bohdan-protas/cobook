@@ -12,8 +12,15 @@ import Alamofire
 protocol Router: URLRequestConvertible {
     var useAuthirizationToken: Bool { get }
     var method: HTTPMethod { get }
+    var baseUrlPath: URLComponents { get }
     var path: String { get }
     var parameters: Parameters? { get }
+}
+
+extension Router {
+    var baseUrlPath: URLComponents {
+        return APIConstants.baseURLPath
+    }
 }
 
 // MARK: - Base configuration
@@ -21,7 +28,7 @@ extension Router {
 
     func asURLRequest() throws -> URLRequest {
         // Base URL
-        let url = try APIConstants.baseURLPath.asURL()
+        let url = try baseUrlPath.asURL()
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
 
         // HTTP Method

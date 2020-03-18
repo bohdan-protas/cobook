@@ -14,11 +14,16 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
     func showAutocompleteController(completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
+    func setImage(image: UIImage?)
     func popController()
     func setupHeaderFooterViews()
 }
 
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
+
+    enum Defaults {
+        static let imageCompressionQuality: CGFloat = 0.1
+    }
 
     // MARK: Properties
     weak var view: CreatePersonalCardView?
@@ -45,6 +50,70 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func setup() {
+        fetchSetupData()
+    }
+
+    func createPerconalCard() {
+        view?.startLoading()
+        APIClient.default.createPersonalCard(parameters: self.createPersonalCardParameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+
+            switch result {
+            case let .success(response):
+                if response.status == .error {
+                    strongSelf.view?.errorAlert(message: response.errorLocalizadMessage ?? "")
+                }
+                strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { [weak self] (_) in
+                    self?.view?.popController()
+                })
+            case let .failure(error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func userImagePicked(_ image: UIImage?) {
+        let selectedUserImageData = image?.jpegData(compressionQuality: Defaults.imageCompressionQuality)
+        self.uploadUserImage(data: selectedUserImageData)
+    }
+
+
+}
+
+// MARK: - CreatePersonalCardPresenter
+private extension CreatePersonalCardPresenter {
+
+    func setupDataSource() {
+        view?.setupHeaderFooterViews()
+        dataSource?.source = [
+            PersonalCard.Section(items: [
+                .title(text: "Діяльність"),
+                .textField(type: .occupiedPosition),
+                .actionTextField(type: .activityType(list: practices)),
+                .actionTextField(type: .placeOfLiving),
+                .actionTextField(type: .activityRegion),
+                .textView(type: .activityDescription)
+            ]),
+
+            PersonalCard.Section(items: [
+                .title(text: "Контактні дані"),
+                .textField(type: .workingEmailForCommunication),
+                .textField(type: .workingPhoneNumber)
+            ]),
+
+            PersonalCard.Section(items: [
+                .title(text: "Інтереси (для рекомендацій)"),
+                .interests(list: interests)
+            ])
+
+        ]
+
+        dataSource?.cellsDelegate = self
+        dataSource?.tableView.reloadData()
+    }
+
+    func fetchSetupData() {
         let group = DispatchGroup()
 
         var practicesTypesListRequestError: AFError?
@@ -97,16 +166,16 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
             strongSelf.setupDataSource()
         }
-
     }
 
-    func userImagePicked(_ image: UIImage?) {
+    func uploadUserImage(data: Data?) {
+        guard let imageData = data else {
+            Log.error("Cannot find selected image data!")
+            return
+        }
 
-    }
-
-    func createPerconalCard() {
         view?.startLoading()
-        APIClient.default.createPersonalCard(parameters: self.createPersonalCardParameters) { [weak self] (result) in
+        APIClient.default.upload(imageData: imageData) { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
@@ -115,52 +184,13 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
                 if response.status == .error {
                     strongSelf.view?.errorAlert(message: response.errorLocalizadMessage ?? "")
                 }
-                strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { [weak self] (_) in
-                    self?.view?.popController()
-                })
+                strongSelf.createPersonalCardParameters.avatarId = response.data?.id
+                strongSelf.view?.setImage(image: UIImage(data: imageData))
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
-                debugPrint(error.localizedDescription)
             }
         }
-    }
 
-
-
-}
-
-// MARK: - CreatePersonalCardPresenter
-private extension CreatePersonalCardPresenter {
-
-    func setupDataSource() {
-
-        view?.setupHeaderFooterViews()
-
-        dataSource?.source = [
-            PersonalCard.Section(items: [
-                .title(text: "Діяльність"),
-                .textField(type: .occupiedPosition),
-                .actionTextField(type: .activityType(list: practices)),
-                .actionTextField(type: .placeOfLiving),
-                .actionTextField(type: .activityRegion),
-                .textView(type: .activityDescription)
-            ]),
-
-            PersonalCard.Section(items: [
-                .title(text: "Контактні дані"),
-                .textField(type: .workingEmailForCommunication),
-                .textField(type: .workingPhoneNumber)
-            ]),
-
-            PersonalCard.Section(items: [
-                .title(text: "Інтереси (для рекомендацій)"),
-                .interests(list: interests)
-            ])
-
-        ]
-
-        dataSource?.cellsDelegate = self
-        dataSource?.tableView.reloadData()
     }
 
 

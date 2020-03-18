@@ -83,6 +83,10 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         tableView.tableFooterView = cardSaveView
     }
 
+    func setImage(image: UIImage?) {
+        personalCardPhotoManagmentView.setImage(image)
+    }
+
 
 }
 
@@ -125,7 +129,6 @@ extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UI
 
         guard let image = info[.originalImage] as? UIImage else { return }
         presenter.userImagePicked(image)
-        personalCardPhotoManagmentView.setImage(image)
     }
 
 

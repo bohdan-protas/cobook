@@ -43,7 +43,26 @@ class APIClient {
             .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
                 completion(response.result)
             }
-    }
+    } // end performRequest
+
+    @discardableResult
+    private func upload<T: Decodable>(imageData: Data,
+                                      to endpoint: URLConvertible,
+                                      headers: HTTPHeaders?,
+                                      decoder: JSONDecoder = JSONDecoder(),
+                                      completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
+
+        return session.upload(multipartFormData: { multipartFormData in
+            let randomName = "\(String.random())-image"
+            multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).png", mimeType: "image/png")
+        }, to: endpoint, headers: headers)
+            .uploadProgress { progress in
+                Log.debug("Photo upload Progress: \(progress.fractionCompleted)")
+            }
+            .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
+                completion(response.result)
+        }
+    } // end upload
 
 
 }
@@ -212,6 +231,28 @@ extension APIClient {
 
         let router = CardsRouter.createPersonalCard(parameters: parameters)
         return performRequest(router: router, completion: completion)
+    }
+
+}
+
+// MARK: - ContentManagerRouter requests
+extension APIClient {
+
+    /**
+     Request upload image data to server
+
+     - parameters:
+        - imageData: image data(JPEG preffered)
+        - completion: parsed  'FileAPIResponseData' response from server
+     */
+    @discardableResult
+    func upload(imageData: Data, completion: @escaping (AFResult<APIResponse<FileAPIResponseData>>) -> Void) -> DataRequest {
+        let router = ContentManagerRouter.singleFileUpload
+
+        // FIXME: Fix force unwrap
+        let url = router.urlRequest!.url!
+        let headers = router.urlRequest?.headers
+        return upload(imageData: imageData, to: url, headers: headers, completion: completion)
     }
 
 }

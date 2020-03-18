@@ -117,6 +117,9 @@
 		B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */; };
 		B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C72400515B002E91F7 /* OnboardingPresenter.swift */; };
 		B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */; };
+		B8AB3F0124229A1A00E06E53 /* ContentManagerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F0024229A1A00E06E53 /* ContentManagerRouter.swift */; };
+		B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F022422B38300E06E53 /* Data + Extensions.swift */; };
+		B8AB3F052422BDC000E06E53 /* FileAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F042422BDC000E06E53 /* FileAPIResponseData.swift */; };
 		B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */; };
 		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
@@ -256,6 +259,9 @@
 		B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDisplayableView.swift; sourceTree = "<group>"; };
 		B88906C72400515B002E91F7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
+		B8AB3F0024229A1A00E06E53 /* ContentManagerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManagerRouter.swift; sourceTree = "<group>"; };
+		B8AB3F022422B38300E06E53 /* Data + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extensions.swift"; sourceTree = "<group>"; };
+		B8AB3F042422BDC000E06E53 /* FileAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
@@ -429,6 +435,7 @@
 				B8DE5E502419227A00F4F60B /* UITableView + Extensions.swift */,
 				B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */,
 				B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */,
+				B8AB3F022422B38300E06E53 /* Data + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -437,9 +444,9 @@
 			isa = PBXGroup;
 			children = (
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
-				B84B94F424033B3E0007EB60 /* APIClient.swift */,
 				B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */,
 				B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */,
+				B84B94F424033B3E0007EB60 /* APIClient.swift */,
 				B84B94EB24032A760007EB60 /* Routers */,
 			);
 			path = Networking;
@@ -651,6 +658,7 @@
 				B8212A61241BCDDF0066700C /* InterestsRouter.swift */,
 				B8359CD5241EC9D90080263E /* PracticeTypesRouter.swift */,
 				B85F8B5C241FA8F0003C41D2 /* CardsRouter.swift */,
+				B8AB3F0024229A1A00E06E53 /* ContentManagerRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -662,6 +670,7 @@
 				B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */,
 				B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */,
 				B8CB0E7F240551A400AF431B /* RegisterAPIResponseData.swift */,
+				B8AB3F042422BDC000E06E53 /* FileAPIResponseData.swift */,
 				B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */,
 				B8359CD2241EA9BF0080263E /* PersonalCardAPI.swift */,
 			);
@@ -1093,11 +1102,13 @@
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
 				B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */,
+				B8AB3F052422BDC000E06E53 /* FileAPIResponseData.swift in Sources */,
 				B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */,
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
+				B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */,
 				B85F8B5D241FA8F0003C41D2 /* CardsRouter.swift in Sources */,
 				B82200BC240FB99D00A17D2C /* AccountNavigationController.swift in Sources */,
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
@@ -1119,6 +1130,7 @@
 				B82A211724212CB600D0D9F5 /* Logger.swift in Sources */,
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
+				B8AB3F0124229A1A00E06E53 /* ContentManagerRouter.swift in Sources */,
 				B8DE5E552419262600F4F60B /* TextViewTableViewCell.swift in Sources */,
 				B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */,
 			);
