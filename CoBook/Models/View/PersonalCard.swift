@@ -24,7 +24,6 @@ enum PersonalCard {
 
     enum TextType: String {
         case occupiedPosition               // Займана посада
-
         case activityDescription            // Опис діяльності
         case workingPhoneNumber             // Робочий номер телефону
         case workingEmailForCommunication   // Робочий емейл для зв'язку
@@ -41,6 +40,20 @@ enum PersonalCard {
                 case .workingEmailForCommunication:
                     return "Робочий емейл для зв'язку"
                 }
+            }
+        }
+
+        var contentType: UITextContentType? {
+            switch self {
+            case .occupiedPosition:
+                return .jobTitle
+            case .activityDescription:
+                return nil
+            case .workingPhoneNumber:
+                return .telephoneNumber
+            case .workingEmailForCommunication:
+                return .emailAddress
+
             }
         }
 

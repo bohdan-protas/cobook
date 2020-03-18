@@ -8,9 +8,11 @@
 
 import UIKit
 import JGProgressHUD
+import Alamofire
 
-class BaseViewController: UIViewController, LoadDisplayableView {
+class BaseViewController: UIViewController, LoadDisplayableView, ErrorHandlerView, AlertDisplayableView {
 
+    // MARK: Properties
     lazy var hud: JGProgressHUD = {
         let hud = JGProgressHUD(style: .extraLight)
         hud.vibrancyEnabled = true
@@ -18,6 +20,7 @@ class BaseViewController: UIViewController, LoadDisplayableView {
         return hud
     }()
 
+    // MARK: LoadDisplayableView
     func startLoading() {
         let view: UIView
         if let viewForHud = UIApplication.shared.keyWindow {
@@ -32,6 +35,24 @@ class BaseViewController: UIViewController, LoadDisplayableView {
 
     func stopLoading() {
         self.hud.dismiss(animated: true)
+    }
+
+    // MARK: ErrorHandlerView
+    func handle(error: AFError?) {
+        switch error {
+        case let .requestRetryFailed(retryError, _):
+            if (retryError as NSError).code == 401 {
+                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                signInViewController.modalPresentationStyle = .overFullScreen
+                present(signInViewController, animated: true, completion: { [weak self] in
+                    (self?.presentedViewController as? AlertDisplayableView)?.errorAlert(message: "Please, login before continue")
+                })
+            }
+        default:
+            self.defaultErrorAlert()
+        }
+
+
     }
 
 

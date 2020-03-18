@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - UserDefaultObjectStorage
 @propertyWrapper
-struct UserDefaultObjectStorage<Object: Codable> {
+struct UserDefaultObjectStorageWrapper<Object: Codable> {
     let key: String
     let defaultValue: Object
     var storage: UserDefaults = .standard
@@ -42,7 +42,7 @@ struct UserDefaultObjectStorage<Object: Codable> {
     }
 }
 
-extension UserDefaultObjectStorage where Object: ExpressibleByNilLiteral {
+extension UserDefaultObjectStorageWrapper where Object: ExpressibleByNilLiteral {
     init(key: String, storage: UserDefaults = .standard) {
         self.init(key: key, defaultValue: nil, storage: storage)
     }
@@ -50,7 +50,7 @@ extension UserDefaultObjectStorage where Object: ExpressibleByNilLiteral {
 
 // MARK: - UserDefaultValueStorage
 @propertyWrapper
-struct UserDefaultValueStorage<Value> {
+struct UserDefaultValueStorageWrapper<Value> {
     let key: String
     let defaultValue: Value
     var storage: UserDefaults = .standard
@@ -70,7 +70,7 @@ struct UserDefaultValueStorage<Value> {
     }
 }
 
-extension UserDefaultValueStorage where Value: ExpressibleByNilLiteral {
+extension UserDefaultValueStorageWrapper where Value: ExpressibleByNilLiteral {
     init(key: String, storage: UserDefaults = .standard) {
         self.init(key: key, defaultValue: nil, storage: storage)
     }

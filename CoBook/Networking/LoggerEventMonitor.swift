@@ -20,7 +20,7 @@ final class LoggerEventMonitor: EventMonitor {
     // Event called whenever a DataRequest has parsed a response.
     func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
         if let error = response.error {
-            Log.error("Failed request \(request.description) with resson: \(error.failureReason ?? "")" )
+            Log.error("Failed request \(request.description): \(error.localizedDescription)" )
         } else {
             Log.info("Success request: \(request.description)")
         }

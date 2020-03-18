@@ -9,7 +9,7 @@
 import Foundation
 
 @propertyWrapper
-struct KeychainStringValueStorage {
+struct KeychainStringValueStorageWrapper {
     let key: String
     let defaultValue: String?
     var storage: KeychainWrapper = KeychainWrapper.standard

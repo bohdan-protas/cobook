@@ -18,7 +18,8 @@ class APIClient {
         let manager = ServerTrustManager(evaluators: evaluators)
 
         let loggerMonitor = LoggerEventMonitor()
-        let session = Session(serverTrustManager: manager, eventMonitors: [loggerMonitor])
+        let requestInterceptor = AuthRequestInterceptor()
+        let session = Session(interceptor: requestInterceptor, serverTrustManager: manager, eventMonitors: [loggerMonitor])
 
         let apiClient = APIClient(session: session)
         return apiClient
@@ -38,7 +39,9 @@ class APIClient {
                                               completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
 
         return session.request(router)
+            .validate(statusCode: 200..<300)
             .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
+                Log.debug(response)
                 completion(response.result)
             }
     }

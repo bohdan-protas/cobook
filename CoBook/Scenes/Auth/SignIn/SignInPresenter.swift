@@ -55,18 +55,16 @@ class SignInPresenter: BasePresenter {
                 switch response.status {
 
                 case .ok:
-                    AppStorage.profile = response.data?.profile
-                    AppStorage.accessToken = response.data?.assessToken
-                    AppStorage.refreshToken = response.data?.refreshToken
+                    AppStorage.User.profile = response.data?.profile
+                    AppStorage.Auth.accessToken = response.data?.assessToken
+                    AppStorage.Auth.refreshToken = response.data?.refreshToken
 
                     self.view?.goTo(viewController: MainTabBarController())
                 case .error:
-                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
                     self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
 
             case let .failure(error):
-                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
                 self.view?.errorAlert(message: error.localizedDescription.description)
             }
         }
@@ -88,11 +86,9 @@ class SignInPresenter: BasePresenter {
                 case .ok:
                     self.view?.infoAlert(title: nil, message: "ForgotPassword.successMessage".localized)
                 case .error:
-                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
                     self.view?.errorAlert(message: response.errorLocalizadMessage)
                 }
             case let .failure(error):
-                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
                 self.view?.errorAlert(message: error.localizedDescription.description)
             }
         }

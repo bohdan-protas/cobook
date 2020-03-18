@@ -32,7 +32,7 @@ extension Router {
         urlRequest.headers.add(.init(name: "locale", value: "UKR"))
 
         if useAuthirizationToken {
-            urlRequest.headers.add(.authorization(bearerToken: AppStorage.accessToken ?? ""))
+            urlRequest.headers.add(.authorization(bearerToken: AppStorage.Auth.accessToken ?? ""))
         }
 
         // Parameters

@@ -20,7 +20,7 @@ class CreatePasswordPresenter: BasePresenter {
     // MARK: Properties
     private weak var view: CreatePasswordView?
     private var password: String = ""
-    private var telephone: String = AppStorage.profile?.telephone.number ?? "Undefined"
+    private var telephone: String = AppStorage.User.profile?.telephone.number ?? "Undefined"
 
     var currentTelephoneNumberToShow: String {
         return telephone
@@ -46,26 +46,22 @@ class CreatePasswordPresenter: BasePresenter {
             return
         }
 
-        APIClient.default.signUpFinishRequest(accessToken: AppStorage.accessToken ?? "", password: self.password) { (result) in
+        APIClient.default.signUpFinishRequest(accessToken: AppStorage.Auth.accessToken ?? "", password: self.password) { (result) in
             switch result {
             case let .success(response):
                 switch response.status {
                 case .ok:
-                    AppStorage.isUserCompletedRegistration = true
-                    AppStorage.isUserInitiatedRegistration = false
-
-                    AppStorage.profile = response.data?.profile
-                    AppStorage.accessToken = response.data?.assessToken
-                    AppStorage.refreshToken = response.data?.refreshToken
+                    AppStorage.User.isUserCompletedRegistration = true
+                    AppStorage.User.isUserInitiatedRegistration = false
+                    AppStorage.User.profile = response.data?.profile
+                    AppStorage.Auth.accessToken = response.data?.assessToken
+                    AppStorage.Auth.refreshToken = response.data?.refreshToken
 
                     self.view?.goTo(viewController: MainTabBarController())
-
                 case .error:
-                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
                     self.view?.errorAlert(message: response.errorLocalizadMessage, handler: nil)
                 }
             case let .failure(error):
-                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
                 self.view?.errorAlert(message: error.localizedDescription.description, handler: nil)
             }
         }
