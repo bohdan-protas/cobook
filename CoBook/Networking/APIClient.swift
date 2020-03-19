@@ -67,20 +67,35 @@ class APIClient {
                                       to endpoint: URLConvertible,
                                       headers: HTTPHeaders?,
                                       decoder: JSONDecoder = JSONDecoder(),
-                                      completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
+                                      completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
 
         return session.upload(multipartFormData: { multipartFormData in
             let randomName = "\(String.random())-image"
             multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).png", mimeType: "image/png")
         }, to: endpoint, headers: headers)
-            .uploadProgress { progress in
-                Log.debug("Photo upload Progress: \(progress.fractionCompleted)")
-            }
-            .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
-                completion(response.result)
+            .response { (response) in
+                if let responseData = response.data {
+                    do {
+                        let decodedResponse = try decoder.decode(APIResponse<T>.self, from: responseData)
+                        switch decodedResponse.status {
+                        case .ok:
+                            completion(.success(decodedResponse.data))
+                        case .error:
+                            let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
+                            completion(.failure(error))
+                        }
+                    } catch {
+                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
+                        completion(.failure(error))
+                    }
+                } else {
+                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
+                    completion(.failure(error))
+                }
         }
     } // end upload
 
+    
 
 }
 
@@ -263,7 +278,7 @@ extension APIClient {
         - completion: parsed  'FileAPIResponseData' response from server
      */
     @discardableResult
-    func upload(imageData: Data, completion: @escaping (AFResult<APIResponse<FileAPIResponseData>>) -> Void) -> DataRequest {
+    func upload(imageData: Data, completion: @escaping (Result<FileAPIResponseData?, Error>) -> Void) -> DataRequest {
         let router = ContentManagerRouter.singleFileUpload
 
         // FIXME: Fix force unwrap

@@ -178,10 +178,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                if response.status == .error {
-                    strongSelf.view?.errorAlert(message: response.errorLocalizadMessage ?? "")
-                }
-                strongSelf.createPersonalCardParameters.avatarId = response.data?.id
+                strongSelf.createPersonalCardParameters.avatarId = response?.id
                 strongSelf.view?.setImage(image: UIImage(data: imageData))
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
