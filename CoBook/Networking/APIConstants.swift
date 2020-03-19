@@ -11,7 +11,7 @@ import Foundation
 enum APIConstants {
 
     enum Path: String {
-        case API            = "/api/v1"
+        case api            = "/api/v1"
         case contentManager = "/cm/v1"
     }
 
@@ -32,7 +32,7 @@ enum APIConstants {
             var components = URLComponents()
             components.scheme   = "https"
             components.host     = "3.124.214.212"
-            components.path     = Path.API.rawValue
+            components.path     = Path.api.rawValue
             return components
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 import Alamofire
 
-protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
+protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     var tableView: UITableView! { get set }
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
@@ -307,12 +307,51 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
 
 
+    func addNewSocial() {
+        let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
+
+        let submitAction = UIAlertAction(title: "Створити", style: .default) { [unowned ac] _ in
+            let url = ac.textFields?[safe: 1]?.text
+            let name = ac.textFields![safe: 0]?.text
+
+            Log.debug("url: \(url ?? "")")
+            Log.debug("name: \(name ?? "")")
+        }
+        submitAction.isEnabled = false
+        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+        ac.addAction(submitAction)
+        ac.addAction(cancelAction)
+
+        ac.addTextField { (nameTextField) in
+            nameTextField.placeholder = "Назва"
+        }
+
+        ac.addTextField { (urlTextField) in
+            urlTextField.placeholder = "Посилання, https://link.com"
+        }
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 1], queue: OperationQueue.main, using: { _ in
+            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
+        })
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 0], queue: OperationQueue.main, using: { _ in
+            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
+        })
+
+
+        view?.present(controller: ac, animated: true)
+    }
+
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
         switch item {
         case .view(let model):
             Log.debug("\(model.title) selected")
         case .add:
-            Log.debug("add new item")
+            addNewSocial()
         }
     }
 
