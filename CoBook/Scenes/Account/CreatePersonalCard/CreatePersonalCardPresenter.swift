@@ -29,12 +29,16 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     weak var view: CreatePersonalCardView?
 
     private var dataSource: CreatePersonalCardDataSource?
-    private var interests: [PersonalCard.Interest] = []
-    private var practices: [PersonalCard.Practice] = []
+    private var interests:  [CreatePersonalCard.Interest] = []
+    private var practices:  [CreatePersonalCard.Practice] = []
+    private var socialList: [Social.ListItem] = [.view(model: Social.Model(title: "Telegram", url: nil, type: .telegram)),
+                                                                   .view(model: Social.Model(title: "Viber", url: nil, type: .viber)),
+                                                                   .view(model: Social.Model(title: "Facebook", url: nil, type: .facebookMessanger)),
+                                                                   .view(model: Social.Model(title: "Linkedin", url: nil, type: .linkedin))]
 
-    private var createPersonalCardParameters = PersonalCardAPI.Request.CreationParameters() {
+    private var personalCardParameters = PersonalCardAPI.Request.CreationParameters() {
         didSet {
-            view?.setSaveButtonEnabled(createPersonalCardParameters.isRequiredDataFilled)
+            view?.setSaveButtonEnabled(personalCardParameters.isRequiredDataFilled)
         }
     }
 
@@ -55,7 +59,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     func createPerconalCard() {
         view?.startLoading()
-        APIClient.default.createPersonalCard(parameters: self.createPersonalCardParameters) { [weak self] (result) in
+        APIClient.default.createPersonalCard(parameters: self.personalCardParameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
@@ -83,9 +87,16 @@ private extension CreatePersonalCardPresenter {
 
     func setupDataSource() {
         view?.setupHeaderFooterViews()
+        invalidateDataSource()
+        dataSource?.cellsDelegate = self
+        dataSource?.tableView.reloadData()
+    }
+
+    func invalidateDataSource() {
         dataSource?.source = [
-            PersonalCard.Section(items: [
-                .title(text: "Діяльність"),
+
+            CreatePersonalCard.Section(items: [
+                .title(text: "Діяльність:"),
                 .textField(type: .occupiedPosition),
                 .actionTextField(type: .activityType(list: practices)),
                 .actionTextField(type: .placeOfLiving),
@@ -93,21 +104,20 @@ private extension CreatePersonalCardPresenter {
                 .textView(type: .activityDescription)
             ]),
 
-            PersonalCard.Section(items: [
-                .title(text: "Контактні дані"),
+            CreatePersonalCard.Section(items: [
+                .title(text: "Контактні дані:"),
                 .textField(type: .workingEmailForCommunication),
-                .textField(type: .workingPhoneNumber)
+                .textField(type: .workingPhoneNumber),
+                .title(text: "Соціальні мережі:"),
+                .socialList(list: socialList)
             ]),
 
-            PersonalCard.Section(items: [
+            CreatePersonalCard.Section(items: [
                 .title(text: "Інтереси (для рекомендацій)"),
                 .interests(list: interests)
             ])
 
         ]
-
-        dataSource?.cellsDelegate = self
-        dataSource?.tableView.reloadData()
     }
 
     func fetchSetupData() {
@@ -125,7 +135,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.practices = (response ?? []).map { PersonalCard.Practice(id: $0.id, title: $0.title) }
+                strongSelf.practices = (response ?? []).map { CreatePersonalCard.Practice(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 practicesTypesListRequestError = error
@@ -140,7 +150,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.interests = (response ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
+                strongSelf.interests = (response ?? []).map { CreatePersonalCard.Interest(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 interestsListRequestError = error
@@ -178,7 +188,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.createPersonalCardParameters.avatarId = response?.id
+                strongSelf.personalCardParameters.avatarId = response?.id
                 strongSelf.view?.setImage(image: UIImage(data: imageData))
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -200,7 +210,7 @@ extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
 
          if case .interests(var list) = data {
             list[safe: index]?.isSelected = true
-            createPersonalCardParameters.interestsIds = list
+            personalCardParameters.interestsIds = list
                 .filter { $0.isSelected }
                 .compactMap { $0.id }
             dataSource?[indexPath] = .interests(list: list)
@@ -225,19 +235,19 @@ extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
 extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 
     func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
-        guard let textType = PersonalCard.TextType.init(rawValue: identifier ?? "") else {
+        guard let textType = CreatePersonalCard.TextType.init(rawValue: identifier ?? "") else {
             return
         }
 
         switch textType {
         case .occupiedPosition:
-            createPersonalCardParameters.position = text
+            personalCardParameters.position = text
         case .activityDescription:
-            createPersonalCardParameters.description = text
+            personalCardParameters.description = text
         case .workingPhoneNumber:
-            createPersonalCardParameters.contactTelephone = text
+            personalCardParameters.contactTelephone = text
         case .workingEmailForCommunication:
-            createPersonalCardParameters.contactEmail = text
+            personalCardParameters.contactEmail = text
         }
     }
 
@@ -248,46 +258,84 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
-        guard let textType = PersonalCard.TextType.init(rawValue: identifier ?? "") else {
+        guard let textType = CreatePersonalCard.TextType.init(rawValue: identifier ?? "") else {
             return
         }
 
         switch textType {
         case .occupiedPosition:
-            createPersonalCardParameters.position = text
+            personalCardParameters.position = text
         case .activityDescription:
-            createPersonalCardParameters.description = text
+            personalCardParameters.description = text
         case .workingPhoneNumber:
-            createPersonalCardParameters.contactTelephone = text
+            personalCardParameters.contactTelephone = text
         case .workingEmailForCommunication:
-            createPersonalCardParameters.contactEmail = text
+            personalCardParameters.contactEmail = text
         }
     }
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {
-        guard let action = PersonalCard.ActionType.init(rawValue: identifier ?? "") else {
+        guard let action = CreatePersonalCard.ActionType.init(rawValue: identifier ?? "") else {
             return
         }
 
         switch action {
         case .activityType:
             let selectedPractice = cell.textView.text
-            createPersonalCardParameters.practiseTypeId = self.practices.first(where: { $0.title == selectedPractice })?.id
+            personalCardParameters.practiseTypeId = self.practices.first(where: { $0.title == selectedPractice })?.id
         case .placeOfLiving:
             let filter = GMSAutocompleteFilter()
             filter.type = .city
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
-                self?.createPersonalCardParameters.cityPlaceId = fetchedPlace.placeID
+                self?.personalCardParameters.cityPlaceId = fetchedPlace.placeID
             })
         case .activityRegion:
             let filter = GMSAutocompleteFilter()
             filter.type = .geocode
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
-                self?.createPersonalCardParameters.regionPlaceId = fetchedPlace.placeID
+                self?.personalCardParameters.regionPlaceId = fetchedPlace.placeID
              })
         }
+    }
+
+
+}
+
+// MARK: - SocialsListTableViewCell delegation
+extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
+
+
+    func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
+        switch item {
+        case .view(let model):
+            Log.debug("\(model.title) selected")
+        case .add:
+            Log.debug("add new item")
+        }
+    }
+
+    func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath) {
+        let actions: [UIAlertAction] = [
+
+            .init(title: "Видалити", style: .destructive, handler: { (_) in
+                cell.deleteAt(indexPath: indexPath)
+                self.socialList.remove(at: indexPath.item)
+                self.invalidateDataSource()
+            }),
+
+            .init(title: "Змінити", style: .default, handler: { (_) in
+                Log.debug("Change")
+            }),
+
+            .init(title: "Відмінити", style: .cancel, handler: { (_) in
+                Log.debug("Cancel")
+            })
+
+        ]
+
+        view?.actionSheetAlert(title: value.title, message: nil, actions: actions)
     }
 
 

@@ -11,17 +11,20 @@ import UIKit
 class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
     // MARK: Properties
-    var source: [PersonalCard.Section] = []
+    var source: [CreatePersonalCard.Section] = []
 
     unowned var tableView: UITableView
-    weak var cellsDelegate: (TextViewTableViewCellDelegate & TextFieldTableViewCellDelegate & InterestsSelectionTableViewCellDelegate)?
+    weak var cellsDelegate: (TextViewTableViewCellDelegate &
+                             TextFieldTableViewCellDelegate &
+                             InterestsSelectionTableViewCellDelegate &
+                             SocialsListTableViewCellDelegate)?
 
     private lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
         return pickerView
     }()
 
-    subscript(indexPath: IndexPath) -> PersonalCard.Item? {
+    subscript(indexPath: IndexPath) -> CreatePersonalCard.Item? {
         get {
             return source[safe: indexPath.section]?.items[safe: indexPath.row]
         }
@@ -40,6 +43,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.identifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.identifier)
         tableView.register(InterestsSelectionTableViewCell.nib, forCellReuseIdentifier: InterestsSelectionTableViewCell.identifier)
+        tableView.register(SocialsListTableViewCell.nib, forCellReuseIdentifier: SocialsListTableViewCell.identifier)
     }
 
     // MARK:  UITableViewDataSource
@@ -104,6 +108,12 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: InterestsSelectionTableViewCell.identifier, for: indexPath) as! InterestsSelectionTableViewCell
             cell.delegate = cellsDelegate
             cell.dataSource = list
+            return cell
+
+        case .socialList(let list):
+            let cell = tableView.dequeueReusableCell(withIdentifier: SocialsListTableViewCell.identifier, for: indexPath) as! SocialsListTableViewCell
+            cell.delegate = cellsDelegate
+            cell.fill(items: list, isEditable: true)
             return cell
         }
 

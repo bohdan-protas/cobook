@@ -17,7 +17,7 @@ class InterestsSelectionTableViewCell: UITableViewCell {
 
     @IBOutlet var interestsCollectionView: UICollectionView!
     weak var delegate: InterestsSelectionTableViewCellDelegate?
-    var dataSource: [PersonalCard.Interest] = []
+    var dataSource: [CreatePersonalCard.Interest] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
