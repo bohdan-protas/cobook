@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AccountDataSource: NSObject, UITableViewDataSource {
 
@@ -56,6 +57,9 @@ class AccountDataSource: NSObject, UITableViewDataSource {
             cell.telephoneNumberLabel.text = model.telephone
             cell.companyNameLabel.text = model.name
 
+            cell.titleImageView.kf.setImage(with: URL.init(string: model.image ?? ""), options: [.transition(.fade(0.3)),
+                                                                                                 .processor(RoundCornerImageProcessor(cornerRadius: 16))])
+
             return cell
         case .personalCardPreview(let model):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountCardPreviewTableViewCell.identifier, for: indexPath) as? AccountCardPreviewTableViewCell else {
@@ -65,6 +69,9 @@ class AccountDataSource: NSObject, UITableViewDataSource {
             cell.proffesionLabel.text = model.profession
             cell.telephoneNumberLabel.text = model.telephone
             cell.companyNameLabel.text = model.name
+            
+            cell.titleImageView.kf.setImage(with: URL.init(string: model.image ?? ""), options: [.transition(.fade(0.3)),
+                                                                                                 .processor(RoundCornerImageProcessor(cornerRadius: 16))])
 
             return cell
         case .title(let text):

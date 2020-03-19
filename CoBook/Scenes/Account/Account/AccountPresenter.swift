@@ -67,6 +67,7 @@ class AccountPresenter: BasePresenter {
             break
         case .personalCardPreview(let model):
             break
+
         default: break
         }
     }
@@ -109,12 +110,11 @@ private extension AccountPresenter {
             cardsPreviceSection.items.append(.title(text: "Мої візитки:"))
             personalCardsList.forEach {
                 cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
-                                                                                     image: $0.avatar?.sourceUrl,
-                                                                                     name: "Name Name",
-                                                                                     profession: $0.practiceType?.title,
-                                                                                     telephone: $0.telephone?.number)))
+                                                                                                 image: $0.avatar?.sourceUrl,
+                                                                                                 name: "Name Name",
+                                                                                                 profession: $0.practiceType?.title,
+                                                                                                 telephone: $0.telephone?.number)))
                 cardsPreviceSection.items.append(.action(type: .createBusinessCard))
-
             }
         }
 

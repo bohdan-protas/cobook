@@ -36,8 +36,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmK-GW-Nza" userLabel="Detail Info Container">
                         <rect key="frame" x="16" y="16" width="288" height="64"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Y5-RH-F2P" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Y5-RH-F2P">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Hai-Ws-1Rn"/>
                                     <constraint firstAttribute="width" constant="64" id="Lh9-Bj-YM2"/>
@@ -51,7 +52,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="C87-Wz-Y9g">
                                 <rect key="frame" x="80" y="2" width="168" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtE-hR-fD4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtE-hR-fD4">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="83M-FE-Z29"/>
@@ -60,7 +61,7 @@
                                         <color key="textColor" name="Theme_Black-Middle"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tu-Am-nAk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tu-Am-nAk">
                                         <rect key="frame" x="0.0" y="23" width="168" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="f6S-vZ-bWy"/>
@@ -69,7 +70,7 @@
                                         <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2y-ll-lbw">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2y-ll-lbw">
                                         <rect key="frame" x="0.0" y="44" width="168" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="Lkd-kN-Aaz"/>
@@ -88,7 +89,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="C87-Wz-Y9g" firstAttribute="top" secondItem="gmK-GW-Nza" secondAttribute="top" constant="2" id="C3O-R9-yp3"/>
                             <constraint firstItem="zPd-Yt-jf5" firstAttribute="leading" secondItem="C87-Wz-Y9g" secondAttribute="trailing" constant="16" id="Mlx-oV-0Pr"/>
