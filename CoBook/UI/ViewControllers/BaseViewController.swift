@@ -10,7 +10,7 @@ import UIKit
 import JGProgressHUD
 import Alamofire
 
-class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayableView {
+class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayableView, NavigableView {
 
     // MARK: Properties
     lazy var hud: JGProgressHUD = {
@@ -35,6 +35,11 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
     func stopLoading() {
         self.hud.dismiss(animated: true)
+    }
+
+    // MARK: - NavigableView
+    func push(controller: UIViewController, animated: Bool) {
+        self.navigationController?.pushViewController(controller, animated: animated)
     }
 
 

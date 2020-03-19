@@ -34,7 +34,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     private var createPersonalCardParameters = PersonalCardAPI.Request.CreationParameters() {
         didSet {
-            view?.setSaveButtonEnabled(createPersonalCardParameters.isRequiredDataIsFilled)
+            view?.setSaveButtonEnabled(createPersonalCardParameters.isRequiredDataFilled)
         }
     }
 

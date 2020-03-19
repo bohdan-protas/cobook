@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol Router: URLRequestConvertible {
+protocol Endpoint: URLRequestConvertible {
     var useAuthirizationToken: Bool { get }
     var method: HTTPMethod { get }
     var baseUrlPath: URLComponents { get }
@@ -17,14 +17,14 @@ protocol Router: URLRequestConvertible {
     var parameters: Parameters? { get }
 }
 
-extension Router {
+extension Endpoint {
     var baseUrlPath: URLComponents {
         return APIConstants.baseURLPath
     }
 }
 
 // MARK: - Base configuration
-extension Router {
+extension Endpoint {
 
     func asURLRequest() throws -> URLRequest {
         // Base URL

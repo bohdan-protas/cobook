@@ -10,18 +10,31 @@ import UIKit
 
 class AccountDataSource: NSObject, UITableViewDataSource {
 
-    var sections: [Account.Section] = []
+    //MARK: Properties
+    var source: [Account.Section] = []
+    unowned var tableView: UITableView
+    
+    // MARK: Lifecycle
+    init(tableView: UITableView) {
+        self.tableView = tableView
+        super.init()
+
+        tableView.dataSource = self
+        tableView.register(AccountCardPreviewTableViewCell.nib, forCellReuseIdentifier: AccountCardPreviewTableViewCell.identifier)
+        tableView.register(AccountItemTableViewCell.nib, forCellReuseIdentifier: AccountItemTableViewCell.identifier)
+        tableView.register(SectionTitleTableViewCell.nib, forCellReuseIdentifier: SectionTitleTableViewCell.identifier)
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return source.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return sections[safe: section]?.items.count ?? 0
+         return source[safe: section]?.items.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let dataType =  sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+        guard let dataType = source[safe: indexPath.section]?.items[safe: indexPath.item] else {
             return UITableViewCell()
         }
 
@@ -34,12 +47,33 @@ class AccountDataSource: NSObject, UITableViewDataSource {
             cell.typeImageView.image = type.image
             return cell
 
-        case .businessCard(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountBusinessCardTableViewCell.identifier, for: indexPath) as? AccountBusinessCardTableViewCell else {
+        case .businessCardPreview(let model):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountCardPreviewTableViewCell.identifier, for: indexPath) as? AccountCardPreviewTableViewCell else {
                 return UITableViewCell()
             }
-            cell.fill(with: model)
-            return UITableViewCell()
+
+            cell.proffesionLabel.text = model.profession
+            cell.telephoneNumberLabel.text = model.telephone
+            cell.companyNameLabel.text = model.name
+
+            return cell
+        case .personalCardPreview(let model):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountCardPreviewTableViewCell.identifier, for: indexPath) as? AccountCardPreviewTableViewCell else {
+                return UITableViewCell()
+            }
+
+            cell.proffesionLabel.text = model.profession
+            cell.telephoneNumberLabel.text = model.telephone
+            cell.companyNameLabel.text = model.name
+
+            return cell
+        case .title(let text):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SectionTitleTableViewCell.identifier, for: indexPath) as? SectionTitleTableViewCell else {
+                return UITableViewCell()
+            }
+
+            cell.titleLabel.text = text
+            return cell
         }
 
     }

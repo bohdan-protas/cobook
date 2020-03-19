@@ -59,7 +59,7 @@ enum PersonalCardAPI {
             var contactEmail: String?
             var socialNetworks: [SocialNetwork] = []
 
-            var isRequiredDataIsFilled: Bool {
+            var isRequiredDataFilled: Bool {
                 return
                     !(avatarId ?? "").isEmpty &&
                     !(cityPlaceId ?? "").isEmpty &&

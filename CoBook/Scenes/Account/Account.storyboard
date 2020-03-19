@@ -22,7 +22,7 @@
                                 <color key="backgroundColor" name="Theme_Gray-Background"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Nz3-fY-tzn" firstAttribute="leading" secondItem="Lex-8g-ztL" secondAttribute="leading" id="98m-6b-KwI"/>
                             <constraint firstItem="Nz3-fY-tzn" firstAttribute="trailing" secondItem="Lex-8g-ztL" secondAttribute="trailing" id="HZq-UZ-wN1"/>
@@ -51,7 +51,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="l0l-NB-rD4">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" name="Theme_Gray-Background"/>

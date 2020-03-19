@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum SignInRouter: Router {
+enum SignInEndpoint: Endpoint {
 
     /**
      Login route

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum CardsRouter: Router {
+enum CardsEndpoint: Endpoint {
 
     case createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters)
 

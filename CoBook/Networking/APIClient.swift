@@ -37,16 +37,16 @@ class APIClient {
     Base request builder
 
     - parameters:
-       - router: path to endpoint
+       - endpoint: path to endpoint
        - decoder: decoder for decode response, by default JSONDecoder()
        - completion: parsed response from server
     */
     @discardableResult
-    private func performRequest<T: Decodable>(router: Router,
+    private func performRequest<T: Decodable>(endpoint: Endpoint,
                                               decoder: JSONDecoder = JSONDecoder(),
                                               completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
 
-        return session.request(router)
+        return session.request(endpoint)
             .validate()
             .response { (response) in
                 if let responseData = response.data {
@@ -102,7 +102,9 @@ class APIClient {
                             let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
                             completion(.failure(error))
                         }
-                    } catch {
+                    } catch let decodeError {
+                        Log.error(decodeError)
+
                         let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
                         completion(.failure(error))
                     }
@@ -135,8 +137,8 @@ extension APIClient {
                                      lastName: String,
                                      completion: @escaping (Result<SignInAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -151,8 +153,8 @@ extension APIClient {
                        accessToken: String,
                        completion: @escaping (Result<VerifyAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.verify(smsCode: smsCode, accessToken: accessToken)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.verify(smsCode: smsCode, accessToken: accessToken)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -165,8 +167,8 @@ extension APIClient {
     func resendSmsRequest(accessToken: String,
                           completion: @escaping (Result<SignInAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.resend(accessToken: accessToken)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.resend(accessToken: accessToken)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -181,8 +183,8 @@ extension APIClient {
                              password: String,
                              completion: @escaping (Result<RegisterAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.finish(accessToken: accessToken, password: password)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.finish(accessToken: accessToken, password: password)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
 
@@ -202,8 +204,8 @@ extension APIClient {
                        password: String,
                        completion: @escaping (Result<RegisterAPIResponseData?, Error>) -> Void) {
 
-        let router = SignInRouter.login(login: login, password: password)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignInEndpoint.login(login: login, password: password)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 }
 
@@ -220,8 +222,8 @@ extension APIClient {
     func refreshTokenRequest(refreshToken: String,
                              completion: @escaping (Result<RefreshTokenAPIResponseData?, Error>) -> Void) {
 
-        let router = AuthRouter.refresh(refreshToken: refreshToken)
-        performRequest(router: router, completion: completion)
+        let endpoint = AuthEndpoint.refresh(refreshToken: refreshToken)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -234,27 +236,27 @@ extension APIClient {
     func forgotPasswordRequest(telephone: String,
                                completion: @escaping (Result<VoidResponseData?, Error>) -> Void) {
 
-        let router = AuthRouter.forgotPassword(telephone: telephone)
-        performRequest(router: router, completion: completion)
+        let endpoint = AuthEndpoint.forgotPassword(telephone: telephone)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
 }
 
-// MARK: - Interests router requests
+// MARK: - InterestsEndpoint requests
 extension APIClient {
 
     /**
      Request localized list of interests
     */
     func interestsListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Interest]?, Error>) -> Void) {
-        let router = InterestsRouter.list
-        performRequest(router: router, completion: completion)
+        let endpoint = InterestsEndpoint.list
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
 
 }
 
-// MARK: - PracticeTypesRouter request
+// MARK: - PracticeTypesEndpoint request
 extension APIClient {
 
     /**
@@ -262,14 +264,14 @@ extension APIClient {
     */
     @discardableResult
     func practicesTypesListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Practice]?, Error>) -> Void) -> DataRequest{
-        let router = PracticeTypesRouter.list
-        return performRequest(router: router, completion: completion)
+        let endpoint = PracticeTypesEndpoint.list
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
 
 }
 
-// MARK: - CardsRouter requests
+// MARK: - CardsEndpoint requests
 extension APIClient {
 
     /**
@@ -279,13 +281,13 @@ extension APIClient {
     func createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters,
                             completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
 
-        let router = CardsRouter.createPersonalCard(parameters: parameters)
-        return performRequest(router: router, completion: completion)
+        let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
 }
 
-// MARK: - ContentManagerRouter requests
+// MARK: - ContentManagerEndpoint requests
 extension APIClient {
 
     /**
@@ -297,12 +299,30 @@ extension APIClient {
      */
     @discardableResult
     func upload(imageData: Data, completion: @escaping (Result<FileAPIResponseData?, Error>) -> Void) -> DataRequest {
-        let router = ContentManagerRouter.singleFileUpload
+        let endpoint = ContentManagerEndpoint.singleFileUpload
 
         // FIXME: Fix force unwrap
-        let url = router.urlRequest!.url!
-        let headers = router.urlRequest?.headers
+        let url = endpoint.urlRequest!.url!
+        let headers = endpoint.urlRequest?.headers
         return upload(imageData: imageData, to: url, headers: headers, completion: completion)
+    }
+
+}
+
+// MARK: - ProfileEndpoint requests
+extension APIClient {
+
+    /**
+     Request get profile data
+
+     - parameters:
+        - imageData: image data(JPEG preffered)
+        - completion: parsed  'FileAPIResponseData' response from server
+     */
+    @discardableResult
+    func profileDetails(completion: @escaping (Result<Profile?, Error>) -> Void) -> DataRequest {
+        let endpoint = ProfileEndpoint.profile
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
 }

@@ -95,6 +95,7 @@ private extension CreatePersonalCardViewController {
     func setupLayout() {
         self.navigationItem.title = "Створення персональної візитки"
 
+        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.delegate = self
 
     }

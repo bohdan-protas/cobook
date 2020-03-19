@@ -21,7 +21,7 @@ struct FileAPIResponseData {
 
 }
 
-extension FileAPIResponseData: Decodable {
+extension FileAPIResponseData: Codable {
     enum CodingKeys: String, CodingKey {
         case storageKey = "storage_key"
         case id
