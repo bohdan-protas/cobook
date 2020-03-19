@@ -619,6 +619,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B83FD7D4242328D500ACA1D4 /* SocialsEditListTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SocialsEditListTableViewCell;
+			sourceTree = "<group>";
+		};
 		B84A15E62410F63100C4DC11 /* AccountCardPreviewTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -721,9 +728,9 @@
 				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
-				B826B0F323F45ED8009041DD /* Models */,
 				B8307F1F2406FED000AFE578 /* Persistance */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
+				B826B0F323F45ED8009041DD /* Models */,
 				B82A2118242135C200D0D9F5 /* UI */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
 				B823AB6923F156C600DE13EA /* Resources */,
@@ -819,6 +826,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B83FD7D4242328D500ACA1D4 /* SocialsEditListTableViewCell */,
 				B8212A5A241B6A400066700C /* InterestItemCollectionViewCell */,
 				B828282B241A96BA0003D056 /* InterestsSelectionTableViewCell */,
 				B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */,

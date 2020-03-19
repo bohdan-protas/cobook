@@ -111,7 +111,7 @@ private extension AccountPresenter {
             personalCardsList.forEach {
                 cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
                                                                                                  image: $0.avatar?.sourceUrl,
-                                                                                                 name: "Name Name",
+                                                                                                 name: "\(AppStorage.User.profile?.firstName ?? "") \(AppStorage.User.profile?.lastName ?? "")",
                                                                                                  profession: $0.practiceType?.title,
                                                                                                  telephone: $0.telephone?.number)))
                 cardsPreviceSection.items.append(.action(type: .createBusinessCard))
