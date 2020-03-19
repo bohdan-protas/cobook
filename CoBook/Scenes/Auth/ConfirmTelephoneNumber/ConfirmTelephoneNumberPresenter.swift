@@ -41,15 +41,10 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
             self.view?.stopLoading()
 
             switch result {
-            case let .success(response):
-                if response.status == .ok, response.data?.isSuccess == true {
-                    self.view?.goToCreatePasswordController()
-                } else {
-                    self.view?.infoAlert(title: nil, message: response.errorLocalizadMessage)
-                }
+            case .success:
+                self.view?.goToCreatePasswordController()
             case let .failure(error):
-                self.view?.defaultErrorAlert()
-                debugPrint(error.localizedDescription)
+                self.view?.errorAlert(message: error.localizedDescription)
             }
 
         }
@@ -61,15 +56,10 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
             self.view?.setResendButton(isLoading: false)
             switch result {
             case let .success(response):
-                switch response.status {
-                case .ok:
-                    AppStorage.Auth.accessToken = response.data?.accessToken
-                    let leftInMs = response.data?.smsResendLeftInMs ?? 0
-                    self.smsResendLeftInSec = leftInMs * 0.001
-                    self.runTimer()
-                case .error:
-                    self.view?.errorAlert(message: response.errorLocalizadMessage)
-                }
+                AppStorage.Auth.accessToken = response?.accessToken
+                let leftInMs = response?.smsResendLeftInMs ?? 0
+                self.smsResendLeftInSec = leftInMs * 0.001
+                self.runTimer()
             case let .failure(error):
                 self.view?.errorAlert(message: error.localizedDescription.description)
             }

@@ -52,18 +52,11 @@ class SignInPresenter: BasePresenter {
             self.view?.stopLoading()
             switch result {
             case let .success(response):
-                switch response.status {
+                AppStorage.User.profile = response?.profile
+                AppStorage.Auth.accessToken = response?.assessToken
+                AppStorage.Auth.refreshToken = response?.refreshToken
 
-                case .ok:
-                    AppStorage.User.profile = response.data?.profile
-                    AppStorage.Auth.accessToken = response.data?.assessToken
-                    AppStorage.Auth.refreshToken = response.data?.refreshToken
-
-                    self.view?.goTo(viewController: MainTabBarController())
-                case .error:
-                    self.view?.errorAlert(message: response.errorLocalizadMessage)
-                }
-
+                self.view?.goTo(viewController: MainTabBarController())
             case let .failure(error):
                 self.view?.errorAlert(message: error.localizedDescription.description)
             }
@@ -81,15 +74,10 @@ class SignInPresenter: BasePresenter {
 
         APIClient.default.forgotPasswordRequest(telephone: login) { (result) in
             switch result {
-            case let .success(response):
-                switch response.status {
-                case .ok:
-                    self.view?.infoAlert(title: nil, message: "ForgotPassword.successMessage".localized)
-                case .error:
-                    self.view?.errorAlert(message: response.errorLocalizadMessage)
-                }
+            case .success:
+                self.view?.infoAlert(title: nil, message: "ForgotPassword.successMessage".localized)
             case let .failure(error):
-                self.view?.errorAlert(message: error.localizedDescription.description)
+                self.view?.errorAlert(message: error.localizedDescription)
             }
         }
     }
