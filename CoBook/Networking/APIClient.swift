@@ -33,6 +33,14 @@ class APIClient {
     }
 
     // MARK: Public
+    /**
+    Base request builder
+
+    - parameters:
+       - router: path to endpoint
+       - decoder: decoder for decode response, by default JSONDecoder()
+       - completion: parsed response from server
+    */
     @discardableResult
     private func performRequest<T: Decodable>(router: Router,
                                               decoder: JSONDecoder = JSONDecoder(),
@@ -62,6 +70,16 @@ class APIClient {
             }
     } // end performRequest
 
+    /**
+    Photo upload request
+
+    - parameters:
+       - imageData: compressed image data(JPEG preffered)
+       - endpoint: path to endpoint
+       - headers: headers for authetificate
+       - decoder: decoder for decode response, by default JSONDecoder()
+       - completion: parsed response from server
+    */
     @discardableResult
     private func upload<T: Decodable>(imageData: Data,
                                       to endpoint: URLConvertible,
