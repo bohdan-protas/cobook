@@ -63,7 +63,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT9-E5-t4x" userLabel="Separator View">
-                        <rect key="frame" x="60" y="43" width="220" height="1"/>
+                        <rect key="frame" x="60" y="43" width="260" height="1"/>
                         <color key="backgroundColor" name="Theme_Separator"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="BaI-cT-HzK"/>
@@ -73,7 +73,6 @@
                 <constraints>
                     <constraint firstItem="pT9-E5-t4x" firstAttribute="leading" secondItem="rJf-cE-ckD" secondAttribute="trailing" constant="16" id="0IV-BQ-9QE"/>
                     <constraint firstItem="aPM-eH-Xlv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9xt-kN-RLU"/>
-                    <constraint firstItem="aPM-eH-Xlv" firstAttribute="leading" secondItem="pT9-E5-t4x" secondAttribute="trailing" id="Ji0-bq-8UZ"/>
                     <constraint firstItem="aPM-eH-Xlv" firstAttribute="leading" secondItem="BGg-UX-17T" secondAttribute="trailing" constant="16" id="Ne1-g4-Xx1"/>
                     <constraint firstItem="rJf-cE-ckD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="XQ1-Ak-fQr"/>
                     <constraint firstAttribute="bottom" secondItem="pT9-E5-t4x" secondAttribute="bottom" id="aMJ-1j-9eK"/>
@@ -81,6 +80,7 @@
                     <constraint firstAttribute="trailing" secondItem="aPM-eH-Xlv" secondAttribute="trailing" constant="16" id="ehb-3S-kOs"/>
                     <constraint firstItem="BGg-UX-17T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="jh0-9L-Oe7"/>
                     <constraint firstItem="rJf-cE-ckD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lJm-Hw-bkv"/>
+                    <constraint firstAttribute="trailing" secondItem="pT9-E5-t4x" secondAttribute="trailing" id="nWK-3u-wtH"/>
                     <constraint firstItem="BGg-UX-17T" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nai-62-3eR"/>
                     <constraint firstItem="pT9-E5-t4x" firstAttribute="top" secondItem="BGg-UX-17T" secondAttribute="bottom" constant="12" id="v9Y-Wv-BiR"/>
                 </constraints>

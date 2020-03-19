@@ -10,14 +10,9 @@ import Foundation
 
 enum APIConstants {
 
-    static var baseURLPath: URLComponents {
-        get {
-            var components = URLComponents()
-            components.scheme   = "https"
-            components.host     = "3.124.214.212"
-            components.path     = "/api/v1"
-            return components
-        }
+    enum Path: String {
+        case API            = "/api/v1"
+        case contentManager = "/cm/v1"
     }
 
     enum ParameterKey {
@@ -32,8 +27,18 @@ enum APIConstants {
         static let refreshToken = "refresh_token"
     }
 
+    static var baseURLPath: URLComponents {
+        get {
+            var components = URLComponents()
+            components.scheme   = "https"
+            components.host     = "3.124.214.212"
+            components.path     = Path.API.rawValue
+            return components
+        }
+    }
+
     enum Google {
-        static let placesApiKey: String = "AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"//"AIzaSyD5F_F9Y_6Ypim3LldWIKA3I"
+        static let placesApiKey: String = "AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"
     }
 
 

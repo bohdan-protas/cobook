@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum AuthRouter: Router {
+enum AuthEndpoint: Endpoint {
 
     /**
      Request new credentials via login router

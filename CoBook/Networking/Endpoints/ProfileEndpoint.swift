@@ -1,18 +1,16 @@
 //
-//  PracticeTypesRouter.swift
+//  ProfileEndpoint.swift
 //  CoBook
 //
-//  Created by protas on 3/15/20.
+//  Created by protas on 3/19/20.
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
-enum PracticeTypesRouter: Router {
+enum ProfileEndpoint: Endpoint {
 
-    /// Request localized list of practice types
-    case list
+    case profile
 
     var useAuthirizationToken: Bool {
         return true
@@ -23,7 +21,7 @@ enum PracticeTypesRouter: Router {
     }
 
     var path: String {
-        return "/practice_types/list"
+        return "/profile"
     }
 
     var parameters: Parameters? {

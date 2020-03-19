@@ -35,13 +35,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         return controller
     }()
 
-    private lazy var autocompleteViewController: GMSAutocompleteViewController = {
-        let acController = GMSAutocompleteViewController()
-        acController.modalPresentationStyle = .overFullScreen
-        acController.delegate = self
-        return acController
-    }()
-
     private lazy var personalCardPhotoManagmentView: PersonalCardPhotoManagmentView = {
         let view = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
         view.delegate = self
@@ -69,13 +62,28 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         self.navigationController?.popViewController(animated: true)
     }
 
-    func showAutocompleteController(completion: ((GMSPlace) -> Void)?) {
+    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?) {
         placeCompletion = completion
+
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.modalPresentationStyle = .overFullScreen
+        autocompleteViewController.autocompleteFilter = filter
+        autocompleteViewController.delegate = self
+
         present(autocompleteViewController, animated: true, completion: nil)
     }
 
     func setSaveButtonEnabled(_ isEnabled: Bool) {
         cardSaveView.saveButton.isEnabled = isEnabled
+    }
+
+    func setupHeaderFooterViews() {
+        tableView.tableHeaderView = personalCardPhotoManagmentView
+        tableView.tableFooterView = cardSaveView
+    }
+
+    func setImage(image: UIImage?) {
+        personalCardPhotoManagmentView.setImage(image)
     }
 
 
@@ -87,9 +95,9 @@ private extension CreatePersonalCardViewController {
     func setupLayout() {
         self.navigationItem.title = "Створення персональної візитки"
 
+        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.delegate = self
-        tableView.tableHeaderView = personalCardPhotoManagmentView
-        tableView.tableFooterView = cardSaveView
+
     }
 
 
@@ -121,7 +129,6 @@ extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UI
 
         guard let image = info[.originalImage] as? UIImage else { return }
         presenter.userImagePicked(image)
-        personalCardPhotoManagmentView.setImage(image)
     }
 
 

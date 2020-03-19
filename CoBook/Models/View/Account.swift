@@ -15,15 +15,18 @@ enum Account {
     }
 
     enum Item {
+        case title(text: String)
         case action(type: ActionType)
-        case businessCard(model: BusinessCard)
+        case personalCardPreview(model: CardPreview)
+        case businessCardPreview(model: CardPreview)
     }
 
-    struct BusinessCard {
-        var image: String
-        var name: String
-        var profession: String
-        var telephone: String
+    struct CardPreview {
+        var id: Int
+        var image: String?
+        var name: String?
+        var profession: String?
+        var telephone: String?
     }
 
     enum ActionType {

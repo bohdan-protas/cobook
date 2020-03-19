@@ -1,17 +1,17 @@
 //
-//  InterestsRouter.swift
+//  PracticeTypesRouter.swift
 //  CoBook
 //
-//  Created by protas on 3/13/20.
+//  Created by protas on 3/15/20.
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
 import Foundation
 import Alamofire
 
-enum InterestsRouter: Router {
+enum PracticeTypesEndpoint: Endpoint {
 
-    /// Request localized list of interests
+    /// Request localized list of practice types
     case list
 
     var useAuthirizationToken: Bool {
@@ -23,12 +23,12 @@ enum InterestsRouter: Router {
     }
 
     var path: String {
-        return "/interests/list"
+        return "/practice_types/list"
     }
 
     var parameters: Parameters? {
         return nil
     }
 
-    
+
 }

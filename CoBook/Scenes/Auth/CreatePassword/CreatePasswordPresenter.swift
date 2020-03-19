@@ -49,18 +49,14 @@ class CreatePasswordPresenter: BasePresenter {
         APIClient.default.signUpFinishRequest(accessToken: AppStorage.Auth.accessToken ?? "", password: self.password) { (result) in
             switch result {
             case let .success(response):
-                switch response.status {
-                case .ok:
-                    AppStorage.User.isUserCompletedRegistration = true
-                    AppStorage.User.isUserInitiatedRegistration = false
-                    AppStorage.User.profile = response.data?.profile
-                    AppStorage.Auth.accessToken = response.data?.assessToken
-                    AppStorage.Auth.refreshToken = response.data?.refreshToken
+                AppStorage.Auth.accessToken = response?.assessToken
+                AppStorage.Auth.refreshToken = response?.refreshToken
 
-                    self.view?.goTo(viewController: MainTabBarController())
-                case .error:
-                    self.view?.errorAlert(message: response.errorLocalizadMessage, handler: nil)
-                }
+                AppStorage.User.isUserCompletedRegistration = true
+                AppStorage.User.isUserInitiatedRegistration = false
+                AppStorage.User.profile = response?.profile
+
+                self.view?.goTo(viewController: MainTabBarController())
             case let .failure(error):
                 self.view?.errorAlert(message: error.localizedDescription.description, handler: nil)
             }

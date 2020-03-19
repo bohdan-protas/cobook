@@ -13,30 +13,32 @@ final class AuthRequestInterceptor: RequestInterceptor {
 
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         guard let response = request.task?.response as? HTTPURLResponse else {
-            // The request did not fail due to a 403 Unauthorized response.
-            // Return the original error and don't retry the request.
             return completion(.doNotRetryWithError(error))
         }
 
         switch response.statusCode {
         case 401:
-            let myError = NSError.init(domain: "", code: 401, userInfo: nil)
-            completion(.doNotRetryWithError(myError))
+            DispatchQueue.main.async {
+                AppStorage.Auth.deleteAllData()
+                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                if let topController = UIApplication.topViewController() {
+                    topController.present(signInViewController, animated: true, completion: {
+                        (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: "Please, login before continue")
+                    })
+                }
+                completion(.doNotRetry)
+            }
         case 403:
-            APIClient.default.refreshTokenRequest(refreshToken: AppStorage.Auth.refreshToken ?? "") { (result) in
-                switch result {
-                case let .success(response):
-                    if response.status == .ok {
-                        AppStorage.Auth.accessToken = response.data?.accessToken
+            DispatchQueue.main.async {
+                APIClient.default.refreshTokenRequest(refreshToken: AppStorage.Auth.refreshToken ?? "") { (result) in
+                    switch result {
+                    case let .success(response):
+                        AppStorage.Auth.accessToken = response?.accessToken
                         completion(.retry)
-                    } else {
+                    case let .failure(error):
                         AppStorage.Auth.deleteAllData()
-                        let myError = NSError.init(domain: "", code: 401, userInfo: nil)
-                        completion(.doNotRetryWithError(myError))
+                        completion(.doNotRetryWithError(error))
                     }
-                case let .failure(error):
-                    AppStorage.Auth.deleteAllData()
-                    completion(.doNotRetryWithError(error))
                 }
             }
         default:
@@ -48,3 +50,5 @@ final class AuthRequestInterceptor: RequestInterceptor {
     }
 
 }
+
+

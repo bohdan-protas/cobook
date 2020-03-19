@@ -8,55 +8,45 @@
 
 import UIKit
 
-protocol AccountView: AlertDisplayableView, LoadDisplayableView {
+protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
+    var tableView: UITableView! { get set }
     func fillHeader(with profile: Profile?)
-
-    func push(controller: UIViewController)
 }
 
 class AccountPresenter: BasePresenter {
-    weak var view: AccountView?
-    var dataSource = AccountDataSource()
+    // MARK: Properties
+    private weak var view: AccountView?
+    var dataSource: AccountDataSource?
 
-    func setup() {
-        // Setup data source
-        dataSource.sections = [
+    private var personalCardsList: [CardPreview] = []
 
-            Account.Section(items: [
-                Account.Item.action(type: .createBusinessCard),
-                Account.Item.action(type: .createPersonalCard),
-            ]),
+    // MARK: Public
+    func attachView(_ view: AccountView) {
+        self.view = view
+        self.dataSource = AccountDataSource(tableView: view.tableView)
+    }
 
-            Account.Section(items: [
-                Account.Item.action(type: .inviteFriends),
-                Account.Item.action(type: .statictics),
-                Account.Item.action(type: .generateQrCode),
-                Account.Item.action(type: .faq)
-            ]),
+    func detachView() {
+        view = nil
+        dataSource = nil
+    }
 
-            Account.Section(items: [
-                Account.Item.action(type: .quitAccount),
-            ])
-        ]
-
-        //setup header
-        view?.fillHeader(with: AppStorage.User.profile)
+    func onDidAppear() {
+        fetchProfileData()
     }
 
     func selectedRow(at indexPath: IndexPath) {
-        guard let actionType = dataSource.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+        guard let actionType = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.item] else {
             debugPrint("Error occured when selected account action type")
             return
         }
 
         switch actionType {
-
         case .action(let type):
-
             switch type {
             case .createPersonalCard:
                 let createPersonalCardController: CreatePersonalCardViewController = UIStoryboard.account.initiateViewControllerFromType()
-                view?.push(controller: createPersonalCardController)
+                view?.push(controller: createPersonalCardController, animated: true)
             case .createBusinessCard:
                 break
             case .inviteFriends:
@@ -73,14 +63,80 @@ class AccountPresenter: BasePresenter {
                 break
             }
 
-        case .businessCard(let model):
+        case .businessCardPreview(let model):
             break
+        case .personalCardPreview(let model):
+            break
+
+        default: break
         }
-
-
     }
 
-    func attachView(_ view: AccountView) { self.view = view }
-    func detachView() { view = nil }
+
+}
+
+// MARK: - Privates
+private extension AccountPresenter {
+
+    func fetchProfileData() {
+        view?.startLoading()
+        APIClient.default.profileDetails { [weak self] (result) in
+            guard let strongSelf = self else { return }
+
+            strongSelf.view?.stopLoading()
+            switch result {
+            case let .success(response):
+                AppStorage.User.profile = response
+                strongSelf.personalCardsList = response?.personalCardsList ?? []
+                strongSelf.setupDataSource()
+            case let .failure(error):
+                strongSelf.personalCardsList = AppStorage.User.profile?.personalCardsList ?? []
+                strongSelf.setupDataSource()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func setupDataSource() {
+        view?.fillHeader(with: AppStorage.User.profile)
+
+        var cardsPreviceSection = Account.Section(items: [])
+        if personalCardsList.isEmpty {
+            cardsPreviceSection.items = [
+                .action(type: .createPersonalCard),
+                .action(type: .createBusinessCard),
+            ]
+        } else {
+            cardsPreviceSection.items.append(.title(text: "Мої візитки:"))
+            personalCardsList.forEach {
+                cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
+                                                                                                 image: $0.avatar?.sourceUrl,
+                                                                                                 name: "Name Name",
+                                                                                                 profession: $0.practiceType?.title,
+                                                                                                 telephone: $0.telephone?.number)))
+                cardsPreviceSection.items.append(.action(type: .createBusinessCard))
+            }
+        }
+
+        // Setup data source
+        dataSource?.source = [
+            cardsPreviceSection,
+            Account.Section(items: [
+                .action(type: .inviteFriends),
+                .action(type: .statictics),
+                .action(type: .generateQrCode),
+                .action(type: .faq)
+            ]),
+
+            Account.Section(items: [
+                .action(type: .quitAccount),
+            ])
+        ]
+
+        dataSource?.tableView.reloadData()
+    }
+
+
+
 
 }

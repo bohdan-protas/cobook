@@ -10,14 +10,20 @@ import UIKit
 import GooglePlaces
 import Alamofire
 
-protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, ErrorHandlerView {
+protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
-    func showAutocompleteController(completion: ((GMSPlace) -> Void)?)
+    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
+    func setImage(image: UIImage?)
     func popController()
+    func setupHeaderFooterViews()
 }
 
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
+
+    enum Defaults {
+        static let imageCompressionQuality: CGFloat = 0.1
+    }
 
     // MARK: Properties
     weak var view: CreatePersonalCardView?
@@ -28,7 +34,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     private var createPersonalCardParameters = PersonalCardAPI.Request.CreationParameters() {
         didSet {
-            view?.setSaveButtonEnabled(createPersonalCardParameters.isRequiredDataIsFilled)
+            view?.setSaveButtonEnabled(createPersonalCardParameters.isRequiredDataFilled)
         }
     }
 
@@ -44,64 +50,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func setup() {
-        let group = DispatchGroup()
-
-        var practicesTypesListRequestError: AFError?
-        var interestsListRequestError: AFError?
-
-        view?.startLoading()
-
-        // fetch practices
-        group.enter()
-        APIClient.default.practicesTypesListRequest { [weak self] (result) in
-            guard let strongSelf = self else { return }
-
-            switch result {
-            case let .success(response):
-                strongSelf.practices = (response.data ?? []).map { PersonalCard.Practice(id: $0.id, title: $0.title) }
-                group.leave()
-            case let .failure(error):
-                practicesTypesListRequestError = error
-                group.leave()
-            }
-        }
-
-        // fetch interests
-        group.enter()
-        APIClient.default.interestsListRequest { [weak self] (result) in
-            guard let strongSelf = self else { return }
-
-            switch result {
-            case let .success(response):
-                strongSelf.interests = (response.data ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
-                group.leave()
-            case let .failure(error):
-                interestsListRequestError = error
-                group.leave()
-            }
-        }
-
-        group.notify(queue: .main) { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.view?.stopLoading()
-
-            if practicesTypesListRequestError != nil {
-                strongSelf.view?.handle(error: practicesTypesListRequestError)
-                strongSelf.setupDataSource()
-                return
-            }
-
-            if interestsListRequestError != nil  {
-                strongSelf.view?.handle(error: interestsListRequestError)
-            }
-
-            strongSelf.setupDataSource()
-        }
-
-    }
-
-    func userImagePicked(_ image: UIImage?) {
-
+        fetchSetupData()
     }
 
     func createPerconalCard() {
@@ -111,20 +60,20 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
             strongSelf.view?.stopLoading()
 
             switch result {
-            case let .success(response):
-                if response.status == .error {
-                    strongSelf.view?.errorAlert(message: response.errorLocalizadMessage ?? "")
-                }
+            case .success:
                 strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { [weak self] (_) in
                     self?.view?.popController()
                 })
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
-                debugPrint(error.localizedDescription)
             }
         }
     }
 
+    func userImagePicked(_ image: UIImage?) {
+        let selectedUserImageData = image?.jpegData(compressionQuality: Defaults.imageCompressionQuality)
+        self.uploadUserImage(data: selectedUserImageData)
+    }
 
 
 }
@@ -133,7 +82,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 private extension CreatePersonalCardPresenter {
 
     func setupDataSource() {
-
+        view?.setupHeaderFooterViews()
         dataSource?.source = [
             PersonalCard.Section(items: [
                 .title(text: "Діяльність"),
@@ -159,6 +108,83 @@ private extension CreatePersonalCardPresenter {
 
         dataSource?.cellsDelegate = self
         dataSource?.tableView.reloadData()
+    }
+
+    func fetchSetupData() {
+        let group = DispatchGroup()
+
+        var practicesTypesListRequestError: Error?
+        var interestsListRequestError: Error?
+
+        view?.startLoading()
+
+        // fetch practices
+        group.enter()
+        APIClient.default.practicesTypesListRequest { [weak self] (result) in
+            guard let strongSelf = self else { return }
+
+            switch result {
+            case let .success(response):
+                strongSelf.practices = (response ?? []).map { PersonalCard.Practice(id: $0.id, title: $0.title) }
+                group.leave()
+            case let .failure(error):
+                practicesTypesListRequestError = error
+                group.leave()
+            }
+        }
+
+        // fetch interests
+        group.enter()
+        APIClient.default.interestsListRequest { [weak self] (result) in
+            guard let strongSelf = self else { return }
+
+            switch result {
+            case let .success(response):
+                strongSelf.interests = (response ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
+                group.leave()
+            case let .failure(error):
+                interestsListRequestError = error
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+
+            if practicesTypesListRequestError != nil {
+                strongSelf.view?.errorAlert(message: practicesTypesListRequestError?.localizedDescription)
+                return
+            }
+
+            if interestsListRequestError != nil  {
+                strongSelf.view?.errorAlert(message: interestsListRequestError?.localizedDescription)
+            }
+
+            strongSelf.setupDataSource()
+        }
+    }
+
+    func uploadUserImage(data: Data?) {
+        guard let imageData = data else {
+            Log.error("Cannot find selected image data!")
+            return
+        }
+
+        view?.startLoading()
+        APIClient.default.upload(imageData: imageData) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+
+            switch result {
+            case let .success(response):
+                strongSelf.createPersonalCardParameters.avatarId = response?.id
+                strongSelf.view?.setImage(image: UIImage(data: imageData))
+            case let .failure(error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+
     }
 
 
@@ -248,12 +274,16 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             let selectedPractice = cell.textView.text
             createPersonalCardParameters.practiseTypeId = self.practices.first(where: { $0.title == selectedPractice })?.id
         case .placeOfLiving:
-            view?.showAutocompleteController(completion: { [weak self] (fetchedPlace) in
+            let filter = GMSAutocompleteFilter()
+            filter.type = .city
+            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
                 self?.createPersonalCardParameters.cityPlaceId = fetchedPlace.placeID
             })
         case .activityRegion:
-            view?.showAutocompleteController(completion: { [weak self] (fetchedPlace) in
+            let filter = GMSAutocompleteFilter()
+            filter.type = .geocode
+            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
                 self?.createPersonalCardParameters.regionPlaceId = fetchedPlace.placeID
              })

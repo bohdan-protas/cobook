@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountBusinessCardTableViewCell: UITableViewCell {
+class AccountCardPreviewTableViewCell: UITableViewCell {
 
     @IBOutlet var titleImageView: UIImageView!
     @IBOutlet var companyNameLabel: UILabel!
@@ -20,10 +20,6 @@ class AccountBusinessCardTableViewCell: UITableViewCell {
         companyNameLabel.text = ""
         proffesionLabel.text = ""
         telephoneNumberLabel.text = ""
-    }
-
-    func fill(with model: Account.BusinessCard) {
-
     }
     
 }
