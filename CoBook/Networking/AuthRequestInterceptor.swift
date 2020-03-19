@@ -33,14 +33,8 @@ final class AuthRequestInterceptor: RequestInterceptor {
                 APIClient.default.refreshTokenRequest(refreshToken: AppStorage.Auth.refreshToken ?? "") { (result) in
                     switch result {
                     case let .success(response):
-                        if response.status == .ok {
-                            AppStorage.Auth.accessToken = response.data?.accessToken
-                            completion(.retry)
-                        } else {
-                            AppStorage.Auth.deleteAllData()
-                            let myError = NSError.init(domain: "", code: 401, userInfo: nil)
-                            completion(.doNotRetryWithError(myError))
-                        }
+                        AppStorage.Auth.accessToken = response?.accessToken
+                        completion(.retry)
                     case let .failure(error):
                         AppStorage.Auth.deleteAllData()
                         completion(.doNotRetryWithError(error))

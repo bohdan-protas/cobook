@@ -60,10 +60,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
             strongSelf.view?.stopLoading()
 
             switch result {
-            case let .success(response):
-                if response.status == .error {
-                    strongSelf.view?.errorAlert(message: response.errorLocalizadMessage ?? "")
-                }
+            case .success:
                 strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { [weak self] (_) in
                     self?.view?.popController()
                 })
@@ -116,8 +113,8 @@ private extension CreatePersonalCardPresenter {
     func fetchSetupData() {
         let group = DispatchGroup()
 
-        var practicesTypesListRequestError: AFError?
-        var interestsListRequestError: AFError?
+        var practicesTypesListRequestError: Error?
+        var interestsListRequestError: Error?
 
         view?.startLoading()
 
@@ -128,7 +125,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.practices = (response.data ?? []).map { PersonalCard.Practice(id: $0.id, title: $0.title) }
+                strongSelf.practices = (response ?? []).map { PersonalCard.Practice(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 practicesTypesListRequestError = error
@@ -143,7 +140,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.interests = (response.data ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
+                strongSelf.interests = (response ?? []).map { PersonalCard.Interest(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 interestsListRequestError = error
@@ -181,10 +178,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                if response.status == .error {
-                    strongSelf.view?.errorAlert(message: response.errorLocalizadMessage ?? "")
-                }
-                strongSelf.createPersonalCardParameters.avatarId = response.data?.id
+                strongSelf.createPersonalCardParameters.avatarId = response?.id
                 strongSelf.view?.setImage(image: UIImage(data: imageData))
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)

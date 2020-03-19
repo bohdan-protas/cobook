@@ -17,12 +17,11 @@ final class LoggerEventMonitor: EventMonitor {
         }
     }
 
-    // Event called whenever a DataRequest has parsed a response.
-    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
+    func request(_ request: DataRequest, didParseResponse response: DataResponse<Data?, AFError>) {
         if let error = response.error {
             Log.error("Failed request \(request.description): \(error.localizedDescription)" )
         } else {
-            Log.info("Success request: \(request.description)")
+            Log.info("Successed request: \(request.description)")
         }
 
         /// When need find parse error
@@ -32,5 +31,6 @@ final class LoggerEventMonitor: EventMonitor {
             Log.info("Response data: \n\(degubResponseString)")
         }
     }
+
 
 }

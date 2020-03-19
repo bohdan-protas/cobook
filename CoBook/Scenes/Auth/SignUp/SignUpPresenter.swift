@@ -44,19 +44,13 @@ class SignUpPresenter: BasePresenter {
 
             switch result {
             case .success(let response):
-                switch response.status {
-                case .ok:
+                AppStorage.User.isUserInitiatedRegistration = true
+                AppStorage.User.profile?.telephone.number = self.telephone
+                AppStorage.User.profile?.email.address = self.email
 
-                    AppStorage.User.isUserInitiatedRegistration = true
-                    AppStorage.Auth.accessToken = response.data?.accessToken
-                    AppStorage.User.profile?.telephone.number = self.telephone
-                    AppStorage.User.profile?.email.address = self.email
+                AppStorage.Auth.accessToken = response?.accessToken
 
-                    self.view?.goToConfirmTelephoneNumber()
-
-                case .error:
-                    self.view?.errorAlert(message: response.errorLocalizadMessage)
-                }
+                self.view?.goToConfirmTelephoneNumber()
             case .failure(let error):
                 self.view?.errorAlert(message: error.localizedDescription)
             }
