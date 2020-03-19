@@ -116,8 +116,8 @@ private extension CreatePersonalCardPresenter {
     func fetchSetupData() {
         let group = DispatchGroup()
 
-        var practicesTypesListRequestError: AFError?
-        var interestsListRequestError: AFError?
+        var practicesTypesListRequestError: Error?
+        var interestsListRequestError: Error?
 
         view?.startLoading()
 
