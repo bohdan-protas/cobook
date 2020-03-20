@@ -61,16 +61,7 @@ class SocialsListTableViewCell: UITableViewCell {
         }
     }
 
-    func deleteAt(indexPath: IndexPath) {
-        collectionView.performBatchUpdates({
-            self.dataSource.remove(at: indexPath.item)
-            self.collectionView.deleteItems(at: [indexPath])
-        }) { (finished) in
-
-        }
-    }
-
-    func append(socialListItem: Social.ListItem) {
+    func create(socialListItem: Social.ListItem) {
         if isEditable && collectionView.numberOfItems(inSection: 0) > 1 {
             collectionView.performBatchUpdates({
                 self.dataSource.insert(socialListItem, at: collectionView.numberOfItems(inSection: 0)-1)
@@ -80,6 +71,22 @@ class SocialsListTableViewCell: UITableViewCell {
             }
         }
     }
+
+    func updateAt(indexPath: IndexPath, with item: Social.ListItem) {
+        self.dataSource[safe: indexPath.row] = item
+        collectionView.reloadItems(at: [indexPath])
+    }
+
+    func deleteAt(indexPath: IndexPath) {
+        collectionView.performBatchUpdates({
+            self.dataSource.remove(at: indexPath.item)
+            self.collectionView.deleteItems(at: [indexPath])
+        }) { (finished) in
+
+        }
+    }
+
+
 
     func fill(items: [Social.ListItem], isEditable: Bool) {
         self.isEditable = isEditable
@@ -140,7 +147,11 @@ extension SocialsListTableViewCell: UICollectionViewDataSource {
         switch item {
         case .view(let social):
             cell.socialTitleLabel.text = social.title
-            cell.socialImageView.image = social.type.image
+            if let type = social.type {
+                cell.socialImageView.image = type.image
+            } else {
+                cell.socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
+            }
         case .add:
             cell.socialImageView.image = UIImage(named: "ic_add_item")
             cell.socialTitleLabel.text = "Додати"

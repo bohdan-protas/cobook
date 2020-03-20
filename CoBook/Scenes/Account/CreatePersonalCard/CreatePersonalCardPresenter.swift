@@ -17,7 +17,7 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func setImage(image: UIImage?)
     func popController()
     func setupHeaderFooterViews()
-    func addNewSocial(completion: ((_ name: String?, _ url: String?) -> Void)?)
+    func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
 }
 
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
@@ -32,10 +32,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     private var dataSource: CreatePersonalCardDataSource?
     private var interests:  [CreatePersonalCard.Interest] = []
     private var practices:  [CreatePersonalCard.Practice] = []
-    private var socialList: [Social.ListItem] = [.view(model: Social.Model(title: "Telegram", url: nil, type: .telegram)),
-                                                                   .view(model: Social.Model(title: "Viber", url: nil, type: .viber)),
-                                                                   .view(model: Social.Model(title: "Facebook", url: nil, type: .facebookMessanger)),
-                                                                   .view(model: Social.Model(title: "Linkedin", url: nil, type: .linkedin))]
+    private var socialList: [Social.ListItem] = []
 
     private var personalCardParameters = PersonalCardAPI.Request.CreationParameters() {
         didSet {
@@ -312,17 +309,15 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
         case .view(let model):
             Log.debug("\(model.title) selected")
         case .add:
-            view?.addNewSocial { (name, url) in
-                Log.debug("name: \(name ?? "")")
-                Log.debug("url: \(url ?? "")")
-
-                guard let name = name, let url = url else {
+            view?.addNewSocial(name: nil, link: nil) { (name, strUrl) in
+                guard let name = name, let url = URL.init(string: strUrl ?? "") else {
                     self.view?.errorAlert(message: "Перевірне вхідні дані")
                     return
                 }
 
-                let newItem = Social.ListItem.view(model: Social.Model(title: name, url: URL.init(string: url), type: .telegram))
-                cell.append(socialListItem: newItem)
+                let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
+                cell.create(socialListItem: newItem)
+
                 self.socialList.append(newItem)
                 self.invalidateDataSource()
             }
@@ -339,7 +334,18 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
             }),
 
             .init(title: "Змінити", style: .default, handler: { (_) in
-                Log.debug("Change")
+                self.view?.addNewSocial(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
+                    guard let name = name, let url = URL.init(string: strUrl ?? "") else {
+                        self.view?.errorAlert(message: "Перевірне вхідні дані")
+                        return
+                    }
+
+                    let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
+                    cell.updateAt(indexPath: indexPath, with: newItem)
+
+                    self.socialList[safe: indexPath.item] = newItem
+                    self.invalidateDataSource()
+                }
             }),
 
             .init(title: "Відмінити", style: .cancel, handler: { (_) in

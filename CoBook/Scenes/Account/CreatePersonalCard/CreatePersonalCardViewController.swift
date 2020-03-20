@@ -86,7 +86,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         personalCardPhotoManagmentView.setImage(image)
     }
 
-    func addNewSocial(completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
+    func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
         let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
 
         let submitAction = UIAlertAction(title: "Створити", style: .default) { [unowned ac] _ in
@@ -101,9 +101,11 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         ac.addAction(cancelAction)
 
         ac.addTextField { (nameTextField) in
+            nameTextField.text = name
             nameTextField.placeholder = "Назва"
         }
         ac.addTextField { (urlTextField) in
+            urlTextField.text = link
             urlTextField.placeholder = "Посилання, https://link.com"
         }
 
