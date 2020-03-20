@@ -89,7 +89,9 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
     func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
         let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
 
-        let submitAction = UIAlertAction(title: "Створити", style: .default) { [unowned ac] _ in
+        let isEditing = !(name ?? "").isEmpty || !(link ?? "").isEmpty
+
+        let submitAction = UIAlertAction(title: isEditing ? "Змінити": "Створити", style: .default) { [unowned ac] _ in
             let name = ac.textFields![safe: 0]?.text
             let url = ac.textFields?[safe: 1]?.text
             completion?(name, url)
@@ -106,6 +108,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         }
         ac.addTextField { (urlTextField) in
             urlTextField.text = link
+            urlTextField.keyboardType = .URL
             urlTextField.placeholder = "Посилання, https://link.com"
         }
 
@@ -190,12 +193,14 @@ extension CreatePersonalCardViewController: UITableViewDelegate {
 extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegate {
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        self.placeCompletion?(place)
-        self.placeCompletion = nil
+        view.endEditing(true)
+        placeCompletion?(place)
+        placeCompletion = nil
         viewController.dismiss(animated: true, completion: nil)
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        view.endEditing(true)
         debugPrint(error.localizedDescription)
         viewController.dismiss(animated: true, completion: { [weak self] in
             self?.errorAlert(message: error.localizedDescription)
@@ -203,6 +208,7 @@ extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegat
     }
 
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        view.endEditing(true)
         viewController.dismiss(animated: true, completion: nil)
     }
 

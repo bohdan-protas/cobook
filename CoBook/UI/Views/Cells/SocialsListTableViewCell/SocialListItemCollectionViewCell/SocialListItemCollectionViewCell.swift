@@ -16,7 +16,7 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        socialImageView.backgroundColor = .red
+        socialImageView.backgroundColor = UIColor.Theme.grayBG
         socialImageView.layer.cornerRadius = socialImageView.frame.height / 2
         socialImageView.layer.masksToBounds = true
     }

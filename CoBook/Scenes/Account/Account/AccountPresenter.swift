@@ -114,7 +114,6 @@ private extension AccountPresenter {
                                                                                                  name: "\(AppStorage.User.profile?.firstName ?? "") \(AppStorage.User.profile?.lastName ?? "")",
                                                                                                  profession: $0.practiceType?.title,
                                                                                                  telephone: $0.telephone?.number)))
-                cardsPreviceSection.items.append(.action(type: .createPersonalCard))
                 cardsPreviceSection.items.append(.action(type: .createBusinessCard))
             }
         }

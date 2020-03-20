@@ -316,10 +316,10 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
                 }
 
                 let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
-                cell.create(socialListItem: newItem)
-
                 self.socialList.append(newItem)
                 self.invalidateDataSource()
+
+                cell.create(socialListItem: newItem)
             }
         }
     }

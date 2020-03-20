@@ -62,7 +62,7 @@ class SocialsListTableViewCell: UITableViewCell {
     }
 
     func create(socialListItem: Social.ListItem) {
-        if isEditable && collectionView.numberOfItems(inSection: 0) > 1 {
+        if isEditable && collectionView.numberOfItems(inSection: 0) >= 1 {
             collectionView.performBatchUpdates({
                 self.dataSource.insert(socialListItem, at: collectionView.numberOfItems(inSection: 0)-1)
                 self.collectionView.insertItems(at: [IndexPath(item: collectionView.numberOfItems(inSection: 0)-1, section: 0)])
