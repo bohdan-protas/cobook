@@ -17,7 +17,7 @@ enum ProfileEndpoint: Endpoint {
     }
 
     var method: HTTPMethod {
-        return .post
+        return .get
     }
 
     var path: String {

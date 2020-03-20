@@ -6,7 +6,6 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
 enum SignInEndpoint: Endpoint {

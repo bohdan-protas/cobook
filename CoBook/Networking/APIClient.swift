@@ -92,26 +92,29 @@ class APIClient {
             multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).png", mimeType: "image/png")
         }, to: endpoint, headers: headers)
             .response { (response) in
-                if let responseData = response.data {
-                    do {
-                        let decodedResponse = try decoder.decode(APIResponse<T>.self, from: responseData)
-                        switch decodedResponse.status {
-                        case .ok:
-                            completion(.success(decodedResponse.data))
-                        case .error:
-                            let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
-                            completion(.failure(error))
-                        }
-                    } catch let decodeError {
-                        Log.error(decodeError)
-
-                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
-                        completion(.failure(error))
-                    }
-                } else {
+                
+                guard let responseData = response.data else {
                     let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
                     completion(.failure(error))
+                    return
                 }
+
+                do {
+                    let decodedResponse = try decoder.decode(APIResponse<T>.self, from: responseData)
+                    switch decodedResponse.status {
+                    case .ok:
+                        completion(.success(decodedResponse.data))
+                    case .error:
+                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
+                        completion(.failure(error))
+                    }
+                } catch let decodeError {
+                    Log.error(decodeError)
+
+                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
+                    completion(.failure(error))
+                }
+
         }
     } // end upload
 

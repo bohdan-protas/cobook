@@ -85,6 +85,11 @@
 		B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8357DB2240C6372006AB78E /* SignInEndpoint.swift */; };
 		B8359CD3241EA9BF0080263E /* PersonalCardAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD2241EA9BF0080263E /* PersonalCardAPI.swift */; };
 		B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */; };
+		B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83FD7D52423B3CE00ACA1D4 /* SocialsListTableViewCell.swift */; };
+		B83FD7D82423B3CE00ACA1D4 /* SocialsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B83FD7D62423B3CE00ACA1D4 /* SocialsListTableViewCell.xib */; };
+		B83FD7DC2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83FD7DA2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift */; };
+		B83FD7DD2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B83FD7DB2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib */; };
+		B83FD7E02424002A00ACA1D4 /* SocialListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83FD7DF2424002A00ACA1D4 /* SocialListItem.swift */; };
 		B84A15E32410E50900C4DC11 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E22410E50900C4DC11 /* Account.swift */; };
 		B84A15E52410F2DA00C4DC11 /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */; };
 		B84A15E92410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E72410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift */; };
@@ -226,6 +231,11 @@
 		B8357DB2240C6372006AB78E /* SignInEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEndpoint.swift; sourceTree = "<group>"; };
 		B8359CD2241EA9BF0080263E /* PersonalCardAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardAPI.swift; sourceTree = "<group>"; };
 		B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeTypesEndpoint.swift; sourceTree = "<group>"; };
+		B83FD7D52423B3CE00ACA1D4 /* SocialsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsListTableViewCell.swift; sourceTree = "<group>"; };
+		B83FD7D62423B3CE00ACA1D4 /* SocialsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialsListTableViewCell.xib; sourceTree = "<group>"; };
+		B83FD7DA2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialListItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B83FD7DB2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialListItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		B83FD7DF2424002A00ACA1D4 /* SocialListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialListItem.swift; sourceTree = "<group>"; };
 		B84A15E22410E50900C4DC11 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataSource.swift; sourceTree = "<group>"; };
 		B84A15E72410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardPreviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -615,8 +625,28 @@
 				B8307F182406AED800AFE578 /* Profile.swift */,
 				B84A15E22410E50900C4DC11 /* Account.swift */,
 				B8DE5E4D2418EE4800F4F60B /* PersonalCard.swift */,
+				B83FD7DF2424002A00ACA1D4 /* SocialListItem.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B83FD7D92423B5BA00ACA1D4 /* SocialListItemCollectionViewCell */,
+				B83FD7D52423B3CE00ACA1D4 /* SocialsListTableViewCell.swift */,
+				B83FD7D62423B3CE00ACA1D4 /* SocialsListTableViewCell.xib */,
+			);
+			path = SocialsListTableViewCell;
+			sourceTree = "<group>";
+		};
+		B83FD7D92423B5BA00ACA1D4 /* SocialListItemCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B83FD7DA2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift */,
+				B83FD7DB2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib */,
+			);
+			path = SocialListItemCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		B84A15E62410F63100C4DC11 /* AccountCardPreviewTableViewCell */ = {
@@ -721,9 +751,9 @@
 				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
-				B826B0F323F45ED8009041DD /* Models */,
 				B8307F1F2406FED000AFE578 /* Persistance */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
+				B826B0F323F45ED8009041DD /* Models */,
 				B82A2118242135C200D0D9F5 /* UI */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
 				B823AB6923F156C600DE13EA /* Resources */,
@@ -819,6 +849,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */,
 				B8212A5A241B6A400066700C /* InterestItemCollectionViewCell */,
 				B828282B241A96BA0003D056 /* InterestsSelectionTableViewCell */,
 				B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */,
@@ -948,6 +979,7 @@
 				B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */,
 				B84A15F02411130800C4DC11 /* AccountHeaderView.xib in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
+				B83FD7DD2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
 				B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */,
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
@@ -971,6 +1003,7 @@
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
 				B825741723F5621500C8CBF8 /* HelveticaNeueCyr-MediumItalic.ttf in Resources */,
+				B83FD7D82423B3CE00ACA1D4 /* SocialsListTableViewCell.xib in Resources */,
 				B84A15EA2410F65500C4DC11 /* AccountCardPreviewTableViewCell.xib in Resources */,
 				B825741C23F5621500C8CBF8 /* SFProDisplay-Regular.ttf in Resources */,
 				B825741A23F5621500C8CBF8 /* SFProDisplay-Medium.ttf in Resources */,
@@ -1054,6 +1087,7 @@
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
+				B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
 				B82200C1240FBC2C00A17D2C /* AccountPresenter.swift in Sources */,
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
@@ -1110,6 +1144,7 @@
 				B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */,
 				B8282831241A98780003D056 /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
+				B83FD7DC2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
 				B8AB3F072422D5B900E06E53 /* NSError + Extensions.swift in Sources */,
 				B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */,
@@ -1122,6 +1157,7 @@
 				B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */,
 				B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */,
 				B82200BC240FB99D00A17D2C /* AccountNavigationController.swift in Sources */,
+				B83FD7E02424002A00ACA1D4 /* SocialListItem.swift in Sources */,
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,

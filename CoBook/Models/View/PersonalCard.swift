@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum PersonalCard {
+enum CreatePersonalCard {
 
     struct Section {
         var items: [Item]
@@ -20,6 +20,7 @@ enum PersonalCard {
         case actionTextField(type: ActionType)
         case textView(type: TextType)
         case interests(list: [Interest])
+        case socialList(list: [Social.ListItem])
     }
 
     enum TextType: String {
@@ -107,11 +108,8 @@ enum PersonalCard {
             case .activityType:     return "activityType"
             case .placeOfLiving:    return "placeOfLiving"
             case .activityRegion:   return "activityRegion"
-
             }
         }
-
-
     }
 
     struct Interest {

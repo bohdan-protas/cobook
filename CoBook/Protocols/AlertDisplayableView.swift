@@ -16,6 +16,8 @@ protocol AlertDisplayableView {
 
     func infoAlert(title: String?, message: String?)
     func infoAlert(title: String?, message: String?, handler: ((UIAlertAction) -> Void)?)
+
+    func actionSheetAlert(title: String?, message: String?, actions: [UIAlertAction])
 }
 
 extension AlertDisplayableView where Self: UIViewController {
@@ -56,5 +58,20 @@ extension AlertDisplayableView where Self: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
+    func actionSheetAlert(title: String?, message: String?, actions: [UIAlertAction]) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        for action in actions {
+            alertController.addAction(action)
+        }
+        present(alertController, animated: true, completion: nil)
+    }
 
+
+}
+
+extension UIAlertAction {
+
+    func setFont(color: UIColor) {
+        setValue(color, forKey: "UIAlertActionConstants.alertActionTextColor")
+    }
 }

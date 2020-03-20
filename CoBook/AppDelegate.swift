@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import GooglePlaces
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,13 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
+        IQKeyboardManager.shared.enable = true
+        GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
+
         if AppStorage.State.isFirstAppLaunch {
             AppStorage.deleteAllData()
             AppStorage.State.isFirstAppLaunch = false
         }
-
-        IQKeyboardManager.shared.enable = true
-        GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
         if AppStorage.User.profile?.userId == nil {
             if AppStorage.User.isTutorialShown {

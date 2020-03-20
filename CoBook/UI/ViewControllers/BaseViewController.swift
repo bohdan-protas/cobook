@@ -42,5 +42,9 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
         self.navigationController?.pushViewController(controller, animated: animated)
     }
 
+    func present(controller: UIViewController, animated: Bool) {
+        self.present(controller, animated: animated, completion: nil)
+    }
+
 
 }
