@@ -70,6 +70,17 @@ class SocialsListTableViewCell: UITableViewCell {
         }
     }
 
+    func append(socialListItem: Social.ListItem) {
+        if isEditable && collectionView.numberOfItems(inSection: 0) > 1 {
+            collectionView.performBatchUpdates({
+                self.dataSource.insert(socialListItem, at: collectionView.numberOfItems(inSection: 0)-1)
+                self.collectionView.insertItems(at: [IndexPath(item: collectionView.numberOfItems(inSection: 0)-1, section: 0)])
+            }) { (finished) in
+
+            }
+        }
+    }
+
     func fill(items: [Social.ListItem], isEditable: Bool) {
         self.isEditable = isEditable
         self.dataSource = items

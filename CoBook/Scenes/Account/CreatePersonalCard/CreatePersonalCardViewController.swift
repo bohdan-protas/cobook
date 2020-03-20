@@ -86,6 +86,42 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         personalCardPhotoManagmentView.setImage(image)
     }
 
+    func addNewSocial(completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
+        let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
+
+        let submitAction = UIAlertAction(title: "Створити", style: .default) { [unowned ac] _ in
+            let name = ac.textFields![safe: 0]?.text
+            let url = ac.textFields?[safe: 1]?.text
+            completion?(name, url)
+        }
+        submitAction.isEnabled = false
+        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+
+        ac.addAction(submitAction)
+        ac.addAction(cancelAction)
+
+        ac.addTextField { (nameTextField) in
+            nameTextField.placeholder = "Назва"
+        }
+        ac.addTextField { (urlTextField) in
+            urlTextField.placeholder = "Посилання, https://link.com"
+        }
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 1], queue: OperationQueue.main, using: { _ in
+            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
+        })
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 0], queue: OperationQueue.main, using: { _ in
+            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
+        })
+
+        present(controller: ac, animated: true)
+    }
+
 
 }
 
