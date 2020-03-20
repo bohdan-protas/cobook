@@ -12,35 +12,49 @@ import Foundation
 enum AppStorage {
 
     enum Keys: String {
-        case userCompletedTutorial
+        case isTutorialSeen
         case userCompletedRegistration
         case userInitiatedRegistration
         case accessToken
         case refreshToken
         case profile
+        case firstAppLaunch
     }
 
-    @UserDefaultValueStorage(key: Keys.userInitiatedRegistration.rawValue, defaultValue: false)
-    static var isUserCompletedTutorial: Bool
+    enum State {
+        @UserDefaultValueStorageWrapper(key: Keys.firstAppLaunch.rawValue, defaultValue: true)
+        static var isFirstAppLaunch: Bool
+    }
 
-    @UserDefaultValueStorage(key: Keys.userInitiatedRegistration.rawValue, defaultValue: false)
-    static var isUserInitiatedRegistration: Bool
+    enum User {
+        @UserDefaultValueStorageWrapper(key: Keys.isTutorialSeen.rawValue, defaultValue: false)
+        static var isTutorialShown: Bool
 
-    @UserDefaultValueStorage(key: Keys.userCompletedRegistration.rawValue, defaultValue: false)
-    static var isUserCompletedRegistration: Bool
+        @UserDefaultValueStorageWrapper(key: Keys.userInitiatedRegistration.rawValue, defaultValue: false)
+        static var isUserInitiatedRegistration: Bool
 
-    @KeychainStringValueStorage(key: Keys.accessToken.rawValue, defaultValue: nil, storage: KeychainWrapper.auth)
-    static var accessToken: String?
+        @UserDefaultValueStorageWrapper(key: Keys.userCompletedRegistration.rawValue, defaultValue: false)
+        static var isUserCompletedRegistration: Bool
 
-    @KeychainStringValueStorage(key: Keys.refreshToken.rawValue, defaultValue: nil, storage: KeychainWrapper.auth)
-    static var refreshToken: String?
+        @UserDefaultObjectStorageWrapper(key: Keys.profile.rawValue, defaultValue: Profile())
+        static var profile: Profile?
+    }
 
-    @UserDefaultObjectStorage(key: Keys.profile.rawValue, defaultValue: Profile())
-    static var profile: Profile?
+    enum Auth {
+        @KeychainStringValueStorageWrapper(key: Keys.accessToken.rawValue, defaultValue: nil, storage: KeychainWrapper.auth)
+        static var accessToken: String?
+
+        @KeychainStringValueStorageWrapper(key: Keys.refreshToken.rawValue, defaultValue: nil, storage: KeychainWrapper.auth)
+        static var refreshToken: String?
+
+        static func deleteAllData() {
+            KeychainWrapper.auth.removeAllKeys()
+        }
+    }
 
     static func deleteAllData() {
         KeychainWrapper.auth.removeAllKeys()
-        UserDefaults.standard.removePersistentDomain(forName:  Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
     }
 

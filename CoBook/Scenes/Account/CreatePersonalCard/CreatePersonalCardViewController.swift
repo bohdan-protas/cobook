@@ -35,13 +35,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         return controller
     }()
 
-    private lazy var autocompleteViewController: GMSAutocompleteViewController = {
-        let acController = GMSAutocompleteViewController()
-        acController.modalPresentationStyle = .overFullScreen
-        acController.delegate = self
-        return acController
-    }()
-
     private lazy var personalCardPhotoManagmentView: PersonalCardPhotoManagmentView = {
         let view = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
         view.delegate = self
@@ -69,13 +62,69 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         self.navigationController?.popViewController(animated: true)
     }
 
-    func showAutocompleteController(completion: ((GMSPlace) -> Void)?) {
+    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?) {
         placeCompletion = completion
+
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.modalPresentationStyle = .overFullScreen
+        autocompleteViewController.autocompleteFilter = filter
+        autocompleteViewController.delegate = self
+
         present(autocompleteViewController, animated: true, completion: nil)
     }
 
     func setSaveButtonEnabled(_ isEnabled: Bool) {
         cardSaveView.saveButton.isEnabled = isEnabled
+    }
+
+    func setupHeaderFooterViews() {
+        tableView.tableHeaderView = personalCardPhotoManagmentView
+        tableView.tableFooterView = cardSaveView
+    }
+
+    func setImage(image: UIImage?) {
+        personalCardPhotoManagmentView.setImage(image)
+    }
+
+    func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
+        let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
+
+        let isEditing = !(name ?? "").isEmpty || !(link ?? "").isEmpty
+
+        let submitAction = UIAlertAction(title: isEditing ? "Змінити": "Створити", style: .default) { [unowned ac] _ in
+            let name = ac.textFields![safe: 0]?.text
+            let url = ac.textFields?[safe: 1]?.text
+            completion?(name, url)
+        }
+        submitAction.isEnabled = false
+        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+
+        ac.addAction(submitAction)
+        ac.addAction(cancelAction)
+
+        ac.addTextField { (nameTextField) in
+            nameTextField.text = name
+            nameTextField.placeholder = "Назва"
+        }
+        ac.addTextField { (urlTextField) in
+            urlTextField.text = link
+            urlTextField.keyboardType = .URL
+            urlTextField.placeholder = "Посилання, https://link.com"
+        }
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 1], queue: OperationQueue.main, using: { _ in
+            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
+        })
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 0], queue: OperationQueue.main, using: { _ in
+            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
+        })
+
+        present(controller: ac, animated: true)
     }
 
 
@@ -87,9 +136,9 @@ private extension CreatePersonalCardViewController {
     func setupLayout() {
         self.navigationItem.title = "Створення персональної візитки"
 
+        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.delegate = self
-        tableView.tableHeaderView = personalCardPhotoManagmentView
-        tableView.tableFooterView = cardSaveView
+
     }
 
 
@@ -121,7 +170,6 @@ extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UI
 
         guard let image = info[.originalImage] as? UIImage else { return }
         presenter.userImagePicked(image)
-        personalCardPhotoManagmentView.setImage(image)
     }
 
 
@@ -145,12 +193,14 @@ extension CreatePersonalCardViewController: UITableViewDelegate {
 extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegate {
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        self.placeCompletion?(place)
-        self.placeCompletion = nil
+        view.endEditing(true)
+        placeCompletion?(place)
+        placeCompletion = nil
         viewController.dismiss(animated: true, completion: nil)
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        view.endEditing(true)
         debugPrint(error.localizedDescription)
         viewController.dismiss(animated: true, completion: { [weak self] in
             self?.errorAlert(message: error.localizedDescription)
@@ -158,6 +208,7 @@ extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegat
     }
 
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        view.endEditing(true)
         viewController.dismiss(animated: true, completion: nil)
     }
 

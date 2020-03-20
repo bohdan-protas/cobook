@@ -37,19 +37,14 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 
     func verify(with smsCode: String) {
         view?.startLoading()
-        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: AppStorage.accessToken ?? "") { (result) in
+        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: AppStorage.Auth.accessToken ?? "") { (result) in
             self.view?.stopLoading()
 
             switch result {
-            case let .success(response):
-                if response.status == .ok, response.data?.isSuccess == true {
-                    self.view?.goToCreatePasswordController()
-                } else {
-                    self.view?.infoAlert(title: nil, message: response.errorLocalizadMessage)
-                }
+            case .success:
+                self.view?.goToCreatePasswordController()
             case let .failure(error):
-                self.view?.defaultErrorAlert()
-                debugPrint(error.localizedDescription)
+                self.view?.errorAlert(message: error.localizedDescription)
             }
 
         }
@@ -57,22 +52,15 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 
     func resendSms() {
         view?.setResendButton(isLoading: true)
-        APIClient.default.resendSmsRequest(accessToken: AppStorage.accessToken ?? "") { (result) in
+        APIClient.default.resendSmsRequest(accessToken: AppStorage.Auth.accessToken ?? "") { (result) in
             self.view?.setResendButton(isLoading: false)
             switch result {
             case let .success(response):
-                switch response.status {
-                case .ok:
-                    AppStorage.accessToken = response.data?.accessToken
-                    let leftInMs = response.data?.smsResendLeftInMs ?? 0
-                    self.smsResendLeftInSec = leftInMs * 0.001
-                    self.runTimer()
-                case .error:
-                    debugPrint("Error:  [\(response.errorId ?? "-1")], \(response.errorDescription ?? "")")
-                    self.view?.errorAlert(message: response.errorLocalizadMessage)
-                }
+                AppStorage.Auth.accessToken = response?.accessToken
+                let leftInMs = response?.smsResendLeftInMs ?? 0
+                self.smsResendLeftInSec = leftInMs * 0.001
+                self.runTimer()
             case let .failure(error):
-                debugPrint("Error: [\(error.responseCode ?? 0)], \(error.errorDescription ?? "")")
                 self.view?.errorAlert(message: error.localizedDescription.description)
             }
         }

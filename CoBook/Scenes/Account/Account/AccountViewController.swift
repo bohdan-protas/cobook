@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: UIViewController, AccountView {
+class AccountViewController: BaseViewController, AccountView {
 
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
@@ -28,9 +28,12 @@ class AccountViewController: UIViewController, AccountView {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-
         setupLayout()
-        presenter.setup()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter.onDidAppear()
     }
 
     deinit {
@@ -42,18 +45,6 @@ class AccountViewController: UIViewController, AccountView {
         (tableView.tableHeaderView as? AccountHeaderView)?.fill(with: profile)
     }
 
-    func startLoading() {
-
-    }
-
-    func stopLoading() {
-
-    }
-
-    func push(controller: UIViewController) {
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
-
 
 }
 
@@ -61,14 +52,10 @@ class AccountViewController: UIViewController, AccountView {
 private extension AccountViewController {
 
     func setupLayout() {
-        tableView.register(AccountBusinessCardTableViewCell.nib, forCellReuseIdentifier: AccountBusinessCardTableViewCell.identifier)
-        tableView.register(AccountItemTableViewCell.nib, forCellReuseIdentifier: AccountItemTableViewCell.identifier)
-
         tableView.tableHeaderView = AccountHeaderView(frame:  CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: Defaults.headerHeight))
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
 
-        tableView.dataSource = presenter.dataSource
         tableView.delegate = self
     }
 }

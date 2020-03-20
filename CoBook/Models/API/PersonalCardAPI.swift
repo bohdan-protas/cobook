@@ -57,15 +57,17 @@ enum PersonalCardAPI {
             var interestsIds: [Int]?
             var contactTelephone: String?
             var contactEmail: String?
-            var socialNetworks: [SocialNetwork]?
+            var socialNetworks: [SocialNetwork] = []
 
-            var isRequiredDataIsFilled: Bool {
+            var isRequiredDataFilled: Bool {
                 return
+                    !(avatarId ?? "").isEmpty &&
                     !(cityPlaceId ?? "").isEmpty &&
                     !(regionPlaceId ?? "").isEmpty &&
                     !(position ?? "").isEmpty &&
                     !(description ?? "").isEmpty &&
                     !(practiseTypeId == nil) &&
+                    !(interestsIds ?? []).isEmpty &&
                     !(contactTelephone ?? "").isEmpty &&
                     !(contactEmail ?? "").isEmpty
             }

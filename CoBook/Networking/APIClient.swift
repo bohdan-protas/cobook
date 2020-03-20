@@ -17,13 +17,9 @@ class APIClient {
         let evaluators = [APIConstants.baseURLPath.host ?? "": DisabledEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
 
-
-        let monitor = ClosureEventMonitor()
-        monitor.requestDidCompleteTaskWithError = { (request, task, error) in
-            print(request)
-        }
-
-        let session = Session(serverTrustManager: manager, eventMonitors: [monitor])
+        let loggerMonitor = LoggerEventMonitor()
+        let requestInterceptor = AuthRequestInterceptor()
+        let session = Session(interceptor: requestInterceptor, serverTrustManager: manager, eventMonitors: [loggerMonitor])
 
         let apiClient = APIClient(session: session)
         return apiClient
@@ -37,20 +33,92 @@ class APIClient {
     }
 
     // MARK: Public
+    /**
+    Base request builder
+
+    - parameters:
+       - endpoint: path to endpoint
+       - decoder: decoder for decode response, by default JSONDecoder()
+       - completion: parsed response from server
+    */
     @discardableResult
-    private func performRequest<T: Decodable>(router: Router,
+    private func performRequest<T: Decodable>(endpoint: Endpoint,
                                               decoder: JSONDecoder = JSONDecoder(),
-                                              completion: @escaping (AFResult<APIResponse<T>>) -> Void) -> DataRequest {
+                                              completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
 
-        return session.request(router)
-            .cURLDescription(calling: { (description) in
-                print(description)
-            })
-            .responseDecodable(of: APIResponse<T>.self, decoder: decoder) { (response) in
-                completion(response.result)
+        return session.request(endpoint)
+            .validate()
+            .response { (response) in
+                if let responseData = response.data {
+                    do {
+                        let decodedResponse = try decoder.decode(APIResponse<T>.self, from: responseData)
+                        switch decodedResponse.status {
+                        case .ok:
+                            completion(.success(decodedResponse.data))
+                        case .error:
+                            let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
+                            completion(.failure(error))
+                        }
+                    } catch {
+                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
+                        completion(.failure(error))
+                    }
+                } else {
+                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
+                    completion(.failure(error))
+                }
             }
-    }
+    } // end performRequest
 
+    /**
+    Photo upload request
+
+    - parameters:
+       - imageData: compressed image data(JPEG preffered)
+       - endpoint: path to endpoint
+       - headers: headers for authetificate
+       - decoder: decoder for decode response, by default JSONDecoder()
+       - completion: parsed response from server
+    */
+    @discardableResult
+    private func upload<T: Decodable>(imageData: Data,
+                                      to endpoint: URLConvertible,
+                                      headers: HTTPHeaders?,
+                                      decoder: JSONDecoder = JSONDecoder(),
+                                      completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
+
+        return session.upload(multipartFormData: { multipartFormData in
+            let randomName = "\(String.random())-image"
+            multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).png", mimeType: "image/png")
+        }, to: endpoint, headers: headers)
+            .response { (response) in
+                
+                guard let responseData = response.data else {
+                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
+                    completion(.failure(error))
+                    return
+                }
+
+                do {
+                    let decodedResponse = try decoder.decode(APIResponse<T>.self, from: responseData)
+                    switch decodedResponse.status {
+                    case .ok:
+                        completion(.success(decodedResponse.data))
+                    case .error:
+                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
+                        completion(.failure(error))
+                    }
+                } catch let decodeError {
+                    Log.error(decodeError)
+
+                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
+                    completion(.failure(error))
+                }
+
+        }
+    } // end upload
+
+    
 
 }
 
@@ -70,10 +138,10 @@ extension APIClient {
                                      telephone: String,
                                      firstName: String,
                                      lastName: String,
-                                     completion: @escaping (AFResult<APIResponse<SignInAPIResponseData>>) -> Void) {
+                                     completion: @escaping (Result<SignInAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -86,10 +154,10 @@ extension APIClient {
      */
     func verifyRequest(smsCode: Int,
                        accessToken: String,
-                       completion: @escaping (AFResult<APIResponse<VerifyAPIResponseData>>) -> Void) {
+                       completion: @escaping (Result<VerifyAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.verify(smsCode: smsCode, accessToken: accessToken)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.verify(smsCode: smsCode, accessToken: accessToken)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -100,10 +168,10 @@ extension APIClient {
         - completion: parsed response from server
      */
     func resendSmsRequest(accessToken: String,
-                          completion: @escaping (AFResult<APIResponse<SignInAPIResponseData>>) -> Void) {
+                          completion: @escaping (Result<SignInAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.resend(accessToken: accessToken)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.resend(accessToken: accessToken)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -116,10 +184,10 @@ extension APIClient {
      */
     func signUpFinishRequest(accessToken: String,
                              password: String,
-                             completion: @escaping (AFResult<APIResponse<RegisterAPIResponseData>>) -> Void) {
+                             completion: @escaping (Result<RegisterAPIResponseData?, Error>) -> Void) {
 
-        let router = SignUpRouter.finish(accessToken: accessToken, password: password)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignUpEndpoint.finish(accessToken: accessToken, password: password)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
 
@@ -137,10 +205,10 @@ extension APIClient {
      */
     func signInRequest(login: String,
                        password: String,
-                       completion: @escaping (AFResult<APIResponse<RegisterAPIResponseData>>) -> Void) {
+                       completion: @escaping (Result<RegisterAPIResponseData?, Error>) -> Void) {
 
-        let router = SignInRouter.login(login: login, password: password)
-        performRequest(router: router, completion: completion)
+        let endpoint = SignInEndpoint.login(login: login, password: password)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 }
 
@@ -155,10 +223,10 @@ extension APIClient {
         - completion: parsed response from server
      */
     func refreshTokenRequest(refreshToken: String,
-                             completion: @escaping (AFResult<APIResponse<RefreshTokenAPIResponseData>>) -> Void) {
+                             completion: @escaping (Result<RefreshTokenAPIResponseData?, Error>) -> Void) {
 
-        let router = AuthRouter.refresh(refreshToken: refreshToken)
-        performRequest(router: router, completion: completion)
+        let endpoint = AuthEndpoint.refresh(refreshToken: refreshToken)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
     /**
@@ -169,44 +237,44 @@ extension APIClient {
         - completion: parsed response from server
      */
     func forgotPasswordRequest(telephone: String,
-                               completion: @escaping (AFResult<APIResponse<VoidResponseData>>) -> Void) {
+                               completion: @escaping (Result<VoidResponseData?, Error>) -> Void) {
 
-        let router = AuthRouter.forgotPassword(telephone: telephone)
-        performRequest(router: router, completion: completion)
+        let endpoint = AuthEndpoint.forgotPassword(telephone: telephone)
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
 }
 
-// MARK: - Interests router requests
+// MARK: - InterestsEndpoint requests
 extension APIClient {
 
     /**
      Request localized list of interests
     */
-    func interestsListRequest(completion: @escaping (AFResult<APIResponse<[PersonalCardAPI.Response.Interest]>>) -> Void) {
-        let router = InterestsRouter.list
-        performRequest(router: router, completion: completion)
+    func interestsListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Interest]?, Error>) -> Void) {
+        let endpoint = InterestsEndpoint.list
+        performRequest(endpoint: endpoint, completion: completion)
     }
 
 
 }
 
-// MARK: - PracticeTypesRouter request
+// MARK: - PracticeTypesEndpoint request
 extension APIClient {
 
     /**
      Request localized list of practice types
     */
     @discardableResult
-    func practicesTypesListRequest(completion: @escaping (AFResult<APIResponse<[PersonalCardAPI.Response.Practice]>>) -> Void) -> DataRequest{
-        let router = PracticeTypesRouter.list
-        return performRequest(router: router, completion: completion)
+    func practicesTypesListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Practice]?, Error>) -> Void) -> DataRequest{
+        let endpoint = PracticeTypesEndpoint.list
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
 
 }
 
-// MARK: - CardsRouter requests
+// MARK: - CardsEndpoint requests
 extension APIClient {
 
     /**
@@ -214,10 +282,50 @@ extension APIClient {
     */
     @discardableResult
     func createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters,
-                            completion: @escaping (AFResult<APIResponse<VoidResponseData>>) -> Void) -> DataRequest {
+                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
 
-        let router = CardsRouter.createPersonalCard(parameters: parameters)
-        return performRequest(router: router, completion: completion)
+        let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+}
+
+// MARK: - ContentManagerEndpoint requests
+extension APIClient {
+
+    /**
+     Request upload image data to server
+
+     - parameters:
+        - imageData: image data(JPEG preffered)
+        - completion: parsed  'FileAPIResponseData' response from server
+     */
+    @discardableResult
+    func upload(imageData: Data, completion: @escaping (Result<FileAPIResponseData?, Error>) -> Void) -> DataRequest {
+        let endpoint = ContentManagerEndpoint.singleFileUpload
+
+        // FIXME: Fix force unwrap
+        let url = endpoint.urlRequest!.url!
+        let headers = endpoint.urlRequest?.headers
+        return upload(imageData: imageData, to: url, headers: headers, completion: completion)
+    }
+
+}
+
+// MARK: - ProfileEndpoint requests
+extension APIClient {
+
+    /**
+     Request get profile data
+
+     - parameters:
+        - imageData: image data(JPEG preffered)
+        - completion: parsed  'FileAPIResponseData' response from server
+     */
+    @discardableResult
+    func profileDetails(completion: @escaping (Result<Profile?, Error>) -> Void) -> DataRequest {
+        let endpoint = ProfileEndpoint.profile
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
 }

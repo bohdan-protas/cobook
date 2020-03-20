@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum PersonalCard {
+enum CreatePersonalCard {
 
     struct Section {
         var items: [Item]
@@ -20,11 +20,11 @@ enum PersonalCard {
         case actionTextField(type: ActionType)
         case textView(type: TextType)
         case interests(list: [Interest])
+        case socialList(list: [Social.ListItem])
     }
 
     enum TextType: String {
         case occupiedPosition               // Займана посада
-
         case activityDescription            // Опис діяльності
         case workingPhoneNumber             // Робочий номер телефону
         case workingEmailForCommunication   // Робочий емейл для зв'язку
@@ -41,6 +41,20 @@ enum PersonalCard {
                 case .workingEmailForCommunication:
                     return "Робочий емейл для зв'язку"
                 }
+            }
+        }
+
+        var contentType: UITextContentType? {
+            switch self {
+            case .occupiedPosition:
+                return .jobTitle
+            case .activityDescription:
+                return nil
+            case .workingPhoneNumber:
+                return .telephoneNumber
+            case .workingEmailForCommunication:
+                return .emailAddress
+
             }
         }
 
@@ -94,11 +108,8 @@ enum PersonalCard {
             case .activityType:     return "activityType"
             case .placeOfLiving:    return "placeOfLiving"
             case .activityRegion:   return "activityRegion"
-
             }
         }
-
-
     }
 
     struct Interest {

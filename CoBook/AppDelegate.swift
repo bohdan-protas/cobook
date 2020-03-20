@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import GooglePlaces
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,37 +17,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
         IQKeyboardManager.shared.enable = true
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
-        if AppStorage.profile == nil {
-            if AppStorage.isUserCompletedTutorial {
+        if AppStorage.State.isFirstAppLaunch {
+            AppStorage.deleteAllData()
+            AppStorage.State.isFirstAppLaunch = false
+        }
+
+        if AppStorage.User.profile?.userId == nil {
+            if AppStorage.User.isTutorialShown {
                 let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                 window?.rootViewController = signUpNavigationController
             } else {
+                AppStorage.User.isTutorialShown = true
                 let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
                 window?.rootViewController = onboardingViewController
             }
         } else {
-            let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-            window?.rootViewController = signInViewController
+            if AppStorage.Auth.refreshToken == nil {
+                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signInViewController
+            } else {
+                window?.rootViewController = MainTabBarController()
+            }
         }
-        //
+
 
         return true
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        if AppStorage.isUserInitiatedRegistration && !AppStorage.isUserCompletedRegistration {
-            AppStorage.accessToken = nil
-            AppStorage.refreshToken = nil
-            AppStorage.profile = nil
-            AppStorage.isUserInitiatedRegistration = false
+        if AppStorage.User.isUserInitiatedRegistration && !AppStorage.User.isUserCompletedRegistration {
+            AppStorage.Auth.accessToken = nil
+            AppStorage.Auth.refreshToken = nil
+            AppStorage.User.profile = nil
+            AppStorage.User.isUserInitiatedRegistration = false
         }
     }
 

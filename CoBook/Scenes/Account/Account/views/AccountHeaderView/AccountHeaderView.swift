@@ -29,7 +29,6 @@ class AccountHeaderView: BaseFromNibView {
     }
 
     func fill(with profile: Profile?) {
-        
         self.userAvatarImageView.textPlaceholder = "\(profile?.firstName?.first?.uppercased() ?? "")\(profile?.lastName?.first?.uppercased() ?? "")"
         self.userNameLabel.text = "\(profile?.firstName ?? "") \(profile?.lastName ?? "")"
         self.telephoneNumberLabel.text = profile?.telephone.number
