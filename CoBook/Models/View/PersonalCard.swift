@@ -16,9 +16,9 @@ enum CreatePersonalCard {
 
     enum Item {
         case title(text: String)
-        case textField(type: TextType)
-        case actionTextField(type: ActionType)
-        case textView(type: TextType)
+        case textField(text: String?, type: TextType)
+        case actionTextField(text: String?, type: ActionType)
+        case textView(text: String?, type: TextType)
         case interests(list: [Interest])
         case socialList(list: [Social.ListItem])
     }

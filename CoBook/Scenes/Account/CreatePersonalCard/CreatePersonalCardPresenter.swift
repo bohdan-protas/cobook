@@ -104,16 +104,16 @@ private extension CreatePersonalCardPresenter {
         viewDataSource?.source = [
             CreatePersonalCard.Section(items: [
                 .title(text: "Діяльність:"),
-                .textField(type: .occupiedPosition),
-                .actionTextField(type: .activityType(list: personalCardParameters.practices)),
-                .actionTextField(type: .placeOfLiving),
-                .actionTextField(type: .activityRegion),
-                .textView(type: .activityDescription)
+                .textField(text: personalCardParameters.position, type: .occupiedPosition),
+                .actionTextField(text: personalCardParameters.practiseType.title, type: .activityType(list: personalCardParameters.practices)),
+                .actionTextField(text: personalCardParameters.city.name, type: .placeOfLiving),
+                .actionTextField(text: personalCardParameters.region.name, type: .activityRegion),
+                .textView(text: personalCardParameters.description, type: .activityDescription)
             ]),
             CreatePersonalCard.Section(items: [
                 .title(text: "Контактні дані:"),
-                .textField(type: .workingEmailForCommunication),
-                .textField(type: .workingPhoneNumber),
+                .textField(text: personalCardParameters.contactEmail, type: .workingEmailForCommunication),
+                .textField(text: personalCardParameters.contactTelephone, type: .workingPhoneNumber),
                 .title(text: "Соціальні мережі:"),
                 .socialList(list: personalCardParameters.socialList)
             ]),
