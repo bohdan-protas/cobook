@@ -11,6 +11,7 @@ import Alamofire
 enum CardsEndpoint: Endpoint {
 
     case createPersonalCard(parameters: CardAPIModel.PersonalCardParameters)
+    case getCardInfo(id: Int)
 
     var useAuthirizationToken: Bool {
         return true
@@ -24,6 +25,8 @@ enum CardsEndpoint: Endpoint {
         switch self {
         case .createPersonalCard:
             return "/cards/personal"
+        case .getCardInfo:
+            return "/cards/info"
         }
     }
 
@@ -31,6 +34,8 @@ enum CardsEndpoint: Endpoint {
         switch self {
         case .createPersonalCard(let parameters):
             return parameters.dictionary
+        case .getCardInfo:
+            return nil
         }
     }
 

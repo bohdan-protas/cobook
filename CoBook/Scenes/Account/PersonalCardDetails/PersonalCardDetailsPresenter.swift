@@ -33,7 +33,20 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
-        Log.debug("Presenter loaded with id: \(personalCardId)")
+        view?.startLoading()
+        APIClient.default.getCardInfo(id: personalCardId) { [weak self] (result) in
+            self?.view?.stopLoading()
+
+            switch result {
+            case let .success(response):
+                self?.view?.infoAlert(title: nil, message: "Received success!")
+            case let .failure(error):
+                self?.view?.errorAlert(message: error.localizedDescription, handler: { (_) in
+                    self?.view?.popController()
+                })
+                Log.error(error.localizedDescription)
+            }
+        }
     }
 
 }

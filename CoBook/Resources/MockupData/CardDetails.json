@@ -1,0 +1,66 @@
+{
+  "error_localized_message": null,
+  "error_id": null,
+  "error_description": null,
+  "data": {
+    "id": 1,
+    "type": "personal",
+    "created_by": {
+      "id": "46c53d20-5de5-426d-b1cb-6b1cac20c70c",
+      "first_name": "Protas",
+      "last_name": "Bohdan"
+    },
+    "company": null,
+    "company_web_site": null,
+    "avatar": {
+      "id": "99eb7b2c-731f-4c7d-b579-19a15313eda5",
+      "storage_key": "general/6410f6-GgyC5QeCjdfwmDYEGLQ6-image.png",
+      "owner_id": "46c53d20-5de5-426d-b1cb-6b1cac20c70c",
+      "type": "image",
+      "subtype": "png",
+      "source_url": "https://s3.eu-central-1.amazonaws.com/cobook.attachments/general/6410f6-GgyC5QeCjdfwmDYEGLQ6-image.png",
+      "created_at": "2020-03-19T00:52:40.635239+00:00"
+    },
+    "background": null,
+    "practice_type": {
+      "id": 2,
+      "title": "Management IT"
+    },
+    "position": "Посада",
+    "city": {
+      "id": 1,
+      "name": "Uzhhorod"
+    },
+    "region": {
+      "id": 1,
+      "name": "Zakarpattia Oblast"
+    },
+    "address": null,
+    "schedule": null,
+    "description": "qwerty",
+    "contact_telephone": {
+      "id": 1,
+      "number": "+380975305496"
+    },
+    "contact_email": {
+      "id": 1,
+      "address": "bo7pro@gmail.com"
+    },
+    "social_networks": [],
+    "created_at": "2020-03-18T21:14:08.951Z",
+    "updated_at": "2020-03-19T00:53:31.142Z",
+    "interests": [
+      {
+        "id": 1,
+        "title": "Marketing"
+      },
+      {
+        "id": 3,
+        "title": "Investments"
+      }
+    ]
+  },
+  "status": "ok",
+  "request_context": {}
+}
+

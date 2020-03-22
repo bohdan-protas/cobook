@@ -131,6 +131,9 @@
 		B8AB83EA24280ECB0041B879 /* PersonalCardDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83E924280ECB0041B879 /* PersonalCardDetailsViewController.swift */; };
 		B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83EB24280EDC0041B879 /* PersonalCardDetailsPresenter.swift */; };
 		B8AB83EE24280F130041B879 /* PersonalCardDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83ED24280F130041B879 /* PersonalCardDetailsDataSource.swift */; };
+		B8AB83F3242828470041B879 /* CardDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = B8AB83F2242828470041B879 /* CardDetails.json */; };
+		B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83F52428293D0041B879 /* MockupEndpoind.swift */; };
+		B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83F824282B890041B879 /* CardDetailsEndpointMockup.swift */; };
 		B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */; };
 		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
@@ -284,6 +287,9 @@
 		B8AB83E924280ECB0041B879 /* PersonalCardDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetailsViewController.swift; sourceTree = "<group>"; };
 		B8AB83EB24280EDC0041B879 /* PersonalCardDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetailsPresenter.swift; sourceTree = "<group>"; };
 		B8AB83ED24280F130041B879 /* PersonalCardDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetailsDataSource.swift; sourceTree = "<group>"; };
+		B8AB83F2242828470041B879 /* CardDetails.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CardDetails.json; sourceTree = "<group>"; };
+		B8AB83F52428293D0041B879 /* MockupEndpoind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupEndpoind.swift; sourceTree = "<group>"; };
+		B8AB83F824282B890041B879 /* CardDetailsEndpointMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsEndpointMockup.swift; sourceTree = "<group>"; };
 		B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
@@ -425,6 +431,7 @@
 		B823AB6923F156C600DE13EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B8AB83F12428280D0041B879 /* MockupData */,
 				B82573FD23F561D100C8CBF8 /* Fonts */,
 				B870198D23ED50EC00625D61 /* Assets.xcassets */,
 				B825742623F57E0600C8CBF8 /* Localizable.strings */,
@@ -472,6 +479,7 @@
 				B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */,
 				B84B94F424033B3E0007EB60 /* APIClient.swift */,
 				B84B94EB24032A760007EB60 /* Endpoints */,
+				B8AB83F4242829060041B879 /* Mockup */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -558,8 +566,8 @@
 		B826B0EB23F442AC009041DD /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				B8212A66241BE0770066700C /* LaunchScreenLoader */,
 				B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */,
+				B8212A66241BE0770066700C /* LaunchScreenLoader */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -826,6 +834,23 @@
 			path = PersonalCardDetails;
 			sourceTree = "<group>";
 		};
+		B8AB83F12428280D0041B879 /* MockupData */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB83F2242828470041B879 /* CardDetails.json */,
+			);
+			path = MockupData;
+			sourceTree = "<group>";
+		};
+		B8AB83F4242829060041B879 /* Mockup */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB83F52428293D0041B879 /* MockupEndpoind.swift */,
+				B8AB83F824282B890041B879 /* CardDetailsEndpointMockup.swift */,
+			);
+			path = Mockup;
+			sourceTree = "<group>";
+		};
 		B8CB0E7824053E6B00AF431B /* KeychainWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1007,6 +1032,7 @@
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
 				B8DE5E562419262600F4F60B /* TextViewTableViewCell.xib in Resources */,
 				B825741223F5621500C8CBF8 /* HelveticaNeueCyr-Medium.ttf in Resources */,
+				B8AB83F3242828470041B879 /* CardDetails.json in Resources */,
 				B825742123F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf in Resources */,
 				B825741423F5621500C8CBF8 /* HelveticaNeueCyr-Black.ttf in Resources */,
 				B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */,
@@ -1127,6 +1153,7 @@
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardAPIModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
+				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
@@ -1180,6 +1207,7 @@
 				B83FD7E02424002A00ACA1D4 /* SocialListItem.swift in Sources */,
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
+				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,

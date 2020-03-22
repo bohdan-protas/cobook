@@ -280,7 +280,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedCity) in
                 if let cityId = fetchedCity.placeID {
                     cell.textView.text = fetchedCity.name
-                    self?.personalCardParameters.city = CardAPIModel.City(placeId: cityId, name: fetchedCity.name)
+                    self?.personalCardParameters.city = CardAPIModel.Place(placeId: cityId, name: fetchedCity.name)
                 } else {
                     self?.view?.errorAlert(message: "Selected city data missing!")
                     Log.error("City data missing!")
@@ -294,7 +294,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedRegion) in
                 if let regionId = fetchedRegion.placeID {
                     cell.textView.text = fetchedRegion.name
-                    self?.personalCardParameters.region = CardAPIModel.Region(placeId: regionId, name: fetchedRegion.name)
+                    self?.personalCardParameters.region = CardAPIModel.Place(placeId: regionId, name: fetchedRegion.name)
                 } else {
                     self?.view?.errorAlert(message: "Selected region data missing!")
                     Log.error("Region data missing")
