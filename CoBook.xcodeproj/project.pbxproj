@@ -92,8 +92,8 @@
 		B83FD7E02424002A00ACA1D4 /* SocialListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83FD7DF2424002A00ACA1D4 /* SocialListItem.swift */; };
 		B84A15E32410E50900C4DC11 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E22410E50900C4DC11 /* Account.swift */; };
 		B84A15E52410F2DA00C4DC11 /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */; };
-		B84A15E92410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E72410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift */; };
-		B84A15EA2410F65500C4DC11 /* AccountCardPreviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84A15E82410F65500C4DC11 /* AccountCardPreviewTableViewCell.xib */; };
+		B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E72410F65500C4DC11 /* CardPreviewTableViewCell.swift */; };
+		B84A15EA2410F65500C4DC11 /* CardPreviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84A15E82410F65500C4DC11 /* CardPreviewTableViewCell.xib */; };
 		B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15EC2411108800C4DC11 /* AccountHeaderView.swift */; };
 		B84A15F02411130800C4DC11 /* AccountHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84A15EF2411130800C4DC11 /* AccountHeaderView.xib */; };
 		B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */; };
@@ -238,8 +238,8 @@
 		B83FD7DF2424002A00ACA1D4 /* SocialListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialListItem.swift; sourceTree = "<group>"; };
 		B84A15E22410E50900C4DC11 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		B84A15E42410F2DA00C4DC11 /* AccountDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataSource.swift; sourceTree = "<group>"; };
-		B84A15E72410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardPreviewTableViewCell.swift; sourceTree = "<group>"; };
-		B84A15E82410F65500C4DC11 /* AccountCardPreviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCardPreviewTableViewCell.xib; sourceTree = "<group>"; };
+		B84A15E72410F65500C4DC11 /* CardPreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewTableViewCell.swift; sourceTree = "<group>"; };
+		B84A15E82410F65500C4DC11 /* CardPreviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardPreviewTableViewCell.xib; sourceTree = "<group>"; };
 		B84A15EC2411108800C4DC11 /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
 		B84A15EF2411130800C4DC11 /* AccountHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeaderView.xib; sourceTree = "<group>"; };
 		B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFromNibView.swift; sourceTree = "<group>"; };
@@ -650,20 +650,19 @@
 			path = SocialListItemCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		B84A15E62410F63100C4DC11 /* AccountCardPreviewTableViewCell */ = {
+		B84A15E62410F63100C4DC11 /* CardPreviewTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				B84A15E82410F65500C4DC11 /* AccountCardPreviewTableViewCell.xib */,
-				B84A15E72410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift */,
+				B84A15E82410F65500C4DC11 /* CardPreviewTableViewCell.xib */,
+				B84A15E72410F65500C4DC11 /* CardPreviewTableViewCell.swift */,
 			);
-			path = AccountCardPreviewTableViewCell;
+			path = CardPreviewTableViewCell;
 			sourceTree = "<group>";
 		};
 		B84A15EB2411106100C4DC11 /* views */ = {
 			isa = PBXGroup;
 			children = (
 				B84A15EE241112EF00C4DC11 /* AccountHeaderView */,
-				B84A15E62410F63100C4DC11 /* AccountCardPreviewTableViewCell */,
 				B8858878240FE58500158751 /* AccountItemTableViewCell */,
 			);
 			path = views;
@@ -850,6 +849,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B84A15E62410F63100C4DC11 /* CardPreviewTableViewCell */,
 				B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */,
 				B828282B241A96BA0003D056 /* InterestsSelectionTableViewCell */,
 				B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */,
@@ -1004,7 +1004,7 @@
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
 				B825741723F5621500C8CBF8 /* HelveticaNeueCyr-MediumItalic.ttf in Resources */,
 				B83FD7D82423B3CE00ACA1D4 /* SocialsListTableViewCell.xib in Resources */,
-				B84A15EA2410F65500C4DC11 /* AccountCardPreviewTableViewCell.xib in Resources */,
+				B84A15EA2410F65500C4DC11 /* CardPreviewTableViewCell.xib in Resources */,
 				B825741C23F5621500C8CBF8 /* SFProDisplay-Regular.ttf in Resources */,
 				B825741A23F5621500C8CBF8 /* SFProDisplay-Medium.ttf in Resources */,
 				B825741D23F5621500C8CBF8 /* HelveticaNeueCyr-UltraLight.ttf in Resources */,
@@ -1113,7 +1113,7 @@
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
 				B82200BF240FBC1C00A17D2C /* AccountViewController.swift in Sources */,
 				B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */,
-				B84A15E92410F65500C4DC11 /* AccountCardPreviewTableViewCell.swift in Sources */,
+				B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */,
 				B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */,
 				B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,

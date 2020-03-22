@@ -21,7 +21,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
         super.init()
 
         tableView.dataSource = self
-        tableView.register(AccountCardPreviewTableViewCell.nib, forCellReuseIdentifier: AccountCardPreviewTableViewCell.identifier)
+        tableView.register(CardPreviewTableViewCell.nib, forCellReuseIdentifier: CardPreviewTableViewCell.identifier)
         tableView.register(AccountItemTableViewCell.nib, forCellReuseIdentifier: AccountItemTableViewCell.identifier)
         tableView.register(SectionTitleTableViewCell.nib, forCellReuseIdentifier: SectionTitleTableViewCell.identifier)
     }
@@ -49,7 +49,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
             return cell
 
         case .businessCardPreview(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountCardPreviewTableViewCell.identifier, for: indexPath) as? AccountCardPreviewTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CardPreviewTableViewCell.identifier, for: indexPath) as? CardPreviewTableViewCell else {
                 return UITableViewCell()
             }
 
@@ -62,7 +62,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
 
             return cell
         case .personalCardPreview(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountCardPreviewTableViewCell.identifier, for: indexPath) as? AccountCardPreviewTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CardPreviewTableViewCell.identifier, for: indexPath) as? CardPreviewTableViewCell else {
                 return UITableViewCell()
             }
 

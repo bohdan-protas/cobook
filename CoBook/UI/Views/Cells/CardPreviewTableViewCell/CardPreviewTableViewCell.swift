@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountCardPreviewTableViewCell: UITableViewCell {
+class CardPreviewTableViewCell: UITableViewCell {
 
     @IBOutlet var titleImageView: UIImageView!
     @IBOutlet var companyNameLabel: UILabel!
