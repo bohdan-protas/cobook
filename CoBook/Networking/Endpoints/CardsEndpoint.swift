@@ -10,7 +10,7 @@ import Alamofire
 
 enum CardsEndpoint: Endpoint {
 
-    case createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters)
+    case createPersonalCard(parameters: CardAPIModel.PersonalCardParameters)
 
     var useAuthirizationToken: Bool {
         return true

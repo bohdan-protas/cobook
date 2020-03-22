@@ -26,28 +26,37 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     // MARK: Properties
-    weak var view: CreatePersonalCardView?
+    private weak var view: CreatePersonalCardView?
+    private var viewDataSource: CreatePersonalCardDataSource?
 
-    private var dataSource: CreatePersonalCardDataSource?
-    private var interests:  [CreatePersonalCard.Interest] = []
-    private var practices:  [CreatePersonalCard.Practice] = []
-    private var socialList: [Social.ListItem] = []
-
-    private var personalCardParameters = PersonalCardAPI.Request.CreationParameters() {
+    private var personalCardParameters = CardAPIModel.PersonalCardParameters() {
         didSet {
-            view?.setSaveButtonEnabled(personalCardParameters.isRequiredDataFilled)
+            let isRequiredDataFilled: Bool =
+                !(personalCardParameters.avatarId ?? "").isEmpty &&
+                !(personalCardParameters.city.placeId ?? "").isEmpty &&
+                !(personalCardParameters.region.placeId ?? "").isEmpty &&
+                !(personalCardParameters.position ?? "").isEmpty &&
+                !(personalCardParameters.description ?? "").isEmpty &&
+                !(personalCardParameters.practiseType.id == nil) &&
+                !(personalCardParameters.interests).isEmpty &&
+                !(personalCardParameters.contactTelephone ?? "").isEmpty &&
+                !(personalCardParameters.contactEmail ?? "").isEmpty
+            
+            view?.setSaveButtonEnabled(isRequiredDataFilled)
+            syncDataSource()
         }
     }
+    
 
     // MARK: Public
     func attachView(_ view: CreatePersonalCardView) {
         self.view = view
-        self.dataSource = CreatePersonalCardDataSource(tableView: view.tableView)
+        self.viewDataSource = CreatePersonalCardDataSource(tableView: view.tableView)
     }
 
     func detachView() {
         view = nil
-        dataSource = nil
+        viewDataSource = nil
     }
 
     func setup() {
@@ -84,37 +93,37 @@ private extension CreatePersonalCardPresenter {
 
     func setupDataSource() {
         view?.setupHeaderFooterViews()
-        invalidateDataSource()
-        dataSource?.cellsDelegate = self
-        dataSource?.tableView.reloadData()
+        viewDataSource?.cellsDelegate = self
+
+        syncDataSource()
+        viewDataSource?.tableView.reloadData()
     }
 
-    func invalidateDataSource() {
-        dataSource?.source = [
+    func syncDataSource() {
 
+        viewDataSource?.source = [
             CreatePersonalCard.Section(items: [
                 .title(text: "Діяльність:"),
                 .textField(type: .occupiedPosition),
-                .actionTextField(type: .activityType(list: practices)),
+                .actionTextField(type: .activityType(list: personalCardParameters.practices)),
                 .actionTextField(type: .placeOfLiving),
                 .actionTextField(type: .activityRegion),
                 .textView(type: .activityDescription)
             ]),
-
             CreatePersonalCard.Section(items: [
                 .title(text: "Контактні дані:"),
                 .textField(type: .workingEmailForCommunication),
                 .textField(type: .workingPhoneNumber),
                 .title(text: "Соціальні мережі:"),
-                .socialList(list: socialList)
+                .socialList(list: personalCardParameters.socialList)
             ]),
-
             CreatePersonalCard.Section(items: [
                 .title(text: "Інтереси (для рекомендацій)"),
-                .interests(list: interests)
+                .interests(list: personalCardParameters.interests)
             ])
-
         ]
+
+
     }
 
     func fetchSetupData() {
@@ -132,7 +141,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.practices = (response ?? []).map { CreatePersonalCard.Practice(id: $0.id, title: $0.title) }
+                strongSelf.personalCardParameters.practices = (response ?? []).map { CreatePersonalCard.Practice(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 practicesTypesListRequestError = error
@@ -147,7 +156,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.interests = (response ?? []).map { CreatePersonalCard.Interest(id: $0.id, title: $0.title) }
+                strongSelf.personalCardParameters.interests = (response ?? []).map { CreatePersonalCard.Interest(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 interestsListRequestError = error
@@ -155,6 +164,7 @@ private extension CreatePersonalCardPresenter {
             }
         }
 
+        // setup data source
         group.notify(queue: .main) { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
@@ -191,7 +201,6 @@ private extension CreatePersonalCardPresenter {
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
-
     }
 
 
@@ -201,21 +210,11 @@ private extension CreatePersonalCardPresenter {
 extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
 
     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
-        interests[safe: index]?.isSelected = true
-        invalidateDataSource()
-
-        personalCardParameters.interestsIds = interests
-            .filter { $0.isSelected }
-            .compactMap { $0.id }
+        personalCardParameters.interests[safe: index]?.isSelected = true
     }
 
     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
-        interests[safe: index]?.isSelected = false
-        invalidateDataSource()
-
-        personalCardParameters.interestsIds = interests
-            .filter { $0.isSelected }
-            .compactMap { $0.id }
+        personalCardParameters.interests[safe: index]?.isSelected = false
     }
 
 
@@ -271,22 +270,37 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
         switch action {
         case .activityType:
-            let selectedPractice = cell.textView.text
-            personalCardParameters.practiseTypeId = self.practices.first(where: { $0.title == selectedPractice })?.id
+            let selectedPracticeName = cell.textView.text
+            let selectedPracticeId = personalCardParameters.practices.first(where: { $0.title == selectedPracticeName })?.id
+            personalCardParameters.practiseType = CardAPIModel.PracticeType(id: selectedPracticeId,
+                                                                            title: selectedPracticeName)
         case .placeOfLiving:
             let filter = GMSAutocompleteFilter()
             filter.type = .city
-            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
-                cell.textView.text = fetchedPlace.name
-                self?.personalCardParameters.cityPlaceId = fetchedPlace.placeID
+            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedCity) in
+                if let cityId = fetchedCity.placeID {
+                    cell.textView.text = fetchedCity.name
+                    self?.personalCardParameters.city = CardAPIModel.City(placeId: cityId, name: fetchedCity.name)
+                } else {
+                    self?.view?.errorAlert(message: "Selected city data missing!")
+                    Log.error("City data missing!")
+                }
+
             })
+
         case .activityRegion:
             let filter = GMSAutocompleteFilter()
             filter.type = .region
-            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
-                cell.textView.text = fetchedPlace.name
-                self?.personalCardParameters.regionPlaceId = fetchedPlace.placeID
-             })
+            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedRegion) in
+                if let regionId = fetchedRegion.placeID {
+                    cell.textView.text = fetchedRegion.name
+                    self?.personalCardParameters.region = CardAPIModel.Region(placeId: regionId, name: fetchedRegion.name)
+                } else {
+                    self?.view?.errorAlert(message: "Selected region data missing!")
+                    Log.error("Region data missing")
+                }
+            })
+
         }
     }
 
@@ -308,8 +322,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
                 }
 
                 let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
-                self.socialList.append(newItem)
-                self.invalidateDataSource()
+                self.personalCardParameters.socialList.append(newItem)
 
                 cell.create(socialListItem: newItem)
             }
@@ -322,8 +335,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
 
             .init(title: "Видалити", style: .destructive, handler: { (_) in
                 cell.deleteAt(indexPath: indexPath)
-                self.socialList.remove(at: indexPath.item)
-                self.invalidateDataSource()
+                self.personalCardParameters.socialList.remove(at: indexPath.item)
             }),
 
             .init(title: "Змінити", style: .default, handler: { (_) in
@@ -336,8 +348,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
                     let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
                     cell.updateAt(indexPath: indexPath, with: newItem)
 
-                    self.socialList[safe: indexPath.item] = newItem
-                    self.invalidateDataSource()
+                    self.personalCardParameters.socialList[safe: indexPath.item] = newItem
                 }
             }),
 

@@ -251,7 +251,7 @@ extension APIClient {
     /**
      Request localized list of interests
     */
-    func interestsListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Interest]?, Error>) -> Void) {
+    func interestsListRequest(completion: @escaping (Result<[CardAPIModel.Interest]?, Error>) -> Void) {
         let endpoint = InterestsEndpoint.list
         performRequest(endpoint: endpoint, completion: completion)
     }
@@ -266,7 +266,7 @@ extension APIClient {
      Request localized list of practice types
     */
     @discardableResult
-    func practicesTypesListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Practice]?, Error>) -> Void) -> DataRequest{
+    func practicesTypesListRequest(completion: @escaping (Result<[CardAPIModel.PracticeType]?, Error>) -> Void) -> DataRequest{
         let endpoint = PracticeTypesEndpoint.list
         return performRequest(endpoint: endpoint, completion: completion)
     }
@@ -281,7 +281,7 @@ extension APIClient {
      Request create personal card
     */
     @discardableResult
-    func createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters,
+    func createPersonalCard(parameters: CardAPIModel.PersonalCardParameters,
                             completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)

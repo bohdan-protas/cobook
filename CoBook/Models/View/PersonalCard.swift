@@ -113,13 +113,13 @@ enum CreatePersonalCard {
     }
 
     struct Interest {
-        var id: Int
+        var id: Int?
         var title: String?
         var isSelected: Bool = false
     }
 
     struct Practice {
-        var id: Int
+        var id: Int?
         var title: String?
         var isSelected: Bool = false
     }
