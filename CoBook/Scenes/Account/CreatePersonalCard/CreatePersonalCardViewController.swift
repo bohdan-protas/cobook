@@ -58,11 +58,13 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         presenter.setup()
     }
 
-    func popController() {
-        self.navigationController?.popViewController(animated: true)
+    func setupHeaderFooterViews() {
+        tableView.tableHeaderView = personalCardPhotoManagmentView
+        tableView.tableFooterView = cardSaveView
     }
 
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?) {
+        view.endEditing(true)
         placeCompletion = completion
 
         let autocompleteViewController = GMSAutocompleteViewController()
@@ -75,11 +77,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 
     func setSaveButtonEnabled(_ isEnabled: Bool) {
         cardSaveView.saveButton.isEnabled = isEnabled
-    }
-
-    func setupHeaderFooterViews() {
-        tableView.tableHeaderView = personalCardPhotoManagmentView
-        tableView.tableFooterView = cardSaveView
     }
 
     func setImage(image: UIImage?) {
@@ -138,7 +135,6 @@ private extension CreatePersonalCardViewController {
 
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.delegate = self
-
     }
 
 
@@ -193,14 +189,12 @@ extension CreatePersonalCardViewController: UITableViewDelegate {
 extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegate {
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        view.endEditing(true)
         placeCompletion?(place)
         placeCompletion = nil
         viewController.dismiss(animated: true, completion: nil)
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        view.endEditing(true)
         debugPrint(error.localizedDescription)
         viewController.dismiss(animated: true, completion: { [weak self] in
             self?.errorAlert(message: error.localizedDescription)
@@ -208,7 +202,6 @@ extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegat
     }
 
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        view.endEditing(true)
         viewController.dismiss(animated: true, completion: nil)
     }
 

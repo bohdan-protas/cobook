@@ -21,6 +21,29 @@ class InterestItemCollectionViewCell: UICollectionViewCell {
     private var selectedTextColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private var deselectedTextColor: UIColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
 
+    var maxWidth: CGFloat?
+
+    //forces the system to do one layout pass
+    var isSizeCalculated: Bool = false
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        //Exhibit A - We need to cache our calculation to prevent a crash.
+        if !isSizeCalculated {
+            setNeedsLayout()
+            layoutIfNeeded()
+
+            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+            var newFrame = layoutAttributes.frame
+            if let maxWidth = maxWidth {
+                newFrame.size.width = min(CGFloat(ceilf(Float(size.width))), maxWidth)
+            } else {
+                newFrame.size.width = CGFloat(ceilf(Float(size.width)))
+            }
+
+            layoutAttributes.frame = newFrame
+            isSizeCalculated = true
+        }
+        return layoutAttributes
+    }
 
     override var isSelected: Bool {
         didSet {

@@ -26,9 +26,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="171" height="24"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XD-xA-Ms1">
-                                <rect key="frame" x="12" y="5" width="128" height="14"/>
+                                <rect key="frame" x="12" y="0.0" width="128" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="yUG-0T-GRB"/>
+                                    <constraint firstAttribute="height" constant="24" id="BJ0-YB-Dmr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,8 +49,8 @@
                         <constraints>
                             <constraint firstItem="99r-tc-lj2" firstAttribute="centerY" secondItem="6XD-xA-Ms1" secondAttribute="centerY" id="2Ou-fn-P7x"/>
                             <constraint firstItem="99r-tc-lj2" firstAttribute="leading" secondItem="6XD-xA-Ms1" secondAttribute="trailing" constant="7" id="UkK-ya-Z1K"/>
-                            <constraint firstAttribute="bottom" secondItem="6XD-xA-Ms1" secondAttribute="bottom" constant="5" id="ZLT-Ej-JrO"/>
-                            <constraint firstItem="6XD-xA-Ms1" firstAttribute="top" secondItem="kGF-mn-nXq" secondAttribute="top" constant="5" id="bhy-TJ-3fp"/>
+                            <constraint firstAttribute="bottom" secondItem="6XD-xA-Ms1" secondAttribute="bottom" id="ZLT-Ej-JrO"/>
+                            <constraint firstItem="6XD-xA-Ms1" firstAttribute="top" secondItem="kGF-mn-nXq" secondAttribute="top" id="bhy-TJ-3fp"/>
                             <constraint firstAttribute="trailing" secondItem="99r-tc-lj2" secondAttribute="trailing" id="cVR-39-APt"/>
                             <constraint firstItem="6XD-xA-Ms1" firstAttribute="leading" secondItem="kGF-mn-nXq" secondAttribute="leading" constant="12" id="qN7-Iz-exU"/>
                         </constraints>
@@ -64,9 +64,9 @@
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="kGF-mn-nXq" secondAttribute="bottom" id="7R9-J2-QZ7"/>
-                <constraint firstItem="kGF-mn-nXq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="HzB-Fw-Aep"/>
                 <constraint firstItem="kGF-mn-nXq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KYa-1o-NhJ"/>
-                <constraint firstAttribute="trailing" secondItem="kGF-mn-nXq" secondAttribute="trailing" id="YHQ-6I-aKq"/>
+                <constraint firstItem="kGF-mn-nXq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TkA-sp-tyu"/>
+                <constraint firstAttribute="trailing" secondItem="kGF-mn-nXq" secondAttribute="trailing" id="gsn-n1-tR9"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="171" height="24"/>

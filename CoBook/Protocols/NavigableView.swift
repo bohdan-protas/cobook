@@ -11,4 +11,5 @@ import UIKit
 protocol NavigableView {
     func push(controller: UIViewController, animated: Bool)
     func present(controller: UIViewController, animated: Bool)
+    func popController()
 }

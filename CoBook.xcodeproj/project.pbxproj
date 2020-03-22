@@ -588,6 +588,7 @@
 		B828282B241A96BA0003D056 /* InterestsSelectionTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				B8212A5A241B6A400066700C /* InterestItemCollectionViewCell */,
 				B828282C241A970D0003D056 /* InterestsSelectionTableViewCell.swift */,
 				B828282D241A970D0003D056 /* InterestsSelectionTableViewCell.xib */,
 			);
@@ -850,7 +851,6 @@
 			isa = PBXGroup;
 			children = (
 				B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */,
-				B8212A5A241B6A400066700C /* InterestItemCollectionViewCell */,
 				B828282B241A96BA0003D056 /* InterestsSelectionTableViewCell */,
 				B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */,
 				B8DE5E3B2418E1D900F4F60B /* TextFieldTableViewCell */,

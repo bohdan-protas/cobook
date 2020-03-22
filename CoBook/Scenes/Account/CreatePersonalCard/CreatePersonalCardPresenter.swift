@@ -15,7 +15,6 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setImage(image: UIImage?)
-    func popController()
     func setupHeaderFooterViews()
     func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
 }
@@ -149,6 +148,11 @@ private extension CreatePersonalCardPresenter {
             switch result {
             case let .success(response):
                 strongSelf.interests = (response ?? []).map { CreatePersonalCard.Interest(id: $0.id, title: $0.title) }
+                strongSelf.interests.append(CreatePersonalCard.Interest(id: 123, title: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", isSelected: false))
+                strongSelf.interests.append(CreatePersonalCard.Interest(id: 124, title: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", isSelected: false))
+                strongSelf.interests.append(CreatePersonalCard.Interest(id: 125, title: "Ut enim ad minim veniam", isSelected: false))
+                strongSelf.interests.append(CreatePersonalCard.Interest(id: 126, title: "incididunt ut labore et dolore magna aliqua", isSelected: false))
+
                 group.leave()
             case let .failure(error):
                 interestsListRequestError = error
@@ -202,29 +206,22 @@ private extension CreatePersonalCardPresenter {
 extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
 
     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
-         guard let indexPath = view?.tableView.indexPath(for: cell), let data = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.row] else {
-             return
-         }
+        interests[safe: index]?.isSelected = true
+        invalidateDataSource()
 
-         if case .interests(var list) = data {
-            list[safe: index]?.isSelected = true
-            personalCardParameters.interestsIds = list
-                .filter { $0.isSelected }
-                .compactMap { $0.id }
-            dataSource?[indexPath] = .interests(list: list)
-         }
-     }
+        personalCardParameters.interestsIds = interests
+            .filter { $0.isSelected }
+            .compactMap { $0.id }
+    }
 
-     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
-         guard let indexPath = view?.tableView.indexPath(for: cell), let data = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.row] else {
-             return
-         }
+    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+        interests[safe: index]?.isSelected = false
+        invalidateDataSource()
 
-         if case .interests(var list) = data {
-             list[safe: index]?.isSelected = false
-             dataSource?[indexPath] = .interests(list: list)
-         }
-     }
+        personalCardParameters.interestsIds = interests
+            .filter { $0.isSelected }
+            .compactMap { $0.id }
+    }
 
 
 }
@@ -325,6 +322,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
     }
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath) {
+
         let actions: [UIAlertAction] = [
 
             .init(title: "Видалити", style: .destructive, handler: { (_) in
@@ -335,7 +333,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
 
             .init(title: "Змінити", style: .default, handler: { (_) in
                 self.view?.addNewSocial(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
-                    guard let name = name, let url = URL.init(string: strUrl ?? "") else {
+                    guard let name = name, let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
                         self.view?.errorAlert(message: "Перевірне вхідні дані")
                         return
                     }
