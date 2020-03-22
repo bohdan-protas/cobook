@@ -290,7 +290,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             })
         case .activityRegion:
             let filter = GMSAutocompleteFilter()
-            filter.type = .geocode
+            filter.type = .region
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedPlace) in
                 cell.textView.text = fetchedPlace.name
                 self?.personalCardParameters.regionPlaceId = fetchedPlace.placeID

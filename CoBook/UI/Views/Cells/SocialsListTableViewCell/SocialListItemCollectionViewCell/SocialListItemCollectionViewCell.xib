@@ -33,6 +33,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                 <color key="backgroundColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="eXT-28-R8y" secondAttribute="height" multiplier="1:1" id="UYe-M1-Ddz"/>
                                     <constraint firstAttribute="height" constant="48" id="pik-mI-4Ty"/>
                                 </constraints>
                             </imageView>

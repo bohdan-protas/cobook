@@ -73,7 +73,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             cell.textTypeIdentifier = type.rawValue
             cell.textView.placeholder = type.placeholder
 
-            cell.textView.textContentType = type.contentType
+            //cell.textView.textContentType = type.contentType
             cell.textView.keyboardType = type.keyboardType
             cell.textView.reloadInputViews()
 
