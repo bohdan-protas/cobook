@@ -66,8 +66,9 @@ class AccountPresenter: BasePresenter {
         case .businessCardPreview(let model):
             break
         case .personalCardPreview(let model):
-            break
-
+            let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+            personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: model.id)
+            view?.push(controller: personalCardDetailsViewController, animated: true)
         default: break
         }
     }

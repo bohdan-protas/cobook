@@ -71,6 +71,36 @@
             </objects>
             <point key="canvasLocation" x="2028" y="-125.4872563718141"/>
         </scene>
+        <!--Personal Card Details View Controller-->
+        <scene sceneID="ku6-Ad-QeJ">
+            <objects>
+                <viewController storyboardIdentifier="PersonalCardDetailsViewController" hidesBottomBarWhenPushed="YES" id="df6-Gm-Zjw" customClass="PersonalCardDetailsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hGf-b4-q5Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="99k-kN-JLI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="99k-kN-JLI" firstAttribute="top" secondItem="g3K-bm-mIQ" secondAttribute="top" id="Tee-LS-bMm"/>
+                            <constraint firstItem="99k-kN-JLI" firstAttribute="trailing" secondItem="g3K-bm-mIQ" secondAttribute="trailing" id="Ux3-T6-YA0"/>
+                            <constraint firstItem="99k-kN-JLI" firstAttribute="bottom" secondItem="g3K-bm-mIQ" secondAttribute="bottom" id="ach-LD-Ayw"/>
+                            <constraint firstItem="99k-kN-JLI" firstAttribute="leading" secondItem="g3K-bm-mIQ" secondAttribute="leading" id="kwC-AM-lCz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="g3K-bm-mIQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="99k-kN-JLI" id="kCS-Oh-dj4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gna-EY-YNz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2864.8000000000002" y="-125.4872563718141"/>
+        </scene>
         <!--Account Navigation Controller-->
         <scene sceneID="Azw-7v-TXN">
             <objects>

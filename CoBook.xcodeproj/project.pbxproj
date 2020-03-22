@@ -128,6 +128,9 @@
 		B8AB3F072422D5B900E06E53 /* NSError + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F062422D5B900E06E53 /* NSError + Extensions.swift */; };
 		B8AB3F092422FBE800E06E53 /* ProfileEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F082422FBE800E06E53 /* ProfileEndpoint.swift */; };
 		B8AB3F0B2422FF1B00E06E53 /* NavigableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F0A2422FF1B00E06E53 /* NavigableView.swift */; };
+		B8AB83EA24280ECB0041B879 /* PersonalCardDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83E924280ECB0041B879 /* PersonalCardDetailsViewController.swift */; };
+		B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83EB24280EDC0041B879 /* PersonalCardDetailsPresenter.swift */; };
+		B8AB83EE24280F130041B879 /* PersonalCardDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83ED24280F130041B879 /* PersonalCardDetailsDataSource.swift */; };
 		B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */; };
 		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
@@ -278,6 +281,9 @@
 		B8AB3F062422D5B900E06E53 /* NSError + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError + Extensions.swift"; sourceTree = "<group>"; };
 		B8AB3F082422FBE800E06E53 /* ProfileEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEndpoint.swift; sourceTree = "<group>"; };
 		B8AB3F0A2422FF1B00E06E53 /* NavigableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigableView.swift; sourceTree = "<group>"; };
+		B8AB83E924280ECB0041B879 /* PersonalCardDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetailsViewController.swift; sourceTree = "<group>"; };
+		B8AB83EB24280EDC0041B879 /* PersonalCardDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetailsPresenter.swift; sourceTree = "<group>"; };
+		B8AB83ED24280F130041B879 /* PersonalCardDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetailsDataSource.swift; sourceTree = "<group>"; };
 		B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
@@ -372,6 +378,7 @@
 			children = (
 				B82200B9240FB8A400A17D2C /* Account.storyboard */,
 				B82200BD240FBBF700A17D2C /* Account */,
+				B8AB83E824280E7E0041B879 /* PersonalCardDetails */,
 				B8DD431724178F0200C7D940 /* CreatePersonalCard */,
 			);
 			path = Account;
@@ -809,6 +816,16 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		B8AB83E824280E7E0041B879 /* PersonalCardDetails */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB83E924280ECB0041B879 /* PersonalCardDetailsViewController.swift */,
+				B8AB83EB24280EDC0041B879 /* PersonalCardDetailsPresenter.swift */,
+				B8AB83ED24280F130041B879 /* PersonalCardDetailsDataSource.swift */,
+			);
+			path = PersonalCardDetails;
+			sourceTree = "<group>";
+		};
 		B8CB0E7824053E6B00AF431B /* KeychainWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1083,7 +1100,9 @@
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
 				B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */,
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
+				B8AB83EE24280F130041B879 /* PersonalCardDetailsDataSource.swift in Sources */,
 				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
+				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
@@ -1123,6 +1142,7 @@
 				B8307F192406AED800AFE578 /* Profile.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */,
+				B8AB83EA24280ECB0041B879 /* PersonalCardDetailsViewController.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
