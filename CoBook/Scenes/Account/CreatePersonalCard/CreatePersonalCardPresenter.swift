@@ -334,8 +334,8 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
         switch item {
         case .add:
             view?.addNewSocial(name: nil, link: nil) { (name, strUrl) in
-                guard let name = name, let url = URL.init(string: strUrl ?? "") else {
-                    self.view?.errorAlert(message: "Перевірне вхідні дані")
+                guard let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
+                    self.view?.errorAlert(message: "Посилання має хибний формат")
                     return
                 }
 
@@ -362,7 +362,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
             .init(title: "Змінити", style: .default, handler: { (_) in
                 self.view?.addNewSocial(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
                     guard let name = name, let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
-                        self.view?.errorAlert(message: "Перевірне вхідні дані")
+                        self.view?.errorAlert(message: "Посилання має хибний формат")
                         return
                     }
 
