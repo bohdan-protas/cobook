@@ -113,7 +113,6 @@ extension PersonalCardDetailsPresenter: SocialsListTableViewCellDelegate {
     }
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath) {
-
     }
 
 

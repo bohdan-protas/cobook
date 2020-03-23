@@ -52,10 +52,10 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["you@yoursite.com"])
+            mail.setToRecipients([address])
             present(mail, animated: true)
         } else {
-            errorAlert(message: "Unaviable send email to this address")
+            errorAlert(message: "Unaviable send email to \(address)")
         }
     }
 
