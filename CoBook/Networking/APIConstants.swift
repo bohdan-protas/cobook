@@ -25,6 +25,7 @@ enum APIConstants {
         static let code         = "code"
         static let login        = "login"
         static let refreshToken = "refresh_token"
+        static let id           = "id"
     }
 
     static var baseURLPath: URLComponents {

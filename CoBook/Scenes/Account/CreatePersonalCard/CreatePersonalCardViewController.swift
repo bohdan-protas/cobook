@@ -8,6 +8,7 @@
 
 import UIKit
 import GooglePlaces
+import Kingfisher
 
 class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
 
@@ -55,7 +56,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         setupLayout()
 
         presenter.attachView(self)
-        presenter.setup()
+        presenter.onViewDidLoad()
     }
 
     func setupHeaderFooterViews() {
@@ -80,6 +81,10 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
     }
 
     func setImage(image: UIImage?) {
+        personalCardPhotoManagmentView.setImage(image)
+    }
+
+    func setImage(image: URL?) {
         personalCardPhotoManagmentView.setImage(image)
     }
 
