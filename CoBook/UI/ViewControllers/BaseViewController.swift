@@ -46,5 +46,9 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
         self.present(controller, animated: animated, completion: nil)
     }
 
+    func popController() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
 
 }

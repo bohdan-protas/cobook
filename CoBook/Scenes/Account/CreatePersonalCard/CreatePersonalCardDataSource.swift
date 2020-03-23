@@ -67,21 +67,20 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             cell.titleLabel.text = text
             return cell
 
-        case .textField(let type):
+        case .textField(let text, let type):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
             cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
+            cell.textView.text = text
             cell.textView.placeholder = type.placeholder
-
-            cell.textView.textContentType = type.contentType
             cell.textView.keyboardType = type.keyboardType
             cell.textView.reloadInputViews()
-
             return cell
 
-        case .actionTextField(let action):
+        case .actionTextField(let text, let action):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
             cell.delegate = cellsDelegate
+            cell.textView.text = text
             cell.textView.placeholder = action.placeholder
             cell.rightViewActionIdentifier = action.rawValue
 
@@ -97,11 +96,12 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             }
             return cell
 
-        case .textView(let type):
+        case .textView(let text, let type):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier, for: indexPath) as! TextViewTableViewCell
             cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
-            cell.textView.pText = type.placeholder
+            cell.textView.placeholderLabel.isHidden = !(text ?? "").isEmpty
+            cell.textView.text = text
             return cell
 
         case .interests(let list):

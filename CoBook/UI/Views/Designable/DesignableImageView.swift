@@ -20,7 +20,7 @@ class DesignableImageView: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        layer.masksToBounds = false
+        layer.masksToBounds = true
         layer.shadowOffset = shadowOffset
         layer.shadowColor = shadowColor.cgColor
         layer.shadowRadius = shadowRadius

@@ -15,22 +15,28 @@ protocol InterestsSelectionTableViewCellDelegate: class {
 
 class InterestsSelectionTableViewCell: UITableViewCell {
 
+    enum Constants {
+        static let spacing: CGFloat = 16
+    }
+
     @IBOutlet var interestsCollectionView: UICollectionView!
+    @IBOutlet var interestsCollectionViewFlowLayout: LeftAlignedCollectionViewFlowLayout!
+
     weak var delegate: InterestsSelectionTableViewCellDelegate?
     var dataSource: [CreatePersonalCard.Interest] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        interestsCollectionViewFlowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+
         interestsCollectionView.register(InterestItemCollectionViewCell.nib, forCellWithReuseIdentifier: InterestItemCollectionViewCell.identifier)
         interestsCollectionView.delegate = self
         interestsCollectionView.dataSource = self
         interestsCollectionView.allowsMultipleSelection = true
 
-        // Set up the flow layout's cell alignment:
-        let flowLayout = interestsCollectionView?.collectionViewLayout as? LeftAlignedCollectionViewFlowLayout
-        //flowLayout?.horizontalAlignment = .left
-        flowLayout?.estimatedItemSize = .init(width: 100, height: 24)
+        interestsCollectionViewFlowLayout.estimatedItemSize = .init(width: 50, height: 24)
+        interestsCollectionViewFlowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
     }
 
     
@@ -47,6 +53,7 @@ extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InterestItemCollectionViewCell.identifier, for: indexPath) as! InterestItemCollectionViewCell
         cell.titleLabel.text = dataSource[indexPath.row].title
         cell.isSelected = dataSource[indexPath.row].isSelected
+        cell.maxWidth = self.interestsCollectionView.bounds.width
         return cell
     }
 
@@ -57,14 +64,16 @@ extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
 extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dataSource[safe: indexPath.item]?.isSelected = true
         self.delegate?.interestsSelectionTableViewCell(self, didSelectInterestAt: indexPath.item)
-
-        collectionView.cellForItem(at: indexPath)?.isSelected = true
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        dataSource[safe: indexPath.item]?.isSelected = false
         self.delegate?.interestsSelectionTableViewCell(self, didDeselectInterestAt: indexPath.item)
-        collectionView.cellForItem(at: indexPath)?.isSelected = false
     }
 
 }
+
+
+

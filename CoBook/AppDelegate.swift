@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
+
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
         if AppStorage.State.isFirstAppLaunch {

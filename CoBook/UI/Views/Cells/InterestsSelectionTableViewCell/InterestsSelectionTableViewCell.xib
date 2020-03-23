@@ -42,6 +42,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="interestsCollectionView" destination="qzO-QA-mqp" id="JKa-Fk-oGV"/>
+                <outlet property="interestsCollectionViewFlowLayout" destination="J4T-BN-ppU" id="B74-Hs-fT6"/>
             </connections>
             <point key="canvasLocation" x="177.536231884058" y="184.15178571428569"/>
         </tableViewCell>

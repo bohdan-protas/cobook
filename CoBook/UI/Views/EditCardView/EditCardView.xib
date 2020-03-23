@@ -14,22 +14,22 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardSaveView" customModule="CoBook" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditCardView" customModule="CoBook" customModuleProvider="target">
             <connections>
-                <outlet property="saveButton" destination="TOD-x1-a74" id="6Re-gF-hPV"/>
-                <outlet property="topShadowView" destination="rc2-c2-s1J" id="DH7-iX-S6q"/>
+                <outlet property="editButton" destination="3Tl-uy-dNa" id="SaH-5F-B1N"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rc2-c2-s1J" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="-10" width="375" height="20"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMC-a2-D8z" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="-10" width="414" height="20"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="f5D-F8-5bV"/>
+                        <constraint firstAttribute="height" constant="20" id="fVa-Rt-Il0"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="i0I-MW-Ly6"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -49,15 +49,15 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOD-x1-a74" userLabel="Continue Button" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
-                    <rect key="frame" x="40" y="42" width="295" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tl-uy-dNa" userLabel="Continue Button" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
+                    <rect key="frame" x="139.5" y="37" width="135" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="ebk-aJ-NVJ"/>
+                        <constraint firstAttribute="height" constant="20" id="kry-Q4-o0c"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="15"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Зберегти візитку">
-                        <color key="titleColor" name="Theme_Black-Middle"/>
+                    <state key="normal" title="Редагувати візитку">
+                        <color key="titleColor" name="Theme_Green-Dark"/>
                     </state>
                     <state key="disabled">
                         <color key="titleColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -67,46 +67,42 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="disabledBgColor">
-                            <color key="value" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBgColor">
-                            <color key="value" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="normalBgColor">
-                            <color key="value" name="Theme_Accent"/>
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="selectedBgColor">
-                            <color key="value" name="Theme_Accent"/>
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="onSaveButtonTapped:" destination="-1" eventType="touchUpInside" id="B07-37-InK"/>
+                        <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="wji-ad-1gf"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TOD-x1-a74" secondAttribute="trailing" constant="40" id="5OH-C1-BSj"/>
-                <constraint firstItem="TOD-x1-a74" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="JNu-PH-gP3"/>
-                <constraint firstAttribute="trailing" secondItem="rc2-c2-s1J" secondAttribute="trailing" id="SF1-3y-0gR"/>
-                <constraint firstItem="rc2-c2-s1J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-10" id="g2n-xz-PoC"/>
-                <constraint firstItem="rc2-c2-s1J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lsn-pQ-gFl"/>
-                <constraint firstItem="TOD-x1-a74" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="oIV-kE-FAS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pMC-a2-D8z" secondAttribute="trailing" id="1Y2-g6-CQh"/>
+                <constraint firstItem="3Tl-uy-dNa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="9u1-4m-JuC"/>
+                <constraint firstItem="pMC-a2-D8z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SLq-11-abs"/>
+                <constraint firstItem="pMC-a2-D8z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-10" id="Sdn-WI-2nd"/>
+                <constraint firstItem="3Tl-uy-dNa" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gcE-x2-SmY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="109.42028985507247" y="-105.13392857142857"/>
+            <point key="canvasLocation" x="137.68115942028987" y="-118.52678571428571"/>
         </view>
     </objects>
     <resources>
-        <namedColor name="Theme_Accent">
-            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Theme_Black-Middle">
-            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Theme_Gray-UI">
             <color red="0.53299999237060547" green="0.53299999237060547" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green-Dark">
+            <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -12,7 +12,6 @@ import Alamofire
 class APIClient {
 
     // MARK: Properties
-    /// Singleton
     public static var `default`: APIClient = {
         let evaluators = [APIConstants.baseURLPath.host ?? "": DisabledEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
@@ -42,7 +41,7 @@ class APIClient {
        - completion: parsed response from server
     */
     @discardableResult
-    private func performRequest<T: Decodable>(endpoint: Endpoint,
+    private func performRequest<T: Decodable>(endpoint: URLRequestConvertible,
                                               decoder: JSONDecoder = JSONDecoder(),
                                               completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
 
@@ -251,7 +250,7 @@ extension APIClient {
     /**
      Request localized list of interests
     */
-    func interestsListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Interest]?, Error>) -> Void) {
+    func interestsListRequest(completion: @escaping (Result<[CardAPIModel.Interest]?, Error>) -> Void) {
         let endpoint = InterestsEndpoint.list
         performRequest(endpoint: endpoint, completion: completion)
     }
@@ -266,7 +265,7 @@ extension APIClient {
      Request localized list of practice types
     */
     @discardableResult
-    func practicesTypesListRequest(completion: @escaping (Result<[PersonalCardAPI.Response.Practice]?, Error>) -> Void) -> DataRequest{
+    func practicesTypesListRequest(completion: @escaping (Result<[CardAPIModel.PracticeType]?, Error>) -> Void) -> DataRequest{
         let endpoint = PracticeTypesEndpoint.list
         return performRequest(endpoint: endpoint, completion: completion)
     }
@@ -281,10 +280,26 @@ extension APIClient {
      Request create personal card
     */
     @discardableResult
-    func createPersonalCard(parameters: PersonalCardAPI.Request.CreationParameters,
+    func createPersonalCard(parameters: CardAPIModel.PersonalCardParameters,
                             completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for card details info
+
+     - parameters:
+        - id: card id
+        - completion: parsed  'CardDetailsAPIResponseData' response from server
+     - returns: DataRequest
+     */
+    @discardableResult
+    func getCardInfo(id: Int,
+                     completion: @escaping (Result<CardAPIModel.CardDetailsAPIResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = /*CardEndpointMockup.details*/CardsEndpoint.getCardInfo(id: id)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -301,10 +316,10 @@ extension APIClient {
         - completion: parsed  'FileAPIResponseData' response from server
      */
     @discardableResult
-    func upload(imageData: Data, completion: @escaping (Result<FileAPIResponseData?, Error>) -> Void) -> DataRequest {
-        let endpoint = ContentManagerEndpoint.singleFileUpload
+    func upload(imageData: Data,
+                completion: @escaping (Result<FileAPIResponseData?, Error>) -> Void) -> DataRequest {
 
-        // FIXME: Fix force unwrap
+        let endpoint = ContentManagerEndpoint.singleFileUpload
         let url = endpoint.urlRequest!.url!
         let headers = endpoint.urlRequest?.headers
         return upload(imageData: imageData, to: url, headers: headers, completion: completion)

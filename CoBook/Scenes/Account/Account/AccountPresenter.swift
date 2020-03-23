@@ -66,8 +66,9 @@ class AccountPresenter: BasePresenter {
         case .businessCardPreview(let model):
             break
         case .personalCardPreview(let model):
-            break
-
+            let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+            personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: model.id)
+            view?.push(controller: personalCardDetailsViewController, animated: true)
         default: break
         }
     }
@@ -114,6 +115,7 @@ private extension AccountPresenter {
                                                                                                  name: "\(AppStorage.User.profile?.firstName ?? "") \(AppStorage.User.profile?.lastName ?? "")",
                                                                                                  profession: $0.practiceType?.title,
                                                                                                  telephone: $0.telephone?.number)))
+                cardsPreviceSection.items.append(.action(type: .createPersonalCard))
                 cardsPreviceSection.items.append(.action(type: .createBusinessCard))
             }
         }
