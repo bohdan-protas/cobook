@@ -84,7 +84,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="99k-kN-JLI" firstAttribute="top" secondItem="g3K-bm-mIQ" secondAttribute="top" id="Tee-LS-bMm"/>
                             <constraint firstItem="99k-kN-JLI" firstAttribute="trailing" secondItem="g3K-bm-mIQ" secondAttribute="trailing" id="Ux3-T6-YA0"/>

@@ -134,6 +134,12 @@
 		B8AB83F3242828470041B879 /* CardDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = B8AB83F2242828470041B879 /* CardDetails.json */; };
 		B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83F52428293D0041B879 /* MockupEndpoind.swift */; };
 		B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83F824282B890041B879 /* CardDetailsEndpointMockup.swift */; };
+		B8AB83FF242831E60041B879 /* PersonalCardUserInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB83FD242831E60041B879 /* PersonalCardUserInfoTableViewCell.swift */; };
+		B8AB8400242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AB83FE242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib */; };
+		B8AB840324283C580041B879 /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB840224283C580041B879 /* EditCardView.swift */; };
+		B8AB840524283C7C0041B879 /* EditCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AB840424283C7C0041B879 /* EditCardView.xib */; };
+		B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */; };
+		B8AB840A2428411F0041B879 /* GetInTouchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */; };
 		B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */; };
 		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
@@ -290,6 +296,12 @@
 		B8AB83F2242828470041B879 /* CardDetails.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CardDetails.json; sourceTree = "<group>"; };
 		B8AB83F52428293D0041B879 /* MockupEndpoind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupEndpoind.swift; sourceTree = "<group>"; };
 		B8AB83F824282B890041B879 /* CardDetailsEndpointMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsEndpointMockup.swift; sourceTree = "<group>"; };
+		B8AB83FD242831E60041B879 /* PersonalCardUserInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardUserInfoTableViewCell.swift; sourceTree = "<group>"; };
+		B8AB83FE242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCardUserInfoTableViewCell.xib; sourceTree = "<group>"; };
+		B8AB840224283C580041B879 /* EditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
+		B8AB840424283C7C0041B879 /* EditCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditCardView.xib; sourceTree = "<group>"; };
+		B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInTouchTableViewCell.swift; sourceTree = "<group>"; };
+		B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetInTouchTableViewCell.xib; sourceTree = "<group>"; };
 		B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
@@ -490,6 +502,7 @@
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
 				B8DE5E5724192ADC00F4F60B /* Designable */,
 				B8282826241A6F780003D056 /* CardSaveView */,
+				B8AB840124283C440041B879 /* EditCardView */,
 				B8DE5E432418E5C400F4F60B /* SectionHeaderSeparatorView */,
 				B8DE5E3A2418E1C600F4F60B /* Cells */,
 			);
@@ -827,6 +840,7 @@
 		B8AB83E824280E7E0041B879 /* PersonalCardDetails */ = {
 			isa = PBXGroup;
 			children = (
+				B8AB83FA2428314A0041B879 /* views */,
 				B8AB83E924280ECB0041B879 /* PersonalCardDetailsViewController.swift */,
 				B8AB83EB24280EDC0041B879 /* PersonalCardDetailsPresenter.swift */,
 				B8AB83ED24280F130041B879 /* PersonalCardDetailsDataSource.swift */,
@@ -849,6 +863,41 @@
 				B8AB83F824282B890041B879 /* CardDetailsEndpointMockup.swift */,
 			);
 			path = Mockup;
+			sourceTree = "<group>";
+		};
+		B8AB83FA2428314A0041B879 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB83FD242831E60041B879 /* PersonalCardUserInfoTableViewCell.swift */,
+				B8AB83FE242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib */,
+			);
+			path = PersonalCardUserInfoCell;
+			sourceTree = "<group>";
+		};
+		B8AB840124283C440041B879 /* EditCardView */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB840224283C580041B879 /* EditCardView.swift */,
+				B8AB840424283C7C0041B879 /* EditCardView.xib */,
+			);
+			path = EditCardView;
+			sourceTree = "<group>";
+		};
+		B8AB8406242840F80041B879 /* GetInTouchTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */,
+				B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */,
+			);
+			path = GetInTouchTableViewCell;
 			sourceTree = "<group>";
 		};
 		B8CB0E7824053E6B00AF431B /* KeychainWrapper */ = {
@@ -891,6 +940,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8AB8406242840F80041B879 /* GetInTouchTableViewCell */,
 				B84A15E62410F63100C4DC11 /* CardPreviewTableViewCell */,
 				B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */,
 				B828282B241A96BA0003D056 /* InterestsSelectionTableViewCell */,
@@ -1015,6 +1065,7 @@
 			files = (
 				B828282F241A970D0003D056 /* InterestsSelectionTableViewCell.xib in Resources */,
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
+				B8AB8400242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B8DE5E352418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
@@ -1027,6 +1078,7 @@
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
 				B828282A241A6FE80003D056 /* CardSaveView.xib in Resources */,
 				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
+				B8AB840524283C7C0041B879 /* EditCardView.xib in Resources */,
 				B8DE5E452418E82600F4F60B /* SectionHeaderSeparatorView.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
@@ -1050,6 +1102,7 @@
 				B84A15EA2410F65500C4DC11 /* CardPreviewTableViewCell.xib in Resources */,
 				B825741C23F5621500C8CBF8 /* SFProDisplay-Regular.ttf in Resources */,
 				B825741A23F5621500C8CBF8 /* SFProDisplay-Medium.ttf in Resources */,
+				B8AB840A2428411F0041B879 /* GetInTouchTableViewCell.xib in Resources */,
 				B825741D23F5621500C8CBF8 /* HelveticaNeueCyr-UltraLight.ttf in Resources */,
 				B825741B23F5621500C8CBF8 /* HelveticaNeueCyr-BoldItalic.ttf in Resources */,
 			);
@@ -1143,6 +1196,7 @@
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
 				B82200B7240FB87000A17D2C /* MainTabBarController.swift in Sources */,
 				B8AB3F0B2422FF1B00E06E53 /* NavigableView.swift in Sources */,
+				B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */,
 				B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */,
 				B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */,
 				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
@@ -1173,6 +1227,7 @@
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
+				B8AB83FF242831E60041B879 /* PersonalCardUserInfoTableViewCell.swift in Sources */,
 				B84A15F72411256800C4DC11 /* DesignableTextPlaceholderImageView.swift in Sources */,
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
@@ -1192,6 +1247,7 @@
 				B8282831241A98780003D056 /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B83FD7DC2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift in Sources */,
+				B8AB840324283C580041B879 /* EditCardView.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
 				B8AB3F072422D5B900E06E53 /* NSError + Extensions.swift in Sources */,
 				B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */,
