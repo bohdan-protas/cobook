@@ -69,14 +69,20 @@ enum Social {
     }
 
     struct Model {
-        let title: String
+        let title: String?
         let url: URL?
         let type: LinkType?
 
-        init(title: String, url: URL?) {
+        init(title: String?, url: URL?) {
             self.title = title
             self.url = url
             self.type = detectFrom(url: url)
+        }
+
+        init(title: String?, url: String?) {
+            self.title = title
+            self.url = URL.init(string: url ?? "")
+            self.type = detectFrom(url: self.url)
         }
 
     }

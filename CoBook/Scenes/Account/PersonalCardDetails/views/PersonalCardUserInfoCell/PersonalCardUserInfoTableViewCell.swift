@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PersonalCardUserInfoTableViewCell: UITableViewCell {
 
@@ -20,13 +21,38 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        clearLayout()
+    }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        clearLayout()
+
+    }
+
+    private func clearLayout() {
+        avatarImageView.kf.cancelDownloadTask()
         userNameLabel.text = ""
         practiceTypeLabel.text = ""
         positionLabel.text = ""
         telephoneNumberLabel.text = ""
         descriptionLabel.text = ""
         locationLabel.text = ""
+
+    }
+
+    func fill(with model: CardAPIModel.CardDetailsAPIResponseData?) {
+        self.avatarImageView.kf.setImage(with: URL.init(string: model?.avatar?.sourceUrl ?? ""),
+                                         placeholder: UIImage(named: "ic_user"),
+                                         options: [.transition(.fade(0.3))]
+        )
+        self.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
+        self.practiceTypeLabel.text = model?.practiceType?.title
+        self.positionLabel.text = model?.position
+        self.telephoneNumberLabel.text = model?.contactTelephone?.number
+        self.descriptionLabel.text = model?.description
+        self.locationLabel.text = "\(model?.city?.name ?? ""), \(model?.region?.name ?? "")"
+
     }
 
     

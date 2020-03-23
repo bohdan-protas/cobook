@@ -32,17 +32,22 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CA2-BV-FzE">
                                 <rect key="frame" x="24" y="16.5" width="272" height="64"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sgy-yI-82k">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sgy-yI-82k" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Sgy-yI-82k" secondAttribute="height" multiplier="1:1" id="nLT-F7-3OV"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oPr-84-Ba8">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="oPr-84-Ba8">
                                         <rect key="frame" x="80" y="2" width="192" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YJ-Yt-IUk">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="19"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="FFE-OQ-bGm"/>
                                                 </constraints>
@@ -51,7 +56,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Practise Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBx-pB-mRg">
-                                                <rect key="frame" x="0.0" y="19" width="192" height="16"/>
+                                                <rect key="frame" x="0.0" y="25" width="192" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="XAM-ah-xAZ"/>
                                                 </constraints>
