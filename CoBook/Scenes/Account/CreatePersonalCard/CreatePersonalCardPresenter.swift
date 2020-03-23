@@ -20,6 +20,10 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
 }
 
+protocol CreatePersonalCardPresenterDelegate: class {
+    func createPersonalCardPresenterDidUpdatedPersonalCard(_ presenter: CreatePersonalCardPresenter)
+}
+
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     enum Defaults {
@@ -47,6 +51,8 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
             syncDataSource()
         }
     }
+
+    weak var delegate: CreatePersonalCardPresenterDelegate?
     
     // Lifecycle
     init(parameters: CardAPIModel.PersonalCardParameters? = nil) {
@@ -76,8 +82,9 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
             switch result {
             case .success:
-                strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { [weak self] (_) in
-                    self?.view?.popController()
+                strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { (_) in
+                    strongSelf.delegate?.createPersonalCardPresenterDidUpdatedPersonalCard(strongSelf)
+                    strongSelf.view?.popController()
                 })
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -160,7 +167,15 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.personalCardParameters.interests = (response ?? []).compactMap { CreatePersonalCard.Interest(id: $0.id, title: $0.title) }
+                let currentSelectedInterests = strongSelf.personalCardParameters.interests
+                let fetchedInterests: [CreatePersonalCard.Interest] = (response ?? []).compactMap { fetched in
+                    let isSelected = currentSelectedInterests.contains(where: { (selected) -> Bool in
+                        return selected.id == fetched.id
+                    })
+                    return CreatePersonalCard.Interest(id: fetched.id, title: fetched.title, isSelected: isSelected)
+                }
+
+                strongSelf.personalCardParameters.interests = fetchedInterests
                 group.leave()
             case let .failure(error):
                 interestsListRequestError = error
@@ -297,6 +312,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             filter.type = .region
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedRegion) in
                 if let regionId = fetchedRegion.placeID {
+                    Log.debug("Region id: \(regionId)")
                     cell.textView.text = fetchedRegion.name
                     self?.personalCardParameters.region = CardAPIModel.Place(placeId: regionId, name: fetchedRegion.name)
                 } else {
@@ -318,8 +334,8 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
         switch item {
         case .add:
             view?.addNewSocial(name: nil, link: nil) { (name, strUrl) in
-                guard let name = name, let url = URL.init(string: strUrl ?? "") else {
-                    self.view?.errorAlert(message: "Перевірне вхідні дані")
+                guard let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
+                    self.view?.errorAlert(message: "Посилання має хибний формат")
                     return
                 }
 
@@ -346,7 +362,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
             .init(title: "Змінити", style: .default, handler: { (_) in
                 self.view?.addNewSocial(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
                     guard let name = name, let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
-                        self.view?.errorAlert(message: "Перевірне вхідні дані")
+                        self.view?.errorAlert(message: "Посилання має хибний формат")
                         return
                     }
 

@@ -34,29 +34,30 @@ enum Social {
             case .telegram:
                 return ["t.me", "telegram.org"]
             case .linkedin:
-                return ["www.linkedin.com"]
+                return ["www.linkedin.com", "linkedin.com"]
             case .viber:
-                return ["www.viber.com"]
+                return ["www.viber.com", "viber.com", "vb.me", "invite.viber.com"]
             case .facebookMessanger:
-                return ["www.facebook.com"]
+                return ["www.facebook.com", "m.facebook.com", "facebook.com"]
             }
         }
+
     }
 
     static func detectFrom(url: URL?) -> Social.LinkType? {
         var detectedType: Social.LinkType?
-
-        guard let url = url, let detectingLinkHost = url.host else {
-            Log.debug("Cannot fetch host")
+        guard let url = url else {
             return detectedType
         }
 
-        Social.LinkType.allCases.forEach { linkType in
-            if linkType.associatedHost.contains(detectingLinkHost) {
-                Log.debug("Detected link host \(detectingLinkHost): \(linkType)")
-                detectedType = linkType
-            } else {
-                Log.debug("\(linkType) type not associated with host \(detectingLinkHost)")
+        if let detectingLinkHost = url.host {
+            Social.LinkType.allCases.forEach { linkType in
+                if linkType.associatedHost.contains(detectingLinkHost) {
+                    Log.debug("Detected link host \(detectingLinkHost): \(linkType)")
+                    detectedType = linkType
+                } else {
+                    Log.debug("\(linkType) type not associated with host \(detectingLinkHost)")
+                }
             }
         }
 

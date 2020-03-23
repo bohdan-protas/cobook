@@ -45,16 +45,15 @@ class InterestItemCollectionViewCell: UICollectionViewCell {
         return layoutAttributes
     }
 
-    override var isSelected: Bool {
-        didSet {
-            containerView.backgroundColor = self.isSelected ? selectedBgColor : deselectedBgColor
-            titleLabel.textColor = self.isSelected ? selectedTextColor : deselectedTextColor
-            actionButton.tintColor = self.isSelected ? selectedButtonColor : deselectedButtonColor
+    func setSelected(_ isSelected: Bool) {
+        containerView.backgroundColor = isSelected ? selectedBgColor : deselectedBgColor
+        titleLabel.textColor = isSelected ? selectedTextColor : deselectedTextColor
+        actionButton.tintColor = isSelected ? selectedButtonColor : deselectedButtonColor
 
-            UIView.animate(withDuration: 0.1) {
-                self.actionButton.transform = self.isSelected ? CGAffineTransform(rotationAngle: CGFloat.pi / 4) : CGAffineTransform.identity
-            }
+        UIView.animate(withDuration: 0.1) {
+            self.actionButton.transform = isSelected ? CGAffineTransform(rotationAngle: CGFloat.pi / 4) : CGAffineTransform.identity
         }
     }
+
 
 }

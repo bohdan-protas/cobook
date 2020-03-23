@@ -47,9 +47,13 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     func editPerconalCard() {
         let createPersonalCardViewController: CreatePersonalCardViewController = UIStoryboard.account.initiateViewControllerFromType()
         if let cardDetails = cardDetails {
-            createPersonalCardViewController.presenter = CreatePersonalCardPresenter(parameters: CardAPIModel.PersonalCardParameters(with: cardDetails))
+            let presenter = CreatePersonalCardPresenter(parameters: CardAPIModel.PersonalCardParameters(with: cardDetails))
+            presenter.delegate = self
+            createPersonalCardViewController.presenter = presenter
         } else {
-            createPersonalCardViewController.presenter = CreatePersonalCardPresenter()
+            let presenter = CreatePersonalCardPresenter()
+            presenter.delegate = self
+            createPersonalCardViewController.presenter = presenter
         }
         view?.push(controller: createPersonalCardViewController, animated: true)
     }
@@ -143,3 +147,11 @@ extension PersonalCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
 }
 
+// MARK: - CreatePersonalCardPresenterDelegate
+extension PersonalCardDetailsPresenter: CreatePersonalCardPresenterDelegate {
+
+    func createPersonalCardPresenterDidUpdatedPersonalCard(_ presenter: CreatePersonalCardPresenter) {
+        setupDataSource()
+    }
+
+}
