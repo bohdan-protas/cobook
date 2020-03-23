@@ -33,6 +33,7 @@ enum CardAPIModel {
         enum CodingKeys: String, CodingKey {
             case id
             case name
+            case placeId = "place_id"
         }
 
         init(id: Int? = nil, placeId: String? = nil, name: String? = nil) {
@@ -48,6 +49,7 @@ enum CardAPIModel {
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             id = try container.decodeIfPresent(Int.self, forKey: .id)
+            placeId = try container.decodeIfPresent(String.self, forKey: .placeId)
             name = try container.decodeIfPresent(String.self, forKey: .name)
         }
     }
@@ -142,7 +144,7 @@ extension CardAPIModel {
             try container.encodeIfPresent(position, forKey: .position)
             try container.encodeIfPresent(description, forKey: .description)
             try container.encodeIfPresent(practiseType.id, forKey: .practiseTypeId)
-            try container.encodeIfPresent(interests.map { $0.id }, forKey: .interestsIds)
+            try container.encodeIfPresent(interests.filter { $0.isSelected }.map { $0.id }, forKey: .interestsIds)
             try container.encodeIfPresent(contactTelephone, forKey: .contactTelephone)
             try container.encodeIfPresent(contactEmail, forKey: .contactEmail)
 

@@ -38,7 +38,7 @@ enum Social {
             case .viber:
                 return ["www.viber.com"]
             case .facebookMessanger:
-                return ["www.facebook.com"]
+                return ["www.facebook.com", "m.facebook.com"]
             }
         }
     }
