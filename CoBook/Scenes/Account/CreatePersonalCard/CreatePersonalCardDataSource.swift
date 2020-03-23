@@ -75,7 +75,6 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             cell.textView.placeholder = type.placeholder
             cell.textView.keyboardType = type.keyboardType
             cell.textView.reloadInputViews()
-
             return cell
 
         case .actionTextField(let text, let action):
@@ -99,10 +98,10 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
         case .textView(let text, let type):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier, for: indexPath) as! TextViewTableViewCell
-            cell.textView.text = text
             cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
-            cell.textView.pText = type.placeholder
+            cell.textView.placeholderLabel.isHidden = !(text ?? "").isEmpty
+            cell.textView.text = text
             return cell
 
         case .interests(let list):

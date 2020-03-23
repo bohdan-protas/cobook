@@ -41,7 +41,7 @@ class DesignableTextView: UITextView {
     private var textPadding = UIEdgeInsets.zero
 
     // MARK: Placeholder
-    private var placeholderLabel: UILabel!
+    var placeholderLabel: UILabel!
     private var placeholderLabelTopConstraint: NSLayoutConstraint?
     private var placeholderLabelLeftConstraint: NSLayoutConstraint?
     private var placeholderLabelRightConstraint: NSLayoutConstraint?

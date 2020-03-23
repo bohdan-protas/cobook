@@ -15,6 +15,7 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setImage(image: UIImage?)
+    func setImage(image: URL?)
     func setupHeaderFooterViews()
     func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
 }
@@ -29,7 +30,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     private weak var view: CreatePersonalCardView?
     private var viewDataSource: CreatePersonalCardDataSource?
 
-    private var personalCardParameters = CardAPIModel.PersonalCardParameters() {
+    private var personalCardParameters: CardAPIModel.PersonalCardParameters {
         didSet {
             let isRequiredDataFilled: Bool =
                 !(personalCardParameters.avatarId ?? "").isEmpty &&
@@ -47,6 +48,10 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
         }
     }
     
+    // Lifecycle
+    init(parameters: CardAPIModel.PersonalCardParameters? = nil) {
+        self.personalCardParameters = parameters ?? CardAPIModel.PersonalCardParameters()
+    }
 
     // MARK: Public
     func attachView(_ view: CreatePersonalCardView) {
@@ -59,8 +64,8 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
         viewDataSource = nil
     }
 
-    func setup() {
-        fetchSetupData()
+    func onViewDidLoad() {
+        fetchDataSource()
     }
 
     func createPerconalCard() {
@@ -122,17 +127,16 @@ private extension CreatePersonalCardPresenter {
                 .interests(list: personalCardParameters.interests)
             ])
         ]
-
-
     }
 
-    func fetchSetupData() {
+    func fetchDataSource() {
         let group = DispatchGroup()
 
         var practicesTypesListRequestError: Error?
         var interestsListRequestError: Error?
 
         view?.startLoading()
+        view?.setImage(image: URL.init(string: personalCardParameters.avatarUrl ?? ""))
 
         // fetch practices
         group.enter()
@@ -156,7 +160,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.personalCardParameters.interests = (response ?? []).map { CreatePersonalCard.Interest(id: $0.id, title: $0.title) }
+                strongSelf.personalCardParameters.interests = (response ?? []).compactMap { CreatePersonalCard.Interest(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 interestsListRequestError = error
@@ -312,8 +316,6 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
         switch item {
-        case .view(let model):
-            Log.debug("\(model.title) selected")
         case .add:
             view?.addNewSocial(name: nil, link: nil) { (name, strUrl) in
                 guard let name = name, let url = URL.init(string: strUrl ?? "") else {
@@ -322,10 +324,13 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
                 }
 
                 let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
-                self.personalCardParameters.socialList.append(newItem)
-
                 cell.create(socialListItem: newItem)
+
+                self.personalCardParameters.socialList.append(newItem)
+                self.syncDataSource()
             }
+        default:
+            break
         }
     }
 
@@ -347,7 +352,6 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
 
                     let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
                     cell.updateAt(indexPath: indexPath, with: newItem)
-
                     self.personalCardParameters.socialList[safe: indexPath.item] = newItem
                 }
             }),

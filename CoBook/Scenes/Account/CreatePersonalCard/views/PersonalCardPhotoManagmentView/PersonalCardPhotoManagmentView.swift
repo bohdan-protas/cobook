@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol PersonalCardPhotoManagmentViewDelegate: class {
     func cardPhotoManagmentViewDidAddPhoto(_ view: PersonalCardPhotoManagmentView)
@@ -63,6 +64,11 @@ class PersonalCardPhotoManagmentView: BaseFromNibView {
             imageView.image = UIImage(named: "ic_user")
             currentState = .addPhoto
         }
+    }
+
+    func setImage(_ image: URL?) {
+        imageView.kf.setImage(with: image, placeholder: UIImage(named: "ic_user"))
+        currentState = .changePhoto
     }
 
 

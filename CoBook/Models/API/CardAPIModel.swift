@@ -35,9 +35,14 @@ enum CardAPIModel {
             case name
         }
 
-        init(placeId: String? = nil, name: String? = nil) {
+        init(id: Int? = nil, placeId: String? = nil, name: String? = nil) {
+            self.id = id
             self.placeId = placeId
             self.name = name
+
+            if placeId == nil {
+                self.name = nil
+            }
         }
 
         init(from decoder: Decoder) throws {
@@ -86,16 +91,16 @@ extension CardAPIModel {
 
     struct PersonalCardParameters: Encodable {
         var avatarId: String?
+        var avatarUrl: String?
         var city: Place = Place()
         var region: Place = Place()
         var position: String?
         var description: String?
         var practiseType: PracticeType = PracticeType()
+        var interests:  [CreatePersonalCard.Interest] = []
         var contactTelephone: String?
         var contactEmail: String?
-        var socialNetworks: [SocialNetwork] = []
 
-        var interests:  [CreatePersonalCard.Interest] = []
         var practices:  [CreatePersonalCard.Practice] = []
         var socialList: [Social.ListItem] = []
 
@@ -112,6 +117,23 @@ extension CardAPIModel {
             case socialNetworks = "social_networks"
         }
 
+        init() {
+        }
+
+        init(with model: CardDetailsAPIResponseData) {
+            self.avatarId = model.avatar?.id
+            self.avatarUrl = model.avatar?.sourceUrl
+            self.city = Place(id: model.city?.id, placeId: model.city?.placeId, name: model.city?.name)
+            self.region = Place(id: model.region?.id, placeId: model.region?.placeId, name: model.region?.name)
+            self.position = model.position
+            self.description = model.description
+            self.practiseType = PracticeType(id: model.practiceType?.id, title: model.practiceType?.title)
+            self.interests = (model.interests ?? []).compactMap { CreatePersonalCard.Interest(id: $0.id, title: $0.title, isSelected: true) }
+            self.contactTelephone = model.contactTelephone?.number
+            self.contactEmail = model.contactEmail?.address
+            self.socialList = (model.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+        }
+
         func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encodeIfPresent(avatarId, forKey: .avatarId)
@@ -123,7 +145,17 @@ extension CardAPIModel {
             try container.encodeIfPresent(interests.map { $0.id }, forKey: .interestsIds)
             try container.encodeIfPresent(contactTelephone, forKey: .contactTelephone)
             try container.encodeIfPresent(contactEmail, forKey: .contactEmail)
-            try container.encodeIfPresent(socialNetworks, forKey: .socialNetworks)
+
+            let list: [SocialNetwork] = socialList.compactMap {
+                switch $0 {
+                case .view(let model):
+                    return SocialNetwork(title: model.title, link: model.url?.absoluteString)
+                default:
+                    return nil
+                }
+
+            }
+            try container.encodeIfPresent(list, forKey: .socialNetworks)
         }
     }
 

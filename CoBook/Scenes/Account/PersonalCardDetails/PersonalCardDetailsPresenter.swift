@@ -45,8 +45,15 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func editPerconalCard() {
-
+        let createPersonalCardViewController: CreatePersonalCardViewController = UIStoryboard.account.initiateViewControllerFromType()
+        if let cardDetails = cardDetails {
+            createPersonalCardViewController.presenter = CreatePersonalCardPresenter(parameters: CardAPIModel.PersonalCardParameters(with: cardDetails))
+        } else {
+            createPersonalCardViewController.presenter = CreatePersonalCardPresenter()
+        }
+        view?.push(controller: createPersonalCardViewController, animated: true)
     }
+    
 
 }
 
