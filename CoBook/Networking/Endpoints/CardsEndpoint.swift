@@ -34,8 +34,10 @@ enum CardsEndpoint: Endpoint {
         switch self {
         case .createPersonalCard(let parameters):
             return parameters.dictionary
-        case .getCardInfo:
-            return nil
+        case .getCardInfo(let id):
+            return [
+                APIConstants.ParameterKey.id: id,
+            ]
         }
     }
 

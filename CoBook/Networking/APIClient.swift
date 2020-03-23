@@ -299,7 +299,7 @@ extension APIClient {
     func getCardInfo(id: Int,
                      completion: @escaping (Result<CardAPIModel.CardDetailsAPIResponseData?, Error>) -> Void) -> DataRequest {
 
-        let endpoint = CardEndpointMockup.details//CardsEndpoint.getCardInfo(id: id)
+        let endpoint = /*CardEndpointMockup.details*/CardsEndpoint.getCardInfo(id: id)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
