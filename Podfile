@@ -9,4 +9,5 @@ target 'CoBook' do
   pod 'JGProgressHUD'
   pod 'GooglePlaces'
   pod 'URLEmbeddedView'
+  pod 'Wormholy', :configurations => ['Debug']
 end
