@@ -76,6 +76,19 @@ private extension PersonalCardDetailsViewController {
 // MARK: - UITableViewDelegate
 extension PersonalCardDetailsViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return SectionHeaderSeparatorView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if presenter?.showSectionHeaderFor(section: section) ?? false {
+            return Defaults.sectionHeaderHeight
+        } else {
+            return 0
+        }
+
+    }
+
 }
 
 // MARK: - MFMailComposeViewControllerDelegate

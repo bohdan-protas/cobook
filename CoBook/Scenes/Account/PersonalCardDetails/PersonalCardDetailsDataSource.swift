@@ -16,12 +16,22 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
 
     // MARK: Source
     var source: [PersonalCardDetails.Section] = []
-    subscript(indexPath: IndexPath) -> PersonalCardDetails.Item? {
+
+    subscript(section: Int) -> PersonalCardDetails.Section? {
         get {
-            return source[safe: indexPath.section]?.items[safe: indexPath.row]
+            return source[safe: section]
         }
         set(newValue) {
-            source[safe: indexPath.section]?.items[safe: indexPath.row] = newValue
+            source[safe: section] = newValue
+        }
+    }
+
+    subscript(item: IndexPath) -> PersonalCardDetails.Item? {
+        get {
+            return source[safe: item.section]?.items[safe: item.row]
+        }
+        set(newValue) {
+            source[safe: item.section]?.items[safe: item.row] = newValue
         }
     }
 

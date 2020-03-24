@@ -33,9 +33,9 @@ class CustomNavigationController: UINavigationController {
         navigationBar.titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle]
 
         /// make navigation bg transparent
-        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationBar.setBackgroundImage(UIColor.Theme.grayBG.filledImage, for: UIBarMetrics.default)
         navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
+        navigationBar.isTranslucent = false
         navigationBar.barTintColor = .white
 
         self.delegate = self

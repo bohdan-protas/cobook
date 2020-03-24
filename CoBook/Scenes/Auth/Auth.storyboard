@@ -136,7 +136,7 @@
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-Rd-0iZ" userLabel="Fields Stack View">
                                         <rect key="frame" x="16" y="275" width="295" height="168"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIn-Tu-MOa">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIn-Tu-MOa" userLabel="Name container">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dNK-MC-EhC">
@@ -488,7 +488,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7bH-f7-VLF"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="JN2-Zf-9id"/>
                                 </constraints>
                                 <items>
                                     <navigationItem id="rhk-Y9-O7g"/>
@@ -534,7 +533,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-9w-2Sf" userLabel="Fields Stack View">
-                                        <rect key="frame" x="16" y="255" width="295" height="148"/>
+                                        <rect key="frame" x="16" y="255" width="295" height="120"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+380XXXXXXXX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1w-rc-cAA" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
@@ -615,7 +614,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xj-uY-QYt">
-                                                <rect key="frame" x="0.0" y="120" width="295" height="28"/>
+                                                <rect key="frame" x="0.0" y="120" width="295" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Забули пароль?">
                                                     <color key="titleColor" name="Theme_Green"/>
@@ -709,16 +708,16 @@
                                         <rect key="frame" x="10" y="20" width="355" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-4M-Ndt">
-                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65" height="20"/>
                                             </view>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вперше в CoBook?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yJ2-0v-hQM">
-                                                <rect key="frame" x="64.5" y="0.0" width="117" height="20"/>
+                                                <rect key="frame" x="68" y="0.0" width="117" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zq-NY-pq3">
-                                                <rect key="frame" x="184.5" y="0.0" width="106" height="20"/>
+                                                <rect key="frame" x="188" y="0.0" width="99" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Зареєструйтесь">
                                                     <color key="titleColor" name="Theme_Green"/>
@@ -728,7 +727,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-UX-7KI">
-                                                <rect key="frame" x="293.5" y="0.0" width="61.5" height="20"/>
+                                                <rect key="frame" x="290" y="0.0" width="65" height="20"/>
                                             </view>
                                         </subviews>
                                         <constraints>

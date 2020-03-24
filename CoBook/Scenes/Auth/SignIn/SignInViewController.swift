@@ -56,7 +56,7 @@ class SignInViewController: UIViewController, SignInView {
     @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
         removeKeyboardObserver()
         self.present(forgotPasswordAlert, animated: true, completion: {
-            self.addKeyboardObserver()
+            self.addKeyboardObservers()
         })
     }
 
@@ -71,10 +71,13 @@ class SignInViewController: UIViewController, SignInView {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         presenter.attachView(self)
-        setupLayout()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         setupLayout()
+     }
 
     deinit {
         presenter.detachView()
@@ -120,16 +123,16 @@ private extension SignInViewController {
     func setupLayout() {
         navBar.topItem?.title = "SignIn.title".localized
 
-        /// In small screen devices disable title image
+        // In small screen devices disable title image
         if UIDevice().isSmallScreenType {
             fieldToTitleConstraint.isActive = true
             view.layoutIfNeeded()
         } else {
-            addKeyboardObserver()
+            addKeyboardObservers()
         }
     }
 
-    private func addKeyboardObserver() {
+    private func addKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }

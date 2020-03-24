@@ -57,6 +57,10 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
         }
         view?.push(controller: createPersonalCardViewController, animated: true)
     }
+
+    func showSectionHeaderFor(section: Int) -> Bool {
+        return viewDataSource?[section]?.useHeader ?? false
+    }
     
 
 }
