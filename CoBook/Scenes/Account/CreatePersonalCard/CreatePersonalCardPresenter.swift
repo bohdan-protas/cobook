@@ -75,18 +75,17 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func createPerconalCard() {
-        view?.startLoading()
+        view?.startLoading(text: "Створення...")
         APIClient.default.createPersonalCard(parameters: self.personalCardParameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
-            strongSelf.view?.stopLoading()
-
             switch result {
             case .success:
-                strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { (_) in
+                strongSelf.view?.stopLoading(success: true, completion: {
                     strongSelf.delegate?.createPersonalCardPresenterDidUpdatedPersonalCard(strongSelf)
                     strongSelf.view?.popController()
                 })
             case let .failure(error):
+                strongSelf.view?.stopLoading()
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
@@ -142,7 +141,7 @@ private extension CreatePersonalCardPresenter {
         var practicesTypesListRequestError: Error?
         var interestsListRequestError: Error?
 
-        view?.startLoading()
+        view?.startLoading(text: "Завантаження")
         view?.setImage(image: URL.init(string: personalCardParameters.avatarUrl ?? ""))
 
         // fetch practices

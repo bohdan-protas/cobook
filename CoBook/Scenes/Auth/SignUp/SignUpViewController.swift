@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, SignUpView {
+class SignUpViewController: BaseViewController, SignUpView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -62,11 +62,11 @@ class SignUpViewController: UIViewController, SignUpView {
     }
 
     // MARK: SignUpView
-    func startLoading() {
+    override func startLoading() {
         continueButton.isLoading = true
     }
 
-    func stopLoading() {
+    override func stopLoading() {
         continueButton.isLoading = false
     }
 

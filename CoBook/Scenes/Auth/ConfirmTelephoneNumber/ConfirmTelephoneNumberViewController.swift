@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNumberView {
+class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephoneNumberView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -89,11 +89,11 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
         resendSmsButton.isLoading = isLoading
     }
 
-    func startLoading() {
+    override func startLoading() {
         continueButton.isLoading = true
     }
 
-    func stopLoading() {
+    override func stopLoading() {
         continueButton.isLoading = false
     }
 
