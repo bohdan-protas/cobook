@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="SFProDisplay-Regular.ttf">
-            <string>SFProDisplay-Regular</string>
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
         </array>
     </customFonts>
     <objects>
@@ -54,7 +54,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="ebk-aJ-NVJ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Зберегти візитку">
                         <color key="titleColor" name="Theme_Black-Middle"/>
@@ -81,7 +81,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="Theme_Gray-Background"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TOD-x1-a74" secondAttribute="trailing" constant="40" id="5OH-C1-BSj"/>
                 <constraint firstItem="TOD-x1-a74" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="JNu-PH-gP3"/>
@@ -100,13 +100,16 @@
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-bg-disabled">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-bg-enabled">
-            <color red="1" green="0.85490196080000003" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-bg-selected">
-            <color red="1" green="0.85490196080000003" blue="0.1019607843" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Gray-UI">
             <color red="0.53299999237060547" green="0.53299999237060547" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

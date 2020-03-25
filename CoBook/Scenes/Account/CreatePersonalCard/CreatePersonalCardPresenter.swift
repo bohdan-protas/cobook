@@ -114,6 +114,7 @@ private extension CreatePersonalCardPresenter {
 
         viewDataSource?.source = [
             CreatePersonalCard.Section(items: [
+                .sectionHeader,
                 .title(text: "Діяльність:"),
                 .textField(text: personalCardParameters.position, type: .occupiedPosition),
                 .actionTextField(text: personalCardParameters.practiseType.title, type: .activityType(list: personalCardParameters.practices)),
@@ -122,6 +123,7 @@ private extension CreatePersonalCardPresenter {
                 .textView(text: personalCardParameters.description, type: .activityDescription)
             ]),
             CreatePersonalCard.Section(items: [
+                .sectionHeader,
                 .title(text: "Контактні дані:"),
                 .textField(text: personalCardParameters.contactEmail, type: .workingEmailForCommunication),
                 .textField(text: personalCardParameters.contactTelephone, type: .workingPhoneNumber),
@@ -129,6 +131,7 @@ private extension CreatePersonalCardPresenter {
                 .socialList(list: personalCardParameters.socialList)
             ]),
             CreatePersonalCard.Section(items: [
+                .sectionHeader,
                 .title(text: "Інтереси (для рекомендацій)"),
                 .interests(list: personalCardParameters.interests)
             ])

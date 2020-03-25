@@ -220,8 +220,8 @@ extension APIClient {
         - refreshToken: current users refresh token
         - completion: parsed response from server
      */
-    func refreshTokenRequest(refreshToken: String?, completion: @escaping (Result<RefreshTokenAPIResponseData?, Error>) -> Void) {
-        let endpoint = AuthEndpoint.refresh(refreshToken: AppStorage.Auth.refreshToken)
+    func refreshTokenRequest(refreshToken: String, completion: @escaping (Result<RefreshTokenAPIResponseData?, Error>) -> Void) {
+        let endpoint = AuthEndpoint.refresh(refreshToken: refreshToken)
         performRequest(endpoint: endpoint, completion: completion)
     }
 

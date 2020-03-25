@@ -180,11 +180,11 @@ extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UI
 extension CreatePersonalCardViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return SectionHeaderSeparatorView()
+        return UIView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Defaults.sectionHeaderHeight
+        return 0
     }
 
 
