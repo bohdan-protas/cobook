@@ -31,30 +31,29 @@ final class AuthRequestInterceptor: RequestInterceptor {
             }
 
         case 403:
-            if let refreshToken = AppStorage.Auth.refreshToken {
+            if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
 
-                DispatchQueue.main.async {
-                    AppStorage.Auth.deleteAllData()
-                    APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
-                        switch result {
-                        case let .success(response):
-                            AppStorage.Auth.accessToken = response?.accessToken
-                            completion(.retry)
-                        case let .failure(error):
-                            DispatchQueue.main.async {
-                                AppStorage.Auth.deleteAllData()
-                                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-                                if let topController = UIApplication.topViewController() {
-                                    topController.present(signInViewController, animated: true, completion: {
-                                        (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: error.localizedDescription)
-                                    })
-                                }
-                                completion(.doNotRetry)
+                AppStorage.Auth.deleteAllData()
+                APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
+                    switch result {
+                    case let .success(response):
+                        AppStorage.Auth.accessToken = response?.accessToken
+                        completion(.retry)
+                    case let .failure(error):
+                        DispatchQueue.main.async {
+                            AppStorage.Auth.deleteAllData()
+                            let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                            if let topController = UIApplication.topViewController() {
+                                topController.present(signInViewController, animated: true, completion: {
+                                    (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: error.localizedDescription)
+                                })
                             }
-
+                            completion(.doNotRetry)
                         }
+
                     }
                 }
+
 
             } else {
 

@@ -55,18 +55,13 @@ extension UIColor {
         }
 
         enum Button {
-
             enum Main {
                 static let textEnabled = UIColor.init(named: "Theme_Button-main-text-enabled")!
                 static let textDisabled = UIColor.init(named: "Theme_Button-main-text-disabled")!
                 static let bgEnabled = UIColor(named: "Theme_Button-main-bg-enabled")!
                 static let bgDisabled = UIColor(named: "Theme_Button-main-bg-disabled")
             }
-
-
-
         }
-
     }
 
 

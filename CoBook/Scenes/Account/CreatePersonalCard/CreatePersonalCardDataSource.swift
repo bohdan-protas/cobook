@@ -100,9 +100,8 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier, for: indexPath) as! TextViewTableViewCell
             cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
-            cell.textView.pText = type.placeholder
+            cell.textView.placeholder = type.placeholder
             cell.textView.text = text
-            //cell.textView.placeholderLabel.isHidden = !(text ?? "").isEmpty
             return cell
 
         case .interests(let list):

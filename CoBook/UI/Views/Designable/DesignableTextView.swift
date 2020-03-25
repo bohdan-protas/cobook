@@ -19,7 +19,8 @@ class DesignableTextView: UITextView {
     @IBInspectable
     var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.clear
 
-    @IBInspectable var isEnabled: Bool = false {
+    @IBInspectable
+    var isEnabled: Bool = false {
         didSet { layer.borderColor = isEnabled ? enabledBorderColor.cgColor : disabledBorderColor.cgColor }
     }
 
@@ -47,21 +48,35 @@ class DesignableTextView: UITextView {
     private var textPadding = UIEdgeInsets.zero
 
     // MARK: Placeholder
+    @IBInspectable
+    var placeholder: String = ""
+
+    @IBInspectable
+    var pTextColor: UIColor = .black
+
+    @IBInspectable
+    var pFontSize: CGFloat = 14
+
+    @IBInspectable var pBgColor: UIColor = .clear
+
+    @IBInspectable
+    public var pBottomTextInset: CGFloat = 16
+
+    @IBInspectable
+    public var pLeftTextInset: CGFloat = 16
+
+    @IBInspectable
+    public var pRightTextInset: CGFloat = 16
+
+    @IBInspectable
+    public var pTopTextInset: CGFloat = 16
+
     private var placeholderLabel: UILabel!
     private var placeholderLabelTopConstraint: NSLayoutConstraint?
     private var placeholderLabelLeftConstraint: NSLayoutConstraint?
     private var placeholderLabelRightConstraint: NSLayoutConstraint?
     private var placeholderLabelBottomConstraint: NSLayoutConstraint?
 
-    @IBInspectable var pFontSize: CGFloat = 14
-    @IBInspectable var pText: String = ""
-    @IBInspectable var pTextColor: UIColor = .black
-    @IBInspectable var pBgColor: UIColor = .clear
-
-    @IBInspectable public var pBottomTextInset: CGFloat = 16
-    @IBInspectable public var pLeftTextInset: CGFloat = 16
-    @IBInspectable public var pRightTextInset: CGFloat = 16
-    @IBInspectable public var pTopTextInset: CGFloat = 16
 
     private weak var proxyDelegate: UITextViewDelegate?
     override weak var delegate: UITextViewDelegate? {
@@ -121,7 +136,6 @@ private extension DesignableTextView {
         textContainer.lineFragmentPadding = 0
 
         if placeholderLabel == nil {
-
             // Make sure we don't render the label outside of ourselves
             placeholderLabel = UILabel()
             placeholderLabel.numberOfLines = 0
@@ -151,7 +165,7 @@ private extension DesignableTextView {
         placeholderLabelBottomConstraint?.constant = pBottomTextInset
 
         let pAttrs = [NSAttributedString.Key.font: UIFont.SFProDisplay_Regular(size: pFontSize)]
-        let pString = NSMutableAttributedString(string: pText, attributes: pAttrs)
+        let pString = NSMutableAttributedString(string: placeholder, attributes: pAttrs)
 
         placeholderLabel.attributedText = pString
         placeholderLabel.textColor = pTextColor
@@ -159,6 +173,8 @@ private extension DesignableTextView {
 
         placeholderLabel.layoutIfNeeded()
         placeholderLabel.sizeToFit()
+
+        placeholderLabel?.isHidden = self.text.count > 0
     }
 
 
