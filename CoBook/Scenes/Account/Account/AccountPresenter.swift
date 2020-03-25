@@ -14,21 +14,22 @@ protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
 }
 
 class AccountPresenter: BasePresenter {
+
     // MARK: Properties
     private weak var view: AccountView?
-    var dataSource: AccountDataSource?
+    var viewDataSource: AccountDataSource?
 
     private var personalCardsList: [CardPreview] = []
 
     // MARK: Public
     func attachView(_ view: AccountView) {
         self.view = view
-        self.dataSource = AccountDataSource(tableView: view.tableView)
+        self.viewDataSource = AccountDataSource(tableView: view.tableView)
     }
 
     func detachView() {
         view = nil
-        dataSource = nil
+        viewDataSource = nil
     }
 
     func onDidAppear() {
@@ -36,7 +37,7 @@ class AccountPresenter: BasePresenter {
     }
 
     func selectedRow(at indexPath: IndexPath) {
-        guard let actionType = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.item] else {
+        guard let actionType = viewDataSource?.source[safe: indexPath.section]?.items[safe: indexPath.item] else {
             debugPrint("Error occured when selected account action type")
             return
         }
@@ -120,7 +121,7 @@ private extension AccountPresenter {
         }
 
         // Setup data source
-        dataSource?.source = [
+        viewDataSource?.source = [
             cardsPreviceSection,
             Account.Section(items: [
                 .action(type: .inviteFriends),
@@ -134,7 +135,7 @@ private extension AccountPresenter {
             ])
         ]
 
-        dataSource?.tableView.reloadData()
+        viewDataSource?.tableView.reloadData()
     }
 
 

@@ -66,7 +66,6 @@
 		B828282A241A6FE80003D056 /* CardSaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8282829241A6FE80003D056 /* CardSaveView.xib */; };
 		B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828282C241A970D0003D056 /* InterestsSelectionTableViewCell.swift */; };
 		B828282F241A970D0003D056 /* InterestsSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B828282D241A970D0003D056 /* InterestsSelectionTableViewCell.xib */; };
-		B8282831241A98780003D056 /* AlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8282830241A98780003D056 /* AlignedCollectionViewFlowLayout.swift */; };
 		B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828C34A240CE0A800F8C371 /* AuthEndpoint.swift */; };
 		B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */; };
 		B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A21142421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift */; };
@@ -225,7 +224,6 @@
 		B8282829241A6FE80003D056 /* CardSaveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardSaveView.xib; sourceTree = "<group>"; };
 		B828282C241A970D0003D056 /* InterestsSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		B828282D241A970D0003D056 /* InterestsSelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestsSelectionTableViewCell.xib; sourceTree = "<group>"; };
-		B8282830241A98780003D056 /* AlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		B828C34A240CE0A800F8C371 /* AuthEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndpoint.swift; sourceTree = "<group>"; };
 		B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenAPIResponseData.swift; sourceTree = "<group>"; };
 		B82A21142421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -353,7 +351,6 @@
 		B815A14C241ACE6B008BBD4D /* FlowLayouts */ = {
 			isa = PBXGroup;
 			children = (
-				B8282830241A98780003D056 /* AlignedCollectionViewFlowLayout.swift */,
 				B82A21142421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift */,
 			);
 			path = FlowLayouts;
@@ -1248,7 +1245,6 @@
 				B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */,
-				B8282831241A98780003D056 /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B83FD7DC2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift in Sources */,
 				B8AB840324283C580041B879 /* EditCardView.swift in Sources */,

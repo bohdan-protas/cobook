@@ -46,7 +46,7 @@ class APIClient {
                                               completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
 
         return session.request(endpoint)
-            .validate()
+            .validate(statusCode: 200..<300)
             .response { (response) in
                 if let responseData = response.data {
                     do {
@@ -117,7 +117,6 @@ class APIClient {
         }
     } // end upload
 
-    
 
 }
 
@@ -221,10 +220,8 @@ extension APIClient {
         - refreshToken: current users refresh token
         - completion: parsed response from server
      */
-    func refreshTokenRequest(refreshToken: String,
-                             completion: @escaping (Result<RefreshTokenAPIResponseData?, Error>) -> Void) {
-
-        let endpoint = AuthEndpoint.refresh(refreshToken: refreshToken)
+    func refreshTokenRequest(refreshToken: String?, completion: @escaping (Result<RefreshTokenAPIResponseData?, Error>) -> Void) {
+        let endpoint = AuthEndpoint.refresh(refreshToken: AppStorage.Auth.refreshToken)
         performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -299,7 +296,7 @@ extension APIClient {
     func getCardInfo(id: Int,
                      completion: @escaping (Result<CardAPIModel.CardDetailsAPIResponseData?, Error>) -> Void) -> DataRequest {
 
-        let endpoint = /*CardEndpointMockup.details*/CardsEndpoint.getCardInfo(id: id)
+        let endpoint = CardsEndpoint.getCardInfo(id: id)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

@@ -24,7 +24,7 @@ enum AuthEndpoint: Endpoint {
      - parameters:
         - refreshToken: current users refresh token
      */
-    case refresh(refreshToken: String)
+    case refresh(refreshToken: String?)
 
     // MARK: - Auth token usage
     var useAuthirizationToken: Bool {
@@ -56,11 +56,15 @@ enum AuthEndpoint: Endpoint {
             ]
 
         case let .refresh(token):
-            return [
-                APIConstants.ParameterKey.refreshToken: token,
-            ]
-
+            if let token = token {
+                return [
+                    APIConstants.ParameterKey.refreshToken: token,
+                ]
+            } else {
+                return nil
+            }
         }
+
     }
 
 
