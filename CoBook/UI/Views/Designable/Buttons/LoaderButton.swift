@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class LoaderButton: DesignableButton {
+class LoaderDesignableButton: DesignableButton {
 
     // MARK: Properties
     @IBInspectable var spinnerColor: UIColor = .black {
@@ -33,8 +33,8 @@ class LoaderButton: DesignableButton {
     private var lastTitle: String?
 
     // MARK: Lifecycle
-    override func sharedInit() {
-        super.sharedInit()
+    override func configureLayout() {
+        super.configureLayout()
 
         self.addSubview(activityIndicator)
         centerActivityIndicatorInButton()
@@ -44,7 +44,7 @@ class LoaderButton: DesignableButton {
 }
 
 // MARK: - Privates
-private extension LoaderButton {
+private extension LoaderDesignableButton {
 
     func startLoaderAnimating() {
         lastTitle = self.titleLabel?.text

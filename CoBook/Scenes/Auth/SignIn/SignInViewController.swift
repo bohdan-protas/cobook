@@ -17,7 +17,7 @@ class SignInViewController: BaseViewController, SignInView {
     // MARK: IBOutlets
     @IBOutlet var loginTextField: DesignableTextField!
     @IBOutlet var passwordTextField: DesignableTextField!
-    @IBOutlet var signInButton: LoaderButton!
+    @IBOutlet var signInButton: LoaderDesignableButton!
     @IBOutlet var navBar: TransparentNavigationBar!
 
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
@@ -60,7 +60,7 @@ class SignInViewController: BaseViewController, SignInView {
         })
     }
 
-    @IBAction func signInButtonTapped(_ sender: LoaderButton) {
+    @IBAction func signInButtonTapped(_ sender: LoaderDesignableButton) {
         presenter.signIn()
     }
 

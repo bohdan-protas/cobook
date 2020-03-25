@@ -49,14 +49,22 @@ extension UIColor {
         static let green = UIColor(named: "Theme_Green")!
         static let border = UIColor(named: "Theme_Border")!
 
-
         enum TextField {
             static let borderActive = UIColor.init(named: "Theme_TextField-borderActive")
             static let borderInactive = UIColor.init(named: "Theme_TextField-borderInactive")
         }
 
         enum Button {
-            static let textDisabled = UIColor(named: "Theme_Button-text-disabled")!
+
+            enum Main {
+                static let textEnabled = UIColor.init(named: "Theme_Button-main-text-enabled")!
+                static let textDisabled = UIColor.init(named: "Theme_Button-main-text-disabled")!
+                static let bgEnabled = UIColor(named: "Theme_Button-main-bg-enabled")!
+                static let bgDisabled = UIColor(named: "Theme_Button-main-bg-disabled")
+            }
+
+
+
         }
 
     }

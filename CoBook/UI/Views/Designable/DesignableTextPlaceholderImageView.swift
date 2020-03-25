@@ -8,19 +8,17 @@
 
 import UIKit
 
-@IBDesignable class DesignableTextPlaceholderImageView: DesignableImageView {
+@IBDesignable
+class DesignableTextPlaceholderImageView: UIImageView {
 
     /// Title text to render inside the image
     @IBInspectable var textPlaceholder: String = ""
 
     /// The color of the title text
-    @IBInspectable var textColor: UIColor = .black
-
-    /// The backgroun color of the title text
-    @IBInspectable var textBgColor: UIColor = .white
+    @IBInspectable var placeholderColor: UIColor = .black
 
     /// The font size of the title text
-    @IBInspectable var textFontSize: CGFloat = 20
+    @IBInspectable var fontSize: CGFloat = 20
 
     /// The label used to render title and size text
     private var label: UILabel!
@@ -84,17 +82,15 @@ import UIKit
 
         }
 
-        let titleAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: textFontSize + titleFontSizeAdjustment)]
+        let titleAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize + titleFontSizeAdjustment)]
         let titleString = NSMutableAttributedString(string: textPlaceholder, attributes: titleAttrs)
 
         // append the size string and put it inside the label
         label.attributedText = titleString
 
         // make sure the label color reflects the latest setting
-        label.textColor = textColor
-        label.backgroundColor = textBgColor
-
-        layer.cornerRadius = cornerRadius
+        label.textColor = placeholderColor
+        label.backgroundColor = .clear
     }
 
 

@@ -38,16 +38,6 @@ class DesignableTextField: UITextField {
     }
 
     @IBInspectable
-    var cornerRadius: CGFloat = 0 {
-        didSet { setCorners(value: cornerRadius) }
-    }
-
-    @IBInspectable
-    var borderWidth: CGFloat = 0 {
-        didSet { setBorderWidth(value: borderWidth) }
-    }
-
-    @IBInspectable
     var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.white {
         didSet { refreshBorderColor() }
     }
@@ -62,17 +52,17 @@ class DesignableTextField: UITextField {
     // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        sharedInit()
+        configureLayout()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        sharedInit()
+        configureLayout()
     }
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        sharedInit()
+        configureLayout()
     }
 
     override func layoutSubviews() {
@@ -87,7 +77,7 @@ class DesignableTextField: UITextField {
     }
 
     // MARK: Setup
-    func sharedInit() {
+    func configureLayout() {
         self.clipsToBounds = true
         self.borderStyle = .none
         setPlaceholderColor(value: placeholderColor)

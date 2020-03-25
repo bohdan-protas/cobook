@@ -13,31 +13,37 @@ import UIKit
 class DesignableTextView: UITextView {
 
     // MARK: Title text
-    @IBInspectable var cornerRadius: CGFloat = 0
-    @IBInspectable var borderWidth: CGFloat = 0
-    @IBInspectable var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.clear
-    @IBInspectable var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.clear
+    @IBInspectable
+    var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.clear
+
+    @IBInspectable
+    var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.clear
 
     @IBInspectable var isEnabled: Bool = false {
         didSet { layer.borderColor = isEnabled ? enabledBorderColor.cgColor : disabledBorderColor.cgColor }
     }
 
     // MARK: Title text
-    @IBInspectable public var bottomTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var bottomTextInset: CGFloat = 0 {
         didSet { textPadding.bottom = bottomTextInset }
     }
 
-    @IBInspectable public var leftTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var leftTextInset: CGFloat = 0 {
         didSet { textPadding.left = leftTextInset }
     }
 
-    @IBInspectable public var rightTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var rightTextInset: CGFloat = 0 {
         didSet { textPadding.right = rightTextInset }
     }
 
-    @IBInspectable public var topTextInset: CGFloat = 0 {
+    @IBInspectable
+    public var topTextInset: CGFloat = 0 {
         didSet { textPadding.top = topTextInset }
     }
+
     private var textPadding = UIEdgeInsets.zero
 
     // MARK: Placeholder
@@ -73,24 +79,24 @@ class DesignableTextView: UITextView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        configure()
+        configureLayout()
     }
 
     // MARK: Layout
     override func awakeFromNib() {
         super.awakeFromNib()
         self.delegate = self
-        configure()
+        configureLayout()
     }
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        configure()
+        configureLayout()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        configure()
+        configureLayout()
     }
 
     override func resignFirstResponder() -> Bool {
@@ -105,7 +111,7 @@ class DesignableTextView: UITextView {
 // MARK: - Privates
 private extension DesignableTextView {
 
-    func configure() {
+    func configureLayout() {
         clipsToBounds = true
 
         layer.borderWidth = borderWidth

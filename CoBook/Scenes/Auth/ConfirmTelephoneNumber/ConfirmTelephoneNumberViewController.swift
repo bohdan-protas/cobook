@@ -18,9 +18,9 @@ class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephone
     // MARK: IBOutlets
     @IBOutlet var smsCodeTextFields: [UITextField]!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
-    @IBOutlet var continueButton: LoaderButton!
+    @IBOutlet var continueButton: LoaderDesignableButton!
     @IBOutlet var timerLabel: UILabel!
-    @IBOutlet var resendSmsButton: LoaderButton!
+    @IBOutlet var resendSmsButton: LoaderDesignableButton!
     
     // MARK: Properties
     var presenter: ConfirmTelephoneNumberPresenter? = ConfirmTelephoneNumberPresenter()
@@ -42,7 +42,7 @@ class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephone
         continueButton.isEnabled = !arrayOfTruth.contains(false)
     }
 
-    @IBAction func continueButtonTapped(_ sender: LoaderButton) {
+    @IBAction func continueButtonTapped(_ sender: LoaderDesignableButton) {
         let code = smsCodeTextFields.map { $0.text ?? "" }.reduce("", { $0 + $1 })
         presenter?.verify(with: code)
     }

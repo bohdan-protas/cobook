@@ -21,13 +21,13 @@ class SignUpViewController: BaseViewController, SignUpView {
     @IBOutlet var lastNameTextField: DesignableTextField!
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
     @IBOutlet var emailTextField: DesignableTextField!
-    @IBOutlet var continueButton: LoaderButton!
+    @IBOutlet var continueButton: LoaderDesignableButton!
 
     // MARK: Properties
     var presenter = SignUpPresenter()
 
     // MARK: Actions
-    @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
+    @IBAction func signUpButtonTapped(_ sender: LoaderDesignableButton) {
         presenter.signUp()
     }
 

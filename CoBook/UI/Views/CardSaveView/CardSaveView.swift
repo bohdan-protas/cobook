@@ -10,7 +10,7 @@ import UIKit
 
 class CardSaveView: BaseFromNibView {
 
-    @IBOutlet var saveButton: LoaderButton!
+    @IBOutlet var saveButton: LoaderDesignableButton!
     @IBOutlet var topShadowView: UIView!
 
     var onSaveTapped: (() -> Void)?
@@ -19,7 +19,7 @@ class CardSaveView: BaseFromNibView {
         return CardSaveView.nib
     }
     
-    @IBAction func onSaveButtonTapped(_ sender: LoaderButton) {
+    @IBAction func onSaveButtonTapped(_ sender: LoaderDesignableButton) {
         onSaveTapped?()
     }
 

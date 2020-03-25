@@ -96,7 +96,6 @@
 		B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15EC2411108800C4DC11 /* AccountHeaderView.swift */; };
 		B84A15F02411130800C4DC11 /* AccountHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84A15EF2411130800C4DC11 /* AccountHeaderView.xib */; };
 		B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */; };
-		B84A15F424111F5F00C4DC11 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F324111F5F00C4DC11 /* DesignableImageView.swift */; };
 		B84A15F72411256800C4DC11 /* DesignableTextPlaceholderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F62411256800C4DC11 /* DesignableTextPlaceholderImageView.swift */; };
 		B84B94E82403299F0007EB60 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E72403299F0007EB60 /* Endpoint.swift */; };
 		B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E9240329D50007EB60 /* APIConstants.swift */; };
@@ -254,7 +253,6 @@
 		B84A15EC2411108800C4DC11 /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
 		B84A15EF2411130800C4DC11 /* AccountHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeaderView.xib; sourceTree = "<group>"; };
 		B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFromNibView.swift; sourceTree = "<group>"; };
-		B84A15F324111F5F00C4DC11 /* DesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
 		B84A15F62411256800C4DC11 /* DesignableTextPlaceholderImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextPlaceholderImageView.swift; sourceTree = "<group>"; };
 		B84B94E2240323ED0007EB60 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		B84B94E72403299F0007EB60 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -992,7 +990,6 @@
 			children = (
 				B88906CB2400540C002E91F7 /* Buttons */,
 				B82B6DB523FC118900BB0EFA /* DesignableView.swift */,
-				B84A15F324111F5F00C4DC11 /* DesignableImageView.swift */,
 				B826B0E523F4109C009041DD /* DesignableProgressView.swift */,
 				B8625AC723FAD6C80044605C /* DesignableTextField.swift */,
 				B84A15F62411256800C4DC11 /* DesignableTextPlaceholderImageView.swift */,
@@ -1218,7 +1215,6 @@
 				B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
-				B84A15F424111F5F00C4DC11 /* DesignableImageView.swift in Sources */,
 				B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */,
 				B8307F192406AED800AFE578 /* Profile.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,

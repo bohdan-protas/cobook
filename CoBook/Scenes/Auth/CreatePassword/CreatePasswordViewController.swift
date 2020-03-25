@@ -19,7 +19,7 @@ class CreatePasswordViewController: BaseViewController, CreatePasswordView {
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
     @IBOutlet var passwordTextField: DesignableTextField!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
-    @IBOutlet var continueButton: LoaderButton!
+    @IBOutlet var continueButton: LoaderDesignableButton!
 
     var presenter: CreatePasswordPresenter = CreatePasswordPresenter()
 
