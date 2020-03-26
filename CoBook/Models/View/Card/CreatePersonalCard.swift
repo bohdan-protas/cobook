@@ -20,7 +20,7 @@ enum CreatePersonalCard {
         case textField(text: String?, type: TextType)
         case actionTextField(text: String?, type: ActionType)
         case textView(text: String?, type: TextType)
-        case interests(list: [Interest])
+        case interests(list: [Card.InterestItem])
         case socialList(list: [Social.ListItem])
         case sectionHeader
     }
@@ -76,7 +76,7 @@ enum CreatePersonalCard {
     }
 
     enum ActionType: RawRepresentable {
-        case activityType(list: [Practice])     // Вид діяльності
+        case activityType(list: [Card.PracticeItem])     // Вид діяльності
         case placeOfLiving                      // Місце проживання
         case activityRegion                     // Регіон діяльності
 

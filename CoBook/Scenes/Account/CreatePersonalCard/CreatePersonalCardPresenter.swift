@@ -128,7 +128,7 @@ private extension CreatePersonalCardPresenter {
                 .textField(text: personalCardParameters.contactEmail, type: .workingEmailForCommunication),
                 .textField(text: personalCardParameters.contactTelephone, type: .workingPhoneNumber),
                 .title(text: "Соціальні мережі:"),
-                .socialList(list: personalCardParameters.socialList)
+                .socialList(list: personalCardParameters.socialNetworks)
             ]),
             CreatePersonalCard.Section(items: [
                 .sectionHeader,
@@ -153,7 +153,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.personalCardParameters.practices = (response ?? []).map { CreatePersonalCard.Practice(id: $0.id, title: $0.title) }
+                strongSelf.personalCardParameters.practices = (response ?? []).map { Card.PracticeItem(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 practicesTypesListRequestError = error
@@ -169,11 +169,11 @@ private extension CreatePersonalCardPresenter {
             switch result {
             case let .success(response):
                 let currentSelectedInterests = strongSelf.personalCardParameters.interests
-                let fetchedInterests: [CreatePersonalCard.Interest] = (response ?? []).compactMap { fetched in
+                let fetchedInterests: [Card.InterestItem] = (response ?? []).compactMap { fetched in
                     let isSelected = currentSelectedInterests.contains(where: { (selected) -> Bool in
                         return selected.id == fetched.id
                     })
-                    return CreatePersonalCard.Interest(id: fetched.id, title: fetched.title, isSelected: isSelected)
+                    return Card.InterestItem(id: fetched.id, title: fetched.title, isSelected: isSelected)
                 }
 
                 strongSelf.personalCardParameters.interests = fetchedInterests
@@ -344,7 +344,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
                 let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
                 cell.create(socialListItem: newItem)
 
-                self.personalCardParameters.socialList.append(newItem)
+                self.personalCardParameters.socialNetworks.append(newItem)
             }
         default:
             break
@@ -357,7 +357,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
 
             .init(title: "Видалити", style: .destructive, handler: { (_) in
                 cell.deleteAt(indexPath: indexPath)
-                self.personalCardParameters.socialList.remove(at: indexPath.item)
+                self.personalCardParameters.socialNetworks.remove(at: indexPath.item)
             }),
 
             .init(title: "Змінити", style: .default, handler: { (_) in
@@ -369,7 +369,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
 
                     let newItem = Social.ListItem.view(model: Social.Model(title: name, url: url))
                     cell.updateAt(indexPath: indexPath, with: newItem)
-                    self.personalCardParameters.socialList[safe: indexPath.item] = newItem
+                    self.personalCardParameters.socialNetworks[safe: indexPath.item] = newItem
                 }
             }),
 
