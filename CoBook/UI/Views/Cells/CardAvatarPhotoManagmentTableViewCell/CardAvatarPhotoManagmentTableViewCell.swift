@@ -30,9 +30,9 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
         var emptyStateTitle: String {
             switch self {
             case .personalCard:
-                return "Додати фото"
+                return "Змінити логотип компанії"
             case .businessCard:
-                return "Додати фото"
+                return "Добавити логотип компанії"
             }
         }
     }

@@ -46,7 +46,7 @@
                             <constraint firstAttribute="bottom" secondItem="88Q-sd-qkP" secondAttribute="bottom" id="pH1-Tz-dZI"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyI-4D-mw2" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyI-4D-mw2">
                         <rect key="frame" x="116" y="38" width="180" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="Pch-sK-oe9"/>
