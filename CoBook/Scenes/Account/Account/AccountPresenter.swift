@@ -104,10 +104,10 @@ private extension AccountPresenter {
     func setupDataSource() {
         var cardsPreviceSection = Account.Section(items: [
             .userInfoHeader(avatarUrl: personalCardsList.first?.avatar?.sourceUrl,
-                    firstName: AppStorage.User.profile?.firstName,
-                    lastName: AppStorage.User.profile?.lastName,
-                    telephone: AppStorage.User.profile?.telephone.number,
-                    email: AppStorage.User.profile?.email.address),
+                            firstName: AppStorage.User.profile?.firstName,
+                            lastName: AppStorage.User.profile?.lastName,
+                            telephone: AppStorage.User.profile?.telephone.number,
+                            email: AppStorage.User.profile?.email.address),
             .sectionHeader
         ])
 
@@ -121,7 +121,8 @@ private extension AccountPresenter {
             personalCardsList.forEach {
                 cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
                                                                                                  image: $0.avatar?.sourceUrl,
-                                                                                                 name: "\(AppStorage.User.profile?.firstName ?? "") \(AppStorage.User.profile?.lastName ?? "")",
+                                                                                                 firstName: AppStorage.User.profile?.firstName,
+                                                                                                 lastName: AppStorage.User.profile?.lastName,
                                                                                                  profession: $0.practiceType?.title,
                                                                                                  telephone: $0.telephone?.number)))
                 cardsPreviceSection.items.append(.action(type: .createBusinessCard))

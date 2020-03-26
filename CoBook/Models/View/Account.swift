@@ -26,7 +26,8 @@ enum Account {
     struct CardPreview {
         var id: Int
         var image: String?
-        var name: String?
+        var firstName: String?
+        var lastName: String?
         var profession: String?
         var telephone: String?
     }

@@ -8,7 +8,6 @@
 
 import UIKit
 import GooglePlaces
-import Kingfisher
 
 class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
 

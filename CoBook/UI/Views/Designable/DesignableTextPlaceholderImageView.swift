@@ -12,7 +12,13 @@ import UIKit
 class DesignableTextPlaceholderImageView: UIImageView {
 
     /// Title text to render inside the image
-    @IBInspectable var placeholder: String = "" {
+    @IBInspectable var placeholder: String? {
+        didSet {
+            configure()
+        }
+    }
+
+    override var image: UIImage? {
         didSet {
             configure()
         }
@@ -25,7 +31,7 @@ class DesignableTextPlaceholderImageView: UIImageView {
     @IBInspectable var fontSize: CGFloat = 20
 
     /// The label used to render title and size text
-    private var label: UILabel!
+    private var placeholderLabel: UILabel!
 
     /// Adjustment in font size to make the title font slightly bigger
     private let titleFontSizeAdjustment: CGFloat = 4
@@ -63,38 +69,34 @@ class DesignableTextPlaceholderImageView: UIImageView {
     private func configure() {
         clipsToBounds = true
 
-        guard image == nil else {
-            label = nil
-            return
-        }
-
-        if label == nil {
+        if placeholderLabel == nil {
             // make sure we don't render the label outside of ourselves
-            label = UILabel(frame: bounds)
-            label.numberOfLines = 0
-            label.textAlignment = .center
-            addSubview(label)
+            placeholderLabel = UILabel(frame: bounds)
+            placeholderLabel.numberOfLines = 0
+            placeholderLabel.textAlignment = .center
+            addSubview(placeholderLabel)
 
             // center the label inside the placeholder space
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            label.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-            label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-            label.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-
+            placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+            placeholderLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            placeholderLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            placeholderLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            placeholderLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            placeholderLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
 
+        placeholderLabel.isHidden = image != nil
+
         let titleAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize + titleFontSizeAdjustment)]
-        let titleString = NSMutableAttributedString(string: placeholder, attributes: titleAttrs)
+        let titleString = NSMutableAttributedString(string: placeholder ?? "", attributes: titleAttrs)
 
         // append the size string and put it inside the label
-        label.attributedText = titleString
+        placeholderLabel.attributedText = titleString
 
         // make sure the label color reflects the latest setting
-        label.textColor = placeholderColor
-        label.backgroundColor = .clear
+        placeholderLabel.textColor = placeholderColor
+        placeholderLabel.backgroundColor = .clear
     }
 
 
