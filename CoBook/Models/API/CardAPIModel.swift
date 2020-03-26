@@ -88,7 +88,51 @@ enum CardAPIModel {
 
 }
 
-// MARK: - PersonalCardParameters
+// MARK: - PersonalCardAPIResponseData
+extension CardAPIModel {
+
+    struct CardDetailsAPIResponseData: Decodable {
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case type
+            case cardCreator = "created_by"
+            case avatar
+            case practiceType = "practice_type"
+            case position
+            case city
+            case region
+            case description
+            case contactTelephone = "contact_telephone"
+            case contactEmail = "contact_email"
+            case socialNetworks = "social_networks"
+            case createdAt = "created_at"
+            case updatedAt = "updated_at"
+            case interests
+        }
+
+
+        var id: Int
+        var type: CardType?
+        var cardCreator: CardCreator?
+        var avatar: FileAPIResponseData?
+        var practiceType: PracticeType?
+        var position: String?
+        var city: Place?
+        var region: Place?
+        var description: String?
+        var contactTelephone: ContactTelephone?
+        var contactEmail: ContactEmail?
+        var socialNetworks: [SocialNetwork]?
+        var createdAt: String?
+        var updatedAt: String?
+        var interests: [Interest]?
+    }
+
+
+}
+
+// MARK: - Create & Update parameters
 extension CardAPIModel {
 
     struct BusinessCardParameters {
@@ -237,50 +281,6 @@ extension CardAPIModel {
             }
             try container.encodeIfPresent(list, forKey: .socialNetworks)
         }
-    }
-
-
-}
-
-// MARK: - PersonalCardAPIResponseData
-extension CardAPIModel {
-
-    struct CardDetailsAPIResponseData: Decodable {
-
-        enum CodingKeys: String, CodingKey {
-            case id
-            case type
-            case cardCreator = "created_by"
-            case avatar
-            case practiceType = "practice_type"
-            case position
-            case city
-            case region
-            case description
-            case contactTelephone = "contact_telephone"
-            case contactEmail = "contact_email"
-            case socialNetworks = "social_networks"
-            case createdAt = "created_at"
-            case updatedAt = "updated_at"
-            case interests
-        }
-
-
-        var id: Int
-        var type: CardType?
-        var cardCreator: CardCreator?
-        var avatar: FileAPIResponseData?
-        var practiceType: PracticeType?
-        var position: String?
-        var city: Place?
-        var region: Place?
-        var description: String?
-        var contactTelephone: ContactTelephone?
-        var contactEmail: ContactEmail?
-        var socialNetworks: [SocialNetwork]?
-        var createdAt: String?
-        var updatedAt: String?
-        var interests: [Interest]?
     }
 
 

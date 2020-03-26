@@ -16,78 +16,69 @@ enum CreateBusinessCard {
 
     enum Item {
         case avatarPhotoManagment(sourceType: CardAvatarPhotoManagmentTableViewCell.SourceType, imagePath: String?)
+        case sectionHeader
         case title(text: String)
         case textField(text: String?, type: TextType)
         case actionTextField(text: String?, type: ActionType)
-        case textView(text: String?, type: TextType)
         case interests(list: [Card.InterestItem])
         case socialList(list: [Social.ListItem])
-        case sectionHeader
+
     }
 
     enum TextType: String {
-        case occupiedPosition               // Займана посада
-        case activityDescription            // Опис діяльності
-        case workingPhoneNumber             // Робочий номер телефону
-        case workingEmailForCommunication   // Робочий емейл для зв'язку
+        case companyName
+        case companyWebSite
+        case workingPhoneNumber
 
         var placeholder: String {
             get {
                 switch self {
-                case .occupiedPosition:
-                    return "Займана посада"
-                case .activityDescription:
-                    return "Опис діяльності"
+                case .companyName:
+                    return "Назва компанії"
+                case .companyWebSite:
+                    return "Веб-сайт компанії"
                 case .workingPhoneNumber:
                     return "Робочий номер телефону"
-                case .workingEmailForCommunication:
-                    return "Робочий емейл для зв'язку"
                 }
             }
         }
 
-        var contentType: UITextContentType? {
-            switch self {
-            case .occupiedPosition:
-                return .jobTitle
-            case .activityDescription:
-                return nil
-            case .workingPhoneNumber:
-                return .telephoneNumber
-            case .workingEmailForCommunication:
-                return .emailAddress
-
-            }
-        }
-
         var keyboardType: UIKeyboardType {
-            switch self {
-            case .occupiedPosition:
-                return .default
-            case .activityDescription:
-                return .default
-            case .workingPhoneNumber:
-                return .phonePad
-            case .workingEmailForCommunication:
-                return .emailAddress
+            get {
+                switch self {
+                case .companyName:
+                    return .default
+                case .companyWebSite:
+                    return .URL
+                case .workingPhoneNumber:
+                    return .phonePad
+                }
             }
         }
 
     }
 
     enum ActionType: RawRepresentable {
-        case activityType(list: [Practice])     // Вид діяльності
-        case placeOfLiving                      // Місце проживання
-        case activityRegion                     // Регіон діяльності
+        case activityType(list: [Card.PracticeItem])
+        case city
+        case region
+        case address
+        case schedule
 
         var placeholder: String {
-            switch self {
-            case .activityType:
-                return "Вид діяльності"
-            case .placeOfLiving:
-                return "Місце проживання"
-            case .activityRegion:
-                return "Регіон діяльності"
+            get {
+                switch self {
+                case .activityType:
+                    return "Вид діяльності"
+                case .city:
+                    return "Місто розташування"
+                case .region:
+                    return "Місто діяльності"
+                case .address:
+                    return "Вулиця"
+                case .schedule:
+                    return "Графік роботи (дні та години)"
+                }
             }
         }
 
@@ -97,8 +88,10 @@ enum CreateBusinessCard {
         public init?(rawValue: RawValue) {
             switch rawValue {
             case "activityType":    self = .activityType(list: [])
-            case "placeOfLiving":   self = .placeOfLiving
-            case "activityRegion":  self = .activityRegion
+            case "city":            self = .city
+            case "region":          self = .region
+            case "address":         self = .address
+            case "schedule":        self = .schedule
             default:
                 return nil
             }
@@ -108,16 +101,12 @@ enum CreateBusinessCard {
         public var rawValue: RawValue {
             switch self {
             case .activityType:     return "activityType"
-            case .placeOfLiving:    return "placeOfLiving"
-            case .activityRegion:   return "activityRegion"
+            case .city:             return "city"
+            case .region:           return "region"
+            case .address:          return "address"
+            case .schedule:         return "schedule"
             }
         }
-    }
-
-    struct Practice {
-        var id: Int?
-        var title: String?
-        var isSelected: Bool = false
     }
 
 
