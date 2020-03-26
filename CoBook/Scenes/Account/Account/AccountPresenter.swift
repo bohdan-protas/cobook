@@ -10,7 +10,6 @@ import UIKit
 
 protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     var tableView: UITableView! { get set }
-    func fillHeader(with profile: Profile?)
 }
 
 class AccountPresenter: BasePresenter {
@@ -103,17 +102,21 @@ private extension AccountPresenter {
     }
 
     func setupDataSource() {
-        view?.fillHeader(with: AppStorage.User.profile)
+        var cardsPreviceSection = Account.Section(items: [
+            .userInfoHeader(avatarUrl: personalCardsList.first?.avatar?.sourceUrl,
+                    firstName: AppStorage.User.profile?.firstName,
+                    lastName: AppStorage.User.profile?.lastName,
+                    telephone: AppStorage.User.profile?.telephone.number,
+                    email: AppStorage.User.profile?.email.address),
+            .sectionHeader
+        ])
 
-        var cardsPreviceSection = Account.Section(items: [])
         if personalCardsList.isEmpty {
-            cardsPreviceSection.items = [
-                .sectionHeader,
+            cardsPreviceSection.items.append(contentsOf: [
                 .action(type: .createPersonalCard),
                 .action(type: .createBusinessCard),
-            ]
+            ])
         } else {
-            cardsPreviceSection.items.append(.sectionHeader)
             cardsPreviceSection.items.append(.title(text: "Мої візитки:"))
             personalCardsList.forEach {
                 cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,

@@ -21,6 +21,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
         super.init()
 
         tableView.dataSource = self
+        tableView.register(AccountHeaderTableViewCell.nib, forCellReuseIdentifier: AccountHeaderTableViewCell.identifier)
         tableView.register(CardPreviewTableViewCell.nib, forCellReuseIdentifier: CardPreviewTableViewCell.identifier)
         tableView.register(AccountItemTableViewCell.nib, forCellReuseIdentifier: AccountItemTableViewCell.identifier)
         tableView.register(SectionTitleTableViewCell.nib, forCellReuseIdentifier: SectionTitleTableViewCell.identifier)
@@ -41,6 +42,15 @@ class AccountDataSource: NSObject, UITableViewDataSource {
         }
 
         switch dataType {
+
+        case .userInfoHeader(let avatarUrl, let firstName, let lastName, let telephone, let email):
+            let cell = tableView.dequeueReusableCell(withIdentifier: AccountHeaderTableViewCell.identifier, for: indexPath) as! AccountHeaderTableViewCell
+
+            cell.avatarTextPlaceholderImageView.placeholder = "\(firstName?.first?.uppercased() ?? "") \(lastName?.first?.uppercased() ?? "")"
+            cell.userNameLabel.text = "\(firstName ?? "") \(lastName ?? "")"
+            cell.emailLabel.text = email
+            cell.telephoneNumberLabel.text = telephone
+            return cell
 
         case .action(let type):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountItemTableViewCell.identifier, for: indexPath) as? AccountItemTableViewCell else {

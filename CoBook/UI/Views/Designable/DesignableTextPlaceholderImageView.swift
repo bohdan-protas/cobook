@@ -12,7 +12,11 @@ import UIKit
 class DesignableTextPlaceholderImageView: UIImageView {
 
     /// Title text to render inside the image
-    @IBInspectable var textPlaceholder: String = ""
+    @IBInspectable var placeholder: String = "" {
+        didSet {
+            configure()
+        }
+    }
 
     /// The color of the title text
     @IBInspectable var placeholderColor: UIColor = .black
@@ -83,7 +87,7 @@ class DesignableTextPlaceholderImageView: UIImageView {
         }
 
         let titleAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize + titleFontSizeAdjustment)]
-        let titleString = NSMutableAttributedString(string: textPlaceholder, attributes: titleAttrs)
+        let titleString = NSMutableAttributedString(string: placeholder, attributes: titleAttrs)
 
         // append the size string and put it inside the label
         label.attributedText = titleString

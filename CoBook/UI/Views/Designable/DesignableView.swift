@@ -12,3 +12,8 @@ import UIKit
 class DesignableView: UIView {
 
 }
+
+@IBDesignable
+class DesignableImageView: UIImageView {
+
+}

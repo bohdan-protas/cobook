@@ -12,8 +12,6 @@ class AccountViewController: BaseViewController, AccountView {
 
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
-        static let headerHeight: CGFloat = 308
-        static let footerHeight: CGFloat = 124
     }
 
     // MARK: IBOutlets
@@ -39,11 +37,6 @@ class AccountViewController: BaseViewController, AccountView {
         presenter.detachView()
     }
 
-    // MARK: Public
-    func fillHeader(with profile: Profile?) {
-        (tableView.tableHeaderView as? AccountHeaderView)?.fill(with: profile)
-    }
-
 
 }
 
@@ -51,8 +44,7 @@ class AccountViewController: BaseViewController, AccountView {
 private extension AccountViewController {
 
     func setupLayout() {
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
-        tableView.tableHeaderView = AccountHeaderView(frame:  CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: Defaults.headerHeight))
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
 
