@@ -66,11 +66,14 @@ class AccountPresenter: BasePresenter {
 
         case .businessCardPreview(let model):
             break
+
         case .personalCardPreview(let model):
             let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
             personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: model.id)
             view?.push(controller: personalCardDetailsViewController, animated: true)
-        default: break
+
+        default:
+            break
         }
     }
 
@@ -105,10 +108,12 @@ private extension AccountPresenter {
         var cardsPreviceSection = Account.Section(items: [])
         if personalCardsList.isEmpty {
             cardsPreviceSection.items = [
+                .sectionHeader,
                 .action(type: .createPersonalCard),
                 .action(type: .createBusinessCard),
             ]
         } else {
+            cardsPreviceSection.items.append(.sectionHeader)
             cardsPreviceSection.items.append(.title(text: "Мої візитки:"))
             personalCardsList.forEach {
                 cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
@@ -124,6 +129,7 @@ private extension AccountPresenter {
         viewDataSource?.source = [
             cardsPreviceSection,
             Account.Section(items: [
+                .sectionHeader,
                 .action(type: .inviteFriends),
                 .action(type: .statictics),
                 .action(type: .generateQrCode),
@@ -131,6 +137,7 @@ private extension AccountPresenter {
             ]),
 
             Account.Section(items: [
+                .sectionHeader,
                 .action(type: .quitAccount),
             ])
         ]

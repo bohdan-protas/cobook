@@ -19,6 +19,7 @@ enum Account {
         case action(type: ActionType)
         case personalCardPreview(model: CardPreview)
         case businessCardPreview(model: CardPreview)
+        case sectionHeader
     }
 
     struct CardPreview {

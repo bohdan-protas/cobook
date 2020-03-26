@@ -24,6 +24,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
         tableView.register(CardPreviewTableViewCell.nib, forCellReuseIdentifier: CardPreviewTableViewCell.identifier)
         tableView.register(AccountItemTableViewCell.nib, forCellReuseIdentifier: AccountItemTableViewCell.identifier)
         tableView.register(SectionTitleTableViewCell.nib, forCellReuseIdentifier: SectionTitleTableViewCell.identifier)
+        tableView.register(SectionHeaderTableViewCell.nib, forCellReuseIdentifier: SectionHeaderTableViewCell.identifier)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,6 +41,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
         }
 
         switch dataType {
+
         case .action(let type):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountItemTableViewCell.identifier, for: indexPath) as? AccountItemTableViewCell else {
                 return UITableViewCell()
@@ -59,8 +61,8 @@ class AccountDataSource: NSObject, UITableViewDataSource {
 
             cell.titleImageView.kf.setImage(with: URL.init(string: model.image ?? ""), options: [.transition(.fade(0.3)),
                                                                                                  .processor(RoundCornerImageProcessor(cornerRadius: 16))])
-
             return cell
+
         case .personalCardPreview(let model):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CardPreviewTableViewCell.identifier, for: indexPath) as? CardPreviewTableViewCell else {
                 return UITableViewCell()
@@ -69,17 +71,20 @@ class AccountDataSource: NSObject, UITableViewDataSource {
             cell.proffesionLabel.text = model.profession
             cell.telephoneNumberLabel.text = model.telephone
             cell.companyNameLabel.text = model.name
-            
             cell.titleImageView.kf.setImage(with: URL.init(string: model.image ?? ""), options: [.transition(.fade(0.3)),
                                                                                                  .processor(RoundCornerImageProcessor(cornerRadius: 16))])
-
             return cell
+
         case .title(let text):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SectionTitleTableViewCell.identifier, for: indexPath) as? SectionTitleTableViewCell else {
                 return UITableViewCell()
             }
 
             cell.titleLabel.text = text
+            return cell
+
+        case .sectionHeader:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SectionHeaderTableViewCell.identifier, for: indexPath) as! SectionHeaderTableViewCell
             return cell
         }
 

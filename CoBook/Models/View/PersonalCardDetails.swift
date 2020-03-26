@@ -11,7 +11,6 @@ import Foundation
 enum PersonalCardDetails {
 
     struct Section {
-        var useHeader: Bool = true
         var items: [Item]
     }
 
@@ -20,6 +19,7 @@ enum PersonalCardDetails {
         case userInfo(model: CardAPIModel.CardDetailsAPIResponseData?)
         case getInTouch
         case socialList(list: [Social.ListItem])
+        case sectionHeader
     }
 
 

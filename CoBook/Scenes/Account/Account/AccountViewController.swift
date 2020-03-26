@@ -14,7 +14,6 @@ class AccountViewController: BaseViewController, AccountView {
         static let estimatedRowHeight: CGFloat = 44
         static let headerHeight: CGFloat = 308
         static let footerHeight: CGFloat = 124
-        static let sectionHeaderHeight: CGFloat = 28
     }
 
     // MARK: IBOutlets
@@ -52,6 +51,7 @@ class AccountViewController: BaseViewController, AccountView {
 private extension AccountViewController {
 
     func setupLayout() {
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
         tableView.tableHeaderView = AccountHeaderView(frame:  CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: Defaults.headerHeight))
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
@@ -69,11 +69,11 @@ extension AccountViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return SectionHeaderSeparatorView()
+        return UIView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Defaults.sectionHeaderHeight
+        return 0
     }
 
 

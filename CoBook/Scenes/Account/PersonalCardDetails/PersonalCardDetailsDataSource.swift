@@ -45,6 +45,7 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
         tableView.register(PersonalCardUserInfoTableViewCell.nib, forCellReuseIdentifier: PersonalCardUserInfoTableViewCell.identifier)
         tableView.register(GetInTouchTableViewCell.nib, forCellReuseIdentifier: GetInTouchTableViewCell.identifier)
         tableView.register(SocialsListTableViewCell.nib, forCellReuseIdentifier: SocialsListTableViewCell.identifier)
+        tableView.register(SectionHeaderTableViewCell.nib, forCellReuseIdentifier: SectionHeaderTableViewCell.identifier)
     }
 
     // MARK:  UITableViewDataSource
@@ -78,6 +79,9 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SocialsListTableViewCell.identifier, for: indexPath) as! SocialsListTableViewCell
             cell.delegate = cellsDelegate
             cell.fill(items: list, isEditable: false)
+            return cell
+        case .sectionHeader:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SectionHeaderTableViewCell.identifier, for: indexPath) as! SectionHeaderTableViewCell
             return cell
         }
     }

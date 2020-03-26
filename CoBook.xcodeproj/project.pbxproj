@@ -153,8 +153,6 @@
 		B8DE5E392418DACF00F4F60B /* CreatePersonalCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */; };
 		B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E3F2418E25000F4F60B /* TextFieldTableViewCell.swift */; };
 		B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E402418E25000F4F60B /* TextFieldTableViewCell.xib */; };
-		B8DE5E452418E82600F4F60B /* SectionHeaderSeparatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E442418E82600F4F60B /* SectionHeaderSeparatorView.xib */; };
-		B8DE5E472418E83800F4F60B /* SectionHeaderSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E462418E83800F4F60B /* SectionHeaderSeparatorView.swift */; };
 		B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E492418E99900F4F60B /* SectionTitleTableViewCell.swift */; };
 		B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E4A2418E99900F4F60B /* SectionTitleTableViewCell.xib */; };
 		B8DE5E4E2418EE4800F4F60B /* CreatePersonalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E4D2418EE4800F4F60B /* CreatePersonalCard.swift */; };
@@ -316,8 +314,6 @@
 		B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSource.swift; sourceTree = "<group>"; };
 		B8DE5E3F2418E25000F4F60B /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		B8DE5E402418E25000F4F60B /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
-		B8DE5E442418E82600F4F60B /* SectionHeaderSeparatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderSeparatorView.xib; sourceTree = "<group>"; };
-		B8DE5E462418E83800F4F60B /* SectionHeaderSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderSeparatorView.swift; sourceTree = "<group>"; };
 		B8DE5E492418E99900F4F60B /* SectionTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewCell.swift; sourceTree = "<group>"; };
 		B8DE5E4A2418E99900F4F60B /* SectionTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTitleTableViewCell.xib; sourceTree = "<group>"; };
 		B8DE5E4D2418EE4800F4F60B /* CreatePersonalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCard.swift; sourceTree = "<group>"; };
@@ -522,7 +518,6 @@
 				B8DE5E5724192ADC00F4F60B /* Designable */,
 				B82248DB242C0CD700392D10 /* CardSaveView */,
 				B8AB840124283C440041B879 /* EditCardView */,
-				B8DE5E432418E5C400F4F60B /* SectionHeaderSeparatorView */,
 				B8DE5E3A2418E1C600F4F60B /* Cells */,
 			);
 			path = Views;
@@ -972,15 +967,6 @@
 			path = TextFieldTableViewCell;
 			sourceTree = "<group>";
 		};
-		B8DE5E432418E5C400F4F60B /* SectionHeaderSeparatorView */ = {
-			isa = PBXGroup;
-			children = (
-				B8DE5E462418E83800F4F60B /* SectionHeaderSeparatorView.swift */,
-				B8DE5E442418E82600F4F60B /* SectionHeaderSeparatorView.xib */,
-			);
-			path = SectionHeaderSeparatorView;
-			sourceTree = "<group>";
-		};
 		B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1090,7 +1076,6 @@
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
 				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
 				B8AB840524283C7C0041B879 /* EditCardView.xib in Resources */,
-				B8DE5E452418E82600F4F60B /* SectionHeaderSeparatorView.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
 				B8DE5E562419262600F4F60B /* TextViewTableViewCell.xib in Resources */,
@@ -1247,7 +1232,6 @@
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
 				B82A211E2421700A00D0D9F5 /* AuthRequestInterceptor.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */,
-				B8DE5E472418E83800F4F60B /* SectionHeaderSeparatorView.swift in Sources */,
 				B84A15ED2411108800C4DC11 /* AccountHeaderView.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */,
