@@ -44,11 +44,15 @@ class AccountPresenter: BasePresenter {
         switch actionType {
         case .action(let type):
             switch type {
+
             case .createPersonalCard:
                 let createPersonalCardController: CreatePersonalCardViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: createPersonalCardController, animated: true)
+
             case .createBusinessCard:
-                break
+                let createBusinessCardController: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: createBusinessCardController, animated: true)
+
             case .inviteFriends:
                 break
             case .statictics:

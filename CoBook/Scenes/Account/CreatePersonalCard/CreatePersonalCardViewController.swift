@@ -13,14 +13,11 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
-        static let headerHeight: CGFloat = 120
         static let footerHeight: CGFloat = 124
-        static let sectionHeaderHeight: CGFloat = 28
     }
 
     // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
-    var imagePicker = UIImagePickerController()
 
     // MARK: Properties
     private var placeCompletion: ((GMSPlace) -> Void)?
@@ -74,47 +71,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 
     func presentPickerController() {
         present(imagePickerController, animated: true, completion: nil)
-    }
-
-    func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
-        let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
-
-        let isEditing = !(name ?? "").isEmpty || !(link ?? "").isEmpty
-
-        let submitAction = UIAlertAction(title: isEditing ? "Змінити": "Створити", style: .default) { [unowned ac] _ in
-            let name = ac.textFields![safe: 0]?.text
-            let url = ac.textFields?[safe: 1]?.text
-            completion?(name, url)
-        }
-        submitAction.isEnabled = false
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
-
-        ac.addAction(submitAction)
-        ac.addAction(cancelAction)
-
-        ac.addTextField { (nameTextField) in
-            nameTextField.text = name
-            nameTextField.placeholder = "Назва"
-        }
-        ac.addTextField { (urlTextField) in
-            urlTextField.text = link
-            urlTextField.keyboardType = .URL
-            urlTextField.placeholder = "Посилання, https://link.com"
-        }
-
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 1], queue: OperationQueue.main, using: { _ in
-            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
-        })
-
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 0], queue: OperationQueue.main, using: { _ in
-            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
-        })
-
-        present(controller: ac, animated: true)
     }
 
 

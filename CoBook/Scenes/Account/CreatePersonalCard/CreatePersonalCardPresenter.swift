@@ -15,7 +15,6 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupHeaderFooterViews()
-    func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
     func presentPickerController() 
 }
 
@@ -335,7 +334,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
         switch item {
         case .add:
-            view?.addNewSocial(name: nil, link: nil) { (name, strUrl) in
+            view?.newSocialAlert(name: nil, link: nil) { (name, strUrl) in
                 guard let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
                     self.view?.errorAlert(message: "Посилання має хибний формат")
                     return
@@ -361,7 +360,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
             }),
 
             .init(title: "Змінити", style: .default, handler: { (_) in
-                self.view?.addNewSocial(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
+                self.view?.newSocialAlert(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
                     guard let name = name, let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
                         self.view?.errorAlert(message: "Посилання має хибний формат")
                         return

@@ -152,6 +152,7 @@ extension CardAPIModel {
         var contactEmail: String?
         var socialNetworks: [Social.ListItem] = []
         var employeeIds: [Int] = []
+        var practices:  [Card.PracticeItem] = []
 
         enum CodingKeys: String, CodingKey {
             case avatarId = "avatar_id"
