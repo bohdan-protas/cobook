@@ -47,7 +47,10 @@ private extension AccountViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
-
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
+        let footerView = UIView(frame: CGRect(origin: .zero, size: .init(width: tableView.frame.width, height: 8)))
+        footerView.backgroundColor = .white
+        tableView.tableFooterView = footerView
         tableView.delegate = self
     }
 }
