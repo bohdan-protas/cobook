@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class CreatePasswordViewController: UIViewController, CreatePasswordView {
+class CreatePasswordViewController: BaseViewController, CreatePasswordView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -19,7 +19,7 @@ class CreatePasswordViewController: UIViewController, CreatePasswordView {
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
     @IBOutlet var passwordTextField: DesignableTextField!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
-    @IBOutlet var continueButton: LoaderButton!
+    @IBOutlet var continueButton: LoaderDesignableButton!
 
     var presenter: CreatePasswordPresenter = CreatePasswordPresenter()
 
@@ -57,11 +57,11 @@ class CreatePasswordViewController: UIViewController, CreatePasswordView {
         continueButton.isEnabled = enabled
     }
 
-    func startLoading() {
+    override func startLoading() {
         continueButton.isLoading = true
     }
 
-    func stopLoading() {
+    override func stopLoading() {
         continueButton.isLoading = false
     }
 

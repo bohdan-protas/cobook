@@ -44,6 +44,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.identifier)
         tableView.register(InterestsSelectionTableViewCell.nib, forCellReuseIdentifier: InterestsSelectionTableViewCell.identifier)
         tableView.register(SocialsListTableViewCell.nib, forCellReuseIdentifier: SocialsListTableViewCell.identifier)
+        tableView.register(SectionHeaderTableViewCell.nib, forCellReuseIdentifier: SectionHeaderTableViewCell.identifier)
     }
 
     // MARK:  UITableViewDataSource
@@ -100,7 +101,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier, for: indexPath) as! TextViewTableViewCell
             cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
-            cell.textView.placeholderLabel.isHidden = !(text ?? "").isEmpty
+            cell.textView.placeholder = type.placeholder
             cell.textView.text = text
             return cell
 
@@ -114,6 +115,10 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SocialsListTableViewCell.identifier, for: indexPath) as! SocialsListTableViewCell
             cell.delegate = cellsDelegate
             cell.fill(items: list, isEditable: true)
+            return cell
+
+        case .sectionHeader:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SectionHeaderTableViewCell.identifier, for: indexPath) as! SectionHeaderTableViewCell
             return cell
         }
 

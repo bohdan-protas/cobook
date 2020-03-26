@@ -16,12 +16,22 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
 
     // MARK: Source
     var source: [PersonalCardDetails.Section] = []
-    subscript(indexPath: IndexPath) -> PersonalCardDetails.Item? {
+
+    subscript(section: Int) -> PersonalCardDetails.Section? {
         get {
-            return source[safe: indexPath.section]?.items[safe: indexPath.row]
+            return source[safe: section]
         }
         set(newValue) {
-            source[safe: indexPath.section]?.items[safe: indexPath.row] = newValue
+            source[safe: section] = newValue
+        }
+    }
+
+    subscript(item: IndexPath) -> PersonalCardDetails.Item? {
+        get {
+            return source[safe: item.section]?.items[safe: item.row]
+        }
+        set(newValue) {
+            source[safe: item.section]?.items[safe: item.row] = newValue
         }
     }
 
@@ -35,6 +45,7 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
         tableView.register(PersonalCardUserInfoTableViewCell.nib, forCellReuseIdentifier: PersonalCardUserInfoTableViewCell.identifier)
         tableView.register(GetInTouchTableViewCell.nib, forCellReuseIdentifier: GetInTouchTableViewCell.identifier)
         tableView.register(SocialsListTableViewCell.nib, forCellReuseIdentifier: SocialsListTableViewCell.identifier)
+        tableView.register(SectionHeaderTableViewCell.nib, forCellReuseIdentifier: SectionHeaderTableViewCell.identifier)
     }
 
     // MARK:  UITableViewDataSource
@@ -68,6 +79,9 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SocialsListTableViewCell.identifier, for: indexPath) as! SocialsListTableViewCell
             cell.delegate = cellsDelegate
             cell.fill(items: list, isEditable: false)
+            return cell
+        case .sectionHeader:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SectionHeaderTableViewCell.identifier, for: indexPath) as! SectionHeaderTableViewCell
             return cell
         }
     }

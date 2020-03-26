@@ -10,7 +10,7 @@ import UIKit
 
 class CardPreviewTableViewCell: UITableViewCell {
 
-    @IBOutlet var titleImageView: UIImageView!
+    @IBOutlet var titleImageView: DesignableTextPlaceholderImageView!
     @IBOutlet var companyNameLabel: UILabel!
     @IBOutlet var proffesionLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!

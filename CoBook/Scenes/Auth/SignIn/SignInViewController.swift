@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInViewController: UIViewController, SignInView {
+class SignInViewController: BaseViewController, SignInView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -17,7 +17,7 @@ class SignInViewController: UIViewController, SignInView {
     // MARK: IBOutlets
     @IBOutlet var loginTextField: DesignableTextField!
     @IBOutlet var passwordTextField: DesignableTextField!
-    @IBOutlet var signInButton: LoaderButton!
+    @IBOutlet var signInButton: LoaderDesignableButton!
     @IBOutlet var navBar: TransparentNavigationBar!
 
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
@@ -56,11 +56,11 @@ class SignInViewController: UIViewController, SignInView {
     @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
         removeKeyboardObserver()
         self.present(forgotPasswordAlert, animated: true, completion: {
-            self.addKeyboardObserver()
+            self.addKeyboardObservers()
         })
     }
 
-    @IBAction func signInButtonTapped(_ sender: LoaderButton) {
+    @IBAction func signInButtonTapped(_ sender: LoaderDesignableButton) {
         presenter.signIn()
     }
 
@@ -71,21 +71,24 @@ class SignInViewController: UIViewController, SignInView {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         presenter.attachView(self)
-        setupLayout()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         setupLayout()
+     }
 
     deinit {
         presenter.detachView()
     }
 
     // MARK: Public
-    func startLoading() {
+    override func startLoading() {
         signInButton.isLoading = true
     }
 
-    func stopLoading() {
+    override func stopLoading() {
         signInButton.isLoading = false
     }
 
@@ -120,16 +123,16 @@ private extension SignInViewController {
     func setupLayout() {
         navBar.topItem?.title = "SignIn.title".localized
 
-        /// In small screen devices disable title image
+        // In small screen devices disable title image
         if UIDevice().isSmallScreenType {
             fieldToTitleConstraint.isActive = true
             view.layoutIfNeeded()
         } else {
-            addKeyboardObserver()
+            addKeyboardObservers()
         }
     }
 
-    private func addKeyboardObserver() {
+    private func addKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }

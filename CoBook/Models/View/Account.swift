@@ -15,16 +15,19 @@ enum Account {
     }
 
     enum Item {
+        case userInfoHeader(avatarUrl: String?, firstName: String?, lastName: String?, telephone: String?, email: String?)
         case title(text: String)
         case action(type: ActionType)
         case personalCardPreview(model: CardPreview)
         case businessCardPreview(model: CardPreview)
+        case sectionHeader
     }
 
     struct CardPreview {
         var id: Int
         var image: String?
-        var name: String?
+        var firstName: String?
+        var lastName: String?
         var profession: String?
         var telephone: String?
     }

@@ -84,11 +84,12 @@ private extension PersonalCardDetailsPresenter {
     }
 
     func syncViewDataSource() {
-        let userInfoSection = PersonalCardDetails.Section(useHeader: false, items: [
+        let userInfoSection = PersonalCardDetails.Section(items: [
             .userInfo(model: cardDetails)
         ])
 
         var getInTouchSection =  PersonalCardDetails.Section(items: [
+            .sectionHeader,
             .title(text: "Зв’язатись:"),
         ])
 

@@ -21,6 +21,7 @@ enum CreatePersonalCard {
         case textView(text: String?, type: TextType)
         case interests(list: [Interest])
         case socialList(list: [Social.ListItem])
+        case sectionHeader
     }
 
     enum TextType: String {

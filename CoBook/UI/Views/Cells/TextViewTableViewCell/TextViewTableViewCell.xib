@@ -58,7 +58,6 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
                                 <real key="value" value="16"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="string" keyPath="pText" value="placeholder"/>
                             <userDefinedRuntimeAttribute type="color" keyPath="pTextColor">
                                 <color key="value" name="Theme_TextField-placeholder"/>
                             </userDefinedRuntimeAttribute>

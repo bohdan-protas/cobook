@@ -75,18 +75,17 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func createPerconalCard() {
-        view?.startLoading()
+        view?.startLoading(text: "Створення...")
         APIClient.default.createPersonalCard(parameters: self.personalCardParameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
-            strongSelf.view?.stopLoading()
-
             switch result {
             case .success:
-                strongSelf.view?.infoAlert(title: nil, message: "Успішно створено візитку", handler: { (_) in
+                strongSelf.view?.stopLoading(success: true, completion: {
                     strongSelf.delegate?.createPersonalCardPresenterDidUpdatedPersonalCard(strongSelf)
                     strongSelf.view?.popController()
                 })
             case let .failure(error):
+                strongSelf.view?.stopLoading()
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
@@ -115,6 +114,7 @@ private extension CreatePersonalCardPresenter {
 
         viewDataSource?.source = [
             CreatePersonalCard.Section(items: [
+                .sectionHeader,
                 .title(text: "Діяльність:"),
                 .textField(text: personalCardParameters.position, type: .occupiedPosition),
                 .actionTextField(text: personalCardParameters.practiseType.title, type: .activityType(list: personalCardParameters.practices)),
@@ -123,6 +123,7 @@ private extension CreatePersonalCardPresenter {
                 .textView(text: personalCardParameters.description, type: .activityDescription)
             ]),
             CreatePersonalCard.Section(items: [
+                .sectionHeader,
                 .title(text: "Контактні дані:"),
                 .textField(text: personalCardParameters.contactEmail, type: .workingEmailForCommunication),
                 .textField(text: personalCardParameters.contactTelephone, type: .workingPhoneNumber),
@@ -130,6 +131,7 @@ private extension CreatePersonalCardPresenter {
                 .socialList(list: personalCardParameters.socialList)
             ]),
             CreatePersonalCard.Section(items: [
+                .sectionHeader,
                 .title(text: "Інтереси (для рекомендацій)"),
                 .interests(list: personalCardParameters.interests)
             ])
@@ -142,7 +144,7 @@ private extension CreatePersonalCardPresenter {
         var practicesTypesListRequestError: Error?
         var interestsListRequestError: Error?
 
-        view?.startLoading()
+        view?.startLoading(text: "Завантаження")
         view?.setImage(image: URL.init(string: personalCardParameters.avatarUrl ?? ""))
 
         // fetch practices

@@ -14,7 +14,6 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
         static let footerHeight: CGFloat = 84
-        static let sectionHeaderHeight: CGFloat = 28
     }
 
     // MARK: IBOutlets
@@ -75,6 +74,14 @@ private extension PersonalCardDetailsViewController {
 
 // MARK: - UITableViewDelegate
 extension PersonalCardDetailsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
 
 }
 

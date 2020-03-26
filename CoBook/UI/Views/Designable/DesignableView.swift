@@ -11,25 +11,9 @@ import UIKit
 @IBDesignable
 class DesignableView: UIView {
 
-    @IBInspectable var shadowOffset: CGSize = CGSize.zero
-    @IBInspectable var shadowColor: UIColor = .black
-    @IBInspectable var shadowRadius: CGFloat = 0
-    @IBInspectable var shadowOpacity: Float = 0
-    @IBInspectable var cornerRadius: CGFloat = 0
+}
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        layer.masksToBounds = false
-        layer.shadowOffset = shadowOffset
-        layer.shadowColor = shadowColor.cgColor
-        layer.shadowRadius = shadowRadius
-        layer.shadowOpacity = shadowOpacity
-        layer.cornerRadius = cornerRadius
-
-        let backgroundCGColor = backgroundColor?.cgColor
-        backgroundColor = nil
-        layer.backgroundColor =  backgroundCGColor
-    }
+@IBDesignable
+class DesignableImageView: UIImageView {
 
 }

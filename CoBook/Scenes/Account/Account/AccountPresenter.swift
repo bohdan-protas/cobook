@@ -10,25 +10,25 @@ import UIKit
 
 protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     var tableView: UITableView! { get set }
-    func fillHeader(with profile: Profile?)
 }
 
 class AccountPresenter: BasePresenter {
+
     // MARK: Properties
     private weak var view: AccountView?
-    var dataSource: AccountDataSource?
+    var viewDataSource: AccountDataSource?
 
     private var personalCardsList: [CardPreview] = []
 
     // MARK: Public
     func attachView(_ view: AccountView) {
         self.view = view
-        self.dataSource = AccountDataSource(tableView: view.tableView)
+        self.viewDataSource = AccountDataSource(tableView: view.tableView)
     }
 
     func detachView() {
         view = nil
-        dataSource = nil
+        viewDataSource = nil
     }
 
     func onDidAppear() {
@@ -36,7 +36,7 @@ class AccountPresenter: BasePresenter {
     }
 
     func selectedRow(at indexPath: IndexPath) {
-        guard let actionType = dataSource?.source[safe: indexPath.section]?.items[safe: indexPath.item] else {
+        guard let actionType = viewDataSource?.source[safe: indexPath.section]?.items[safe: indexPath.item] else {
             debugPrint("Error occured when selected account action type")
             return
         }
@@ -65,11 +65,14 @@ class AccountPresenter: BasePresenter {
 
         case .businessCardPreview(let model):
             break
+
         case .personalCardPreview(let model):
             let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
             personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: model.id)
             view?.push(controller: personalCardDetailsViewController, animated: true)
-        default: break
+
+        default:
+            break
         }
     }
 
@@ -99,31 +102,38 @@ private extension AccountPresenter {
     }
 
     func setupDataSource() {
-        view?.fillHeader(with: AppStorage.User.profile)
+        var cardsPreviceSection = Account.Section(items: [
+            .userInfoHeader(avatarUrl: personalCardsList.first?.avatar?.sourceUrl,
+                            firstName: AppStorage.User.profile?.firstName,
+                            lastName: AppStorage.User.profile?.lastName,
+                            telephone: AppStorage.User.profile?.telephone.number,
+                            email: AppStorage.User.profile?.email.address),
+            .sectionHeader
+        ])
 
-        var cardsPreviceSection = Account.Section(items: [])
         if personalCardsList.isEmpty {
-            cardsPreviceSection.items = [
+            cardsPreviceSection.items.append(contentsOf: [
                 .action(type: .createPersonalCard),
                 .action(type: .createBusinessCard),
-            ]
+            ])
         } else {
             cardsPreviceSection.items.append(.title(text: "Мої візитки:"))
             personalCardsList.forEach {
                 cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
                                                                                                  image: $0.avatar?.sourceUrl,
-                                                                                                 name: "\(AppStorage.User.profile?.firstName ?? "") \(AppStorage.User.profile?.lastName ?? "")",
+                                                                                                 firstName: AppStorage.User.profile?.firstName,
+                                                                                                 lastName: AppStorage.User.profile?.lastName,
                                                                                                  profession: $0.practiceType?.title,
                                                                                                  telephone: $0.telephone?.number)))
-                cardsPreviceSection.items.append(.action(type: .createPersonalCard))
                 cardsPreviceSection.items.append(.action(type: .createBusinessCard))
             }
         }
 
         // Setup data source
-        dataSource?.source = [
+        viewDataSource?.source = [
             cardsPreviceSection,
             Account.Section(items: [
+                .sectionHeader,
                 .action(type: .inviteFriends),
                 .action(type: .statictics),
                 .action(type: .generateQrCode),
@@ -131,11 +141,12 @@ private extension AccountPresenter {
             ]),
 
             Account.Section(items: [
+                .sectionHeader,
                 .action(type: .quitAccount),
             ])
         ]
 
-        dataSource?.tableView.reloadData()
+        viewDataSource?.tableView.reloadData()
     }
 
 

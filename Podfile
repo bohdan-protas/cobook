@@ -4,9 +4,10 @@ target 'CoBook' do
   use_frameworks!
 
   pod 'Alamofire', '~> 5.0'
-  pod 'Kingfisher', '~> 5.0'
+  pod 'AlamofireImage', '~> 4.0'
   pod 'IQKeyboardManagerSwift'
   pod 'JGProgressHUD'
   pod 'GooglePlaces'
   pod 'URLEmbeddedView'
+  pod 'Wormholy', :configurations => ['Debug']
 end

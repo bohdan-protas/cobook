@@ -7,128 +7,122 @@
 //
 
 import UIKit
-import ObjectiveC
 
 @IBDesignable
-class DesignableButton: UIButton {
+open class DesignableButton: UIButton {
 
-    // MARK: Properties
-    var disabledColorHandle: UInt8 = 0
-    var highlightedColorHandle: UInt8 = 0
-    var selectedColorHandle: UInt8 = 0
-
-    @IBInspectable
-    var disabledBgColor: UIColor? {
-        get {
-            if let color = objc_getAssociatedObject(self, &disabledColorHandle) as? UIColor {
-                return color
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                self.setBackgroundColor(color, for: .disabled)
-                self.setTitleColor(UIColor.init(hexString: "#BDBDBD") ?? .white, for: .disabled)
-                objc_setAssociatedObject(self, &disabledColorHandle, color, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            } else {
-                self.setBackgroundImage(nil, for: .disabled)
-                objc_setAssociatedObject(self, &disabledColorHandle, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
-    }
-
-    @IBInspectable
-    var highlightedBgColor: UIColor? {
-        get {
-            if let color = objc_getAssociatedObject(self, &highlightedColorHandle) as? UIColor {
-                return color
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                self.setBackgroundColor(color, for: .highlighted)
-            } else {
-                self.setBackgroundImage(nil, for: .highlighted)
-                objc_setAssociatedObject(self, &highlightedColorHandle, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
-    }
-
-    @IBInspectable
-    var normalBgColor: UIColor? {
-        get {
-            if let color = objc_getAssociatedObject(self, &selectedColorHandle) as? UIColor {
-                return color
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                self.setBackgroundColor(color, for: .normal)
-                objc_setAssociatedObject(self, &selectedColorHandle, color, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            } else {
-                self.setBackgroundImage(nil, for: .normal)
-                objc_setAssociatedObject(self, &selectedColorHandle, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
-    }
-
-    @IBInspectable
-    var selectedBgColor: UIColor? {
-        get {
-            if let color = objc_getAssociatedObject(self, &selectedColorHandle) as? UIColor {
-                return color
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                self.setBackgroundColor(color, for: .selected)
-                objc_setAssociatedObject(self, &selectedColorHandle, color, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            } else {
-                self.setBackgroundImage(nil, for: .selected)
-                objc_setAssociatedObject(self, &selectedColorHandle, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
-    }
-
-    @IBInspectable var cornerRadius: CGFloat = 0 {
+    @IBInspectable public var defaultColor: UIColor? {
         didSet {
-            setCorners(value: cornerRadius)
+            self.configureLayout()
         }
     }
 
-    // MARK: Initializers
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        sharedInit()
+    @IBInspectable public var selectedColor: UIColor? {
+        didSet {
+            self.configureLayout()
+        }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    @IBInspectable public var disabledColor: UIColor? {
+        didSet {
+            self.configureLayout()
+        }
+    }
+
+    // support for Dynamic Type without allowing the text to grow too big to fit
+    @IBInspectable public var adjustsFontSizeToFitWidth: Bool = false {
+        didSet {
+            self.titleLabel?.adjustsFontForContentSizeCategory = self.adjustsFontSizeToFitWidth
+            self.titleLabel?.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth
+            self.titleLabel?.baselineAdjustment = self.adjustsFontSizeToFitWidth ? .alignCenters : .alignBaselines
+
+            if self.adjustsFontSizeToFitWidth {
+                // When dynamic text changes we need to redraw the layout
+                NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] notification in
+                    guard let strongSelf = self else { return }
+                    strongSelf.setNeedsLayout()
+                }
+            }
+            else {
+                NotificationCenter.default.removeObserver(self, name: UIContentSizeCategory.didChangeNotification, object: nil)
+            }
+        }
+    }
+
+    open override var isHighlighted: Bool {
+        didSet {
+            self.configureLayout()
+        }
+    }
+
+    open override var isSelected: Bool {
+        didSet {
+            self.configureLayout()
+        }
+    }
+
+    open override var isEnabled: Bool {
+        didSet {
+            self.configureLayout()
+        }
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        sharedInit()
     }
 
-    override func prepareForInterfaceBuilder() {
-        sharedInit()
+    required public override init(frame: CGRect) {
+        super.init(frame: frame)
     }
 
-    // MARK: Setup
-    func sharedInit() {
-        self.clipsToBounds = true
-        setCorners(value: cornerRadius)
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        self.configureLayout()
     }
 
-    // MARK: Helpers
-    private func setCorners(value: CGFloat) {
-        layer.cornerRadius = value
+    public func configureLayout() {
+        if isHighlighted || isSelected {
+            self.backgroundColor = selectedColor
+        } else if isEnabled {
+            self.backgroundColor = defaultColor
+        }
+        else {
+            self.backgroundColor = disabledColor
+        }
+
+        self.reversesTitleShadowWhenHighlighted = false
+        self.showsTouchWhenHighlighted = false
+        self.adjustsImageWhenHighlighted = false
+
+        self.titleLabel?.textAlignment = .center
+        self.titleLabel?.numberOfLines = 0
+        self.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.titleLabel?.lineBreakMode = .byClipping //<-- MAGIC LINE
+
+        assert(self.buttonType == UIButton.ButtonType.custom, "Designable Button \"\(self.titleLabel?.text ?? "?")\" buttonType must be Custom")
     }
+}
 
-    private func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
-        self.setBackgroundImage(color.filledImage, for: state)
+// helper to put icon above text
+public extension UIButton {
+
+    func alignImageAndTitleVertically(padding: CGFloat = 6.0) {
+        let imageSize = self.imageView!.frame.size
+        let titleSize = self.titleLabel!.frame.size
+        let totalHeight = imageSize.height + titleSize.height + padding
+
+        self.imageEdgeInsets = UIEdgeInsets(
+            top: -(totalHeight - imageSize.height),
+            left: 0,
+            bottom: 0,
+            right: -titleSize.width
+        )
+
+        self.titleEdgeInsets = UIEdgeInsets(
+            top: 0,
+            left: -imageSize.width,
+            bottom: -(totalHeight - titleSize.height),
+            right: 0
+        )
     }
-
-    
-
 }
