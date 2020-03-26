@@ -14,10 +14,9 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     var tableView: UITableView! { get set }
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
-    func setImage(image: UIImage?)
-    func setImage(image: URL?)
     func setupHeaderFooterViews()
     func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
+    func presentPickerController() 
 }
 
 protocol CreatePersonalCardPresenterDelegate: class {
@@ -114,6 +113,7 @@ private extension CreatePersonalCardPresenter {
 
         viewDataSource?.source = [
             CreatePersonalCard.Section(items: [
+                .avatarPhotoManagment(sourceType: .personalCard, imagePath: personalCardParameters.avatarUrl),
                 .sectionHeader,
                 .title(text: "Діяльність:"),
                 .textField(text: personalCardParameters.position, type: .occupiedPosition),
@@ -145,7 +145,6 @@ private extension CreatePersonalCardPresenter {
         var interestsListRequestError: Error?
 
         view?.startLoading(text: "Завантаження")
-        view?.setImage(image: URL.init(string: personalCardParameters.avatarUrl ?? ""))
 
         // fetch practices
         group.enter()
@@ -216,8 +215,9 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
+                strongSelf.personalCardParameters.avatarUrl = response?.sourceUrl
                 strongSelf.personalCardParameters.avatarId = response?.id
-                strongSelf.view?.setImage(image: UIImage(data: imageData))
+                strongSelf.view?.tableView.reloadData()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
@@ -345,7 +345,6 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
                 cell.create(socialListItem: newItem)
 
                 self.personalCardParameters.socialList.append(newItem)
-                self.syncDataSource()
             }
         default:
             break
@@ -381,6 +380,20 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate {
         ]
 
         view?.actionSheetAlert(title: value.title, message: nil, actions: actions)
+    }
+
+
+}
+
+// MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
+extension CreatePersonalCardPresenter: CardAvatarPhotoManagmentTableViewCellDelegate {
+
+    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didSelectAction sender: UIButton) {
+        self.view?.presentPickerController()
+    }
+
+    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didChangeAction sender: UIButton) {
+        self.view?.presentPickerController()
     }
 
 

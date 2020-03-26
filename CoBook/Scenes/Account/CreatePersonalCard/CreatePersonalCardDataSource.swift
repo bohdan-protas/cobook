@@ -15,9 +15,10 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
     unowned var tableView: UITableView
     weak var cellsDelegate: (TextViewTableViewCellDelegate &
-                             TextFieldTableViewCellDelegate &
-                             InterestsSelectionTableViewCellDelegate &
-                             SocialsListTableViewCellDelegate)?
+                            TextFieldTableViewCellDelegate &
+                            InterestsSelectionTableViewCellDelegate &
+                            SocialsListTableViewCellDelegate &
+                            CardAvatarPhotoManagmentTableViewCellDelegate)?
 
     private lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
@@ -39,6 +40,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         super.init()
 
         tableView.dataSource = self
+        tableView.register(CardAvatarPhotoManagmentTableViewCell.nib, forCellReuseIdentifier: CardAvatarPhotoManagmentTableViewCell.identifier)
         tableView.register(SectionTitleTableViewCell.nib, forCellReuseIdentifier: SectionTitleTableViewCell.identifier)
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.identifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.identifier)
@@ -62,7 +64,12 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         }
 
         switch dataType {
-            
+        case .avatarPhotoManagment(let sourceType, let imagePath):
+            let cell = tableView.dequeueReusableCell(withIdentifier: CardAvatarPhotoManagmentTableViewCell.identifier, for: indexPath) as! CardAvatarPhotoManagmentTableViewCell
+            cell.delegate = cellsDelegate
+            cell.fill(sourceType: sourceType, imagePath: imagePath)
+            return cell
+
         case .title(let text):
             let cell = tableView.dequeueReusableCell(withIdentifier: SectionTitleTableViewCell.identifier, for: indexPath) as! SectionTitleTableViewCell
             cell.titleLabel.text = text

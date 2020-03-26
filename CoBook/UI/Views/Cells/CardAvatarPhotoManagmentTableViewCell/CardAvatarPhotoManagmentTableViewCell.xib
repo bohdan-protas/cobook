@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="KGk-i7-Jjw" customClass="CardAvatarPhotoManagmentTableViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="316" height="112"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="316" height="112"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIu-sP-32Y">
+                        <rect key="frame" x="24" y="24" width="72" height="72"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="88Q-sd-qkP" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="88Q-sd-qkP" firstAttribute="leading" secondItem="cIu-sP-32Y" secondAttribute="leading" id="L5p-JM-Gb4"/>
+                            <constraint firstAttribute="trailing" secondItem="88Q-sd-qkP" secondAttribute="trailing" id="M2A-4X-iCO"/>
+                            <constraint firstItem="88Q-sd-qkP" firstAttribute="top" secondItem="cIu-sP-32Y" secondAttribute="top" id="Osu-xZ-EUW"/>
+                            <constraint firstAttribute="width" constant="72" id="Vlv-8i-Rgv"/>
+                            <constraint firstAttribute="height" constant="72" id="nex-Jc-b6j"/>
+                            <constraint firstAttribute="bottom" secondItem="88Q-sd-qkP" secondAttribute="bottom" id="pH1-Tz-dZI"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyI-4D-mw2" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
+                        <rect key="frame" x="116" y="38" width="180" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="Pch-sK-oe9"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="13"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" name="Theme_Black-Middle"/>
+                        </state>
+                        <connections>
+                            <action selector="avatarSelectionAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="asg-eD-0gL"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cIu-sP-32Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="1j0-Za-EEa"/>
+                    <constraint firstItem="fyI-4D-mw2" firstAttribute="leading" secondItem="cIu-sP-32Y" secondAttribute="trailing" constant="20" id="2c5-lP-nhm"/>
+                    <constraint firstItem="fyI-4D-mw2" firstAttribute="centerY" secondItem="cIu-sP-32Y" secondAttribute="centerY" id="7i2-RQ-OHf"/>
+                    <constraint firstAttribute="bottom" secondItem="cIu-sP-32Y" secondAttribute="bottom" constant="16" id="BX4-CP-bWe"/>
+                    <constraint firstItem="cIu-sP-32Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Ys7-e6-6qA"/>
+                    <constraint firstAttribute="trailing" secondItem="fyI-4D-mw2" secondAttribute="trailing" constant="20" id="gcJ-V3-FyZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="avatarImageView" destination="88Q-sd-qkP" id="Jja-K7-KXs"/>
+                <outlet property="avatarSelectionButton" destination="fyI-4D-mw2" id="1Te-AF-2U4"/>
+                <outletCollection property="avatarPaddingConstaints" destination="Osu-xZ-EUW" collectionClass="NSMutableArray" id="QEZ-df-Q4R"/>
+                <outletCollection property="avatarPaddingConstaints" destination="M2A-4X-iCO" collectionClass="NSMutableArray" id="lgm-qe-jJi"/>
+                <outletCollection property="avatarPaddingConstaints" destination="L5p-JM-Gb4" collectionClass="NSMutableArray" id="V5T-Zg-VEB"/>
+                <outletCollection property="avatarPaddingConstaints" destination="Osu-xZ-EUW" collectionClass="NSMutableArray" id="VTm-po-1e6"/>
+                <outletCollection property="avatarPaddingConstaints" destination="pH1-Tz-dZI" collectionClass="NSMutableArray" id="bRX-CP-MWn"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="194.19642857142856"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_user" width="48" height="48"/>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

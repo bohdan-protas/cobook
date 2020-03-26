@@ -15,6 +15,7 @@ enum CreatePersonalCard {
     }
 
     enum Item {
+        case avatarPhotoManagment(sourceType: CardAvatarPhotoManagmentTableViewCell.SourceType, imagePath: String?)
         case title(text: String)
         case textField(text: String?, type: TextType)
         case actionTextField(text: String?, type: ActionType)

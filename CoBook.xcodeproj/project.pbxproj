@@ -41,6 +41,8 @@
 		B823B088242CD4F30012529D /* AccountHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B086242CD4F30012529D /* AccountHeaderTableViewCell.swift */; };
 		B823B089242CD4F30012529D /* AccountHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B823B087242CD4F30012529D /* AccountHeaderTableViewCell.xib */; };
 		B823B08B242CEFDF0012529D /* UIImageView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B08A242CEFDF0012529D /* UIImageView + Extensions.swift */; };
+		B823B08F242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B08D242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift */; };
+		B823B090242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B823B08E242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib */; };
 		B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */; };
 		B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */; };
 		B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */; };
@@ -149,8 +151,6 @@
 		B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E8124057B1700AF431B /* ValidationManager.swift */; };
 		B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */; };
 		B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */; };
-		B8DE5E352418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E342418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib */; };
-		B8DE5E372418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E362418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift */; };
 		B8DE5E392418DACF00F4F60B /* CreatePersonalCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */; };
 		B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E3F2418E25000F4F60B /* TextFieldTableViewCell.swift */; };
 		B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E402418E25000F4F60B /* TextFieldTableViewCell.xib */; };
@@ -198,6 +198,8 @@
 		B823B086242CD4F30012529D /* AccountHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B823B087242CD4F30012529D /* AccountHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		B823B08A242CEFDF0012529D /* UIImageView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extensions.swift"; sourceTree = "<group>"; };
+		B823B08D242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAvatarPhotoManagmentTableViewCell.swift; sourceTree = "<group>"; };
+		B823B08E242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardAvatarPhotoManagmentTableViewCell.xib; sourceTree = "<group>"; };
 		B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingPageCollectionViewCell.xib; sourceTree = "<group>"; };
 		B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
@@ -311,8 +313,6 @@
 		B8CB0E8124057B1700AF431B /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardViewController.swift; sourceTree = "<group>"; };
 		B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardPresenter.swift; sourceTree = "<group>"; };
-		B8DE5E342418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCardPhotoManagmentView.xib; sourceTree = "<group>"; };
-		B8DE5E362418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardPhotoManagmentView.swift; sourceTree = "<group>"; };
 		B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSource.swift; sourceTree = "<group>"; };
 		B8DE5E3F2418E25000F4F60B /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		B8DE5E402418E25000F4F60B /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
@@ -566,6 +566,15 @@
 				B823B087242CD4F30012529D /* AccountHeaderTableViewCell.xib */,
 			);
 			path = AccountHeaderTableViewCell;
+			sourceTree = "<group>";
+		};
+		B823B08C242D1ADF0012529D /* CardAvatarPhotoManagmentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B823B08D242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift */,
+				B823B08E242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib */,
+			);
+			path = CardAvatarPhotoManagmentTableViewCell;
 			sourceTree = "<group>";
 		};
 		B82573F223F545D000C8CBF8 /* OnboardingPageCollectionViewCell */ = {
@@ -921,7 +930,6 @@
 		B8DD431724178F0200C7D940 /* CreatePersonalCard */ = {
 			isa = PBXGroup;
 			children = (
-				B8DE5E322418D60900F4F60B /* views */,
 				B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */,
 				B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */,
 				B8DE5E382418DACF00F4F60B /* CreatePersonalCardDataSource.swift */,
@@ -929,26 +937,10 @@
 			path = CreatePersonalCard;
 			sourceTree = "<group>";
 		};
-		B8DE5E322418D60900F4F60B /* views */ = {
-			isa = PBXGroup;
-			children = (
-				B8DE5E332418D62200F4F60B /* PersonalCardPhotoManagmentView */,
-			);
-			path = views;
-			sourceTree = "<group>";
-		};
-		B8DE5E332418D62200F4F60B /* PersonalCardPhotoManagmentView */ = {
-			isa = PBXGroup;
-			children = (
-				B8DE5E342418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib */,
-				B8DE5E362418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift */,
-			);
-			path = PersonalCardPhotoManagmentView;
-			sourceTree = "<group>";
-		};
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B823B08C242D1ADF0012529D /* CardAvatarPhotoManagmentTableViewCell */,
 				B82248E0242C104A00392D10 /* SectionHeaderTableViewCell */,
 				B8AB8406242840F80041B879 /* GetInTouchTableViewCell */,
 				B84A15E62410F63100C4DC11 /* CardPreviewTableViewCell */,
@@ -1067,12 +1059,12 @@
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
 				B8AB8400242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
-				B8DE5E352418D65D00F4F60B /* PersonalCardPhotoManagmentView.xib in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
 				B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
 				B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */,
 				B83FD7DD2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib in Resources */,
+				B823B090242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib in Resources */,
 				B823B089242CD4F30012529D /* AccountHeaderTableViewCell.xib in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
 				B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */,
@@ -1194,6 +1186,7 @@
 				B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
+				B823B08F242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift in Sources */,
 				B82200B7240FB87000A17D2C /* MainTabBarController.swift in Sources */,
 				B8AB3F0B2422FF1B00E06E53 /* NavigableView.swift in Sources */,
 				B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */,
@@ -1272,7 +1265,6 @@
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */,
 				B82248DE242C0CD700392D10 /* CardSaveView.swift in Sources */,
-				B8DE5E372418D66D00F4F60B /* PersonalCardPhotoManagmentView.swift in Sources */,
 				B84B94E82403299F0007EB60 /* Endpoint.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
 				B8AB3F092422FBE800E06E53 /* ProfileEndpoint.swift in Sources */,

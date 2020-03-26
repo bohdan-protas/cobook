@@ -20,7 +20,6 @@ class AccountViewController: BaseViewController, AccountView {
     // MARK: Properties
     var presenter = AccountPresenter()
 
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

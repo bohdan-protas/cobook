@@ -35,12 +35,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         return controller
     }()
 
-    private lazy var personalCardPhotoManagmentView: PersonalCardPhotoManagmentView = {
-        let view = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
-        view.delegate = self
-        return view
-    }()
-
     private lazy var cardSaveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
         view.onSaveTapped = { [weak self] in
@@ -59,7 +53,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
     }
 
     func setupHeaderFooterViews() {
-        tableView.tableHeaderView = personalCardPhotoManagmentView
         tableView.tableFooterView = cardSaveView
     }
 
@@ -79,12 +72,8 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         cardSaveView.saveButton.isEnabled = isEnabled
     }
 
-    func setImage(image: UIImage?) {
-        personalCardPhotoManagmentView.setImage(image)
-    }
-
-    func setImage(image: URL?) {
-        personalCardPhotoManagmentView.setImage(image)
+    func presentPickerController() {
+        present(imagePickerController, animated: true, completion: nil)
     }
 
     func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
@@ -139,24 +128,6 @@ private extension CreatePersonalCardViewController {
 
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.delegate = self
-    }
-
-
-}
-
-// MARK: - PersonalCardPhotoManagmentViewDelegate
-extension CreatePersonalCardViewController: PersonalCardPhotoManagmentViewDelegate {
-
-    func cardPhotoManagmentViewDidAddPhoto(_ view: PersonalCardPhotoManagmentView) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            present(imagePickerController, animated: true, completion: nil)
-        }
-    }
-
-    func cardPhotoManagmentViewDidChangePhoto(_ view: PersonalCardPhotoManagmentView) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            present(imagePickerController, animated: true, completion: nil)
-        }
     }
 
 
