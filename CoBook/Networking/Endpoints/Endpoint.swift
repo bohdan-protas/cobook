@@ -37,8 +37,8 @@ extension Endpoint {
         urlRequest.headers.add(.contentType(ContentType.json.rawValue))
         urlRequest.headers.add(.init(name: "locale", value: "UKR"))
 
-        if useAuthirizationToken {
-            urlRequest.headers.add(.authorization(bearerToken: AppStorage.Auth.accessToken ?? ""))
+        if useAuthirizationToken, let accessToken = AppStorage.Auth.accessToken, !accessToken.isEmpty  {
+            urlRequest.headers.add(.authorization(bearerToken: accessToken))
         }
 
         // Parameters
