@@ -150,6 +150,7 @@
 		B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */; };
 		B8AB840A2428411F0041B879 /* GetInTouchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */; };
 		B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB840B242845380041B879 /* PersonalCardDetails.swift */; };
+		B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5C8FB2432AAA0004A3F30 /* OpenGraphFetcher.swift */; };
 		B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */; };
 		B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */; };
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
@@ -318,6 +319,7 @@
 		B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInTouchTableViewCell.swift; sourceTree = "<group>"; };
 		B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetInTouchTableViewCell.xib; sourceTree = "<group>"; };
 		B8AB840B242845380041B879 /* PersonalCardDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetails.swift; sourceTree = "<group>"; };
+		B8C5C8FB2432AAA0004A3F30 /* OpenGraphFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphFetcher.swift; sourceTree = "<group>"; };
 		B8CB0E7424053BE800AF431B /* VerifyAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
@@ -661,6 +663,7 @@
 				B823A6AC23FD3924007540D0 /* RegularExpression.swift */,
 				B8CB0E8124057B1700AF431B /* ValidationManager.swift */,
 				B82A211624212CB600D0D9F5 /* Logger.swift */,
+				B8C5C8FB2432AAA0004A3F30 /* OpenGraphFetcher.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1206,6 +1209,7 @@
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B8AB83EE24280F130041B879 /* PersonalCardDetailsDataSource.swift in Sources */,
 				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
+				B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */,
 				B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */,
 				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
