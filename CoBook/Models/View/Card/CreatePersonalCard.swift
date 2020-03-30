@@ -20,16 +20,16 @@ enum CreatePersonalCard {
         case textField(text: String?, type: TextType)
         case actionTextField(text: String?, type: ActionType)
         case textView(text: String?, type: TextType)
-        case interests(list: [Interest])
+        case interests(list: [Card.InterestItem])
         case socialList(list: [Social.ListItem])
         case sectionHeader
     }
 
     enum TextType: String {
-        case occupiedPosition               // Займана посада
-        case activityDescription            // Опис діяльності
-        case workingPhoneNumber             // Робочий номер телефону
-        case workingEmailForCommunication   // Робочий емейл для зв'язку
+        case occupiedPosition
+        case activityDescription
+        case workingPhoneNumber
+        case workingEmailForCommunication
 
         var placeholder: String {
             get {
@@ -72,13 +72,12 @@ enum CreatePersonalCard {
                 return .emailAddress
             }
         }
-
     }
 
     enum ActionType: RawRepresentable {
-        case activityType(list: [Practice])     // Вид діяльності
-        case placeOfLiving                      // Місце проживання
-        case activityRegion                     // Регіон діяльності
+        case activityType(list: [Card.PracticeItem])
+        case placeOfLiving
+        case activityRegion
 
         var placeholder: String {
             switch self {
@@ -113,18 +112,5 @@ enum CreatePersonalCard {
             }
         }
     }
-
-    struct Interest {
-        var id: Int?
-        var title: String?
-        var isSelected: Bool = false
-    }
-
-    struct Practice {
-        var id: Int?
-        var title: String?
-        var isSelected: Bool = false
-    }
-
 
 }

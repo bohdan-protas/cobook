@@ -34,7 +34,7 @@ final class AuthRequestInterceptor: RequestInterceptor {
 
             DispatchQueue.main.async {
                 if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
-                    AppStorage.Auth.deleteAllData()
+                    AppStorage.Auth.accessToken = nil
                     APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
                         switch result {
                         case let .success(response):

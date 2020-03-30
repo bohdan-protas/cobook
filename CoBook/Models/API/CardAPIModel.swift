@@ -88,82 +88,6 @@ enum CardAPIModel {
 
 }
 
-// MARK: - PersonalCardParameters
-extension CardAPIModel {
-
-    struct PersonalCardParameters: Encodable {
-        var avatarId: String?
-        var avatarUrl: String?
-        var city: Place = Place()
-        var region: Place = Place()
-        var position: String?
-        var description: String?
-        var practiseType: PracticeType = PracticeType()
-        var interests:  [CreatePersonalCard.Interest] = []
-        var contactTelephone: String?
-        var contactEmail: String?
-
-        var practices:  [CreatePersonalCard.Practice] = []
-        var socialList: [Social.ListItem] = []
-
-        enum CodingKeys: String, CodingKey {
-            case avatarId = "avatar_id"
-            case cityPlaceId = "city_place_id"
-            case regionPlaceId = "region_place_id"
-            case position
-            case description
-            case practiseTypeId = "practise_type_id"
-            case interestsIds = "interests_ids"
-            case contactTelephone = "contact_telephone"
-            case contactEmail = "contact_email"
-            case socialNetworks = "social_networks"
-        }
-
-        init() {
-        }
-
-        init(with model: CardDetailsAPIResponseData) {
-            self.avatarId = model.avatar?.id
-            self.avatarUrl = model.avatar?.sourceUrl
-            self.city = Place(id: model.city?.id, placeId: model.city?.placeId, name: model.city?.name)
-            self.region = Place(id: model.region?.id, placeId: model.region?.placeId, name: model.region?.name)
-            self.position = model.position
-            self.description = model.description
-            self.practiseType = PracticeType(id: model.practiceType?.id, title: model.practiceType?.title)
-            self.interests = (model.interests ?? []).compactMap { CreatePersonalCard.Interest(id: $0.id, title: $0.title, isSelected: true) }
-            self.contactTelephone = model.contactTelephone?.number
-            self.contactEmail = model.contactEmail?.address
-            self.socialList = (model.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
-        }
-
-        func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encodeIfPresent(avatarId, forKey: .avatarId)
-            try container.encodeIfPresent(city.placeId, forKey: .cityPlaceId)
-            try container.encodeIfPresent(region.placeId, forKey: .regionPlaceId)
-            try container.encodeIfPresent(position, forKey: .position)
-            try container.encodeIfPresent(description, forKey: .description)
-            try container.encodeIfPresent(practiseType.id, forKey: .practiseTypeId)
-            try container.encodeIfPresent(interests.filter { $0.isSelected }.map { $0.id }, forKey: .interestsIds)
-            try container.encodeIfPresent(contactTelephone, forKey: .contactTelephone)
-            try container.encodeIfPresent(contactEmail, forKey: .contactEmail)
-
-            let list: [SocialNetwork] = socialList.compactMap {
-                switch $0 {
-                case .view(let model):
-                    return SocialNetwork(title: model.title, link: model.url?.absoluteString)
-                default:
-                    return nil
-                }
-
-            }
-            try container.encodeIfPresent(list, forKey: .socialNetworks)
-        }
-    }
-
-
-}
-
 // MARK: - PersonalCardAPIResponseData
 extension CardAPIModel {
 
@@ -203,6 +127,161 @@ extension CardAPIModel {
         var createdAt: String?
         var updatedAt: String?
         var interests: [Interest]?
+    }
+
+
+}
+
+// MARK: - Create & Update parameters
+extension CardAPIModel {
+
+    struct BusinessCardParameters {
+        var avatarId: String?
+        var avatarUrl: String?
+        var bgImageId: String?
+        var bgImageUrl: String?
+        var city: Place = Place()
+        var region: Place = Place()
+        var companyName: String?
+        var companyWebSite: String?
+        var addressPlaceId: String?
+        var schedule: String?
+        var practiseType: PracticeType = PracticeType()
+        var interests:  [Card.InterestItem] = []
+        var contactTelephone: String?
+        var contactEmail: String?
+        var socialNetworks: [Social.ListItem] = []
+        var employeeIds: [Int] = []
+        var practices:  [Card.PracticeItem] = []
+
+        enum CodingKeys: String, CodingKey {
+            case avatarId = "avatar_id"
+            case bgImageId = "background_id"
+            case cityPlaceId = "city_place_id"
+            case regionPlaceId = "region_place_id"
+            case companyName = "company_name"
+            case companyWebSite = "company_web_site"
+            case addressPlaceId  = "address_place_id"
+            case schedule = "schedule"
+            case practiseTypeId = "practise_type_id"
+            case interestsIds = "interests_ids"
+            case contactTelephone = "contact_telephone"
+            case contactEmail = "contact_email"
+            case socialNetworks = "social_networks"
+            case employeeIds = "employee_ids"
+        }
+
+        init() {
+        }
+
+        init(with model: CardDetailsAPIResponseData) {
+            self.avatarId = model.avatar?.id
+            self.avatarUrl = model.avatar?.sourceUrl
+            self.city = Place(id: model.city?.id, placeId: model.city?.placeId, name: model.city?.name)
+            self.region = Place(id: model.region?.id, placeId: model.region?.placeId, name: model.region?.name)
+            self.practiseType = PracticeType(id: model.practiceType?.id, title: model.practiceType?.title)
+            self.interests = (model.interests ?? []).compactMap { Card.InterestItem(id: $0.id, title: $0.title, isSelected: true) }
+            self.contactTelephone = model.contactTelephone?.number
+            self.contactEmail = model.contactEmail?.address
+            self.socialNetworks = (model.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encodeIfPresent(avatarId, forKey: .avatarId)
+            try container.encodeIfPresent(bgImageId, forKey: .bgImageId)
+            try container.encodeIfPresent(city.placeId, forKey: .cityPlaceId)
+            try container.encodeIfPresent(region.placeId, forKey: .regionPlaceId)
+            try container.encodeIfPresent(companyName, forKey: .companyName)
+            try container.encodeIfPresent(companyWebSite, forKey: .companyWebSite)
+            try container.encodeIfPresent(addressPlaceId, forKey: .addressPlaceId)
+            try container.encodeIfPresent(schedule, forKey: .schedule)
+            try container.encodeIfPresent(practiseType.id, forKey: .practiseTypeId)
+            try container.encodeIfPresent(interests.filter { $0.isSelected }.map { $0.id }, forKey: .interestsIds)
+            try container.encodeIfPresent(contactTelephone, forKey: .contactTelephone)
+            try container.encodeIfPresent(contactEmail, forKey: .contactEmail)
+
+            let list: [SocialNetwork] = socialNetworks.compactMap {
+                switch $0 {
+                case .view(let model):
+                    return SocialNetwork(title: model.title, link: model.url?.absoluteString)
+                default:
+                    return nil
+                }
+
+            }
+            try container.encodeIfPresent(list, forKey: .socialNetworks)
+            try container.encodeIfPresent(employeeIds, forKey: .employeeIds)
+        }
+    }
+
+    struct PersonalCardParameters: Encodable {
+        var avatarId: String?
+        var avatarUrl: String?
+        var city: Place = Place()
+        var region: Place = Place()
+        var position: String?
+        var description: String?
+        var practiseType: PracticeType = PracticeType()
+        var interests:  [Card.InterestItem] = []
+        var contactTelephone: String?
+        var contactEmail: String?
+        var practices:  [Card.PracticeItem] = []
+        var socialNetworks: [Social.ListItem] = []
+
+        enum CodingKeys: String, CodingKey {
+            case avatarId = "avatar_id"
+            case cityPlaceId = "city_place_id"
+            case regionPlaceId = "region_place_id"
+            case position
+            case description
+            case practiseTypeId = "practise_type_id"
+            case interestsIds = "interests_ids"
+            case contactTelephone = "contact_telephone"
+            case contactEmail = "contact_email"
+            case socialNetworks = "social_networks"
+        }
+
+        init() {
+        }
+
+        init(with model: CardDetailsAPIResponseData) {
+            self.avatarId = model.avatar?.id
+            self.avatarUrl = model.avatar?.sourceUrl
+            self.city = Place(id: model.city?.id, placeId: model.city?.placeId, name: model.city?.name)
+            self.region = Place(id: model.region?.id, placeId: model.region?.placeId, name: model.region?.name)
+            self.position = model.position
+            self.description = model.description
+            self.practiseType = PracticeType(id: model.practiceType?.id, title: model.practiceType?.title)
+            self.interests = (model.interests ?? []).compactMap { Card.InterestItem(id: $0.id, title: $0.title, isSelected: true) }
+            self.contactTelephone = model.contactTelephone?.number
+            self.contactEmail = model.contactEmail?.address
+            self.socialNetworks = (model.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encodeIfPresent(avatarId, forKey: .avatarId)
+            try container.encodeIfPresent(city.placeId, forKey: .cityPlaceId)
+            try container.encodeIfPresent(region.placeId, forKey: .regionPlaceId)
+            try container.encodeIfPresent(position, forKey: .position)
+            try container.encodeIfPresent(description, forKey: .description)
+            try container.encodeIfPresent(practiseType.id, forKey: .practiseTypeId)
+            try container.encodeIfPresent(interests.filter { $0.isSelected }.map { $0.id }, forKey: .interestsIds)
+            try container.encodeIfPresent(contactTelephone, forKey: .contactTelephone)
+            try container.encodeIfPresent(contactEmail, forKey: .contactEmail)
+
+            let list: [SocialNetwork] = socialNetworks.compactMap {
+                switch $0 {
+                case .view(let model):
+                    return SocialNetwork(title: model.title, link: model.url?.absoluteString)
+                default:
+                    return nil
+                }
+
+            }
+            try container.encodeIfPresent(list, forKey: .socialNetworks)
+        }
     }
 
 

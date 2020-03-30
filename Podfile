@@ -8,6 +8,5 @@ target 'CoBook' do
   pod 'IQKeyboardManagerSwift'
   pod 'JGProgressHUD'
   pod 'GooglePlaces'
-  pod 'URLEmbeddedView'
-  pod 'Wormholy', :configurations => ['Debug']
+  pod 'OpenGraph'
 end
