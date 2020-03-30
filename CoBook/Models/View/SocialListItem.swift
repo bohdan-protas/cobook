@@ -15,6 +15,7 @@ enum Social {
         case linkedin
         case viber
         case facebookMessanger
+        case youtube
 
         var image: UIImage {
             switch self {
@@ -26,6 +27,8 @@ enum Social {
                 return #imageLiteral(resourceName: "ic_social_viber")
             case .facebookMessanger:
                 return #imageLiteral(resourceName: "of_social_facebook-messanger")
+            case .youtube:
+                return #imageLiteral(resourceName: "ic_social_youtube")
             }
         }
 
@@ -36,9 +39,11 @@ enum Social {
             case .linkedin:
                 return ["www.linkedin.com", "linkedin.com"]
             case .viber:
-                return ["www.viber.com", "viber.com", "vb.me", "invite.viber.com"]
+                return ["www.viber.com", "viber.com", "vb.me", "invite.viber.com", "chats.viber.com"]
             case .facebookMessanger:
                 return ["www.facebook.com", "m.facebook.com", "facebook.com"]
+            case .youtube:
+                return ["www.youtube.com", "m.youtube.com", "youtube.com"]
             }
         }
 

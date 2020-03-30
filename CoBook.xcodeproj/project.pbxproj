@@ -48,6 +48,7 @@
 		B823B097242D3DD90012529D /* CreateBusinessCardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B096242D3DD90012529D /* CreateBusinessCardViewDataSource.swift */; };
 		B823B09B242D43C70012529D /* CreateBusinessCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B09A242D43C70012529D /* CreateBusinessCard.swift */; };
 		B823B0A1242D46EF0012529D /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B0A0242D46EF0012529D /* Card.swift */; };
+		B823C6212431F585002CFB02 /* UIImage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823C6202431F585002CFB02 /* UIImage + Extensions.swift */; };
 		B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */; };
 		B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */; };
 		B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */; };
@@ -210,6 +211,7 @@
 		B823B096242D3DD90012529D /* CreateBusinessCardViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardViewDataSource.swift; sourceTree = "<group>"; };
 		B823B09A242D43C70012529D /* CreateBusinessCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCard.swift; sourceTree = "<group>"; };
 		B823B0A0242D46EF0012529D /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		B823C6202431F585002CFB02 /* UIImage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extensions.swift"; sourceTree = "<group>"; };
 		B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingPageCollectionViewCell.xib; sourceTree = "<group>"; };
 		B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				B8AB3F022422B38300E06E53 /* Data + Extensions.swift */,
 				B8AB3F062422D5B900E06E53 /* NSError + Extensions.swift */,
 				B823B08A242CEFDF0012529D /* UIImageView + Extensions.swift */,
+				B823C6202431F585002CFB02 /* UIImage + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1283,6 +1286,7 @@
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */,
 				B823B08B242CEFDF0012529D /* UIImageView + Extensions.swift in Sources */,
+				B823C6212431F585002CFB02 /* UIImage + Extensions.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
 				B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */,
 				B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */,
