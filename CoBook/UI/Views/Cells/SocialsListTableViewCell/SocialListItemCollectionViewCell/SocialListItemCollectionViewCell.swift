@@ -21,4 +21,11 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
         socialImageView.layer.masksToBounds = true
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        socialImageView.image = nil
+        socialTitleLabel.text = ""
+        socialImageView.cancelImageRequest()
+    }
+
 }
