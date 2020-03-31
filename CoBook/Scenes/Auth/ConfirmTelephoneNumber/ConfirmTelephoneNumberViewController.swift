@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNumberView {
+class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephoneNumberView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -18,9 +18,9 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
     // MARK: IBOutlets
     @IBOutlet var smsCodeTextFields: [UITextField]!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
-    @IBOutlet var continueButton: LoaderButton!
+    @IBOutlet var continueButton: LoaderDesignableButton!
     @IBOutlet var timerLabel: UILabel!
-    @IBOutlet var resendSmsButton: LoaderButton!
+    @IBOutlet var resendSmsButton: LoaderDesignableButton!
     
     // MARK: Properties
     var presenter: ConfirmTelephoneNumberPresenter? = ConfirmTelephoneNumberPresenter()
@@ -42,7 +42,7 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
         continueButton.isEnabled = !arrayOfTruth.contains(false)
     }
 
-    @IBAction func continueButtonTapped(_ sender: LoaderButton) {
+    @IBAction func continueButtonTapped(_ sender: LoaderDesignableButton) {
         let code = smsCodeTextFields.map { $0.text ?? "" }.reduce("", { $0 + $1 })
         presenter?.verify(with: code)
     }
@@ -89,11 +89,11 @@ class ConfirmTelephoneNumberViewController: UIViewController, ConfirmTelephoneNu
         resendSmsButton.isLoading = isLoading
     }
 
-    func startLoading() {
+    override func startLoading() {
         continueButton.isLoading = true
     }
 
-    func stopLoading() {
+    override func stopLoading() {
         continueButton.isLoading = false
     }
 

@@ -59,8 +59,8 @@ enum AuthEndpoint: Endpoint {
             return [
                 APIConstants.ParameterKey.refreshToken: token,
             ]
-
         }
+
     }
 
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class PersonalCardUserInfoTableViewCell: UITableViewCell {
 
@@ -31,7 +30,7 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
     }
 
     private func clearLayout() {
-        avatarImageView.kf.cancelDownloadTask()
+        avatarImageView.cancelImageRequest()
         userNameLabel.text = ""
         practiceTypeLabel.text = ""
         positionLabel.text = ""
@@ -42,10 +41,8 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
     }
 
     func fill(with model: CardAPIModel.CardDetailsAPIResponseData?) {
-        self.avatarImageView.kf.setImage(with: URL.init(string: model?.avatar?.sourceUrl ?? ""),
-                                         placeholder: UIImage(named: "ic_user"),
-                                         options: [.transition(.fade(0.3))]
-        )
+        self.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl,
+                                      placeholderText: "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")")
         self.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
         self.practiceTypeLabel.text = model?.practiceType?.title
         self.positionLabel.text = model?.position

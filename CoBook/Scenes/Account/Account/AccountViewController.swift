@@ -12,9 +12,6 @@ class AccountViewController: BaseViewController, AccountView {
 
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
-        static let headerHeight: CGFloat = 308
-        static let footerHeight: CGFloat = 124
-        static let sectionHeaderHeight: CGFloat = 28
     }
 
     // MARK: IBOutlets
@@ -22,7 +19,6 @@ class AccountViewController: BaseViewController, AccountView {
 
     // MARK: Properties
     var presenter = AccountPresenter()
-
 
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -40,11 +36,6 @@ class AccountViewController: BaseViewController, AccountView {
         presenter.detachView()
     }
 
-    // MARK: Public
-    func fillHeader(with profile: Profile?) {
-        (tableView.tableHeaderView as? AccountHeaderView)?.fill(with: profile)
-    }
-
 
 }
 
@@ -52,10 +43,13 @@ class AccountViewController: BaseViewController, AccountView {
 private extension AccountViewController {
 
     func setupLayout() {
-        tableView.tableHeaderView = AccountHeaderView(frame:  CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: Defaults.headerHeight))
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
-
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
+        let footerView = UIView(frame: CGRect(origin: .zero, size: .init(width: tableView.frame.width, height: 8)))
+        footerView.backgroundColor = .white
+        tableView.tableFooterView = footerView
         tableView.delegate = self
     }
 }
@@ -69,11 +63,11 @@ extension AccountViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return SectionHeaderSeparatorView()
+        return UIView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Defaults.sectionHeaderHeight
+        return 0
     }
 
 

@@ -143,19 +143,7 @@ extension SocialsListTableViewCell: UICollectionViewDataSource {
 
         let item = dataSource[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SocialListItemCollectionViewCell.identifier, for: indexPath) as! SocialListItemCollectionViewCell
-
-        switch item {
-        case .view(let social):
-            cell.socialTitleLabel.text = social.title
-            if let type = social.type {
-                cell.socialImageView.image = type.image
-            } else {
-                cell.socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
-            }
-        case .add:
-            cell.socialImageView.image = UIImage(named: "ic_add_item")
-            cell.socialTitleLabel.text = "Додати"
-        }
+        cell.configure(with: item)
         return cell
     }
 

@@ -23,7 +23,7 @@ class InterestsSelectionTableViewCell: UITableViewCell {
     @IBOutlet var interestsCollectionViewFlowLayout: LeftAlignedCollectionViewFlowLayout!
 
     weak var delegate: InterestsSelectionTableViewCellDelegate?
-    var dataSource: [CreatePersonalCard.Interest] = []
+    var dataSource: [CreateCard.InterestItem] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()

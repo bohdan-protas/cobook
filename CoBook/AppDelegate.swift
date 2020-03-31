@@ -9,7 +9,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 import GooglePlaces
-import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -56,8 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         if AppStorage.User.isUserInitiatedRegistration && !AppStorage.User.isUserCompletedRegistration {
-            AppStorage.Auth.accessToken = nil
-            AppStorage.Auth.refreshToken = nil
+            AppStorage.Auth.deleteAllData()
             AppStorage.User.profile = nil
             AppStorage.User.isUserInitiatedRegistration = false
         }

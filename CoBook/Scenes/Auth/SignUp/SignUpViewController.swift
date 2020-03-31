@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, SignUpView {
+class SignUpViewController: BaseViewController, SignUpView {
 
     enum Defaults {
         static let bottomContainerHeight: CGFloat = 80
@@ -21,13 +21,13 @@ class SignUpViewController: UIViewController, SignUpView {
     @IBOutlet var lastNameTextField: DesignableTextField!
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
     @IBOutlet var emailTextField: DesignableTextField!
-    @IBOutlet var continueButton: LoaderButton!
+    @IBOutlet var continueButton: LoaderDesignableButton!
 
     // MARK: Properties
     var presenter = SignUpPresenter()
 
     // MARK: Actions
-    @IBAction func signUpButtonTapped(_ sender: LoaderButton) {
+    @IBAction func signUpButtonTapped(_ sender: LoaderDesignableButton) {
         presenter.signUp()
     }
 
@@ -62,11 +62,11 @@ class SignUpViewController: UIViewController, SignUpView {
     }
 
     // MARK: SignUpView
-    func startLoading() {
+    override func startLoading() {
         continueButton.isLoading = true
     }
 
-    func stopLoading() {
+    override func stopLoading() {
         continueButton.isLoading = false
     }
 

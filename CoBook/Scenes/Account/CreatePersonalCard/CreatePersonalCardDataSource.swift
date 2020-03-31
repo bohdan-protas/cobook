@@ -11,20 +11,21 @@ import UIKit
 class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
     // MARK: Properties
-    var source: [CreatePersonalCard.Section] = []
+    var source: [CreateCard.Section] = []
 
     unowned var tableView: UITableView
     weak var cellsDelegate: (TextViewTableViewCellDelegate &
-                             TextFieldTableViewCellDelegate &
-                             InterestsSelectionTableViewCellDelegate &
-                             SocialsListTableViewCellDelegate)?
+                            TextFieldTableViewCellDelegate &
+                            InterestsSelectionTableViewCellDelegate &
+                            SocialsListTableViewCellDelegate &
+                            CardAvatarPhotoManagmentTableViewCellDelegate)?
 
     private lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
         return pickerView
     }()
 
-    subscript(indexPath: IndexPath) -> CreatePersonalCard.Item? {
+    subscript(indexPath: IndexPath) -> CreateCard.Item? {
         get {
             return source[safe: indexPath.section]?.items[safe: indexPath.row]
         }
@@ -39,11 +40,13 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         super.init()
 
         tableView.dataSource = self
+        tableView.register(CardAvatarPhotoManagmentTableViewCell.nib, forCellReuseIdentifier: CardAvatarPhotoManagmentTableViewCell.identifier)
         tableView.register(SectionTitleTableViewCell.nib, forCellReuseIdentifier: SectionTitleTableViewCell.identifier)
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.identifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.identifier)
         tableView.register(InterestsSelectionTableViewCell.nib, forCellReuseIdentifier: InterestsSelectionTableViewCell.identifier)
         tableView.register(SocialsListTableViewCell.nib, forCellReuseIdentifier: SocialsListTableViewCell.identifier)
+        tableView.register(SectionHeaderTableViewCell.nib, forCellReuseIdentifier: SectionHeaderTableViewCell.identifier)
     }
 
     // MARK:  UITableViewDataSource
@@ -61,7 +64,12 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         }
 
         switch dataType {
-            
+        case .avatarPhotoManagment(let sourceType, let imagePath):
+            let cell = tableView.dequeueReusableCell(withIdentifier: CardAvatarPhotoManagmentTableViewCell.identifier, for: indexPath) as! CardAvatarPhotoManagmentTableViewCell
+            cell.delegate = cellsDelegate
+            cell.fill(sourceType: sourceType, imagePath: imagePath)
+            return cell
+
         case .title(let text):
             let cell = tableView.dequeueReusableCell(withIdentifier: SectionTitleTableViewCell.identifier, for: indexPath) as! SectionTitleTableViewCell
             cell.titleLabel.text = text
@@ -93,6 +101,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             case .placeOfLiving, .activityRegion:
                 cell.actionControlView.isUserInteractionEnabled = true
                 cell.textView.isUserInteractionEnabled = false
+            default: break
             }
             return cell
 
@@ -100,7 +109,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier, for: indexPath) as! TextViewTableViewCell
             cell.delegate = cellsDelegate
             cell.textTypeIdentifier = type.rawValue
-            cell.textView.placeholderLabel.isHidden = !(text ?? "").isEmpty
+            cell.textView.placeholder = type.placeholder
             cell.textView.text = text
             return cell
 
@@ -114,6 +123,10 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SocialsListTableViewCell.identifier, for: indexPath) as! SocialsListTableViewCell
             cell.delegate = cellsDelegate
             cell.fill(items: list, isEditable: true)
+            return cell
+
+        case .sectionHeader:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SectionHeaderTableViewCell.identifier, for: indexPath) as! SectionHeaderTableViewCell
             return cell
         }
 

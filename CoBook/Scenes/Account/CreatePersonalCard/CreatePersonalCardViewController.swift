@@ -8,20 +8,16 @@
 
 import UIKit
 import GooglePlaces
-import Kingfisher
 
 class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
 
     enum Defaults {
         static let estimatedRowHeight: CGFloat = 44
-        static let headerHeight: CGFloat = 120
         static let footerHeight: CGFloat = 124
-        static let sectionHeaderHeight: CGFloat = 28
     }
 
     // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
-    var imagePicker = UIImagePickerController()
 
     // MARK: Properties
     private var placeCompletion: ((GMSPlace) -> Void)?
@@ -34,12 +30,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         controller.sourceType = .photoLibrary
         controller.modalPresentationStyle = .overFullScreen
         return controller
-    }()
-
-    private lazy var personalCardPhotoManagmentView: PersonalCardPhotoManagmentView = {
-        let view = PersonalCardPhotoManagmentView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: Defaults.headerHeight)))
-        view.delegate = self
-        return view
     }()
 
     private lazy var cardSaveView: CardSaveView = {
@@ -60,7 +50,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
     }
 
     func setupHeaderFooterViews() {
-        tableView.tableHeaderView = personalCardPhotoManagmentView
         tableView.tableFooterView = cardSaveView
     }
 
@@ -80,53 +69,8 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         cardSaveView.saveButton.isEnabled = isEnabled
     }
 
-    func setImage(image: UIImage?) {
-        personalCardPhotoManagmentView.setImage(image)
-    }
-
-    func setImage(image: URL?) {
-        personalCardPhotoManagmentView.setImage(image)
-    }
-
-    func addNewSocial(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)? = nil) {
-        let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
-
-        let isEditing = !(name ?? "").isEmpty || !(link ?? "").isEmpty
-
-        let submitAction = UIAlertAction(title: isEditing ? "Змінити": "Створити", style: .default) { [unowned ac] _ in
-            let name = ac.textFields![safe: 0]?.text
-            let url = ac.textFields?[safe: 1]?.text
-            completion?(name, url)
-        }
-        submitAction.isEnabled = false
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
-
-        ac.addAction(submitAction)
-        ac.addAction(cancelAction)
-
-        ac.addTextField { (nameTextField) in
-            nameTextField.text = name
-            nameTextField.placeholder = "Назва"
-        }
-        ac.addTextField { (urlTextField) in
-            urlTextField.text = link
-            urlTextField.keyboardType = .URL
-            urlTextField.placeholder = "Посилання, https://link.com"
-        }
-
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 1], queue: OperationQueue.main, using: { _ in
-            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
-        })
-
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 0], queue: OperationQueue.main, using: { _ in
-            let nameTextFieldTextCount = ac.textFields?[safe: 0]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            let urlTextFieldextCount = ac.textFields?[safe: 1]?.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-            submitAction.isEnabled = (nameTextFieldTextCount > 0) && (urlTextFieldextCount > 0)
-        })
-
-        present(controller: ac, animated: true)
+    func presentPickerController() {
+        present(imagePickerController, animated: true, completion: nil)
     }
 
 
@@ -140,24 +84,6 @@ private extension CreatePersonalCardViewController {
 
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.delegate = self
-    }
-
-
-}
-
-// MARK: - PersonalCardPhotoManagmentViewDelegate
-extension CreatePersonalCardViewController: PersonalCardPhotoManagmentViewDelegate {
-
-    func cardPhotoManagmentViewDidAddPhoto(_ view: PersonalCardPhotoManagmentView) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            present(imagePickerController, animated: true, completion: nil)
-        }
-    }
-
-    func cardPhotoManagmentViewDidChangePhoto(_ view: PersonalCardPhotoManagmentView) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            present(imagePickerController, animated: true, completion: nil)
-        }
     }
 
 
@@ -180,11 +106,11 @@ extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UI
 extension CreatePersonalCardViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return SectionHeaderSeparatorView()
+        return UIView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Defaults.sectionHeaderHeight
+        return 0
     }
 
 

@@ -39,7 +39,7 @@ enum APIConstants {
     }
 
     enum Google {
-        static let placesApiKey: String = "AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"
+        static let placesApiKey: String = "AIzaSyDHrahNfM6ZMu-TLQQbl-chJ1vXjxdYWMM"  //"AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"
     }
 
 

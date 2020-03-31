@@ -11,3 +11,14 @@ import Foundation
 extension Optional: AnyOptional {
     var isNil: Bool { self == nil }
 }
+
+extension Optional where Wrapped: Collection {
+    public var isNilOrEmty: Bool {
+        switch self {
+        case .none:
+            return true
+        case .some(let collection):
+            return collection.isEmpty
+        }
+    }
+}

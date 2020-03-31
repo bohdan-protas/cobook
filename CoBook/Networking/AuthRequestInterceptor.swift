@@ -18,6 +18,7 @@ final class AuthRequestInterceptor: RequestInterceptor {
 
         switch response.statusCode {
         case 401:
+
             DispatchQueue.main.async {
                 AppStorage.Auth.deleteAllData()
                 let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
@@ -28,19 +29,43 @@ final class AuthRequestInterceptor: RequestInterceptor {
                 }
                 completion(.doNotRetry)
             }
+
         case 403:
+
             DispatchQueue.main.async {
-                APIClient.default.refreshTokenRequest(refreshToken: AppStorage.Auth.refreshToken ?? "") { (result) in
-                    switch result {
-                    case let .success(response):
-                        AppStorage.Auth.accessToken = response?.accessToken
-                        completion(.retry)
-                    case let .failure(error):
-                        AppStorage.Auth.deleteAllData()
-                        completion(.doNotRetryWithError(error))
+                if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
+                    AppStorage.Auth.accessToken = nil
+                    APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
+                        switch result {
+                        case let .success(response):
+                            AppStorage.Auth.accessToken = response?.accessToken
+                            completion(.retry)
+                        case let .failure(error):
+                            DispatchQueue.main.async {
+                                AppStorage.Auth.deleteAllData()
+                                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                                if let topController = UIApplication.topViewController() {
+                                    topController.present(signInViewController, animated: true, completion: {
+                                        (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: error.localizedDescription)
+                                    })
+                                }
+                                completion(.doNotRetry)
+                            }
+
+                        }
                     }
+                } else {
+                    AppStorage.Auth.deleteAllData()
+                    let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                    if let topController = UIApplication.topViewController() {
+                        topController.present(signInViewController, animated: true, completion: {
+                            (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: "Please, login before continue")
+                        })
+                    }
+                    completion(.doNotRetry)
                 }
             }
+
         default:
             return completion(.doNotRetryWithError(error))
         }
