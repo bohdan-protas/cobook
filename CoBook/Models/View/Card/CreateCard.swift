@@ -1,14 +1,14 @@
 //
-//  PersonalCard.swift
+//  Card.swift
 //  CoBook
 //
-//  Created by protas on 3/11/20.
+//  Created by protas on 3/26/20.
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
 import UIKit
 
-enum CreatePersonalCard {
+enum CreateCard {
 
     struct Section {
         var items: [Item]
@@ -20,7 +20,7 @@ enum CreatePersonalCard {
         case textField(text: String?, type: TextType)
         case actionTextField(text: String?, type: ActionType)
         case textView(text: String?, type: TextType)
-        case interests(list: [Card.InterestItem])
+        case interests(list: [InterestItem])
         case socialList(list: [Social.ListItem])
         case sectionHeader
     }
@@ -30,6 +30,9 @@ enum CreatePersonalCard {
         case activityDescription
         case workingPhoneNumber
         case workingEmailForCommunication
+        case companyName
+        case companyWebSite
+        case schedule
 
         var placeholder: String {
             get {
@@ -42,42 +45,38 @@ enum CreatePersonalCard {
                     return "Робочий номер телефону"
                 case .workingEmailForCommunication:
                     return "Робочий емейл для зв'язку"
+                case .companyName:
+                    return "Назва компанії"
+                case .companyWebSite:
+                    return "Веб-сайт компанії"
+                case .schedule:
+                    return "Графік роботи (дні та години)"
                 }
-            }
-        }
-
-        var contentType: UITextContentType? {
-            switch self {
-            case .occupiedPosition:
-                return .jobTitle
-            case .activityDescription:
-                return nil
-            case .workingPhoneNumber:
-                return .telephoneNumber
-            case .workingEmailForCommunication:
-                return .emailAddress
-
             }
         }
 
         var keyboardType: UIKeyboardType {
             switch self {
-            case .occupiedPosition:
-                return .default
-            case .activityDescription:
+            case .occupiedPosition, .companyName, .activityDescription, .schedule:
                 return .default
             case .workingPhoneNumber:
                 return .phonePad
             case .workingEmailForCommunication:
                 return .emailAddress
+            case .companyWebSite:
+                return .URL
             }
         }
     }
 
     enum ActionType: RawRepresentable {
-        case activityType(list: [Card.PracticeItem])
+        case activityType(list: [PracticeItem])
         case placeOfLiving
         case activityRegion
+        case city
+        case region
+        case address
+
 
         var placeholder: String {
             switch self {
@@ -87,6 +86,13 @@ enum CreatePersonalCard {
                 return "Місце проживання"
             case .activityRegion:
                 return "Регіон діяльності"
+            case .city:
+                return "Місто розташування"
+            case .region:
+                return "Місто діяльності"
+            case .address:
+                return "Вулиця"
+
             }
         }
 
@@ -98,6 +104,9 @@ enum CreatePersonalCard {
             case "activityType":    self = .activityType(list: [])
             case "placeOfLiving":   self = .placeOfLiving
             case "activityRegion":  self = .activityRegion
+            case "city":            self = .city
+            case "region":          self = .region
+            case "address":         self = .address
             default:
                 return nil
             }
@@ -109,8 +118,23 @@ enum CreatePersonalCard {
             case .activityType:     return "activityType"
             case .placeOfLiving:    return "placeOfLiving"
             case .activityRegion:   return "activityRegion"
+            case .city:             return "city"
+            case .region:           return "region"
+            case .address:          return "address"
             }
         }
+    }
+
+    struct PracticeItem {
+        var id: Int?
+        var title: String?
+        var isSelected: Bool = false
+    }
+
+    struct InterestItem {
+        var id: Int?
+        var title: String?
+        var isSelected: Bool = false
     }
 
 }

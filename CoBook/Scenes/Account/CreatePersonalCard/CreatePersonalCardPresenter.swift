@@ -111,7 +111,7 @@ private extension CreatePersonalCardPresenter {
     func syncDataSource() {
 
         viewDataSource?.source = [
-            CreatePersonalCard.Section(items: [
+            CreateCard.Section(items: [
                 .avatarPhotoManagment(sourceType: .personalCard, imagePath: personalCardParameters.avatarUrl),
                 .sectionHeader,
                 .title(text: "Діяльність:"),
@@ -121,7 +121,7 @@ private extension CreatePersonalCardPresenter {
                 .actionTextField(text: personalCardParameters.region.name, type: .activityRegion),
                 .textView(text: personalCardParameters.description, type: .activityDescription)
             ]),
-            CreatePersonalCard.Section(items: [
+            CreateCard.Section(items: [
                 .sectionHeader,
                 .title(text: "Контактні дані:"),
                 .textField(text: personalCardParameters.contactEmail, type: .workingEmailForCommunication),
@@ -129,7 +129,7 @@ private extension CreatePersonalCardPresenter {
                 .title(text: "Соціальні мережі:"),
                 .socialList(list: personalCardParameters.socialNetworks)
             ]),
-            CreatePersonalCard.Section(items: [
+            CreateCard.Section(items: [
                 .sectionHeader,
                 .title(text: "Інтереси (для рекомендацій)"),
                 .interests(list: personalCardParameters.interests)
@@ -152,7 +152,7 @@ private extension CreatePersonalCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.personalCardParameters.practices = (response ?? []).map { Card.PracticeItem(id: $0.id, title: $0.title) }
+                strongSelf.personalCardParameters.practices = (response ?? []).map { CreateCard.PracticeItem(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
                 practicesTypesListRequestError = error
@@ -168,11 +168,11 @@ private extension CreatePersonalCardPresenter {
             switch result {
             case let .success(response):
                 let currentSelectedInterests = strongSelf.personalCardParameters.interests
-                let fetchedInterests: [Card.InterestItem] = (response ?? []).compactMap { fetched in
+                let fetchedInterests: [CreateCard.InterestItem] = (response ?? []).compactMap { fetched in
                     let isSelected = currentSelectedInterests.contains(where: { (selected) -> Bool in
                         return selected.id == fetched.id
                     })
-                    return Card.InterestItem(id: fetched.id, title: fetched.title, isSelected: isSelected)
+                    return CreateCard.InterestItem(id: fetched.id, title: fetched.title, isSelected: isSelected)
                 }
 
                 strongSelf.personalCardParameters.interests = fetchedInterests
@@ -244,7 +244,7 @@ extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDelegate {
 extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 
     func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
-        guard let textType = CreatePersonalCard.TextType.init(rawValue: identifier ?? "") else {
+        guard let textType = CreateCard.TextType.init(rawValue: identifier ?? "") else {
             return
         }
 
@@ -257,6 +257,7 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
             personalCardParameters.contactTelephone = text
         case .workingEmailForCommunication:
             personalCardParameters.contactEmail = text
+        default: break
         }
     }
 
@@ -267,7 +268,7 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?) {
-        guard let textType = CreatePersonalCard.TextType.init(rawValue: identifier ?? "") else {
+        guard let textType = CreateCard.TextType.init(rawValue: identifier ?? "") else {
             return
         }
 
@@ -280,11 +281,12 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             personalCardParameters.contactTelephone = text
         case .workingEmailForCommunication:
             personalCardParameters.contactEmail = text
+        default: break
         }
     }
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {
-        guard let action = CreatePersonalCard.ActionType.init(rawValue: identifier ?? "") else {
+        guard let action = CreateCard.ActionType.init(rawValue: identifier ?? "") else {
             return
         }
 
@@ -321,6 +323,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
                     Log.error("Region data missing")
                 }
             })
+        default: break
 
         }
     }

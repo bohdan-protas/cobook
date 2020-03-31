@@ -36,7 +36,7 @@ class CreateBusinessCardViewController: BaseViewController {
         return view
     }()
 
-    var presenter = CreateBusinessCardPresenter()
+    //var presenter = CreateBusinessCardPresenter()
     private var placeCompletion: ((GMSPlace) -> Void)?
 
     // MARK: Lifecycle

@@ -11,7 +11,7 @@ import UIKit
 class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
 
     // MARK: Properties
-    var source: [CreatePersonalCard.Section] = []
+    var source: [CreateCard.Section] = []
 
     unowned var tableView: UITableView
     weak var cellsDelegate: (TextViewTableViewCellDelegate &
@@ -25,7 +25,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
         return pickerView
     }()
 
-    subscript(indexPath: IndexPath) -> CreatePersonalCard.Item? {
+    subscript(indexPath: IndexPath) -> CreateCard.Item? {
         get {
             return source[safe: indexPath.section]?.items[safe: indexPath.row]
         }
@@ -101,6 +101,7 @@ class CreatePersonalCardDataSource: NSObject, UITableViewDataSource {
             case .placeOfLiving, .activityRegion:
                 cell.actionControlView.isUserInteractionEnabled = true
                 cell.textView.isUserInteractionEnabled = false
+            default: break
             }
             return cell
 
