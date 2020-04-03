@@ -31,7 +31,7 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
     private lazy var cardSaveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
         view.onSaveTapped = { [weak self] in
-            //self?.presenter.createBusinessCard()
+            self?.presenter.onCreateBusinessCard()
         }
         return view
     }()
@@ -75,8 +75,6 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         imagePickerCompletion = completion
         present(imagePickerController, animated: true, completion: nil)
     }
-
-
 
 
 }

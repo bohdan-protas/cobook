@@ -41,3 +41,7 @@ struct CardAvatarManagmentCellModel {
     let sourceType: CardAvatarPhotoManagmentTableViewCell.SourceType
     let imagePath: String?
 }
+
+struct BackgroundManagmentImageCellModel {
+    var imagePath: String?
+}
