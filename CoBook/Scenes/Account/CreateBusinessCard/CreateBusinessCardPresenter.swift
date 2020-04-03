@@ -122,6 +122,7 @@ private extension CreateBusinessCardPresenter {
             switch result {
             case let .success(response):
                 strongSelf.detailsModel.avatarImage = response
+                strongSelf.view?.tableView.reloadData()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
@@ -142,6 +143,7 @@ private extension CreateBusinessCardPresenter {
             switch result {
             case let .success(response):
                 strongSelf.detailsModel.backgroudImage = response
+                strongSelf.view?.tableView.reloadData()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
