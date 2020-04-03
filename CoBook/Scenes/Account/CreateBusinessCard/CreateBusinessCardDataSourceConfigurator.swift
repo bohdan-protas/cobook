@@ -21,6 +21,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
     let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
     let interestsListConfigurator: CellConfigurator<Void?, InterestsSelectionTableViewCell>
     let avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>
+    let backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>
 
     // MARK: Initializer
     init(presenter: CreateBusinessCardPresenter) {
@@ -88,6 +89,14 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             cell.fill(sourceType: model.sourceType, imagePath: model.imagePath)
             return cell
         }
+
+        backgroundImageManagmentConfigurator = CellConfigurator { (cell, model: BackgroundManagmentImageCellModel, tableView, indexPath) -> CardBackgroundManagmentTableViewCell in
+            cell.delegate = presenter
+            cell.set(imagePath: model.imagePath)
+            return cell
+        }
+
+
     }
 
     func reuseIdentifier(for item: CreateBusinessCard.Cell, indexPath: IndexPath) -> String {
@@ -106,6 +115,8 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return interestsListConfigurator.reuseIdentifier
         case .avatarManagment:
             return avatarManagmentConfigurator.reuseIdentifier
+        case .backgroundImageManagment:
+            return backgroundImageManagmentConfigurator.reuseIdentifier
         }
     }
 
@@ -127,6 +138,8 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return interestsListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         case .avatarManagment(let model):
             return avatarManagmentConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .backgroundImageManagment(let model):
+            return backgroundImageManagmentConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -139,6 +152,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
         socialListConfigurator.registerCells(in: tableView)
         interestsListConfigurator.registerCells(in: tableView)
         avatarManagmentConfigurator.registerCells(in: tableView)
+        backgroundImageManagmentConfigurator.registerCells(in: tableView)
     }
 }
 

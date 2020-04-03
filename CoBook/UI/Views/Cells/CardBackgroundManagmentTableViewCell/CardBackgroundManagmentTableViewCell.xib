@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="120" id="KGk-i7-Jjw" customClass="CardBackgroundManagmentTableViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="daL-JI-hCB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="daL-JI-hCB" secondAttribute="height" multiplier="25:8" id="bNS-8S-2j0"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kHJ-nY-gX7">
+                        <rect key="frame" x="114" y="42.5" width="147" height="35.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Додати фото обкладинки" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaB-nk-o3g">
+                                <rect key="frame" x="0.0" y="0.0" width="147" height="17"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(800x260)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAS-zb-Y03">
+                                <rect key="frame" x="0.0" y="21" width="147" height="14.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6Q-0f-J5b">
+                        <rect key="frame" x="114" y="42.5" width="147" height="35.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <size key="titleShadowOffset" width="1" height="1"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="changePhotoTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="k7Z-Pc-jb3"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="S6Q-0f-J5b" firstAttribute="width" secondItem="kHJ-nY-gX7" secondAttribute="width" id="A7t-PV-Z16"/>
+                    <constraint firstItem="kHJ-nY-gX7" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="F8A-6R-msT"/>
+                    <constraint firstItem="S6Q-0f-J5b" firstAttribute="centerY" secondItem="kHJ-nY-gX7" secondAttribute="centerY" id="Hun-Of-2Q6"/>
+                    <constraint firstItem="S6Q-0f-J5b" firstAttribute="height" secondItem="kHJ-nY-gX7" secondAttribute="height" id="O2I-Fe-EuQ"/>
+                    <constraint firstItem="kHJ-nY-gX7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OlF-oC-alP"/>
+                    <constraint firstItem="S6Q-0f-J5b" firstAttribute="centerX" secondItem="kHJ-nY-gX7" secondAttribute="centerX" id="a0a-JD-aBQ"/>
+                    <constraint firstItem="daL-JI-hCB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gtm-DE-zqV"/>
+                    <constraint firstAttribute="trailing" secondItem="daL-JI-hCB" secondAttribute="trailing" id="rl1-0d-mYU"/>
+                    <constraint firstAttribute="bottom" secondItem="daL-JI-hCB" secondAttribute="bottom" id="ssW-o0-3Vq"/>
+                    <constraint firstItem="daL-JI-hCB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wBi-C4-dua"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bgImageView" destination="daL-JI-hCB" id="cav-rI-ta9"/>
+                <outlet property="photoSizeLabel" destination="wAS-zb-Y03" id="ukD-qi-tFb"/>
+                <outlet property="photoStatusLabel" destination="AaB-nk-o3g" id="Cd6-X7-gLx"/>
+            </connections>
+            <point key="canvasLocation" x="177.536231884058" y="178.79464285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

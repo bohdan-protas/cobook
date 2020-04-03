@@ -46,6 +46,8 @@
 		B823B093242D3DA90012529D /* CreateBusinessCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B092242D3DA90012529D /* CreateBusinessCardViewController.swift */; };
 		B823B0A1242D46EF0012529D /* CreatePersonalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B0A0242D46EF0012529D /* CreatePersonalCard.swift */; };
 		B823C6212431F585002CFB02 /* UIImage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823C6202431F585002CFB02 /* UIImage + Extensions.swift */; };
+		B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */; };
+		B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */; };
 		B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */; };
 		B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */; };
 		B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */; };
@@ -212,6 +214,8 @@
 		B823B092242D3DA90012529D /* CreateBusinessCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardViewController.swift; sourceTree = "<group>"; };
 		B823B0A0242D46EF0012529D /* CreatePersonalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCard.swift; sourceTree = "<group>"; };
 		B823C6202431F585002CFB02 /* UIImage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extensions.swift"; sourceTree = "<group>"; };
+		B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackgroundManagmentTableViewCell.swift; sourceTree = "<group>"; };
+		B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardBackgroundManagmentTableViewCell.xib; sourceTree = "<group>"; };
 		B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingPageCollectionViewCell.xib; sourceTree = "<group>"; };
 		B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
@@ -608,6 +612,15 @@
 			path = CreateBusinessCard;
 			sourceTree = "<group>";
 		};
+		B824E1AC243766C60091C491 /* CardBackgroundManagmentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */,
+				B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */,
+			);
+			path = CardBackgroundManagmentTableViewCell;
+			sourceTree = "<group>";
+		};
 		B82573F223F545D000C8CBF8 /* OnboardingPageCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -983,6 +996,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B824E1AC243766C60091C491 /* CardBackgroundManagmentTableViewCell */,
 				B823B08C242D1ADF0012529D /* CardAvatarPhotoManagmentTableViewCell */,
 				B82248E0242C104A00392D10 /* SectionHeaderTableViewCell */,
 				B8AB8406242840F80041B879 /* GetInTouchTableViewCell */,
@@ -1102,6 +1116,7 @@
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
 				B8AB8400242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
+				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
 				B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
@@ -1327,6 +1342,7 @@
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
 				B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */,
+				B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */,
 				B8DE5E552419262600F4F60B /* TextViewTableViewCell.swift in Sources */,
 				B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */,
 			);

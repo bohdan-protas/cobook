@@ -11,6 +11,7 @@ import Foundation
 enum CreateBusinessCard {
 
     enum Cell {
+        case backgroundImageManagment(model: BackgroundManagmentImageCellModel)
         case avatarManagment(model: CardAvatarManagmentCellModel)
         case title(text: String)
         case sectionHeader

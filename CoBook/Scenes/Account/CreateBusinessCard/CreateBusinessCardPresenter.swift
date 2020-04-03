@@ -63,6 +63,7 @@ private extension CreateBusinessCardPresenter {
 
     func updateViewDataSource() {
         let mainDataSection = Section<CreateBusinessCard.Cell>(items: [
+            .backgroundImageManagment(model: BackgroundManagmentImageCellModel(imagePath: detailsModel.backgroudImage?.sourceUrl)),
             .avatarManagment(model: CardAvatarManagmentCellModel(sourceType: .businessCard, imagePath: detailsModel.avatarImage?.sourceUrl)),
             .sectionHeader,
             .title(text: "Основні дані:"),
@@ -129,8 +130,8 @@ private extension CreateBusinessCardPresenter {
         }
     }
 
-    func uploadCompanyBg(data: Data?) {
-        guard let imageData = data else {
+    func uploadCompanyBg(image: UIImage?) {
+        guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
             return
         }
@@ -208,6 +209,18 @@ private extension CreateBusinessCardPresenter {
             strongSelf.view?.tableView.reloadData()
         }
     }
+}
+
+// MARK: - CardBackgroundManagmentTableViewCellDelegate
+extension CreateBusinessCardPresenter: CardBackgroundManagmentTableViewCellDelegate {
+
+    func didTappedOnPhoto(_ cell: CardBackgroundManagmentTableViewCell) {
+        self.view?.showPickerController(completion: { (fetchedImage) in
+            self.uploadCompanyBg(image: fetchedImage)
+        })
+    }
+
+
 }
 
 // MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
