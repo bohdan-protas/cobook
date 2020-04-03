@@ -276,13 +276,13 @@ extension APIClient {
     /**
      Request create personal card
     */
-//    @discardableResult
-//    func createPersonalCard(parameters: PersonalCardParameters,
-//                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
-//
-//        let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
-//        return performRequest(endpoint: endpoint, completion: completion)
-//    }
+    @discardableResult
+    func createPersonalCard(parameters: CreatePersonalCardParametersApiModel,
+                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
 
     /**
      Request for card details info

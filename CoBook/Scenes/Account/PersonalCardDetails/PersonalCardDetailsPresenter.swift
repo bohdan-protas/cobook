@@ -52,7 +52,6 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
             //createPersonalCardViewController.presenter = presenter
         } else {
             let presenter = CreatePersonalCardPresenter()
-            presenter.delegate = self
             createPersonalCardViewController.presenter = presenter
         }
         view?.push(controller: createPersonalCardViewController, animated: true)
@@ -145,14 +144,5 @@ extension PersonalCardDetailsPresenter: GetInTouchTableViewCellDelegate {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
     }
 
-
-}
-
-// MARK: - CreatePersonalCardPresenterDelegate
-extension PersonalCardDetailsPresenter: CreatePersonalCardPresenterDelegate {
-
-    func createPersonalCardPresenterDidUpdatedPersonalCard(_ presenter: CreatePersonalCardPresenter) {
-        setupDataSource()
-    }
 
 }
