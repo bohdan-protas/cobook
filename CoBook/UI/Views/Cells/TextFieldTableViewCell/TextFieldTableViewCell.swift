@@ -54,6 +54,16 @@ class TextFieldTableViewCell: UITableViewCell {
         textField.rightView = rightView
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        textField.text = ""
+        textField.placeholder = ""
+        actionIdentifier = nil
+        textKeyPath = nil
+        actionControlView.isUserInteractionEnabled = false
+        textField.isUserInteractionEnabled = true
+    }
+
     // MARK: Actions
     @IBAction func textViewEditingChanged(_ sender: UITextField) {
         delegate?.textFieldTableViewCell(self, didUpdatedText: sender.text, forKeyPath: textKeyPath)

@@ -29,14 +29,28 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     private var viewDataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?
     private var viewDataSourceConfigurator: CreateBusinessCardDataSourceConfigurator?
 
-    var detailsModel: CreateBusinessCard.DetailsModel {
+    var businessCardDetailsModel: CreateBusinessCard.DetailsModel {
         didSet {
+            let isRequiredDataFilled = (
+                !(businessCardDetailsModel.avatarImage == nil) &&
+                !(businessCardDetailsModel.backgroudImage == nil) &&
+                !(businessCardDetailsModel.companyName ?? "").isEmpty &&
+                !(businessCardDetailsModel.practiseType == nil) &&
+                !(businessCardDetailsModel.contactTelephone ?? "").isEmpty &&
+                !(businessCardDetailsModel.companyWebSite ?? "").isEmpty &&
+                !(businessCardDetailsModel.city == nil) &&
+                !(businessCardDetailsModel.region == nil) &&
+                !(businessCardDetailsModel.address == nil) &&
+                !(businessCardDetailsModel.schedule ?? "").isEmpty
+            )
+
+            view?.setSaveButtonEnabled(isRequiredDataFilled)
             updateViewDataSource()
         }
     }
 
     init(detailsModel: CreateBusinessCard.DetailsModel? = nil) {
-        self.detailsModel = detailsModel ?? CreateBusinessCard.DetailsModel()
+        self.businessCardDetailsModel = detailsModel ?? CreateBusinessCard.DetailsModel()
     }
 
     // MARK: Public
@@ -56,30 +70,37 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
         setupDataSource()
     }
 
+    func onCreateBusinessCard() {
+        
+    }
+
 }
 
 // MARK: - Privates
 private extension CreateBusinessCardPresenter {
 
     func updateViewDataSource() {
+        let photosSection = Section<CreateBusinessCard.Cell>(items: [
+            .backgroundImageManagment(model: BackgroundManagmentImageCellModel(imagePath: businessCardDetailsModel.backgroudImage?.sourceUrl)),
+            .avatarManagment(model: CardAvatarManagmentCellModel(sourceType: .businessCard, imagePath: businessCardDetailsModel.avatarImage?.sourceUrl))
+        ])
+
         let mainDataSection = Section<CreateBusinessCard.Cell>(items: [
-            .backgroundImageManagment(model: BackgroundManagmentImageCellModel(imagePath: detailsModel.backgroudImage?.sourceUrl)),
-            .avatarManagment(model: CardAvatarManagmentCellModel(sourceType: .businessCard, imagePath: detailsModel.avatarImage?.sourceUrl)),
             .sectionHeader,
             .title(text: "Основні дані:"),
-            .textField(model: TextFieldModel(text: detailsModel.companyName, placeholder: "Назва компанії", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyName, keyboardType: .default)),
-            .actionField(model: ActionFieldModel(text: detailsModel.practiseType?.title, placeholder: "Вид діяльності", actionTypeId: CreateBusinessCard.ActionType.practice.rawValue)),
-            .textField(model: TextFieldModel(text: detailsModel.contactTelephone, placeholder: "Робочий номер телефону", keyboardType: .phonePad)),
-            .textField(model: TextFieldModel(text: detailsModel.companyWebSite, placeholder: "Веб сайт", keyboardType: .URL))
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyName, placeholder: "Назва компанії", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyName, keyboardType: .default)),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.practiseType?.title, placeholder: "Вид діяльності", actionTypeId: CreateBusinessCard.ActionType.practice.rawValue)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.contactTelephone, placeholder: "Робочий номер телефону", associatedKeyPath: \CreateBusinessCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyWebSite, placeholder: "Веб сайт", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyWebSite, keyboardType: .URL))
         ])
 
         let companyActivitySection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "Діяльність компанії:"),
-            .actionField(model: ActionFieldModel(text: detailsModel.city?.name, placeholder: "Місто розташування", actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
-            .actionField(model: ActionFieldModel(text: detailsModel.region?.name, placeholder: "Місто діяльності", actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
-            .actionField(model: ActionFieldModel(text: detailsModel.address?.name, placeholder: "Вулиця", actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
-            .textField(model: TextFieldModel(text: detailsModel.schedule, placeholder: "Графік роботи (дні та години)", keyboardType: .default))
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.city?.name, placeholder: "Місто розташування", actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.region?.name, placeholder: "Місто діяльності", actionTypeId: CreateBusinessCard.ActionType.region.rawValue)),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.address?.name, placeholder: "Вулиця", actionTypeId: CreateBusinessCard.ActionType.address.rawValue)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.schedule, placeholder: "Графік роботи (дні та години)", associatedKeyPath: \CreateBusinessCard.DetailsModel.schedule, keyboardType: .default))
         ])
 
         let aboutCompacySection = Section<CreateBusinessCard.Cell>(items: [
@@ -100,7 +121,7 @@ private extension CreateBusinessCardPresenter {
             .interests
         ])
 
-        viewDataSource?.sections = [mainDataSection, companyActivitySection, aboutCompacySection, socialSection, interestsSection]
+        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, interestsSection]
     }
 
 
@@ -108,6 +129,10 @@ private extension CreateBusinessCardPresenter {
 
 // MARK: - User cases
 private extension CreateBusinessCardPresenter {
+
+    func createPersonalCard() {
+
+    }
 
     func uploadCompanyAvatar(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
@@ -122,7 +147,7 @@ private extension CreateBusinessCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.detailsModel.avatarImage = response
+                strongSelf.businessCardDetailsModel.avatarImage = response
                 strongSelf.view?.tableView.reloadData()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -143,7 +168,7 @@ private extension CreateBusinessCardPresenter {
 
             switch result {
             case let .success(response):
-                strongSelf.detailsModel.backgroudImage = response
+                strongSelf.businessCardDetailsModel.backgroudImage = response
                 strongSelf.view?.tableView.reloadData()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -193,8 +218,8 @@ private extension CreateBusinessCardPresenter {
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
-            self?.detailsModel.practices = practicies
-            self?.detailsModel.interests = interests
+            self?.businessCardDetailsModel.practices = practicies
+            self?.businessCardDetailsModel.interests = interests
 
             if practicesTypesListRequestError != nil {
                 strongSelf.view?.errorAlert(message: practicesTypesListRequestError?.localizedDescription)
@@ -245,14 +270,14 @@ extension CreateBusinessCardPresenter: CardAvatarPhotoManagmentTableViewCellDele
 extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextFieldTableViewCellDataSource {
 
     var pickerList: [String] {
-        return detailsModel.practices.compactMap { $0.title }
+        return businessCardDetailsModel.practices.compactMap { $0.title }
     }
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?) {
         guard let keyPath = keyPath as? WritableKeyPath<CreateBusinessCard.DetailsModel, String?> else {
             return
         }
-        detailsModel[keyPath: keyPath] = text
+        businessCardDetailsModel[keyPath: keyPath] = text
     }
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {
@@ -262,32 +287,37 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
 
         switch action {
         case .practice:
-            break
+            let selectedPracticeName = cell.textField.text
+            let selectedPractice = businessCardDetailsModel.practices.first(where: { $0.title == selectedPracticeName })
+            businessCardDetailsModel.practiseType = selectedPractice
+
         case .city:
             let filter = GMSAutocompleteFilter()
             filter.type = .city
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedCity) in
                 if let id = fetchedCity.placeID {
                     cell.textField.text = fetchedCity.name
-                    self?.detailsModel.city = PlaceModel(googlePlaceId: id, name: fetchedCity.name)
+                    self?.businessCardDetailsModel.city = PlaceModel(googlePlaceId: id, name: fetchedCity.name)
                 }
             })
+
         case .region:
             let filter = GMSAutocompleteFilter()
             filter.type = .region
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedRegion) in
                 if let id = fetchedRegion.placeID {
                     cell.textField.text = fetchedRegion.name
-                    self?.detailsModel.city = PlaceModel(googlePlaceId: id, name: fetchedRegion.name)
+                    self?.businessCardDetailsModel.region = PlaceModel(googlePlaceId: id, name: fetchedRegion.name)
                 }
             })
+
         case .address:
             let filter = GMSAutocompleteFilter()
             filter.type = .address
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedAddress) in
                 if let id = fetchedAddress.placeID {
                     cell.textField.text = fetchedAddress.name
-                    self?.detailsModel.city = PlaceModel(googlePlaceId: id, name: fetchedAddress.name)
+                    self?.businessCardDetailsModel.address = PlaceModel(googlePlaceId: id, name: fetchedAddress.name)
                 }
             })
         }
@@ -303,7 +333,7 @@ extension CreateBusinessCardPresenter: TextViewTableViewCellDelegate {
         guard let keyPath = keyPath as? WritableKeyPath<CreateBusinessCard.DetailsModel, String?> else {
             return
         }
-        detailsModel[keyPath: keyPath] = text
+        businessCardDetailsModel[keyPath: keyPath] = text
     }
 
 
@@ -314,10 +344,10 @@ extension CreateBusinessCardPresenter: InterestsSelectionTableViewCellDataSource
 
     var interests: [InterestModel] {
         get {
-            return detailsModel.interests
+            return businessCardDetailsModel.interests
         }
         set {
-            detailsModel.interests = newValue
+            businessCardDetailsModel.interests = newValue
         }
     }
 
@@ -329,10 +359,10 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
 
     var socials: [Social.ListItem] {
         get {
-            return detailsModel.socials
+            return businessCardDetailsModel.socials
         }
         set {
-            detailsModel.socials = newValue
+            businessCardDetailsModel.socials = newValue
         }
     }
 
