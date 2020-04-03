@@ -49,6 +49,7 @@
 		B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */; };
 		B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */; };
 		B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */; };
+		B824E1B42437C5940091C491 /* CreatePersonalCardParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1B32437C5940091C491 /* CreatePersonalCardParameters.swift */; };
 		B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */; };
 		B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */; };
 		B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */; };
@@ -218,6 +219,7 @@
 		B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackgroundManagmentTableViewCell.swift; sourceTree = "<group>"; };
 		B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardBackgroundManagmentTableViewCell.xib; sourceTree = "<group>"; };
 		B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSourceConfigurator.swift; sourceTree = "<group>"; };
+		B824E1B32437C5940091C491 /* CreatePersonalCardParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardParameters.swift; sourceTree = "<group>"; };
 		B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingPageCollectionViewCell.xib; sourceTree = "<group>"; };
 		B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
@@ -816,6 +818,7 @@
 				B8AB3F042422BDC000E06E53 /* FileDataApiModel.swift */,
 				B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */,
 				B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */,
+				B824E1B32437C5940091C491 /* CreatePersonalCardParameters.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1236,6 +1239,7 @@
 				B8AB83EE24280F130041B879 /* PersonalCardDetailsDataSource.swift in Sources */,
 				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
 				B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */,
+				B824E1B42437C5940091C491 /* CreatePersonalCardParameters.swift in Sources */,
 				B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */,
 				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,

@@ -24,6 +24,7 @@ class AccountViewController: BaseViewController, AccountView {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+        presenter.onViewDidLoad()
         setupLayout()
     }
 

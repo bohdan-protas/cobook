@@ -18,10 +18,6 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func presentPickerController() 
 }
 
-protocol CreatePersonalCardPresenterDelegate: class {
-    func createPersonalCardPresenterDidUpdatedPersonalCard(_ presenter: CreatePersonalCardPresenter)
-}
-
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     enum Defaults {
@@ -51,8 +47,6 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
             updateViewDataSource()
         }
     }
-
-    weak var delegate: CreatePersonalCardPresenterDelegate?
     
     // Lifecycle
     init(detailsModel: CreatePersonalCard.DetailsModel? = nil) {
@@ -79,19 +73,20 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     func createPerconalCard() {
         view?.startLoading(text: "Створення...")
-//        APIClient.default.createPersonalCard(parameters: self.personalCardParameters) { [weak self] (result) in
-//            guard let strongSelf = self else { return }
-//            switch result {
-//            case .success:
-//                strongSelf.view?.stopLoading(success: true, completion: {
-//                    strongSelf.delegate?.createPersonalCardPresenterDidUpdatedPersonalCard(strongSelf)
-//                    strongSelf.view?.popController()
-//                })
-//            case let .failure(error):
-//                strongSelf.view?.stopLoading()
-//                strongSelf.view?.errorAlert(message: error.localizedDescription)
-//            }
-//        }
+        let params = CreatePersonalCardParametersApiModel(model: personalCardDetailsModel)
+        APIClient.default.createPersonalCard(parameters: params) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case let .failure(error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
     func userImagePicked(_ image: UIImage?) {

@@ -31,8 +31,16 @@ class AccountPresenter: BasePresenter {
         viewDataSource = nil
     }
 
-    func onDidAppear() {
+    func onViewDidLoad() {
         fetchProfileData()
+        AppStorage.State.isNeedToUpdateAccountData = false
+    }
+
+    func onDidAppear() {
+        if AppStorage.State.isNeedToUpdateAccountData {
+            fetchProfileData()
+            AppStorage.State.isNeedToUpdateAccountData = false
+        }
     }
 
     func selectedRow(at indexPath: IndexPath) {
