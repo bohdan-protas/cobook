@@ -16,7 +16,7 @@ enum PersonalCardDetails {
 
     enum Item {
         case title(text: String)
-        case userInfo(model: CardAPIModel.CardDetailsAPIResponseData?)
+        case userInfo(model: CardDetailsApiModel)
         case getInTouch
         case socialList(list: [Social.ListItem])
         case sectionHeader
@@ -24,3 +24,4 @@ enum PersonalCardDetails {
 
 
 }
+

@@ -15,14 +15,35 @@ protocol SocialsListTableViewCellDelegate: class {
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath)
 }
 
+protocol SocialsListTableViewCellDataSource: class {
+    var socials: [Social.ListItem] { get set }
+}
+
 class SocialsListTableViewCell: UITableViewCell {
 
     // MARK: Properties
     @IBOutlet var collectionView: UICollectionView!
 
-    var isEditable: Bool = false
-    var dataSource: [Social.ListItem] = []
+    var isEditable: Bool = false {
+        didSet {
+            if isEditable {
+                if dataSource?.socials.isEmpty ?? false {
+                    self.dataSource?.socials = [.add]
+                } else {
+                    switch dataSource?.socials.last {
+                    case .view:
+                        self.dataSource?.socials.append(.add)
+                    default:
+                        break
+                    }
+                }
+            }
+            self.collectionView.reloadData()
+        }
+    }
+
     weak var delegate: SocialsListTableViewCellDelegate?
+    weak var dataSource: SocialsListTableViewCellDataSource?
 
     // MARK: Lifecycle
     override func awakeFromNib() {
@@ -43,8 +64,7 @@ class SocialsListTableViewCell: UITableViewCell {
 
         let location = gesture.location(in: self.collectionView)
         if let indexPath = self.collectionView.indexPathForItem(at: location) {
-
-            if let item = dataSource[safe: indexPath.item] {
+            if let item = dataSource?.socials[safe: indexPath.item] {
                 switch item {
                 case .view(let social):
                     if isEditable {
@@ -54,17 +74,13 @@ class SocialsListTableViewCell: UITableViewCell {
                     break
                 }
             }
-
-
-        } else {
-            Log.debug("Couldn't find longpressed item indexPath")
         }
     }
 
     func create(socialListItem: Social.ListItem) {
         if isEditable && collectionView.numberOfItems(inSection: 0) >= 1 {
             collectionView.performBatchUpdates({
-                self.dataSource.insert(socialListItem, at: collectionView.numberOfItems(inSection: 0)-1)
+                self.dataSource?.socials.insert(socialListItem, at: collectionView.numberOfItems(inSection: 0)-1)
                 self.collectionView.insertItems(at: [IndexPath(item: collectionView.numberOfItems(inSection: 0)-1, section: 0)])
             }) { (finished) in
 
@@ -73,13 +89,13 @@ class SocialsListTableViewCell: UITableViewCell {
     }
 
     func updateAt(indexPath: IndexPath, with item: Social.ListItem) {
-        self.dataSource[safe: indexPath.row] = item
+        self.dataSource?.socials[safe: indexPath.row] = item
         collectionView.reloadItems(at: [indexPath])
     }
 
     func deleteAt(indexPath: IndexPath) {
         collectionView.performBatchUpdates({
-            self.dataSource.remove(at: indexPath.item)
+            self.dataSource?.socials.remove(at: indexPath.item)
             self.collectionView.deleteItems(at: [indexPath])
         }) { (finished) in
 
@@ -87,41 +103,21 @@ class SocialsListTableViewCell: UITableViewCell {
     }
 
 
-
-    func fill(items: [Social.ListItem], isEditable: Bool) {
-        self.isEditable = isEditable
-        self.dataSource = items
-
-        if isEditable {
-            if items.isEmpty {
-                self.dataSource = [.add]
-            } else {
-                switch dataSource.last {
-                case .view:
-                    self.dataSource.append(.add)
-                default:
-                    break
-                }
-            }
-        }
-        self.collectionView.reloadData()
-    }
-
 }
 
 // MARK: - UICollectionViewDelegate
 extension SocialsListTableViewCell: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let item = dataSource[safe: indexPath.item] {
+        if let item = dataSource?.socials[safe: indexPath.item] {
 
             switch item {
             case .view:
-                if !isEditable, let item = dataSource[safe: indexPath.item] {
+                if !isEditable, let item = dataSource?.socials[safe: indexPath.item] {
                     delegate?.socialsListTableViewCell(self, didSelectedSocialItem: item)
                 }
             case .add:
-                if isEditable, let item = dataSource[safe: indexPath.item] {
+                if isEditable, let item = dataSource?.socials[safe: indexPath.item] {
                     delegate?.socialsListTableViewCell(self, didSelectedSocialItem: item)
                 }
             }
@@ -136,14 +132,14 @@ extension SocialsListTableViewCell: UICollectionViewDelegate {
 extension SocialsListTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSource?.socials.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let item = dataSource[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SocialListItemCollectionViewCell.identifier, for: indexPath) as! SocialListItemCollectionViewCell
-        cell.configure(with: item)
+        if let item = dataSource?.socials[indexPath.item] {
+             cell.configure(with: item)
+        }
         return cell
     }
 

@@ -18,7 +18,7 @@ class AccountPresenter: BasePresenter {
     private weak var view: AccountView?
     var viewDataSource: AccountDataSource?
 
-    private var personalCardsList: [CardPreview] = []
+    private var personalCardsList: [CardPreviewApiModel] = []
 
     // MARK: Public
     func attachView(_ view: AccountView) {

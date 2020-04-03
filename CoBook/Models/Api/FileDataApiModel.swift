@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FileAPIResponseData {
+struct FileDataApiModel {
     var storageKey: String?
     /// UUID represented attachment identifier
     var id: String
@@ -21,7 +21,7 @@ struct FileAPIResponseData {
 
 }
 
-extension FileAPIResponseData: Codable {
+extension FileDataApiModel: Codable {
     enum CodingKeys: String, CodingKey {
         case storageKey = "storage_key"
         case id

@@ -247,7 +247,7 @@ extension APIClient {
     /**
      Request localized list of interests
     */
-    func interestsListRequest(completion: @escaping (Result<[CardAPIModel.Interest]?, Error>) -> Void) {
+    func interestsListRequest(completion: @escaping (Result<[InterestApiModel]?, Error>) -> Void) {
         let endpoint = InterestsEndpoint.list
         performRequest(endpoint: endpoint, completion: completion)
     }
@@ -262,7 +262,7 @@ extension APIClient {
      Request localized list of practice types
     */
     @discardableResult
-    func practicesTypesListRequest(completion: @escaping (Result<[CardAPIModel.PracticeType]?, Error>) -> Void) -> DataRequest{
+    func practicesTypesListRequest(completion: @escaping (Result<[PracticeTypeApiModel]?, Error>) -> Void) -> DataRequest{
         let endpoint = PracticeTypesEndpoint.list
         return performRequest(endpoint: endpoint, completion: completion)
     }
@@ -276,13 +276,13 @@ extension APIClient {
     /**
      Request create personal card
     */
-    @discardableResult
-    func createPersonalCard(parameters: CardAPIModel.PersonalCardParameters,
-                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
-
-        let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
-        return performRequest(endpoint: endpoint, completion: completion)
-    }
+//    @discardableResult
+//    func createPersonalCard(parameters: PersonalCardParameters,
+//                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+//
+//        let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
+//        return performRequest(endpoint: endpoint, completion: completion)
+//    }
 
     /**
      Request for card details info
@@ -294,7 +294,7 @@ extension APIClient {
      */
     @discardableResult
     func getCardInfo(id: Int,
-                     completion: @escaping (Result<CardAPIModel.CardDetailsAPIResponseData?, Error>) -> Void) -> DataRequest {
+                     completion: @escaping (Result<CardDetailsApiModel?, Error>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardInfo(id: id)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -314,7 +314,7 @@ extension APIClient {
      */
     @discardableResult
     func upload(imageData: Data,
-                completion: @escaping (Result<FileAPIResponseData?, Error>) -> Void) -> DataRequest {
+                completion: @escaping (Result<FileDataApiModel?, Error>) -> Void) -> DataRequest {
 
         let endpoint = ContentManagerEndpoint.singleFileUpload
         let url = endpoint.urlRequest!.url!
@@ -335,7 +335,7 @@ extension APIClient {
         - completion: parsed  'FileAPIResponseData' response from server
      */
     @discardableResult
-    func profileDetails(completion: @escaping (Result<Profile?, Error>) -> Void) -> DataRequest {
+    func profileDetails(completion: @escaping (Result<ProfileApiModel?, Error>) -> Void) -> DataRequest {
         let endpoint = ProfileEndpoint.profile
         return performRequest(endpoint: endpoint, completion: completion)
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TextViewTableViewCellDelegate: class {
-    func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?)
+    func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?)
 }
 
 class TextViewTableViewCell: UITableViewCell {
@@ -17,7 +17,7 @@ class TextViewTableViewCell: UITableViewCell {
     @IBOutlet var textView: DesignableTextView!
     weak var delegate: TextViewTableViewCellDelegate?
 
-    var textTypeIdentifier: String?
+    var textKeyPath: AnyKeyPath?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +31,7 @@ class TextViewTableViewCell: UITableViewCell {
 extension TextViewTableViewCell: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
-        delegate?.textViewTableViewCell(self, didUpdatedText: textView.text, textTypeIdentifier: textTypeIdentifier)
+        delegate?.textViewTableViewCell(self, didUpdatedText: textView.text, forKeyPath: textKeyPath)
     }
 
 }

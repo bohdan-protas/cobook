@@ -13,6 +13,10 @@ protocol InterestsSelectionTableViewCellDelegate: class {
     func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int)
 }
 
+protocol InterestsSelectionTableViewCellDataSource: class {
+    var interests: [InterestModel] { get set }
+}
+
 class InterestsSelectionTableViewCell: UITableViewCell {
 
     enum Constants {
@@ -23,7 +27,7 @@ class InterestsSelectionTableViewCell: UITableViewCell {
     @IBOutlet var interestsCollectionViewFlowLayout: LeftAlignedCollectionViewFlowLayout!
 
     weak var delegate: InterestsSelectionTableViewCellDelegate?
-    var dataSource: [CreateCard.InterestItem] = []
+    weak var dataSource: InterestsSelectionTableViewCellDataSource?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,13 +49,14 @@ class InterestsSelectionTableViewCell: UITableViewCell {
 extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSource?.interests.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InterestItemCollectionViewCell.identifier, for: indexPath) as! InterestItemCollectionViewCell
-        cell.titleLabel.text = dataSource[indexPath.row].title
-        cell.setSelected(dataSource[indexPath.row].isSelected)
+        let interest = dataSource?.interests[safe: indexPath.row]
+        cell.titleLabel.text = interest?.title
+        cell.setSelected(interest?.isSelected ?? false)
         cell.maxWidth = self.interestsCollectionView.bounds.width
         return cell
     }
@@ -63,16 +68,19 @@ extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
 extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if dataSource[indexPath.row].isSelected {
-            dataSource[safe: indexPath.item]?.isSelected = false
-            self.delegate?.interestsSelectionTableViewCell(self, didDeselectInterestAt: indexPath.item)
-        } else {
-            dataSource[safe: indexPath.item]?.isSelected = true
-            self.delegate?.interestsSelectionTableViewCell(self, didSelectInterestAt: indexPath.item)
+        if let interest = dataSource?.interests[safe: indexPath.row] {
+            if interest.isSelected {
+                dataSource?.interests[safe: indexPath.item]?.isSelected = false
+                delegate?.interestsSelectionTableViewCell(self, didDeselectInterestAt: indexPath.item)
+            } else {
+                dataSource?.interests[safe: indexPath.item]?.isSelected = true
+                delegate?.interestsSelectionTableViewCell(self, didSelectInterestAt: indexPath.item)
+            }
+
+            let cell = collectionView.cellForItem(at: indexPath) as? InterestItemCollectionViewCell
+            cell?.setSelected(dataSource?.interests[indexPath.item].isSelected ?? false)
         }
 
-        let cell = collectionView.cellForItem(at: indexPath) as? InterestItemCollectionViewCell
-        cell?.setSelected(dataSource[indexPath.item].isSelected)
     }
 
 

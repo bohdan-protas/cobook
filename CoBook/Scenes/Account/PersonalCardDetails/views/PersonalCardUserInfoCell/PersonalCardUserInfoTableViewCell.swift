@@ -40,17 +40,17 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
 
     }
 
-    func fill(with model: CardAPIModel.CardDetailsAPIResponseData?) {
-        self.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl,
-                                      placeholderText: "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")")
-        self.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
-        self.practiceTypeLabel.text = model?.practiceType?.title
-        self.positionLabel.text = model?.position
-        self.telephoneNumberLabel.text = model?.contactTelephone?.number
-        self.descriptionLabel.text = model?.description
-        self.locationLabel.text = "\(model?.city?.name ?? ""), \(model?.region?.name ?? "")"
-
-    }
+//    func fill(with model: CardDetailsAPIResponseData?) {
+//        self.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl,
+//                                      placeholderText: "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")")
+//        self.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
+//        self.practiceTypeLabel.text = model?.practiceType?.title
+//        self.positionLabel.text = model?.position
+//        self.telephoneNumberLabel.text = model?.contactTelephone?.number
+//        self.descriptionLabel.text = model?.description
+//        self.locationLabel.text = "\(model?.city?.name ?? ""), \(model?.region?.name ?? "")"
+//
+//    }
 
     
 }

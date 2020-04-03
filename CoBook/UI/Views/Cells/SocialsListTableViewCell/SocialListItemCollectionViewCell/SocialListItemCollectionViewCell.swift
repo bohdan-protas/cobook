@@ -18,17 +18,26 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet var socialTitleLabel: UILabel!
     @IBOutlet var borderView: UIView!
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
         socialTitleLabel.text = ""
-        socialImageView.af.cancelImageRequest()
         socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
-        pendingRequestWorkItem?.cancel()
         borderView.backgroundColor = .clear
     }
 
-    private var pendingRequestWorkItem: DispatchWorkItem?
+    override func prepareForReuse() {
+        super.prepareForReuse()
 
+        socialTitleLabel.text = ""
+        borderView.backgroundColor = .clear
+
+        pendingRequestWorkItem?.cancel()
+        socialImageView.af.cancelImageRequest()
+        socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
+    }
+
+    private var pendingRequestWorkItem: DispatchWorkItem?
 
     func configure(with item: Social.ListItem) {
         switch item {
@@ -54,6 +63,7 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
                 }
             }
         case .add:
+            borderView.backgroundColor = .clear
             socialImageView.image = UIImage(named: "ic_add_item")
             socialTitleLabel.text = "Додати"
         }

@@ -9,7 +9,7 @@
 import Foundation
 
 struct RegisterAPIResponseData {
-    var profile: Profile?
+    var profile: ProfileApiModel?
     var assessToken: String?
     var refreshToken: String?
 }

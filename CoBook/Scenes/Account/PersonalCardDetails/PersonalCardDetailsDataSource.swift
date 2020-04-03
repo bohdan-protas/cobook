@@ -69,7 +69,7 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
             return cell
         case .userInfo(let data):
             let cell = tableView.dequeueReusableCell(withIdentifier: PersonalCardUserInfoTableViewCell.identifier, for: indexPath) as! PersonalCardUserInfoTableViewCell
-            cell.fill(with: data)
+            //cell.fill(with: data)
             return cell
         case .getInTouch:
             let cell = tableView.dequeueReusableCell(withIdentifier: GetInTouchTableViewCell.identifier, for: indexPath) as! GetInTouchTableViewCell
@@ -78,7 +78,7 @@ class PersonalCardDetailsDataSource: NSObject, UITableViewDataSource {
         case .socialList(let list):
             let cell = tableView.dequeueReusableCell(withIdentifier: SocialsListTableViewCell.identifier, for: indexPath) as! SocialsListTableViewCell
             cell.delegate = cellsDelegate
-            cell.fill(items: list, isEditable: false)
+            //cell.fill(items: list, isEditable: false)
             return cell
         case .sectionHeader:
             let cell = tableView.dequeueReusableCell(withIdentifier: SectionHeaderTableViewCell.identifier, for: indexPath) as! SectionHeaderTableViewCell

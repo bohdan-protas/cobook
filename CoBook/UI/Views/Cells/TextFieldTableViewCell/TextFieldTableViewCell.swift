@@ -9,66 +9,73 @@
 import UIKit
 
 protocol TextFieldTableViewCellDelegate: class {
-    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, textTypeIdentifier identifier: String?)
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?)
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?)
+}
+
+protocol TextFieldTableViewCellDataSource: class {
+    var pickerList: [String] { get }
 }
 
 class TextFieldTableViewCell: UITableViewCell {
 
     // MARK: Properties
-    @IBOutlet var textView: DesignableTextField!
+    @IBOutlet var textField: DesignableTextField!
     @IBOutlet var actionControlView: UIControl!
+
+    weak var delegate: TextFieldTableViewCellDelegate?
+    weak var dataSource: TextFieldTableViewCellDataSource?
 
     private lazy var rightView: UIView = {
         let iconView = UIImageView(frame: CGRect(x: -15, y: 0, width: 10, height: 10))
         iconView.image = UIImage(named: "ic_arrow_bottom")
         let iconContainerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         iconContainerView.addSubview(iconView)
-
         return iconContainerView
     }()
 
-    weak var delegate: TextFieldTableViewCellDelegate?
+    lazy var pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
 
-    var pickerListDataSource: [String] = []
-    var textTypeIdentifier: String?
-    var rightViewActionIdentifier: String? {
+    var textKeyPath: AnyKeyPath?
+    var actionIdentifier: String? {
         didSet {
-            textView.rightViewMode = rightViewActionIdentifier == nil ? .never : .always
+            textField.rightViewMode = actionIdentifier == nil ? .never : .always
         }
     }
 
     // MARK: Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        textView.rightView = rightView
+        textField.rightView = rightView
     }
 
     // MARK: Actions
     @IBAction func textViewEditingChanged(_ sender: UITextField) {
-        delegate?.textFieldTableViewCell(self, didUpdatedText: sender.text, textTypeIdentifier: textTypeIdentifier)
+        delegate?.textFieldTableViewCell(self, didUpdatedText: sender.text, forKeyPath: textKeyPath)
     }
 
     @IBAction func actionControlViewDidTapped(_ sender: Any) {
-        guard let rightViewActionIdentifier = rightViewActionIdentifier else {
-            return
-        }
-        delegate?.textFieldTableViewCell(self, didOccuredAction: rightViewActionIdentifier)
+        delegate?.textFieldTableViewCell(self, didOccuredAction: actionIdentifier)
     }
 
-    
+
 }
 
 // MARK: - UIPickerViewDelegate Delegation
 extension TextFieldTableViewCell: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        textView.text = pickerListDataSource[safe: row]
-        delegate?.textFieldTableViewCell(self, didOccuredAction: rightViewActionIdentifier)
+        textField.text = dataSource?.pickerList[safe: row]
+        delegate?.textFieldTableViewCell(self, didOccuredAction: actionIdentifier)
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerListDataSource[safe: row]
+        return dataSource?.pickerList[safe: row]
     }
 
 
@@ -82,7 +89,7 @@ extension TextFieldTableViewCell: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerListDataSource.count
+        return dataSource?.pickerList.count ?? 0
     }
 
 

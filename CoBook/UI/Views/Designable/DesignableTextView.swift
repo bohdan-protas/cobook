@@ -49,7 +49,7 @@ class DesignableTextView: UITextView {
 
     // MARK: Placeholder
     @IBInspectable
-    var placeholder: String = ""
+    var placeholder: String?
 
     @IBInspectable
     var pTextColor: UIColor = .black
@@ -165,7 +165,7 @@ private extension DesignableTextView {
         placeholderLabelBottomConstraint?.constant = pBottomTextInset
 
         let pAttrs = [NSAttributedString.Key.font: UIFont.SFProDisplay_Regular(size: pFontSize)]
-        let pString = NSMutableAttributedString(string: placeholder, attributes: pAttrs)
+        let pString = NSMutableAttributedString(string: placeholder ?? "", attributes: pAttrs)
 
         placeholderLabel.attributedText = pString
         placeholderLabel.textColor = pTextColor

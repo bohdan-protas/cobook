@@ -21,7 +21,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     private var viewDataSource: PersonalCardDetailsDataSource?
 
     private var personalCardId: Int
-    private var cardDetails: CardAPIModel.CardDetailsAPIResponseData?
+    private var cardDetails: CardDetailsApiModel?
 
     // MARK: Lifecycle
     init(id: Int) {
@@ -47,9 +47,9 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     func editPerconalCard() {
         let createPersonalCardViewController: CreatePersonalCardViewController = UIStoryboard.account.initiateViewControllerFromType()
         if let cardDetails = cardDetails {
-            let presenter = CreatePersonalCardPresenter(parameters: CardAPIModel.PersonalCardParameters(with: cardDetails))
-            presenter.delegate = self
-            createPersonalCardViewController.presenter = presenter
+//            let presenter = CreatePersonalCardPresenter(parameters: CardAPIModel.PersonalCardParameters(with: cardDetails))
+//            presenter.delegate = self
+            //createPersonalCardViewController.presenter = presenter
         } else {
             let presenter = CreatePersonalCardPresenter()
             presenter.delegate = self
@@ -85,7 +85,7 @@ private extension PersonalCardDetailsPresenter {
 
     func syncViewDataSource() {
         let userInfoSection = PersonalCardDetails.Section(items: [
-            .userInfo(model: cardDetails)
+            //.userInfo(model: cardDetails)
         ])
 
         var getInTouchSection =  PersonalCardDetails.Section(items: [
