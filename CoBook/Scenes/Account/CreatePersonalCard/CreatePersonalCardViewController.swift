@@ -49,7 +49,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         presenter.onViewDidLoad()
     }
 
-    func setupHeaderFooterViews() {
+    func setupSaveCardView() {
         tableView.tableFooterView = cardSaveView
     }
 

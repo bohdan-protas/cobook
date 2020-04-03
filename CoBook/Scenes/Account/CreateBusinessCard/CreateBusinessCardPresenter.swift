@@ -67,6 +67,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
+        view?.setupSaveCardView()
         setupDataSource()
     }
 
@@ -230,10 +231,11 @@ private extension CreateBusinessCardPresenter {
                 strongSelf.view?.errorAlert(message: interestsListRequestError?.localizedDescription)
             }
 
-            strongSelf.view?.setupSaveCardView()
             strongSelf.view?.tableView.reloadData()
         }
     }
+
+    
 }
 
 // MARK: - CardBackgroundManagmentTableViewCellDelegate

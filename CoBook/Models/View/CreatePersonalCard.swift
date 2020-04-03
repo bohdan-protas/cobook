@@ -11,28 +11,46 @@ import UIKit
 enum CreatePersonalCard {
 
     enum Cell {
-        case avatarPhotoManagment(sourceType: CardAvatarPhotoManagmentTableViewCell.SourceType, imagePath: String?)
+        case avatarManagment(model: CardAvatarManagmentCellModel)
         case title(text: String)
-        case textField(model: TextFieldModel)
-        case actionTextField(model: ActionFieldModel)
-        case textView(model: TextFieldModel)
-        case interests
-        case socials
         case sectionHeader
+        case textField(model: TextFieldModel)
+        case actionField(model: ActionFieldModel)
+        case textView(model: TextFieldModel)
+        case socials
+        case interests
     }
 
     enum ActionType: String {
         case activityType
         case placeOfLiving
         case activityRegion
-        case city
-        case region
-        case address
     }
 
-//    struct CreatePersonalCardViewModel: Encodable {
-//        var avatarId: String?
-//        var avatarUrl: String?
+    struct DetailsModel {
+        var avatarImage: FileDataApiModel?
+
+        var position: String?
+        var practiseType: PracticeModel?
+        var city: PlaceModel?
+        var region: PlaceModel?
+        var description: String?
+
+        var contactTelephone: String?
+        var contactEmail: String?
+
+        var interests: [InterestModel] = []
+        var socials: [Social.ListItem] = []
+        var practices: [PracticeModel] = []
+    }
+
+
+
+}
+
+    //    struct CreatePersonalCardViewModel: Encodable {
+    //        var avatarId: String?
+    //        var avatarUrl: String?
 //        var city: PlaceApiModel = PlaceApiModel()
 //        var region: PlaceApiModel = PlaceApiModel()
 //        var position: String?
@@ -98,10 +116,6 @@ enum CreatePersonalCard {
 //            try container.encodeIfPresent(list, forKey: .socialNetworks)
 //        }
 //    }
-
-
-}
-
 
 
 
