@@ -31,23 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppStorage.State.isFirstAppLaunch = false
         }
 
-        if AppStorage.User.profile?.userId == nil {
-            if AppStorage.User.isTutorialShown {
-                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                window?.rootViewController = signUpNavigationController
-            } else {
-                AppStorage.User.isTutorialShown = true
-                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-                window?.rootViewController = onboardingViewController
-            }
-        } else {
-            if AppStorage.Auth.refreshToken == nil {
-                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-                window?.rootViewController = signInViewController
-            } else {
-                window?.rootViewController = MainTabBarController()
-            }
-        }
+        let controller: SearchNavigationController = UIStoryboard.search.initiateViewControllerFromType()
+        window?.rootViewController = controller
+
+//        if AppStorage.User.profile?.userId == nil {
+//            if AppStorage.User.isTutorialShown {
+//                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+//                window?.rootViewController = signUpNavigationController
+//            } else {
+//                AppStorage.User.isTutorialShown = true
+//                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+//                window?.rootViewController = onboardingViewController
+//            }
+//        } else {
+//            if AppStorage.Auth.refreshToken == nil {
+//                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+//                window?.rootViewController = signInViewController
+//            } else {
+//                window?.rootViewController = MainTabBarController()
+//            }
+//        }
 
 
         return true

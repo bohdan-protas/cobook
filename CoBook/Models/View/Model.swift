@@ -45,3 +45,12 @@ struct CardAvatarManagmentCellModel {
 struct BackgroundManagmentImageCellModel {
     var imagePath: String?
 }
+
+struct CardPreviewModel {
+    var id: Int
+    var image: String?
+    var firstName: String?
+    var lastName: String?
+    var profession: String?
+    var telephone: String?
+}
