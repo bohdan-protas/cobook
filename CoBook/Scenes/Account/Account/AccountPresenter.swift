@@ -102,11 +102,11 @@ private extension AccountPresenter {
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
-                AppStorage.User.profile = response
+                AppStorage.User.data = response
                 strongSelf.personalCardsList = response?.personalCardsList ?? []
                 strongSelf.setupDataSource()
             case let .failure(error):
-                strongSelf.personalCardsList = AppStorage.User.profile?.personalCardsList ?? []
+                strongSelf.personalCardsList = AppStorage.User.data?.personalCardsList ?? []
                 strongSelf.setupDataSource()
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
@@ -116,10 +116,10 @@ private extension AccountPresenter {
     func setupDataSource() {
         var cardsPreviceSection = Account.Section(items: [
             .userInfoHeader(avatarUrl: personalCardsList.first?.avatar?.sourceUrl,
-                            firstName: AppStorage.User.profile?.firstName,
-                            lastName: AppStorage.User.profile?.lastName,
-                            telephone: AppStorage.User.profile?.telephone.number,
-                            email: AppStorage.User.profile?.email.address),
+                            firstName: AppStorage.User.data?.firstName,
+                            lastName: AppStorage.User.data?.lastName,
+                            telephone: AppStorage.User.data?.telephone.number,
+                            email: AppStorage.User.data?.email.address),
             .sectionHeader
         ])
 
@@ -133,8 +133,8 @@ private extension AccountPresenter {
             personalCardsList.forEach {
                 cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
                                                                                                  image: $0.avatar?.sourceUrl,
-                                                                                                 firstName: AppStorage.User.profile?.firstName,
-                                                                                                 lastName: AppStorage.User.profile?.lastName,
+                                                                                                 firstName: AppStorage.User.data?.firstName,
+                                                                                                 lastName: AppStorage.User.data?.lastName,
                                                                                                  profession: $0.practiceType?.title,
                                                                                                  telephone: $0.telephone?.number)))
                 cardsPreviceSection.items.append(.action(type: .createBusinessCard))

@@ -274,6 +274,17 @@ extension APIClient {
 extension APIClient {
 
     /**
+     Request create business card
+    */
+    @discardableResult
+    func createBusinessCard(parameters: CreateBusinessCardParametersApiModel,
+                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.createBusinessCard(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
      Request create personal card
     */
     @discardableResult

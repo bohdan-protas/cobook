@@ -106,7 +106,7 @@ private extension CreateBusinessCardViewController {
 extension CreateBusinessCardViewController: SearchTableViewControllerDelegate {
 
     func searchTableViewController(_ controller: SearchTableViewController, didSelected item: CardPreviewModel?) {
-        presenter.addEmoployer(model: item)
+        presenter.addEmploy(model: item)
     }
 
 

@@ -9,7 +9,7 @@
 import UIKit
 import GooglePlaces
 
-protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView {
+protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     var tableView: UITableView! { get set }
     func setupLayout()
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
@@ -19,12 +19,12 @@ protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView {
     func showSearchEmployersControlelr()
 }
 
-class CreateBusinessCardPresenter: NSObject, BasePresenter {
+private enum Defaults {
+    static let avatarImageCompressionQuality: CGFloat = 0.1
+    static let bgImageCompressionQuality: CGFloat = 0.1
+}
 
-    enum Defaults {
-        static let avatarImageCompressionQuality: CGFloat = 0.1
-        static let bgImageCompressionQuality: CGFloat = 0.1
-    }
+class CreateBusinessCardPresenter: NSObject, BasePresenter {
 
     // MARK: Properties
     private var view: CreateBusinessCardView?
@@ -75,10 +75,24 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     }
 
     func createBusinessCard() {
-        
+        let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
+
+        APIClient.default.createBusinessCard(parameters: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case let .failure(error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
-    func addEmoployer(model: CardPreviewModel?) {
+    func addEmploy(model: CardPreviewModel?) {
         if let model = model {
             if businessCardDetailsModel.employers.contains(where: { $0 == model }) {
                 view?.errorAlert(message: "Вибраний працівник вже доданий")
@@ -165,6 +179,7 @@ private extension CreateBusinessCardPresenter {
     func uploadCompanyAvatar(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
+            view?.errorAlert(message: "Помилка завантаження фото")
             return
         }
 
@@ -186,6 +201,7 @@ private extension CreateBusinessCardPresenter {
     func uploadCompanyBg(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
+            view?.errorAlert(message: "Помилка завантаження фото")
             return
         }
 
@@ -376,7 +392,7 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
 
         case .address:
             let filter = GMSAutocompleteFilter()
-            filter.type = .address
+            filter.type = .establishment
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedAddress) in
                 if let id = fetchedAddress.placeID {
                     cell.textField.text = fetchedAddress.name

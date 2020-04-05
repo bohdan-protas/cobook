@@ -41,7 +41,7 @@ enum AppStorage {
         static var isUserCompletedRegistration: Bool
 
         @UserDefaultObjectStorageWrapper(key: Keys.profile.rawValue, defaultValue: ProfileApiModel())
-        static var profile: ProfileApiModel?
+        static var data: ProfileApiModel?
     }
 
     enum Auth {

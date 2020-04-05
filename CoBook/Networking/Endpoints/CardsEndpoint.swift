@@ -10,6 +10,7 @@ import Alamofire
 
 enum CardsEndpoint: Endpoint {
 
+    case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
 
@@ -27,6 +28,8 @@ enum CardsEndpoint: Endpoint {
             return "/cards/personal"
         case .getCardInfo:
             return "/cards/info"
+        case .createBusinessCard:
+            return "/cards/business"
         }
     }
 
@@ -38,6 +41,8 @@ enum CardsEndpoint: Endpoint {
             return [
                 APIConstants.ParameterKey.id: id,
             ]
+        case .createBusinessCard(let parameters):
+            return parameters.dictionary
         }
     }
 
