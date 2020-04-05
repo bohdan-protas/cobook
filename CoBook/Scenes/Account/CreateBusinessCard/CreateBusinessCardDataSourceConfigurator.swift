@@ -22,6 +22,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
     let interestsListConfigurator: CellConfigurator<Void?, InterestsSelectionTableViewCell>
     let avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>
     let backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>
+    let employersSearchCellConfigurator: CellConfigurator<Void?, SearchTableViewCell>
 
     // MARK: Initializer
     init(presenter: CreateBusinessCardPresenter) {
@@ -96,6 +97,11 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return cell
         }
 
+        employersSearchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SearchTableViewCell in
+            cell.delegate = presenter
+            return cell
+        }
+
 
     }
 
@@ -117,6 +123,8 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return avatarManagmentConfigurator.reuseIdentifier
         case .backgroundImageManagment:
             return backgroundImageManagmentConfigurator.reuseIdentifier
+        case .employersSearch:
+            return employersSearchCellConfigurator.reuseIdentifier
         }
     }
 
@@ -140,6 +148,8 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return avatarManagmentConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         case .backgroundImageManagment(let model):
             return backgroundImageManagmentConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .employersSearch:
+            return employersSearchCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -153,6 +163,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
         interestsListConfigurator.registerCells(in: tableView)
         avatarManagmentConfigurator.registerCells(in: tableView)
         backgroundImageManagmentConfigurator.registerCells(in: tableView)
+        employersSearchCellConfigurator.registerCells(in: tableView)
     }
 }
 

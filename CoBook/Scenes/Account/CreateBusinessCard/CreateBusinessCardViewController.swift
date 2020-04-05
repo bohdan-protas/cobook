@@ -9,12 +9,12 @@
 import UIKit
 import GooglePlaces
 
-class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardView {
+private enum Defaults {
+    static let estimatedRowHeight: CGFloat = 44
+    static let footerHeight: CGFloat = 124
+}
 
-    enum Defaults {
-        static let estimatedRowHeight: CGFloat = 44
-        static let footerHeight: CGFloat = 124
-    }
+class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardView {
 
     // MARK: Properties
     @IBOutlet var tableView: UITableView!
@@ -31,7 +31,7 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
     private lazy var cardSaveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
         view.onSaveTapped = { [weak self] in
-            self?.presenter.onCreateBusinessCard()
+            self?.presenter.createBusinessCard()
         }
         return view
     }()
@@ -45,9 +45,20 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupLayout()
         presenter.attachView(self)
         presenter.onViewDidLoad()
+    }
+
+    deinit {
+        presenter.detachView()
+    }
+
+    // MARK: CreateBusinessCardView
+    func setupLayout() {
+        self.navigationItem.title = "Створення бізнес візитки"
+
+        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
+        tableView.delegate = self
     }
 
     func setupSaveCardView() {
@@ -81,14 +92,6 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
 
 // MARK: Privates
 private extension CreateBusinessCardViewController {
-
-    func setupLayout() {
-        self.navigationItem.title = "Створення бізнес візитки"
-
-        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
-        tableView.delegate = self
-    }
-
 
 }
 

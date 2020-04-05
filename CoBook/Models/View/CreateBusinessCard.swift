@@ -20,6 +20,7 @@ enum CreateBusinessCard {
         case textView(model: TextFieldModel)
         case socials
         case interests
+        case employersSearch
     }
 
     enum ActionType: String {

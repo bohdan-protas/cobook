@@ -11,6 +11,7 @@ import GooglePlaces
 
 protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView {
     var tableView: UITableView! { get set }
+    func setupLayout()
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func showPickerController(completion: ((UIImage) -> Void)?)
     func setupSaveCardView()
@@ -67,11 +68,12 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
+        view?.setupLayout()
         view?.setupSaveCardView()
         setupDataSource()
     }
 
-    func onCreateBusinessCard() {
+    func createBusinessCard() {
         
     }
 
@@ -116,19 +118,25 @@ private extension CreateBusinessCardPresenter {
             .socials,
         ])
 
+        let employersSection = Section<CreateBusinessCard.Cell>(items: [
+            .sectionHeader,
+            .title(text: "Працівники компанії:"),
+            .employersSearch
+        ])
+
         let interestsSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "Інтереси(для рекомендацій):"),
             .interests
         ])
 
-        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, interestsSection]
+        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, employersSection, interestsSection]
     }
 
 
 }
 
-// MARK: - User cases
+// MARK: - Use cases
 private extension CreateBusinessCardPresenter {
 
     func createPersonalCard() {
@@ -236,6 +244,16 @@ private extension CreateBusinessCardPresenter {
     }
 
     
+}
+
+// MARK: - CardBackgroundManagmentTableViewCellDelegate
+extension CreateBusinessCardPresenter: SearchTableViewCellDelegate {
+
+    func onSearchTapped(_ cell: SearchTableViewCell) {
+        Log.debug("Search tapped!")
+    }
+
+
 }
 
 // MARK: - CardBackgroundManagmentTableViewCellDelegate
@@ -367,7 +385,6 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
             businessCardDetailsModel.socials = newValue
         }
     }
-
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
         switch item {

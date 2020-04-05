@@ -42,7 +42,6 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
                 !(personalCardDetailsModel.contactEmail ?? "").isEmpty
             )
 
-            
             view?.setSaveButtonEnabled(isRequiredDataFilled)
             updateViewDataSource()
         }
