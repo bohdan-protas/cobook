@@ -36,6 +36,7 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         return view
     }()
 
+
     var presenter = CreateBusinessCardPresenter()
 
     private var placeCompletion: ((GMSPlace) -> Void)?
@@ -87,11 +88,27 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    func showSearchEmployersControlelr() {
+        let searchNavigationController: SearchNavigationController = UIStoryboard.search.initiateViewControllerFromType()
+        searchNavigationController.searchTableViewControllerDelegate = self
+        self.present(searchNavigationController, animated: true, completion: nil)
+    }
+
 
 }
 
 // MARK: Privates
 private extension CreateBusinessCardViewController {
+
+}
+
+// MARK: - SearchTableViewControllerDelegate
+extension CreateBusinessCardViewController: SearchTableViewControllerDelegate {
+
+    func searchTableViewController(_ controller: SearchTableViewController, didSelected item: CardPreviewModel?) {
+        presenter.addEmoployer(model: item)
+    }
+
 
 }
 

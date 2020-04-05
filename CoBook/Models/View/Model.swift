@@ -46,11 +46,19 @@ struct BackgroundManagmentImageCellModel {
     var imagePath: String?
 }
 
-struct CardPreviewModel {
-    var id: Int
+struct CardPreviewModel: Equatable {
+    var id: String?
     var image: String?
     var firstName: String?
     var lastName: String?
     var profession: String?
     var telephone: String?
+
+    static func == (lhs: CardPreviewModel, rhs: CardPreviewModel) -> Bool {
+        if let lhsId = lhs.id, let rhsId = rhs.id {
+            return lhsId == rhsId
+        } else {
+            return false
+        }
+    }
 }

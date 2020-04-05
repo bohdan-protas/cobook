@@ -16,6 +16,7 @@ protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView {
     func showPickerController(completion: ((UIImage) -> Void)?)
     func setupSaveCardView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
+    func showSearchEmployersControlelr()
 }
 
 class CreateBusinessCardPresenter: NSObject, BasePresenter {
@@ -75,6 +76,19 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
 
     func createBusinessCard() {
         
+    }
+
+    func addEmoployer(model: CardPreviewModel?) {
+        if let model = model {
+            if businessCardDetailsModel.employers.contains(where: { $0 == model }) {
+                view?.errorAlert(message: "Вибраний працівник вже доданий")
+                return
+            }
+
+            businessCardDetailsModel.employers.append(model)
+        } else {
+            Log.error("User not defined")
+        }
     }
 
 }
@@ -250,7 +264,7 @@ private extension CreateBusinessCardPresenter {
 extension CreateBusinessCardPresenter: SearchTableViewCellDelegate {
 
     func onSearchTapped(_ cell: SearchTableViewCell) {
-        Log.debug("Search tapped!")
+        view?.showSearchEmployersControlelr()
     }
 
 

@@ -26,28 +26,10 @@
             </objects>
             <point key="canvasLocation" x="722" y="146"/>
         </scene>
-        <!--Cards Search Result Table View Controller-->
-        <scene sceneID="SJ7-ar-hfS">
-            <objects>
-                <tableViewController storyboardIdentifier="CardsSearchResultTableViewController" id="LYM-vy-zlf" customClass="CardsSearchResultTableViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="X8g-hL-UXI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="LYM-vy-zlf" id="9R9-M1-umj"/>
-                            <outlet property="delegate" destination="LYM-vy-zlf" id="B36-D4-GaD"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f9J-m7-uuA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="721" y="856"/>
-        </scene>
         <!--Search Navigation Controller-->
         <scene sceneID="3IS-ez-IdW">
             <objects>
-                <navigationController storyboardIdentifier="SearchNavigationController" id="0GY-8x-N6o" customClass="SearchNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SearchNavigationController" modalPresentationStyle="currentContext" id="0GY-8x-N6o" customClass="SearchNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8bh-9p-oRA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

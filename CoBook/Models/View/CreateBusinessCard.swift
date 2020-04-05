@@ -44,6 +44,7 @@ enum CreateBusinessCard {
         var address: PlaceModel?
         var schedule: String?
 
+        var employers = [CardPreviewModel]()
         var interests: [InterestModel] = []
         var socials: [Social.ListItem] = []
         var practices: [PracticeModel] = []

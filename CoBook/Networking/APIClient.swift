@@ -341,3 +341,19 @@ extension APIClient {
     }
 
 }
+
+// MARK: - UsersEndpoint requests
+extension APIClient {
+
+    @discardableResult
+    func searchEmployee(searchQuery: String?,
+                     limit: Int? = nil,
+                     offset: Int? = nil,
+                     completion: @escaping (Result<[EmployersSearchItemApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = UsersEndpoint.searchEmployee(searchQuery: searchQuery, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
+}

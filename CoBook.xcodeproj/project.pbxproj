@@ -51,9 +51,9 @@
 		B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */; };
 		B824E1B42437C5940091C491 /* CreatePersonalCardParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1B32437C5940091C491 /* CreatePersonalCardParameters.swift */; };
 		B8255A1E243A266B00C4169D /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8255A1D243A266B00C4169D /* Search.storyboard */; };
-		B8255A20243A269E00C4169D /* CardsSearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8255A1F243A269E00C4169D /* CardsSearchResultTableViewController.swift */; };
 		B8255A22243A26B400C4169D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8255A21243A26B400C4169D /* SearchTableViewController.swift */; };
 		B8255A24243A2C2500C4169D /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8255A23243A2C2500C4169D /* SearchNavigationController.swift */; };
+		B8255A26243A58A400C4169D /* UsersEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8255A25243A58A400C4169D /* UsersEndpoint.swift */; };
 		B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */; };
 		B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */; };
 		B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */; };
@@ -124,6 +124,7 @@
 		B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F0240337390007EB60 /* BaseApiResponse.swift */; };
 		B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F424033B3E0007EB60 /* APIClient.swift */; };
 		B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */; };
+		B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */; };
 		B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */; };
 		B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* DesignableButton.swift */; };
 		B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC523FAC88C0044605C /* LoaderButton.swift */; };
@@ -227,9 +228,9 @@
 		B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B824E1B32437C5940091C491 /* CreatePersonalCardParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardParameters.swift; sourceTree = "<group>"; };
 		B8255A1D243A266B00C4169D /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
-		B8255A1F243A269E00C4169D /* CardsSearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsSearchResultTableViewController.swift; sourceTree = "<group>"; };
 		B8255A21243A26B400C4169D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		B8255A23243A2C2500C4169D /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
+		B8255A25243A58A400C4169D /* UsersEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersEndpoint.swift; sourceTree = "<group>"; };
 		B82573F323F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B82573F423F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingPageCollectionViewCell.xib; sourceTree = "<group>"; };
 		B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
@@ -302,6 +303,7 @@
 		B84B94F0240337390007EB60 /* BaseApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiResponse.swift; sourceTree = "<group>"; };
 		B84B94F424033B3E0007EB60 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIResponseData.swift; sourceTree = "<group>"; };
+		B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersSearchItemApiModel.swift; sourceTree = "<group>"; };
 		B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsEndpoint.swift; sourceTree = "<group>"; };
 		B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		B8625AC323FA94D30044605C /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
@@ -510,7 +512,6 @@
 		B823AB6A23F156D600DE13EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B8255A1C243A264E00C4169D /* Search */,
 				B826B0EB23F442AC009041DD /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B82200B8240FB87A00A17D2C /* Account */,
@@ -644,7 +645,6 @@
 				B8255A1D243A266B00C4169D /* Search.storyboard */,
 				B8255A23243A2C2500C4169D /* SearchNavigationController.swift */,
 				B8255A21243A26B400C4169D /* SearchTableViewController.swift */,
-				B8255A1F243A269E00C4169D /* CardsSearchResultTableViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -734,6 +734,7 @@
 		B82A2118242135C200D0D9F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B8255A1C243A264E00C4169D /* Search */,
 				B8DC630A2434FBED00A2ED58 /* Section.swift */,
 				B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */,
 				B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */,
@@ -836,6 +837,7 @@
 				B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */,
 				B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */,
 				B8AB3F082422FBE800E06E53 /* ProfileEndpoint.swift */,
+				B8255A25243A58A400C4169D /* UsersEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -852,6 +854,7 @@
 				B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */,
 				B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */,
 				B824E1B32437C5940091C491 /* CreatePersonalCardParameters.swift */,
+				B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1270,6 +1273,7 @@
 				B84A15E52410F2DA00C4DC11 /* AccountDataSource.swift in Sources */,
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
+				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */,
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B8AB83EE24280F130041B879 /* PersonalCardDetailsDataSource.swift in Sources */,
@@ -1304,8 +1308,8 @@
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
 				B8DE5E512419227A00F4F60B /* UITableView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
-				B8255A20243A269E00C4169D /* CardsSearchResultTableViewController.swift in Sources */,
 				B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */,
+				B8255A26243A58A400C4169D /* UsersEndpoint.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
