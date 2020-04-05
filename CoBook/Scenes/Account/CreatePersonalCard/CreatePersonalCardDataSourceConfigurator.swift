@@ -21,7 +21,6 @@ struct CreatePersonalCardDataSourceConfigurator: CellConfiguratorType {
     let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
     let interestsListConfigurator: CellConfigurator<Void?, InterestsSelectionTableViewCell>
     let avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>
-    let backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>
 
     // MARK: Initializer
     init(presenter: CreatePersonalCardPresenter) {
@@ -90,14 +89,6 @@ struct CreatePersonalCardDataSourceConfigurator: CellConfiguratorType {
             cell.fill(sourceType: model.sourceType, imagePath: model.imagePath)
             return cell
         }
-
-        backgroundImageManagmentConfigurator = CellConfigurator { (cell, model: BackgroundManagmentImageCellModel, tableView, indexPath) -> CardBackgroundManagmentTableViewCell in
-            //cell.delegate = presenter
-            cell.set(imagePath: model.imagePath)
-            return cell
-        }
-
-
     }
 
     func reuseIdentifier(for item: CreatePersonalCard.Cell, indexPath: IndexPath) -> String {

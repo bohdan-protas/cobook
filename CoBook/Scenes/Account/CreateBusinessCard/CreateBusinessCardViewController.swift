@@ -9,12 +9,12 @@
 import UIKit
 import GooglePlaces
 
-class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardView {
+private enum Defaults {
+    static let estimatedRowHeight: CGFloat = 44
+    static let footerHeight: CGFloat = 124
+}
 
-    enum Defaults {
-        static let estimatedRowHeight: CGFloat = 44
-        static let footerHeight: CGFloat = 124
-    }
+class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardView {
 
     // MARK: Properties
     @IBOutlet var tableView: UITableView!
@@ -31,10 +31,11 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
     private lazy var cardSaveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
         view.onSaveTapped = { [weak self] in
-            self?.presenter.onCreateBusinessCard()
+            self?.presenter.createBusinessCard()
         }
         return view
     }()
+
 
     var presenter = CreateBusinessCardPresenter()
 
@@ -45,9 +46,20 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupLayout()
         presenter.attachView(self)
         presenter.onViewDidLoad()
+    }
+
+    deinit {
+        presenter.detachView()
+    }
+
+    // MARK: CreateBusinessCardView
+    func setupLayout() {
+        self.navigationItem.title = "Створення бізнес візитки"
+
+        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
+        tableView.delegate = self
     }
 
     func setupSaveCardView() {
@@ -76,17 +88,25 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    func showSearchEmployersControlelr() {
+        let searchNavigationController: SearchNavigationController = UIStoryboard.search.initiateViewControllerFromType()
+        searchNavigationController.searchTableViewControllerDelegate = self
+        self.present(searchNavigationController, animated: true, completion: nil)
+    }
+
 
 }
 
 // MARK: Privates
 private extension CreateBusinessCardViewController {
 
-    func setupLayout() {
-        self.navigationItem.title = "Створення бізнес візитки"
+}
 
-        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
-        tableView.delegate = self
+// MARK: - SearchTableViewControllerDelegate
+extension CreateBusinessCardViewController: SearchTableViewControllerDelegate {
+
+    func searchTableViewController(_ controller: SearchTableViewController, didSelected item: CardPreviewModel?) {
+        presenter.addEmploy(model: item)
     }
 
 

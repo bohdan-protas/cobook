@@ -274,6 +274,17 @@ extension APIClient {
 extension APIClient {
 
     /**
+     Request create business card
+    */
+    @discardableResult
+    func createBusinessCard(parameters: CreateBusinessCardParametersApiModel,
+                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.createBusinessCard(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
      Request create personal card
     */
     @discardableResult
@@ -339,5 +350,21 @@ extension APIClient {
         let endpoint = ProfileEndpoint.profile
         return performRequest(endpoint: endpoint, completion: completion)
     }
+
+}
+
+// MARK: - UsersEndpoint requests
+extension APIClient {
+
+    @discardableResult
+    func searchEmployee(searchQuery: String?,
+                     limit: Int? = nil,
+                     offset: Int? = nil,
+                     completion: @escaping (Result<[EmployersSearchItemApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = UsersEndpoint.searchEmployee(searchQuery: searchQuery, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 }

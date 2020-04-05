@@ -106,3 +106,5 @@ struct ProfileApiModel: Codable {
     var email: EmailApiModel = EmailApiModel()
     var personalCardsList: [CardPreviewApiModel]?
 }
+
+

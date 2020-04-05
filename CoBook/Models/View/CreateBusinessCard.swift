@@ -20,6 +20,8 @@ enum CreateBusinessCard {
         case textView(model: TextFieldModel)
         case socials
         case interests
+        case employersSearch
+        case employersList
     }
 
     enum ActionType: String {
@@ -43,6 +45,7 @@ enum CreateBusinessCard {
         var address: PlaceModel?
         var schedule: String?
 
+        var employers = [CardPreviewModel]()
         var interests: [InterestModel] = []
         var socials: [Social.ListItem] = []
         var practices: [PracticeModel] = []

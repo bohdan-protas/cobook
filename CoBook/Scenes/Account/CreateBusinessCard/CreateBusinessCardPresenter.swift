@@ -9,20 +9,22 @@
 import UIKit
 import GooglePlaces
 
-protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView {
+protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     var tableView: UITableView! { get set }
+    func setupLayout()
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func showPickerController(completion: ((UIImage) -> Void)?)
     func setupSaveCardView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
+    func showSearchEmployersControlelr()
+}
+
+private enum Defaults {
+    static let avatarImageCompressionQuality: CGFloat = 0.1
+    static let bgImageCompressionQuality: CGFloat = 0.1
 }
 
 class CreateBusinessCardPresenter: NSObject, BasePresenter {
-
-    enum Defaults {
-        static let avatarImageCompressionQuality: CGFloat = 0.1
-        static let bgImageCompressionQuality: CGFloat = 0.1
-    }
 
     // MARK: Properties
     private var view: CreateBusinessCardView?
@@ -67,12 +69,41 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
+        view?.setupLayout()
         view?.setupSaveCardView()
         setupDataSource()
     }
 
-    func onCreateBusinessCard() {
-        
+    func createBusinessCard() {
+        let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
+
+        APIClient.default.createBusinessCard(parameters: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case let .failure(error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func addEmploy(model: CardPreviewModel?) {
+        if let model = model {
+            if businessCardDetailsModel.employers.contains(where: { $0 == model }) {
+                view?.errorAlert(message: "Вибраний працівник вже доданий")
+                return
+            }
+
+            businessCardDetailsModel.employers.append(model)
+            view?.tableView.reloadData()
+        } else {
+            Log.error("User not defined")
+        }
     }
 
 }
@@ -116,19 +147,29 @@ private extension CreateBusinessCardPresenter {
             .socials,
         ])
 
+        var employersSection = Section<CreateBusinessCard.Cell>(items: [
+            .sectionHeader,
+            .title(text: "Працівники компанії:"),
+            .employersSearch,
+        ])
+        if !businessCardDetailsModel.employers.isEmpty {
+            employersSection.items.append(.employersList)
+        }
+
+
         let interestsSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "Інтереси(для рекомендацій):"),
             .interests
         ])
 
-        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, interestsSection]
+        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, employersSection, interestsSection]
     }
 
 
 }
 
-// MARK: - User cases
+// MARK: - Use cases
 private extension CreateBusinessCardPresenter {
 
     func createPersonalCard() {
@@ -138,6 +179,7 @@ private extension CreateBusinessCardPresenter {
     func uploadCompanyAvatar(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
+            view?.errorAlert(message: "Помилка завантаження фото")
             return
         }
 
@@ -159,6 +201,7 @@ private extension CreateBusinessCardPresenter {
     func uploadCompanyBg(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
+            view?.errorAlert(message: "Помилка завантаження фото")
             return
         }
 
@@ -238,6 +281,40 @@ private extension CreateBusinessCardPresenter {
     
 }
 
+// MARK: - EmployersPreviewHorizontalListTableViewCellDataSource
+extension CreateBusinessCardPresenter: EmployersPreviewHorizontalListTableViewCellDataSource, EmployersPreviewHorizontalListTableViewCellDelegate {
+
+    func didLastEmployDeleted(_ cell: EmployersPreviewHorizontalListTableViewCell) {
+        if let indexPath = view?.tableView.indexPath(for: cell) {
+            view?.tableView.beginUpdates()
+            view?.tableView.deleteRows(at: [indexPath], with: .top)
+            view?.tableView.endUpdates()
+        }
+
+    }
+
+    var employers: [CardPreviewModel] {
+        get {
+            return businessCardDetailsModel.employers
+        }
+        set {
+            businessCardDetailsModel.employers = newValue
+        }
+    }
+
+
+}
+
+// MARK: - CardBackgroundManagmentTableViewCellDelegate
+extension CreateBusinessCardPresenter: SearchTableViewCellDelegate {
+
+    func onSearchTapped(_ cell: SearchTableViewCell) {
+        view?.showSearchEmployersControlelr()
+    }
+
+
+}
+
 // MARK: - CardBackgroundManagmentTableViewCellDelegate
 extension CreateBusinessCardPresenter: CardBackgroundManagmentTableViewCellDelegate {
 
@@ -315,7 +392,7 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
 
         case .address:
             let filter = GMSAutocompleteFilter()
-            filter.type = .address
+            filter.type = .establishment
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedAddress) in
                 if let id = fetchedAddress.placeID {
                     cell.textField.text = fetchedAddress.name
@@ -367,7 +444,6 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
             businessCardDetailsModel.socials = newValue
         }
     }
-
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
         switch item {

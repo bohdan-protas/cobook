@@ -32,8 +32,6 @@ class InterestsSelectionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        interestsCollectionViewFlowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-
         interestsCollectionView.register(InterestItemCollectionViewCell.nib, forCellWithReuseIdentifier: InterestItemCollectionViewCell.identifier)
         interestsCollectionView.delegate = self
         interestsCollectionView.dataSource = self
