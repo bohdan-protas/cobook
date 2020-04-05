@@ -86,6 +86,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
             }
 
             businessCardDetailsModel.employers.append(model)
+            view?.tableView.reloadData()
         } else {
             Log.error("User not defined")
         }
@@ -132,11 +133,15 @@ private extension CreateBusinessCardPresenter {
             .socials,
         ])
 
-        let employersSection = Section<CreateBusinessCard.Cell>(items: [
+        var employersSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "Працівники компанії:"),
-            .employersSearch
+            .employersSearch,
         ])
+        if !businessCardDetailsModel.employers.isEmpty {
+            employersSection.items.append(.employersList)
+        }
+
 
         let interestsSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
@@ -258,6 +263,30 @@ private extension CreateBusinessCardPresenter {
     }
 
     
+}
+
+// MARK: - EmployersPreviewHorizontalListTableViewCellDataSource
+extension CreateBusinessCardPresenter: EmployersPreviewHorizontalListTableViewCellDataSource, EmployersPreviewHorizontalListTableViewCellDelegate {
+
+    func didLastEmployDeleted(_ cell: EmployersPreviewHorizontalListTableViewCell) {
+        if let indexPath = view?.tableView.indexPath(for: cell) {
+            view?.tableView.beginUpdates()
+            view?.tableView.deleteRows(at: [indexPath], with: .top)
+            view?.tableView.endUpdates()
+        }
+
+    }
+
+    var employers: [CardPreviewModel] {
+        get {
+            return businessCardDetailsModel.employers
+        }
+        set {
+            businessCardDetailsModel.employers = newValue
+        }
+    }
+
+
 }
 
 // MARK: - CardBackgroundManagmentTableViewCellDelegate

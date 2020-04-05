@@ -125,6 +125,10 @@
 		B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F424033B3E0007EB60 /* APIClient.swift */; };
 		B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */; };
 		B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */; };
+		B8559F57243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F55243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift */; };
+		B8559F58243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F56243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib */; };
+		B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F5A243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift */; };
+		B8559F5D243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F5B243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib */; };
 		B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */; };
 		B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* DesignableButton.swift */; };
 		B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC523FAC88C0044605C /* LoaderButton.swift */; };
@@ -304,6 +308,10 @@
 		B84B94F424033B3E0007EB60 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIResponseData.swift; sourceTree = "<group>"; };
 		B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersSearchItemApiModel.swift; sourceTree = "<group>"; };
+		B8559F55243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersPreviewHorizontalListTableViewCell.swift; sourceTree = "<group>"; };
+		B8559F56243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployersPreviewHorizontalListTableViewCell.xib; sourceTree = "<group>"; };
+		B8559F5A243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployerPreviewHorizontalListItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8559F5B243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployerPreviewHorizontalListItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsEndpoint.swift; sourceTree = "<group>"; };
 		B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		B8625AC323FA94D30044605C /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
@@ -859,6 +867,25 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		B8559F54243A753100787349 /* EmployersPreviewHorizontalListTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8559F59243A76C900787349 /* EmployerPreviewHorizontalListItemCollectionViewCell */,
+				B8559F55243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift */,
+				B8559F56243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib */,
+			);
+			path = EmployersPreviewHorizontalListTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8559F59243A76C900787349 /* EmployerPreviewHorizontalListItemCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8559F5A243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift */,
+				B8559F5B243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib */,
+			);
+			path = EmployerPreviewHorizontalListItemCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		B8625ABC23FA8BDE0044605C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,6 +1065,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8559F54243A753100787349 /* EmployersPreviewHorizontalListTableViewCell */,
 				B825B6F724391427002A27EC /* EmployersSearchTableViewCell */,
 				B824E1AC243766C60091C491 /* CardBackgroundManagmentTableViewCell */,
 				B823B08C242D1ADF0012529D /* CardAvatarPhotoManagmentTableViewCell */,
@@ -1158,6 +1186,7 @@
 				B825B6FB24391448002A27EC /* SearchTableViewCell.xib in Resources */,
 				B828282F241A970D0003D056 /* InterestsSelectionTableViewCell.xib in Resources */,
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
+				B8559F58243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib in Resources */,
 				B8AB8400242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib in Resources */,
 				B8255A1E243A266B00C4169D /* Search.storyboard in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
@@ -1182,6 +1211,7 @@
 				B825742123F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf in Resources */,
 				B825741423F5621500C8CBF8 /* HelveticaNeueCyr-Black.ttf in Resources */,
 				B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */,
+				B8559F5D243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib in Resources */,
 				B825741623F5621500C8CBF8 /* HelveticaNeueCyr-ThinItalic.ttf in Resources */,
 				B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */,
 				B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */,
@@ -1331,6 +1361,7 @@
 				B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */,
 				B8AB83EA24280ECB0041B879 /* PersonalCardDetailsViewController.swift in Sources */,
 				B823B088242CD4F30012529D /* AccountHeaderTableViewCell.swift in Sources */,
+				B8559F57243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
@@ -1377,6 +1408,7 @@
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
+				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,
 				B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,

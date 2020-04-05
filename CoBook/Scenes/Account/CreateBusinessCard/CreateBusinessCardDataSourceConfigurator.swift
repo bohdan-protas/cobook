@@ -23,6 +23,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
     let avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>
     let backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>
     let employersSearchCellConfigurator: CellConfigurator<Void?, SearchTableViewCell>
+    let employersListCellConfigurator: CellConfigurator<Void?, EmployersPreviewHorizontalListTableViewCell>
 
     // MARK: Initializer
     init(presenter: CreateBusinessCardPresenter) {
@@ -102,6 +103,13 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return cell
         }
 
+        employersListCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> EmployersPreviewHorizontalListTableViewCell in
+            cell.dataSource = presenter
+            cell.delegate = presenter
+            cell.collectionView.reloadData()
+            return cell
+        }
+
 
     }
 
@@ -125,6 +133,8 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return backgroundImageManagmentConfigurator.reuseIdentifier
         case .employersSearch:
             return employersSearchCellConfigurator.reuseIdentifier
+        case .employersList:
+            return employersListCellConfigurator.reuseIdentifier
         }
     }
 
@@ -150,6 +160,8 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             return backgroundImageManagmentConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         case .employersSearch:
             return employersSearchCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+        case .employersList:
+            return employersListCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -164,6 +176,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
         avatarManagmentConfigurator.registerCells(in: tableView)
         backgroundImageManagmentConfigurator.registerCells(in: tableView)
         employersSearchCellConfigurator.registerCells(in: tableView)
+        employersListCellConfigurator.registerCells(in: tableView)
     }
 }
 

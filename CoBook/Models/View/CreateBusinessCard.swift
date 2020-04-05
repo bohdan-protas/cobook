@@ -21,6 +21,7 @@ enum CreateBusinessCard {
         case socials
         case interests
         case employersSearch
+        case employersList
     }
 
     enum ActionType: String {
