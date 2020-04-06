@@ -42,8 +42,8 @@ struct CardCreatorApiModel: Decodable {
     }
 }
 
-struct CompanyApiModel: Decodable {
-    var id: Int
+struct CompanyApiModel: Codable {
+    var id: Int?
     var name: String?
 }
 
@@ -67,44 +67,6 @@ struct PracticeTypeApiModel: Codable {
     var title: String?
 }
 
-// MARK: - Card
-struct CardPreviewApiModel: Codable {
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case type
-        case avatar
-        case telephone
-        case email
-        case practiceType = "practice_type"
-    }
-
-    var id: Int
-    var type: CardType
-    var avatar: FileDataApiModel?
-    var telephone: TelephoneApiModel?
-    var email: EmailApiModel?
-    var practiceType: PracticeTypeApiModel?
-}
-
-// MARK: - Profile
-struct ProfileApiModel: Codable {
-
-    enum CodingKeys: String, CodingKey {
-        case userId     = "id"
-        case firstName  = "first_name"
-        case lastName   = "last_name"
-        case telephone
-        case email
-        case personalCardsList = "cards_previews"
-    }
-
-    var userId: String?
-    var firstName: String?
-    var lastName: String?
-    var telephone: TelephoneApiModel = TelephoneApiModel()
-    var email: EmailApiModel = EmailApiModel()
-    var personalCardsList: [CardPreviewApiModel]?
-}
 
 

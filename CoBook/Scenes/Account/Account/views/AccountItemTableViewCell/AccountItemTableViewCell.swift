@@ -13,4 +13,11 @@ class AccountItemTableViewCell: UITableViewCell {
     @IBOutlet var typeImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        typeImageView.image = nil
+        titleLabel.text = ""
+    }
+
 }
