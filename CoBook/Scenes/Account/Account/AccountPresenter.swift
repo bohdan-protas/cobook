@@ -95,12 +95,12 @@ class AccountPresenter: BasePresenter {
             }
             view?.push(controller: personalCardDetailsViewController, animated: true)
 
-        case .businessCardPreview(let model):
-            let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
-            if let strid = model.id, let id = Int(strid) {
-                //personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
-            }
-            view?.push(controller: businessCardDetailsViewController, animated: true)
+        case .businessCardPreview(let model): break
+//            let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+//            if let strid = model.id, let id = Int(strid) {
+//                //personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
+//            }
+//            view?.push(controller: businessCardDetailsViewController, animated: true)
 
         default:
             break
