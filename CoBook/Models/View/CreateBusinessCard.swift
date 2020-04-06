@@ -39,11 +39,14 @@ enum CreateBusinessCard {
         var practiseType: PracticeModel?
         var contactTelephone: String?
         var companyWebSite: String?
+        var companyEmail: String?
 
         var city: PlaceModel?
         var region: PlaceModel?
         var address: PlaceModel?
         var schedule: String?
+
+        var description: String?
 
         var employers = [CardPreviewModel]()
         var interests: [InterestModel] = []

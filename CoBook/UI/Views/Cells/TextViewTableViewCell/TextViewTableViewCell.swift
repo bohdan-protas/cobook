@@ -19,6 +19,13 @@ class TextViewTableViewCell: UITableViewCell {
 
     var textKeyPath: AnyKeyPath?
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        textView.text = ""
+        textKeyPath = nil
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         textView.delegate = self
