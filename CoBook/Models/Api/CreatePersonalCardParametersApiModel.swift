@@ -27,7 +27,9 @@ struct CreatePersonalCardParametersApiModel: Encodable {
         self.position = model.position
         self.description = model.description
         self.practiceTypeId = model.practiseType?.id
-        self.interestsIds = model.interests.compactMap { $0.id }
+        self.interestsIds = model.interests
+            .filter { $0.isSelected }
+            .compactMap { $0.id }
         self.contactTelephone = model.contactTelephone
         self.contactEmail = model.contactEmail
         self.socialNetworks = model.socials

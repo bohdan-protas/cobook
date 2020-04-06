@@ -392,7 +392,7 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
 
         case .address:
             let filter = GMSAutocompleteFilter()
-            filter.type = .establishment
+            filter.type = .address
             view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedAddress) in
                 if let id = fetchedAddress.placeID {
                     cell.textField.text = fetchedAddress.name

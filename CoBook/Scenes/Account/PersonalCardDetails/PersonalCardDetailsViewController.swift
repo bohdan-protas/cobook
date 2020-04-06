@@ -21,6 +21,8 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
 
     // MARK: Properties
     var presenter: PersonalCardDetailsPresenter?
+    var dataSource: TableDataSource<PersonalCardDetailsDataSourceConfigurator>?
+
     private lazy var editCardView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
         view.onEditTapped = { [weak self] in
@@ -32,10 +34,12 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
-
         presenter?.attachView(self)
-        presenter?.onViewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.setupDataSource()
     }
 
     deinit {
@@ -43,7 +47,9 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     }
 
     // MARK: - PersonalCardDetailsView
-    func setupHeaderFooterViews() {
+    func setupLayout() {
+        navigationItem.title = "Персональна візитка"
+        tableView.delegate = self
         tableView.tableFooterView = editCardView
     }
 
@@ -58,17 +64,21 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         }
     }
 
+    func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator) {
+        dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
+        tableView.dataSource = dataSource
+    }
+
+    func updateDataSource(sections: [Section<PersonalCardDetails.Cell>]) {
+        dataSource?.sections = sections
+        tableView.reloadData()
+    }
+
 
 }
 
 // MARK: Privates
 private extension PersonalCardDetailsViewController {
-
-    func setupLayout() {
-        navigationItem.title = "Персональна візитка"
-        tableView.delegate = self
-    }
-
 
 }
 
