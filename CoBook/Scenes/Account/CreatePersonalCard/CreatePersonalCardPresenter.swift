@@ -76,7 +76,6 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     func createPerconalCard() {
         view?.startLoading(text: "Створення...")
         let params = CreatePersonalCardParametersApiModel(model: personalCardDetailsModel)
-        dump(params)
         
         APIClient.default.createPersonalCard(parameters: params) { [weak self] (result) in
             guard let strongSelf = self else { return }
