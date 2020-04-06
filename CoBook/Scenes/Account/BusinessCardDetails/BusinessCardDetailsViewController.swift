@@ -8,17 +8,68 @@
 
 import UIKit
 
-class BusinessCardDetailsViewController: UIViewController {
+private enum Defaults {
+    static let estimatedRowHeight: CGFloat = 44
+    static let hideCardViewHeight: CGFloat = 84
+}
+
+class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetailsView {
 
     @IBOutlet var tableView: UITableView!
 
+    var presenter: BusinessCardDetailsPresenter?
+    var dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?
+
+    private lazy var hideCardView: EditCardView = {
+        let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
+        view.onEditTapped = { [weak self] in
+            //self?.presenter?.editPerconalCard()
+        }
+        return view
+    }()
+
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.attachView(self)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.onViewWillAppear()
+    }
+
+    deinit {
+        presenter?.detachView()
+    }
+
+    // MARK: - BusinessCardDetailsView
+    func setupLayout() {
+        navigationItem.title = "Бізнес візитка"
+        tableView.delegate = self
+        tableView.tableFooterView = hideCardView
+    }
+
+    func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator) {
 
     }
-    
+
+    func updateDataSource(sections: [Section<BusinessCardDetails.Cell>]) {
+
+    }
 
 
+}
 
+// MARK: - UITableViewDelegate
+extension BusinessCardDetailsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
 
 }

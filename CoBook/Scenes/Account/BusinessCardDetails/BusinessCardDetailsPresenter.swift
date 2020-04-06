@@ -10,14 +10,14 @@ import Foundation
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     func setupLayout()
-    func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator)
-    func updateDataSource(sections: [Section<PersonalCardDetails.Cell>])
+    func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator)
+    func updateDataSource(sections: [Section<BusinessCardDetails.Cell>])
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     // MARK: Properties
-    private weak var view: PersonalCardDetailsView?
+    private weak var view: BusinessCardDetailsView?
     private lazy var dataSourceConfigurator: BusinessCardDetailsDataSourceConfigurator = {
         let dataSourceConfigurator = BusinessCardDetailsDataSourceConfigurator(presenter: self)
         return dataSourceConfigurator
@@ -32,7 +32,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     // MARK: Public
-    func attachView(_ view: PersonalCardDetailsView) {
+    func attachView(_ view: BusinessCardDetailsView) {
         self.view = view
     }
 
@@ -40,9 +40,18 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         view = nil
     }
 
+    func onViewDidLoad() {
+        
+    }
+
+    func onViewWillAppear() {
+
+    }
+
 
 }
 
+// MARK: Use cases
 private extension BusinessCardDetailsPresenter {
 
     func setupDataSource(onSuccess: ((CardDetailsApiModel?) -> Void)?) {
