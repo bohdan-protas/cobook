@@ -10,16 +10,12 @@ import Foundation
 
 enum PersonalCardDetails {
 
-    struct Section {
-        var items: [Item]
-    }
-
-    enum Item {
-        case title(text: String)
-        case userInfo(model: CardDetailsApiModel)
-        case getInTouch
-        case socialList(list: [Social.ListItem])
+    enum Cell {
         case sectionHeader
+        case title(text: String)
+        case userInfo(model: CardDetailsApiModel?)
+        case getInTouch
+        case socialList
     }
 
 

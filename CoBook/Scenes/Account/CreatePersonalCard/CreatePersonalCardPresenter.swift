@@ -18,13 +18,14 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func presentPickerController() 
 }
 
+private enum Defaults {
+    static let imageCompressionQuality: CGFloat = 0.1
+}
+
 class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
-    enum Defaults {
-        static let imageCompressionQuality: CGFloat = 0.1
-    }
+    // MARK: - Properties
 
-    // MARK: Properties
     private weak var view: CreatePersonalCardView?
     private var viewDataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?
     private var viewDataSourceConfigurator: CreatePersonalCardDataSourceConfigurator?
@@ -47,12 +48,14 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
         }
     }
     
-    // Lifecycle
+    // MARK: - View Lifecycle
+
     init(detailsModel: CreatePersonalCard.DetailsModel? = nil) {
         self.personalCardDetailsModel = detailsModel ?? CreatePersonalCard.DetailsModel()
     }
 
-    // MARK: Public
+    // MARK: - Public
+
     func attachView(_ view: CreatePersonalCardView) {
         self.view = view
         self.viewDataSourceConfigurator = CreatePersonalCardDataSourceConfigurator(presenter: self)
@@ -73,6 +76,8 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     func createPerconalCard() {
         view?.startLoading(text: "Створення...")
         let params = CreatePersonalCardParametersApiModel(model: personalCardDetailsModel)
+        dump(params)
+        
         APIClient.default.createPersonalCard(parameters: params) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -97,6 +102,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 }
 
 // MARK: - CreatePersonalCardPresenter
+
 private extension CreatePersonalCardPresenter {
     
     func updateViewDataSource() {
@@ -136,6 +142,7 @@ private extension CreatePersonalCardPresenter {
 }
 
 // MARK: - Use cases
+
 private extension CreatePersonalCardPresenter {
 
     func setupDataSource() {
@@ -181,7 +188,14 @@ private extension CreatePersonalCardPresenter {
             strongSelf.view?.stopLoading()
 
             self?.personalCardDetailsModel.practices = practicies
-            self?.personalCardDetailsModel.interests = interests
+
+            let fetchedInterests: [InterestModel] = interests.compactMap { fetched in
+                let isSelected = strongSelf.personalCardDetailsModel.interests.contains(where: { (selected) -> Bool in
+                    return selected.id == fetched.id
+                })
+                return InterestModel(id: fetched.id, title: fetched.title, isSelected: isSelected )
+            }
+            self?.personalCardDetailsModel.interests = fetchedInterests
 
             if practicesTypesListRequestError != nil {
                 strongSelf.view?.errorAlert(message: practicesTypesListRequestError?.localizedDescription)
@@ -221,6 +235,7 @@ private extension CreatePersonalCardPresenter {
 }
 
 // MARK: - InterestsSelectionTableViewCell Delegation
+
 extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource {
 
     var interests: [InterestModel] {
@@ -235,6 +250,7 @@ extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource
 }
 
 // MARK: - TextViewTableViewCell Delegation
+
 extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 
     func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?) {
@@ -248,6 +264,7 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 }
 
 // MARK: - TextFieldTableViewCell Delegation
+
 extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextFieldTableViewCellDataSource {
 
     var pickerList: [String] {
@@ -298,6 +315,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextField
 }
 
 // MARK: - SocialsListTableViewCell delegation
+
 extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, SocialsListTableViewCellDataSource {
 
     var socials: [Social.ListItem] {
@@ -355,6 +373,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, Socials
 }
 
 // MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
+
 extension CreatePersonalCardPresenter: CardAvatarPhotoManagmentTableViewCellDelegate {
 
     func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didSelectAction sender: UIButton) {
