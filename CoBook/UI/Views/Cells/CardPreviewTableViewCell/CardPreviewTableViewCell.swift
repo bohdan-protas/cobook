@@ -16,7 +16,7 @@ class CardPreviewTableViewCell: UITableViewCell {
     @IBOutlet var telephoneNumberLabel: UILabel!
 
     override func prepareForReuse() {
-        titleImageView.image = nil
+        titleImageView.cancelImageRequest()
         companyNameLabel.text = ""
         proffesionLabel.text = ""
         telephoneNumberLabel.text = ""

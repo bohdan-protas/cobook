@@ -17,6 +17,7 @@ struct CreateBusinessCardParametersApiModel {
     var companyWebSite: String?
     var addressPlaceId: String?
     var schedule: String?
+    var description: String?
     var practiseTypeId: Int?
     var interestsIds: [Int] = []
     var contactTelephone: String?
@@ -33,10 +34,11 @@ struct CreateBusinessCardParametersApiModel {
         self.companyWebSite = model.companyWebSite
         self.addressPlaceId = model.address?.googlePlaceId
         self.schedule = model.schedule
+        self.description = model.description
         self.practiseTypeId = model.practiseType?.id
         self.interestsIds = model.interests.compactMap { $0.id }
         self.contactTelephone = model.contactTelephone
-        self.contactEmail = AppStorage.User.data?.email.address
+        self.contactEmail = model.companyEmail
 
         self.socialNetworks = model.socials
             .compactMap {
@@ -61,6 +63,7 @@ extension CreateBusinessCardParametersApiModel: Encodable {
         case companyWebSite = "company_web_site"
         case addressPlaceId = "address_place_id"
         case schedule
+        case description
         case practiseTypeId = "practise_type_id"
         case interestsIds = "interests_ids"
         case contactTelephone = "contact_telephone"

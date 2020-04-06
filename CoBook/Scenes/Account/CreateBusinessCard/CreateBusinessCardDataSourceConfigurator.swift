@@ -52,6 +52,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
             cell.delegate = presenter
             cell.textView.text = model.text
             cell.textView.placeholder = model.placeholder
+            cell.textKeyPath = model.associatedKeyPath
             return cell
         }
 

@@ -39,11 +39,13 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
                 !(businessCardDetailsModel.companyName ?? "").isEmpty &&
                 !(businessCardDetailsModel.practiseType == nil) &&
                 !(businessCardDetailsModel.contactTelephone ?? "").isEmpty &&
+                !(businessCardDetailsModel.companyEmail ?? "").isEmpty &&
                 !(businessCardDetailsModel.companyWebSite ?? "").isEmpty &&
                 !(businessCardDetailsModel.city == nil) &&
                 !(businessCardDetailsModel.region == nil) &&
                 !(businessCardDetailsModel.address == nil) &&
-                !(businessCardDetailsModel.schedule ?? "").isEmpty
+                !(businessCardDetailsModel.schedule ?? "").isEmpty &&
+                !(businessCardDetailsModel.description ?? "").isEmpty
             )
 
             view?.setSaveButtonEnabled(isRequiredDataFilled)
@@ -76,7 +78,8 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
 
     func createBusinessCard() {
         let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
-
+        
+        view?.startLoading(text: "Створення...")
         APIClient.default.createBusinessCard(parameters: parameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -123,7 +126,8 @@ private extension CreateBusinessCardPresenter {
             .textField(model: TextFieldModel(text: businessCardDetailsModel.companyName, placeholder: "Назва компанії", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyName, keyboardType: .default)),
             .actionField(model: ActionFieldModel(text: businessCardDetailsModel.practiseType?.title, placeholder: "Вид діяльності", actionTypeId: CreateBusinessCard.ActionType.practice.rawValue)),
             .textField(model: TextFieldModel(text: businessCardDetailsModel.contactTelephone, placeholder: "Робочий номер телефону", associatedKeyPath: \CreateBusinessCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyWebSite, placeholder: "Веб сайт", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyWebSite, keyboardType: .URL))
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyWebSite, placeholder: "Веб сайт", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyWebSite, keyboardType: .URL)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyEmail, placeholder: "Емейл", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyEmail, keyboardType: .emailAddress))
         ])
 
         let companyActivitySection = Section<CreateBusinessCard.Cell>(items: [
@@ -138,7 +142,7 @@ private extension CreateBusinessCardPresenter {
         let aboutCompacySection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "Про компанію:"),
-            .textView(model: TextFieldModel(text: nil, placeholder: "Детальний опис", associatedKeyPath: nil, keyboardType: .default))
+            .textView(model: TextFieldModel(text: businessCardDetailsModel.description, placeholder: "Детальний опис", associatedKeyPath: \CreateBusinessCard.DetailsModel.description, keyboardType: .default))
         ])
 
         let socialSection = Section<CreateBusinessCard.Cell>(items: [
