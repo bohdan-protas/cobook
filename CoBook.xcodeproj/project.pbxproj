@@ -932,24 +932,11 @@
 		B8559F62243AD05900787349 /* BusinessCardDetails */ = {
 			isa = PBXGroup;
 			children = (
-				B8559F71243B780C00787349 /* view */,
 				B8559F63243AD09C00787349 /* BusinessCardDetailsViewController.swift */,
 				B8559F65243AD0B900787349 /* BusinessCardDetailsPresenter.swift */,
 				B8559F67243AD0CD00787349 /* BusinessCardDetailsDataSourceConfigurator.swift */,
 			);
 			path = BusinessCardDetails;
-			sourceTree = "<group>";
-		};
-		B8559F71243B780C00787349 /* view */ = {
-			isa = PBXGroup;
-			children = (
-				B8559F87243C841100787349 /* ExpandableTextDescriptionTableViewCell */,
-				B8559F82243C817E00787349 /* MapDirectionTableViewCell */,
-				B8559F7D243C808B00787349 /* MapTableViewCell */,
-				B8559F78243C7D7F00787349 /* AddressInfoTableViewCell */,
-				B8559F72243B781600787349 /* BusinessCardHeaderUserInfoTableViewCell */,
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		B8559F72243B781600787349 /* BusinessCardHeaderUserInfoTableViewCell */ = {
@@ -1103,7 +1090,6 @@
 		B8AB83E824280E7E0041B879 /* PersonalCardDetails */ = {
 			isa = PBXGroup;
 			children = (
-				B8AB83FA2428314A0041B879 /* views */,
 				B8AB83E924280ECB0041B879 /* PersonalCardDetailsViewController.swift */,
 				B8AB83EB24280EDC0041B879 /* PersonalCardDetailsPresenter.swift */,
 				B8559F60243AA76800787349 /* PersonalCardDetailsDataSourceConfigurator.swift */,
@@ -1126,14 +1112,6 @@
 				B8AB83F824282B890041B879 /* CardDetailsEndpointMockup.swift */,
 			);
 			path = Mockup;
-			sourceTree = "<group>";
-		};
-		B8AB83FA2428314A0041B879 /* views */ = {
-			isa = PBXGroup;
-			children = (
-				B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */,
-			);
-			path = views;
 			sourceTree = "<group>";
 		};
 		B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */ = {
@@ -1185,6 +1163,12 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */,
+				B8559F87243C841100787349 /* ExpandableTextDescriptionTableViewCell */,
+				B8559F82243C817E00787349 /* MapDirectionTableViewCell */,
+				B8559F7D243C808B00787349 /* MapTableViewCell */,
+				B8559F78243C7D7F00787349 /* AddressInfoTableViewCell */,
+				B8559F72243B781600787349 /* BusinessCardHeaderUserInfoTableViewCell */,
 				B8559F8C243C8A9700787349 /* PersonalCardItemTableViewCell */,
 				B8559F54243A753100787349 /* EmployersPreviewHorizontalListTableViewCell */,
 				B825B6F724391427002A27EC /* EmployersSearchTableViewCell */,

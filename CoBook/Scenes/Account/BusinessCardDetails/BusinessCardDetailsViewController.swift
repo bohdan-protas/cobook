@@ -31,7 +31,10 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
+
         presenter?.attachView(self)
+        presenter?.onViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,15 +50,21 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     func setupLayout() {
         navigationItem.title = "Бізнес візитка"
         tableView.delegate = self
-        tableView.tableFooterView = hideCardView
     }
 
     func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator) {
-
+        dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
+        tableView.dataSource = dataSource
+        tableView.tableFooterView = hideCardView
     }
 
     func updateDataSource(sections: [Section<BusinessCardDetails.Cell>]) {
+        dataSource?.sections = sections
+        tableView.reloadData()
+    }
 
+    func sendEmail(to address: String) {
+        
     }
 
 

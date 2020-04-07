@@ -17,6 +17,7 @@ struct CardDetailsApiModel: Decodable {
         case company
         case companyWebSite = "company_web_site"
         case avatar
+        case background
         case practiceType = "practice_type"
         case position
         case city

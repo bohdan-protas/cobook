@@ -62,3 +62,9 @@ struct CardPreviewModel: Equatable {
         }
     }
 }
+
+struct AddressInfoCellModel {
+    var mainAddress: String?
+    var subAdress: String?
+    var schedule: String?
+}

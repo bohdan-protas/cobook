@@ -74,7 +74,7 @@
         <!--Business Card Details View Controller-->
         <scene sceneID="3zZ-He-5vo">
             <objects>
-                <viewController storyboardIdentifier="BusinessCardDetailsViewController" id="VNd-Gh-MEp" customClass="BusinessCardDetailsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BusinessCardDetailsViewController" hidesBottomBarWhenPushed="YES" id="VNd-Gh-MEp" customClass="BusinessCardDetailsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iW6-M9-eTT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -50,8 +50,8 @@ extension EmployersPreviewHorizontalListTableViewCell: UICollectionViewDataSourc
         cell.titleLabel.text = "\(employee?.firstName ?? "") \(employee?.lastName ?? "")"
         cell.professionLabel.text = employee?.profession
         cell.telNumberLabel.text = employee?.telephone
-        cell.avatarTextPlaceholderImageView.setImage(withPath: employee?.image,
-                                                     placeholderText: "\(employee?.firstName?.first?.uppercased() ?? "") \(employee?.lastName?.first?.uppercased() ?? "")")
+        cell.avatarTextPlaceholderImageView.setTextPlaceholderImage(withPath: employee?.image,
+                                                                    placeholderText: "\(employee?.firstName?.first?.uppercased() ?? "") \(employee?.lastName?.first?.uppercased() ?? "")")
 
         return cell
     }

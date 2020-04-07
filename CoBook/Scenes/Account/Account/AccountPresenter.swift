@@ -98,7 +98,9 @@ class AccountPresenter: BasePresenter {
         case .businessCardPreview(let model):
             let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
             if let strid = model.id, let id = Int(strid) {
-                //personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
+                businessCardDetailsViewController.presenter = BusinessCardDetailsPresenter(id: id)
+            } else {
+                view?.errorAlert(message: "Bad id")
             }
             view?.push(controller: businessCardDetailsViewController, animated: true)
 

@@ -26,18 +26,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QZa-ec-721">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QZa-ec-721">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="120" id="dCN-dy-mhT"/>
+                            <constraint firstAttribute="width" secondItem="QZa-ec-721" secondAttribute="height" multiplier="25:8" id="93k-of-Pj1"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBE-6H-pie">
                         <rect key="frame" x="0.0" y="120" width="375" height="155"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_business_plan" translatesAutoresizingMaskIntoConstraints="NO" id="mv0-nt-aeu" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="mv0-nt-aeu" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                 <rect key="frame" x="147.5" y="-40" width="80" height="80"/>
-                                <color key="backgroundColor" name="Theme_Black-Middle"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="HHX-Vd-Oji"/>
                                     <constraint firstAttribute="height" constant="80" id="mJw-PI-kps"/>
@@ -57,7 +58,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-xq-Y2q">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-xq-Y2q">
                                 <rect key="frame" x="16" y="82" width="343" height="63"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQh-Cn-edJ">
@@ -70,7 +71,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGx-af-SyC">
-                                        <rect key="frame" x="0.0" y="22.5" width="343" height="18"/>
+                                        <rect key="frame" x="0.0" y="22" width="343" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="fvb-AN-G33"/>
                                         </constraints>
@@ -88,6 +89,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="63" id="YMt-yj-hRm"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -127,9 +131,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_business_plan" width="251.5" height="200"/>
-        <namedColor name="Theme_Black-Middle">
-            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="ic_user" width="48" height="48"/>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -13,20 +13,116 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     // MARK: Properties
     weak var presenter: BusinessCardDetailsPresenter?
 
+    var headerInfoCellConfigurator: CellConfigurator<BusinessCardDetails.HeaderInfoModel?, BusinessCardHeaderInfoTableViewCell>
+    var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>
+    var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>
+    var getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>
+    var socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
+    var expandableDescriptionCellConfigurator: CellConfigurator<String?, ExpandableDescriptionTableViewCell>
+    var mapDirectionCellConfigurator: CellConfigurator<Void?, MapDirectionTableViewCell>
+    var mapCellConfigurator: CellConfigurator<String?, MapTableViewCell>
+    var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>
+
     // MARK: Initializer
     init(presenter: BusinessCardDetailsPresenter) {
         self.presenter = presenter
+
+        headerInfoCellConfigurator = CellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel?, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
+            cell.bgImageView.setImage(withPath: model?.bgimagePath)
+            cell.avatarImageView.setImage(withPath: model?.avatartImagePath)
+            cell.nameLabel.text = model?.name
+            cell.professionLabel.text = model?.profession
+            cell.telephoneNumberLabel.text = model?.telephoneNumber
+            cell.websiteLabel.text = model?.websiteAddress
+
+            return cell
+        }
+
+        sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            cell.titleLabel.text = model
+            return cell
+        }
+
+        sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            return cell
+        }
+
+        getInTouchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
+            cell.delegate = presenter
+            return cell
+        }
+
+        socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
+            cell.delegate = presenter
+            cell.dataSource = presenter
+            cell.isEditable = false
+            return cell
+        }
+
+        expandableDescriptionCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+            return cell
+        }
+
+        mapDirectionCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapDirectionTableViewCell in
+            return cell
+        }
+
+        mapCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> MapTableViewCell in
+            return cell
+        }
+
+        addressInfoCellConfigurator = CellConfigurator { (cell, model: AddressInfoCellModel, tableView, indexPath) -> AddressInfoTableViewCell in
+            return cell
+        }
     }
 
-    func reuseIdentifier(for item: PersonalCardDetails.Cell, indexPath: IndexPath) -> String {
-        return ""
+    func reuseIdentifier(for item: BusinessCardDetails.Cell, indexPath: IndexPath) -> String {
+        switch item {
+        case .sectionHeader:
+            return sectionHeaderConfigurator.reuseIdentifier
+        case .userInfo:
+            return self.headerInfoCellConfigurator.reuseIdentifier
+        case .getInTouch:
+            return self.getInTouchCellConfigurator.reuseIdentifier
+        case .socialList:
+            return socialListConfigurator.reuseIdentifier
+        case .addressInfo:
+            return addressInfoCellConfigurator.reuseIdentifier
+        case .map:
+            return mapCellConfigurator.reuseIdentifier
+        case .mapDirection:
+            return mapDirectionCellConfigurator.reuseIdentifier
+        }
     }
 
-    func configuredCell(for item: PersonalCardDetails.Cell, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    func configuredCell(for item: BusinessCardDetails.Cell, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        switch item {
+        case .sectionHeader:
+            return sectionHeaderConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+        case .userInfo(let model):
+            return headerInfoCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .getInTouch:
+            return getInTouchCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+        case .socialList:
+            return socialListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+        case .addressInfo(let model):
+            return addressInfoCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .map(let path):
+            return mapCellConfigurator.configuredCell(for: path, tableView: tableView, indexPath: indexPath)
+        case .mapDirection:
+            return mapDirectionCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+        }
     }
 
     func registerCells(in tableView: UITableView) {
-
+        headerInfoCellConfigurator.registerCells(in: tableView)
+        sectionTitleConfigurator.registerCells(in: tableView)
+        sectionHeaderConfigurator.registerCells(in: tableView)
+        getInTouchCellConfigurator.registerCells(in: tableView)
+        socialListConfigurator.registerCells(in: tableView)
+        expandableDescriptionCellConfigurator.registerCells(in: tableView)
+        mapDirectionCellConfigurator.registerCells(in: tableView)
+        mapCellConfigurator.registerCells(in: tableView)
+        addressInfoCellConfigurator.registerCells(in: tableView)
     }
 }
