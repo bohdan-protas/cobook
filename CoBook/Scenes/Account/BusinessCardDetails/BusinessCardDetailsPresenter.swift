@@ -17,7 +17,6 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
-    // MARK: Properties
     private weak var view: BusinessCardDetailsView?
 
     private lazy var dataSourceConfigurator: BusinessCardDetailsDataSourceConfigurator = {
@@ -28,14 +27,24 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
 
-    // MARK: Lifecycle
+    var items: [BarItemViewModel] = [
+        BarItemViewModel(title: "Загальна інформація", isSelected: true),
+        BarItemViewModel(title: "Послуги", isSelected: false),
+        BarItemViewModel(title: "Крамниця", isSelected: false),
+        BarItemViewModel(title: "Контакти", isSelected: false),
+    ]
+
+    // MARK: - Object Lifecycle
+
     init(id: Int) {
         self.businessCardId = id
     }
 
-    // MARK: Public
+    // MARK: - Public
+
     func attachView(_ view: BusinessCardDetailsView) {
         self.view = view
+        self.view?.configureDataSource(with: dataSourceConfigurator)
     }
 
     func detachView() {
@@ -43,10 +52,8 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
-        self.view?.configureDataSource(with: self.dataSourceConfigurator)
         fetchDetails { model in
             self.cardDetails = model
-
             self.updateViewDataSource()
         }
     }
@@ -58,7 +65,8 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
 }
 
-// MARK: -
+// MARK: - Privates
+
 private extension BusinessCardDetailsPresenter {
 
     func updateViewDataSource() {
@@ -70,28 +78,30 @@ private extension BusinessCardDetailsPresenter {
                                                                  telephoneNumber: cardDetails?.contactTelephone?.number,
                                                                  websiteAddress: cardDetails?.companyWebSite)),
 
+
+        ])
+
+        var generalInfoSection = Section<BusinessCardDetails.Cell>(items: [
             .companyDescription(text: cardDetails?.description),
             .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
             .map(path: ""),
             .mapDirection
         ])
 
-        var getInTouchSection = Section<BusinessCardDetails.Cell>(items: [
-        ])
-
         let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
         if !listListItems.isEmpty {
-            getInTouchSection.items.append(.socialList)
+            generalInfoSection.items.append(.socialList)
         }
-        getInTouchSection.items.append(.getInTouch)
+        generalInfoSection.items.append(.getInTouch)
 
-        view?.updateDataSource(sections: [userInfoSection, getInTouchSection])
+        view?.updateDataSource(sections: [userInfoSection, generalInfoSection])
     }
 
 
 }
 
 // MARK: - Use cases
+
 private extension BusinessCardDetailsPresenter {
 
     func fetchDetails(onSuccess: ((CardDetailsApiModel?) -> Void)?) {
@@ -114,7 +124,35 @@ private extension BusinessCardDetailsPresenter {
 
 }
 
+// MARK: - HorizontalItemsBarViewDelegate
+
+extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
+
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
+        items[index].isSelected = true
+        Log.debug("Selected \(index)")
+    }
+
+
+}
+
+// MARK: - HorizontalItemsBarViewDataSource
+
+extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDataSource {
+
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, titleForItemAt index: Int) -> BarItemViewModel? {
+        return items[safe: index]
+    }
+
+    func numberOfItems(in view: HorizontalItemsBarView) -> Int {
+        return items.count
+    }
+
+
+}
+
 // MARK: - SocialsListTableViewCellDataSource
+
 extension BusinessCardDetailsPresenter: SocialsListTableViewCellDataSource {
 
     var socials: [Social.ListItem] {
@@ -129,6 +167,7 @@ extension BusinessCardDetailsPresenter: SocialsListTableViewCellDataSource {
 }
 
 // MARK: - SocialsListTableViewCellDelegate
+
 extension BusinessCardDetailsPresenter: SocialsListTableViewCellDelegate {
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
@@ -151,6 +190,7 @@ extension BusinessCardDetailsPresenter: SocialsListTableViewCellDelegate {
 }
 
 // MARK: - GetInTouchTableViewCellDelegate
+
 extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredCallAction(_ cell: GetInTouchTableViewCell) {

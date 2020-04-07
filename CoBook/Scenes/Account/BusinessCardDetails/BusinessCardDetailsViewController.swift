@@ -28,7 +28,15 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         return view
     }()
 
+    private lazy var itemsBarView: HorizontalItemsBarView = {
+        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 53)))
+        view.dataSource = self.presenter
+        view.delegate = self.presenter
+        return view
+    }()
+
     // MARK: - View Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -46,11 +54,12 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         presenter?.detachView()
     }
 
-    // MARK: - BusinessCardDetailsView
     func setupLayout() {
         navigationItem.title = "Бізнес візитка"
         tableView.delegate = self
     }
+
+    // MARK: - BusinessCardDetailsView
 
     func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator) {
         dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
@@ -72,13 +81,17 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 }
 
 // MARK: - UITableViewDelegate
+
 extension BusinessCardDetailsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
+        return itemsBarView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return itemsBarView.frame.height
+        }
         return 0
     }
 

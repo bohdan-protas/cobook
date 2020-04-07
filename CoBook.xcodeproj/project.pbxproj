@@ -151,6 +151,10 @@
 		B8559F90243C8B0900787349 /* PersonalCardItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F8E243C8B0900787349 /* PersonalCardItemTableViewCell.xib */; };
 		B8559F93243CC4FD00787349 /* HideCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F92243CC4FC00787349 /* HideCardView.swift */; };
 		B8559F95243CC67E00787349 /* HideCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F94243CC67E00787349 /* HideCardView.xib */; };
+		B8559F98243CD69B00787349 /* HorizontalItemsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F97243CD69A00787349 /* HorizontalItemsBarView.swift */; };
+		B8559F9A243CD6C600787349 /* HorizontalItemsBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F99243CD6C600787349 /* HorizontalItemsBarView.xib */; };
+		B8559F9E243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F9C243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift */; };
+		B8559F9F243CD9D100787349 /* HorizontalBarItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F9D243CD9D100787349 /* HorizontalBarItemCollectionViewCell.xib */; };
 		B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */; };
 		B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* DesignableButton.swift */; };
 		B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC523FAC88C0044605C /* LoaderButton.swift */; };
@@ -355,6 +359,10 @@
 		B8559F8E243C8B0900787349 /* PersonalCardItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCardItemTableViewCell.xib; sourceTree = "<group>"; };
 		B8559F92243CC4FC00787349 /* HideCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideCardView.swift; sourceTree = "<group>"; };
 		B8559F94243CC67E00787349 /* HideCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HideCardView.xib; sourceTree = "<group>"; };
+		B8559F97243CD69A00787349 /* HorizontalItemsBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalItemsBarView.swift; sourceTree = "<group>"; };
+		B8559F99243CD6C600787349 /* HorizontalItemsBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalItemsBarView.xib; sourceTree = "<group>"; };
+		B8559F9C243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalBarItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8559F9D243CD9D100787349 /* HorizontalBarItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalBarItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsEndpoint.swift; sourceTree = "<group>"; };
 		B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		B8625AC323FA94D30044605C /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
@@ -611,6 +619,7 @@
 			isa = PBXGroup;
 			children = (
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
+				B8559F96243CD62700787349 /* HorizintalItemsBarView */,
 				B8DE5E5724192ADC00F4F60B /* Designable */,
 				B8559F91243CC4B200787349 /* HideCardView */,
 				B82248DB242C0CD700392D10 /* CardSaveView */,
@@ -786,11 +795,11 @@
 		B82A2118242135C200D0D9F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B8255A1C243A264E00C4169D /* Search */,
 				B8DC630A2434FBED00A2ED58 /* Section.swift */,
 				B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */,
 				B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */,
 				B82200B5240FB84B00A17D2C /* TabBarControllers */,
+				B8255A1C243A264E00C4169D /* Search */,
 				B88906C9240053DE002E91F7 /* NavigationBars */,
 				B88906BA240002B5002E91F7 /* NavigationControllers */,
 				B8212A63241BD32C0066700C /* ViewControllers */,
@@ -1005,6 +1014,25 @@
 				B8559F94243CC67E00787349 /* HideCardView.xib */,
 			);
 			path = HideCardView;
+			sourceTree = "<group>";
+		};
+		B8559F96243CD62700787349 /* HorizintalItemsBarView */ = {
+			isa = PBXGroup;
+			children = (
+				B8559F9B243CD98000787349 /* BarItemView */,
+				B8559F97243CD69A00787349 /* HorizontalItemsBarView.swift */,
+				B8559F99243CD6C600787349 /* HorizontalItemsBarView.xib */,
+			);
+			path = HorizintalItemsBarView;
+			sourceTree = "<group>";
+		};
+		B8559F9B243CD98000787349 /* BarItemView */ = {
+			isa = PBXGroup;
+			children = (
+				B8559F9C243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift */,
+				B8559F9D243CD9D100787349 /* HorizontalBarItemCollectionViewCell.xib */,
+			);
+			path = BarItemView;
 			sourceTree = "<group>";
 		};
 		B8625ABC23FA8BDE0044605C /* Frameworks */ = {
@@ -1307,6 +1335,7 @@
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
 				B8559F58243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib in Resources */,
 				B8AB8400242831E60041B879 /* PersonalCardUserInfoTableViewCell.xib in Resources */,
+				B8559F9F243CD9D100787349 /* HorizontalBarItemCollectionViewCell.xib in Resources */,
 				B8255A1E243A266B00C4169D /* Search.storyboard in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
@@ -1340,6 +1369,7 @@
 				B825741623F5621500C8CBF8 /* HelveticaNeueCyr-ThinItalic.ttf in Resources */,
 				B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */,
 				B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */,
+				B8559F9A243CD6C600787349 /* HorizontalItemsBarView.xib in Resources */,
 				B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */,
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
 				B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */,
@@ -1432,6 +1462,7 @@
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8559F7B243C7E0E00787349 /* AddressInfoTableViewCell.swift in Sources */,
 				B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */,
+				B8559F9E243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift in Sources */,
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
 				B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */,
@@ -1471,6 +1502,7 @@
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
 				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,
+				B8559F98243CD69B00787349 /* HorizontalItemsBarView.swift in Sources */,
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,

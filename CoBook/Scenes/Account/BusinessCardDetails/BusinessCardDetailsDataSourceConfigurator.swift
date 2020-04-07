@@ -10,7 +10,8 @@ import UIKit
 
 struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
 
-    // MARK: Properties
+    // MARK: - Properties
+
     weak var presenter: BusinessCardDetailsPresenter?
 
     var headerInfoCellConfigurator: CellConfigurator<BusinessCardDetails.HeaderInfoModel?, BusinessCardHeaderInfoTableViewCell>
@@ -23,7 +24,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var mapCellConfigurator: CellConfigurator<String?, MapTableViewCell>
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>
 
-    // MARK: Initializer
+    // MARK: - Initializer
+
     init(presenter: BusinessCardDetailsPresenter) {
         self.presenter = presenter
 
@@ -79,6 +81,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return cell
         }
     }
+
+    // MARK: - Cell configurator
 
     func reuseIdentifier(for item: BusinessCardDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
