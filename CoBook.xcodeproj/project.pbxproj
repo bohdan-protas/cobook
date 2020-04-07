@@ -149,6 +149,8 @@
 		B8559F8B243C843400787349 /* ExpandableDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F89243C843400787349 /* ExpandableDescriptionTableViewCell.xib */; };
 		B8559F8F243C8B0900787349 /* PersonalCardItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F8D243C8B0900787349 /* PersonalCardItemTableViewCell.swift */; };
 		B8559F90243C8B0900787349 /* PersonalCardItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F8E243C8B0900787349 /* PersonalCardItemTableViewCell.xib */; };
+		B8559F93243CC4FD00787349 /* HideCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F92243CC4FC00787349 /* HideCardView.swift */; };
+		B8559F95243CC67E00787349 /* HideCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F94243CC67E00787349 /* HideCardView.xib */; };
 		B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */; };
 		B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC323FA94D30044605C /* DesignableButton.swift */; };
 		B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8625AC523FAC88C0044605C /* LoaderButton.swift */; };
@@ -351,6 +353,8 @@
 		B8559F89243C843400787349 /* ExpandableDescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpandableDescriptionTableViewCell.xib; sourceTree = "<group>"; };
 		B8559F8D243C8B0900787349 /* PersonalCardItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardItemTableViewCell.swift; sourceTree = "<group>"; };
 		B8559F8E243C8B0900787349 /* PersonalCardItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCardItemTableViewCell.xib; sourceTree = "<group>"; };
+		B8559F92243CC4FC00787349 /* HideCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideCardView.swift; sourceTree = "<group>"; };
+		B8559F94243CC67E00787349 /* HideCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HideCardView.xib; sourceTree = "<group>"; };
 		B85F8B5C241FA8F0003C41D2 /* CardsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsEndpoint.swift; sourceTree = "<group>"; };
 		B8625ABD23FA8BDE0044605C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		B8625AC323FA94D30044605C /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
@@ -608,6 +612,7 @@
 			children = (
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
 				B8DE5E5724192ADC00F4F60B /* Designable */,
+				B8559F91243CC4B200787349 /* HideCardView */,
 				B82248DB242C0CD700392D10 /* CardSaveView */,
 				B8AB840124283C440041B879 /* EditCardView */,
 				B8DE5E3A2418E1C600F4F60B /* Cells */,
@@ -993,6 +998,15 @@
 			path = PersonalCardItemTableViewCell;
 			sourceTree = "<group>";
 		};
+		B8559F91243CC4B200787349 /* HideCardView */ = {
+			isa = PBXGroup;
+			children = (
+				B8559F92243CC4FC00787349 /* HideCardView.swift */,
+				B8559F94243CC67E00787349 /* HideCardView.xib */,
+			);
+			path = HideCardView;
+			sourceTree = "<group>";
+		};
 		B8625ABC23FA8BDE0044605C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1304,6 +1318,7 @@
 				B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */,
 				B83FD7DD2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib in Resources */,
 				B823B090242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib in Resources */,
+				B8559F95243CC67E00787349 /* HideCardView.xib in Resources */,
 				B823B089242CD4F30012529D /* AccountHeaderTableViewCell.xib in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
 				B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */,
@@ -1534,6 +1549,7 @@
 				B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
+				B8559F93243CC4FD00787349 /* HideCardView.swift in Sources */,
 				B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */,
 				B82248DE242C0CD700392D10 /* CardSaveView.swift in Sources */,
 				B8559F8F243C8B0900787349 /* PersonalCardItemTableViewCell.swift in Sources */,

@@ -68,11 +68,15 @@ private extension BusinessCardDetailsPresenter {
                                                                  bgimagePath: cardDetails?.background?.sourceUrl,
                                                                  profession: cardDetails?.practiceType?.title,
                                                                  telephoneNumber: cardDetails?.contactTelephone?.number,
-                                                                 websiteAddress: cardDetails?.companyWebSite))
+                                                                 websiteAddress: cardDetails?.companyWebSite)),
+
+            .companyDescription(text: cardDetails?.description),
+            .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
+            .map(path: ""),
+            .mapDirection
         ])
 
         var getInTouchSection = Section<BusinessCardDetails.Cell>(items: [
-
         ])
 
         let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
@@ -80,7 +84,6 @@ private extension BusinessCardDetailsPresenter {
             getInTouchSection.items.append(.socialList)
         }
         getInTouchSection.items.append(.getInTouch)
-
 
         view?.updateDataSource(sections: [userInfoSection, getInTouchSection])
     }

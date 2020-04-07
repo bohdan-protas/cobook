@@ -60,6 +60,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         }
 
         expandableDescriptionCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+            cell.textDescriptionLabel.text = model
             return cell
         }
 
@@ -72,6 +73,9 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         }
 
         addressInfoCellConfigurator = CellConfigurator { (cell, model: AddressInfoCellModel, tableView, indexPath) -> AddressInfoTableViewCell in
+            cell.mainAddressLabel.text = model.mainAddress
+            cell.subadressLabel.text = model.subAdress
+            cell.scheduleLabel.text = model.schedule
             return cell
         }
     }
@@ -92,6 +96,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return mapCellConfigurator.reuseIdentifier
         case .mapDirection:
             return mapDirectionCellConfigurator.reuseIdentifier
+        case .companyDescription:
+            return expandableDescriptionCellConfigurator.reuseIdentifier
         }
     }
 
@@ -111,6 +117,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return mapCellConfigurator.configuredCell(for: path, tableView: tableView, indexPath: indexPath)
         case .mapDirection:
             return mapDirectionCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+        case .companyDescription(let text):
+            return expandableDescriptionCellConfigurator.configuredCell(for: text, tableView: tableView, indexPath: indexPath)
         }
     }
 

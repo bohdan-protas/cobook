@@ -12,6 +12,7 @@ enum BusinessCardDetails {
 
     enum Cell {
         case sectionHeader
+        case companyDescription(text: String?)
         case userInfo(model: BusinessCardDetails.HeaderInfoModel?)
         case getInTouch
         case socialList

@@ -10,7 +10,7 @@ import UIKit
 
 private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
-    static let hideCardViewHeight: CGFloat = 84
+    static let hideCardViewHeight: CGFloat = 102
 }
 
 class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetailsView {
@@ -20,9 +20,9 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     var presenter: BusinessCardDetailsPresenter?
     var dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?
 
-    private lazy var hideCardView: EditCardView = {
-        let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
-        view.onEditTapped = { [weak self] in
+    private lazy var hideCardView: HideCardView = {
+        let view = HideCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
+        view.onHideTapped = { [weak self] in
             //self?.presenter?.editPerconalCard()
         }
         return view
@@ -55,11 +55,12 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator) {
         dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
         tableView.dataSource = dataSource
-        tableView.tableFooterView = hideCardView
+
     }
 
     func updateDataSource(sections: [Section<BusinessCardDetails.Cell>]) {
         dataSource?.sections = sections
+        tableView.tableFooterView = hideCardView
         tableView.reloadData()
     }
 
