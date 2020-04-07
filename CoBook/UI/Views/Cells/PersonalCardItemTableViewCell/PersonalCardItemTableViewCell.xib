@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="140" id="KGk-i7-Jjw" customClass="PersonalCardItemTableViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-Xj-xGk" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                        <rect key="frame" x="16" y="28" width="64" height="64"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="64" id="3RJ-R2-Fb3"/>
+                            <constraint firstAttribute="width" constant="64" id="oIG-OL-7Ig"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2St-iw-VD5">
+                        <rect key="frame" x="0.0" y="108" width="320" height="32"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_account_createparsonalcard" translatesAutoresizingMaskIntoConstraints="NO" id="1CI-lM-9Cy">
+                                <rect key="frame" x="16" y="8" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1CI-lM-9Cy" secondAttribute="height" multiplier="1:1" id="ei3-lB-YVd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Персональна візитка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6L-fk-w9d">
+                                <rect key="frame" x="47" y="0.0" width="257" height="32"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
+                                <color key="textColor" name="Theme_Black-Middle"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.85490196078431369" blue="0.10196078431372549" alpha="0.10298052226027397" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="m6L-fk-w9d" firstAttribute="top" secondItem="2St-iw-VD5" secondAttribute="top" id="45N-HH-0rs"/>
+                            <constraint firstAttribute="bottom" secondItem="1CI-lM-9Cy" secondAttribute="bottom" constant="8" id="7gX-1Y-4gs"/>
+                            <constraint firstAttribute="height" constant="32" id="Drw-6P-XBX"/>
+                            <constraint firstItem="m6L-fk-w9d" firstAttribute="leading" secondItem="1CI-lM-9Cy" secondAttribute="trailing" constant="15" id="FVE-TH-HwB"/>
+                            <constraint firstItem="1CI-lM-9Cy" firstAttribute="top" secondItem="2St-iw-VD5" secondAttribute="top" constant="8" id="cT1-8x-DWh"/>
+                            <constraint firstAttribute="bottom" secondItem="m6L-fk-w9d" secondAttribute="bottom" id="ebQ-GV-WC1"/>
+                            <constraint firstAttribute="trailing" secondItem="m6L-fk-w9d" secondAttribute="trailing" constant="16" id="jgk-ut-De6"/>
+                            <constraint firstItem="1CI-lM-9Cy" firstAttribute="leading" secondItem="2St-iw-VD5" secondAttribute="leading" constant="16" id="olz-ry-L4g"/>
+                            <constraint firstItem="m6L-fk-w9d" firstAttribute="centerY" secondItem="1CI-lM-9Cy" secondAttribute="centerY" id="xud-Ad-keT"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lih-SN-k16">
+                        <rect key="frame" x="96" y="28" width="208" height="64"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DWr-kl-slk">
+                                <rect key="frame" x="0.0" y="4" width="208" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yna-cX-gBx">
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="13.5"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
+                                        <color key="textColor" name="Theme_Black-Middle"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4N-3o-Vex">
+                                        <rect key="frame" x="0.0" y="21.5" width="208" height="13"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
+                                        <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71z-4F-5Ur">
+                                        <rect key="frame" x="0.0" y="42.5" width="208" height="13.5"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
+                                        <color key="textColor" name="Theme_TextField-text"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DWr-kl-slk" firstAttribute="leading" secondItem="lih-SN-k16" secondAttribute="leading" id="9b9-ya-CHS"/>
+                            <constraint firstAttribute="trailing" secondItem="DWr-kl-slk" secondAttribute="trailing" id="csA-ue-Uhq"/>
+                            <constraint firstAttribute="bottom" secondItem="DWr-kl-slk" secondAttribute="bottom" constant="4" id="dVu-Y3-l44"/>
+                            <constraint firstItem="DWr-kl-slk" firstAttribute="top" secondItem="lih-SN-k16" secondAttribute="top" constant="4" id="mr2-a0-vrj"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="zew-Hn-XHu"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="lih-SN-k16" firstAttribute="leading" secondItem="HSL-Xj-xGk" secondAttribute="trailing" constant="16" id="8N1-DJ-qWM"/>
+                    <constraint firstItem="HSL-Xj-xGk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Aum-bg-XcS"/>
+                    <constraint firstItem="2St-iw-VD5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DuZ-YQ-XV4"/>
+                    <constraint firstAttribute="trailing" secondItem="lih-SN-k16" secondAttribute="trailing" constant="16" id="U4p-rc-8FU"/>
+                    <constraint firstItem="2St-iw-VD5" firstAttribute="top" secondItem="lih-SN-k16" secondAttribute="bottom" constant="16" id="cHO-WI-lQt"/>
+                    <constraint firstAttribute="trailing" secondItem="2St-iw-VD5" secondAttribute="trailing" id="cfc-Qu-FoT"/>
+                    <constraint firstItem="HSL-Xj-xGk" firstAttribute="centerY" secondItem="lih-SN-k16" secondAttribute="centerY" id="eug-Iu-cB2"/>
+                    <constraint firstAttribute="bottom" secondItem="2St-iw-VD5" secondAttribute="bottom" id="eyj-lO-saC"/>
+                    <constraint firstItem="lih-SN-k16" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="28" id="q7X-z8-jZf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="nameLabel" destination="Yna-cX-gBx" id="tLN-lU-2hT"/>
+                <outlet property="professionLabel" destination="c4N-3o-Vex" id="ayg-Bv-cAq"/>
+                <outlet property="telNumberLabel" destination="71z-4F-5Ur" id="BPm-Vq-ACz"/>
+                <outlet property="userAvatarImageView" destination="HSL-Xj-xGk" id="8BQ-aH-gsj"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="185.49107142857142"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_account_createparsonalcard" width="16" height="16"/>
+        <image name="ic_user" width="48" height="48"/>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_TextField-text">
+            <color red="0.17299999296665192" green="0.17299999296665192" blue="0.17299999296665192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -12,18 +12,32 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
 
     @IBOutlet var bgImageView: UIImageView!
     @IBOutlet var avatarImageView: DesignableImageView!
-    
-
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var professionLabel: UILabel!
+    @IBOutlet var telephoneNumberLabel: UILabel!
+    @IBOutlet var websiteLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        nameLabel.text = ""
+        professionLabel.text = ""
+        telephoneNumberLabel.text = ""
+        websiteLabel.text = ""
+        bgImageView.image = nil
+        avatarImageView.image = nil
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    override func prepareForReuse() {
+        super.prepareForReuse()
 
-        // Configure the view for the selected state
+        nameLabel.text = ""
+        professionLabel.text = ""
+        telephoneNumberLabel.text = ""
+        websiteLabel.text = ""
+        bgImageView.cancelImageRequest()
+        avatarImageView.cancelImageRequest()
+        bgImageView.image = nil
+        avatarImageView.image = nil
     }
     
 }
