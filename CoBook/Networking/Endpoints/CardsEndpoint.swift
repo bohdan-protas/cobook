@@ -10,6 +10,7 @@ import Alamofire
 
 enum CardsEndpoint: Endpoint {
 
+    case updateBusinessCard(parameters: CreateBusinessCardParametersApiModel)
     case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
@@ -19,7 +20,17 @@ enum CardsEndpoint: Endpoint {
     }
 
     var method: HTTPMethod {
-        return .post
+        switch self {
+        case .updateBusinessCard:
+            return .put
+        case .createBusinessCard:
+            return .post
+        case .createPersonalCard:
+            return .post
+        case .getCardInfo:
+            return .post
+
+        }
     }
 
     var path: String {
@@ -30,6 +41,8 @@ enum CardsEndpoint: Endpoint {
             return "/cards/info"
         case .createBusinessCard:
             return "/cards/business"
+        case .updateBusinessCard:
+            return "/cards/business"
         }
     }
 
@@ -37,12 +50,18 @@ enum CardsEndpoint: Endpoint {
         switch self {
         case .createPersonalCard(let parameters):
             return parameters.dictionary
+
         case .getCardInfo(let id):
             return [
                 APIConstants.ParameterKey.id: id,
             ]
+
         case .createBusinessCard(let parameters):
             return parameters.dictionary
+
+        case .updateBusinessCard(let parameters):
+            return parameters.dictionary
+            
         }
     }
 

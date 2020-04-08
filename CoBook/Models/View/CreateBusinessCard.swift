@@ -32,6 +32,8 @@ enum CreateBusinessCard {
     }
 
     struct DetailsModel {
+        var cardId: Int?
+
         var avatarImage: FileDataApiModel?
         var backgroudImage: FileDataApiModel?
 
@@ -52,6 +54,34 @@ enum CreateBusinessCard {
         var interests: [InterestModel] = []
         var socials: [Social.ListItem] = []
         var practices: [PracticeModel] = []
+
+        init() {}
+
+        init(apiModel: CardDetailsApiModel) {
+            self.cardId = apiModel.id
+
+            self.avatarImage = apiModel.avatar
+            self.backgroudImage = apiModel.background
+
+            self.companyName = apiModel.company?.name
+            self.practiseType = PracticeModel(id: apiModel.practiceType?.id, title: apiModel.practiceType?.title)
+            self.contactTelephone = apiModel.contactTelephone?.number
+            self.companyWebSite = apiModel.companyWebSite
+            self.companyEmail = apiModel.contactEmail?.address
+
+            self.city = PlaceModel(googlePlaceId: apiModel.city?.googlePlaceId, name: apiModel.city?.name)
+            self.region = PlaceModel(googlePlaceId: apiModel.region?.googlePlaceId, name: apiModel.region?.name)
+            self.address = PlaceModel(googlePlaceId: apiModel.address?.googlePlaceId, name: apiModel.address?.name)
+            self.schedule = apiModel.schedule
+
+            self.description = apiModel.description
+
+
+            self.interests = apiModel.interests?.compactMap { InterestModel(id: $0.id, title: $0.title, isSelected: true) } ?? []
+            self.socials = apiModel.socialNetworks?.compactMap { Social.ListItem.view(model: .init(title: $0.title, url: $0.link)) } ?? []
+        }
+
+
     }
 
 }

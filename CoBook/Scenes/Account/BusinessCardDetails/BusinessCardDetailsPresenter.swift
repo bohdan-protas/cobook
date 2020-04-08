@@ -57,11 +57,24 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
-        setupDataSource()
+
     }
 
     func onViewWillAppear() {
+        setupDataSource()
+    }
 
+    func editBusinessCard() {
+        if let cardDetails = cardDetails {
+            let businessCardDetails = CreateBusinessCard.DetailsModel.init(apiModel: cardDetails)
+            let presenter = CreateBusinessCardPresenter(detailsModel: businessCardDetails)
+            let controller: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
+            controller.presenter = presenter
+            view?.push(controller: controller, animated: true)
+        } else {
+            let controller: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
+            view?.push(controller: controller, animated: true)
+        }
     }
 
 
