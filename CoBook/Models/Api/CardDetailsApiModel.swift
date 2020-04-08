@@ -36,7 +36,7 @@ struct CardDetailsApiModel: Decodable {
     var id: Int
     var type: CardType?
     var cardCreator: CardCreatorApiModel?
-    var company: CompanyApiModel
+    var company: CompanyApiModel?
     var companyWebSite: String?
     var avatar: FileDataApiModel?
     var background: FileDataApiModel?

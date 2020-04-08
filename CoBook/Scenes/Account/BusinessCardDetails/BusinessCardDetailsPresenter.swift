@@ -74,7 +74,7 @@ private extension BusinessCardDetailsPresenter {
     func updateViewDataSource() {
 
         let userInfoSection = Section<BusinessCardDetails.Cell>(items: [
-            .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company.name,
+            .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
                                                                  avatartImagePath: cardDetails?.avatar?.sourceUrl,
                                                                  bgimagePath: cardDetails?.background?.sourceUrl,
                                                                  profession: cardDetails?.practiceType?.title,

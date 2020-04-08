@@ -24,9 +24,6 @@ final class LoggerEventMonitor: EventMonitor {
             Log.info("Successed request: \(request.description)")
         }
 
-        /// When need find parse error
-        //Log.info(response.debugDescription)
-
         if let degubResponseString = response.data?.prettyPrintedJSONString {
             Log.info("Response data: \n\(degubResponseString)")
         }

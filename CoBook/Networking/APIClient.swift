@@ -58,9 +58,10 @@ class APIClient {
                             let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
                             completion(.failure(error))
                         }
-                    } catch {
-                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
-                        completion(.failure(error))
+                    } catch let decodeErrror {
+                        Log.error(decodeErrror)
+                        let userError = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in unexpected format")
+                        completion(.failure(userError))
                     }
                 } else {
                     let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
