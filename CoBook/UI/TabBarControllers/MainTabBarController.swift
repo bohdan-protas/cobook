@@ -24,7 +24,15 @@ class MainTabBarController: UITabBarController {
         accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
         accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
 
-        self.viewControllers = [accountController]
+        let allCardsController: CardsOverviewNavigationController = UIStoryboard.allCards.initiateViewControllerFromType()
+        allCardsController.tabBarItem = UITabBarItem(title: "AllCards".localized, image: #imageLiteral(resourceName: "ic_tabbar_allcards_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_allcards_active"))
+        allCardsController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .normal)
+        allCardsController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .selected)
+        allCardsController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
+        allCardsController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
+
+        self.viewControllers = [allCardsController, accountController]
+        self.selectedIndex = 1
     }
 
     override func viewDidLoad() {

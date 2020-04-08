@@ -48,6 +48,11 @@
 		B823C6212431F585002CFB02 /* UIImage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823C6202431F585002CFB02 /* UIImage + Extensions.swift */; };
 		B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */; };
 		B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249241243DE2CC00A1AC39 /* CardItemApiModel.swift */; };
+		B8249245243DE63B00A1AC39 /* CardsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */; };
+		B8249247243DE64A00A1AC39 /* CardsOverviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249246243DE64A00A1AC39 /* CardsOverviewPresenter.swift */; };
+		B8249249243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249248243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift */; };
+		B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B824924D243DE73E00A1AC39 /* AllCards.storyboard */; };
+		B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */; };
 		B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */; };
 		B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */; };
 		B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */; };
@@ -256,6 +261,11 @@
 		B823C6202431F585002CFB02 /* UIImage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extensions.swift"; sourceTree = "<group>"; };
 		B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemViewModel.swift; sourceTree = "<group>"; };
 		B8249241243DE2CC00A1AC39 /* CardItemApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemApiModel.swift; sourceTree = "<group>"; };
+		B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewViewController.swift; sourceTree = "<group>"; };
+		B8249246243DE64A00A1AC39 /* CardsOverviewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewPresenter.swift; sourceTree = "<group>"; };
+		B8249248243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewDataSourceConfigurator.swift; sourceTree = "<group>"; };
+		B824924D243DE73E00A1AC39 /* AllCards.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AllCards.storyboard; sourceTree = "<group>"; };
+		B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewNavigationController.swift; sourceTree = "<group>"; };
 		B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackgroundManagmentTableViewCell.swift; sourceTree = "<group>"; };
 		B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardBackgroundManagmentTableViewCell.xib; sourceTree = "<group>"; };
 		B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSourceConfigurator.swift; sourceTree = "<group>"; };
@@ -575,6 +585,7 @@
 		B823AB6A23F156D600DE13EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B8249243243DE62600A1AC39 /* AllCards */,
 				B826B0EB23F442AC009041DD /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B82200B8240FB87A00A17D2C /* Account */,
@@ -693,6 +704,25 @@
 				B836DF29243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift */,
 			);
 			path = CreateBusinessCard;
+			sourceTree = "<group>";
+		};
+		B8249243243DE62600A1AC39 /* AllCards */ = {
+			isa = PBXGroup;
+			children = (
+				B824924D243DE73E00A1AC39 /* AllCards.storyboard */,
+				B824924C243DE72500A1AC39 /* CardsOverview */,
+			);
+			path = AllCards;
+			sourceTree = "<group>";
+		};
+		B824924C243DE72500A1AC39 /* CardsOverview */ = {
+			isa = PBXGroup;
+			children = (
+				B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */,
+				B8249246243DE64A00A1AC39 /* CardsOverviewPresenter.swift */,
+				B8249248243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift */,
+			);
+			path = CardsOverview;
 			sourceTree = "<group>";
 		};
 		B824E1AC243766C60091C491 /* CardBackgroundManagmentTableViewCell */ = {
@@ -1114,6 +1144,7 @@
 				B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */,
 				B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */,
 				B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */,
+				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 			);
 			path = NavigationControllers;
 			sourceTree = "<group>";
@@ -1345,6 +1376,7 @@
 				B8255A1E243A266B00C4169D /* Search.storyboard in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
+				B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */,
 				B8559F81243C809D00787349 /* MapTableViewCell.xib in Resources */,
 				B8559F90243C8B0900787349 /* PersonalCardItemTableViewCell.xib in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
@@ -1540,6 +1572,7 @@
 				B828BCC024366F170099D1A8 /* Model.swift in Sources */,
 				B84A15F72411256800C4DC11 /* DesignableTextPlaceholderImageView.swift in Sources */,
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
+				B8249247243DE64A00A1AC39 /* CardsOverviewPresenter.swift in Sources */,
 				B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
@@ -1586,6 +1619,7 @@
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,
+				B8249249243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift in Sources */,
 				B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
@@ -1599,11 +1633,13 @@
 				B8AB3F092422FBE800E06E53 /* ProfileEndpoint.swift in Sources */,
 				B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */,
 				B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */,
+				B8249245243DE63B00A1AC39 /* CardsOverviewViewController.swift in Sources */,
 				B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */,
 				B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */,
 				B8559F85243C81D500787349 /* MapDirectionTableViewCell.swift in Sources */,
 				B82A211724212CB600D0D9F5 /* Logger.swift in Sources */,
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
+				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
 				B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */,
 				B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */,
