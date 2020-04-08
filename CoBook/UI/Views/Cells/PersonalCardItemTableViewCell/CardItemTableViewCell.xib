@@ -20,14 +20,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="140" id="KGk-i7-Jjw" customClass="PersonalCardItemTableViewCell" customModule="CoBook" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="140" id="KGk-i7-Jjw" customClass="CardItemTableViewCell" customModule="CoBook" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-Xj-xGk" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-Xj-xGk" customClass="DesignableTextPlaceholderImageView" customModule="CoBook" customModuleProvider="target">
                         <rect key="frame" x="16" y="28" width="64" height="64"/>
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
@@ -37,6 +37,12 @@
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                <color key="value" name="Theme_TextField-text"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                <real key="value" value="20"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
@@ -120,17 +126,19 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="avatarImageView" destination="HSL-Xj-xGk" id="f91-bu-s8f"/>
+                <outlet property="cardTypeContainerView" destination="2St-iw-VD5" id="wED-wk-TI5"/>
+                <outlet property="cardTypeImageView" destination="1CI-lM-9Cy" id="JIv-Gh-oIo"/>
+                <outlet property="cardTypeLabel" destination="m6L-fk-w9d" id="sWc-9d-aUP"/>
                 <outlet property="nameLabel" destination="Yna-cX-gBx" id="tLN-lU-2hT"/>
                 <outlet property="professionLabel" destination="c4N-3o-Vex" id="ayg-Bv-cAq"/>
                 <outlet property="telNumberLabel" destination="71z-4F-5Ur" id="BPm-Vq-ACz"/>
-                <outlet property="userAvatarImageView" destination="HSL-Xj-xGk" id="8BQ-aH-gsj"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="185.49107142857142"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="ic_account_createparsonalcard" width="16" height="16"/>
-        <image name="ic_user" width="48" height="48"/>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

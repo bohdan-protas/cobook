@@ -9,13 +9,13 @@
 import UIKit
 
 struct BarItemViewModel {
+    var index: Int
     var title: String?
-    var isSelected: Bool?
 }
 
 protocol HorizontalItemsBarViewDataSource: class {
     func numberOfItems(in view: HorizontalItemsBarView) -> Int
-    func horizontalItemsBarView(_ view: HorizontalItemsBarView, titleForItemAt index: Int) -> BarItemViewModel?
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, itemAt index: Int) -> BarItemViewModel?
 }
 
 protocol HorizontalItemsBarViewDelegate: class {
@@ -83,9 +83,8 @@ extension HorizontalItemsBarView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HorizontalBarItemCollectionViewCell.identifier, for: indexPath) as! HorizontalBarItemCollectionViewCell
 
-        let item = self.dataSource?.horizontalItemsBarView(self, titleForItemAt: indexPath.item)
+        let item = self.dataSource?.horizontalItemsBarView(self, itemAt: indexPath.item)
         cell.nameLabel.text = item?.title
-        cell.isSelected = item?.isSelected ?? false
         cell.maxWidth = self.collectionView.frame.width / 4
         return cell
     }

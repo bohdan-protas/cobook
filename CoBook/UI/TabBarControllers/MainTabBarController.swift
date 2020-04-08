@@ -32,7 +32,7 @@ class MainTabBarController: UITabBarController {
         allCardsController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
 
         self.viewControllers = [allCardsController, accountController]
-        self.selectedIndex = 1
+        self.selectedIndex = 0
     }
 
     override func viewDidLoad() {

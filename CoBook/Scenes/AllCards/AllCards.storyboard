@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,10 +16,25 @@
                     <view key="view" contentMode="scaleToFill" id="3WC-RM-BgX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VUz-yx-tlA">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstItem="VUz-yx-tlA" firstAttribute="top" secondItem="dd8-43-qnP" secondAttribute="top" id="7Xh-aK-bCO"/>
+                            <constraint firstItem="VUz-yx-tlA" firstAttribute="trailing" secondItem="dd8-43-qnP" secondAttribute="trailing" id="D36-XW-Q8u"/>
+                            <constraint firstItem="VUz-yx-tlA" firstAttribute="bottom" secondItem="dd8-43-qnP" secondAttribute="bottom" id="mGy-ej-8CK"/>
+                            <constraint firstItem="VUz-yx-tlA" firstAttribute="leading" secondItem="dd8-43-qnP" secondAttribute="leading" id="ulf-UW-MNk"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dd8-43-qnP"/>
                     </view>
                     <navigationItem key="navigationItem" id="wBW-kW-dOa"/>
+                    <connections>
+                        <outlet property="tableView" destination="VUz-yx-tlA" id="FPI-gk-dc4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hy1-SE-9TN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -43,4 +59,9 @@
             <point key="canvasLocation" x="133.59999999999999" y="74.212893553223395"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

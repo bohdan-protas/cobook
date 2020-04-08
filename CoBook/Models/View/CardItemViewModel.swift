@@ -10,8 +10,14 @@ import Foundation
 
 struct CardItemViewModel {
     var id: String?
+    var type: CardType
     var avatarPath: String?
-    var name: String?
+    var firstName: String?
+    var lastName: String?
     var profession: String?
     var telephoneNumber: String?
+
+    var nameAbbreviation: String? {
+        return (firstName?.first?.uppercased() ?? "") + " " + (lastName?.first?.uppercased() ?? "")
+    }
 }
