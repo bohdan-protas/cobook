@@ -8,13 +8,7 @@
 
 import UIKit
 
-struct CardItemViewModel {
-    var id: String?
-    var avatarPath: String?
-    var name: String?
-    var profession: String?
-    var telephoneNumber: String?
-}
+
 
 struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
 

@@ -312,6 +312,27 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for card items list
+
+     - parameters:
+        - type: card id
+        - limit: pagination page list limit (default 15)
+        - offset: pagination offset (default 0)
+        - completion: parsed  'CardItemApiModel'  list response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getCardsList(type: String? = nil,
+                      limit: Int? = nil,
+                      offset: Int? = nil,
+                      completion: @escaping (Result<[CardItemApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.getCardsList(type: type, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
 }
 
 // MARK: - ContentManagerEndpoint requests
