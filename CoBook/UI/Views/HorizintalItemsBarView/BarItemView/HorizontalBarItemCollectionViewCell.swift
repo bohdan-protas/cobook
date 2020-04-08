@@ -10,32 +10,31 @@ import UIKit
 
 class HorizontalBarItemCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet var selectionIndicatorView: UIView!
-    @IBOutlet var nameLabel: UILabel!
     var maxWidth: CGFloat?
+    @IBOutlet var nameLabel: UILabel!
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
 
-    var isSizeCalculated: Bool = false
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        if !isSizeCalculated {
-            setNeedsLayout()
-            layoutIfNeeded()
-
-            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-            var newFrame = layoutAttributes.frame
-            if let maxWidth = maxWidth {
-                newFrame.size.width = min(CGFloat(ceilf(Float(size.width))), maxWidth)
-            } else {
-                newFrame.size.width = CGFloat(ceilf(Float(size.width)))
-            }
-
-            layoutAttributes.frame = newFrame
-            isSizeCalculated = true
-        }
-        return layoutAttributes
-    }
+//    var isSizeCalculated: Bool = false
+//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+//        if !isSizeCalculated {
+//            setNeedsLayout()
+//            layoutIfNeeded()
+//
+//            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+//            var newFrame = layoutAttributes.frame
+//            if let maxWidth = maxWidth {
+//                newFrame.size.width = min(CGFloat(ceilf(Float(size.width))), maxWidth)
+//            } else {
+//                newFrame.size.width = CGFloat(ceilf(Float(size.width)))
+//            }
+//
+//            layoutAttributes.frame = newFrame
+//            isSizeCalculated = true
+//        }
+//        return layoutAttributes
+//    }
 
 }

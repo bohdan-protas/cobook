@@ -366,5 +366,15 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    @discardableResult
+    func employeeList(cardId: Int,
+                      limit: Int? = nil,
+                      offset: Int? = nil,
+                      completion: @escaping (Result<[EmployApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = UsersEndpoint.employeeList(cardId: cardId, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 }

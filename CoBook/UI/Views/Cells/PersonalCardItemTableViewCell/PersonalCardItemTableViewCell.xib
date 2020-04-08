@@ -27,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-Xj-xGk" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-Xj-xGk" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                         <rect key="frame" x="16" y="28" width="64" height="64"/>
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
@@ -40,35 +40,6 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2St-iw-VD5">
-                        <rect key="frame" x="0.0" y="108" width="320" height="32"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_account_createparsonalcard" translatesAutoresizingMaskIntoConstraints="NO" id="1CI-lM-9Cy">
-                                <rect key="frame" x="16" y="8" width="16" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1CI-lM-9Cy" secondAttribute="height" multiplier="1:1" id="ei3-lB-YVd"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Персональна візитка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6L-fk-w9d">
-                                <rect key="frame" x="47" y="0.0" width="257" height="32"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
-                                <color key="textColor" name="Theme_Black-Middle"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.85490196078431369" blue="0.10196078431372549" alpha="0.10298052226027397" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="m6L-fk-w9d" firstAttribute="top" secondItem="2St-iw-VD5" secondAttribute="top" id="45N-HH-0rs"/>
-                            <constraint firstAttribute="bottom" secondItem="1CI-lM-9Cy" secondAttribute="bottom" constant="8" id="7gX-1Y-4gs"/>
-                            <constraint firstAttribute="height" constant="32" id="Drw-6P-XBX"/>
-                            <constraint firstItem="m6L-fk-w9d" firstAttribute="leading" secondItem="1CI-lM-9Cy" secondAttribute="trailing" constant="15" id="FVE-TH-HwB"/>
-                            <constraint firstItem="1CI-lM-9Cy" firstAttribute="top" secondItem="2St-iw-VD5" secondAttribute="top" constant="8" id="cT1-8x-DWh"/>
-                            <constraint firstAttribute="bottom" secondItem="m6L-fk-w9d" secondAttribute="bottom" id="ebQ-GV-WC1"/>
-                            <constraint firstAttribute="trailing" secondItem="m6L-fk-w9d" secondAttribute="trailing" constant="16" id="jgk-ut-De6"/>
-                            <constraint firstItem="1CI-lM-9Cy" firstAttribute="leading" secondItem="2St-iw-VD5" secondAttribute="leading" constant="16" id="olz-ry-L4g"/>
-                            <constraint firstItem="m6L-fk-w9d" firstAttribute="centerY" secondItem="1CI-lM-9Cy" secondAttribute="centerY" id="xud-Ad-keT"/>
-                        </constraints>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lih-SN-k16">
                         <rect key="frame" x="96" y="28" width="208" height="64"/>
                         <subviews>
@@ -102,7 +73,36 @@
                             <constraint firstAttribute="trailing" secondItem="DWr-kl-slk" secondAttribute="trailing" id="csA-ue-Uhq"/>
                             <constraint firstAttribute="bottom" secondItem="DWr-kl-slk" secondAttribute="bottom" constant="4" id="dVu-Y3-l44"/>
                             <constraint firstItem="DWr-kl-slk" firstAttribute="top" secondItem="lih-SN-k16" secondAttribute="top" constant="4" id="mr2-a0-vrj"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="zew-Hn-XHu"/>
+                            <constraint firstAttribute="height" constant="64" id="zew-Hn-XHu"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2St-iw-VD5">
+                        <rect key="frame" x="0.0" y="108" width="320" height="32"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_account_createparsonalcard" translatesAutoresizingMaskIntoConstraints="NO" id="1CI-lM-9Cy">
+                                <rect key="frame" x="16" y="8" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1CI-lM-9Cy" secondAttribute="height" multiplier="1:1" id="ei3-lB-YVd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Персональна візитка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6L-fk-w9d">
+                                <rect key="frame" x="47" y="0.0" width="257" height="32"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
+                                <color key="textColor" name="Theme_Black-Middle"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.85490196078431369" blue="0.10196078431372549" alpha="0.10298052226027397" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="m6L-fk-w9d" firstAttribute="top" secondItem="2St-iw-VD5" secondAttribute="top" id="45N-HH-0rs"/>
+                            <constraint firstAttribute="bottom" secondItem="1CI-lM-9Cy" secondAttribute="bottom" constant="8" id="7gX-1Y-4gs"/>
+                            <constraint firstAttribute="height" constant="32" id="Drw-6P-XBX"/>
+                            <constraint firstItem="m6L-fk-w9d" firstAttribute="leading" secondItem="1CI-lM-9Cy" secondAttribute="trailing" constant="15" id="FVE-TH-HwB"/>
+                            <constraint firstItem="1CI-lM-9Cy" firstAttribute="top" secondItem="2St-iw-VD5" secondAttribute="top" constant="8" id="cT1-8x-DWh"/>
+                            <constraint firstAttribute="bottom" secondItem="m6L-fk-w9d" secondAttribute="bottom" id="ebQ-GV-WC1"/>
+                            <constraint firstAttribute="trailing" secondItem="m6L-fk-w9d" secondAttribute="trailing" constant="16" id="jgk-ut-De6"/>
+                            <constraint firstItem="1CI-lM-9Cy" firstAttribute="leading" secondItem="2St-iw-VD5" secondAttribute="leading" constant="16" id="olz-ry-L4g"/>
+                            <constraint firstItem="m6L-fk-w9d" firstAttribute="centerY" secondItem="1CI-lM-9Cy" secondAttribute="centerY" id="xud-Ad-keT"/>
                         </constraints>
                     </view>
                 </subviews>

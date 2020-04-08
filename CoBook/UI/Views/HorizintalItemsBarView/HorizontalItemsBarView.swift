@@ -29,7 +29,7 @@ class HorizontalItemsBarView: BaseFromNibView {
 
     var selectionIndicatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor.Theme.green
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -86,7 +86,7 @@ extension HorizontalItemsBarView: UICollectionViewDataSource {
         let item = self.dataSource?.horizontalItemsBarView(self, titleForItemAt: indexPath.item)
         cell.nameLabel.text = item?.title
         cell.isSelected = item?.isSelected ?? false
-        cell.maxWidth = self.collectionView.frame.width
+        cell.maxWidth = self.collectionView.frame.width / 4
         return cell
     }
 
@@ -107,16 +107,12 @@ extension HorizontalItemsBarView: UICollectionViewDelegate {
         selectionIndicatorWidth?.constant = cell.frame.width
 
         collectionView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.collectionView.layoutIfNeeded()
         }, completion: { isFinished in
             self.delegate?.horizontalItemsBarView(self, didSelectedItemAt: indexPath.item)
         })
     }
-
-
-
-
 
 
 }

@@ -8,6 +8,14 @@
 
 import UIKit
 
+struct CardItemViewModel {
+    var id: String?
+    var avatarPath: String?
+    var name: String?
+    var profession: String?
+    var telephoneNumber: String?
+}
+
 struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
 
     // MARK: - Properties
@@ -23,11 +31,21 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var mapDirectionCellConfigurator: CellConfigurator<Void?, MapDirectionTableViewCell>
     var mapCellConfigurator: CellConfigurator<String?, MapTableViewCell>
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>
+    var employeeCellConfigurator: CellConfigurator<CardItemViewModel?, PersonalCardItemTableViewCell>
 
     // MARK: - Initializer
 
     init(presenter: BusinessCardDetailsPresenter) {
         self.presenter = presenter
+
+        employeeCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> PersonalCardItemTableViewCell in
+            cell.userAvatarImageView.setImage(withPath: model?.avatarPath)
+            cell.nameLabel.text = model?.name
+            cell.professionLabel.text = model?.profession
+            cell.telNumberLabel.text = model?.telephoneNumber
+
+            return cell
+        }
 
         headerInfoCellConfigurator = CellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel?, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
             cell.bgImageView.setImage(withPath: model?.bgimagePath)
@@ -102,6 +120,10 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return mapDirectionCellConfigurator.reuseIdentifier
         case .companyDescription:
             return expandableDescriptionCellConfigurator.reuseIdentifier
+        case .title:
+            return sectionTitleConfigurator.reuseIdentifier
+        case .employee:
+            return employeeCellConfigurator.reuseIdentifier
         }
     }
 
@@ -123,6 +145,10 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return mapDirectionCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         case .companyDescription(let text):
             return expandableDescriptionCellConfigurator.configuredCell(for: text, tableView: tableView, indexPath: indexPath)
+        case .title(let text):
+            return sectionTitleConfigurator.configuredCell(for: text, tableView: tableView, indexPath: indexPath)
+        case .employee(let model):
+            return employeeCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -136,5 +162,6 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         mapDirectionCellConfigurator.registerCells(in: tableView)
         mapCellConfigurator.registerCells(in: tableView)
         addressInfoCellConfigurator.registerCells(in: tableView)
+        employeeCellConfigurator.registerCells(in: tableView)
     }
 }

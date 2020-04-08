@@ -20,5 +20,13 @@ class PersonalCardItemTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        userAvatarImageView.cancelImageRequest()
+        nameLabel.text = ""
+        professionLabel.text = ""
+        telNumberLabel.text = ""
+    }
+
     
 }

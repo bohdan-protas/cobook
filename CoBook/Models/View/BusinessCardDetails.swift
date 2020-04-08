@@ -11,6 +11,7 @@ import Foundation
 enum BusinessCardDetails {
 
     enum Cell {
+        case title(text: String)
         case sectionHeader
         case companyDescription(text: String?)
         case userInfo(model: BusinessCardDetails.HeaderInfoModel?)
@@ -19,6 +20,7 @@ enum BusinessCardDetails {
         case addressInfo(model: AddressInfoCellModel)
         case map(path: String?)
         case mapDirection
+        case employee(model: CardItemViewModel?)
     }
 
     struct HeaderInfoModel {

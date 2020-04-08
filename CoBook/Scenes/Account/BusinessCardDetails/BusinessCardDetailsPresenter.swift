@@ -26,13 +26,19 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     private var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
+    private var employee: [CardItemViewModel] = []
 
     var items: [BarItemViewModel] = [
-        BarItemViewModel(title: "Загальна інформація", isSelected: true),
-        BarItemViewModel(title: "Послуги", isSelected: false),
-        BarItemViewModel(title: "Крамниця", isSelected: false),
+        BarItemViewModel(title: "Загальна\n інформація", isSelected: true),
         BarItemViewModel(title: "Контакти", isSelected: false),
+        BarItemViewModel(title: "Команда", isSelected: false),
     ]
+
+    var currentIndex: Int = 0 {
+        didSet {
+            updateViewDataSource()
+        }
+    }
 
     // MARK: - Object Lifecycle
 
@@ -52,10 +58,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
-        fetchDetails { model in
-            self.cardDetails = model
-            self.updateViewDataSource()
-        }
+        setupDataSource()
     }
 
     func onViewWillAppear() {
@@ -70,6 +73,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 private extension BusinessCardDetailsPresenter {
 
     func updateViewDataSource() {
+
         let userInfoSection = Section<BusinessCardDetails.Cell>(items: [
             .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company.name,
                                                                  avatartImagePath: cardDetails?.avatar?.sourceUrl,
@@ -77,24 +81,33 @@ private extension BusinessCardDetailsPresenter {
                                                                  profession: cardDetails?.practiceType?.title,
                                                                  telephoneNumber: cardDetails?.contactTelephone?.number,
                                                                  websiteAddress: cardDetails?.companyWebSite)),
-
-
         ])
 
-        var generalInfoSection = Section<BusinessCardDetails.Cell>(items: [
-            .companyDescription(text: cardDetails?.description),
-            .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
-            .map(path: ""),
-            .mapDirection
-        ])
-
-        let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
-        if !listListItems.isEmpty {
-            generalInfoSection.items.append(.socialList)
+        var changableSection = Section<BusinessCardDetails.Cell>(items: [])
+        switch currentIndex {
+        case 0:
+            changableSection.items = [.companyDescription(text: cardDetails?.description),
+                                      .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
+                                      .map(path: ""),
+                                      .mapDirection]
+        case 1:
+            changableSection.items = [
+                .getInTouch
+            ]
+            let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+            if !listListItems.isEmpty {
+                changableSection.items.append(.title(text: "Соціальні мережі:"))
+                changableSection.items.append(.socialList)
+            }
+        case 2:
+            let emplCells = employee.compactMap {
+                BusinessCardDetails.Cell.employee(model: $0)
+            }
+            changableSection.items = emplCells
+        default: break
         }
-        generalInfoSection.items.append(.getInTouch)
 
-        view?.updateDataSource(sections: [userInfoSection, generalInfoSection])
+        view?.updateDataSource(sections: [userInfoSection, changableSection])
     }
 
 
@@ -104,19 +117,56 @@ private extension BusinessCardDetailsPresenter {
 
 private extension BusinessCardDetailsPresenter {
 
-    func fetchDetails(onSuccess: ((CardDetailsApiModel?) -> Void)?) {
-        view?.startLoading()
-        APIClient.default.getCardInfo(id: businessCardId) { [weak self] (result) in
-            guard let strongSelf = self else {
-                return
-            }
-            self?.view?.stopLoading()
+    func setupDataSource() {
+        let group = DispatchGroup()
+        var errors = [Error]()
 
+        var cardDetails: CardDetailsApiModel?
+        var employee: [EmployApiModel] = []
+
+        view?.startLoading(text: "Завантаження")
+
+        group.enter()
+        APIClient.default.getCardInfo(id: businessCardId) { (result) in
             switch result {
             case let .success(response):
-                onSuccess?(response)
+                cardDetails = response
+                group.leave()
             case let .failure(error):
-                strongSelf.view?.errorAlert(message: error.localizedDescription)
+                errors.append(error)
+                group.leave()
+            }
+        }
+
+        group.enter()
+        APIClient.default.employeeList(cardId: businessCardId) { (result) in
+            switch result {
+            case let .success(response):
+                employee = response ?? []
+                group.leave()
+            case let .failure(error):
+                errors.append(error)
+                group.leave()
+            }
+        }
+
+        // setup data source
+        group.notify(queue: .main) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+
+            if !errors.isEmpty {
+                errors.forEach {
+                    self?.view?.errorAlert(message: $0.localizedDescription)
+                }
+            } else {
+                self?.cardDetails = cardDetails
+                self?.employee = employee.map { CardItemViewModel(id: $0.id,
+                                                                  avatarPath: $0.avatar?.sourceUrl,
+                                                                  name: ($0.firstName ?? "") + " " + ($0.lastName ?? ""),
+                                                                  profession: $0.position,
+                                                                  telephoneNumber: $0.telephone?.number) }
+                self?.updateViewDataSource()
             }
         }
     }
@@ -129,8 +179,11 @@ private extension BusinessCardDetailsPresenter {
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        items[index].isSelected = true
-        Log.debug("Selected \(index)")
+        for index in 0..<items.count {
+            items[index].isSelected = false
+        }
+        currentIndex = index
+        items[currentIndex].isSelected = true
     }
 
 
