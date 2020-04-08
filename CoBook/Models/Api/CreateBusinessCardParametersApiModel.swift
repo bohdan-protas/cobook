@@ -9,6 +9,7 @@
 import Foundation
 
 struct CreateBusinessCardParametersApiModel {
+    var id: Int?
     var avatarId: String?
     var backgroundId: String?
     var cityPlaceId: String?
@@ -26,6 +27,7 @@ struct CreateBusinessCardParametersApiModel {
     var employeeIds: [String] = []
 
     init(model: CreateBusinessCard.DetailsModel) {
+        self.id = model.cardId
         self.avatarId = model.avatarImage?.id
         self.backgroundId = model.backgroudImage?.id
         self.cityPlaceId = model.city?.googlePlaceId
@@ -55,6 +57,7 @@ struct CreateBusinessCardParametersApiModel {
 extension CreateBusinessCardParametersApiModel: Encodable {
 
     enum CodingKeys: String, CodingKey {
+        case id
         case avatarId = "avatar_id"
         case backgroundId = "background_id"
         case cityPlaceId = "city_place_id"

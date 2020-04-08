@@ -31,7 +31,9 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     private var viewDataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?
     private var viewDataSourceConfigurator: CreateBusinessCardDataSourceConfigurator?
 
-    var businessCardDetailsModel: CreateBusinessCard.DetailsModel {
+    private let isEditing: Bool
+
+    private var businessCardDetailsModel: CreateBusinessCard.DetailsModel {
         didSet {
             let isRequiredDataFilled = (
                 !(businessCardDetailsModel.avatarImage == nil) &&
@@ -53,8 +55,14 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
         }
     }
 
-    init(detailsModel: CreateBusinessCard.DetailsModel? = nil) {
-        self.businessCardDetailsModel = detailsModel ?? CreateBusinessCard.DetailsModel()
+    override init() {
+        self.isEditing = false
+        self.businessCardDetailsModel = CreateBusinessCard.DetailsModel()
+    }
+
+    init(detailsModel: CreateBusinessCard.DetailsModel) {
+        self.isEditing = true
+        self.businessCardDetailsModel = detailsModel
     }
 
     // MARK: Public
@@ -76,22 +84,11 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
         setupDataSource()
     }
 
-    func createBusinessCard() {
-        let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
-        
-        view?.startLoading(text: "Створення...")
-        APIClient.default.createBusinessCard(parameters: parameters) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            switch result {
-            case .success:
-                strongSelf.view?.stopLoading(success: true, completion: {
-                    AppStorage.State.isNeedToUpdateAccountData = true
-                    strongSelf.view?.popController()
-                })
-            case let .failure(error):
-                strongSelf.view?.stopLoading()
-                strongSelf.view?.errorAlert(message: error.localizedDescription)
-            }
+    func onCreationAction() {
+        if isEditing {
+            updateBusinessCard()
+        } else {
+            createBusinessCard()
         }
     }
 
@@ -176,8 +173,42 @@ private extension CreateBusinessCardPresenter {
 // MARK: - Use cases
 private extension CreateBusinessCardPresenter {
 
-    func createPersonalCard() {
+    func updateBusinessCard() {
+        view?.startLoading(text: "Створення...")
 
+        let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
+        APIClient.default.updateBusinessCard(parameters: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case let .failure(error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func createBusinessCard() {
+        view?.startLoading(text: "Створення...")
+
+        let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
+        APIClient.default.createBusinessCard(parameters: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case let .failure(error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
     func uploadCompanyAvatar(image: UIImage?) {
@@ -226,38 +257,53 @@ private extension CreateBusinessCardPresenter {
 
     func setupDataSource() {
         let group = DispatchGroup()
-
-        var practicesTypesListRequestError: Error?
-        var interestsListRequestError: Error?
-
-        var practicies: [PracticeModel] = []
-        var interests: [InterestModel] = []
+        var errors = [Error]()
 
         view?.startLoading(text: "Завантаження")
 
         // fetch practices
         group.enter()
-        APIClient.default.practicesTypesListRequest { (result) in
+        APIClient.default.practicesTypesListRequest { [weak self] (result) in
             switch result {
             case let .success(response):
-                practicies = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
+                self?.businessCardDetailsModel.practices = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
                 group.leave()
             case let .failure(error):
-                practicesTypesListRequestError = error
+                errors.append(error)
                 group.leave()
             }
         }
 
         // fetch interests
         group.enter()
-        APIClient.default.interestsListRequest { (result) in
+        APIClient.default.interestsListRequest { [weak self] (result) in
             switch result {
             case let .success(response):
-                interests = (response ?? []).compactMap { InterestModel(id: $0.id, title: $0.title, isSelected: false) }
+                self?.businessCardDetailsModel.interests = (response ?? []).compactMap { InterestModel(id: $0.id, title: $0.title, isSelected: false) }
                 group.leave()
             case let .failure(error):
-                interestsListRequestError = error
+                errors.append(error)
                 group.leave()
+            }
+        }
+
+        if let id = businessCardDetailsModel.cardId {
+            // fetch employers
+            group.enter()
+            APIClient.default.employeeList(cardId: id) { [weak self] (result) in
+                switch result {
+                case let .success(response):
+                    self?.businessCardDetailsModel.employers = (response ?? []).compactMap { CardPreviewModel(id: $0.id,
+                                                                                                              image: $0.avatar?.sourceUrl,
+                                                                                                              firstName: $0.firstName,
+                                                                                                              lastName: $0.lastName,
+                                                                                                              profession: $0.practiceType?.title,
+                                                                                                              telephone: $0.telephone?.number) }
+                    group.leave()
+                case let .failure(error):
+                    errors.append(error)
+                    group.leave()
+                }
             }
         }
 
@@ -266,16 +312,8 @@ private extension CreateBusinessCardPresenter {
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
-            self?.businessCardDetailsModel.practices = practicies
-            self?.businessCardDetailsModel.interests = interests
-
-            if practicesTypesListRequestError != nil {
-                strongSelf.view?.errorAlert(message: practicesTypesListRequestError?.localizedDescription)
-                return
-            }
-
-            if interestsListRequestError != nil  {
-                strongSelf.view?.errorAlert(message: interestsListRequestError?.localizedDescription)
+            if !errors.isEmpty {
+                self?.view?.errorAlert(message: errors.first?.localizedDescription)
             }
 
             strongSelf.view?.tableView.reloadData()
