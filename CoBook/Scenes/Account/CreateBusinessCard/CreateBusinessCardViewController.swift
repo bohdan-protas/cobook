@@ -22,7 +22,7 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
     private lazy var imagePickerController: UIImagePickerController = {
          let controller = UIImagePickerController()
          controller.delegate = self
-         controller.allowsEditing = false
+         controller.allowsEditing = true
          controller.sourceType = .photoLibrary
          controller.modalPresentationStyle = .overFullScreen
          return controller
@@ -132,7 +132,7 @@ extension CreateBusinessCardViewController: UIImagePickerControllerDelegate & UI
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
 
-        guard let image = info[.originalImage] as? UIImage else { return }
+        guard let image = info[.editedImage] as? UIImage else { return }
         imagePickerCompletion?(image)
         imagePickerCompletion = nil
     }

@@ -90,14 +90,12 @@ private extension BusinessCardDetailsPresenter {
                                       .map(path: ""),
                                       .mapDirection]
         case 1:
-            changableSection.items = [
-                .getInTouch
-            ]
             let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
             if !listListItems.isEmpty {
                 changableSection.items.append(.title(text: "Соціальні мережі:"))
                 changableSection.items.append(.socialList)
             }
+            changableSection.items.append(.getInTouch)
         case 2:
             let emplCells = employee.compactMap {
                 BusinessCardDetails.Cell.employee(model: $0)
