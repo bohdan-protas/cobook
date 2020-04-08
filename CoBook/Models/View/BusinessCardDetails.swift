@@ -11,11 +11,25 @@ import Foundation
 enum BusinessCardDetails {
 
     enum Cell {
+        case title(text: String)
         case sectionHeader
-        case userInfo(model: CardDetailsApiModel?)
+        case companyDescription(text: String?)
+        case userInfo(model: BusinessCardDetails.HeaderInfoModel?)
         case getInTouch
         case socialList
+        case addressInfo(model: AddressInfoCellModel)
+        case map(path: String?)
+        case mapDirection
+        case employee(model: CardItemViewModel?)
     }
 
+    struct HeaderInfoModel {
+        var name: String?
+        var avatartImagePath: String?
+        var bgimagePath: String?
+        var profession: String?
+        var telephoneNumber: String?
+        var websiteAddress: String?
+    }
 
 }

@@ -62,7 +62,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
         cell.proffesionLabel.text = model.profession
         cell.telephoneNumberLabel.text = model.telephone
         cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-        cell.titleImageView.setImage(withPath: model.image, placeholderText: "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")")
+        cell.titleImageView.setTextPlaceholderImage(withPath: model.image, placeholderText: "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")")
 
         return cell
     }

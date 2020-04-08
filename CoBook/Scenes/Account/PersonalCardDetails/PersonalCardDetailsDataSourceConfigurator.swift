@@ -34,7 +34,7 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
         }
 
         userInfoCellConfigurator = CellConfigurator { (cell, model: CardDetailsApiModel?, tableView, indexPath) -> PersonalCardUserInfoTableViewCell in
-            cell.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl,
+            cell.avatarImageView.setTextPlaceholderImage(withPath: model?.avatar?.sourceUrl,
                                           placeholderText: "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")")
             cell.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
             cell.practiceTypeLabel.text = model?.practiceType?.title

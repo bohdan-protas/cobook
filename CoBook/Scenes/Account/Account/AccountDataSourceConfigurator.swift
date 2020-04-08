@@ -37,7 +37,7 @@ struct AccountDataSourceConfigurator: CellConfiguratorType {
         }
 
         accountHeaderCellConfigurator = CellConfigurator { (cell, model: Account.UserInfoHeaderModel?, tableView, indexPath) -> AccountHeaderTableViewCell in
-            cell.avatarTextPlaceholderImageView.setImage(withPath: model?.avatarUrl, placeholderText: "\(model?.firstName?.first?.uppercased() ?? "") \(model?.lastName?.first?.uppercased() ?? "")")
+            cell.avatarTextPlaceholderImageView.setTextPlaceholderImage(withPath: model?.avatarUrl, placeholderText: "\(model?.firstName?.first?.uppercased() ?? "") \(model?.lastName?.first?.uppercased() ?? "")")
             cell.userNameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
             cell.emailLabel.text = model?.email
             cell.telephoneNumberLabel.text = model?.telephone
@@ -48,7 +48,7 @@ struct AccountDataSourceConfigurator: CellConfiguratorType {
             cell.proffesionLabel.text = model.profession
             cell.telephoneNumberLabel.text = model.telephone
             cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-            cell.titleImageView.setImage(withPath: model.image, placeholderText: "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")")
+            cell.titleImageView.setTextPlaceholderImage(withPath: model.image, placeholderText: "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")")
             return cell
         }
     }

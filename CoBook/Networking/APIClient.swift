@@ -58,9 +58,10 @@ class APIClient {
                             let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
                             completion(.failure(error))
                         }
-                    } catch {
-                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in bad format")
-                        completion(.failure(error))
+                    } catch let decodeErrror {
+                        Log.error(decodeErrror)
+                        let userError = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in unexpected format")
+                        completion(.failure(userError))
                     }
                 } else {
                     let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
@@ -363,6 +364,16 @@ extension APIClient {
                      completion: @escaping (Result<[EmployersSearchItemApiModel]?, Error>) -> Void) -> DataRequest {
 
         let endpoint = UsersEndpoint.searchEmployee(searchQuery: searchQuery, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func employeeList(cardId: Int,
+                      limit: Int? = nil,
+                      offset: Int? = nil,
+                      completion: @escaping (Result<[EmployApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = UsersEndpoint.employeeList(cardId: cardId, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
