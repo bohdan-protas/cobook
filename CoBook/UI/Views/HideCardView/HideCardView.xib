@@ -51,16 +51,16 @@
                     <rect key="frame" x="16" y="34" width="382" height="44"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mat-7X-7d6">
-                            <rect key="frame" x="76.5" y="0.0" width="229.5" height="44"/>
+                            <rect key="frame" x="77.5" y="0.0" width="227" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не цікавить візитка?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-Wj-iXk">
-                                    <rect key="frame" x="0.0" y="15" width="144.5" height="14"/>
+                                    <rect key="frame" x="0.0" y="13.5" width="145.5" height="17.5"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
                                     <color key="textColor" name="Theme_Green-Dark"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Приховати" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-F5-t3w">
-                                    <rect key="frame" x="149.5" y="15" width="80" height="14"/>
+                                    <rect key="frame" x="150.5" y="13.5" width="76.5" height="17.5"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="15"/>
                                     <color key="textColor" name="Theme_Green-Dark"/>
                                     <nil key="highlightedColor"/>

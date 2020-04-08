@@ -11,7 +11,6 @@ import UIKit
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator)
     func updateDataSource(sections: [Section<BusinessCardDetails.Cell>])
-
     func sendEmail(to address: String)
 }
 
@@ -71,7 +70,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 // MARK: - Privates
 
 private extension BusinessCardDetailsPresenter {
-
+    
     func updateViewDataSource() {
 
         let userInfoSection = Section<BusinessCardDetails.Cell>(items: [
@@ -237,6 +236,7 @@ extension BusinessCardDetailsPresenter: SocialsListTableViewCellDelegate {
     }
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath) {
+
     }
 
 
