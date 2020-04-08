@@ -19,11 +19,15 @@ enum AppStorage {
         case refreshToken
         case profile
         case firstAppLaunch
+        case isNeedToUpdateAccountData
     }
 
     enum State {
         @UserDefaultValueStorageWrapper(key: Keys.firstAppLaunch.rawValue, defaultValue: true)
         static var isFirstAppLaunch: Bool
+
+        @UserDefaultValueStorageWrapper(key: Keys.isNeedToUpdateAccountData.rawValue, defaultValue: false)
+        static var isNeedToUpdateAccountData: Bool
     }
 
     enum User {
@@ -36,8 +40,8 @@ enum AppStorage {
         @UserDefaultValueStorageWrapper(key: Keys.userCompletedRegistration.rawValue, defaultValue: false)
         static var isUserCompletedRegistration: Bool
 
-        @UserDefaultObjectStorageWrapper(key: Keys.profile.rawValue, defaultValue: Profile())
-        static var profile: Profile?
+        @UserDefaultObjectStorageWrapper(key: Keys.profile.rawValue, defaultValue: ProfileApiModel())
+        static var data: ProfileApiModel?
     }
 
     enum Auth {

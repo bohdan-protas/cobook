@@ -9,12 +9,12 @@
 import UIKit
 import GooglePlaces
 
-class CreateBusinessCardViewController: BaseViewController {
+private enum Defaults {
+    static let estimatedRowHeight: CGFloat = 44
+    static let footerHeight: CGFloat = 124
+}
 
-    enum Defaults {
-        static let estimatedRowHeight: CGFloat = 44
-        static let footerHeight: CGFloat = 124
-    }
+class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardView {
 
     // MARK: Properties
     @IBOutlet var tableView: UITableView!
@@ -22,7 +22,7 @@ class CreateBusinessCardViewController: BaseViewController {
     private lazy var imagePickerController: UIImagePickerController = {
          let controller = UIImagePickerController()
          controller.delegate = self
-         controller.allowsEditing = false
+         controller.allowsEditing = true
          controller.sourceType = .photoLibrary
          controller.modalPresentationStyle = .overFullScreen
          return controller
@@ -31,19 +31,67 @@ class CreateBusinessCardViewController: BaseViewController {
     private lazy var cardSaveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
         view.onSaveTapped = { [weak self] in
-            //self?.presenter.createBusinessCard()
+            self?.presenter.createBusinessCard()
         }
         return view
     }()
 
-    //var presenter = CreateBusinessCardPresenter()
+
+    var presenter = CreateBusinessCardPresenter()
+
     private var placeCompletion: ((GMSPlace) -> Void)?
+    private var imagePickerCompletion: ((UIImage) -> Void)?
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        presenter.attachView(self)
+        presenter.onViewDidLoad()
+    }
+
+    deinit {
+        presenter.detachView()
+    }
+
+    // MARK: CreateBusinessCardView
+    func setupLayout() {
+        self.navigationItem.title = "Створення бізнес візитки"
+
+        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
+        tableView.delegate = self
+    }
+
+    func setupSaveCardView() {
+        tableView.tableFooterView = cardSaveView
+    }
+
+    func setSaveButtonEnabled(_ isEnabled: Bool) {
+        cardSaveView.saveButton.isEnabled = isEnabled
+    }
+
+    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?) {
+        view.endEditing(true)
+        placeCompletion = completion
+
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.modalPresentationStyle = .overFullScreen
+        autocompleteViewController.autocompleteFilter = filter
+        autocompleteViewController.delegate = self
+
+        present(autocompleteViewController, animated: true, completion: nil)
+    }
+
+    func showPickerController(completion: ((UIImage) -> Void)?) {
+        view.endEditing(true)
+        imagePickerCompletion = completion
+        present(imagePickerController, animated: true, completion: nil)
+    }
+
+    func showSearchEmployersControlelr() {
+        let searchNavigationController: SearchNavigationController = UIStoryboard.search.initiateViewControllerFromType()
+        searchNavigationController.searchTableViewControllerDelegate = self
+        self.present(searchNavigationController, animated: true, completion: nil)
     }
 
 
@@ -52,24 +100,13 @@ class CreateBusinessCardViewController: BaseViewController {
 // MARK: Privates
 private extension CreateBusinessCardViewController {
 
-    func setupLayout() {
-        self.navigationItem.title = "Створення бізнес візитки"
-
-        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
-        tableView.delegate = self
-    }
-
-
 }
 
-// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
-extension CreateBusinessCardViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+// MARK: - SearchTableViewControllerDelegate
+extension CreateBusinessCardViewController: SearchTableViewControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-
-        guard let image = info[.originalImage] as? UIImage else { return }
-        //presenter.userImagePicked(image)
+    func searchTableViewController(_ controller: SearchTableViewController, didSelected item: CardPreviewModel?) {
+        presenter.addEmploy(model: item)
     }
 
 
@@ -84,6 +121,20 @@ extension CreateBusinessCardViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
+    }
+
+
+}
+
+// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
+extension CreateBusinessCardViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        guard let image = info[.editedImage] as? UIImage else { return }
+        imagePickerCompletion?(image)
+        imagePickerCompletion = nil
     }
 
 

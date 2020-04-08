@@ -48,10 +48,7 @@ enum Social {
         if let detectingLinkHost = url.host {
             Social.LinkType.allCases.forEach { linkType in
                 if linkType.associatedHost.contains(detectingLinkHost) {
-                    Log.debug("Detected link host \(detectingLinkHost): \(linkType)")
                     detectedType = linkType
-                } else {
-                    Log.debug("\(linkType) type not associated with host \(detectingLinkHost)")
                 }
             }
         }

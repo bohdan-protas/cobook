@@ -13,7 +13,7 @@ extension Optional: AnyOptional {
 }
 
 extension Optional where Wrapped: Collection {
-    public var isNilOrEmty: Bool {
+    public var isNilOrEmpty: Bool {
         switch self {
         case .none:
             return true

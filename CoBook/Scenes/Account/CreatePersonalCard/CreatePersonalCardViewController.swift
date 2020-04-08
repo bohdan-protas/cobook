@@ -26,7 +26,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
     private lazy var imagePickerController: UIImagePickerController = {
         let controller = UIImagePickerController()
         controller.delegate = self
-        controller.allowsEditing = false
+        controller.allowsEditing = true
         controller.sourceType = .photoLibrary
         controller.modalPresentationStyle = .overFullScreen
         return controller
@@ -49,7 +49,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         presenter.onViewDidLoad()
     }
 
-    func setupHeaderFooterViews() {
+    func setupSaveCardView() {
         tableView.tableFooterView = cardSaveView
     }
 
@@ -73,6 +73,8 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    
+
 
 }
 
@@ -95,7 +97,7 @@ extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UI
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
 
-        guard let image = info[.originalImage] as? UIImage else { return }
+        guard let image = info[.editedImage] as? UIImage else { return }
         presenter.userImagePicked(image)
     }
 

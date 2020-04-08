@@ -34,7 +34,7 @@ class DesignableTextPlaceholderImageView: UIImageView {
     private var placeholderLabel: UILabel!
 
     /// Adjustment in font size to make the title font slightly bigger
-    private let titleFontSizeAdjustment: CGFloat = 4
+    private let titleFontSizeAdjustment: CGFloat = 0
 
     override required init(frame: CGRect) {
         super.init(frame: frame)

@@ -15,19 +15,6 @@ enum APIConstants {
         case contentManager = "/cm/v1"
     }
 
-    enum ParameterKey {
-        static let password     = "password"
-        static let email        = "email"
-        static let firstName    = "first_name"
-        static let lastName     = "last_name"
-        static let telephone    = "telephone"
-        static let token        = "s_id"
-        static let code         = "code"
-        static let login        = "login"
-        static let refreshToken = "refresh_token"
-        static let id           = "id"
-    }
-
     static var baseURLPath: URLComponents {
         get {
             var components = URLComponents()
@@ -39,7 +26,20 @@ enum APIConstants {
     }
 
     enum Google {
-        static let placesApiKey: String = "AIzaSyDHrahNfM6ZMu-TLQQbl-chJ1vXjxdYWMM"  //"AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"
+        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"  //"AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"
+    }
+
+    enum ParameterKey {
+        static let password     = "password"
+        static let email        = "email"
+        static let firstName    = "first_name"
+        static let lastName     = "last_name"
+        static let telephone    = "telephone"
+        static let token        = "s_id"
+        static let code         = "code"
+        static let login        = "login"
+        static let refreshToken = "refresh_token"
+        static let id           = "id"
     }
 
 

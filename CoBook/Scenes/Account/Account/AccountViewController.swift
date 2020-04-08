@@ -8,23 +8,24 @@
 
 import UIKit
 
-class AccountViewController: BaseViewController, AccountView {
+private enum Defaults {
+    static let estimatedRowHeight: CGFloat = 44
+}
 
-    enum Defaults {
-        static let estimatedRowHeight: CGFloat = 44
-    }
+class AccountViewController: BaseViewController, AccountView {
 
     // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
 
     // MARK: Properties
     var presenter = AccountPresenter()
+    var dataSource: TableDataSource<AccountDataSourceConfigurator>?
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-        setupLayout()
+        presenter.onViewDidLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -36,22 +37,30 @@ class AccountViewController: BaseViewController, AccountView {
         presenter.detachView()
     }
 
-
-}
-
-// MARK: - Privates
-private extension AccountViewController {
-
+    // MARK: - AccountView
     func setupLayout() {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
+
         let footerView = UIView(frame: CGRect(origin: .zero, size: .init(width: tableView.frame.width, height: 8)))
         footerView.backgroundColor = .white
         tableView.tableFooterView = footerView
         tableView.delegate = self
     }
+
+    func configureDataSource(with configurator: AccountDataSourceConfigurator) {
+        dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
+        tableView.dataSource = dataSource
+    }
+
+    func updateDataSource(sections: [Section<Account.Item>]) {
+        dataSource?.sections = sections
+        tableView.reloadData()
+    }
+
+
 }
 
 // MARK: - UITableViewDelegate

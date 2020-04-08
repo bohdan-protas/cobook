@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppStorage.State.isFirstAppLaunch = false
         }
 
-        if AppStorage.User.profile?.userId == nil {
+        if AppStorage.User.data?.userId == nil {
             if AppStorage.User.isTutorialShown {
                 let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                 window?.rootViewController = signUpNavigationController
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         if AppStorage.User.isUserInitiatedRegistration && !AppStorage.User.isUserCompletedRegistration {
             AppStorage.Auth.deleteAllData()
-            AppStorage.User.profile = nil
+            AppStorage.User.data = nil
             AppStorage.User.isUserInitiatedRegistration = false
         }
     }

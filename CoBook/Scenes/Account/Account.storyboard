@@ -49,12 +49,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C9X-BT-DdJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C9X-BT-DdJ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="C9X-BT-DdJ" firstAttribute="bottom" secondItem="STW-El-vVj" secondAttribute="bottom" id="PIa-AK-YAP"/>
                             <constraint firstItem="C9X-BT-DdJ" firstAttribute="leading" secondItem="STW-El-vVj" secondAttribute="leading" id="Qoq-k2-QMy"/>
@@ -70,6 +70,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dwf-9p-GG3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2080.8000000000002" y="235.23238380809596"/>
+        </scene>
+        <!--Business Card Details View Controller-->
+        <scene sceneID="3zZ-He-5vo">
+            <objects>
+                <viewController storyboardIdentifier="BusinessCardDetailsViewController" hidesBottomBarWhenPushed="YES" id="VNd-Gh-MEp" customClass="BusinessCardDetailsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iW6-M9-eTT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZdX-CW-exn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstItem="ZdX-CW-exn" firstAttribute="trailing" secondItem="JBJ-8K-rTu" secondAttribute="trailing" id="4fK-GQ-8Lc"/>
+                            <constraint firstItem="ZdX-CW-exn" firstAttribute="leading" secondItem="JBJ-8K-rTu" secondAttribute="leading" id="8Gf-sh-ce6"/>
+                            <constraint firstItem="ZdX-CW-exn" firstAttribute="top" secondItem="JBJ-8K-rTu" secondAttribute="top" id="PWl-6c-a9y"/>
+                            <constraint firstItem="ZdX-CW-exn" firstAttribute="bottom" secondItem="JBJ-8K-rTu" secondAttribute="bottom" id="R87-tr-tZn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JBJ-8K-rTu"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ZdX-CW-exn" id="BWk-29-4p2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Fo-0a-rVb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2797.5999999999999" y="235.23238380809596"/>
         </scene>
         <!--Create Personal Card View Controller-->
         <scene sceneID="IAu-Gg-hD5">

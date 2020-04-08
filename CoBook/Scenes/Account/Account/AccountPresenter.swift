@@ -10,41 +10,62 @@ import UIKit
 
 protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     var tableView: UITableView! { get set }
+    func setupLayout()
+    func configureDataSource(with configurator: AccountDataSourceConfigurator)
+    func updateDataSource(sections: [Section<Account.Item>])
 }
 
 class AccountPresenter: BasePresenter {
 
     // MARK: Properties
     private weak var view: AccountView?
-    var viewDataSource: AccountDataSource?
+    private lazy var dataSourceConfigurator: AccountDataSourceConfigurator = {
+        let dataSourceConfigurator = AccountDataSourceConfigurator(presenter: self)
+        return dataSourceConfigurator
+    }()
 
-    private var personalCardsList: [CardPreview] = []
+    private var personalCard: CardPreviewModel?
+    private var businessCardsList = [CardPreviewModel]()
+
+    private var sections: [Section<Account.Item>] = [] {
+        didSet {
+            view?.updateDataSource(sections: sections)
+        }
+    }
 
     // MARK: Public
     func attachView(_ view: AccountView) {
         self.view = view
-        self.viewDataSource = AccountDataSource(tableView: view.tableView)
     }
 
     func detachView() {
         view = nil
-        viewDataSource = nil
     }
 
-    func onDidAppear() {
+    func onViewDidLoad() {
+        view?.setupLayout()
+        view?.configureDataSource(with: dataSourceConfigurator)
+
+        AppStorage.State.isNeedToUpdateAccountData = false
         fetchProfileData()
     }
 
+    func onDidAppear() {
+        if AppStorage.State.isNeedToUpdateAccountData {
+            fetchProfileData()
+            AppStorage.State.isNeedToUpdateAccountData = false
+        }
+    }
+
     func selectedRow(at indexPath: IndexPath) {
-        guard let actionType = viewDataSource?.source[safe: indexPath.section]?.items[safe: indexPath.item] else {
+        guard let item = sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
             debugPrint("Error occured when selected account action type")
             return
         }
 
-        switch actionType {
-        case .action(let type):
-            switch type {
-
+        switch item {
+        case .menuItem(let model):
+            switch model.actiontype {
             case .createPersonalCard:
                 let createPersonalCardController: CreatePersonalCardViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: createPersonalCardController, animated: true)
@@ -67,17 +88,26 @@ class AccountPresenter: BasePresenter {
                 break
             }
 
-        case .businessCardPreview(let model):
-            break
-
         case .personalCardPreview(let model):
             let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
-            personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: model.id)
+            if let strid = model.id, let id = Int(strid) {
+                personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
+            }
             view?.push(controller: personalCardDetailsViewController, animated: true)
+
+        case .businessCardPreview(let model):
+            let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+            if let strid = model.id, let id = Int(strid) {
+                businessCardDetailsViewController.presenter = BusinessCardDetailsPresenter(id: id)
+            } else {
+                view?.errorAlert(message: "Bad id")
+            }
+            view?.push(controller: businessCardDetailsViewController, animated: true)
 
         default:
             break
         }
+
     }
 
 
@@ -94,63 +124,93 @@ private extension AccountPresenter {
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
-                AppStorage.User.profile = response
-                strongSelf.personalCardsList = response?.personalCardsList ?? []
-                strongSelf.setupDataSource()
+                AppStorage.User.data = response
+                strongSelf.personalCard = response?.cardsPreviews?
+                    .filter { $0.type == CardType.personal }
+                    .compactMap { CardPreviewModel(id: String($0.id),
+                                                   image: $0.avatar?.sourceUrl,
+                                                   firstName: AppStorage.User.data?.firstName,
+                                                   lastName: AppStorage.User.data?.lastName,
+                                                   profession: $0.practiceType?.title,
+                                                   telephone: $0.telephone?.number) }.first
+
+                strongSelf.businessCardsList = response?.cardsPreviews?
+                    .filter { $0.type == CardType.business }
+                    .compactMap { CardPreviewModel(id: String($0.id),
+                                                   image: $0.avatar?.sourceUrl,
+                                                   firstName: $0.company?.name,
+                                                   lastName: nil,
+                                                   profession: $0.practiceType?.title,
+                                                   telephone: $0.telephone?.number) } ?? []
+
+                strongSelf.updateViewDataSource()
             case let .failure(error):
-                strongSelf.personalCardsList = AppStorage.User.profile?.personalCardsList ?? []
-                strongSelf.setupDataSource()
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
     }
 
-    func setupDataSource() {
-        var cardsPreviceSection = Account.Section(items: [
-            .userInfoHeader(avatarUrl: personalCardsList.first?.avatar?.sourceUrl,
-                            firstName: AppStorage.User.profile?.firstName,
-                            lastName: AppStorage.User.profile?.lastName,
-                            telephone: AppStorage.User.profile?.telephone.number,
-                            email: AppStorage.User.profile?.email.address),
+    func updateViewDataSource() {
+
+        // header Section
+        let cardHeaderSection = Section<Account.Item>(items: [
+            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: personalCard?.image,
+                                                               firstName: AppStorage.User.data?.firstName,
+                                                               lastName: AppStorage.User.data?.lastName,
+                                                               telephone: AppStorage.User.data?.telephone.number,
+                                                               email: AppStorage.User.data?.email.address))
+        ])
+
+        // cardsPreviews Section
+        var cardsPreviewSection = Section<Account.Item>(items: [
             .sectionHeader
         ])
 
-        if personalCardsList.isEmpty {
-            cardsPreviceSection.items.append(contentsOf: [
-                .action(type: .createPersonalCard),
-                .action(type: .createBusinessCard),
-            ])
-        } else {
-            cardsPreviceSection.items.append(.title(text: "Мої візитки:"))
-            personalCardsList.forEach {
-                cardsPreviceSection.items.append(.personalCardPreview(model: Account.CardPreview(id: $0.id,
-                                                                                                 image: $0.avatar?.sourceUrl,
-                                                                                                 firstName: AppStorage.User.profile?.firstName,
-                                                                                                 lastName: AppStorage.User.profile?.lastName,
-                                                                                                 profession: $0.practiceType?.title,
-                                                                                                 telephone: $0.telephone?.number)))
-                cardsPreviceSection.items.append(.action(type: .createBusinessCard))
-            }
+        if !personalCard.isNil || !businessCardsList.isEmpty {
+            cardsPreviewSection.items.append(.title(text: "Мої візитки:"))
         }
 
-        // Setup data source
-        viewDataSource?.source = [
-            cardsPreviceSection,
-            Account.Section(items: [
-                .sectionHeader,
-                .action(type: .inviteFriends),
-                .action(type: .statictics),
-                .action(type: .generateQrCode),
-                .action(type: .faq)
-            ]),
+        if let personalCard = personalCard {
+            cardsPreviewSection.items.append(.personalCardPreview(model: personalCard))
+        } else {
+            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createPersonalCard".localized,
+                                                                                               image: UIImage(named: "ic_account_createparsonalcard"),
+                                                                                               actiontype: .createPersonalCard)))
+        }
 
-            Account.Section(items: [
-                .sectionHeader,
-                .action(type: .quitAccount),
-            ])
-        ]
+        if !businessCardsList.isEmpty {
+            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
+            cardsPreviewSection.items.append(contentsOf: cards)
+            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Створити ще одну бізнес візитку",
+                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+                                                                                           actiontype: .createBusinessCard)))
+        } else {
+            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Створити бізнес візитку",
+                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+                                                                                           actiontype: .createBusinessCard)))
+        }
 
-        viewDataSource?.tableView.reloadData()
+        // menuItems Section
+        var menuItemsSection = Section<Account.Item>(items: [
+            .sectionHeader,
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized, image: UIImage(named: "ic_account_createparsonalcard"), actiontype: .inviteFriends)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized, image: UIImage(named: "ic_account_faq"), actiontype: .faq)),
+        ])
+        if !personalCard.isNil {
+            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
+                                                                                        actiontype: .startMakingMoney)))
+        }
+
+        // Quit account section
+        let quitAccountSectin = Section<Account.Item>(items: [
+            .sectionHeader,
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.quitAccount".localized, image: UIImage(named: "ic_account_logout"), actiontype: .quitAccount)),
+        ])
+
+        sections = [cardHeaderSection, cardsPreviewSection, menuItemsSection, quitAccountSectin]
     }
 
 

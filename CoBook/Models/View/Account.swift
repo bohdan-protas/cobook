@@ -10,26 +10,27 @@ import UIKit
 
 enum Account {
 
-    struct Section {
-        var items: [Item]
-    }
-
     enum Item {
-        case userInfoHeader(avatarUrl: String?, firstName: String?, lastName: String?, telephone: String?, email: String?)
         case title(text: String)
-        case action(type: ActionType)
-        case personalCardPreview(model: CardPreview)
-        case businessCardPreview(model: CardPreview)
         case sectionHeader
+        case userInfoHeader(model: UserInfoHeaderModel?)
+        case menuItem(model: AccountMenuItemModel)
+        case personalCardPreview(model: CardPreviewModel)
+        case businessCardPreview(model: CardPreviewModel)
     }
 
-    struct CardPreview {
-        var id: Int
-        var image: String?
+    struct AccountMenuItemModel {
+        var title: String
+        var image: UIImage?
+        var actiontype: ActionType
+    }
+
+    struct UserInfoHeaderModel {
+        var avatarUrl: String?
         var firstName: String?
         var lastName: String?
-        var profession: String?
         var telephone: String?
+        var email: String?
     }
 
     enum ActionType {
@@ -41,52 +42,6 @@ enum Account {
         case faq
         case startMakingMoney
         case quitAccount
-
-        var image: UIImage? {
-            get {
-                switch self {
-                case .createPersonalCard:
-                    return #imageLiteral(resourceName: "ic_account_createparsonalcard")
-                case .createBusinessCard:
-                    return #imageLiteral(resourceName: "ic_account_createbusinescard")
-                case .inviteFriends:
-                    return #imageLiteral(resourceName: "ic_account_invitefriends")
-                case .statictics:
-                    return #imageLiteral(resourceName: "ic_account_statistics")
-                case .generateQrCode:
-                    return #imageLiteral(resourceName: "ic_account_qrcode")
-                case .faq:
-                    return #imageLiteral(resourceName: "ic_account_faq")
-                case .startMakingMoney:
-                    return #imageLiteral(resourceName: "ic_account_startmakingmoney")
-                case .quitAccount:
-                    return #imageLiteral(resourceName: "ic_account_logout")
-                }
-            }
-        }
-
-        var title: String {
-            get {
-                switch self {
-                case .createPersonalCard:
-                    return "Account.item.createPersonalCard".localized//Create personal business card"
-                case .createBusinessCard:
-                    return "Account.item.createBusinessCard".localized//Create personalCard"
-                case .inviteFriends:
-                    return "Account.item.inviteFriends".localized//Invite friends"
-                case .statictics:
-                    return "Account.item.statictics".localized//Statistics"
-                case .generateQrCode:
-                    return "Account.item.generateQrCode".localized
-                case .faq:
-                    return "Account.item.faq".localized
-                case .startMakingMoney:
-                    return "Account.item.startMakingMoney".localized
-                case .quitAccount:
-                    return "Account.item.quitAccount".localized
-                }
-            }
-        }
     }
 
 

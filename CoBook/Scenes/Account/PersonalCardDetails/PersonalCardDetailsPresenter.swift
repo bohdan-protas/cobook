@@ -10,18 +10,24 @@ import UIKit
 
 protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     var tableView: UITableView! { get set }
-    func setupHeaderFooterViews()
+    func setupLayout()
     func sendEmail(to address: String)
+
+    func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator)
+    func updateDataSource(sections: [Section<PersonalCardDetails.Cell>])
 }
 
 class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 
     // MARK: Properties
     private weak var view: PersonalCardDetailsView?
-    private var viewDataSource: PersonalCardDetailsDataSource?
+    private lazy var dataSourceConfigurator: PersonalCardDetailsDataSourceConfigurator = {
+        let dataSourceConfigurator = PersonalCardDetailsDataSourceConfigurator(presenter: self)
+        return dataSourceConfigurator
+    }()
 
     private var personalCardId: Int
-    private var cardDetails: CardAPIModel.CardDetailsAPIResponseData?
+    private var cardDetails: CardDetailsApiModel?
 
     // MARK: Lifecycle
     init(id: Int) {
@@ -31,28 +37,39 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     // MARK: Public
     func attachView(_ view: PersonalCardDetailsView) {
         self.view = view
-        self.viewDataSource = PersonalCardDetailsDataSource(tableView: view.tableView)
-        self.viewDataSource?.cellsDelegate = self
     }
 
     func detachView() {
         view = nil
-        viewDataSource = nil
     }
 
-    func onViewDidLoad() {
-        setupDataSource()
+    func setupDataSource() {
+        view?.startLoading()
+        APIClient.default.getCardInfo(id: personalCardId) { [weak self] (result) in
+            guard let strongSelf = self else {
+                return
+            }
+            self?.view?.stopLoading()
+
+            switch result {
+            case let .success(response):
+                strongSelf.cardDetails = response
+                strongSelf.view?.setupLayout()
+                strongSelf.view?.configureDataSource(with: strongSelf.dataSourceConfigurator)
+                strongSelf.updateViewDataSource()
+            case let .failure(error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
     func editPerconalCard() {
         let createPersonalCardViewController: CreatePersonalCardViewController = UIStoryboard.account.initiateViewControllerFromType()
         if let cardDetails = cardDetails {
-            let presenter = CreatePersonalCardPresenter(parameters: CardAPIModel.PersonalCardParameters(with: cardDetails))
-            presenter.delegate = self
+            let presenter = CreatePersonalCardPresenter(detailsModel: CreatePersonalCard.DetailsModel(apiModel: cardDetails))
             createPersonalCardViewController.presenter = presenter
         } else {
             let presenter = CreatePersonalCardPresenter()
-            presenter.delegate = self
             createPersonalCardViewController.presenter = presenter
         }
         view?.push(controller: createPersonalCardViewController, animated: true)
@@ -64,45 +81,38 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 // MARK: - PersonalCardDetailsPresenter
 private extension PersonalCardDetailsPresenter {
 
-    func setupDataSource() {
-        view?.startLoading()
-        APIClient.default.getCardInfo(id: personalCardId) { [weak self] (result) in
-            self?.view?.stopLoading()
-
-            switch result {
-            case let .success(response):
-                self?.cardDetails = response
-                self?.view?.setupHeaderFooterViews()
-                self?.syncViewDataSource()
-                self?.view?.tableView.reloadData()
-            case let .failure(error):
-                self?.view?.errorAlert(message: error.localizedDescription, handler: { (_) in
-                    self?.view?.popController()
-                })
-            }
-        }
-    }
-
-    func syncViewDataSource() {
-        let userInfoSection = PersonalCardDetails.Section(items: [
+    func updateViewDataSource() {
+        let userInfoSection = Section<PersonalCardDetails.Cell>(items: [
             .userInfo(model: cardDetails)
         ])
 
-        var getInTouchSection =  PersonalCardDetails.Section(items: [
+        var getInTouchSection = Section<PersonalCardDetails.Cell>(items: [
             .sectionHeader,
-            .title(text: "Зв’язатись:"),
+            .title(text: "Зв’язатись:")
         ])
 
         let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
         if !listListItems.isEmpty {
-            getInTouchSection.items.append(.socialList(list: listListItems))
+            getInTouchSection.items.append(.socialList)
         }
         getInTouchSection.items.append(.getInTouch)
 
-        viewDataSource?.source = [
-            userInfoSection, getInTouchSection
-        ]
 
+        view?.updateDataSource(sections: [userInfoSection, getInTouchSection])
+    }
+
+
+}
+
+// MARK: - SocialsListTableViewCellDataSource
+extension PersonalCardDetailsPresenter: SocialsListTableViewCellDataSource {
+
+    var socials: [Social.ListItem] {
+        get {
+            let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+            return listListItems
+        }
+        set {}
     }
 
 
@@ -145,14 +155,5 @@ extension PersonalCardDetailsPresenter: GetInTouchTableViewCellDelegate {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
     }
 
-
-}
-
-// MARK: - CreatePersonalCardPresenterDelegate
-extension PersonalCardDetailsPresenter: CreatePersonalCardPresenterDelegate {
-
-    func createPersonalCardPresenterDidUpdatedPersonalCard(_ presenter: CreatePersonalCardPresenter) {
-        setupDataSource()
-    }
 
 }

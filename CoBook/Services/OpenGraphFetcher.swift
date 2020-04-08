@@ -14,8 +14,7 @@ class OpenGraphFetcher {
     class func fetchOpenGraphImage(from url: URL, completion: @escaping (Result<String?, Error>) -> Void) -> DispatchWorkItem? {
         var document: Document?
 
-        let queue = DispatchQueue.global(qos: .utility)
-        let workItem = DispatchWorkItem (qos: .userInteractive) {
+        let workItem = DispatchWorkItem {
             do {
                 let html = try String.init(contentsOf: url)
                 document = try SwiftSoup.parse(html)
@@ -26,7 +25,7 @@ class OpenGraphFetcher {
             }
         }
 
-        queue.async(execute: workItem)
+        DispatchQueue.global(qos: .utility).async(execute: workItem)
         workItem.notify(queue: .main) {
             if workItem.isCancelled {
                 return
