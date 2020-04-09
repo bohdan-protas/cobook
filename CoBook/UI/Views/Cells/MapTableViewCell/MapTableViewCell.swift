@@ -74,8 +74,6 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
         locationManager.delegate = self
 
         mapView.delegate = self
-//        mapView.settings.myLocationButton = true
-//        mapView.isMyLocationEnabled = true
 
         // Add the map to the view, hide it until we've got a location update.
         mapView.isHidden = true
@@ -84,7 +82,18 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
     // MARK: - GMSMapViewDelegate
 
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        delegate?.mapTableViewCell(self, didUpdateVisibleRectBounds: mapView.projection.visibleRegion().farLeft, bottomRight: mapView.projection.visibleRegion().nearRight)
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                break
+            case .authorizedAlways, .authorizedWhenInUse:
+                delegate?.mapTableViewCell(self, didUpdateVisibleRectBounds: mapView.projection.visibleRegion().farLeft, bottomRight: mapView.projection.visibleRegion().nearRight)
+            @unknown default:
+                break
+            }
+        } else {
+            print("Location services are not enabled")
+        }
     }
 
 
@@ -130,7 +139,7 @@ extension MapTableViewCell: CLLocationManagerDelegate {
         case .notDetermined:
             Log.error("Location status not determined.")
             fallthrough
-        default:
+        @unknown default:
             mapView.isHidden = true
             self.contentView.addSubview(placeholderView)
             self.contentView.bringSubviewToFront(placeholderView)
