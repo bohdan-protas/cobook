@@ -14,6 +14,7 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator)
     func setup(sections: [Section<CardsOverview.Items>])
     func reload(section: Section<CardsOverview.Items>, at index: Int)
+    func openSettings()
 }
 
 class CardsOverviewViewPresenter: NSObject, BasePresenter {
@@ -151,6 +152,11 @@ extension CardsOverviewViewPresenter: HorizontalItemsBarViewDelegate {
 // MARK: - MapTableViewCellDelegate
 
 extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
+    
+    func openSettingsAction(_ cell: MapTableViewCell) {
+        view?.openSettings()
+    }
+
 
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
         pendingCardPinRequestWorkItem?.cancel()

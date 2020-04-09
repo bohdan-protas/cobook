@@ -84,6 +84,28 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         
     }
 
+    func openSettings() {
+        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
+
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    Log.debug("Settings opened")
+                })
+            }
+        }
+
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
 
 }
 

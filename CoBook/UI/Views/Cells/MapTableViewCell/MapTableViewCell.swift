@@ -12,12 +12,26 @@ import GooglePlaces
 
 protocol MapTableViewCellDelegate: class {
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?)
+    func openSettingsAction(_ cell: MapTableViewCell)
+}
+
+extension MapTableViewCellDelegate {
+    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {}
 }
 
 class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
 
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     @IBOutlet var mapView: GMSMapView!
+
+    /// placehoolder view for showing when location access denied
+    lazy var placeholderView: UIView = {
+        let view = DeniedAccessToLocationPlaceholderView(frame: self.contentView.bounds)
+        view.onOpenSettingsHandler = {
+            self.delegate?.openSettingsAction(self)
+        }
+        return view
+    }()
 
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
@@ -60,8 +74,8 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
         locationManager.delegate = self
 
         mapView.delegate = self
-        mapView.settings.myLocationButton = true
-        mapView.isMyLocationEnabled = true
+//        mapView.settings.myLocationButton = true
+//        mapView.isMyLocationEnabled = true
 
         // Add the map to the view, hide it until we've got a location update.
         mapView.isHidden = true
@@ -72,6 +86,7 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         delegate?.mapTableViewCell(self, didUpdateVisibleRectBounds: mapView.projection.visibleRegion().farLeft, bottomRight: mapView.projection.visibleRegion().nearRight)
     }
+
 
 }
 
@@ -99,19 +114,26 @@ extension MapTableViewCell: CLLocationManagerDelegate {
 
     // Handle authorization for the location manager.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        placeholderView.removeFromSuperview()
         switch status {
-        case .restricted:
-            Log.error("Location access was restricted.")
-        case .denied:
-            Log.error("User denied access to location.")
-            mapView.isHidden = true
-        case .notDetermined:
-            Log.error("Location status not determined.")
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
+            mapView.isHidden = false
             Log.debug("Location status is OK.")
-        @unknown default:
-            fatalError()
+            break
+        case .restricted:
+            Log.error("Location access was restricted.")
+            fallthrough
+        case .denied:
+            Log.error("User denied access to location.")
+            fallthrough
+        case .notDetermined:
+            Log.error("Location status not determined.")
+            fallthrough
+        default:
+            mapView.isHidden = true
+            self.contentView.addSubview(placeholderView)
+            self.contentView.bringSubviewToFront(placeholderView)
         }
     }
 

@@ -50,6 +50,8 @@
 		B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A2243F590200EE1830 /* PermissionService.swift */; };
 		B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */; };
 		B823E8A7243F753D00EE1830 /* CardMapMarkerApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A6243F753D00EE1830 /* CardMapMarkerApiModel.swift */; };
+		B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A9243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift */; };
+		B823E8AC243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B823E8AB243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib */; };
 		B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */; };
 		B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249241243DE2CC00A1AC39 /* CardItemApiModel.swift */; };
 		B8249245243DE63B00A1AC39 /* CardsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */; };
@@ -268,6 +270,8 @@
 		B823E8A2243F590200EE1830 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateApiModel.swift; sourceTree = "<group>"; };
 		B823E8A6243F753D00EE1830 /* CardMapMarkerApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMapMarkerApiModel.swift; sourceTree = "<group>"; };
+		B823E8A9243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeniedAccessToLocationPlaceholderView.swift; sourceTree = "<group>"; };
+		B823E8AB243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeniedAccessToLocationPlaceholderView.xib; sourceTree = "<group>"; };
 		B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemViewModel.swift; sourceTree = "<group>"; };
 		B8249241243DE2CC00A1AC39 /* CardItemApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemApiModel.swift; sourceTree = "<group>"; };
 		B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewViewController.swift; sourceTree = "<group>"; };
@@ -644,6 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
+				B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */,
 				B8559F96243CD62700787349 /* HorizintalItemsBarView */,
 				B8DE5E5724192ADC00F4F60B /* Designable */,
 				B8559F91243CC4B200787349 /* HideCardView */,
@@ -713,6 +718,15 @@
 				B836DF29243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift */,
 			);
 			path = CreateBusinessCard;
+			sourceTree = "<group>";
+		};
+		B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */ = {
+			isa = PBXGroup;
+			children = (
+				B823E8A9243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift */,
+				B823E8AB243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib */,
+			);
+			path = DeniedAccessToLocationPlaceholderView;
 			sourceTree = "<group>";
 		};
 		B8249243243DE62600A1AC39 /* AllCards */ = {
@@ -1405,6 +1419,7 @@
 				B8559F76243B785800787349 /* BusinessCardHeaderInfoTableViewCell.xib in Resources */,
 				B8DE5E562419262600F4F60B /* TextViewTableViewCell.xib in Resources */,
 				B825741223F5621500C8CBF8 /* HelveticaNeueCyr-Medium.ttf in Resources */,
+				B823E8AC243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib in Resources */,
 				B8AB83F3242828470041B879 /* CardDetails.json in Resources */,
 				B8559F86243C81D500787349 /* MapDirectionTableViewCell.xib in Resources */,
 				B825742123F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf in Resources */,
@@ -1525,6 +1540,7 @@
 				B82200C1240FBC2C00A17D2C /* AccountPresenter.swift in Sources */,
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B8DC630F2434FC3A00A2ED58 /* TableDataSource.swift in Sources */,
+				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
 				B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */,
 				B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */,
 				B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */,

@@ -84,8 +84,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         }
 
         mapCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> MapTableViewCell in
-//            let mapURL = cell.constructStaticMapURL(mapSize: cell.mapImageView.frame.size)
-//            cell.mapImageView.setImage(withURL: mapURL)
+            cell.mapView.isUserInteractionEnabled = false
+            cell.delegate = presenter
             return cell
         }
 

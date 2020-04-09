@@ -86,8 +86,8 @@ enum CardsEndpoint: Endpoint {
 
         case .getCardLocationsInRegion(let topLeftRectCoordinate, let bottomRightRectCoordinate):
             return [
-                "top_left": topLeftRectCoordinate.dictionary,
-                "bottom_right": bottomRightRectCoordinate.dictionary
+                "top_left": topLeftRectCoordinate.dictionary ?? [],
+                "bottom_right": bottomRightRectCoordinate.dictionary ?? []
             ]
 
 

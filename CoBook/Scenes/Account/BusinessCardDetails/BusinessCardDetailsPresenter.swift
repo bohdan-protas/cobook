@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import GoogleMaps
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator)
     func updateDataSource(sections: [Section<BusinessCardDetails.Cell>])
     func sendEmail(to address: String)
+    func openSettings()
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -255,6 +257,17 @@ extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
+    }
+
+
+}
+
+// MARK: - MapTableViewCellDelegate
+
+extension BusinessCardDetailsPresenter: MapTableViewCellDelegate {
+
+    func openSettingsAction(_ cell: MapTableViewCell) {
+        view?.openSettings()
     }
 
 
