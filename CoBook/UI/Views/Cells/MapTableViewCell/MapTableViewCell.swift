@@ -7,20 +7,96 @@
 //
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
 
-class MapTableViewCell: UITableViewCell {
+protocol MapTableViewCellDelegate: class {
+    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?)
+}
 
-    @IBOutlet var mapImageView: UIImageView!
+class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
+
     @IBOutlet var heightConstraint: NSLayoutConstraint!
+    @IBOutlet var mapView: GMSMapView!
+
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
+    var zoomLevel: Float = 10.0
+
+    weak var delegate: MapTableViewCellDelegate?
+
+    // MARK: - View Object Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        mapImageView.image = nil
+
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 5000
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+
+        mapView.delegate = self
+        mapView.settings.myLocationButton = true
+        mapView.isMyLocationEnabled = true
+
+        // Add the map to the view, hide it until we've got a location update.
+        mapView.isHidden = true
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        mapImageView.cancelImageRequest()
+    // MARK: - GMSMapViewDelegate
+
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        delegate?.mapTableViewCell(self, didUpdateVisibleRectBounds: mapView.projection.visibleRegion().farLeft, bottomRight: mapView.projection.visibleRegion().nearRight)
+    }
+
+}
+
+
+// MARK: - CLLocationManagerDelegate
+
+extension MapTableViewCell: CLLocationManagerDelegate {
+
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        if let location = locations.last {
+            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                                  longitude: location.coordinate.longitude,
+                                                  zoom: zoomLevel)
+
+            if mapView.isHidden {
+                mapView.isHidden = false
+                mapView.camera = camera
+            } else {
+                mapView.animate(to: camera)
+            }
+        }
+    }
+
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .restricted:
+            Log.error("Location access was restricted.")
+        case .denied:
+            Log.error("User denied access to location.")
+            mapView.isHidden = true
+        case .notDetermined:
+            Log.error("Location status not determined.")
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            Log.debug("Location status is OK.")
+        @unknown default:
+            fatalError()
+        }
+    }
+
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        Log.error("Error: \(error)")
     }
 
 

@@ -33,6 +33,7 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
 
         mapCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
             cell.heightConstraint.constant = tableView.frame.height - 58
+            cell.delegate = presenter
             return cell
         }
 

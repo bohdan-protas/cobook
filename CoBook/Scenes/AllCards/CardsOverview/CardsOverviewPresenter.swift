@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator)
@@ -137,6 +138,17 @@ extension CardsOverviewViewPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
         selectedBarItem = barItems[safe: index]
+    }
+
+
+}
+
+// MARK: - MapTableViewCellDelegate
+
+extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
+
+    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
+
     }
 
 

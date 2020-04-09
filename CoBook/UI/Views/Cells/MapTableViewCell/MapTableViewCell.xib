@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr4-0h-gpz">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr4-0h-gpz" customClass="GMSMapView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -33,6 +33,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="heightConstraint" destination="Jt1-BI-4WM" id="bhb-Dy-F0G"/>
+                <outlet property="mapView" destination="Gr4-0h-gpz" id="Wzw-dp-1fk"/>
+            </connections>
             <point key="canvasLocation" x="177.536231884058" y="198.88392857142856"/>
         </tableViewCell>
     </objects>

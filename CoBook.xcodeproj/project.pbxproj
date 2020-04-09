@@ -47,6 +47,7 @@
 		B823B0A1242D46EF0012529D /* CreatePersonalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B0A0242D46EF0012529D /* CreatePersonalCard.swift */; };
 		B823C6212431F585002CFB02 /* UIImage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823C6202431F585002CFB02 /* UIImage + Extensions.swift */; };
 		B823E8A1243F173A00EE1830 /* StaticMapConfiguratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */; };
+		B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A2243F590200EE1830 /* PermissionService.swift */; };
 		B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */; };
 		B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249241243DE2CC00A1AC39 /* CardItemApiModel.swift */; };
 		B8249245243DE63B00A1AC39 /* CardsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */; };
@@ -262,6 +263,7 @@
 		B823B0A0242D46EF0012529D /* CreatePersonalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCard.swift; sourceTree = "<group>"; };
 		B823C6202431F585002CFB02 /* UIImage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extensions.swift"; sourceTree = "<group>"; };
 		B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapConfiguratorService.swift; sourceTree = "<group>"; };
+		B823E8A2243F590200EE1830 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemViewModel.swift; sourceTree = "<group>"; };
 		B8249241243DE2CC00A1AC39 /* CardItemApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemApiModel.swift; sourceTree = "<group>"; };
 		B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewViewController.swift; sourceTree = "<group>"; };
@@ -644,7 +646,6 @@
 				B82248DB242C0CD700392D10 /* CardSaveView */,
 				B8AB840124283C440041B879 /* EditCardView */,
 				B8DE5E3A2418E1C600F4F60B /* Cells */,
-				B836DF2724334ACF00CB84D3 /* Configurators */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -808,6 +809,7 @@
 				B82A211624212CB600D0D9F5 /* Logger.swift */,
 				B8C5C8FB2432AAA0004A3F30 /* OpenGraphFetcher.swift */,
 				B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */,
+				B823E8A2243F590200EE1830 /* PermissionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -874,13 +876,6 @@
 				B8249251243E26A300A1AC39 /* CardsOverview.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		B836DF2724334ACF00CB84D3 /* Configurators */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Configurators;
 			sourceTree = "<group>";
 		};
 		B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */ = {
@@ -1502,6 +1497,7 @@
 				B836DF2A243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift in Sources */,
 				B8559F6C243B280500787349 /* AccountDataSourceConfigurator.swift in Sources */,
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
+				B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */,
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */,

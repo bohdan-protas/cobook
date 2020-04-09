@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
@@ -48,10 +49,8 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     }
 
     func reload(section: Section<CardsOverview.Items>, at index: Int) {
-
-
         tableView.beginUpdates()
-         dataSource?.sections[index] = section
+        dataSource?.sections[index] = section
         tableView.setContentOffset(.zero, animated: false)
         tableView.reloadSections(IndexSet(integer: index), with: .automatic)
         tableView.endUpdates()
@@ -66,6 +65,8 @@ private extension CardsOverviewViewController {
     func setupLayout() {
         navigationItem.title = "Всі візитки"
         tableView.delegate = self
+
+
     }
 
 
