@@ -38,8 +38,8 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     }()
 
     private lazy var itemsBarView: HorizontalItemsBarView = {
-        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 53)))
-        view.dataSource = self.presenter
+        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: [])
+
         view.delegate = self.presenter
         return view
     }()

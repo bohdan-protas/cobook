@@ -13,11 +13,6 @@ struct BarItemViewModel {
     var title: String?
 }
 
-protocol HorizontalItemsBarViewDataSource: class {
-    func numberOfItems(in view: HorizontalItemsBarView) -> Int
-    func horizontalItemsBarView(_ view: HorizontalItemsBarView, itemAt index: Int) -> BarItemViewModel?
-}
-
 protocol HorizontalItemsBarViewDelegate: class {
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int)
 }
@@ -29,6 +24,8 @@ class HorizontalItemsBarView: BaseFromNibView {
 
     var selectionIndicatorView: UIView = {
         let view = UIView()
+        view.clipsToBounds = true
+        //view.layer.cornerRadius = 2
         view.backgroundColor = UIColor.Theme.green
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -40,26 +37,31 @@ class HorizontalItemsBarView: BaseFromNibView {
     var selectionIndicatorCenterX: NSLayoutConstraint?
 
     weak var delegate: HorizontalItemsBarViewDelegate?
-    var dataSource: HorizontalItemsBarViewDataSource?
+    var dataSource: [BarItemViewModel] = []
 
     override func getNib() -> UINib {
         return HorizontalItemsBarView.nib
     }
 
-    override func setup() {
+    init(frame: CGRect, dataSource: [BarItemViewModel]) {
+        super.init(frame: frame)
+        self.dataSource = dataSource
+
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(HorizontalBarItemCollectionViewCell.nib, forCellWithReuseIdentifier: HorizontalBarItemCollectionViewCell.identifier)
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
 
-        collectionViewFlowLayout.estimatedItemSize = .init(width: 100, height: collectionView.frame.height)
         collectionViewFlowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
-
+        collectionViewFlowLayout.estimatedItemSize = .init(width: 50, height: collectionView.frame.height)
 
         collectionView.addSubview(selectionIndicatorView)
 
-        selectionIndicatorWidth = selectionIndicatorView.widthAnchor.constraint(equalToConstant: 100)
-        selectionIndicatorHeight = selectionIndicatorView.heightAnchor.constraint(equalToConstant: 2)
+        var width = dataSource.first?.title?.width(withConstrainedHeight: self.collectionView.frame.height, font: UIFont.SFProDisplay_Regular(size: 14)) ?? 0
+        width += 20
+
+        selectionIndicatorWidth = selectionIndicatorView.widthAnchor.constraint(equalToConstant:  width)
+        selectionIndicatorHeight = selectionIndicatorView.heightAnchor.constraint(equalToConstant: 4)
         selectionIndicatorBottom = selectionIndicatorView.bottomAnchor.constraint(equalTo: collectionView.superview!.bottomAnchor)
         selectionIndicatorCenterX = selectionIndicatorView.leftAnchor.constraint(equalTo: collectionView.leftAnchor)
 
@@ -68,7 +70,10 @@ class HorizontalItemsBarView: BaseFromNibView {
         selectionIndicatorBottom?.isActive = true
         selectionIndicatorCenterX?.isActive = true
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
 }
 
@@ -77,15 +82,14 @@ class HorizontalItemsBarView: BaseFromNibView {
 extension HorizontalItemsBarView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.numberOfItems(in: self) ?? 0
+        return dataSource.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HorizontalBarItemCollectionViewCell.identifier, for: indexPath) as! HorizontalBarItemCollectionViewCell
 
-        let item = self.dataSource?.horizontalItemsBarView(self, itemAt: indexPath.item)
+        let item = self.dataSource[safe: indexPath.item]
         cell.nameLabel.text = item?.title
-        cell.maxWidth = self.collectionView.frame.width / 4
         return cell
     }
 
@@ -115,3 +119,7 @@ extension HorizontalItemsBarView: UICollectionViewDelegate {
 
 
 }
+
+
+
+

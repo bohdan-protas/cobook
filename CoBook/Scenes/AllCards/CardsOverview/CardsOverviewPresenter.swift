@@ -22,12 +22,17 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         return dataSourceConfigurator
     }()
 
-    private var barItems: [BarItemViewModel] = [
-        BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
-        BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
-        BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
-        BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
-    ]
+    var barItems: [BarItemViewModel] {
+        get {
+            return [
+                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
+                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
+                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
+                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
+            ]
+        }
+    }
+
 
     private var selectedBarItem: BarItemViewModel? {
         didSet {
@@ -133,21 +138,6 @@ extension CardsOverviewViewPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
         selectedBarItem = barItems[safe: index]
-    }
-
-
-}
-
-// MARK: - HorizontalItemsBarViewDataSource
-
-extension CardsOverviewViewPresenter: HorizontalItemsBarViewDataSource {
-
-    func numberOfItems(in view: HorizontalItemsBarView) -> Int {
-        return barItems.count
-    }
-
-    func horizontalItemsBarView(_ view: HorizontalItemsBarView, itemAt index: Int) -> BarItemViewModel? {
-        return barItems[safe: index]
     }
 
 

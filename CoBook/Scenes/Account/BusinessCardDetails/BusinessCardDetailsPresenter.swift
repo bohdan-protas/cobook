@@ -197,22 +197,6 @@ extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
 }
 
-// MARK: - HorizontalItemsBarViewDataSource
-
-extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDataSource {
-
-    func numberOfItems(in view: HorizontalItemsBarView) -> Int {
-        return items.count
-    }
-
-    func horizontalItemsBarView(_ view: HorizontalItemsBarView, itemAt index: Int) -> BarItemViewModel? {
-        return items[safe: index]
-    }
-
-
-
-}
-
 // MARK: - SocialsListTableViewCellDataSource
 
 extension BusinessCardDetailsPresenter: SocialsListTableViewCellDataSource {
