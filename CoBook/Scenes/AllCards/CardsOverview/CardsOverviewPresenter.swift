@@ -108,7 +108,6 @@ private extension CardsOverviewViewPresenter {
     func setupViewDataSource() {
         postsSection.items = []
         changableSection.items = allCards.map { .cardItem(model: $0) }
-
         view?.setup(sections: [postsSection, changableSection])
     }
 
@@ -122,7 +121,7 @@ private extension CardsOverviewViewPresenter {
             case .businessCards:
                 changableSection.items = businessCards.map { .cardItem(model: $0) }
             case .inMyRegionCards:
-                changableSection.items = []
+                changableSection.items = [.map]
             }
         }
 

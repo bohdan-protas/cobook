@@ -15,6 +15,7 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
     // MARK: Configurators
 
     var cardItemCellConfigurator: CellConfigurator<CardItemViewModel?, CardItemTableViewCell>
+    var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>
 
     // MARK: - Initializer
 
@@ -30,6 +31,11 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
             return cell
         }
 
+        mapCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
+            cell.heightConstraint.constant = tableView.frame.height - 58
+            return cell
+        }
+
     }
 
     // MARK: - Cell configurator
@@ -38,6 +44,8 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
         switch item {
         case .cardItem:
             return cardItemCellConfigurator.reuseIdentifier
+        case .map:
+            return mapCellConfigurator.reuseIdentifier
         }
     }
 
@@ -45,11 +53,14 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
         switch item {
         case .cardItem(let model):
             return cardItemCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .map:
+            return mapCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         }
     }
 
     func registerCells(in tableView: UITableView) {
         cardItemCellConfigurator.registerCells(in: tableView)
+        mapCellConfigurator.registerCells(in: tableView)
     }
 
 

@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,31 +17,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GDa-jf-55x">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr4-0h-gpz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
-                        <color key="backgroundColor" name="Theme_Gray-UI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="GDa-jf-55x" secondAttribute="height" multiplier="25:12" id="vcb-o4-0Wm"/>
+                            <constraint firstAttribute="height" constant="180" id="Jt1-BI-4WM"/>
                         </constraints>
-                    </imageView>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="GDa-jf-55x" secondAttribute="bottom" id="7Gm-1I-kji"/>
-                    <constraint firstItem="GDa-jf-55x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="AHl-ji-TKh"/>
-                    <constraint firstItem="GDa-jf-55x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fp6-nO-crz"/>
-                    <constraint firstAttribute="trailing" secondItem="GDa-jf-55x" secondAttribute="trailing" id="gUd-48-ikj"/>
+                    <constraint firstItem="Gr4-0h-gpz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="75Z-NN-zw9"/>
+                    <constraint firstItem="Gr4-0h-gpz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LQL-cj-4Ol"/>
+                    <constraint firstAttribute="bottom" secondItem="Gr4-0h-gpz" secondAttribute="bottom" id="RE8-va-unx"/>
+                    <constraint firstAttribute="trailing" secondItem="Gr4-0h-gpz" secondAttribute="trailing" id="rDi-aO-Bl2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <connections>
-                <outlet property="mapImageView" destination="GDa-jf-55x" id="y2X-Et-rjc"/>
-            </connections>
             <point key="canvasLocation" x="177.536231884058" y="198.88392857142856"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <namedColor name="Theme_Gray-UI">
-            <color red="0.53299999237060547" green="0.53299999237060547" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

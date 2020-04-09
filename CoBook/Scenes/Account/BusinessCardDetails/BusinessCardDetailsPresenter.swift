@@ -27,11 +27,16 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var cardDetails: CardDetailsApiModel?
     private var employee: [CardItemViewModel] = []
 
-    var items: [BarItemViewModel] = [
-        BarItemViewModel(index: 0, title: "Загальна\n інформація"),
-        BarItemViewModel(index: 1, title: "Контакти"),
-        BarItemViewModel(index: 2,title: "Команда"),
-    ]
+    var items: [BarItemViewModel] {
+        get {
+            return [
+                BarItemViewModel(index: 0, title: "Загальна\n інформація"),
+                BarItemViewModel(index: 1, title: "Контакти"),
+                BarItemViewModel(index: 2,title: "Команда"),
+            ]
+        }
+    }
+
 
     var currentIndex: Int = 0 {
         didSet {

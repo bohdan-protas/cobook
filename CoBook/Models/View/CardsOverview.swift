@@ -12,6 +12,7 @@ enum CardsOverview {
 
     enum Items {
         case cardItem(model: CardItemViewModel?)
+        case map
     }
 
     enum BarSectionsTypeIndex: Int {

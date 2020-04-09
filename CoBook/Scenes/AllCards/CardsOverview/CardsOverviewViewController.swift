@@ -48,9 +48,11 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     }
 
     func reload(section: Section<CardsOverview.Items>, at index: Int) {
-        tableView.setContentOffset(.zero, animated: false)
+
+
         tableView.beginUpdates()
-        dataSource?.sections[index] = section
+         dataSource?.sections[index] = section
+        tableView.setContentOffset(.zero, animated: false)
         tableView.reloadSections(IndexSet(integer: index), with: .automatic)
         tableView.endUpdates()
     }
@@ -84,6 +86,16 @@ extension CardsOverviewViewController: UITableViewDelegate {
             return 0
         }
     }
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let cell = tableView.cellForRow(at: indexPath) as? MapTableViewCell
+//        if cell == nil {
+//            return UITableView.automaticDimension
+//        } else {
+//            return tableView.frame.size.height - 58
+//        }
+//    }
+
 
 
 }
