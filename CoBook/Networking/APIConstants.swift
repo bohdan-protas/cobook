@@ -10,11 +10,6 @@ import Foundation
 
 enum APIConstants {
 
-    enum Path: String {
-        case api            = "/api/v1"
-        case contentManager = "/cm/v1"
-    }
-
     static var baseURLPath: URLComponents {
         get {
             var components = URLComponents()
@@ -23,6 +18,11 @@ enum APIConstants {
             components.path     = Path.api.rawValue
             return components
         }
+    }
+
+    enum Path: String {
+        case api                = "/api/v1"
+        case contentManager     = "/cm/v1"
     }
 
     enum Google {
