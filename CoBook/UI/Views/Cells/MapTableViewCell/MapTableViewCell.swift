@@ -23,6 +23,28 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
     var currentLocation: CLLocation?
     var zoomLevel: Float = 10.0
 
+    private var isCameraFitted: Bool = false
+
+    var markers: [GMSMarker] = [] {
+        willSet {
+            markers.forEach { $0.map = nil }
+        }
+        didSet {
+            markers.forEach { $0.map = mapView }
+
+            if !isCameraFitted {
+                var bounds = GMSCoordinateBounds()
+                for marker in self.markers {
+                    bounds = bounds.includingCoordinate(marker.position)
+                }
+
+                let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 50.0 , left: 50.0 ,bottom: 50.0 ,right: 50.0))
+                mapView.animate(with: cameraUpdate)
+                isCameraFitted = true
+            }
+        }
+    }
+
     weak var delegate: MapTableViewCellDelegate?
 
     // MARK: - View Object Lifecycle

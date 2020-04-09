@@ -273,7 +273,6 @@ extension APIClient {
 
 // MARK: - CardsEndpoint requests
 extension APIClient {
-
     /**
      Request updaet business card
     */
@@ -340,6 +339,25 @@ extension APIClient {
                       completion: @escaping (Result<[CardItemApiModel]?, Error>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardsList(type: type, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for card items list
+
+     - parameters:
+        - type: card id
+        - limit: pagination page list limit (default 15)
+        - offset: pagination offset (default 0)
+        - completion: parsed  'CardItemApiModel'  list response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel,
+                                  bottomRightRectCoordinate: CoordinateApiModel,
+                                  completion: @escaping (Result<[CardMapMarkerApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

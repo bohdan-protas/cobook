@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import GoogleMaps
 
 protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator)
@@ -48,6 +49,9 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     private var personalCards: [CardItemViewModel] = []
     private var businessCards: [CardItemViewModel] = []
 
+    /// Current pin request work item
+    private var pendingCardPinRequestWorkItem: DispatchWorkItem?
+
     // MARK: - BasePresenter
 
     func attachView(_ view: CardsOverviewView) {
@@ -71,6 +75,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 // MARK: - Use Cases
 
 private extension CardsOverviewViewPresenter {
+
 
     func getAllCardsList() {
         view?.startLoading()
@@ -148,7 +153,43 @@ extension CardsOverviewViewPresenter: HorizontalItemsBarViewDelegate {
 extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
 
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
+        pendingCardPinRequestWorkItem?.cancel()
 
+        let requestWorkItem = DispatchWorkItem { [weak self] in
+            let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
+            let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
+            APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate) { [weak self] (result) in
+                switch result {
+                case .success(let response):
+
+                    let markers: [GMSMarker] = response?.compactMap { apiModel in
+                        if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
+                            let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
+                            let marker = GMSMarker(position: position)
+
+                            switch apiModel.type {
+                            case .personal:
+                                marker.icon = UIImage(named: "ic_mapmarker_personal")
+                            case .business:
+                                marker.icon = UIImage(named: "ic_mapmarker_business")
+                            }
+                            return marker
+                        } else {
+                            return nil
+                        }
+                    } ?? []
+
+                    cell.markers = markers
+                case .failure(let error):
+                    self?.view?.errorAlert(message: error.localizedDescription)
+                }
+            }
+
+
+        }
+
+        pendingCardPinRequestWorkItem = requestWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250), execute: requestWorkItem)
     }
 
 

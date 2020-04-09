@@ -11,8 +11,8 @@ import Foundation
 struct CardMapMarkerApiModel {
     var id: Int
     var type: CardType
-    var latitide: Float?
-    var longiture: Float?
+    var latitide: Double?
+    var longiture: Double?
     var placeId: String?
     var name: String?
 }

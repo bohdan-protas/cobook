@@ -88,16 +88,6 @@ extension CardsOverviewViewController: UITableViewDelegate {
         }
     }
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let cell = tableView.cellForRow(at: indexPath) as? MapTableViewCell
-//        if cell == nil {
-//            return UITableView.automaticDimension
-//        } else {
-//            return tableView.frame.size.height - 58
-//        }
-//    }
-
-
 
 }
 

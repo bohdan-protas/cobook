@@ -15,6 +15,7 @@ enum CardsEndpoint: Endpoint {
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
     case getCardsList(type: String?, limit: Int?, offset: Int?)
+    case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
 
     var useAuthirizationToken: Bool {
         return true
@@ -32,6 +33,8 @@ enum CardsEndpoint: Endpoint {
             return .post
         case .getCardsList:
             return .post
+        case .getCardLocationsInRegion:
+            return .post
         }
     }
 
@@ -47,6 +50,8 @@ enum CardsEndpoint: Endpoint {
             return "/cards/business"
         case .getCardsList:
             return "/cards/list"
+        case .getCardLocationsInRegion:
+            return "/cards/area-list"
         }
     }
 
@@ -77,6 +82,13 @@ enum CardsEndpoint: Endpoint {
                 params["type"] = type
             }
             return params
+
+
+        case .getCardLocationsInRegion(let topLeftRectCoordinate, let bottomRightRectCoordinate):
+            return [
+                "top_left": topLeftRectCoordinate.dictionary,
+                "bottom_right": bottomRightRectCoordinate.dictionary
+            ]
 
 
         }
