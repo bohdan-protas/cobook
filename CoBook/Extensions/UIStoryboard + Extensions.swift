@@ -27,6 +27,10 @@ extension UIStoryboard {
         return UIStoryboard(name: "Search", bundle: nil)
     }
 
+    static var allCards: UIStoryboard {
+        return UIStoryboard(name: "AllCards", bundle: nil)
+    }
+
     func initiateViewControllerFromType<T: UIViewController>() -> T {
         guard let vc = self.instantiateViewController(withIdentifier: T.describing) as? T else {
             fatalError("Some error with initiating view controller with specified type")

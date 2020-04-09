@@ -18,9 +18,9 @@ enum APIRequestStatus: String, Decodable {
 struct VoidResponseData: Decodable {
 }
 
-// MAKR: - APIResponse
+// MARK: - APIResponse
 /// Used for unique data
-struct APIResponse<EmbadedData: Decodable>: Decodable {
+struct APIResponse<EmbadedData: Decodable> {
     /// Status of request returned from server
     var status: APIRequestStatus
 
@@ -35,14 +35,18 @@ struct APIResponse<EmbadedData: Decodable>: Decodable {
 
     /// Response payload
     var data: EmbadedData?
+}
+
+extension APIResponse: Decodable {
 
     enum CodingKeys: String, CodingKey {
-        case data
         case status
         case errorId = "error_id"
         case errorLocalizadMessage = "error_localized_message"
         case errorDescription = "error_description"
+        case data
     }
+
 }
 
 

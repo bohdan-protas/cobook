@@ -13,6 +13,7 @@
 "Login.placeholder" = "+380XXXXXXXX";
 
 "Account" = "Аккаунт";
+"AllCards" = "Всі візитки";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";

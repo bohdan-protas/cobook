@@ -18,7 +18,6 @@ final class AuthRequestInterceptor: RequestInterceptor {
 
         switch response.statusCode {
         case 401:
-
             DispatchQueue.main.async {
                 AppStorage.Auth.deleteAllData()
                 let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
@@ -31,7 +30,6 @@ final class AuthRequestInterceptor: RequestInterceptor {
             }
 
         case 403:
-
             DispatchQueue.main.async {
                 if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
                     AppStorage.Auth.accessToken = nil

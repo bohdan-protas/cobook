@@ -12,7 +12,8 @@
 "Error" = "Error";
 "Login.placeholder" = "+380XXXXXXXX";
 
-"Account" = "Account";
+"Account" = "Аккаунт";
+"AllCards" = "Всі візитки";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Title.01";

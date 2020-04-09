@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import GooglePlaces
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
 
+        GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
         if AppStorage.State.isFirstAppLaunch {
