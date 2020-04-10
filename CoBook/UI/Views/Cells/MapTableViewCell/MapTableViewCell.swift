@@ -7,77 +7,150 @@
 //
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
 
-class MapTableViewCell: UITableViewCell {
+protocol MapTableViewCellDelegate: class {
+    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?)
+    func openSettingsAction(_ cell: MapTableViewCell)
+}
 
-    @IBOutlet var mapImageView: UIImageView!
+extension MapTableViewCellDelegate {
+    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {}
+}
+
+class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
+
+    @IBOutlet var heightConstraint: NSLayoutConstraint!
+    @IBOutlet var mapView: GMSMapView!
+
+    /// placehoolder view for showing when location access denied
+    lazy var placeholderView: UIView = {
+        let view = DeniedAccessToLocationPlaceholderView(frame: self.contentView.bounds)
+        view.onOpenSettingsHandler = {
+            self.delegate?.openSettingsAction(self)
+        }
+        return view
+    }()
+
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
+    var zoomLevel: Float = 10.0
+
+    private var isCameraFitted: Bool = false
+
+    var markers: [GMSMarker] = [] {
+        willSet {
+            markers.forEach { $0.map = nil }
+        }
+        didSet {
+            markers.forEach { $0.map = mapView }
+
+            if !isCameraFitted {
+                var bounds = GMSCoordinateBounds()
+                for marker in self.markers {
+                    bounds = bounds.includingCoordinate(marker.position)
+                }
+
+                let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 50.0 , left: 50.0 ,bottom: 50.0 ,right: 50.0))
+                mapView.animate(with: cameraUpdate)
+                isCameraFitted = true
+            }
+        }
+    }
+
+    weak var delegate: MapTableViewCellDelegate?
+
+    // MARK: - View Object Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        mapImageView.image = nil
+
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 5000
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+
+        mapView.delegate = self
+
+        // Add the map to the view, hide it until we've got a location update.
+        mapView.isHidden = true
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        mapImageView.cancelImageRequest()
+    // MARK: - GMSMapViewDelegate
+
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                break
+            case .authorizedAlways, .authorizedWhenInUse:
+                delegate?.mapTableViewCell(self, didUpdateVisibleRectBounds: mapView.projection.visibleRegion().farLeft, bottomRight: mapView.projection.visibleRegion().nearRight)
+            @unknown default:
+                break
+            }
+        } else {
+            print("Location services are not enabled")
+        }
     }
 
-    func constructStaticMapURL(mapSize: CGSize) -> URL? {
 
-//        /// generate static map url marker
-//        func generateMapMarkerURL(category: HopCategory, number: Int, using paths: PhotobookMapIcons.Paths) -> String {
-//            var categoryUrlPath = paths.otherCategory
-//            switch category {
-//            case .activity:
-//                categoryUrlPath = paths.doCategory
-//            case .meal:
-//                categoryUrlPath = paths.eatCategory
-//            case .lodging:
-//                categoryUrlPath = paths.stayCategory
-//            case .transit:
-//                categoryUrlPath = paths.goCategory
-//            case .none:
-//                categoryUrlPath = paths.otherCategory
-//            }
-//
-//            return paths.urlPrefix + categoryUrlPath + paths.iconFilePrefix + "\(number)" + paths.iconFileSuffix
-//        }
+}
 
-        var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?"
 
-        mapUrl.append("&size=\(Int(mapSize.width))x\(Int(mapSize.height))")
-        mapUrl.append("&scale=2")
-        mapUrl.append("&format=png")
+// MARK: - CLLocationManagerDelegate
 
-//        /// setup map center
-//        let mapCenter = hops
-//            .compactMap { $0.location }
-//            .max { Float($0.longitude) < Float($1.longitude) }
+extension MapTableViewCell: CLLocationManagerDelegate {
 
-//        if let mapCenter = mapCenter {
-//            mapUrl.append("&center=\(mapCenter.latitude),\(mapCenter.longitude)")
-//        }
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
-//        /// Setup markers
-//        for (index, hop) in hops.enumerated() {
-//            guard let lt = hop.location?.latitude, let lg = hop.location?.longitude
-//            else {
-//                emptyMapCallback()
-//                continue
-//            }
-//
-//            mapUrl.append(
-//                "&markers=scale:2%7Cicon:\(generateMapMarkerURL(category: hop.hopCategory, number: index + startingOrderNumber, using: iconPaths))"
-//                + "%7C\(lt),\(lg)"
-//            )
-//        }
+        if let location = locations.last {
+            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                                  longitude: location.coordinate.longitude,
+                                                  zoom: zoomLevel)
 
-        /// apiKey
-        mapUrl.append("&key=\(APIConstants.Google.placesApiKey)")
-
-        return URL.init(string: mapUrl)
+            if mapView.isHidden {
+                mapView.isHidden = false
+                mapView.camera = camera
+            } else {
+                mapView.animate(to: camera)
+            }
+        }
     }
 
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        placeholderView.removeFromSuperview()
+        switch status {
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            mapView.isHidden = false
+            Log.debug("Location status is OK.")
+            break
+        case .restricted:
+            Log.error("Location access was restricted.")
+            fallthrough
+        case .denied:
+            Log.error("User denied access to location.")
+            fallthrough
+        case .notDetermined:
+            Log.error("Location status not determined.")
+            fallthrough
+        @unknown default:
+            mapView.isHidden = true
+            self.contentView.addSubview(placeholderView)
+            self.contentView.bringSubviewToFront(placeholderView)
+        }
+    }
+
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        Log.error("Error: \(error)")
+    }
 
 
 }

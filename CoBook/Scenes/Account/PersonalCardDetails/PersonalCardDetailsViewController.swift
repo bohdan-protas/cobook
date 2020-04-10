@@ -31,7 +31,8 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         return view
     }()
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.attachView(self)
@@ -47,6 +48,7 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     }
 
     // MARK: - PersonalCardDetailsView
+
     func setupLayout() {
         navigationItem.title = "Персональна візитка"
         tableView.delegate = self
@@ -71,18 +73,21 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
 
     func updateDataSource(sections: [Section<PersonalCardDetails.Cell>]) {
         dataSource?.sections = sections
+        tableView.setContentOffset(.zero, animated: false)
         tableView.reloadData()
     }
 
 
 }
 
-// MARK: Privates
+// MARK: - Privates
+
 private extension PersonalCardDetailsViewController {
 
 }
 
 // MARK: - UITableViewDelegate
+
 extension PersonalCardDetailsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -96,6 +101,7 @@ extension PersonalCardDetailsViewController: UITableViewDelegate {
 }
 
 // MARK: - MFMailComposeViewControllerDelegate
+
 extension PersonalCardDetailsViewController: MFMailComposeViewControllerDelegate {
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

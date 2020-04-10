@@ -11,6 +11,7 @@ import UIKit
 private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
     static let hideCardViewHeight: CGFloat = 102
+    static let editCardViewHeight: CGFloat = 84
 }
 
 class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetailsView {
@@ -23,14 +24,21 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     private lazy var hideCardView: HideCardView = {
         let view = HideCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
         view.onHideTapped = { [weak self] in
-            //self?.presenter?.editPerconalCard()
+
+        }
+        return view
+    }()
+
+    private lazy var editCardView: EditCardView = {
+        let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.editCardViewHeight)))
+        view.onEditTapped = { [weak self] in
+            self?.presenter?.editBusinessCard()
         }
         return view
     }()
 
     private lazy var itemsBarView: HorizontalItemsBarView = {
-        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 53)))
-        view.dataSource = self.presenter
+        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: self.presenter?.items ?? [])
         view.delegate = self.presenter
         return view
     }()
@@ -64,17 +72,38 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator) {
         dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
         tableView.dataSource = dataSource
-
     }
 
     func updateDataSource(sections: [Section<BusinessCardDetails.Cell>]) {
         dataSource?.sections = sections
-        tableView.tableFooterView = hideCardView
+        tableView.tableFooterView = editCardView
         tableView.reloadData()
     }
 
     func sendEmail(to address: String) {
         
+    }
+
+    func openSettings() {
+        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
+
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    Log.debug("Settings opened")
+                })
+            }
+        }
+
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 
 

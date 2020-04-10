@@ -8,13 +8,7 @@
 
 import UIKit
 
-struct CardItemViewModel {
-    var id: String?
-    var avatarPath: String?
-    var name: String?
-    var profession: String?
-    var telephoneNumber: String?
-}
+
 
 struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
 
@@ -31,16 +25,17 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var mapDirectionCellConfigurator: CellConfigurator<Void?, MapDirectionTableViewCell>
     var mapCellConfigurator: CellConfigurator<String?, MapTableViewCell>
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>
-    var employeeCellConfigurator: CellConfigurator<CardItemViewModel?, PersonalCardItemTableViewCell>
+    var employeeCellConfigurator: CellConfigurator<CardItemViewModel?, CardItemTableViewCell>
 
     // MARK: - Initializer
 
     init(presenter: BusinessCardDetailsPresenter) {
         self.presenter = presenter
 
-        employeeCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> PersonalCardItemTableViewCell in
-            cell.userAvatarImageView.setImage(withPath: model?.avatarPath)
-            cell.nameLabel.text = model?.name
+        employeeCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> CardItemTableViewCell in
+            cell.avatarImageView.setTextPlaceholderImage(withPath: model?.avatarPath, placeholderText: model?.nameAbbreviation)
+            cell.type = model?.type
+            cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
             cell.professionLabel.text = model?.profession
             cell.telNumberLabel.text = model?.telephoneNumber
 
@@ -89,8 +84,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         }
 
         mapCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> MapTableViewCell in
-            let mapURL = cell.constructStaticMapURL(mapSize: cell.mapImageView.frame.size)
-            cell.mapImageView.setImage(withURL: mapURL)
+            cell.mapView.isUserInteractionEnabled = false
+            cell.delegate = presenter
             return cell
         }
 

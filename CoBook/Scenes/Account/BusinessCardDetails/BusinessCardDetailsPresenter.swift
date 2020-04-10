@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import GoogleMaps
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator)
     func updateDataSource(sections: [Section<BusinessCardDetails.Cell>])
     func sendEmail(to address: String)
+    func openSettings()
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -27,11 +29,16 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var cardDetails: CardDetailsApiModel?
     private var employee: [CardItemViewModel] = []
 
-    var items: [BarItemViewModel] = [
-        BarItemViewModel(title: "Загальна\n інформація", isSelected: true),
-        BarItemViewModel(title: "Контакти", isSelected: false),
-        BarItemViewModel(title: "Команда", isSelected: false),
-    ]
+    var items: [BarItemViewModel] {
+        get {
+            return [
+                BarItemViewModel(index: 0, title: "Загальна\n інформація"),
+                BarItemViewModel(index: 1, title: "Контакти"),
+                BarItemViewModel(index: 2,title: "Команда"),
+            ]
+        }
+    }
+
 
     var currentIndex: Int = 0 {
         didSet {
@@ -57,11 +64,24 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
-        setupDataSource()
+
     }
 
     func onViewWillAppear() {
+        setupDataSource()
+    }
 
+    func editBusinessCard() {
+        if let cardDetails = cardDetails {
+            let businessCardDetails = CreateBusinessCard.DetailsModel.init(apiModel: cardDetails)
+            let presenter = CreateBusinessCardPresenter(detailsModel: businessCardDetails)
+            let controller: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
+            controller.presenter = presenter
+            view?.push(controller: controller, animated: true)
+        } else {
+            let controller: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
+            view?.push(controller: controller, animated: true)
+        }
     }
 
 
@@ -159,8 +179,10 @@ private extension BusinessCardDetailsPresenter {
             } else {
                 self?.cardDetails = cardDetails
                 self?.employee = employee.map { CardItemViewModel(id: $0.id,
+                                                                  type: .personal,
                                                                   avatarPath: $0.avatar?.sourceUrl,
-                                                                  name: ($0.firstName ?? "") + " " + ($0.lastName ?? ""),
+                                                                  firstName: $0.firstName,
+                                                                  lastName: $0.lastName,
                                                                   profession: $0.position,
                                                                   telephoneNumber: $0.telephone?.number) }
                 self?.updateViewDataSource()
@@ -176,26 +198,7 @@ private extension BusinessCardDetailsPresenter {
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        for index in 0..<items.count {
-            items[index].isSelected = false
-        }
         currentIndex = index
-        items[currentIndex].isSelected = true
-    }
-
-
-}
-
-// MARK: - HorizontalItemsBarViewDataSource
-
-extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDataSource {
-
-    func horizontalItemsBarView(_ view: HorizontalItemsBarView, titleForItemAt index: Int) -> BarItemViewModel? {
-        return items[safe: index]
-    }
-
-    func numberOfItems(in view: HorizontalItemsBarView) -> Int {
-        return items.count
     }
 
 
@@ -254,6 +257,17 @@ extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
+    }
+
+
+}
+
+// MARK: - MapTableViewCellDelegate
+
+extension BusinessCardDetailsPresenter: MapTableViewCellDelegate {
+
+    func openSettingsAction(_ cell: MapTableViewCell) {
+        view?.openSettings()
     }
 
 

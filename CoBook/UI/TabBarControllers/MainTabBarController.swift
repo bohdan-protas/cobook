@@ -10,40 +10,26 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.tabBar.backgroundColor = .white
-        self.tabBar.isTranslucent = false
-
+    var accountController: UIViewController = {
         let accountController: AccountNavigationController = UIStoryboard.account.initiateViewControllerFromType()
         accountController.tabBarItem = UITabBarItem(title: "Account".localized, image: #imageLiteral(resourceName: "ic_tabbar_account_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_account_active"))
-        accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .normal)
-        accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .selected)
-        accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
-        accountController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
+        return accountController
+    }()
 
-        self.viewControllers = [accountController]
-    }
+    var allCardsController: UIViewController = {
+        let allCardsController: CardsOverviewNavigationController = UIStoryboard.allCards.initiateViewControllerFromType()
+        allCardsController.tabBarItem = UITabBarItem(title: "AllCards".localized, image: #imageLiteral(resourceName: "ic_tabbar_allcards_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_allcards_active"))
+        return allCardsController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
 
-
-        // Do any additional setup after loading the view.
+        self.viewControllers = [allCardsController, accountController]
+        self.selectedIndex = 0
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

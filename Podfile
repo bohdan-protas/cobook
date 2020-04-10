@@ -8,5 +8,6 @@ target 'CoBook' do
   pod 'IQKeyboardManagerSwift'
   pod 'JGProgressHUD'
   pod 'GooglePlaces'
+  pod 'GoogleMaps'
   pod 'SwiftSoup'
 end

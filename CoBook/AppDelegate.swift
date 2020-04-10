@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import GooglePlaces
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,11 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
+        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().tintColor = UIColor.Theme.greenDark
+
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
+
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
 
+        GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
         if AppStorage.State.isFirstAppLaunch {

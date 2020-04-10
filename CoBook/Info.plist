@@ -26,6 +26,12 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Used for record video or take photos for your posts and profile.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your location to find the near cards</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to find the near cards</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to find the near cards</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used for uploading images and videos from gallery.</string>
 	<key>UIAppFonts</key>
