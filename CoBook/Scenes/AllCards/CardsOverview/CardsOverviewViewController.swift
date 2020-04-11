@@ -12,15 +12,20 @@ import CoreLocation
 class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
     @IBOutlet var tableView: UITableView!
-
-    var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
-    var dataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?
+    @IBOutlet var filterBarButtonItem: UIBarButtonItem!
 
     private lazy var itemsBarView: HorizontalItemsBarView = {
         let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: presenter.barItems)
         view.delegate = self.presenter
         return view
     }()
+
+    private var searchController: UISearchController!
+    private var resultsTableController: CardsOverviewSearchResultTableViewController!
+    private var searchBar: UISearchBar!
+
+    var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
+    var dataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?
 
     // MARK: - View Lifecycle
 
@@ -34,6 +39,12 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
     deinit {
         presenter.detachView()
+    }
+
+    // MARK: Actions
+
+    @IBAction func filterBarButtonTapped(_ sender: Any) {
+        Log.debug("filter action")
     }
 
     // MARK: - CardsOverviewView
@@ -85,10 +96,30 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 private extension CardsOverviewViewController {
 
     func setupLayout() {
-        navigationItem.title = "Всі візитки"
         tableView.delegate = self
 
+        self.resultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
 
+        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = true
+        searchController.searchBar.showsCancelButton = false
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
+
+        searchBar = searchController.searchBar
+        searchBar.sizeToFit()
+        searchBar.searchBarStyle = .default
+        searchBar.searchTextField.backgroundColor = .white
+        searchBar.barTintColor = UIColor.Theme.blackMiddle
+        searchBar.tintColor = UIColor.Theme.blackMiddle
+        searchBar.setImage(UIImage(named: "ic_search"), for: .search, state: .normal)
+        searchBar.placeholder = "Пошук професії, виду діяльності"
+        searchBar.autocapitalizationType = .none
+        searchBar.showsCancelButton = false
+
+        navigationItem.titleView = searchBar
+        definesPresentationContext = true
     }
 
 
@@ -99,15 +130,55 @@ private extension CardsOverviewViewController {
 extension CardsOverviewViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return itemsBarView
+        if tableView === self.tableView {
+            return itemsBarView
+        } else {
+            return UIView()
+        }
+
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
-             return itemsBarView.frame.height
+        if tableView === self.tableView {
+            if section == 1 {
+                return itemsBarView.frame.height
+            } else {
+                return 0
+            }
         } else {
             return 0
         }
+
+    }
+
+
+}
+
+// MARK: - UISearchBarDelegate
+
+extension CardsOverviewViewController: UISearchBarDelegate {
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchController.isActive = false
+    }
+
+
+}
+
+// MARK: - UISearchControllerDelegate
+
+extension CardsOverviewViewController: UISearchControllerDelegate {
+
+    func willPresentSearchController(_ searchController: UISearchController) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        self.navigationItem.rightBarButtonItem = nil
+        
+    }
+
+    func willDismissSearchController(_ searchController: UISearchController) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        navigationItem.rightBarButtonItems = [filterBarButtonItem]
+
     }
 
 

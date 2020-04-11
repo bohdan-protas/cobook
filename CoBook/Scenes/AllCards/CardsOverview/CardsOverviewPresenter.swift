@@ -77,7 +77,6 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
 private extension CardsOverviewViewPresenter {
 
-
     func getAllCardsList() {
         view?.startLoading()
         APIClient.default.getCardsList { [weak self] (result) in
@@ -161,9 +160,10 @@ extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
         pendingCardPinRequestWorkItem?.cancel()
 
-        let requestWorkItem = DispatchWorkItem { [weak self] in
+        pendingCardPinRequestWorkItem = DispatchWorkItem { [weak self] in
             let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
             let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
+
             APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate) { [weak self] (result) in
                 switch result {
                 case .success(let response):
@@ -190,12 +190,11 @@ extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
                     self?.view?.errorAlert(message: error.localizedDescription)
                 }
             }
-
-
         }
 
-        pendingCardPinRequestWorkItem = requestWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250), execute: requestWorkItem)
+        if pendingCardPinRequestWorkItem != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250), execute: pendingCardPinRequestWorkItem!)
+        }
     }
 
 

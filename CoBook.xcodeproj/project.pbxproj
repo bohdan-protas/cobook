@@ -116,6 +116,7 @@
 		B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F242406FFD200AFE578 /* Optional + Extensions.swift */; };
 		B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F262406FFF300AFE578 /* AnyOptional.swift */; };
 		B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F282407001800AFE578 /* AlertDisplayableView.swift */; };
+		B831C55B24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */; };
 		B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8357DB2240C6372006AB78E /* SignInEndpoint.swift */; };
 		B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */; };
 		B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */; };
@@ -337,6 +338,7 @@
 		B8307F242406FFD200AFE578 /* Optional + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional + Extensions.swift"; sourceTree = "<group>"; };
 		B8307F262406FFF300AFE578 /* AnyOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyOptional.swift; sourceTree = "<group>"; };
 		B8307F282407001800AFE578 /* AlertDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayableView.swift; sourceTree = "<group>"; };
+		B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewSearchResultTableViewController.swift; sourceTree = "<group>"; };
 		B8357DB2240C6372006AB78E /* SignInEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEndpoint.swift; sourceTree = "<group>"; };
 		B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsApiModel.swift; sourceTree = "<group>"; };
 		B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeTypesEndpoint.swift; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 			isa = PBXGroup;
 			children = (
 				B824924D243DE73E00A1AC39 /* AllCards.storyboard */,
+				B831C55924406A090058F825 /* CardsSearch */,
 				B824924C243DE72500A1AC39 /* CardsOverview */,
 			);
 			path = AllCards;
@@ -877,6 +880,14 @@
 				B8CB0E7824053E6B00AF431B /* KeychainWrapper */,
 			);
 			path = Persistance;
+			sourceTree = "<group>";
+		};
+		B831C55924406A090058F825 /* CardsSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */,
+			);
+			path = CardsSearch;
 			sourceTree = "<group>";
 		};
 		B8359CD7241ECE570080263E /* View */ = {
@@ -1561,6 +1572,7 @@
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */,
 				B8255A26243A58A400C4169D /* UsersEndpoint.swift in Sources */,
+				B831C55B24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
