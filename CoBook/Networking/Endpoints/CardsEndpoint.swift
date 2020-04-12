@@ -10,11 +10,22 @@ import Alamofire
 
 enum CardsEndpoint: Endpoint {
 
+    ///
     case updateBusinessCard(parameters: CreateBusinessCardParametersApiModel)
+
+    ///
     case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)
+
+    ///
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
+
+    ///
     case getCardInfo(id: Int)
-    case getCardsList(type: String?, limit: Int?, offset: Int?)
+
+    ///
+    case getCardsList(type: String?, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
+
+    ///
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
 
     var useAuthirizationToken: Bool {
@@ -71,18 +82,22 @@ enum CardsEndpoint: Endpoint {
 
         case .updateBusinessCard(let parameters):
             return parameters.dictionary
-            
 
-        case .getCardsList(let type, let limit, let offset):
-            var params: Parameters = [
-                "limit": limit ?? 15,
-                "offset": offset ?? 0
-            ]
+        case .getCardsList(let type, let search, let limit, let offset):
+            var params: Parameters = [:]
+            if let limit = limit {
+                params["limit"] = limit
+            }
+            if let offset = offset {
+                params["offset"] = offset
+            }
+            if let search = search {
+                params["search"] = search
+            }
             if let type = type {
                 params["type"] = type
             }
             return params
-
 
         case .getCardLocationsInRegion(let topLeftRectCoordinate, let bottomRightRectCoordinate):
             return [

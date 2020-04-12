@@ -21,7 +21,7 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     }()
 
     private var searchController: UISearchController!
-    private var resultsTableController: CardsOverviewSearchResultTableViewController!
+    private var searchResultsTableController: CardsOverviewSearchResultTableViewController!
     private var searchBar: UISearchBar!
 
     var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
@@ -52,11 +52,17 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator) {
         dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
         tableView.dataSource = dataSource
+
+        searchResultsTableController.configureDataSource(with: configurator)
     }
 
     func setup(sections: [Section<CardsOverview.Items>]) {
         dataSource?.sections = sections
         tableView.reloadData()
+    }
+
+    func setupSearch(sections: [Section<CardsOverview.Items>]) {
+        searchResultsTableController.setup(sections: sections)
     }
 
     func reload(section: Section<CardsOverview.Items>, at index: Int) {
@@ -93,21 +99,22 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 }
 
 // MARK: - Privates
+
 private extension CardsOverviewViewController {
 
     func setupLayout() {
         tableView.delegate = self
 
-        self.resultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
+        self.searchResultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
 
-        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController = UISearchController(searchResultsController: searchResultsTableController)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = true
-        searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.delegate = self
-        searchController.delegate = self
 
         searchBar = searchController.searchBar
+        searchBar.delegate = self
         searchBar.sizeToFit()
         searchBar.searchBarStyle = .default
         searchBar.searchTextField.backgroundColor = .white
@@ -160,6 +167,21 @@ extension CardsOverviewViewController: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
+    }
+
+
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension CardsOverviewViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        // Strip out all the leading and trailing spaces.
+        let whitespaceCharacterSet = CharacterSet.whitespaces
+        let strippedString = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
+
+        presenter.updateSearchResult(query: strippedString)
     }
 
 

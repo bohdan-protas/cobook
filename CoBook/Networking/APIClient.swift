@@ -327,6 +327,7 @@ extension APIClient {
 
      - parameters:
         - type: card id
+        - search: query for searching
         - limit: pagination page list limit (default 15)
         - offset: pagination offset (default 0)
         - completion: parsed  'CardItemApiModel'  list response
@@ -334,11 +335,12 @@ extension APIClient {
      */
     @discardableResult
     func getCardsList(type: String? = nil,
+                      search: String? = nil,
                       limit: Int? = nil,
                       offset: Int? = nil,
                       completion: @escaping (Result<[CardItemApiModel]?, Error>) -> Void) -> DataRequest {
 
-        let endpoint = CardsEndpoint.getCardsList(type: type, limit: limit, offset: offset)
+        let endpoint = CardsEndpoint.getCardsList(type: type, search: search, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

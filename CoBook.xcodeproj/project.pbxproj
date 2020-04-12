@@ -46,6 +46,8 @@
 		B823B093242D3DA90012529D /* CreateBusinessCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B092242D3DA90012529D /* CreateBusinessCardViewController.swift */; };
 		B823B0A1242D46EF0012529D /* CreatePersonalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B0A0242D46EF0012529D /* CreatePersonalCard.swift */; };
 		B823C6212431F585002CFB02 /* UIImage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823C6202431F585002CFB02 /* UIImage + Extensions.swift */; };
+		B823DD7A244348D300A74495 /* SearchResultHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B823DD79244348D300A74495 /* SearchResultHeaderView.xib */; };
+		B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823DD7B244348F100A74495 /* SearchResultHeaderView.swift */; };
 		B823E8A1243F173A00EE1830 /* StaticMapConfiguratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */; };
 		B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A2243F590200EE1830 /* PermissionService.swift */; };
 		B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */; };
@@ -267,6 +269,8 @@
 		B823B092242D3DA90012529D /* CreateBusinessCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardViewController.swift; sourceTree = "<group>"; };
 		B823B0A0242D46EF0012529D /* CreatePersonalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCard.swift; sourceTree = "<group>"; };
 		B823C6202431F585002CFB02 /* UIImage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extensions.swift"; sourceTree = "<group>"; };
+		B823DD79244348D300A74495 /* SearchResultHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultHeaderView.xib; sourceTree = "<group>"; };
+		B823DD7B244348F100A74495 /* SearchResultHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultHeaderView.swift; sourceTree = "<group>"; };
 		B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapConfiguratorService.swift; sourceTree = "<group>"; };
 		B823E8A2243F590200EE1830 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateApiModel.swift; sourceTree = "<group>"; };
@@ -650,6 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
+				B823DD78244348A600A74495 /* SearchResultHeaderView */,
 				B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */,
 				B8559F96243CD62700787349 /* HorizintalItemsBarView */,
 				B8DE5E5724192ADC00F4F60B /* Designable */,
@@ -722,6 +727,15 @@
 			path = CreateBusinessCard;
 			sourceTree = "<group>";
 		};
+		B823DD78244348A600A74495 /* SearchResultHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				B823DD79244348D300A74495 /* SearchResultHeaderView.xib */,
+				B823DD7B244348F100A74495 /* SearchResultHeaderView.swift */,
+			);
+			path = SearchResultHeaderView;
+			sourceTree = "<group>";
+		};
 		B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,7 +749,6 @@
 			isa = PBXGroup;
 			children = (
 				B824924D243DE73E00A1AC39 /* AllCards.storyboard */,
-				B831C55924406A090058F825 /* CardsSearch */,
 				B824924C243DE72500A1AC39 /* CardsOverview */,
 			);
 			path = AllCards;
@@ -745,6 +758,7 @@
 			isa = PBXGroup;
 			children = (
 				B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */,
+				B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */,
 				B8249246243DE64A00A1AC39 /* CardsOverviewPresenter.swift */,
 				B8249248243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift */,
 			);
@@ -880,14 +894,6 @@
 				B8CB0E7824053E6B00AF431B /* KeychainWrapper */,
 			);
 			path = Persistance;
-			sourceTree = "<group>";
-		};
-		B831C55924406A090058F825 /* CardsSearch */ = {
-			isa = PBXGroup;
-			children = (
-				B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */,
-			);
-			path = CardsSearch;
 			sourceTree = "<group>";
 		};
 		B8359CD7241ECE570080263E /* View */ = {
@@ -1409,6 +1415,7 @@
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
 				B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */,
+				B823DD7A244348D300A74495 /* SearchResultHeaderView.xib in Resources */,
 				B8559F81243C809D00787349 /* MapTableViewCell.xib in Resources */,
 				B8559F90243C8B0900787349 /* CardItemTableViewCell.xib in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
@@ -1574,6 +1581,7 @@
 				B8255A26243A58A400C4169D /* UsersEndpoint.swift in Sources */,
 				B831C55B24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
+				B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
 				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,

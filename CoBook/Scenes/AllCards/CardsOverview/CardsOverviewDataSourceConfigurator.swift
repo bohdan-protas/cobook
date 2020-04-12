@@ -25,7 +25,19 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
         cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> CardItemTableViewCell in
             cell.avatarImageView.setTextPlaceholderImage(withPath: model?.avatarPath, placeholderText: model?.nameAbbreviation)
             cell.type = model?.type
-            cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
+
+            switch model?.type {
+            case .none:
+                cell.nameLabel.text = ""
+            case .some(let value):
+                switch value {
+                case .personal:
+                    cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
+                case .business:
+                    cell.nameLabel.text = model?.companyName
+                }
+            }
+
             cell.professionLabel.text = model?.profession
             cell.telNumberLabel.text = model?.telephoneNumber
             return cell

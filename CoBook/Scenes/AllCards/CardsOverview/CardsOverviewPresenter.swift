@@ -13,6 +13,7 @@ import GoogleMaps
 protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView {
     func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator)
     func setup(sections: [Section<CardsOverview.Items>])
+    func setupSearch(sections: [Section<CardsOverview.Items>])
     func reload(section: Section<CardsOverview.Items>, at index: Int)
     func openSettings()
 }
@@ -36,7 +37,6 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
     }
 
-
     private var selectedBarItem: BarItemViewModel? {
         didSet {
             updateViewDataSoure(section: 1)
@@ -53,6 +53,9 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     /// Current pin request work item
     private var pendingCardPinRequestWorkItem: DispatchWorkItem?
 
+    /// Current card search request work item
+    private var pendingSearchResultWorkItem: DispatchWorkItem?
+
     // MARK: - BasePresenter
 
     func attachView(_ view: CardsOverviewView) {
@@ -68,6 +71,45 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
     func onViewDidLoad() {
         getAllCardsList()
+    }
+
+    func updateSearchResult(query: String) {
+        pendingSearchResultWorkItem?.cancel()
+
+        if query.isEmpty {
+            view?.setupSearch(sections: [])
+            return
+        }
+
+        pendingSearchResultWorkItem = DispatchWorkItem { [weak self] in
+            APIClient.default.getCardsList(search: query) { [weak self] result in
+                guard let strongSelf = self else { return }
+
+                switch result {
+                case .success(let response):
+
+                    let searchCards = response?.compactMap { CardItemViewModel(id: String($0.id),
+                                                                               type: $0.type,
+                                                                               avatarPath: $0.avatar?.sourceUrl,
+                                                                               firstName: $0.cardCreator?.firstName,
+                                                                               lastName: $0.cardCreator?.lastName,
+                                                                               companyName: $0.company?.name,
+                                                                               profession: $0.practiceType?.title,
+                                                                               telephoneNumber: $0.contactTelephone?.number) } ?? []
+
+                    var searchSection: Section<CardsOverview.Items> = Section(items: [])
+                    searchSection.items = searchCards.map { .cardItem(model: $0) }
+                    strongSelf.view?.setupSearch(sections: [searchSection])
+
+                case .failure(let error):
+                    strongSelf.view?.errorAlert(message: error.localizedDescription)
+                }
+            }
+        }
+
+        if pendingSearchResultWorkItem != nil, !(pendingSearchResultWorkItem?.isCancelled ?? true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingSearchResultWorkItem!)
+        }
     }
 
 
@@ -91,6 +133,7 @@ private extension CardsOverviewViewPresenter {
                                                                                avatarPath: $0.avatar?.sourceUrl,
                                                                                firstName: $0.cardCreator?.firstName,
                                                                                lastName: $0.cardCreator?.lastName,
+                                                                               companyName: $0.company?.name,
                                                                                profession: $0.practiceType?.title,
                                                                                telephoneNumber: $0.contactTelephone?.number) } ?? []
 
@@ -156,7 +199,6 @@ extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
         view?.openSettings()
     }
 
-
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
         pendingCardPinRequestWorkItem?.cancel()
 
@@ -167,7 +209,6 @@ extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
             APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate) { [weak self] (result) in
                 switch result {
                 case .success(let response):
-
                     let markers: [GMSMarker] = response?.compactMap { apiModel in
                         if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
                             let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
