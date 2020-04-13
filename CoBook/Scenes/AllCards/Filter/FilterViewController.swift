@@ -81,13 +81,8 @@ extension FilterViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        sections[indexPath.section].items[indexPath.row].isSelected = true
-    }
-
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        sections[indexPath.section].items[indexPath.row].isSelected = false
+        sections[indexPath.section].items[indexPath.row].isSelected.toggle()
+        tableView.cellForRow(at: indexPath)?.accessoryType = sections[indexPath.section].items[indexPath.row].isSelected ?.checkmark : .none
     }
 
 
