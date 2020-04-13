@@ -14,6 +14,7 @@ struct CardItemViewModel {
     var avatarPath: String?
     var firstName: String?
     var lastName: String?
+    var companyName: String?
     var profession: String?
     var telephoneNumber: String?
 

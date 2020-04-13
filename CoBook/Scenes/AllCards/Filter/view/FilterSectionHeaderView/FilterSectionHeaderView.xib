@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilterSectionHeaderView" customModule="CoBook" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLabel" destination="XgA-Cv-RbI" id="vmJ-yM-aUB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgA-Cv-RbI">
+                    <rect key="frame" x="16" y="17" width="390" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="4jY-Tr-NXe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="15"/>
+                    <color key="textColor" name="Theme_Black-Middle"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIW-ZK-MUh" userLabel="Separator View">
+                    <rect key="frame" x="16" y="48" width="398" height="1"/>
+                    <color key="backgroundColor" name="Theme_Separator"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="0Yo-ah-oPZ"/>
+                        <constraint firstAttribute="height" constant="1" id="Px6-i6-FG0"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="vIW-ZK-MUh" secondAttribute="trailing" id="Dkl-ze-lrv"/>
+                <constraint firstItem="XgA-Cv-RbI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="17" id="EvZ-Sv-uPM"/>
+                <constraint firstItem="vIW-ZK-MUh" firstAttribute="leading" secondItem="XgA-Cv-RbI" secondAttribute="leading" id="MsI-IO-HUb"/>
+                <constraint firstAttribute="trailing" secondItem="XgA-Cv-RbI" secondAttribute="trailing" constant="8" id="ajP-wd-qPt"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="vIW-ZK-MUh" secondAttribute="bottom" id="d7g-vl-AoF"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="XgA-Cv-RbI" secondAttribute="bottom" constant="12" id="iAW-Wg-Lyl"/>
+                <constraint firstItem="XgA-Cv-RbI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="v3U-Ax-5LX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="147.82608695652175" y="-130.24553571428572"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Separator">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -20,23 +20,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
+        // Tabbar appearance
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = UIColor.Theme.greenDark
 
+        // UITabBarItem appearance
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .selected)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
 
+        // IQKeyboard pod setup
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
 
+        // Google services setup
         GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
+        // App appearance setup
+        /// Clear saved data in keychain if user reinstalled app
         if AppStorage.State.isFirstAppLaunch {
             AppStorage.deleteAllData()
             AppStorage.State.isFirstAppLaunch = false
