@@ -25,19 +25,19 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var mapDirectionCellConfigurator: CellConfigurator<Void?, MapDirectionTableViewCell>
     var mapCellConfigurator: CellConfigurator<String?, MapTableViewCell>
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>
-    var employeeCellConfigurator: CellConfigurator<CardItemViewModel?, CardItemTableViewCell>
+    var employeeCellConfigurator: CellConfigurator<EmployeeModel?, CardItemTableViewCell>
 
     // MARK: - Initializer
 
     init(presenter: BusinessCardDetailsPresenter) {
         self.presenter = presenter
 
-        employeeCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> CardItemTableViewCell in
-            cell.avatarImageView.setTextPlaceholderImage(withPath: model?.avatarPath, placeholderText: model?.nameAbbreviation)
-            cell.type = model?.type
+        employeeCellConfigurator = CellConfigurator { (cell, model: EmployeeModel?, tableView, indexPath) -> CardItemTableViewCell in
+            cell.avatarImageView.setTextPlaceholderImage(withPath: model?.avatar, placeholderText: model?.nameAbbreviation)
+            cell.type = .personal
             cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
-            cell.professionLabel.text = model?.profession
-            cell.telNumberLabel.text = model?.telephoneNumber
+            cell.professionLabel.text = model?.practiceType?.title
+            cell.telNumberLabel.text = model?.telephone
 
             return cell
         }

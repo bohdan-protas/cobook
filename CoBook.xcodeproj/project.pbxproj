@@ -14,6 +14,8 @@
 		B820793A24446EFE00FCCC17 /* FilterSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B820793924446EFE00FCCC17 /* FilterSectionHeaderView.swift */; };
 		B820793D2444727F00FCCC17 /* CorneredEdgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B820793C2444727F00FCCC17 /* CorneredEdgeView.xib */; };
 		B820793F2444729500FCCC17 /* CorneredEdgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B820793E2444729400FCCC17 /* CorneredEdgeView.swift */; };
+		B82079412444A60500FCCC17 /* EmployApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82079402444A60500FCCC17 /* EmployApiModel.swift */; };
+		B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82079422444B49F00FCCC17 /* EmployModel.swift */; };
 		B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A5B241B6A690066700C /* InterestItemCollectionViewCell.swift */; };
 		B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */; };
 		B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A61241BCDDF0066700C /* InterestsEndpoint.swift */; };
@@ -244,6 +246,8 @@
 		B820793924446EFE00FCCC17 /* FilterSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSectionHeaderView.swift; sourceTree = "<group>"; };
 		B820793C2444727F00FCCC17 /* CorneredEdgeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CorneredEdgeView.xib; sourceTree = "<group>"; };
 		B820793E2444729400FCCC17 /* CorneredEdgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorneredEdgeView.swift; sourceTree = "<group>"; };
+		B82079402444A60500FCCC17 /* EmployApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployApiModel.swift; sourceTree = "<group>"; };
+		B82079422444B49F00FCCC17 /* EmployModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployModel.swift; sourceTree = "<group>"; };
 		B8212A5B241B6A690066700C /* InterestItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8212A61241BCDDF0066700C /* InterestsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsEndpoint.swift; sourceTree = "<group>"; };
@@ -970,6 +974,7 @@
 				B8559F69243AD2A100787349 /* BusinessCardDetails.swift */,
 				B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */,
 				B8249251243E26A300A1AC39 /* CardsOverview.swift */,
+				B82079422444B49F00FCCC17 /* EmployModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1055,6 +1060,7 @@
 				B8249241243DE2CC00A1AC39 /* CardItemApiModel.swift */,
 				B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */,
 				B823E8A6243F753D00EE1830 /* CardMapMarkerApiModel.swift */,
+				B82079402444A60500FCCC17 /* EmployApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1658,6 +1664,7 @@
 				B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */,
 				B836DF2C2433792600CB84D3 /* CreateBusinessCardPresenter.swift in Sources */,
 				B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */,
+				B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */,
 				B8559F66243AD0B900787349 /* BusinessCardDetailsPresenter.swift in Sources */,
 				B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */,
 				B820793F2444729500FCCC17 /* CorneredEdgeView.swift in Sources */,
@@ -1668,6 +1675,7 @@
 				B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
+				B82079412444A60500FCCC17 /* EmployApiModel.swift in Sources */,
 				B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */,
 				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B8255A24243A2C2500C4169D /* SearchNavigationController.swift in Sources */,

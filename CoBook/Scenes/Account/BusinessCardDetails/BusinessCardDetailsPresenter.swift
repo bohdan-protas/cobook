@@ -27,7 +27,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     private var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
-    private var employee: [CardItemViewModel] = []
+    private var employee: [EmployeeModel] = []
 
     var items: [BarItemViewModel] {
         get {
@@ -178,13 +178,14 @@ private extension BusinessCardDetailsPresenter {
                 }
             } else {
                 self?.cardDetails = cardDetails
-                self?.employee = employee.map { CardItemViewModel(id: $0.id,
-                                                                  type: .personal,
-                                                                  avatarPath: $0.avatar?.sourceUrl,
-                                                                  firstName: $0.firstName,
-                                                                  lastName: $0.lastName,
-                                                                  profession: $0.position,
-                                                                  telephoneNumber: $0.telephone?.number) }
+                self?.employee = employee.map { EmployeeModel(userId: $0.userId,
+                                                              cardId: $0.cardId,
+                                                              firstName: $0.firstName,
+                                                              lastName: $0.lastName,
+                                                              avatar: $0.avatar?.sourceUrl,
+                                                              position: $0.position,
+                                                              telephone: $0.telephone?.number,
+                                                              practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) }
                 self?.updateViewDataSource()
             }
         }

@@ -1,17 +1,18 @@
 //
-//  EmployersSearchItemApiModel.swift
+//  EmployApiModel.swift
 //  CoBook
 //
-//  Created by protas on 4/5/20.
+//  Created by protas on 4/13/20.
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
 import Foundation
 
-struct EmployersSearchItemApiModel: Decodable {
+struct EmployApiModel: Decodable {
 
     enum CodingKeys: String, CodingKey {
-        case userId = "id"
+        case cardId = "id"
+        case userId
         case firstName = "first_name"
         case lastName = "last_name"
         case avatar
@@ -20,6 +21,7 @@ struct EmployersSearchItemApiModel: Decodable {
         case practiceType = "practice_type"
     }
 
+    var cardId: Int?
     var userId: String?
     var firstName: String?
     var lastName: String?
@@ -27,5 +29,4 @@ struct EmployersSearchItemApiModel: Decodable {
     var position: String?
     var telephone: TelephoneApiModel?
     var practiceType: PracticeTypeApiModel?
-
 }

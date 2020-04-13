@@ -92,7 +92,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
         }
     }
 
-    func addEmploy(model: CardPreviewModel?) {
+    func addEmploy(model: EmployeeModel?) {
         if let model = model {
             if businessCardDetailsModel.employers.contains(where: { $0 == model }) {
                 view?.errorAlert(message: "Вибраний працівник вже доданий")
@@ -293,12 +293,14 @@ private extension CreateBusinessCardPresenter {
             APIClient.default.employeeList(cardId: id) { [weak self] (result) in
                 switch result {
                 case let .success(response):
-                    self?.businessCardDetailsModel.employers = (response ?? []).compactMap { CardPreviewModel(id: $0.id,
-                                                                                                              image: $0.avatar?.sourceUrl,
-                                                                                                              firstName: $0.firstName,
-                                                                                                              lastName: $0.lastName,
-                                                                                                              profession: $0.practiceType?.title,
-                                                                                                              telephone: $0.telephone?.number) }
+                    self?.businessCardDetailsModel.employers = (response ?? []).compactMap { EmployeeModel(userId: $0.userId,
+                                                                                                           cardId: $0.cardId,
+                                                                                                           firstName: $0.firstName,
+                                                                                                           lastName: $0.lastName,
+                                                                                                           avatar: $0.avatar?.sourceUrl,
+                                                                                                           position: $0.position,
+                                                                                                           telephone: $0.telephone?.number,
+                                                                                                           practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) }
                     group.leave()
                 case let .failure(error):
                     errors.append(error)
@@ -335,7 +337,7 @@ extension CreateBusinessCardPresenter: EmployersPreviewHorizontalListTableViewCe
 
     }
 
-    var employers: [CardPreviewModel] {
+    var employers: [EmployeeModel] {
         get {
             return businessCardDetailsModel.employers
         }

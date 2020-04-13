@@ -30,23 +30,3 @@ struct CardPreviewApiModel: Codable {
     var company: CompanyApiModel?
 }
 
-struct EmployApiModel: Decodable {
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case avatar
-        case position
-        case telephone
-        case practiceType = "practice_type"
-    }
-
-    var id: String?
-    var firstName: String?
-    var lastName: String?
-    var avatar: FileDataApiModel?
-    var position: String?
-    var telephone: TelephoneApiModel?
-    var practiceType: PracticeTypeApiModel?
-}

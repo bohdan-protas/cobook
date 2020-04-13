@@ -20,7 +20,7 @@ enum BusinessCardDetails {
         case addressInfo(model: AddressInfoCellModel)
         case map(path: String?)
         case mapDirection
-        case employee(model: CardItemViewModel?)
+        case employee(model: EmployeeModel?)
     }
 
     struct HeaderInfoModel {

@@ -50,7 +50,7 @@ enum CreateBusinessCard {
 
         var description: String?
 
-        var employers = [CardPreviewModel]()
+        var employers = [EmployeeModel]()
         var interests: [InterestModel] = []
         var socials: [Social.ListItem] = []
         var practices: [PracticeModel] = []

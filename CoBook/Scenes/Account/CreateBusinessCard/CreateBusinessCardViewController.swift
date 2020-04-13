@@ -104,7 +104,7 @@ private extension CreateBusinessCardViewController {
 // MARK: - SearchTableViewControllerDelegate
 extension CreateBusinessCardViewController: SearchTableViewControllerDelegate {
 
-    func searchTableViewController(_ controller: SearchTableViewController, didSelected item: CardPreviewModel?) {
+    func searchTableViewController(_ controller: SearchTableViewController, didSelected item: EmployeeModel?) {
         presenter.addEmploy(model: item)
     }
 
