@@ -35,7 +35,7 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_nav_filter" id="AW1-1H-hGn">
                             <color key="tintColor" name="Theme_Black-Middle"/>
                             <connections>
-                                <segue destination="0LK-99-eEw" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="oaF-N5-EXT"/>
+                                <action selector="filterBarButtonTapped:" destination="ibO-Ug-qJc" id="Tc9-F1-2hM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -51,13 +51,13 @@
         <!--Filter View Controller-->
         <scene sceneID="oyL-Z6-sKl">
             <objects>
-                <viewController id="ILx-Ge-kZz" customClass="FilterViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterViewController" modalTransitionStyle="crossDissolve" id="ILx-Ge-kZz" customClass="FilterViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2PR-Np-hIy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o1l-PW-a0F">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BW2-Uo-QuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3192.8000000000002" y="72.413793103448285"/>
+            <point key="canvasLocation" x="2106" y="74"/>
         </scene>
         <!--Cards Overview Search Result Table View Controller-->
         <scene sceneID="ReO-PE-G1W">
@@ -121,24 +121,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJ4-Cb-oBg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="178" y="74"/>
-        </scene>
-        <!--Custom Navigation Controller-->
-        <scene sceneID="aOd-Y9-aZR">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0LK-99-eEw" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g8W-e7-Lb4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ILx-Ge-kZz" kind="relationship" relationship="rootViewController" id="gfC-CM-tWZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gac-oj-f6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2317.5999999999999" y="73.313343328335833"/>
         </scene>
     </scenes>
     <resources>

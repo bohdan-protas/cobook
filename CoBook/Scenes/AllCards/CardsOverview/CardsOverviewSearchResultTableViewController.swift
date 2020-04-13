@@ -34,7 +34,7 @@ class CardsOverviewSearchResultTableViewController: UITableViewController {
 
         let items = sections.flatMap { $0.items }
         headerView.resultsLabel.text = items.isEmpty ?
-            "Нема результатів пошуку" :
+            "Немає результатів пошуку" :
             "Знайдено: \(items.count)"
 
         tableView.reloadData()

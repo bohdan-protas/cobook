@@ -15,6 +15,12 @@ fileprivate enum Defaults {
     static var footerHeight: CGFloat = 16
 }
 
+// MARK: - FilterViewControllerDelegate
+
+protocol FilterViewControllerDelegate: class {
+    func didFilterChanged(_ viewController: FilterViewController)
+}
+
 // MARK: - FilterViewController
 
 class FilterViewController: BaseViewController {
@@ -28,18 +34,25 @@ class FilterViewController: BaseViewController {
     
     var sections: [Section<FilterItemModel>] = []
 
-    var savedFilters = AppStorage.User.Filters
+    weak var delegate: FilterViewControllerDelegate?
 
     // MARK: - Actions
 
     @IBAction func closeButtonTapped(_ sender: Any) {
 
         // save selected filters to storage
-        AppStorage.User.Filters?.interests = sections[safe: SectionAccessoryIndex.interests.rawValue]?.items.filter { $0.isSelected } ?? []
-        AppStorage.User.Filters?.practicies = sections[safe: SectionAccessoryIndex.practicies.rawValue]?.items.filter { $0.isSelected } ?? []
+        AppStorage.User.Filters?.interests = sections[safe: SectionAccessoryIndex.interests.rawValue]?
+            .items.filter { $0.isSelected }
+            .compactMap { $0.id } ?? []
+
+        AppStorage.User.Filters?.practicies = sections[safe: SectionAccessoryIndex.practicies.rawValue]?.items
+            .filter { $0.isSelected }
+            .compactMap { $0.id } ?? []
 
         // dismiss controller
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            self.delegate?.didFilterChanged(self)
+        })
     }
 
     // MARK: - View Lifecycle
@@ -159,17 +172,13 @@ private extension FilterViewController {
 
             // setup selection filter selection state
             let fetchedInterests: [FilterItemModel] = interests.compactMap { fetched in
-                let isSelected = strongSelf.savedFilters?.interests.contains(where: { (selected) -> Bool in
-                    return selected.id == fetched.id
-                })
-                return FilterItemModel(id: fetched.id, title: fetched.title, isSelected: isSelected ?? false )
+                let isSelected: Bool = AppStorage.User.Filters?.interests.contains(fetched.id ?? -1) ?? false
+                return FilterItemModel(id: fetched.id, title: fetched.title, isSelected: isSelected)
             }
 
             let fetchedPracticies: [FilterItemModel] = practicies.compactMap { fetched in
-                let isSelected = strongSelf.savedFilters?.practicies.contains(where: { (selected) -> Bool in
-                    return selected.id == fetched.id
-                })
-                return FilterItemModel(id: fetched.id, title: fetched.title, isSelected: isSelected ?? false )
+                let isSelected: Bool = AppStorage.User.Filters?.practicies.contains(fetched.id ?? -1) ?? false
+                return FilterItemModel(id: fetched.id, title: fetched.title, isSelected: isSelected)
             }
 
             // setup sections
@@ -177,7 +186,9 @@ private extension FilterViewController {
                 Section(accessoryIndex: SectionAccessoryIndex.interests.rawValue, title: "Інтереси", items: fetchedInterests),
                 Section(accessoryIndex: SectionAccessoryIndex.practicies.rawValue, title: "Вид діяльності", items: fetchedPracticies)
             ]
-            strongSelf.tableView.tableFooterView = CorneredEdgeView(frame: CGRect(origin: .zero, size: CGSize(width: strongSelf.tableView.frame.width, height: Defaults.footerHeight)))
+
+            strongSelf.tableView.tableFooterView = CorneredEdgeView(frame: CGRect(origin: .zero,
+                                                                                  size: CGSize(width: strongSelf.tableView.frame.width, height: Defaults.footerHeight)))
 
             self?.tableView.reloadData()
         }

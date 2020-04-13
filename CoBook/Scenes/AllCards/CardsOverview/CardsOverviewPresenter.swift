@@ -73,6 +73,10 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         getAllCardsList()
     }
 
+    func refreshDataSource() {
+        getAllCardsList()
+    }
+
     func updateSearchResult(query: String) {
         pendingSearchResultWorkItem?.cancel()
 
@@ -82,7 +86,11 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
         
         pendingSearchResultWorkItem = DispatchWorkItem { [weak self] in
-            APIClient.default.getCardsList(search: query) { [weak self] result in
+
+            let interests = AppStorage.User.Filters?.interests
+            let practiceTypeIds = AppStorage.User.Filters?.practicies
+
+            APIClient.default.getCardsList(interestIds: interests, practiseTypeIds: practiceTypeIds, search: query) { [weak self] result in
                 guard let strongSelf = self else { return }
 
                 switch result {
@@ -121,7 +129,11 @@ private extension CardsOverviewViewPresenter {
 
     func getAllCardsList() {
         view?.startLoading()
-        APIClient.default.getCardsList { [weak self] (result) in
+
+        let interests = AppStorage.User.Filters?.interests
+        let practiceTypeIds = AppStorage.User.Filters?.practicies
+
+        APIClient.default.getCardsList(interestIds: interests, practiseTypeIds: practiceTypeIds) { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 

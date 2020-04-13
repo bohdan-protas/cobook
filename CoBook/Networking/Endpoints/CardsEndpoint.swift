@@ -23,7 +23,7 @@ enum CardsEndpoint: Endpoint {
     case getCardInfo(id: Int)
 
     ///
-    case getCardsList(type: String?, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
+    case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
 
     ///
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
@@ -69,13 +69,13 @@ enum CardsEndpoint: Endpoint {
     var parameters: Parameters? {
         switch self {
 
-        case .createPersonalCard(let parameters):
-            return parameters.dictionary
-
         case .getCardInfo(let id):
             return [
                 APIConstants.ParameterKey.id: id,
             ]
+
+        case .createPersonalCard(let parameters):
+            return parameters.dictionary
 
         case .createBusinessCard(let parameters):
             return parameters.dictionary
@@ -83,17 +83,28 @@ enum CardsEndpoint: Endpoint {
         case .updateBusinessCard(let parameters):
             return parameters.dictionary
 
-        case .getCardsList(let type, let search, let limit, let offset):
+        case .getCardsList(let type, let interestsIds, let practiseTypeIds, let search, let limit, let offset):
             var params: Parameters = [:]
+            if let interestsIds = interestsIds {
+                params["interests_ids"] = interestsIds
+            }
+
+            if let practiseTypeIds = practiseTypeIds {
+                params["practise_type_ids"] = practiseTypeIds
+            }
+
             if let limit = limit {
                 params["limit"] = limit
             }
+
             if let offset = offset {
                 params["offset"] = offset
             }
+
             if let search = search {
                 params["search"] = search
             }
+
             if let type = type {
                 params["type"] = type
             }

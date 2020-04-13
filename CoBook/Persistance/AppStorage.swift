@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct FilterItemModel: Codable {
+struct FilterItemModel {
     var id: Int?
     var title: String?
     var isSelected: Bool = false
 }
 
 struct UserFilters: Codable {
-    var interests: [FilterItemModel] = []
-    var practicies: [FilterItemModel] = []
+    var interests: [Int] = []
+    var practicies: [Int] = []
 
 }
 

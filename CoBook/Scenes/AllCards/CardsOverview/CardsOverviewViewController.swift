@@ -44,6 +44,14 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     // MARK: Actions
 
     @IBAction func filterBarButtonTapped(_ sender: Any) {
+        let filterViewController: FilterViewController = self.storyboard!.initiateViewControllerFromType()
+        filterViewController.delegate = self
+
+        let navigationController = CustomNavigationController(rootViewController: filterViewController)
+        navigationController.modalPresentationStyle = .overFullScreen
+        navigationController.modalTransitionStyle = .crossDissolve
+
+        self.present(controller: navigationController, animated: true)
     }
 
     // MARK: - CardsOverviewView
@@ -200,6 +208,17 @@ extension CardsOverviewViewController: UISearchControllerDelegate {
         searchBar.setShowsCancelButton(false, animated: true)
         navigationItem.rightBarButtonItems = [filterBarButtonItem]
 
+    }
+
+
+}
+
+// MARK: - FilterViewControllerDelegate
+
+extension CardsOverviewViewController: FilterViewControllerDelegate {
+
+    func didFilterChanged(_ viewController: FilterViewController) {
+        presenter.refreshDataSource()
     }
 
 
