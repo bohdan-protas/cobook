@@ -20,6 +20,13 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         return view
     }()
 
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.Theme.blackMiddle
+        refreshControl.addTarget(self, action: #selector(refreshAllCardsData(_:)), for: .valueChanged)
+        return refreshControl
+    }()
+
     private var searchController: UISearchController!
     private var searchResultsTableController: CardsOverviewSearchResultTableViewController!
     private var searchBar: UISearchBar!
@@ -54,6 +61,10 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         self.present(controller: navigationController, animated: true)
     }
 
+    @objc private func refreshAllCardsData(_ sender: Any) {
+        presenter.refreshDataSource()
+    }
+
     // MARK: - CardsOverviewView
 
     func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator) {
@@ -65,6 +76,8 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
     func setup(sections: [Section<CardsOverview.Items>]) {
         dataSource?.sections = sections
+        itemsBarView.refresh()
+        refreshControl.endRefreshing()
         tableView.reloadData()
     }
 
@@ -111,6 +124,8 @@ private extension CardsOverviewViewController {
 
     func setupLayout() {
         tableView.delegate = self
+        tableView.refreshControl = refreshControl
+
 
         self.searchResultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
 
