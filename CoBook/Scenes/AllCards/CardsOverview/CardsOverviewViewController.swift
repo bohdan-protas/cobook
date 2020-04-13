@@ -44,7 +44,6 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     // MARK: Actions
 
     @IBAction func filterBarButtonTapped(_ sender: Any) {
-        Log.debug("filter action")
     }
 
     // MARK: - CardsOverviewView

@@ -29,12 +29,15 @@ class BaseFromNibView: UIView {
         fatalError("Method should be overriden")
     }
 
-    func setup() {
+    func setupLayout() {
     }
+
+
 }
 
 // MARK: - Private section
 fileprivate extension BaseFromNibView {
+
     func nibSetup() {
         contentView = loadViewFromNib()
         contentView.frame = bounds
@@ -43,7 +46,7 @@ fileprivate extension BaseFromNibView {
 
         addSubview(contentView)
 
-        setup()
+        setupLayout()
     }
 
     func loadViewFromNib() -> UIView {
@@ -51,4 +54,6 @@ fileprivate extension BaseFromNibView {
 
         return nibView
     }
+
+
 }

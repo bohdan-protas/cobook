@@ -35,7 +35,7 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_nav_filter" id="AW1-1H-hGn">
                             <color key="tintColor" name="Theme_Black-Middle"/>
                             <connections>
-                                <action selector="filterBarButtonTapped:" destination="ibO-Ug-qJc" id="f3m-u3-SyT"/>
+                                <segue destination="0LK-99-eEw" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="oaF-N5-EXT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -47,6 +47,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hy1-SE-9TN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1072.8" y="74.212893553223395"/>
+        </scene>
+        <!--Filter View Controller-->
+        <scene sceneID="oyL-Z6-sKl">
+            <objects>
+                <viewController id="ILx-Ge-kZz" customClass="FilterViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2PR-Np-hIy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o1l-PW-a0F">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.40071168664383561" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="o1l-PW-a0F" firstAttribute="top" secondItem="PKx-cW-vQZ" secondAttribute="top" id="6Lu-qr-r3X"/>
+                            <constraint firstItem="o1l-PW-a0F" firstAttribute="bottom" secondItem="PKx-cW-vQZ" secondAttribute="bottom" id="NaZ-mG-DbY"/>
+                            <constraint firstItem="o1l-PW-a0F" firstAttribute="leading" secondItem="PKx-cW-vQZ" secondAttribute="leading" id="Z4B-tS-Yaf"/>
+                            <constraint firstItem="o1l-PW-a0F" firstAttribute="trailing" secondItem="PKx-cW-vQZ" secondAttribute="trailing" id="dkW-AS-gpi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PKx-cW-vQZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Gz5-oh-u6U">
+                        <barButtonItem key="rightBarButtonItem" image="ic_nav_close" id="j8G-Oe-ldM">
+                            <color key="tintColor" name="Theme_Black-Middle"/>
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="ILx-Ge-kZz" id="gaD-js-Sic"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="o1l-PW-a0F" id="VYA-De-heB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BW2-Uo-QuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3192.8000000000002" y="72.413793103448285"/>
         </scene>
         <!--Cards Overview Search Result Table View Controller-->
         <scene sceneID="ReO-PE-G1W">
@@ -84,8 +122,27 @@
             </objects>
             <point key="canvasLocation" x="178" y="74"/>
         </scene>
+        <!--Custom Navigation Controller-->
+        <scene sceneID="aOd-Y9-aZR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0LK-99-eEw" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g8W-e7-Lb4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ILx-Ge-kZz" kind="relationship" relationship="rootViewController" id="gfC-CM-tWZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gac-oj-f6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2317.5999999999999" y="73.313343328335833"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="ic_nav_close" width="24" height="24"/>
         <image name="ic_nav_filter" width="24" height="24"/>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

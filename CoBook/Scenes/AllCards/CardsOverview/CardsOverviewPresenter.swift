@@ -80,7 +80,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             view?.setupSearch(sections: [])
             return
         }
-
+        
         pendingSearchResultWorkItem = DispatchWorkItem { [weak self] in
             APIClient.default.getCardsList(search: query) { [weak self] result in
                 guard let strongSelf = self else { return }
@@ -234,7 +234,7 @@ extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
         }
 
         if pendingCardPinRequestWorkItem != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250), execute: pendingCardPinRequestWorkItem!)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingCardPinRequestWorkItem!)
         }
     }
 

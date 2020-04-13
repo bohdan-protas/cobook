@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		9D8EE06CDCE7F5D068B3EBFF /* Pods_CoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */; };
+		B82079342444638200FCCC17 /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82079322444638200FCCC17 /* FilterItemTableViewCell.swift */; };
+		B82079352444638200FCCC17 /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82079332444638200FCCC17 /* FilterItemTableViewCell.xib */; };
+		B820793824446EE600FCCC17 /* FilterSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B820793724446EE600FCCC17 /* FilterSectionHeaderView.xib */; };
+		B820793A24446EFE00FCCC17 /* FilterSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B820793924446EFE00FCCC17 /* FilterSectionHeaderView.swift */; };
+		B820793D2444727F00FCCC17 /* CorneredEdgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B820793C2444727F00FCCC17 /* CorneredEdgeView.xib */; };
+		B820793F2444729500FCCC17 /* CorneredEdgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B820793E2444729400FCCC17 /* CorneredEdgeView.swift */; };
 		B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A5B241B6A690066700C /* InterestItemCollectionViewCell.swift */; };
 		B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */; };
 		B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A61241BCDDF0066700C /* InterestsEndpoint.swift */; };
@@ -48,6 +54,7 @@
 		B823C6212431F585002CFB02 /* UIImage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823C6202431F585002CFB02 /* UIImage + Extensions.swift */; };
 		B823DD7A244348D300A74495 /* SearchResultHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B823DD79244348D300A74495 /* SearchResultHeaderView.xib */; };
 		B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823DD7B244348F100A74495 /* SearchResultHeaderView.swift */; };
+		B823DD8524439B6F00A74495 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823DD8424439B6F00A74495 /* FilterViewController.swift */; };
 		B823E8A1243F173A00EE1830 /* StaticMapConfiguratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */; };
 		B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A2243F590200EE1830 /* PermissionService.swift */; };
 		B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */; };
@@ -231,6 +238,12 @@
 
 /* Begin PBXFileReference section */
 		5EAA0B323D42D9D8EC7633F5 /* Pods-CoBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.debug.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.debug.xcconfig"; sourceTree = "<group>"; };
+		B82079322444638200FCCC17 /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
+		B82079332444638200FCCC17 /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
+		B820793724446EE600FCCC17 /* FilterSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSectionHeaderView.xib; sourceTree = "<group>"; };
+		B820793924446EFE00FCCC17 /* FilterSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSectionHeaderView.swift; sourceTree = "<group>"; };
+		B820793C2444727F00FCCC17 /* CorneredEdgeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CorneredEdgeView.xib; sourceTree = "<group>"; };
+		B820793E2444729400FCCC17 /* CorneredEdgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorneredEdgeView.swift; sourceTree = "<group>"; };
 		B8212A5B241B6A690066700C /* InterestItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8212A61241BCDDF0066700C /* InterestsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsEndpoint.swift; sourceTree = "<group>"; };
@@ -271,6 +284,7 @@
 		B823C6202431F585002CFB02 /* UIImage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extensions.swift"; sourceTree = "<group>"; };
 		B823DD79244348D300A74495 /* SearchResultHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultHeaderView.xib; sourceTree = "<group>"; };
 		B823DD7B244348F100A74495 /* SearchResultHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultHeaderView.swift; sourceTree = "<group>"; };
+		B823DD8424439B6F00A74495 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapConfiguratorService.swift; sourceTree = "<group>"; };
 		B823E8A2243F590200EE1830 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateApiModel.swift; sourceTree = "<group>"; };
@@ -488,6 +502,42 @@
 			path = FlowLayouts;
 			sourceTree = "<group>";
 		};
+		B82079302444635900FCCC17 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B8207936244466BA00FCCC17 /* FilterSectionHeaderView */,
+				B82079312444635D00FCCC17 /* FilterItemTableViewCell */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		B82079312444635D00FCCC17 /* FilterItemTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B82079322444638200FCCC17 /* FilterItemTableViewCell.swift */,
+				B82079332444638200FCCC17 /* FilterItemTableViewCell.xib */,
+			);
+			path = FilterItemTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8207936244466BA00FCCC17 /* FilterSectionHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				B820793924446EFE00FCCC17 /* FilterSectionHeaderView.swift */,
+				B820793724446EE600FCCC17 /* FilterSectionHeaderView.xib */,
+			);
+			path = FilterSectionHeaderView;
+			sourceTree = "<group>";
+		};
+		B820793B2444725A00FCCC17 /* CorneredEndgeView */ = {
+			isa = PBXGroup;
+			children = (
+				B820793C2444727F00FCCC17 /* CorneredEdgeView.xib */,
+				B820793E2444729400FCCC17 /* CorneredEdgeView.swift */,
+			);
+			path = CorneredEndgeView;
+			sourceTree = "<group>";
+		};
 		B8212A5A241B6A400066700C /* InterestItemCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +703,7 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B820793B2444725A00FCCC17 /* CorneredEndgeView */,
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
 				B823DD78244348A600A74495 /* SearchResultHeaderView */,
 				B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */,
@@ -736,6 +787,15 @@
 			path = SearchResultHeaderView;
 			sourceTree = "<group>";
 		};
+		B823DD8224439B4500A74495 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				B82079302444635900FCCC17 /* view */,
+				B823DD8424439B6F00A74495 /* FilterViewController.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				B824924D243DE73E00A1AC39 /* AllCards.storyboard */,
+				B823DD8224439B4500A74495 /* Filter */,
 				B824924C243DE72500A1AC39 /* CardsOverview */,
 			);
 			path = AllCards;
@@ -1431,6 +1492,7 @@
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
 				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
 				B8AB840524283C7C0041B879 /* EditCardView.xib in Resources */,
+				B820793824446EE600FCCC17 /* FilterSectionHeaderView.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
 				B8559F7C243C7E0E00787349 /* AddressInfoTableViewCell.xib in Resources */,
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
@@ -1449,6 +1511,7 @@
 				B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */,
 				B8559F9A243CD6C600787349 /* HorizontalItemsBarView.xib in Resources */,
 				B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */,
+				B820793D2444727F00FCCC17 /* CorneredEdgeView.xib in Resources */,
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
 				B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
@@ -1461,6 +1524,7 @@
 				B82248E4242C106D00392D10 /* SectionHeaderTableViewCell.xib in Resources */,
 				B825741C23F5621500C8CBF8 /* SFProDisplay-Regular.ttf in Resources */,
 				B825741A23F5621500C8CBF8 /* SFProDisplay-Medium.ttf in Resources */,
+				B82079352444638200FCCC17 /* FilterItemTableViewCell.xib in Resources */,
 				B8AB840A2428411F0041B879 /* GetInTouchTableViewCell.xib in Resources */,
 				B825741D23F5621500C8CBF8 /* HelveticaNeueCyr-UltraLight.ttf in Resources */,
 				B825741B23F5621500C8CBF8 /* HelveticaNeueCyr-BoldItalic.ttf in Resources */,
@@ -1540,6 +1604,7 @@
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */,
+				B823DD8524439B6F00A74495 /* FilterViewController.swift in Sources */,
 				B8559F7B243C7E0E00787349 /* AddressInfoTableViewCell.swift in Sources */,
 				B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */,
 				B8559F9E243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift in Sources */,
@@ -1595,9 +1660,11 @@
 				B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */,
 				B8559F66243AD0B900787349 /* BusinessCardDetailsPresenter.swift in Sources */,
 				B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */,
+				B820793F2444729500FCCC17 /* CorneredEdgeView.swift in Sources */,
 				B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */,
 				B8559F70243B2BDF00787349 /* CardPreviewApiModel.swift in Sources */,
 				B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */,
+				B820793A24446EFE00FCCC17 /* FilterSectionHeaderView.swift in Sources */,
 				B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
@@ -1646,6 +1713,7 @@
 				B8559F8A243C843400787349 /* ExpandableDescriptionTableViewCell.swift in Sources */,
 				B8AB3F052422BDC000E06E53 /* FileDataApiModel.swift in Sources */,
 				B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */,
+				B82079342444638200FCCC17 /* FilterItemTableViewCell.swift in Sources */,
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */,

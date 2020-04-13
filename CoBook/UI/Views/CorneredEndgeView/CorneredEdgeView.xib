@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CorneredEdgeView" customModule="CoBook" customModuleProvider="target">
+            <connections>
+                <outlet property="corneredView" destination="c4w-Gb-bKe" id="vKp-d1-vpA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4w-Gb-bKe">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="c4w-Gb-bKe" secondAttribute="trailing" id="7fB-Bp-IUa"/>
+                <constraint firstItem="c4w-Gb-bKe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Lup-sV-8eE"/>
+                <constraint firstItem="c4w-Gb-bKe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZVZ-QI-AE5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="c4w-Gb-bKe" secondAttribute="bottom" id="ZeJ-7f-akA"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="140.57971014492756" y="-141.96428571428569"/>
+        </view>
+    </objects>
+</document>
