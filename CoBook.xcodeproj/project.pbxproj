@@ -703,8 +703,8 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B820793B2444725A00FCCC17 /* CorneredEndgeView */,
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
+				B820793B2444725A00FCCC17 /* CorneredEndgeView */,
 				B823DD78244348A600A74495 /* SearchResultHeaderView */,
 				B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */,
 				B8559F96243CD62700787349 /* HorizintalItemsBarView */,

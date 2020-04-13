@@ -8,6 +8,18 @@
 
 import Foundation
 
+struct FilterItemModel: Codable {
+    var id: Int?
+    var title: String?
+    var isSelected: Bool = false
+}
+
+struct UserFilters: Codable {
+    var interests: [FilterItemModel] = []
+    var practicies: [FilterItemModel] = []
+
+}
+
 // MARK: - AppStorage
 enum AppStorage {
 
@@ -20,6 +32,7 @@ enum AppStorage {
         case profile
         case firstAppLaunch
         case isNeedToUpdateAccountData
+        case filters
     }
 
     enum State {
@@ -42,6 +55,9 @@ enum AppStorage {
 
         @UserDefaultObjectStorageWrapper(key: Keys.profile.rawValue, defaultValue: ProfileApiModel())
         static var data: ProfileApiModel?
+
+        @UserDefaultObjectStorageWrapper(key: Keys.filters.rawValue, defaultValue: UserFilters())
+        static var Filters: UserFilters?
     }
 
     enum Auth {

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Section<Item> {
+    var accessoryIndex: Int? = nil
     var title: String? = nil
     var items: [Item]
 }
