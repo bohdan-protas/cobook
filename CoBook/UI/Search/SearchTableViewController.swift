@@ -71,6 +71,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
 }
 
 // MARK: - UITableViewDelegate
+
 extension SearchTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -83,6 +84,7 @@ extension SearchTableViewController {
 }
 
 // MARK: - UISearchBarDelegate
+
 extension SearchTableViewController: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

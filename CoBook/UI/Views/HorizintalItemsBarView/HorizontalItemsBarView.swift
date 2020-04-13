@@ -25,7 +25,7 @@ class HorizontalItemsBarView: BaseFromNibView {
     var selectionIndicatorView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
-        //view.layer.cornerRadius = 2
+        view.layer.cornerRadius = 1
         view.backgroundColor = UIColor.Theme.green
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -73,6 +73,17 @@ class HorizontalItemsBarView: BaseFromNibView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func refresh() {
+        selectionIndicatorCenterX?.constant = 0
+
+        var width = dataSource.first?.title?.width(withConstrainedHeight: self.collectionView.frame.height, font: UIFont.SFProDisplay_Regular(size: 14)) ?? 0
+        width += 20
+
+        selectionIndicatorWidth?.constant = width
+
+        self.collectionView.layoutIfNeeded()
     }
 
 }

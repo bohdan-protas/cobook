@@ -25,10 +25,8 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-
         self.viewControllers = [allCardsController, accountController]
-        self.selectedIndex = 0
+        self.selectedViewController = allCardsController
     }
     
 
