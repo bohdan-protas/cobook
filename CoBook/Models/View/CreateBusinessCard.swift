@@ -35,7 +35,10 @@ enum CreateBusinessCard {
         var cardId: Int?
 
         var avatarImage: FileDataApiModel?
+        var avatarImageData: Data?
+
         var backgroudImage: FileDataApiModel?
+        var backgroudImageData: Data?
 
         var companyName: String?
         var practiseType: PracticeModel?

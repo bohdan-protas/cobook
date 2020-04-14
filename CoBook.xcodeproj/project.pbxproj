@@ -71,6 +71,7 @@
 		B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B824924D243DE73E00A1AC39 /* AllCards.storyboard */; };
 		B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */; };
 		B8249252243E26A300A1AC39 /* CardsOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249251243E26A300A1AC39 /* CardsOverview.swift */; };
+		B824AD802445FAE700410C23 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824AD7F2445FAE700410C23 /* ImagePicker.swift */; };
 		B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */; };
 		B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */; };
 		B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */; };
@@ -303,6 +304,7 @@
 		B824924D243DE73E00A1AC39 /* AllCards.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AllCards.storyboard; sourceTree = "<group>"; };
 		B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewNavigationController.swift; sourceTree = "<group>"; };
 		B8249251243E26A300A1AC39 /* CardsOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverview.swift; sourceTree = "<group>"; };
+		B824AD7F2445FAE700410C23 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackgroundManagmentTableViewCell.swift; sourceTree = "<group>"; };
 		B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardBackgroundManagmentTableViewCell.xib; sourceTree = "<group>"; };
 		B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSourceConfigurator.swift; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 				B8C5C8FB2432AAA0004A3F30 /* OpenGraphFetcher.swift */,
 				B823E8A0243F173A00EE1830 /* StaticMapConfiguratorService.swift */,
 				B823E8A2243F590200EE1830 /* PermissionService.swift */,
+				B824AD7F2445FAE700410C23 /* ImagePicker.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1649,6 +1652,7 @@
 				B8DE5E512419227A00F4F60B /* UITableView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */,
+				B824AD802445FAE700410C23 /* ImagePicker.swift in Sources */,
 				B8255A26243A58A400C4169D /* UsersEndpoint.swift in Sources */,
 				B831C55B24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,

@@ -25,7 +25,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Used for record video or take photos for your posts and profile.</string>
+	<string>Used for taking your picture</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need your location to find the near cards</string>
 	<key>NSLocationAlwaysUsageDescription</key>

@@ -40,10 +40,12 @@ struct PlaceModel {
 struct CardAvatarManagmentCellModel {
     let sourceType: CardAvatarPhotoManagmentTableViewCell.SourceType
     let imagePath: String?
+    var imageData: Data?
 }
 
 struct BackgroundManagmentImageCellModel {
     var imagePath: String?
+    var imageData: Data?
 }
 
 struct CardPreviewModel: Equatable {

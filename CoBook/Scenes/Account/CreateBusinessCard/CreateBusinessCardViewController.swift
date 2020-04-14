@@ -8,43 +8,39 @@
 
 import UIKit
 import GooglePlaces
+import CropViewController
 
-private enum Defaults {
+fileprivate enum Layout {
     static let estimatedRowHeight: CGFloat = 44
     static let footerHeight: CGFloat = 124
 }
 
 class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardView {
 
-    // MARK: Properties
     @IBOutlet var tableView: UITableView!
 
-    private lazy var imagePickerController: UIImagePickerController = {
-         let controller = UIImagePickerController()
-         controller.delegate = self
-         controller.allowsEditing = true
-         controller.sourceType = .photoLibrary
-         controller.modalPresentationStyle = .overFullScreen
-         return controller
-     }()
-
     private lazy var cardSaveView: CardSaveView = {
-        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.onSaveTapped = { [weak self] in
             self?.presenter.onCreationAction()
         }
         return view
     }()
 
+    private lazy var imagePicker: ImagePicker = {
+        let imagePicker = ImagePicker(presentationController: self, allowsEditing: true)
+        return imagePicker
+    }()
+
     var presenter = CreateBusinessCardPresenter()
-
     private var placeCompletion: ((GMSPlace) -> Void)?
-    private var imagePickerCompletion: ((UIImage) -> Void)?
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupLayout()
         presenter.attachView(self)
         presenter.onViewDidLoad()
     }
@@ -53,12 +49,10 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         presenter.detachView()
     }
 
-    // MARK: CreateBusinessCardView
-    func setupLayout() {
-        self.navigationItem.title = "Створення бізнес візитки"
+    // MARK: - CreateBusinessCardView
 
-        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
-        tableView.delegate = self
+    func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?) {
+        tableView.dataSource = dataSource
     }
 
     func setupSaveCardView() {
@@ -74,17 +68,11 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         placeCompletion = completion
 
         let autocompleteViewController = GMSAutocompleteViewController()
-        autocompleteViewController.modalPresentationStyle = .overFullScreen
+        autocompleteViewController.modalPresentationStyle = .currentContext
         autocompleteViewController.autocompleteFilter = filter
         autocompleteViewController.delegate = self
 
         present(autocompleteViewController, animated: true, completion: nil)
-    }
-
-    func showPickerController(completion: ((UIImage) -> Void)?) {
-        view.endEditing(true)
-        imagePickerCompletion = completion
-        present(imagePickerController, animated: true, completion: nil)
     }
 
     func showSearchEmployersControlelr() {
@@ -96,12 +84,63 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
 
 }
 
-// MARK: Privates
+// MARK: - Privates
+
 private extension CreateBusinessCardViewController {
+
+    func setupLayout() {
+        self.navigationItem.title = "Створення бізнес візитки"
+
+        tableView.estimatedRowHeight = Layout.estimatedRowHeight
+        tableView.delegate = self
+    }
+    
+
+}
+
+// MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
+
+extension CreateBusinessCardViewController: CardAvatarPhotoManagmentTableViewCellDelegate {
+
+    func didChangeAvatarPhoto(_ view: CardAvatarPhotoManagmentTableViewCell) {
+        self.view.endEditing(true)
+
+        imagePicker.cropViewControllerAspectRatioPreset = .presetSquare
+
+        self.imagePicker.onImagePicked = { image in
+            view.set(image: image)
+            self.presenter.uploadCompanyAvatar(image: image)
+        }
+
+        self.imagePicker.present(dismissView: view.avatarImageView)
+    }
+
+
+}
+
+// MARK: - CardBackgroundManagmentTableViewCellDelegate
+
+extension CreateBusinessCardViewController: CardBackgroundManagmentTableViewCellDelegate {
+
+    func didChangeBackgroundPhoto(_ view: CardBackgroundManagmentTableViewCell) {
+        self.view.endEditing(true)
+
+        imagePicker.cropViewControllerAspectRatioPreset = .presetCustom
+        imagePicker.cropViewControllerCustomAspectRatio = .init(width: 800, height: 260)
+
+        self.imagePicker.onImagePicked = { image in
+            view.set(image: image)
+            self.presenter.uploadCompanyBg(image: image)
+        }
+
+        self.imagePicker.present(dismissView: view.bgImageView)
+    }
+
 
 }
 
 // MARK: - SearchTableViewControllerDelegate
+
 extension CreateBusinessCardViewController: SearchTableViewControllerDelegate {
 
     func searchTableViewController(_ controller: SearchTableViewController, didSelected item: EmployeeModel?) {
@@ -112,6 +151,7 @@ extension CreateBusinessCardViewController: SearchTableViewControllerDelegate {
 }
 
 // MARK: - UITableViewDelegate
+
 extension CreateBusinessCardViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -125,21 +165,8 @@ extension CreateBusinessCardViewController: UITableViewDelegate {
 
 }
 
-// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
-extension CreateBusinessCardViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-
-        guard let image = info[.editedImage] as? UIImage else { return }
-        imagePickerCompletion?(image)
-        imagePickerCompletion = nil
-    }
-
-
-}
-
 // MARK: - GMSAutocompleteViewControllerDelegate
+
 extension CreateBusinessCardViewController: GMSAutocompleteViewControllerDelegate {
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -161,3 +188,5 @@ extension CreateBusinessCardViewController: GMSAutocompleteViewControllerDelegat
 
 
 }
+
+

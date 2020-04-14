@@ -29,6 +29,7 @@ enum CreatePersonalCard {
 
     struct DetailsModel {
         var avatarImage: FileDataApiModel?
+        var avatarImageData: Data?
 
         var position: String?
         var practiseType: PracticeModel?

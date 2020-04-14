@@ -10,15 +10,16 @@ import UIKit
 import GooglePlaces
 import Alamofire
 
-protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, NavigableView {
+protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
+    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?)
+
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()
-    func presentPickerController() 
 }
 
-private enum Defaults {
+fileprivate enum Defaults {
     static let imageCompressionQuality: CGFloat = 0.1
 }
 
@@ -26,9 +27,8 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     // MARK: - Properties
 
-    private weak var view: CreatePersonalCardView?
+    weak var view: CreatePersonalCardView?
     private var viewDataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?
-    private var viewDataSourceConfigurator: CreatePersonalCardDataSourceConfigurator?
 
     var personalCardDetailsModel: CreatePersonalCard.DetailsModel {
         didSet {
@@ -58,13 +58,13 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: CreatePersonalCardView) {
         self.view = view
-        self.viewDataSourceConfigurator = CreatePersonalCardDataSourceConfigurator(presenter: self)
-        self.viewDataSource = TableDataSource(tableView: view.tableView, configurator: viewDataSourceConfigurator)
+
+        self.viewDataSource = TableDataSource(tableView: view.tableView, configurator: dataSourceConfigurator)
+        view.set(dataSource: viewDataSource)
     }
 
     func detachView() {
         self.view = nil
-        self.viewDataSource = nil
         self.viewDataSource = nil
     }
 
@@ -92,21 +92,35 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
         }
     }
 
-    func userImagePicked(_ image: UIImage?) {
-        let selectedUserImageData = image?.jpegData(compressionQuality: Defaults.imageCompressionQuality)
-        self.uploadUserImage(data: selectedUserImageData)
+    func uploadUserImage(image: UIImage?) {
+        guard let imageData = image?.jpegData(compressionQuality: Defaults.imageCompressionQuality) else {
+            Log.error("Cannot find selected image data!")
+            view?.errorAlert(message: "Помилка завантаження фото")
+            return
+        }
+
+        APIClient.default.upload(imageData: imageData) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case let .success(response):
+                strongSelf.personalCardDetailsModel.avatarImage = response
+                strongSelf.personalCardDetailsModel.avatarImageData = imageData
+            case let .failure(error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
 
 }
 
-// MARK: - CreatePersonalCardPresenter
+// MARK: - Privates
 
 private extension CreatePersonalCardPresenter {
-    
+
     func updateViewDataSource() {
         let photosSection = Section<CreatePersonalCard.Cell>(items: [
-            .avatarManagment(model: CardAvatarManagmentCellModel(sourceType: .personalCard, imagePath: personalCardDetailsModel.avatarImage?.sourceUrl))
+            .avatarManagment(model: CardAvatarManagmentCellModel(sourceType: .personalCard, imagePath: personalCardDetailsModel.avatarImage?.sourceUrl, imageData: personalCardDetailsModel.avatarImageData))
         ])
 
         let activitySection = Section<CreatePersonalCard.Cell>(items: [
@@ -136,13 +150,6 @@ private extension CreatePersonalCardPresenter {
 
         viewDataSource?.sections = [photosSection, activitySection, contactsSection, interestsSection]
     }
-
-
-}
-
-// MARK: - Use cases
-
-private extension CreatePersonalCardPresenter {
 
     func setupDataSource() {
         let group = DispatchGroup()
@@ -210,26 +217,6 @@ private extension CreatePersonalCardPresenter {
         }
     }
 
-    func uploadUserImage(data: Data?) {
-        guard let imageData = data else {
-            Log.error("Cannot find selected image data!")
-            return
-        }
-
-        view?.startLoading()
-        APIClient.default.upload(imageData: imageData) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            strongSelf.view?.stopLoading()
-
-            switch result {
-            case let .success(response):
-                strongSelf.personalCardDetailsModel.avatarImage = response
-                strongSelf.view?.tableView.reloadData()
-            case let .failure(error):
-                strongSelf.view?.errorAlert(message: error.localizedDescription)
-            }
-        }
-    }
 
 }
 
@@ -366,21 +353,6 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, Socials
 
         ]
         view?.actionSheetAlert(title: value.title, message: nil, actions: actions)
-    }
-
-
-}
-
-// MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
-
-extension CreatePersonalCardPresenter: CardAvatarPhotoManagmentTableViewCellDelegate {
-
-    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didSelectAction sender: UIButton) {
-        self.view?.presentPickerController()
-    }
-
-    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didChangeAction sender: UIButton) {
-        self.view?.presentPickerController()
     }
 
 
