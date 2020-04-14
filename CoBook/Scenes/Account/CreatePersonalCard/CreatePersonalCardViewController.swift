@@ -9,46 +9,46 @@
 import UIKit
 import GooglePlaces
 
-class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
+fileprivate enum Layout {
+    static let estimatedRowHeight: CGFloat = 44
+    static let footerHeight: CGFloat = 124
+}
 
-    enum Defaults {
-        static let estimatedRowHeight: CGFloat = 44
-        static let footerHeight: CGFloat = 124
-    }
+class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
 
     @IBOutlet var tableView: UITableView!
 
-    private var placeCompletion: ((GMSPlace) -> Void)?
-    var presenter = CreatePersonalCardPresenter()
-
-    private lazy var imagePickerController: UIImagePickerController = {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.allowsEditing = true
-        controller.sourceType = .photoLibrary
-        controller.modalPresentationStyle = .overFullScreen
-        return controller
-    }()
-
     private lazy var cardSaveView: CardSaveView = {
-        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.onSaveTapped = { [weak self] in
             self?.presenter.createPerconalCard()
         }
         return view
     }()
 
+    private lazy var imagePicker: ImagePicker = {
+        let imagePicker = ImagePicker(presentationController: self, allowsEditing: true)
+        return imagePicker
+    }()
+
+    var presenter = CreatePersonalCardPresenter()
+    private var placeCompletion: ((GMSPlace) -> Void)?
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupLayout()
-
         presenter.attachView(self)
         presenter.onViewDidLoad()
     }
 
     // MARK: - CreatePersonalCardView
+
+    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?) {
+        tableView.dataSource = dataSource
+    }
 
     func setupSaveCardView() {
         tableView.tableFooterView = cardSaveView
@@ -70,10 +70,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         cardSaveView.saveButton.isEnabled = isEnabled
     }
 
-    func presentPickerController() {
-        present(imagePickerController, animated: true, completion: nil)
-    }
-
 
 }
 
@@ -84,22 +80,29 @@ private extension CreatePersonalCardViewController {
     func setupLayout() {
         self.navigationItem.title = "Створення персональної візитки"
 
-        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
+        tableView.estimatedRowHeight = Layout.estimatedRowHeight
         tableView.delegate = self
     }
 
 
 }
 
-// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
+// MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
 
-extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension CreatePersonalCardViewController: CardAvatarPhotoManagmentTableViewCellDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
+    func didChangeAvatarPhoto(_ view: CardAvatarPhotoManagmentTableViewCell) {
+        self.view.endEditing(true)
 
-        guard let image = info[.editedImage] as? UIImage else { return }
-        presenter.userImagePicked(image)
+        imagePicker.cropViewControllerAspectRatioPreset = .presetSquare
+
+        self.imagePicker.onImagePicked = { image in
+            view.set(image: image)
+            self.presenter.uploadUserImage(image: image)
+        }
+
+        self.imagePicker.present(dismissView: view.avatarImageView)
+
     }
 
 

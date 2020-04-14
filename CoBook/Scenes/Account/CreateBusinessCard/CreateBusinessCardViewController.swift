@@ -19,14 +19,17 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
 
     @IBOutlet var tableView: UITableView!
 
-    var imagePicker: ImagePicker!
-
     private lazy var cardSaveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.onSaveTapped = { [weak self] in
             self?.presenter.onCreationAction()
         }
         return view
+    }()
+
+    private lazy var imagePicker: ImagePicker = {
+        let imagePicker = ImagePicker(presentationController: self, allowsEditing: true)
+        return imagePicker
     }()
 
     var presenter = CreateBusinessCardPresenter()
@@ -40,7 +43,6 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         setupLayout()
         presenter.attachView(self)
         presenter.onViewDidLoad()
-
     }
 
     deinit {
@@ -103,7 +105,6 @@ extension CreateBusinessCardViewController: CardAvatarPhotoManagmentTableViewCel
     func didChangeAvatarPhoto(_ view: CardAvatarPhotoManagmentTableViewCell) {
         self.view.endEditing(true)
 
-        self.imagePicker = ImagePicker(presentationController: self, allowsEditing: true)
         imagePicker.cropViewControllerAspectRatioPreset = .presetSquare
 
         self.imagePicker.onImagePicked = { image in
@@ -124,7 +125,6 @@ extension CreateBusinessCardViewController: CardBackgroundManagmentTableViewCell
     func didChangeBackgroundPhoto(_ view: CardBackgroundManagmentTableViewCell) {
         self.view.endEditing(true)
 
-        self.imagePicker = ImagePicker(presentationController: self, allowsEditing: true)
         imagePicker.cropViewControllerAspectRatioPreset = .presetCustom
         imagePicker.cropViewControllerCustomAspectRatio = .init(width: 800, height: 260)
 
