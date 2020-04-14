@@ -86,7 +86,8 @@ struct CreatePersonalCardDataSourceConfigurator: CellConfiguratorType {
 
         avatarManagmentConfigurator = CellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
             cell.delegate = presenter
-            cell.fill(sourceType: model.sourceType, imagePath: model.imagePath)
+            cell.set(sourceType: model.sourceType)
+            cell.set(imagePath: model.imagePath)
             return cell
         }
     }

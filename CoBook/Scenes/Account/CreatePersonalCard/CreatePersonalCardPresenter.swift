@@ -374,12 +374,8 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, Socials
 // MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
 
 extension CreatePersonalCardPresenter: CardAvatarPhotoManagmentTableViewCellDelegate {
-
-    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didSelectAction sender: UIButton) {
-        self.view?.presentPickerController()
-    }
-
-    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didChangeAction sender: UIButton) {
+    
+    func didChangeAvatarPhoto(_ view: CardAvatarPhotoManagmentTableViewCell) {
         self.view?.presentPickerController()
     }
 

@@ -10,174 +10,200 @@ import UIKit
 
 struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
 
-    // MARK: Properties
-    weak var presenter: CreateBusinessCardPresenter?
+    var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
+    var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
+    var actionFieldConfigurator: CellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
+    var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
+    var socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>?
+    var interestsListConfigurator: CellConfigurator<Void?, InterestsSelectionTableViewCell>?
+    var avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
+    var backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>?
+    var employersSearchCellConfigurator: CellConfigurator<Void?, SearchTableViewCell>?
+    var employersListCellConfigurator: CellConfigurator<Void?, EmployersPreviewHorizontalListTableViewCell>?
 
-    let sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>
-    let sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>
-    let textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>
-    let actionFieldConfigurator: CellConfigurator<ActionFieldModel, TextFieldTableViewCell>
-    let textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>
-    let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
-    let interestsListConfigurator: CellConfigurator<Void?, InterestsSelectionTableViewCell>
-    let avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>
-    let backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>
-    let employersSearchCellConfigurator: CellConfigurator<Void?, SearchTableViewCell>
-    let employersListCellConfigurator: CellConfigurator<Void?, EmployersPreviewHorizontalListTableViewCell>
-
-    // MARK: Initializer
-    init(presenter: CreateBusinessCardPresenter) {
-        self.presenter = presenter
-
-        // MARK: Cell configurators
-        sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
-            cell.titleLabel.text = model
-            return cell
-        }
-
-        sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
-            return cell
-        }
-
-        textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
-            cell.delegate = presenter
-            cell.textField.text = model.text
-            cell.textKeyPath = model.associatedKeyPath
-            cell.textField.placeholder = model.placeholder
-            cell.textField.keyboardType = model.keyboardType
-            return cell
-        }
-
-        textViewConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
-            cell.delegate = presenter
-            cell.textView.text = model.text
-            cell.textView.placeholder = model.placeholder
-            cell.textKeyPath = model.associatedKeyPath
-            return cell
-        }
-
-        actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
-            cell.delegate = presenter
-            cell.dataSource = presenter
-            cell.textField.text = model.text
-            cell.textField.placeholder = model.placeholder
-            cell.actionIdentifier = model.actionTypeId
-
-            if let action = CreateBusinessCard.ActionType(rawValue: model.actionTypeId ?? "") {
-                switch action {
-                case .practice:
-                    cell.textField.inputView = cell.pickerView
-                default:
-                    cell.actionControlView.isUserInteractionEnabled = true
-                    cell.textField.isUserInteractionEnabled = false
-                }
-            }
-            return cell
-        }
-
-        socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
-            cell.delegate = presenter
-            cell.dataSource = presenter
-            cell.isEditable = true
-            return cell
-        }
-
-        interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> InterestsSelectionTableViewCell in
-            cell.dataSource = presenter
-            return cell
-        }
-
-        avatarManagmentConfigurator = CellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
-            cell.delegate = presenter
-            cell.fill(sourceType: model.sourceType, imagePath: model.imagePath)
-            return cell
-        }
-
-        backgroundImageManagmentConfigurator = CellConfigurator { (cell, model: BackgroundManagmentImageCellModel, tableView, indexPath) -> CardBackgroundManagmentTableViewCell in
-            cell.delegate = presenter
-            cell.set(imagePath: model.imagePath)
-            return cell
-        }
-
-        employersSearchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SearchTableViewCell in
-            cell.delegate = presenter
-            return cell
-        }
-
-        employersListCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> EmployersPreviewHorizontalListTableViewCell in
-            cell.dataSource = presenter
-            cell.delegate = presenter
-            cell.collectionView.reloadData()
-            return cell
-        }
-
-
-    }
+    // MARK: - CellConfiguratorType
 
     func reuseIdentifier(for item: CreateBusinessCard.Cell, indexPath: IndexPath) -> String {
         switch item {
         case .textField, .actionField:
-            return textFieldConfigurator.reuseIdentifier
+            return textFieldConfigurator?.reuseIdentifier ?? ""
         case .textView:
-            return textViewConfigurator.reuseIdentifier
+            return textViewConfigurator?.reuseIdentifier ?? ""
         case .title:
-            return sectionTitleConfigurator.reuseIdentifier
+            return sectionTitleConfigurator?.reuseIdentifier ?? ""
         case .sectionHeader:
-            return sectionHeaderConfigurator.reuseIdentifier
+            return sectionHeaderConfigurator?.reuseIdentifier ?? ""
         case .socials:
-            return socialListConfigurator.reuseIdentifier
+            return socialListConfigurator?.reuseIdentifier ?? ""
         case .interests:
-            return interestsListConfigurator.reuseIdentifier
+            return interestsListConfigurator?.reuseIdentifier ?? ""
         case .avatarManagment:
-            return avatarManagmentConfigurator.reuseIdentifier
+            return avatarManagmentConfigurator?.reuseIdentifier ?? ""
         case .backgroundImageManagment:
-            return backgroundImageManagmentConfigurator.reuseIdentifier
+            return backgroundImageManagmentConfigurator?.reuseIdentifier ?? ""
         case .employersSearch:
-            return employersSearchCellConfigurator.reuseIdentifier
+            return employersSearchCellConfigurator?.reuseIdentifier ?? ""
         case .employersList:
-            return employersListCellConfigurator.reuseIdentifier
+            return employersListCellConfigurator?.reuseIdentifier ?? ""
         }
     }
 
     func configuredCell(for item: CreateBusinessCard.Cell, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         switch item {
         case .textField(let model):
-            return textFieldConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            return textFieldConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .textView(let model):
-            return textViewConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            return textViewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .actionField(let model):
-            return actionFieldConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            return actionFieldConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .title(let model):
-            return sectionTitleConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            return sectionTitleConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .sectionHeader:
-            return sectionHeaderConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+            return sectionHeaderConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .socials:
-            return socialListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+            return socialListConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .interests:
-            return interestsListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+            return interestsListConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .avatarManagment(let model):
-            return avatarManagmentConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            return avatarManagmentConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .backgroundImageManagment(let model):
-            return backgroundImageManagmentConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            return backgroundImageManagmentConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .employersSearch:
-            return employersSearchCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+            return employersSearchCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .employersList:
-            return employersListCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+            return employersListCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
     func registerCells(in tableView: UITableView) {
-        sectionTitleConfigurator.registerCells(in: tableView)
-        sectionHeaderConfigurator.registerCells(in: tableView)
-        textFieldConfigurator.registerCells(in: tableView)
-        actionFieldConfigurator.registerCells(in: tableView)
-        textViewConfigurator.registerCells(in: tableView)
-        socialListConfigurator.registerCells(in: tableView)
-        interestsListConfigurator.registerCells(in: tableView)
-        avatarManagmentConfigurator.registerCells(in: tableView)
-        backgroundImageManagmentConfigurator.registerCells(in: tableView)
-        employersSearchCellConfigurator.registerCells(in: tableView)
-        employersListCellConfigurator.registerCells(in: tableView)
+        sectionTitleConfigurator?.registerCells(in: tableView)
+        sectionHeaderConfigurator?.registerCells(in: tableView)
+        textFieldConfigurator?.registerCells(in: tableView)
+        actionFieldConfigurator?.registerCells(in: tableView)
+        textViewConfigurator?.registerCells(in: tableView)
+        socialListConfigurator?.registerCells(in: tableView)
+        interestsListConfigurator?.registerCells(in: tableView)
+        avatarManagmentConfigurator?.registerCells(in: tableView)
+        backgroundImageManagmentConfigurator?.registerCells(in: tableView)
+        employersSearchCellConfigurator?.registerCells(in: tableView)
+        employersListCellConfigurator?.registerCells(in: tableView)
+    }
+
+
+}
+
+extension CreateBusinessCardPresenter {
+
+    var dataSourceConfigurator: CreateBusinessCardDataSourceConfigurator {
+        get {
+
+            var viewDataSourceConfigurator = CreateBusinessCardDataSourceConfigurator()
+
+            // sectionTitleConfigurator
+            viewDataSourceConfigurator.sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+                cell.titleLabel.text = model
+                return cell
+            }
+
+            // sectionHeaderConfigurator
+            viewDataSourceConfigurator.sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+                return cell
+            }
+
+            // textFieldConfigurator
+            viewDataSourceConfigurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+                cell.delegate = self
+                cell.textField.text = model.text
+                cell.textKeyPath = model.associatedKeyPath
+                cell.textField.placeholder = model.placeholder
+                cell.textField.keyboardType = model.keyboardType
+                return cell
+            }
+
+            // textViewConfigurator
+            viewDataSourceConfigurator.textViewConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
+                cell.delegate = self
+                cell.textView.text = model.text
+                cell.textView.placeholder = model.placeholder
+                cell.textKeyPath = model.associatedKeyPath
+                return cell
+            }
+
+            // actionFieldConfigurator
+            viewDataSourceConfigurator.actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+                cell.delegate = self
+                cell.dataSource = self
+                cell.textField.text = model.text
+                cell.textField.placeholder = model.placeholder
+                cell.actionIdentifier = model.actionTypeId
+
+                if let action = CreateBusinessCard.ActionType(rawValue: model.actionTypeId ?? "") {
+                    switch action {
+                    case .practice:
+                        cell.textField.inputView = cell.pickerView
+                    default:
+                        cell.actionControlView.isUserInteractionEnabled = true
+                        cell.textField.isUserInteractionEnabled = false
+                    }
+                }
+                return cell
+            }
+
+            // socialListConfigurator
+            viewDataSourceConfigurator.socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
+                cell.delegate = self
+                cell.dataSource = self
+                cell.isEditable = true
+                return cell
+            }
+
+            // interestsListConfigurator
+            viewDataSourceConfigurator.interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> InterestsSelectionTableViewCell in
+                cell.dataSource = self
+                return cell
+            }
+
+            // avatarManagmentConfigurator
+            viewDataSourceConfigurator.avatarManagmentConfigurator = CellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
+                cell.delegate = self.view
+                cell.set(sourceType: .businessCard)
+                if let imageData = model.imageData, let image = UIImage(data: imageData) {
+                    cell.set(image: image)
+                } else {
+                    cell.set(imagePath: model.imagePath)
+                }
+
+                return cell
+            }
+
+            // backgroundImageManagmentConfigurator
+            viewDataSourceConfigurator.backgroundImageManagmentConfigurator = CellConfigurator { (cell, model: BackgroundManagmentImageCellModel, tableView, indexPath) -> CardBackgroundManagmentTableViewCell in
+                cell.delegate = self.view
+                if let imageData = model.imageData, let image = UIImage(data: imageData) {
+                    cell.set(image: image)
+                } else {
+                    cell.set(imagePath: model.imagePath)
+                }
+                return cell
+            }
+
+            // employersSearchCellConfigurator
+            viewDataSourceConfigurator.employersSearchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SearchTableViewCell in
+                cell.delegate = self
+                return cell
+            }
+
+            // employersListCellConfigurator
+            viewDataSourceConfigurator.employersListCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> EmployersPreviewHorizontalListTableViewCell in
+                cell.dataSource = self
+                cell.delegate = self
+                cell.collectionView.reloadData()
+                return cell
+            }
+
+            return viewDataSourceConfigurator
+        }
     }
 }
 

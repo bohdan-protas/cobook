@@ -16,10 +16,8 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         static let footerHeight: CGFloat = 124
     }
 
-    // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
 
-    // MARK: Properties
     private var placeCompletion: ((GMSPlace) -> Void)?
     var presenter = CreatePersonalCardPresenter()
 
@@ -40,7 +38,8 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         return view
     }()
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -48,6 +47,8 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         presenter.attachView(self)
         presenter.onViewDidLoad()
     }
+
+    // MARK: - CreatePersonalCardView
 
     func setupSaveCardView() {
         tableView.tableFooterView = cardSaveView
@@ -73,12 +74,11 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         present(imagePickerController, animated: true, completion: nil)
     }
 
-    
-
 
 }
 
-// MARK: Privates
+// MARK: - Privates
+
 private extension CreatePersonalCardViewController {
 
     func setupLayout() {
@@ -92,6 +92,7 @@ private extension CreatePersonalCardViewController {
 }
 
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
+
 extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -105,6 +106,7 @@ extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UI
 }
 
 // MARK: - UITableViewDelegate
+
 extension CreatePersonalCardViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -119,6 +121,7 @@ extension CreatePersonalCardViewController: UITableViewDelegate {
 }
 
 // MARK: - GMSAutocompleteViewControllerDelegate
+
 extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegate {
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
