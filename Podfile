@@ -10,4 +10,5 @@ target 'CoBook' do
   pod 'GooglePlaces'
   pod 'GoogleMaps'
   pod 'SwiftSoup'
+  pod 'CropViewController'
 end
