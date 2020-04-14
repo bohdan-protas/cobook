@@ -27,7 +27,11 @@ open class ImagePicker: NSObject {
     /// Flag that define if need to use crop controller
     var allowsEditing: Bool = false
 
-    var cropViewControllerAspectRatioPreset: CropViewControllerAspectRatioPreset?
+    var cropViewControllerAspectRatioPreset: CropViewControllerAspectRatioPreset? {
+        didSet {
+            cropViewControllerCustomAspectRatio = nil
+        }
+    }
     var cropViewControllerCustomAspectRatio: CGSize?
 
     /// Callback fired when image is selected and cropped if needed

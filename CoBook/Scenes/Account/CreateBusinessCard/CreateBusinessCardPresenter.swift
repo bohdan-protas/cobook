@@ -85,7 +85,6 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
-        view?.setupSaveCardView()
         setupDataSource()
     }
 
@@ -325,6 +324,7 @@ private extension CreateBusinessCardPresenter {
                 self?.view?.errorAlert(message: errors.first?.localizedDescription)
             }
 
+            strongSelf.view?.setupSaveCardView()
             strongSelf.view?.tableView.reloadData()
         }
     }
