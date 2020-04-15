@@ -43,3 +43,54 @@ class TableDataSource<Configurator: CellConfiguratorType>: NSObject, UITableView
 
 
 }
+
+class DataSource<Configurator: CellConfiguratorType>: NSObject, UITableViewDataSource {
+
+    var sections: [Section<Configurator.Item>] = []
+    var configurator: Configurator?
+
+    init(sections: [Section<Configurator.Item>] = [], configurator: Configurator? = nil) {
+        self.sections = sections
+        self.configurator = configurator
+        super.init()
+    }
+
+    func connect(to tableView: UITableView) {
+        tableView.dataSource = self
+        configurator?.registerCells(in: tableView)
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[safe: section]?.items.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let item = sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+            return UITableViewCell()
+        }
+        let configuredCell = configurator?.configuredCell(for: item, tableView: tableView, indexPath: indexPath)
+        return configuredCell ?? UITableViewCell()
+    }
+
+
+}
+
+extension DataSource {
+
+    subscript(cardsOverviewHeader: CardsOverview.SectionAccessoryIndex) -> Section<Configurator.Item> {
+        get {
+            return sections[cardsOverviewHeader.rawValue]
+        }
+
+        set {
+            sections[cardsOverviewHeader.rawValue] = newValue
+        }
+
+
+    }
+
+}

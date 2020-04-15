@@ -661,9 +661,9 @@
 		B823AB6A23F156D600DE13EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B8249243243DE62600A1AC39 /* AllCards */,
 				B826B0EB23F442AC009041DD /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
+				B8249243243DE62600A1AC39 /* AllCards */,
 				B82200B8240FB87A00A17D2C /* Account */,
 			);
 			path = Scenes;
@@ -815,8 +815,8 @@
 			isa = PBXGroup;
 			children = (
 				B824924D243DE73E00A1AC39 /* AllCards.storyboard */,
-				B823DD8224439B4500A74495 /* Filter */,
 				B824924C243DE72500A1AC39 /* CardsOverview */,
+				B823DD8224439B4500A74495 /* Filter */,
 			);
 			path = AllCards;
 			sourceTree = "<group>";

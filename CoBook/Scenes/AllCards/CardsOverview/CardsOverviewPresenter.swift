@@ -11,41 +11,29 @@ import CoreLocation
 import GoogleMaps
 
 protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView {
-    func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator)
-    func setup(sections: [Section<CardsOverview.Items>])
-    func setupSearch(sections: [Section<CardsOverview.Items>])
-    func reload(section: Section<CardsOverview.Items>, at index: Int)
+    func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
+    func reload(section: CardsOverview.SectionAccessoryIndex)
+    func reload()
+
+    func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
+    func reloadSearch(resultText: String)
+
     func openSettings()
 }
 
 class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
-    private weak var view: CardsOverviewView?
-    private lazy var dataSourceConfigurator: CardsOverviewViewDataSourceConfigurator = {
-        let dataSourceConfigurator = CardsOverviewViewDataSourceConfigurator(presenter: self)
-        return dataSourceConfigurator
-    }()
+    /// managed view
+    weak var view: CardsOverviewView?
 
-    var barItems: [BarItemViewModel] {
-        get {
-            return [
-                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
-                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
-                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
-                BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
-            ]
-        }
-    }
+    /// bar items busienss logic
+    var barItems: [BarItemViewModel]
+    var selectedBarItem: BarItemViewModel?
 
-    private var selectedBarItem: BarItemViewModel? {
-        didSet {
-            updateViewDataSoure(section: 1)
-        }
-    }
+    private var dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
+    private var searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
 
-    private var postsSection: Section<CardsOverview.Items> = Section(items: [])
-    private var changableSection: Section<CardsOverview.Items> = Section(items: [])
-
+    /// cards data source
     private var allCards: [CardItemViewModel] = []
     private var personalCards: [CardItemViewModel] = []
     private var businessCards: [CardItemViewModel] = []
@@ -58,9 +46,33 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
     // MARK: - BasePresenter
 
+    override init() {
+
+        self.barItems = [
+            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
+            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
+            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
+            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
+        ]
+        self.selectedBarItem = barItems.first
+
+        super.init()
+
+        // setup feed datasource
+        dataSource = DataSource()
+        dataSource?.sections = [Section<CardsOverview.Items>(accessoryIndex: CardsOverview.SectionAccessoryIndex.header.rawValue, items: []),
+                                Section<CardsOverview.Items>(accessoryIndex: CardsOverview.SectionAccessoryIndex.cards.rawValue, items: [])]
+        dataSource?.configurator = dataSourceConfigurator
+
+        // setup search datasource
+        searchDataSource = DataSource(configurator: dataSourceConfigurator)
+        searchDataSource?.sections = [Section<CardsOverview.Items>(accessoryIndex: CardsOverview.SectionAccessoryIndex.header.rawValue, items: [])]
+    }
+
     func attachView(_ view: CardsOverviewView) {
         self.view = view
-        self.view?.configureDataSource(with: dataSourceConfigurator)
+        view.set(dataSource: dataSource)
+        view.set(searchDataSource: searchDataSource)
     }
 
     func detachView() {
@@ -81,7 +93,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         pendingSearchResultWorkItem?.cancel()
 
         if query.isEmpty {
-            view?.setupSearch(sections: [])
+            searchDataSource?[.header].items.removeAll()
+            view?.reloadSearch(resultText: "Немає результатів пошуку")
             return
         }
         
@@ -105,9 +118,10 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                                                                                profession: $0.practiceType?.title,
                                                                                telephoneNumber: $0.contactTelephone?.number) } ?? []
 
-                    var searchSection: Section<CardsOverview.Items> = Section(items: [])
-                    searchSection.items = searchCards.map { .cardItem(model: $0) }
-                    strongSelf.view?.setupSearch(sections: [searchSection])
+
+                    strongSelf.searchDataSource?[.header].items = searchCards.map { .cardItem(model: $0) }
+                    let text = searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count)"
+                    strongSelf.view?.reloadSearch(resultText: text)
 
                 case .failure(let error):
                     strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -153,6 +167,7 @@ private extension CardsOverviewViewPresenter {
                 strongSelf.businessCards = strongSelf.allCards.filter { $0.type == .business }
 
                 strongSelf.setupViewDataSource()
+                strongSelf.view?.reload()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
@@ -167,28 +182,19 @@ private extension CardsOverviewViewPresenter {
 private extension CardsOverviewViewPresenter {
 
     func setupViewDataSource() {
-        postsSection.items = []
-        changableSection.items = allCards.map { .cardItem(model: $0) }
-        view?.setup(sections: [postsSection, changableSection])
-    }
-
-    func updateViewDataSoure(section: Int) {
         if let item = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
             switch item {
             case .allCards:
-                changableSection.items = allCards.map { .cardItem(model: $0) }
+                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = allCards.map { .cardItem(model: $0) }
             case .personalCards:
-                changableSection.items = personalCards.map { .cardItem(model: $0) }
+                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = personalCards.map { .cardItem(model: $0) }
             case .businessCards:
-                changableSection.items = businessCards.map { .cardItem(model: $0) }
+                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = businessCards.map { .cardItem(model: $0) }
             case .inMyRegionCards:
-                changableSection.items = [.map]
+                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = [.map]
             }
         }
-
-        view?.reload(section: changableSection, at: section)
     }
-
 
 }
 
@@ -198,6 +204,8 @@ extension CardsOverviewViewPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
         selectedBarItem = barItems[safe: index]
+        setupViewDataSource()
+        self.view?.reload(section: .cards)
     }
 
 

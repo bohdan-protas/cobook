@@ -22,7 +22,7 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = UIColor.Theme.blackMiddle
+        refreshControl.tintColor = UIColor.Theme.grayUI
         refreshControl.addTarget(self, action: #selector(refreshAllCardsData(_:)), for: .valueChanged)
         return refreshControl
     }()
@@ -67,30 +67,29 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
     // MARK: - CardsOverviewView
 
-    func configureDataSource(with configurator: CardsOverviewViewDataSourceConfigurator) {
-        dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
-        tableView.dataSource = dataSource
-
-        searchResultsTableController.configureDataSource(with: configurator)
+    func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
+        dataSource?.connect(to: self.tableView)
     }
 
-    func setup(sections: [Section<CardsOverview.Items>]) {
-        dataSource?.sections = sections
-        itemsBarView.refresh()
-        refreshControl.endRefreshing()
-        tableView.reloadData()
-    }
-
-    func setupSearch(sections: [Section<CardsOverview.Items>]) {
-        searchResultsTableController.setup(sections: sections)
-    }
-
-    func reload(section: Section<CardsOverview.Items>, at index: Int) {
+    func reload(section: CardsOverview.SectionAccessoryIndex) {
         tableView.beginUpdates()
-        dataSource?.sections[index] = section
         tableView.setContentOffset(.zero, animated: false)
-        tableView.reloadSections(IndexSet(integer: index), with: .automatic)
+        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .automatic)
         tableView.endUpdates()
+    }
+
+    func reload() {
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+
+    func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
+        searchDataSource?.connect(to: searchResultsTableController.tableView)
+    }
+
+    func reloadSearch(resultText title: String) {
+        searchResultsTableController.set(resultsLabel: title)
+        searchResultsTableController.tableView.reloadData()
     }
 
     func openSettings() {
@@ -126,7 +125,6 @@ private extension CardsOverviewViewController {
         tableView.delegate = self
         tableView.refreshControl = refreshControl
 
-
         self.searchResultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
 
         searchController = UISearchController(searchResultsController: searchResultsTableController)
@@ -158,26 +156,34 @@ private extension CardsOverviewViewController {
 
 extension CardsOverviewViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView {
+        case self.tableView:
+            break
+        default:
+            break
+        }
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if tableView === self.tableView {
+        switch tableView {
+        case self.tableView:
             return itemsBarView
-        } else {
+        default:
             return UIView()
         }
-
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if tableView === self.tableView {
+        switch tableView {
+        case self.tableView:
             if section == 1 {
                 return itemsBarView.frame.height
-            } else {
-                return 0
             }
-        } else {
+            fallthrough
+        default:
             return 0
         }
-
     }
 
 
