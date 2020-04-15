@@ -32,4 +32,13 @@ enum BusinessCardDetails {
         var websiteAddress: String?
     }
 
+    enum SectionAccessoryIndex: Int {
+        case userHeader
+        case cardDetails
+    }
+
+    enum BarSectionsTypeIndex: Int {
+        case general, contacts, team
+    }
+
 }

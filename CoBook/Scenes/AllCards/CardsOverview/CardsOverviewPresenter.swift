@@ -185,13 +185,13 @@ private extension CardsOverviewViewPresenter {
         if let item = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
             switch item {
             case .allCards:
-                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = allCards.map { .cardItem(model: $0) }
+                dataSource?[.cards].items = allCards.map { .cardItem(model: $0) }
             case .personalCards:
-                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = personalCards.map { .cardItem(model: $0) }
+                dataSource?[.cards].items = personalCards.map { .cardItem(model: $0) }
             case .businessCards:
-                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = businessCards.map { .cardItem(model: $0) }
+                dataSource?[.cards].items = businessCards.map { .cardItem(model: $0) }
             case .inMyRegionCards:
-                dataSource?[CardsOverview.SectionAccessoryIndex.cards].items = [.map]
+                dataSource?[.cards].items = [.map]
             }
         }
     }

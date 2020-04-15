@@ -19,16 +19,16 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     @IBOutlet var tableView: UITableView!
 
     var presenter: BusinessCardDetailsPresenter?
-    var dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?
 
+    /// hideCardView
     private lazy var hideCardView: HideCardView = {
         let view = HideCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
         view.onHideTapped = { [weak self] in
-
         }
         return view
     }()
 
+    /// editCardView
     private lazy var editCardView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.editCardViewHeight)))
         view.onEditTapped = { [weak self] in
@@ -37,8 +37,9 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         return view
     }()
 
+    /// itemsBarView
     private lazy var itemsBarView: HorizontalItemsBarView = {
-        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: self.presenter?.items ?? [])
+        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: self.presenter?.barItems ?? [])
         view.delegate = self.presenter
         return view
     }()
@@ -69,14 +70,26 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     // MARK: - BusinessCardDetailsView
 
-    func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator) {
-        dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
-        tableView.dataSource = dataSource
+    func setupEditCardView() {
+        tableView.tableFooterView = editCardView
     }
 
-    func updateDataSource(sections: [Section<BusinessCardDetails.Cell>]) {
-        dataSource?.sections = sections
-        tableView.tableFooterView = editCardView
+    func setupHideCardView() {
+        tableView.tableFooterView = hideCardView
+    }
+
+    func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?) {
+        dataSource?.connect(to: tableView)
+    }
+
+    func reload(section: BusinessCardDetails.SectionAccessoryIndex) {
+        tableView.beginUpdates()
+        //tableView.setContentOffset(.zero, animated: false)
+        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .automatic)
+        tableView.endUpdates()
+    }
+
+    func reload() {
         tableView.reloadData()
     }
 

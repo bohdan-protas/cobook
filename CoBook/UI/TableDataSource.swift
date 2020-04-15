@@ -94,3 +94,19 @@ extension DataSource {
     }
 
 }
+
+extension DataSource {
+
+    subscript(businessCardDetailsIndex: BusinessCardDetails.SectionAccessoryIndex) -> Section<Configurator.Item> {
+        get {
+            return sections[businessCardDetailsIndex.rawValue]
+        }
+
+        set {
+            sections[businessCardDetailsIndex.rawValue] = newValue
+        }
+
+
+    }
+
+}

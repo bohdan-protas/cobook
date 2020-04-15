@@ -10,53 +10,58 @@ import UIKit
 import GoogleMaps
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
-    func configureDataSource(with configurator: BusinessCardDetailsDataSourceConfigurator)
-    func updateDataSource(sections: [Section<BusinessCardDetails.Cell>])
+
+    func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
+    func reload(section: BusinessCardDetails.SectionAccessoryIndex)
+    func reload()
+
+    func setupEditCardView()
+    func setupHideCardView()
+
     func sendEmail(to address: String)
     func openSettings()
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
-    private weak var view: BusinessCardDetailsView?
+    /// Managed view
+    weak var view: BusinessCardDetailsView?
 
-    private lazy var dataSourceConfigurator: BusinessCardDetailsDataSourceConfigurator = {
-        let dataSourceConfigurator = BusinessCardDetailsDataSourceConfigurator(presenter: self)
-        return dataSourceConfigurator
-    }()
+    /// bar items busienss logic
+    var barItems: [BarItemViewModel]
+    var selectedBarItem: BarItemViewModel?
 
+    /// Business logic datasource
     private var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
 
-    var items: [BarItemViewModel] {
-        get {
-            return [
-                BarItemViewModel(index: 0, title: "Загальна\n інформація"),
-                BarItemViewModel(index: 1, title: "Контакти"),
-                BarItemViewModel(index: 2,title: "Команда"),
-            ]
-        }
-    }
-
-
-    var currentIndex: Int = 0 {
-        didSet {
-            updateViewDataSource()
-        }
-    }
+    /// View datasource
+    private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
 
     // MARK: - Object Lifecycle
 
     init(id: Int) {
         self.businessCardId = id
+        self.barItems = [
+            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
+            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
+            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
+        ]
+        self.selectedBarItem = barItems.first
+
+        super.init()
+        
+        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource?.sections = [Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
+                                     Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue, items: [])]
     }
 
     // MARK: - Public
 
     func attachView(_ view: BusinessCardDetailsView) {
         self.view = view
-        self.view?.configureDataSource(with: dataSourceConfigurator)
+        view.set(dataSource: dataSource)
     }
 
     func detachView() {
@@ -93,38 +98,36 @@ private extension BusinessCardDetailsPresenter {
     
     func updateViewDataSource() {
 
-        let userInfoSection = Section<BusinessCardDetails.Cell>(items: [
-            .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
-                                                                 avatartImagePath: cardDetails?.avatar?.sourceUrl,
-                                                                 bgimagePath: cardDetails?.background?.sourceUrl,
-                                                                 profession: cardDetails?.practiceType?.title,
-                                                                 telephoneNumber: cardDetails?.contactTelephone?.number,
-                                                                 websiteAddress: cardDetails?.companyWebSite)),
-        ])
-
-        var changableSection = Section<BusinessCardDetails.Cell>(items: [])
-        switch currentIndex {
-        case 0:
-            changableSection.items = [.companyDescription(text: cardDetails?.description),
-                                      .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
-                                      .map(path: ""),
-                                      .mapDirection]
-        case 1:
-            let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
-            if !listListItems.isEmpty {
-                changableSection.items.append(.title(text: "Соціальні мережі:"))
-                changableSection.items.append(.socialList)
+        dataSource?[.userHeader].items = [
+                    .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
+                                                                         avatartImagePath: cardDetails?.avatar?.sourceUrl,
+                                                                         bgimagePath: cardDetails?.background?.sourceUrl,
+                                                                         profession: cardDetails?.practiceType?.title,
+                                                                         telephoneNumber: cardDetails?.contactTelephone?.number,
+                                                                         websiteAddress: cardDetails?.companyWebSite))
+        ]
+        dataSource?[.cardDetails].items.removeAll()
+        if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
+            switch item {
+            case .general:
+                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
+                                                   .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
+                                                   .map(path: ""),
+                                                   .mapDirection]
+            case .contacts:
+                let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+                if !listListItems.isEmpty {
+                    dataSource?[.cardDetails].items.append(.title(text: "Соціальні мережі:"))
+                    dataSource?[.cardDetails].items.append(.socialList)
+                }
+                dataSource?[.cardDetails].items.append(.getInTouch)
+            case .team:
+                let emplCells = employee.compactMap {
+                    BusinessCardDetails.Cell.employee(model: $0)
+                }
+                dataSource?[.cardDetails].items = emplCells
             }
-            changableSection.items.append(.getInTouch)
-        case 2:
-            let emplCells = employee.compactMap {
-                BusinessCardDetails.Cell.employee(model: $0)
-            }
-            changableSection.items = emplCells
-        default: break
         }
-
-        view?.updateDataSource(sections: [userInfoSection, changableSection])
     }
 
 
@@ -187,6 +190,8 @@ private extension BusinessCardDetailsPresenter {
                                                               telephone: $0.telephone?.number,
                                                               practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) }
                 self?.updateViewDataSource()
+                self?.view?.setupEditCardView()
+                self?.view?.reload()
             }
         }
     }
@@ -199,7 +204,9 @@ private extension BusinessCardDetailsPresenter {
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        currentIndex = index
+        selectedBarItem = barItems[safe: index]
+        updateViewDataSource()
+        self.view?.reload(section: .cardDetails)
     }
 
 
