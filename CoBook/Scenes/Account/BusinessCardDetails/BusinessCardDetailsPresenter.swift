@@ -92,7 +92,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
 }
 
-// MARK: - Privates
+// MARK: - Update data source
 
 private extension BusinessCardDetailsPresenter {
     
@@ -113,7 +113,7 @@ private extension BusinessCardDetailsPresenter {
                 dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
                                                    .map(path: ""),
-                                                   .mapDirection]
+                                                   /*.mapDirection*/]
             case .contacts:
                 let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
                 if !listListItems.isEmpty {
