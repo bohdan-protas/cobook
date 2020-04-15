@@ -21,6 +21,7 @@ enum BusinessCardDetails {
         case map(path: String?)
         case mapDirection
         case employee(model: EmployeeModel?)
+        case contacts(model: ContactsModel?)
     }
 
     struct HeaderInfoModel {

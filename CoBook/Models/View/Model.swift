@@ -62,3 +62,9 @@ struct AddressInfoCellModel {
     var subAdress: String?
     var schedule: String?
 }
+
+struct ContactsModel {
+    var telNumber: String?
+    var website: String?
+    var email: String?
+}

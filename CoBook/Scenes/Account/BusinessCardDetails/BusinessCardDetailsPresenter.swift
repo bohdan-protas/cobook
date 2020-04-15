@@ -113,19 +113,25 @@ private extension BusinessCardDetailsPresenter {
                 dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
                                                    .map(path: ""),
-                                                   /*.mapDirection*/]
+                                                   .mapDirection]
             case .contacts:
+                dataSource?[.cardDetails].items.append(.title(text: "Звязок:"))
+                dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
+
+                dataSource?[.cardDetails].items.append(.getInTouch)
+
                 let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
                 if !listListItems.isEmpty {
                     dataSource?[.cardDetails].items.append(.title(text: "Соціальні мережі:"))
                     dataSource?[.cardDetails].items.append(.socialList)
                 }
-                dataSource?[.cardDetails].items.append(.getInTouch)
+
             case .team:
                 let emplCells = employee.compactMap {
                     BusinessCardDetails.Cell.employee(model: $0)
                 }
                 dataSource?[.cardDetails].items = emplCells
+
             }
         }
     }

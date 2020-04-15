@@ -21,6 +21,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var mapCellConfigurator: CellConfigurator<String?, MapTableViewCell>?
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>?
     var employeeCellConfigurator: CellConfigurator<EmployeeModel?, CardItemTableViewCell>?
+    var contactsCellConfigurator: CellConfigurator<ContactsModel?, ContactsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -46,6 +47,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return sectionTitleConfigurator?.reuseIdentifier ?? ""
         case .employee:
             return employeeCellConfigurator?.reuseIdentifier ?? ""
+        case .contacts:
+            return contactsCellConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -71,6 +74,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return sectionTitleConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .employee(let model):
             return employeeCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .contacts(let model):
+            return contactsCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -85,6 +90,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         mapCellConfigurator?.registerCells(in: tableView)
         addressInfoCellConfigurator?.registerCells(in: tableView)
         employeeCellConfigurator?.registerCells(in: tableView)
+        contactsCellConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -169,6 +175,14 @@ extension BusinessCardDetailsPresenter {
                 cell.mainAddressLabel.text = model.mainAddress
                 cell.subadressLabel.text = model.subAdress
                 cell.scheduleLabel.text = model.schedule
+                return cell
+            }
+
+            // contactsCellConfigurator
+            configurator.contactsCellConfigurator = CellConfigurator { (cell, model: ContactsModel?, tableView, indexPath) -> ContactsTableViewCell in
+                cell.telephoneNumberLabel.text = model?.telNumber
+                cell.websiteLabel.text = model?.website
+                cell.emailLabel.text = model?.email
                 return cell
             }
 
