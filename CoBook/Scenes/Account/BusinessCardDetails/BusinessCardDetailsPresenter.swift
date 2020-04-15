@@ -127,9 +127,7 @@ private extension BusinessCardDetailsPresenter {
                 }
 
             case .team:
-                let emplCells = employee.compactMap {
-                    BusinessCardDetails.Cell.employee(model: $0)
-                }
+                let emplCells = employee.compactMap { BusinessCardDetails.Cell.employee(model: $0) }
                 dataSource?[.cardDetails].items = emplCells
 
             }

@@ -12,7 +12,7 @@ struct EmployApiModel: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case cardId = "id"
-        case userId
+        case userId = "user_id"
         case firstName = "first_name"
         case lastName = "last_name"
         case avatar
