@@ -159,6 +159,7 @@ extension BusinessCardDetailsPresenter {
 
             // mapDirectionCellConfigurator
             configurator.mapDirectionCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapDirectionTableViewCell in
+                cell.delegate = self.view
                 return cell
             }
 

@@ -20,6 +20,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
 		<string>viber</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

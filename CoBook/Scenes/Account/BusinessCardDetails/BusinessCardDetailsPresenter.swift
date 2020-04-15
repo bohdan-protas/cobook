@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MapDirectionTableViewCellDelegate {
 
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex)

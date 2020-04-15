@@ -138,3 +138,23 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
     }
 
 }
+
+// MARK: - MapDirectionTableViewCellDelegate
+
+extension BusinessCardDetailsViewController: MapDirectionTableViewCellDelegate {
+
+    func didOpenGoogleMaps(_ view: MapDirectionTableViewCell) {
+
+        if let googleMapsUrl = URL.init(string: "comgooglemaps://"), UIApplication.shared.canOpenURL(googleMapsUrl) {
+
+            UIApplication.shared.open(googleMapsUrl)
+
+        } else {
+            errorAlert(message: "Не вдається відкрити карти")
+            Log.error("Can't use comgooglemaps://")
+        }
+
+    }
+
+
+}
