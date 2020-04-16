@@ -134,6 +134,45 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
     }
 
+    func selectedCellAt(indexPath: IndexPath) {
+
+        switch dataSource?.sections[safe: indexPath.section]?.items[indexPath.item] {
+        case .some(let value):
+            switch value {
+            case .cardItem(let model):
+
+                switch model?.type {
+                case .some(let cardType):
+
+                    switch cardType {
+                    case .personal:
+
+                        let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                        if let strid = model?.id, let id = Int(strid) {
+                            personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
+                        }
+                        view?.push(controller: personalCardDetailsViewController, animated: true)
+
+                    case .business:
+                        let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                        if let strid = model?.id, let id = Int(strid) {
+                            businessCardDetailsViewController.presenter = BusinessCardDetailsPresenter(id: id)
+                        }
+                        view?.push(controller: businessCardDetailsViewController, animated: true)
+                    }
+
+                default: break
+                }
+
+            default: break
+            }
+        case .none:
+            break
+
+        }
+
+    }
+
 
 }
 

@@ -84,7 +84,6 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     func reload(section: BusinessCardDetails.SectionAccessoryIndex) {
         tableView.beginUpdates()
-        //tableView.setContentOffset(.zero, animated: false)
         tableView.reloadSections(IndexSet(integer: section.rawValue), with: .automatic)
         tableView.endUpdates()
     }
