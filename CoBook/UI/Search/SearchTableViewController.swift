@@ -34,6 +34,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
     weak var delegate: SearchTableViewControllerDelegate?
 
     // MARK: - View Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +52,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
     }
 
     // MARK: - Table view data source
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return previewCards.count
     }
@@ -62,7 +64,10 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
         cell.proffesionLabel.text = model.practiceType?.title
         cell.telephoneNumberLabel.text = model.telephone
         cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-        cell.titleImageView.setTextPlaceholderImage(withPath: model.avatar, placeholderText: model.nameAbbreviation)
+
+        let nameAbbr = model.nameAbbreviation
+        let textPlaceholderImage = nameAbbr?.image(size: cell.titleImageView.frame.size)
+        cell.titleImageView.setImage(withPath: model.avatar, placeholderImage: textPlaceholderImage)
 
         return cell
     }

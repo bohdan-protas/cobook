@@ -77,13 +77,13 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
     }
 
     func set(imagePath: String?) {
-        guard let str = imagePath, let url = URL.init(string: str) else {
+        guard let str = imagePath else {
             avatarImageView.image = UIImage(named: "ic_user")
             self.avatarSelectionButton.isSelected = false
             return
         }
         
-        avatarImageView.setImage(withURL: url, placeholderImage: UIImage(named: "ic_user")) { response in
+        avatarImageView.setImage(withPath: str, placeholderImage: UIImage(named: "ic_user")) { response in
             self.avatarSelectionButton.isSelected = response.error == nil
             self.avatarSelectionButton.isSelected = true
         }

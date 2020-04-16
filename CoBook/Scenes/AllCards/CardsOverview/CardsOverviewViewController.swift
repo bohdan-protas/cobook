@@ -32,7 +32,6 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     private var searchBar: UISearchBar!
 
     var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
-    var dataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?
 
     // MARK: - View Lifecycle
 

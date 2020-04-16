@@ -9,6 +9,7 @@
 import UIKit
 
 extension UITableView {
+
     func sizeHeaderToFit() {
         if let headerView = tableHeaderView {
 
@@ -37,4 +38,6 @@ extension UITableView {
             tableFooterView = footerView
         }
     }
+
+    
 }
