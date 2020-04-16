@@ -709,7 +709,6 @@
 		B823AB6C23F156EE00DE13EA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				B84B94E9240329D50007EB60 /* APIConstants.swift */,
 				B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */,
 				B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */,
 				B84B94F424033B3E0007EB60 /* APIClient.swift */,
@@ -1225,6 +1224,7 @@
 			children = (
 				B870199223ED50EC00625D61 /* Info.plist */,
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
+				B84B94E9240329D50007EB60 /* APIConstants.swift */,
 				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
