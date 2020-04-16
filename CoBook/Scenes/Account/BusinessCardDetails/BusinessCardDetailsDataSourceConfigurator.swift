@@ -106,7 +106,10 @@ extension BusinessCardDetailsPresenter {
 
             // EmployeCellConfigurator
             configurator.employeeCellConfigurator = CellConfigurator { (cell, model: EmployeeModel?, tableView, indexPath) -> CardItemTableViewCell in
-                cell.avatarImageView.setTextPlaceholderImage(withPath: model?.avatar, placeholderText: model?.nameAbbreviation)
+
+                let textImg = model?.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
+
+                cell.avatarImageView.setImage(withPath: model?.avatar, placeholderImage: textImg)
                 cell.type = .personal
                 cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
                 cell.professionLabel.text = model?.practiceType?.title

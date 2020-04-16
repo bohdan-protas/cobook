@@ -50,8 +50,11 @@ extension CardsOverviewViewPresenter {
 
             let dataSourceConfigurator = CardsOverviewViewDataSourceConfigurator()
 
+            // cardItemCellConfigurator
             dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> CardItemTableViewCell in
-                cell.avatarImageView.setTextPlaceholderImage(withPath: model?.avatarPath, placeholderText: model?.nameAbbreviation)
+
+                let textPlaceholderImage = model?.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
+                cell.avatarImageView.setImage(withPath: model?.avatarPath, placeholderImage: textPlaceholderImage)
                 cell.type = model?.type
 
                 switch model?.type {
@@ -71,6 +74,7 @@ extension CardsOverviewViewPresenter {
                 return cell
             }
 
+            // mapCellConfigurator
             dataSourceConfigurator.mapCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
                 cell.heightConstraint.constant = tableView.frame.height - 58
                 cell.mapView.settings.myLocationButton = true

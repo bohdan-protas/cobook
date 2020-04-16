@@ -10,7 +10,7 @@ import UIKit
 
 class AccountHeaderTableViewCell: UITableViewCell {
 
-    @IBOutlet var avatarTextPlaceholderImageView: DesignableTextPlaceholderImageView!
+    @IBOutlet var avatarTextPlaceholderImageView: DesignableImageView!
     @IBOutlet var bgImageView: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!

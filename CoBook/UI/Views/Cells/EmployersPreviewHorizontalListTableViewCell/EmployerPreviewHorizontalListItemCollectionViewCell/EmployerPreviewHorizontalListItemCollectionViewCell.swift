@@ -14,7 +14,7 @@ protocol EmployerPreviewHorizontalListItemCollectionViewCellDelegate: class {
 
 class EmployerPreviewHorizontalListItemCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet var avatarTextPlaceholderImageView: DesignableTextPlaceholderImageView!
+    @IBOutlet var avatarTextPlaceholderImageView: DesignableImageView!
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var professionLabel: UILabel!
@@ -30,7 +30,6 @@ class EmployerPreviewHorizontalListItemCollectionViewCell: UICollectionViewCell 
     // MARK: View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        avatarTextPlaceholderImageView.placeholder = ""
         titleLabel.text = ""
         professionLabel.text = ""
         telNumberLabel.text = ""
@@ -38,8 +37,6 @@ class EmployerPreviewHorizontalListItemCollectionViewCell: UICollectionViewCell 
 
     override func prepareForReuse() {
         super.prepareForReuse()
-
-        avatarTextPlaceholderImageView.placeholder = ""
         avatarTextPlaceholderImageView.af.cancelImageRequest()
         avatarTextPlaceholderImageView.image = nil
         titleLabel.text = ""

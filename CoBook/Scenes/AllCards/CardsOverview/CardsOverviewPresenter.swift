@@ -145,8 +145,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                 case .some(let cardType):
 
                     switch cardType {
-                    case .personal:
 
+                    case .personal:
                         let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
                         if let strid = model?.id, let id = Int(strid) {
                             personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)

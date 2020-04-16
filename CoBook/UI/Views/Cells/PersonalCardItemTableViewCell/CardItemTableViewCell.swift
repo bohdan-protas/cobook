@@ -10,7 +10,7 @@ import UIKit
 
 class CardItemTableViewCell: UITableViewCell {
 
-    @IBOutlet var avatarImageView: DesignableTextPlaceholderImageView!
+    @IBOutlet var avatarImageView: DesignableImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var professionLabel: UILabel!
     @IBOutlet var telNumberLabel: UILabel!
