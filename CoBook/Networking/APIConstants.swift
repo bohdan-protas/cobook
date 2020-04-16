@@ -26,7 +26,7 @@ enum APIConstants {
     }
 
     enum Google {
-        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"  //по
+        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"
     }
 
     enum ParameterKey {
@@ -42,10 +42,15 @@ enum APIConstants {
         static let id           = "id"
     }
 
+    static let additionalAcceptableImageContentTypes: Set<String> = [
+        "image/*"
+    ]
+
+    enum ContentType: String {
+        case json = "application/json"
+        case xFormUrlencoded = "application/x-www-form-urlencoded"
+    }
 
 }
 
-enum ContentType: String {
-    case json = "application/json"
-    case xFormUrlencoded = "application/x-www-form-urlencoded"
-}
+

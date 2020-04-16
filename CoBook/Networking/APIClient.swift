@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 class APIClient {
 
@@ -28,6 +29,9 @@ class APIClient {
 
     // MARK: Initializer
     private init(session: Session) {
+
+        ImageResponseSerializer.addAcceptableImageContentTypes(APIConstants.additionalAcceptableImageContentTypes)
+
         self.session = session
     }
 
