@@ -156,7 +156,8 @@ extension BusinessCardDetailsPresenter {
 
             // expandableDescriptionCellConfigurator
             configurator.expandableDescriptionCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
-                cell.textDescriptionLabel.text = model
+                cell.desctiptionTextView.text = model
+                cell.desctiptionTextViewHeight.constant = model?.height(withConstrainedWidth: cell.desctiptionTextView.frame.width, font: UIFont.SFProDisplay_Regular(size: 15)) ?? 0
                 return cell
             }
 

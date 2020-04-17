@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ExpandableDescriptionTableViewCell: UITableViewCell {
+class ExpandableDescriptionTableViewCell: UITableViewCell, UITextViewDelegate {
 
-    @IBOutlet var textDescriptionLabel: UILabel!
+    @IBOutlet var desctiptionTextView: DesignableTextView!
+    @IBOutlet var desctiptionTextViewHeight: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        desctiptionTextView.delegate = self
     }
 
     
