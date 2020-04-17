@@ -23,21 +23,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guV-U8-592">
+                        <rect key="frame" x="16" y="40" width="288" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="C9o-5e-hLU"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" name="Theme_TextField-text"/>
+                        </state>
+                        <connections>
+                            <action selector="websiteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="p8O-Wh-cUN"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0VJ-lt-K47">
                         <rect key="frame" x="16" y="12" width="288" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="SLH-1a-Zii"/>
                             <constraint firstAttribute="height" constant="20" id="hsp-nv-hCA"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
-                        <color key="textColor" name="Theme_TextField-text"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQi-9Q-C7e">
-                        <rect key="frame" x="16" y="40" width="288" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="rFf-O2-spf"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="vy1-SR-diO"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
                         <color key="textColor" name="Theme_TextField-text"/>
@@ -54,15 +56,15 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="NQi-9Q-C7e" secondAttribute="trailing" constant="16" id="At2-S1-ZIW"/>
-                    <constraint firstItem="E17-iF-Cln" firstAttribute="top" secondItem="NQi-9Q-C7e" secondAttribute="bottom" constant="8" id="Bvp-52-gzL"/>
+                    <constraint firstItem="guV-U8-592" firstAttribute="top" secondItem="0VJ-lt-K47" secondAttribute="bottom" constant="8" id="J8m-zX-FkZ"/>
                     <constraint firstAttribute="bottom" secondItem="E17-iF-Cln" secondAttribute="bottom" constant="16" id="Lc6-NJ-Qht"/>
                     <constraint firstItem="0VJ-lt-K47" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="QuT-tS-GYg"/>
-                    <constraint firstItem="NQi-9Q-C7e" firstAttribute="top" secondItem="0VJ-lt-K47" secondAttribute="bottom" constant="8" id="b9J-tI-8fT"/>
+                    <constraint firstItem="guV-U8-592" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ZIw-3u-K2G"/>
+                    <constraint firstItem="E17-iF-Cln" firstAttribute="top" secondItem="guV-U8-592" secondAttribute="bottom" constant="8" id="alR-nw-gDO"/>
                     <constraint firstAttribute="trailing" secondItem="0VJ-lt-K47" secondAttribute="trailing" constant="16" id="ccU-b6-lAw"/>
                     <constraint firstAttribute="trailing" secondItem="E17-iF-Cln" secondAttribute="trailing" constant="16" id="ehM-dV-JyM"/>
                     <constraint firstItem="0VJ-lt-K47" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="p2E-1x-k23"/>
-                    <constraint firstItem="NQi-9Q-C7e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="qIk-M1-tgw"/>
+                    <constraint firstAttribute="trailing" secondItem="guV-U8-592" secondAttribute="trailing" constant="16" id="sV3-eQ-4ln"/>
                     <constraint firstItem="E17-iF-Cln" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="yQG-kM-GQI"/>
                 </constraints>
             </tableViewCellContentView>
@@ -70,7 +72,7 @@
             <connections>
                 <outlet property="emailLabel" destination="E17-iF-Cln" id="QY7-yp-mlj"/>
                 <outlet property="telephoneNumberLabel" destination="0VJ-lt-K47" id="hYd-pA-vzg"/>
-                <outlet property="websiteLabel" destination="NQi-9Q-C7e" id="jbV-r2-Wfu"/>
+                <outlet property="websiteButton" destination="guV-U8-592" id="7dx-2P-ql3"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="172.76785714285714"/>
         </tableViewCell>

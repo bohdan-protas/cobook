@@ -11,21 +11,20 @@ import UIKit
 class ContactsTableViewCell: UITableViewCell {
 
     @IBOutlet var telephoneNumberLabel: UILabel!
-    @IBOutlet var websiteLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
+    @IBOutlet var websiteButton: UIButton!
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        telephoneNumberLabel.text = ""
-        websiteLabel.text = ""
-        emailLabel.text = ""
+    @IBAction func websiteButtonTapped(_ sender: Any) {
+        if let url = URL.init(string: websiteButton.currentAttributedTitle?.string ?? "") {
+            UIApplication.shared.open(url)
+        }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         telephoneNumberLabel.text = ""
-        websiteLabel.text = ""
         emailLabel.text = ""
     }
 
 }
+

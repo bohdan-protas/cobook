@@ -186,7 +186,17 @@ extension BusinessCardDetailsPresenter {
             // contactsCellConfigurator
             configurator.contactsCellConfigurator = CellConfigurator { (cell, model: ContactsModel?, tableView, indexPath) -> ContactsTableViewCell in
                 cell.telephoneNumberLabel.text = model?.telNumber
-                cell.websiteLabel.text = model?.website
+
+
+                let yourAttributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.HelveticaNeueCyr_Roman(size: 15),
+                    .foregroundColor: UIColor.Theme.blackMiddle,
+                    .underlineStyle: NSUnderlineStyle.single.rawValue]
+
+
+                let attributeString = NSMutableAttributedString(string: model?.website ?? "", attributes: yourAttributes)
+
+                cell.websiteButton.setAttributedTitle(attributeString, for: .normal)
                 cell.emailLabel.text = model?.email
                 return cell
             }

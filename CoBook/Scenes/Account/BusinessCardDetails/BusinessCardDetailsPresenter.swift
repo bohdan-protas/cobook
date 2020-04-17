@@ -10,14 +10,11 @@ import UIKit
 import GoogleMaps
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MapDirectionTableViewCellDelegate {
-
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex)
     func reload()
-
     func setupEditCardView()
     func setupHideCardView()
-
     func sendEmail(to address: String)
     func openSettings()
 }
@@ -31,7 +28,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     var barItems: [BarItemViewModel]
     var selectedBarItem: BarItemViewModel?
 
-    /// Business logic datasource
+    /// Datasource
     private var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
@@ -46,7 +43,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.barItems = [
             BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
             BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
-            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
+            /*BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),*/
         ]
         self.selectedBarItem = barItems.first
 
