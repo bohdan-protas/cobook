@@ -28,7 +28,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     var barItems: [BarItemViewModel]
     var selectedBarItem: BarItemViewModel?
 
-    /// Business logic datasource
+    /// Datasource
     private var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
