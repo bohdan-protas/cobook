@@ -22,7 +22,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>?
     var employeeCellConfigurator: CellConfigurator<EmployeeModel?, CardItemTableViewCell>?
     var contactsCellConfigurator: CellConfigurator<ContactsModel?, ContactsTableViewCell>?
-    var serviceItemCellConfigurator: CellConfigurator<Service.ListItem, ServiceListItemTableViewCell>?
+    var serviceItemCellConfigurator: CellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -106,6 +106,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
 
 extension BusinessCardDetailsPresenter {
 
+    /// Dependency injection to BusinessCardDetailsPresenter
     var dataSouceConfigurator: BusinessCardDetailsDataSourceConfigurator {
         get {
             var configurator = BusinessCardDetailsDataSourceConfigurator()
@@ -206,7 +207,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // serviceItemCellConfigurator
-            configurator.serviceItemCellConfigurator = CellConfigurator { (cell, model: Service.ListItem, tableView, indexPath) -> ServiceListItemTableViewCell in
+            configurator.serviceItemCellConfigurator = CellConfigurator { (cell, model: Service.PreviewListItem, tableView, indexPath) -> ServiceListItemTableViewCell in
                 switch model {
                 case .view(let model):
                     cell.titleLabel.text = model.title

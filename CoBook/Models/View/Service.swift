@@ -10,12 +10,22 @@ import Foundation
 
 enum Service {
 
-    enum ListItem {
-        case view(model: ItemModel)
+    enum EditItem {
+
+    }
+
+    enum CreateItem {
+
+    }
+
+    /// Interface for add&view preview items
+    enum PreviewListItem {
+        case view(model: PreviewListItemModel)
         case add
     }
 
-    struct ItemModel {
+    /// Model for describing data on preview list items
+    struct PreviewListItemModel {
         var imagePath: String?
         var title: String?
         var subtitle: String?

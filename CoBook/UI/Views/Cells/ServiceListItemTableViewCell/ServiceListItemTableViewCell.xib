@@ -59,14 +59,24 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BRV-6c-2yI">
+                        <rect key="frame" x="16" y="103" width="277" height="1"/>
+                        <color key="backgroundColor" name="Theme_Separator"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="CLx-Tu-3Fd"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="NUo-C7-L8I" firstAttribute="leading" secondItem="AtT-Hd-FQU" secondAttribute="trailing" constant="16" id="1pa-7p-ODz"/>
                     <constraint firstItem="AtT-Hd-FQU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="F0N-Lv-I6p"/>
+                    <constraint firstAttribute="trailing" secondItem="BRV-6c-2yI" secondAttribute="trailing" id="SAM-bo-WM9"/>
                     <constraint firstItem="NUo-C7-L8I" firstAttribute="centerY" secondItem="AtT-Hd-FQU" secondAttribute="centerY" id="T2s-3Y-BqL"/>
                     <constraint firstItem="AtT-Hd-FQU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XER-xP-Rik"/>
+                    <constraint firstItem="BRV-6c-2yI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Y7j-Q4-4ts"/>
                     <constraint firstAttribute="trailing" secondItem="NUo-C7-L8I" secondAttribute="trailing" constant="16" id="ttu-B6-FWM"/>
                     <constraint firstAttribute="bottom" secondItem="AtT-Hd-FQU" secondAttribute="bottom" constant="20" id="vb8-k2-Hot"/>
+                    <constraint firstAttribute="bottom" secondItem="BRV-6c-2yI" secondAttribute="bottom" id="xLI-zf-tzv"/>
                     <constraint firstItem="AtT-Hd-FQU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="yu9-t3-lNw"/>
                 </constraints>
             </tableViewCellContentView>
@@ -88,6 +98,9 @@
         </namedColor>
         <namedColor name="Theme_Gray-UI">
             <color red="0.53299999237060547" green="0.53299999237060547" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Separator">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

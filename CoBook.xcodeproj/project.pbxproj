@@ -203,6 +203,9 @@
 		B8970B4924505763006676DF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4824505763006676DF /* Service.swift */; };
 		B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */; };
 		B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */; };
+		B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B09F24507D55007C4F05 /* CreateServiceViewController.swift */; };
+		B8A3B0A224507D65007C4F05 /* CreateServicePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0A124507D65007C4F05 /* CreateServicePresenter.swift */; };
+		B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0A324507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift */; };
 		B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */; };
 		B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */; };
 		B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F022422B38300E06E53 /* Data + Extensions.swift */; };
@@ -446,6 +449,9 @@
 		B8970B4824505763006676DF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListItemTableViewCell.swift; sourceTree = "<group>"; };
 		B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceListItemTableViewCell.xib; sourceTree = "<group>"; };
+		B8A3B09F24507D55007C4F05 /* CreateServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceViewController.swift; sourceTree = "<group>"; };
+		B8A3B0A124507D65007C4F05 /* CreateServicePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServicePresenter.swift; sourceTree = "<group>"; };
+		B8A3B0A324507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
 		B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManagerEndpoint.swift; sourceTree = "<group>"; };
 		B8AB3F022422B38300E06E53 /* Data + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extensions.swift"; sourceTree = "<group>"; };
@@ -597,6 +603,7 @@
 				B8AB83E824280E7E0041B879 /* PersonalCardDetails */,
 				B8DD431724178F0200C7D940 /* CreatePersonalCard */,
 				B823B091242D3D390012529D /* CreateBusinessCard */,
+				B8A3B09E24507D30007C4F05 /* CreateService */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1304,6 +1311,16 @@
 			path = ServiceListItemTableViewCell;
 			sourceTree = "<group>";
 		};
+		B8A3B09E24507D30007C4F05 /* CreateService */ = {
+			isa = PBXGroup;
+			children = (
+				B8A3B09F24507D55007C4F05 /* CreateServiceViewController.swift */,
+				B8A3B0A124507D65007C4F05 /* CreateServicePresenter.swift */,
+				B8A3B0A324507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift */,
+			);
+			path = CreateService;
+			sourceTree = "<group>";
+		};
 		B8AB83E824280E7E0041B879 /* PersonalCardDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1695,6 +1712,7 @@
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
 				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,
 				B8559F98243CD69B00787349 /* HorizontalItemsBarView.swift in Sources */,
+				B8A3B0A224507D65007C4F05 /* CreateServicePresenter.swift in Sources */,
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B8237F38244740F80006E8D1 /* ContactsTableViewCell.swift in Sources */,
 				B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
@@ -1703,6 +1721,7 @@
 				B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */,
 				B836DF2C2433792600CB84D3 /* CreateBusinessCardPresenter.swift in Sources */,
 				B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */,
+				B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */,
 				B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */,
 				B8559F66243AD0B900787349 /* BusinessCardDetailsPresenter.swift in Sources */,
 				B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */,
@@ -1778,6 +1797,7 @@
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
+				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,

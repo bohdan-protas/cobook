@@ -22,7 +22,7 @@ enum BusinessCardDetails {
         case mapDirection
         case employee(model: EmployeeModel?)
         case contacts(model: ContactsModel?)
-        case service(model: Service.ListItem)
+        case service(model: Service.PreviewListItem)
     }
 
     struct HeaderInfoModel {
