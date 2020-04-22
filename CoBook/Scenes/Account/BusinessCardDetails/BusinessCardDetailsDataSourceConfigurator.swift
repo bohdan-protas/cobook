@@ -22,6 +22,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>?
     var employeeCellConfigurator: CellConfigurator<EmployeeModel?, CardItemTableViewCell>?
     var contactsCellConfigurator: CellConfigurator<ContactsModel?, ContactsTableViewCell>?
+    var serviceItemCellConfigurator: CellConfigurator<Service.ListItem, ServiceListItemTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -49,6 +50,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return employeeCellConfigurator?.reuseIdentifier ?? ""
         case .contacts:
             return contactsCellConfigurator?.reuseIdentifier ?? ""
+        case .service:
+            return serviceItemCellConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -76,6 +79,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return employeeCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .contacts(let model):
             return contactsCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .service(let model):
+            return serviceItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -91,6 +96,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         addressInfoCellConfigurator?.registerCells(in: tableView)
         employeeCellConfigurator?.registerCells(in: tableView)
         contactsCellConfigurator?.registerCells(in: tableView)
+        serviceItemCellConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -196,6 +202,23 @@ extension BusinessCardDetailsPresenter {
 
                 cell.websiteButton.setAttributedTitle(attributeString, for: .normal)
                 cell.emailLabel.text = model?.email
+                return cell
+            }
+
+            // serviceItemCellConfigurator
+            configurator.serviceItemCellConfigurator = CellConfigurator { (cell, model: Service.ListItem, tableView, indexPath) -> ServiceListItemTableViewCell in
+                switch model {
+                case .view(let model):
+                    cell.titleLabel.text = model.title
+                    cell.subtitleLabel.text = model.subtitle
+                    cell.titleImageView.setImage(withPath: model.imagePath)
+                    cell.subtitleLabel.isHidden = false
+                case .add:
+                    cell.titleLabel.text = "Додати послугу"
+                    cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
+                    cell.subtitleLabel.isHidden = true
+                }
+
                 return cell
             }
 

@@ -25,8 +25,8 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     weak var view: BusinessCardDetailsView?
 
     /// bar items busienss logic
-    var barItems: [BarItemViewModel]
-    var selectedBarItem: BarItemViewModel?
+    var barItems: [BarItem]
+    var selectedBarItem: BarItem?
 
     /// Datasource
     private var businessCardId: Int
@@ -36,14 +36,21 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     /// View datasource
     private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
 
+    /// Flag for owner identifire
+    private var isUserOwner: Bool {
+        return AppStorage.User.data?.userId == cardDetails?.cardCreator?.id
+    }
+
+
     // MARK: - Object Lifecycle
 
     init(id: Int) {
         self.businessCardId = id
         self.barItems = [
-            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
-            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
-            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
         ]
         self.selectedBarItem = barItems.first
 
@@ -86,6 +93,26 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         }
     }
 
+    func selectedRow(at indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+            Log.debug("Cannot select \(indexPath)")
+            return
+        }
+
+        switch item {
+        case .employee(let model):
+            // TODO: - Add segue to card details VC
+            break
+        case .service(let model):
+            // TODO: - Add segue to service creation
+            break
+        default:
+            break
+        }
+
+
+    }
+
 
 }
 
@@ -106,15 +133,21 @@ private extension BusinessCardDetailsPresenter {
         dataSource?[.cardDetails].items.removeAll()
         if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
             switch item {
+
             case .general:
                 dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
                                                    .map(path: ""),
                                                    .mapDirection]
+
+            case .services:
+                if isUserOwner {
+                    dataSource?[.cardDetails].items.append(.service(model: .add))
+                }
+
             case .contacts:
                 dataSource?[.cardDetails].items.append(.title(text: "Звязок:"))
                 dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
-
                 dataSource?[.cardDetails].items.append(.getInTouch)
 
                 let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
@@ -194,7 +227,7 @@ private extension BusinessCardDetailsPresenter {
 
                 self?.updateViewDataSource()
 
-                if AppStorage.User.data?.userId == cardDetails?.cardCreator?.id {
+                if self?.isUserOwner ?? false {
                     self?.view?.setupEditCardView()
                 } else {
                      self?.view?.setupHideCardView()

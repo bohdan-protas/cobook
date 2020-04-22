@@ -22,6 +22,7 @@ enum BusinessCardDetails {
         case mapDirection
         case employee(model: EmployeeModel?)
         case contacts(model: ContactsModel?)
+        case service(model: Service.ListItem)
     }
 
     struct HeaderInfoModel {
@@ -39,7 +40,7 @@ enum BusinessCardDetails {
     }
 
     enum BarSectionsTypeIndex: Int {
-        case general, contacts, team
+        case general, services, contacts, team
     }
 
 }

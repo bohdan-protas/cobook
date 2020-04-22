@@ -200,6 +200,9 @@
 		B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C1240020F4002E91F7 /* BasePresenter.swift */; };
 		B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */; };
 		B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C72400515B002E91F7 /* OnboardingPresenter.swift */; };
+		B8970B4924505763006676DF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4824505763006676DF /* Service.swift */; };
+		B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */; };
+		B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */; };
 		B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */; };
 		B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */; };
 		B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F022422B38300E06E53 /* Data + Extensions.swift */; };
@@ -440,6 +443,9 @@
 		B88906C1240020F4002E91F7 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDisplayableView.swift; sourceTree = "<group>"; };
 		B88906C72400515B002E91F7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
+		B8970B4824505763006676DF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListItemTableViewCell.swift; sourceTree = "<group>"; };
+		B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceListItemTableViewCell.xib; sourceTree = "<group>"; };
 		B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
 		B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManagerEndpoint.swift; sourceTree = "<group>"; };
 		B8AB3F022422B38300E06E53 /* Data + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extensions.swift"; sourceTree = "<group>"; };
@@ -991,6 +997,7 @@
 				B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */,
 				B8249251243E26A300A1AC39 /* CardsOverview.swift */,
 				B82079422444B49F00FCCC17 /* EmployModel.swift */,
+				B8970B4824505763006676DF /* Service.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1288,6 +1295,15 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */,
+				B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */,
+			);
+			path = ServiceListItemTableViewCell;
+			sourceTree = "<group>";
+		};
 		B8AB83E824280E7E0041B879 /* PersonalCardDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1364,6 +1380,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */,
 				B8237F35244740CE0006E8D1 /* ContactsTableViewCell */,
 				B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */,
 				B8559F87243C841100787349 /* ExpandableTextDescriptionTableViewCell */,
@@ -1521,6 +1538,7 @@
 				B8559F7C243C7E0E00787349 /* AddressInfoTableViewCell.xib in Resources */,
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
 				B8559F76243B785800787349 /* BusinessCardHeaderInfoTableViewCell.xib in Resources */,
+				B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */,
 				B8DE5E562419262600F4F60B /* TextViewTableViewCell.xib in Resources */,
 				B825741223F5621500C8CBF8 /* HelveticaNeueCyr-Medium.ttf in Resources */,
 				B823E8AC243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib in Resources */,
@@ -1635,6 +1653,7 @@
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
 				B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */,
+				B8970B4924505763006676DF /* Service.swift in Sources */,
 				B824E1B42437C5940091C491 /* CreatePersonalCardParametersApiModel.swift in Sources */,
 				B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */,
 				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
@@ -1760,6 +1779,7 @@
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
+				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,
 				B8249249243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift in Sources */,
 				B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */,

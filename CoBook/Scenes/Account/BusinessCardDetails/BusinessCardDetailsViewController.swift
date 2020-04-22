@@ -136,6 +136,10 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
         return 0
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 }
 
 // MARK: - MapDirectionTableViewCellDelegate
