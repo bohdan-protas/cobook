@@ -187,7 +187,6 @@ extension BusinessCardDetailsPresenter {
             configurator.contactsCellConfigurator = CellConfigurator { (cell, model: ContactsModel?, tableView, indexPath) -> ContactsTableViewCell in
                 cell.telephoneNumberLabel.text = model?.telNumber
 
-
                 let websiteLabelAttributes: [NSAttributedString.Key: Any] = [
                     .font: UIFont.HelveticaNeueCyr_Roman(size: 15),
                     .foregroundColor: UIColor.Theme.blackMiddle,

@@ -43,7 +43,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.barItems = [
             BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
             BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
-            /*BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),*/
+            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
         ]
         self.selectedBarItem = barItems.first
 
@@ -70,7 +70,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func onViewWillAppear() {
-        setupDataSource()
+        fetchDataSource()
     }
 
     func editBusinessCard() {
@@ -138,7 +138,7 @@ private extension BusinessCardDetailsPresenter {
 
 private extension BusinessCardDetailsPresenter {
 
-    func setupDataSource() {
+    func fetchDataSource() {
         let group = DispatchGroup()
         var errors = [Error]()
 
@@ -190,8 +190,16 @@ private extension BusinessCardDetailsPresenter {
                                                               position: $0.position,
                                                               telephone: $0.telephone?.number,
                                                               practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) }
+
+
                 self?.updateViewDataSource()
-                self?.view?.setupEditCardView()
+
+                if AppStorage.User.data?.userId == cardDetails?.cardCreator?.id {
+                    self?.view?.setupEditCardView()
+                } else {
+                     self?.view?.setupHideCardView()
+                }
+
                 self?.view?.reload()
             }
         }
