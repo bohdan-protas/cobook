@@ -10,13 +10,14 @@ import UIKit
 
 class CardPreviewTableViewCell: UITableViewCell {
 
-    @IBOutlet var titleImageView: DesignableTextPlaceholderImageView!
+    @IBOutlet var titleImageView: DesignableImageView!
     @IBOutlet var companyNameLabel: UILabel!
     @IBOutlet var proffesionLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!
 
     override func prepareForReuse() {
         titleImageView.cancelImageRequest()
+        titleImageView.image = nil
         companyNameLabel.text = ""
         proffesionLabel.text = ""
         telephoneNumberLabel.text = ""

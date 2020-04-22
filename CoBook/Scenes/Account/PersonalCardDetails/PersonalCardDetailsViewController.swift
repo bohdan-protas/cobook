@@ -9,22 +9,20 @@
 import UIKit
 import MessageUI
 
+fileprivate enum Layout {
+    static let estimatedRowHeight: CGFloat = 44
+    static let footerHeight: CGFloat = 84
+}
+
 class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetailsView {
 
-    enum Defaults {
-        static let estimatedRowHeight: CGFloat = 44
-        static let footerHeight: CGFloat = 84
-    }
-
-    // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
 
-    // MARK: Properties
     var presenter: PersonalCardDetailsPresenter?
     var dataSource: TableDataSource<PersonalCardDetailsDataSourceConfigurator>?
 
     private lazy var editCardView: EditCardView = {
-        let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+        let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.onEditTapped = { [weak self] in
             self?.presenter?.editPerconalCard()
         }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EmployersPreviewHorizontalListTableViewCellDataSource: class {
-    var employers: [CardPreviewModel] { get set }
+    var employers: [EmployeeModel] { get set }
 }
 
 protocol EmployersPreviewHorizontalListTableViewCellDelegate: class {
@@ -48,10 +48,13 @@ extension EmployersPreviewHorizontalListTableViewCell: UICollectionViewDataSourc
 
         let employee = dataSource?.employers[safe: indexPath.row]
         cell.titleLabel.text = "\(employee?.firstName ?? "") \(employee?.lastName ?? "")"
-        cell.professionLabel.text = employee?.profession
+        cell.professionLabel.text = employee?.practiceType?.title
         cell.telNumberLabel.text = employee?.telephone
-        cell.avatarTextPlaceholderImageView.setTextPlaceholderImage(withPath: employee?.image,
-                                                                    placeholderText: "\(employee?.firstName?.first?.uppercased() ?? "") \(employee?.lastName?.first?.uppercased() ?? "")")
+
+        let nameAbbr = "\(employee?.firstName?.first?.uppercased() ?? "") \(employee?.lastName?.first?.uppercased() ?? "")"
+        let textPlaceholderImage = nameAbbr.image(size: cell.avatarTextPlaceholderImageView.frame.size)
+
+        cell.avatarTextPlaceholderImageView.setImage(withPath: employee?.avatar, placeholderImage: textPlaceholderImage)
 
         return cell
     }

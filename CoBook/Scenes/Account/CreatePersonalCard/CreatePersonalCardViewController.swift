@@ -9,44 +9,45 @@
 import UIKit
 import GooglePlaces
 
+fileprivate enum Layout {
+    static let estimatedRowHeight: CGFloat = 44
+    static let footerHeight: CGFloat = 124
+}
+
 class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
 
-    enum Defaults {
-        static let estimatedRowHeight: CGFloat = 44
-        static let footerHeight: CGFloat = 124
-    }
-
-    // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
 
-    // MARK: Properties
-    private var placeCompletion: ((GMSPlace) -> Void)?
-    var presenter = CreatePersonalCardPresenter()
-
-    private lazy var imagePickerController: UIImagePickerController = {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.allowsEditing = true
-        controller.sourceType = .photoLibrary
-        controller.modalPresentationStyle = .overFullScreen
-        return controller
-    }()
-
     private lazy var cardSaveView: CardSaveView = {
-        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.footerHeight)))
+        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.onSaveTapped = { [weak self] in
             self?.presenter.createPerconalCard()
         }
         return view
     }()
 
-    // MARK: Lifecycle
+    private lazy var imagePicker: ImagePicker = {
+        let imagePicker = ImagePicker(presentationController: self, allowsEditing: true)
+        return imagePicker
+    }()
+
+    var presenter = CreatePersonalCardPresenter()
+    private var placeCompletion: ((GMSPlace) -> Void)?
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupLayout()
-
         presenter.attachView(self)
         presenter.onViewDidLoad()
+    }
+
+    // MARK: - CreatePersonalCardView
+
+    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?) {
+        tableView.dataSource = dataSource
     }
 
     func setupSaveCardView() {
@@ -69,42 +70,46 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         cardSaveView.saveButton.isEnabled = isEnabled
     }
 
-    func presentPickerController() {
-        present(imagePickerController, animated: true, completion: nil)
-    }
-
-    
-
 
 }
 
-// MARK: Privates
+// MARK: - Privates
+
 private extension CreatePersonalCardViewController {
 
     func setupLayout() {
         self.navigationItem.title = "Створення персональної візитки"
 
-        tableView.estimatedRowHeight = Defaults.estimatedRowHeight
+        tableView.estimatedRowHeight = Layout.estimatedRowHeight
         tableView.delegate = self
     }
 
 
 }
 
-// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
-extension CreatePersonalCardViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+// MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
+extension CreatePersonalCardViewController: CardAvatarPhotoManagmentTableViewCellDelegate {
 
-        guard let image = info[.editedImage] as? UIImage else { return }
-        presenter.userImagePicked(image)
+    func didChangeAvatarPhoto(_ view: CardAvatarPhotoManagmentTableViewCell) {
+        self.view.endEditing(true)
+
+        imagePicker.cropViewControllerAspectRatioPreset = .presetSquare
+
+        self.imagePicker.onImagePicked = { image in
+            view.set(image: image)
+            self.presenter.uploadUserImage(image: image)
+        }
+
+        self.imagePicker.present(dismissView: view.avatarImageView)
+
     }
 
 
 }
 
 // MARK: - UITableViewDelegate
+
 extension CreatePersonalCardViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -119,6 +124,7 @@ extension CreatePersonalCardViewController: UITableViewDelegate {
 }
 
 // MARK: - GMSAutocompleteViewControllerDelegate
+
 extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegate {
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {

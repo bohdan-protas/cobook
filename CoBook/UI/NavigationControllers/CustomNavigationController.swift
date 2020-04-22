@@ -23,21 +23,6 @@ class CustomNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        /// back button image and color
-        navigationBar.backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back")
-        navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back")
-        navigationBar.tintColor = UIColor.Theme.blackMiddle
-
-        /// setup navigation title
-        navigationBar.titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle]
-
-        /// make navigation bg transparent
-        navigationBar.setBackgroundImage(UIColor.Theme.grayBG.filledImage, for: UIBarMetrics.default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = false
-        navigationBar.barTintColor = .white
-
         self.delegate = self
     }
 

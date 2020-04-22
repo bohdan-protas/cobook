@@ -19,19 +19,19 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="120" id="KGk-i7-Jjw" customClass="CardBackgroundManagmentTableViewCell" customModule="CoBook" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="daL-JI-hCB">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daL-JI-hCB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="daL-JI-hCB" secondAttribute="height" multiplier="25:8" id="bNS-8S-2j0"/>
+                            <constraint firstAttribute="width" secondItem="daL-JI-hCB" secondAttribute="height" multiplier="800:260" id="bNS-8S-2j0"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kHJ-nY-gX7">
-                        <rect key="frame" x="109" y="43" width="157.5" height="34.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kHJ-nY-gX7">
+                        <rect key="frame" x="109" y="42.5" width="157.5" height="35"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Додати фото обкладинки" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaB-nk-o3g">
                                 <rect key="frame" x="0.0" y="0.0" width="157.5" height="16.5"/>
@@ -42,7 +42,7 @@
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(800x260)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAS-zb-Y03">
-                                <rect key="frame" x="0.0" y="20.5" width="157.5" height="14"/>
+                                <rect key="frame" x="0.0" y="21" width="157.5" height="14"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -51,8 +51,8 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6Q-0f-J5b">
-                        <rect key="frame" x="109" y="43" width="157.5" height="34.5"/>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6Q-0f-J5b">
+                        <rect key="frame" x="109" y="42.5" width="157.5" height="35.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <size key="titleShadowOffset" width="1" height="1"/>
                         <state key="normal">

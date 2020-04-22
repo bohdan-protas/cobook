@@ -40,10 +40,12 @@ struct PlaceModel {
 struct CardAvatarManagmentCellModel {
     let sourceType: CardAvatarPhotoManagmentTableViewCell.SourceType
     let imagePath: String?
+    var imageData: Data?
 }
 
 struct BackgroundManagmentImageCellModel {
     var imagePath: String?
+    var imageData: Data?
 }
 
 struct CardPreviewModel: Equatable {
@@ -53,18 +55,16 @@ struct CardPreviewModel: Equatable {
     var lastName: String?
     var profession: String?
     var telephone: String?
-
-    static func == (lhs: CardPreviewModel, rhs: CardPreviewModel) -> Bool {
-        if let lhsId = lhs.id, let rhsId = rhs.id {
-            return lhsId == rhsId
-        } else {
-            return false
-        }
-    }
 }
 
 struct AddressInfoCellModel {
     var mainAddress: String?
     var subAdress: String?
     var schedule: String?
+}
+
+struct ContactsModel {
+    var telNumber: String?
+    var website: String?
+    var email: String?
 }

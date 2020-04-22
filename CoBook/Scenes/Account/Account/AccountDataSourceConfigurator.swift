@@ -37,7 +37,10 @@ struct AccountDataSourceConfigurator: CellConfiguratorType {
         }
 
         accountHeaderCellConfigurator = CellConfigurator { (cell, model: Account.UserInfoHeaderModel?, tableView, indexPath) -> AccountHeaderTableViewCell in
-            cell.avatarTextPlaceholderImageView.setTextPlaceholderImage(withPath: model?.avatarUrl, placeholderText: "\(model?.firstName?.first?.uppercased() ?? "") \(model?.lastName?.first?.uppercased() ?? "")")
+            let nameAbbr = "\(model?.firstName?.first?.uppercased() ?? "") \(model?.lastName?.first?.uppercased() ?? "")"
+            let textPlaceholderImage = nameAbbr.image(size: cell.avatarTextPlaceholderImageView.frame.size)
+
+            cell.avatarTextPlaceholderImageView.setImage(withPath: model?.avatarUrl, placeholderImage: textPlaceholderImage)
             cell.userNameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
             cell.emailLabel.text = model?.email
             cell.telephoneNumberLabel.text = model?.telephone
@@ -45,10 +48,14 @@ struct AccountDataSourceConfigurator: CellConfiguratorType {
         }
 
         cardPreviewConfigurator = CellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
+            let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
+            let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
+
+            cell.titleImageView.setImage(withPath: model.image, placeholderImage: textPlaceholderImage)
             cell.proffesionLabel.text = model.profession
             cell.telephoneNumberLabel.text = model.telephone
             cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-            cell.titleImageView.setTextPlaceholderImage(withPath: model.image, placeholderText: "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")")
+
             return cell
         }
     }

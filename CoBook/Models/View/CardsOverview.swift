@@ -19,5 +19,14 @@ enum CardsOverview {
         case allCards, personalCards, businessCards, inMyRegionCards
     }
 
+    enum SectionAccessoryIndex: Int {
+        case header
+        case cards
+    }
+
+    enum SearchSectionAccessoryIndex: Int {
+        case header, barSections
+    }
+
 
 }

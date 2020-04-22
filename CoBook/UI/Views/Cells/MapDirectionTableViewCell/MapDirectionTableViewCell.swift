@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol MapDirectionTableViewCellDelegate: class {
+    func didOpenGoogleMaps(_ view: MapDirectionTableViewCell)
+}
+
 class MapDirectionTableViewCell: UITableViewCell {
 
     @IBOutlet var mapDirectionButton: UIButton!
+    weak var delegate: MapDirectionTableViewCellDelegate?
 
     @IBAction func mapDirectionButtonTapped(_ sender: Any) {
+        delegate?.didOpenGoogleMaps(self)
     }
 
     override func awakeFromNib() {

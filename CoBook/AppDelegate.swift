@@ -20,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
+        /// back button image and color
+        UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back")
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back")
+        UINavigationBar.appearance().tintColor = UIColor.Theme.blackMiddle
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle]
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().barTintColor = UIColor.Theme.grayBG
+
         // Tabbar appearance
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().isTranslucent = false

@@ -9,8 +9,7 @@
 import UIKit
 
 protocol CardAvatarPhotoManagmentTableViewCellDelegate: class {
-    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didSelectAction sender: UIButton)
-    func cardAvatarPhotoManagmentView(_ view: CardAvatarPhotoManagmentTableViewCell, didChangeAction sender: UIButton)
+    func didChangeAvatarPhoto(_ view: CardAvatarPhotoManagmentTableViewCell)
 }
 
 class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
@@ -35,9 +34,21 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
                 return "Добавити логотип компанії"
             }
         }
+
+        var titleColor: UIColor {
+            switch self {
+
+            case .personalCard:
+                return UIColor.Theme.blackMiddle
+            case .businessCard:
+                return UIColor.Theme.greenDark
+
+            }
+        }
     }
 
-    // MARK: Properties
+    // MARK: - Properties
+
     @IBOutlet var avatarPaddingConstaints: [NSLayoutConstraint]!
     @IBOutlet var avatarImageView: DesignableImageView!
     @IBOutlet var avatarSelectionButton: DesignableButton!
@@ -48,30 +59,39 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
         didSet {
             avatarSelectionButton.setTitle(sourceType?.selectedStateTitle, for: .selected)
             avatarSelectionButton.setTitle(sourceType?.emptyStateTitle, for: .normal)
+            avatarSelectionButton.setTitleColor(sourceType?.titleColor, for: .normal)
+            avatarSelectionButton.setTitleColor(sourceType?.titleColor, for: .selected)
         }
     }
+
+    // MARK: - Actions
 
     @IBAction func avatarSelectionAction(_ sender: UIButton) {
-        if sender.isSelected {
-            delegate?.cardAvatarPhotoManagmentView(self, didChangeAction: sender)
-        } else {
-            delegate?.cardAvatarPhotoManagmentView(self, didSelectAction: sender)
-        }
+        delegate?.didChangeAvatarPhoto(self)
     }
 
-    // MARK: Public
-    func fill(sourceType: SourceType, imagePath: String?) {
-        self.sourceType = sourceType
+    // MARK: - Public
 
-        guard let str = imagePath, let url = URL.init(string: str) else {
+    func set(sourceType: SourceType) {
+        self.sourceType = sourceType
+    }
+
+    func set(imagePath: String?) {
+        guard let str = imagePath else {
             avatarImageView.image = UIImage(named: "ic_user")
             self.avatarSelectionButton.isSelected = false
             return
         }
         
-        avatarImageView.setImage(withURL: url, placeholderImage: UIImage(named: "ic_user")) { response in
+        avatarImageView.setImage(withPath: str, placeholderImage: UIImage(named: "ic_user")) { response in
             self.avatarSelectionButton.isSelected = response.error == nil
+            self.avatarSelectionButton.isSelected = true
         }
+    }
+
+    func set(image: UIImage?) {
+        avatarImageView.image = image
+        avatarSelectionButton.isSelected = image != nil
     }
 
     

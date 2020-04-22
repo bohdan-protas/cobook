@@ -10,13 +10,13 @@ import UIKit
 import Alamofire
 
 protocol SearchTableViewControllerDelegate: class {
-    func searchTableViewController(_ controller: SearchTableViewController, didSelected item: CardPreviewModel?)
+    func searchTableViewController(_ controller: SearchTableViewController, didSelected item: EmployeeModel?)
 }
 
 class SearchTableViewController: UITableViewController, AlertDisplayableView {
 
     /// Data model for the table view.
-    var previewCards = [CardPreviewModel]()
+    var previewCards = [EmployeeModel]()
 
     /// Current search request
     private var pendingRequestWorkItem: DispatchWorkItem?
@@ -34,6 +34,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
     weak var delegate: SearchTableViewControllerDelegate?
 
     // MARK: - View Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +52,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
     }
 
     // MARK: - Table view data source
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return previewCards.count
     }
@@ -59,10 +61,13 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
         let cell = tableView.dequeueReusableCell(withIdentifier: CardPreviewTableViewCell.identifier, for: indexPath) as! CardPreviewTableViewCell
         let model = previewCards[indexPath.row]
 
-        cell.proffesionLabel.text = model.profession
+        cell.proffesionLabel.text = model.practiceType?.title
         cell.telephoneNumberLabel.text = model.telephone
         cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-        cell.titleImageView.setTextPlaceholderImage(withPath: model.image, placeholderText: "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")")
+
+        let nameAbbr = model.nameAbbreviation
+        let textPlaceholderImage = nameAbbr?.image(size: cell.titleImageView.frame.size)
+        cell.titleImageView.setImage(withPath: model.avatar, placeholderImage: textPlaceholderImage)
 
         return cell
     }
@@ -107,7 +112,14 @@ extension SearchTableViewController: UISearchBarDelegate {
                 guard let strongSelf = self else { return }
                 switch result {
                 case .success(let response):
-                    strongSelf.previewCards = response?.compactMap { CardPreviewModel(id: $0.id, image: $0.avatar?.sourceUrl, firstName: $0.firstName, lastName: $0.lastName, profession: $0.position, telephone: $0.telephone?.number) } ?? []
+                    strongSelf.previewCards = response?.compactMap { EmployeeModel(userId: $0.userId,
+                                                                                   cardId: nil,
+                                                                                   firstName: $0.firstName,
+                                                                                   lastName: $0.lastName,
+                                                                                   avatar: $0.avatar?.sourceUrl,
+                                                                                   position: $0.position,
+                                                                                   telephone: $0.telephone?.number,
+                                                                                   practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) } ?? []
                     strongSelf.tableView.reloadData()
                 case .failure(let error):
                     strongSelf.errorAlert(message: error.localizedDescription)

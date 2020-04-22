@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 protocol CardBackgroundManagmentTableViewCellDelegate: class {
-    func didTappedOnPhoto(_ cell: CardBackgroundManagmentTableViewCell)
+    func didChangeBackgroundPhoto(_ view: CardBackgroundManagmentTableViewCell)
 }
 
 class CardBackgroundManagmentTableViewCell: UITableViewCell {
@@ -56,7 +56,12 @@ class CardBackgroundManagmentTableViewCell: UITableViewCell {
     }
 
     @IBAction func changePhotoTapped(_ sender: Any) {
-        delegate?.didTappedOnPhoto(self)
+        delegate?.didChangeBackgroundPhoto(self)
+    }
+
+    func set(image: UIImage?) {
+        bgImageView.image = image
+        currentState = image == nil ? .empty : .filled
     }
 
     func set(imagePath: String?) {
@@ -67,7 +72,6 @@ class CardBackgroundManagmentTableViewCell: UITableViewCell {
         } else {
             currentState = .empty
         }
-
     }
     
 }

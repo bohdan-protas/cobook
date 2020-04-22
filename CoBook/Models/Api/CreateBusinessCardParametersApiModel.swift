@@ -50,7 +50,7 @@ struct CreateBusinessCardParametersApiModel {
                 }
         }
 
-        self.employeeIds = model.employers.compactMap { $0.id }
+        self.employeeIds = model.employers.compactMap { $0.userId }
     }
 }
 

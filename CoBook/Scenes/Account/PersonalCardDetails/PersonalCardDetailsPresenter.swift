@@ -19,7 +19,6 @@ protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
 
 class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 
-    // MARK: Properties
     private weak var view: PersonalCardDetailsView?
     private lazy var dataSourceConfigurator: PersonalCardDetailsDataSourceConfigurator = {
         let dataSourceConfigurator = PersonalCardDetailsDataSourceConfigurator(presenter: self)
@@ -79,6 +78,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 }
 
 // MARK: - PersonalCardDetailsPresenter
+
 private extension PersonalCardDetailsPresenter {
 
     func updateViewDataSource() {
@@ -105,6 +105,7 @@ private extension PersonalCardDetailsPresenter {
 }
 
 // MARK: - SocialsListTableViewCellDataSource
+
 extension PersonalCardDetailsPresenter: SocialsListTableViewCellDataSource {
 
     var socials: [Social.ListItem] {
@@ -119,6 +120,7 @@ extension PersonalCardDetailsPresenter: SocialsListTableViewCellDataSource {
 }
 
 // MARK: - SocialsListTableViewCellDelegate
+
 extension PersonalCardDetailsPresenter: SocialsListTableViewCellDelegate {
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem) {
@@ -141,6 +143,7 @@ extension PersonalCardDetailsPresenter: SocialsListTableViewCellDelegate {
 }
 
 // MARK: - GetInTouchTableViewCellDelegate
+
 extension PersonalCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredCallAction(_ cell: GetInTouchTableViewCell) {

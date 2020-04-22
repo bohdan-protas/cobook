@@ -20,7 +20,8 @@ enum BusinessCardDetails {
         case addressInfo(model: AddressInfoCellModel)
         case map(path: String?)
         case mapDirection
-        case employee(model: CardItemViewModel?)
+        case employee(model: EmployeeModel?)
+        case contacts(model: ContactsModel?)
     }
 
     struct HeaderInfoModel {
@@ -30,6 +31,15 @@ enum BusinessCardDetails {
         var profession: String?
         var telephoneNumber: String?
         var websiteAddress: String?
+    }
+
+    enum SectionAccessoryIndex: Int {
+        case userHeader
+        case cardDetails
+    }
+
+    enum BarSectionsTypeIndex: Int {
+        case general, contacts, team
     }
 
 }

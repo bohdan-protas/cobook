@@ -14,7 +14,7 @@ enum APIConstants {
         get {
             var components = URLComponents()
             components.scheme   = "https"
-            components.host     = "3.124.214.212"
+            components.host     = "cobook.app"
             components.path     = Path.api.rawValue
             return components
         }
@@ -26,7 +26,7 @@ enum APIConstants {
     }
 
     enum Google {
-        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"  //"AIzaSyD9sxyl5oE2f8KhwRu89ew0l_7FZ_hPZKM"
+        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"
     }
 
     enum ParameterKey {
@@ -42,10 +42,16 @@ enum APIConstants {
         static let id           = "id"
     }
 
+    static let additionalAcceptableImageContentTypes: Set<String> = [
+        "image/*"
+    ]
+
+    enum ContentType: String {
+        case json = "application/json"
+        case xFormUrlencoded = "application/x-www-form-urlencoded"
+    }
+
 
 }
 
-enum ContentType: String {
-    case json = "application/json"
-    case xFormUrlencoded = "application/x-www-form-urlencoded"
-}
+
