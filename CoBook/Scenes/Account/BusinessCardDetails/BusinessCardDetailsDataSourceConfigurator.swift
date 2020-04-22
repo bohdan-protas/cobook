@@ -193,7 +193,7 @@ extension BusinessCardDetailsPresenter {
                     .foregroundColor: UIColor.Theme.blackMiddle,
                     .underlineStyle: NSUnderlineStyle.single.rawValue]
 
-                let attributeString = NSMutableAttributedString(string: model?.website ?? "", attributes: yourAttributes)
+                let attributeString = NSMutableAttributedString(string: model?.website ?? "", attributes: websiteLabelAttributes)
 
                 cell.websiteButton.setAttributedTitle(attributeString, for: .normal)
                 cell.emailLabel.text = model?.email
