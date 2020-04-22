@@ -17,11 +17,11 @@ class CreateServicePresenter: NSObject, BasePresenter {
     /// Managed view
     weak var view: CreateServiceView?
 
-    /// View datasource
+    /// View data source
     private var dataSource: DataSource<CreateServiceDataSourceConfigurator>?
 
-
     // MARK: - Object Life Cycle
+
     override init() {
         super.init()
 
@@ -41,7 +41,7 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
 }
 
-// MARK: - CreateServicePresenter
+// MARK: - Updating View Data Source
 
 private extension CreateServicePresenter {
 

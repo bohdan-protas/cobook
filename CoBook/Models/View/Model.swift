@@ -68,3 +68,8 @@ struct ContactsModel {
     var website: String?
     var email: String?
 }
+
+struct CheckboxModel {
+    var title: String?
+    var isSelected: Bool = false
+}

@@ -10,13 +10,33 @@ import Foundation
 
 enum Service {
 
-    enum EditItem {
+    // MARK: - Creation
+
+    enum CreationItem {
+        case gallery
+        case sectionSeparator
+        case title(text: String)
+        case textField(model: TextFieldModel)
+        case textView(model: TextFieldModel)
+        case checkbox
+    }
+
+    enum CreationSectionAccessoryIndex: Int {
+        case header
+    }
+
+
+    // MARK: - Details
+
+    enum DetailsItem {
 
     }
 
-    enum CreateItem {
-
+    enum DetailsSectionAccessoryIndex: Int {
+        case header
     }
+
+    // MARK: - Helpers
 
     /// Interface for add&view preview items
     enum PreviewListItem {

@@ -10,13 +10,12 @@ import UIKit
 
 struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
 
-    func reuseIdentifier(for item: Service.CreateItem, indexPath: IndexPath) -> String {
+    func reuseIdentifier(for item: Service.CreationItem, indexPath: IndexPath) -> String {
         return ""
     }
 
-    func configuredCell(for item: Service.CreateItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    func configuredCell(for item: Service.CreationItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
-
     }
 
     func registerCells(in tableView: UITableView) {
