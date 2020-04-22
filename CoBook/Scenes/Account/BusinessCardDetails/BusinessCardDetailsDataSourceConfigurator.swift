@@ -188,13 +188,12 @@ extension BusinessCardDetailsPresenter {
                 cell.telephoneNumberLabel.text = model?.telNumber
 
 
-                let yourAttributes: [NSAttributedString.Key: Any] = [
+                let websiteLabelAttributes: [NSAttributedString.Key: Any] = [
                     .font: UIFont.HelveticaNeueCyr_Roman(size: 15),
                     .foregroundColor: UIColor.Theme.blackMiddle,
                     .underlineStyle: NSUnderlineStyle.single.rawValue]
 
-
-                let attributeString = NSMutableAttributedString(string: model?.website ?? "", attributes: yourAttributes)
+                let attributeString = NSMutableAttributedString(string: model?.website ?? "", attributes: websiteLabelAttributes)
 
                 cell.websiteButton.setAttributedTitle(attributeString, for: .normal)
                 cell.emailLabel.text = model?.email
