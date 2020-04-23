@@ -121,3 +121,19 @@ extension CreateServicePresenter: TextViewTableViewCellDelegate {
 
 
 }
+
+// MARK: - HorizontalPhotosListDataSource
+
+extension CreateServicePresenter: HorizontalPhotosListDataSource {
+
+    var photos: [EditablePhotoListItem] {
+        get {
+            return details.photos
+        }
+        set {
+            details.photos = newValue
+        }
+    }
+
+
+}

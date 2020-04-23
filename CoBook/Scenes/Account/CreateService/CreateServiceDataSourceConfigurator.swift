@@ -72,6 +72,9 @@ extension CreateServicePresenter {
 
             // galleryConfigurator
             configurator.galleryConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> HorizontalPhotosListTableViewCell in
+                cell.isEditable = true
+                cell.dataSource = self
+                cell.delegate = self
                 return cell
             }
 

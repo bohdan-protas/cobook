@@ -26,6 +26,24 @@ class HorizontalPhotosListTableViewCell: UITableViewCell {
     /// data source delegation
     weak var dataSource: HorizontalPhotosListDataSource?
 
+    var isEditable: Bool = false {
+        didSet {
+            if isEditable {
+                if dataSource?.photos.isEmpty ?? false {
+                    self.dataSource?.photos = [.add]
+                } else {
+                    switch dataSource?.photos.last {
+                    case .view:
+                        self.dataSource?.photos.append(.add)
+                    default:
+                        break
+                    }
+                }
+            }
+            self.photosCollectionView.reloadData()
+        }
+    }
+
     // MARK: - View Life Cycle
 
     override func awakeFromNib() {

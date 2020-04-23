@@ -54,7 +54,7 @@ enum Service {
 
     /// Model for describing data on details screen
     struct CreationDetailsModel {
-
+        var photos: [EditablePhotoListItem] = []
     }
 
 
