@@ -118,6 +118,11 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         present(alertController, animated: true, completion: nil)
     }
 
+    func goToCreateService() {
+        let controller: CreateServiceViewController = self.storyboard!.initiateViewControllerFromType()
+        push(controller: controller, animated: true)
+    }
+
 
 }
 
@@ -138,6 +143,7 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.selectedRow(at: indexPath)
     }
 
 }

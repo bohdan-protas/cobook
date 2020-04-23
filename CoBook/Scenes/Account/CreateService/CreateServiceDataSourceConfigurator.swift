@@ -10,16 +10,103 @@ import UIKit
 
 struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
 
+    var galleryConfigurator: CellConfigurator<Void?, HorizontalPhotosListTableViewCell>?
+    var sectionSeparatorConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
+    var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
+    var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
+
     func reuseIdentifier(for item: Service.CreationItem, indexPath: IndexPath) -> String {
-        return ""
+        switch item {
+        case .gallery:
+            return galleryConfigurator?.reuseIdentifier ?? ""
+        case .sectionSeparator:
+            return sectionSeparatorConfigurator?.reuseIdentifier ?? ""
+        case .title:
+            return sectionTitleConfigurator?.reuseIdentifier ?? ""
+        case .textField:
+            return textFieldConfigurator?.reuseIdentifier ?? ""
+        case .textView:
+            return textViewConfigurator?.reuseIdentifier ?? ""
+        default: return ""
+        }
     }
 
     func configuredCell(for item: Service.CreationItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        switch item {
+        case .gallery:
+            return galleryConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .sectionSeparator:
+            return sectionSeparatorConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .title(let text):
+            return sectionTitleConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .textField(let model):
+            return textFieldConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .textView(let model):
+            return textViewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .checkbox:
+            return UITableViewCell()
+        }
     }
 
     func registerCells(in tableView: UITableView) {
+        galleryConfigurator?.registerCells(in: tableView)
+        sectionSeparatorConfigurator?.registerCells(in: tableView)
+        sectionTitleConfigurator?.registerCells(in: tableView)
+        textFieldConfigurator?.registerCells(in: tableView)
+        textViewConfigurator?.registerCells(in: tableView)
+    }
 
+
+}
+
+// MARK: - CreateServicePresenter data source configuration
+
+extension CreateServicePresenter {
+
+    /// Dependency injection to BusinessCardDetailsPresenter
+    var dataSouceConfigurator: CreateServiceDataSourceConfigurator {
+        get {
+
+            var configurator = CreateServiceDataSourceConfigurator()
+
+            // galleryConfigurator
+            configurator.galleryConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> HorizontalPhotosListTableViewCell in
+                return cell
+            }
+
+            // sectionTitleConfigurator
+            configurator.sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+                cell.titleLabel.text = model
+                return cell
+            }
+
+            // sectionHeaderConfigurator
+            configurator.sectionSeparatorConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+                return cell
+            }
+
+            // textFieldConfigurator
+            configurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+                cell.delegate = self
+                cell.textField.text = model.text
+                cell.textKeyPath = model.associatedKeyPath
+                cell.textField.placeholder = model.placeholder
+                cell.textField.keyboardType = model.keyboardType
+                return cell
+            }
+
+            // textViewConfigurator
+            configurator.textViewConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
+                cell.delegate = self
+                cell.textView.text = model.text
+                cell.textView.placeholder = model.placeholder
+                cell.textKeyPath = model.associatedKeyPath
+                return cell
+            }
+
+            return configurator
+        }
     }
 
 

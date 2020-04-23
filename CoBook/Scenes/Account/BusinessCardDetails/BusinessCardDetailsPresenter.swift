@@ -17,6 +17,8 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func setupHideCardView()
     func sendEmail(to address: String)
     func openSettings()
+
+    func goToCreateService()
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -104,8 +106,11 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             // TODO: - Add segue to card details VC
             break
         case .service(let model):
-            // TODO: - Add segue to service creation
-            break
+            switch model {
+            case .view(let model): break
+            case .add:
+                view?.goToCreateService()
+            }
         default:
             break
         }

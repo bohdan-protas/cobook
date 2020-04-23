@@ -93,7 +93,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         pendingSearchResultWorkItem?.cancel()
 
         if query.isEmpty {
-            searchDataSource?[.header].items.removeAll()
+            searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items.removeAll()
             view?.reloadSearch(resultText: "Немає результатів пошуку")
             return
         }
@@ -119,7 +119,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                                                                                telephoneNumber: $0.contactTelephone?.number) } ?? []
 
 
-                    strongSelf.searchDataSource?[.header].items = searchCards.map { .cardItem(model: $0) }
+                    strongSelf.searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items = searchCards.map { .cardItem(model: $0) }
                     let text = searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count)"
                     strongSelf.view?.reloadSearch(resultText: text)
 

@@ -23,8 +23,9 @@ enum Service {
 
     enum CreationSectionAccessoryIndex: Int {
         case header
+        case contacts
+        case description
     }
-
 
     // MARK: - Details
 
@@ -52,7 +53,7 @@ enum Service {
     }
 
     /// Model for describing data on details screen
-    struct DetailsModel {
+    struct CreationDetailsModel {
 
     }
 
