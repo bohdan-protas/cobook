@@ -11,13 +11,8 @@ import UIKit
 class EditablePhotoListItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var titleImageView: UIImageView!
-    @IBOutlet var addPhotoButton: DesignableButton!
+    @IBOutlet var addPhotoPlaceholderView: DesignableView!
 
-    // MARK: - Actions
-
-    @IBAction func addPhotoButtonTapped(_ sender: Any) {
-
-    }
 
     // MARK: - View Life Cycle
 
@@ -29,7 +24,6 @@ class EditablePhotoListItemCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleImageView.cancelImageRequest()
-        titleImageView.image = nil
     }
 
 }

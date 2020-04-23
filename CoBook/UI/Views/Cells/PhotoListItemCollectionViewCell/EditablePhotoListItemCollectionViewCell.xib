@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="SFProDisplay-Medium.ttf">
-            <string>SFProDisplay-Medium</string>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -32,59 +32,70 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pG-d7-oRB" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgQ-NS-Nsb" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
-                        <color key="backgroundColor" name="Theme_Gray-Background"/>
-                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
-                        <color key="tintColor" name="Theme_Green-Dark"/>
-                        <state key="normal" title="Додати фото">
-                            <color key="titleColor" name="Theme_Green-Dark"/>
-                        </state>
-                        <state key="selected">
-                            <color key="titleColor" name="Theme_Green"/>
-                        </state>
-                        <state key="highlighted">
-                            <color key="titleColor" name="Theme_Green"/>
-                        </state>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Wgs-SN-pWe">
+                                <rect key="frame" x="34" y="58" width="92.5" height="44"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_interests_plus" translatesAutoresizingMaskIntoConstraints="NO" id="X8U-Bv-9c6">
+                                        <rect key="frame" x="38" y="0.0" width="16" height="16"/>
+                                        <color key="tintColor" name="Theme_Green-Dark"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="VJE-yG-Wbi"/>
+                                            <constraint firstAttribute="height" constant="16" id="mHI-wa-ixn"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Додати фото" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZU-AD-4pL">
+                                        <rect key="frame" x="0.0" y="28" width="92.5" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="Cf4-XD-sM3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
+                                        <color key="textColor" name="Theme_Green-Dark"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Wgs-SN-pWe" firstAttribute="centerY" secondItem="ZgQ-NS-Nsb" secondAttribute="centerY" id="Q67-0h-P8d"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Wgs-SN-pWe" secondAttribute="trailing" id="dSM-IA-0k6"/>
+                            <constraint firstItem="Wgs-SN-pWe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZgQ-NS-Nsb" secondAttribute="leading" id="l56-pN-THC"/>
+                            <constraint firstItem="Wgs-SN-pWe" firstAttribute="centerX" secondItem="ZgQ-NS-Nsb" secondAttribute="centerX" id="trS-Lp-mkn"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="8"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
-                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <connections>
-                            <action selector="addPhotoButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="K9Y-4h-WKn"/>
-                        </connections>
-                    </button>
+                    </view>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="ZgQ-NS-Nsb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0Ku-4U-x1X"/>
+                <constraint firstItem="ZgQ-NS-Nsb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5mX-Sy-Aon"/>
                 <constraint firstAttribute="bottom" secondItem="ZoQ-ds-VOU" secondAttribute="bottom" id="FzU-h3-peV"/>
-                <constraint firstItem="9pG-d7-oRB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="GSg-UY-vy0"/>
                 <constraint firstAttribute="trailing" secondItem="ZoQ-ds-VOU" secondAttribute="trailing" id="HOy-bB-6gd"/>
                 <constraint firstItem="ZoQ-ds-VOU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="OaF-Gp-hai"/>
-                <constraint firstAttribute="trailing" secondItem="9pG-d7-oRB" secondAttribute="trailing" id="USW-KY-Y8V"/>
-                <constraint firstItem="9pG-d7-oRB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XCO-Nz-PW4"/>
-                <constraint firstAttribute="bottom" secondItem="9pG-d7-oRB" secondAttribute="bottom" id="e6p-XG-8aB"/>
+                <constraint firstAttribute="bottom" secondItem="ZgQ-NS-Nsb" secondAttribute="bottom" id="RVX-kg-5iT"/>
                 <constraint firstItem="ZoQ-ds-VOU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g6d-ws-pM9"/>
+                <constraint firstAttribute="trailing" secondItem="ZgQ-NS-Nsb" secondAttribute="trailing" id="zWc-pG-Ogl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="160" height="160"/>
             <connections>
-                <outlet property="addPhotoButton" destination="9pG-d7-oRB" id="3Pi-Ik-30Z"/>
+                <outlet property="addPhotoPlaceholderView" destination="ZgQ-NS-Nsb" id="W5T-mB-oPo"/>
                 <outlet property="titleImageView" destination="ZoQ-ds-VOU" id="Rl4-ti-DOs"/>
             </connections>
             <point key="canvasLocation" x="217.39130434782609" y="190.17857142857142"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_interests_plus" width="11" height="11"/>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Theme_Green">
-            <color red="0.48199999332427979" green="0.73299998044967651" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Green-Dark">
             <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

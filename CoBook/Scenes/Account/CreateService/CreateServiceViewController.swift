@@ -96,3 +96,18 @@ extension CreateServiceViewController: UITableViewDelegate {
 
 
 }
+
+// MARK: - HorizontalPhotosListDelegate
+
+extension CreateServiceViewController: HorizontalPhotosListDelegate {
+
+    func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell) {
+        self.view.endEditing(true)
+        self.imagePicker.onImagePicked = { image in
+            Log.debug("picked image")
+        }
+        self.imagePicker.present()
+    }
+
+
+}

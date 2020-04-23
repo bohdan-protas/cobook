@@ -9,7 +9,7 @@
 import UIKit
 
 protocol HorizontalPhotosListDelegate: class {
-
+    func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell)
 }
 
 protocol HorizontalPhotosListDataSource: class {
@@ -56,6 +56,32 @@ class HorizontalPhotosListTableViewCell: UITableViewCell {
         photosCollectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
 
+    // MARK: - Public
+
+    func create(socialListItem: EditablePhotoListItem) {
+        if isEditable && photosCollectionView.numberOfItems(inSection: 0) >= 1 {
+            photosCollectionView.performBatchUpdates({
+                self.dataSource?.photos.insert(socialListItem, at: photosCollectionView.numberOfItems(inSection: 0)-1)
+                self.photosCollectionView.insertItems(at: [IndexPath(item: photosCollectionView.numberOfItems(inSection: 0)-1, section: 0)])
+            }) { (finished) in
+
+            }
+        }
+    }
+
+//    func updateAt(indexPath: IndexPath, with item: Social.ListItem) {
+//        self.dataSource?.socials[safe: indexPath.row] = item
+//        collectionView.reloadItems(at: [indexPath])
+//    }
+//
+//    func deleteAt(indexPath: IndexPath) {
+//        collectionView.performBatchUpdates({
+//            self.dataSource?.socials.remove(at: indexPath.item)
+//            self.collectionView.deleteItems(at: [indexPath])
+//        }) { (finished) in
+//
+//        }
+//    }
     
 }
 
@@ -64,13 +90,26 @@ class HorizontalPhotosListTableViewCell: UITableViewCell {
 extension HorizontalPhotosListTableViewCell: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+        let model = dataSource?.photos[safe: indexPath.item]
+
+        switch model {
+        case .some(let value):
+            switch value {
+            case .view:
+                break
+            case .add:
+                delegate?.didAddNewPhoto(self)
+            }
+        case .none: break
+        }
+
     }
 
 
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension HorizontalPhotosListTableViewCell: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -89,6 +128,25 @@ extension HorizontalPhotosListTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditablePhotoListItemCollectionViewCell.identifier, for: indexPath) as! EditablePhotoListItemCollectionViewCell
+        let model = dataSource?.photos[indexPath.item]
+
+        switch model {
+        case .some(let value):
+            switch value {
+            case .view(let imagePath, let imageData):
+                if let imageData = imageData, let image = UIImage(data: imageData) {
+                    cell.titleImageView.image = image
+                } else {
+                    cell.titleImageView.setImage(withPath: imagePath)
+                }
+                cell.addPhotoPlaceholderView.isHidden = true
+            case .add:
+                cell.addPhotoPlaceholderView.isHidden = false
+            }
+        case .none:
+            break
+        }
+        
         return cell
     }
 

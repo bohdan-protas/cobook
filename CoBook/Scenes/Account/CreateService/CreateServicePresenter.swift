@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CreateServiceView: class, AlertDisplayableView {
+protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate {
     func reload()
     func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?)
     func setupSaveView()
@@ -24,9 +24,6 @@ class CreateServicePresenter: NSObject, BasePresenter {
     private var dataSource: DataSource<CreateServiceDataSourceConfigurator>?
 
     private var details: Service.CreationDetailsModel
-
-    
-
 
     // MARK: - Object Life Cycle
 
@@ -76,7 +73,7 @@ private extension CreateServicePresenter {
             .sectionSeparator,
             .textField(model: TextFieldModel(text: nil, placeholder: "Назва послуги", associatedKeyPath: nil, keyboardType: .default)),
             .title(text: "Вартість послуги"),
-            .textField(model: TextFieldModel(text: nil, placeholder: "Цифра і валюта", associatedKeyPath: nil, keyboardType: .default))
+            .textField(model: TextFieldModel(text: nil, placeholder: "В гривнях", associatedKeyPath: nil, keyboardType: .default))
         ]
 
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
@@ -137,3 +134,5 @@ extension CreateServicePresenter: HorizontalPhotosListDataSource {
 
 
 }
+
+
