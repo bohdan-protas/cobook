@@ -99,7 +99,7 @@ class SignInViewController: BaseViewController, SignInView {
             performSegue(withIdentifier: SignUpNavigationController.unwindSegueId, sender: self)
         } else {
             let navigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-            navigationController.modalTransitionStyle = .crossDissolve
+            navigationController.modalTransitionStyle = .flipHorizontal
             navigationController.modalPresentationStyle = .overFullScreen
             present(navigationController, animated: true, completion: nil)
         }
