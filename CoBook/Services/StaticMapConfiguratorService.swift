@@ -7,64 +7,50 @@
 //
 
 import UIKit
+import GooglePlaces
 
 class StaticMapConfiguratorService {
 
-        func constructStaticMapURL(mapSize: CGSize) -> URL? {
+    func constructStaticMapURL(mapSize: CGSize, center placeID: String, callback: ((URL?) -> Void)?) {
+        GMSPlacesClient.shared().fetchPlace(fromPlaceID: placeID, placeFields: .all, sessionToken: nil) { (place, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    Log.error(error?.localizedDescription ?? "")
+                    return
+                }
 
-    //        /// generate static map url marker
-    //        func generateMapMarkerURL(category: HopCategory, number: Int, using paths: PhotobookMapIcons.Paths) -> String {
-    //            var categoryUrlPath = paths.otherCategory
-    //            switch category {
-    //            case .activity:
-    //                categoryUrlPath = paths.doCategory
-    //            case .meal:
-    //                categoryUrlPath = paths.eatCategory
-    //            case .lodging:
-    //                categoryUrlPath = paths.stayCategory
-    //            case .transit:
-    //                categoryUrlPath = paths.goCategory
-    //            case .none:
-    //                categoryUrlPath = paths.otherCategory
-    //            }
-    //
-    //            return paths.urlPrefix + categoryUrlPath + paths.iconFilePrefix + "\(number)" + paths.iconFileSuffix
-    //        }
-
-            var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?"
-
-            mapUrl.append("&size=\(Int(mapSize.width))x\(Int(mapSize.height))")
-            mapUrl.append("&scale=2")
-            mapUrl.append("&format=png")
-
-    //        /// setup map center
-    //        let mapCenter = hops
-    //            .compactMap { $0.location }
-    //            .max { Float($0.longitude) < Float($1.longitude) }
-
-    //        if let mapCenter = mapCenter {
-    //            mapUrl.append("&center=\(mapCenter.latitude),\(mapCenter.longitude)")
-    //        }
-
-    //        /// Setup markers
-    //        for (index, hop) in hops.enumerated() {
-    //            guard let lt = hop.location?.latitude, let lg = hop.location?.longitude
-    //            else {
-    //                emptyMapCallback()
-    //                continue
-    //            }
-    //
-    //            mapUrl.append(
-    //                "&markers=scale:2%7Cicon:\(generateMapMarkerURL(category: hop.hopCategory, number: index + startingOrderNumber, using: iconPaths))"
-    //                + "%7C\(lt),\(lg)"
-    //            )
-    //        }
-
-            /// apiKey
-            mapUrl.append("&key=\(APIConstants.Google.placesApiKey)")
-
-            return URL.init(string: mapUrl)
+                let placeCoordinate = place?.coordinate
+                let url = self.constructStaticMapURL(mapSize: mapSize, center: (latitude: placeCoordinate?.latitude, longitude: placeCoordinate?.longitude))
+                callback?(url)
+            }
         }
+    }
+
+
+    func constructStaticMapURL(mapSize: CGSize,
+                               center coordinates: (latitude: Double?, longitude: Double?)) -> URL? {
+
+        var mapUrl = APIConstants.StaticMap.baseURL
+        
+        mapUrl.append("&size=\(Int(mapSize.width))x\(Int(mapSize.height))")
+        mapUrl.append("&scale=2")
+        mapUrl.append("&format=png")
+
+        let marker: String = {
+            var marker = "&markers=scale:2%7Cicon:\(APIConstants.StaticMap.markerURL)"
+            if let lt = coordinates.latitude, let ln = coordinates.longitude {
+                marker.append("%7C\(lt),\(ln)")
+            }
+            return marker
+        }()
+
+        mapUrl.append(marker)
+
+        /// apiKey
+        mapUrl.append("&key=\(APIConstants.Google.placesApiKey)")
+
+        return URL.init(string: mapUrl)
+    }
 
 
 }

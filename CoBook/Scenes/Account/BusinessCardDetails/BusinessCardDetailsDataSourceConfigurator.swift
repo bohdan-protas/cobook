@@ -169,7 +169,6 @@ extension BusinessCardDetailsPresenter {
 
             // mapCellConfigurator
             configurator.mapCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> MapTableViewCell in
-                cell.isSetupUserCurrentLocationByMarker = true
                 cell.mapView.isUserInteractionEnabled = false
                 cell.delegate = self
                 return cell

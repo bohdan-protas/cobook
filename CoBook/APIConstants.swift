@@ -29,6 +29,11 @@ enum APIConstants {
         static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"
     }
 
+    enum StaticMap {
+        static let baseURL = "https://maps.googleapis.com/maps/api/staticmap?"
+        static let markerURL = "https://s3.eu-central-1.amazonaws.com/cobook.attachments/static/personal.png"
+    }
+
     enum ParameterKey {
         static let password     = "password"
         static let email        = "email"

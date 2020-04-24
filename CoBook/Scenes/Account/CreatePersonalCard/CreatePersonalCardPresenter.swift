@@ -273,6 +273,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextField
             let selectedPracticeName = cell.textField.text
             let selectedPractice = personalCardDetailsModel.practices.first(where: { $0.title == selectedPracticeName })
             personalCardDetailsModel.practiseType = selectedPractice
+
         case .placeOfLiving:
             let filter = GMSAutocompleteFilter()
             filter.type = .city
