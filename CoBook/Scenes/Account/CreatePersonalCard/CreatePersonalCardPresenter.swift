@@ -69,7 +69,6 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func onViewDidLoad() {
-        view?.setupSaveCardView()
         setupDataSource()
     }
 
