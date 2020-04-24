@@ -283,9 +283,19 @@ private extension CreateBusinessCardPresenter {
         // fetch interests
         group.enter()
         APIClient.default.interestsListRequest { [weak self] (result) in
+            guard let strongSelf = self else { return }
             switch result {
             case let .success(response):
-                self?.businessCardDetailsModel.interests = (response ?? []).compactMap { InterestModel(id: $0.id, title: $0.title, isSelected: false) }
+
+                let interests = (response ?? []).compactMap { InterestModel(id: $0.id, title: $0.title) }
+
+                let fetchedInterests: [InterestModel] = interests.compactMap { fetched in
+                    let isSelected = strongSelf.businessCardDetailsModel.interests.contains(where: { (selected) -> Bool in
+                        return selected.id == fetched.id
+                    })
+                    return InterestModel(id: fetched.id, title: fetched.title, isSelected: isSelected )
+                }
+                strongSelf.businessCardDetailsModel.interests = fetchedInterests
                 group.leave()
             case let .failure(error):
                 errors.append(error)

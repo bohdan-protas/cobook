@@ -38,7 +38,9 @@ struct CreateBusinessCardParametersApiModel {
         self.schedule = model.schedule
         self.description = model.description
         self.practiseTypeId = model.practiseType?.id
-        self.interestsIds = model.interests.compactMap { $0.id }
+        self.interestsIds = model.interests
+            .filter { $0.isSelected }
+            .compactMap { $0.id }
         self.contactTelephone = model.contactTelephone
         self.contactEmail = model.companyEmail
 
@@ -47,7 +49,7 @@ struct CreateBusinessCardParametersApiModel {
                 switch $0 {
                 case .view(let model): return SocialNetworkApiModel(title: model.title, link: model.url?.absoluteString)
                 default: return nil
-                }
+            }
         }
 
         self.employeeIds = model.employers.compactMap { $0.userId }
