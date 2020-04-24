@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
+        IQKeyboardManager.shared.disabledToolbarClasses.append(ConfirmTelephoneNumberViewController.self)
 
         // Google services setup
         GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)

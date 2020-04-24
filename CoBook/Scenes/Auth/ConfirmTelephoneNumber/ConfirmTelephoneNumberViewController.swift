@@ -7,7 +7,10 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
+
+fileprivate enum Defaults {
+    static let bottomContainerHeight: CGFloat = 80
+}
 
 class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephoneNumberView {
 
@@ -51,7 +54,11 @@ class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephone
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.attachView(self)
-        setupLayout()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        smsCodeTextFields[safe: 0]?.becomeFirstResponder()
     }
 
     deinit {
@@ -83,17 +90,6 @@ class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephone
 
     func goToCreatePasswordController() {
         self.performSegue(withIdentifier: CreatePasswordViewController.segueId, sender: nil)
-    }
-
-
-}
-
-// MARK: - Privates
-
-private extension ConfirmTelephoneNumberViewController {
-
-    func setupLayout() {
-        smsCodeTextFields[safe: 0]?.becomeFirstResponder()
     }
 
 

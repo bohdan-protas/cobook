@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
 
 class CreatePasswordViewController: BaseViewController, CreatePasswordView {
 
@@ -34,7 +33,12 @@ class CreatePasswordViewController: BaseViewController, CreatePasswordView {
         super.viewDidLoad()
 
         presenter.attachView(self)
-        setupLayout()
+        telephoneNumberTextField.placeholder = presenter.currentTelephoneNumberToShow
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        passwordTextField.becomeFirstResponder()
     }
 
     // MARK: - Public
@@ -57,17 +61,6 @@ class CreatePasswordViewController: BaseViewController, CreatePasswordView {
         self.present(viewController, animated: true, completion: nil)
     }
 
-
-}
-
-// MARK: - Privates
-
-private extension CreatePasswordViewController {
-
-    func setupLayout() {
-        telephoneNumberTextField.placeholder = presenter.currentTelephoneNumberToShow
-        passwordTextField.becomeFirstResponder()
-    }
 
 }
 

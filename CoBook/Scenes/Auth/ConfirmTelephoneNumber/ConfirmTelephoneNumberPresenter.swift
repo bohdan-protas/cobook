@@ -25,7 +25,7 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
     private var smsResendLeftInSec: TimeInterval = 0
     private var resendSmsTimer: Timer?
 
-    // MARK: - Public
+    // MARK: Lifecycle
 
     func attachView(_ view: ConfirmTelephoneNumberView) {
         self.view = view
@@ -36,6 +36,13 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
         resendSmsTimer?.invalidate()
         resendSmsTimer = nil
     }
+
+    deinit {
+        resendSmsTimer?.invalidate()
+        resendSmsTimer = nil
+    }
+
+    // MARK: - Public
 
     func verify(with smsCode: String) {
         view?.startLoading()
