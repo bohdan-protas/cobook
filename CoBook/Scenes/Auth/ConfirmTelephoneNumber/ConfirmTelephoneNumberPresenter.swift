@@ -9,6 +9,7 @@
 import Foundation
 
 // MARK: - View protocol
+
 protocol ConfirmTelephoneNumberView: LoadDisplayableView, AlertDisplayableView {
     func goToCreatePasswordController()
     func setFormatedTimer(label: String)
@@ -17,14 +18,15 @@ protocol ConfirmTelephoneNumberView: LoadDisplayableView, AlertDisplayableView {
 }
 
 // MARK: - ConfirmTelephoneNumberPresenter
+
 class ConfirmTelephoneNumberPresenter: BasePresenter {
 
-    // MARK: Properties
     private weak var view: ConfirmTelephoneNumberView?
     private var smsResendLeftInSec: TimeInterval = 0
     private var resendSmsTimer: Timer?
 
-    // MARK: Public
+    // MARK: Lifecycle
+
     func attachView(_ view: ConfirmTelephoneNumberView) {
         self.view = view
     }
@@ -34,6 +36,13 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
         resendSmsTimer?.invalidate()
         resendSmsTimer = nil
     }
+
+    deinit {
+        resendSmsTimer?.invalidate()
+        resendSmsTimer = nil
+    }
+
+    // MARK: - Public
 
     func verify(with smsCode: String) {
         view?.startLoading()
@@ -71,6 +80,7 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 }
 
 // MARK: - Privates
+
 private extension ConfirmTelephoneNumberPresenter {
 
     func runTimer() {

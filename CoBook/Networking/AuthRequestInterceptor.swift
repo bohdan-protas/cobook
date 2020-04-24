@@ -20,11 +20,9 @@ final class AuthRequestInterceptor: RequestInterceptor {
         case 401:
             DispatchQueue.main.async {
                 AppStorage.Auth.deleteAllData()
-                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                 if let topController = UIApplication.topViewController() {
-                    topController.present(signInViewController, animated: true, completion: {
-                        (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: "Please, login before continue")
-                    })
+                    topController.present(signInNavigationController, animated: true, completion: nil)
                 }
                 completion(.doNotRetry)
             }
@@ -35,17 +33,17 @@ final class AuthRequestInterceptor: RequestInterceptor {
                     AppStorage.Auth.accessToken = nil
                     APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
                         switch result {
+
                         case let .success(response):
                             AppStorage.Auth.accessToken = response?.accessToken
                             completion(.retry)
-                        case let .failure(error):
+
+                        case .failure:
                             DispatchQueue.main.async {
                                 AppStorage.Auth.deleteAllData()
-                                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                                 if let topController = UIApplication.topViewController() {
-                                    topController.present(signInViewController, animated: true, completion: {
-                                        (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: error.localizedDescription)
-                                    })
+                                    topController.present(signInNavigationController, animated: true, completion: nil)
                                 }
                                 completion(.doNotRetry)
                             }
@@ -54,11 +52,9 @@ final class AuthRequestInterceptor: RequestInterceptor {
                     }
                 } else {
                     AppStorage.Auth.deleteAllData()
-                    let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                    let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                     if let topController = UIApplication.topViewController() {
-                        topController.present(signInViewController, animated: true, completion: {
-                            (topController.presentedViewController as? AlertDisplayableView)?.errorAlert(message: "Please, login before continue")
-                        })
+                        topController.present(signInNavigationController, animated: true, completion: nil)
                     }
                     completion(.doNotRetry)
                 }

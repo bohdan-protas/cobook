@@ -116,9 +116,9 @@ extension CreatePersonalCardPresenter {
                 cell.textField.placeholder = model.placeholder
                 cell.actionIdentifier = model.actionTypeId
 
-                if let action = CreateBusinessCard.ActionType(rawValue: model.actionTypeId ?? "") {
+                if let action = CreatePersonalCard.ActionType(rawValue: model.actionTypeId ?? "") {
                     switch action {
-                    case .practice:
+                    case .activityType:
                         cell.textField.inputView = cell.pickerView
                     default:
                         cell.actionControlView.isUserInteractionEnabled = true

@@ -18,3 +18,14 @@ class SignUpNavigationController: CustomNavigationController {
     
 
 }
+
+class SignInNavigationController: CustomNavigationController {
+
+    override func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        viewController.navigationItem.title = "SignIn.title".localized
+        viewController.navigationItem.setHidesBackButton(true, animated: false)
+        super.navigationController(navigationController, willShow: viewController, animated: animated)
+    }
+
+
+}
