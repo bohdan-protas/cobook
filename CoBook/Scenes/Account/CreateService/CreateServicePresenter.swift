@@ -66,20 +66,23 @@ private extension CreateServicePresenter {
     func updateViewDataSource() {
 
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
-            .gallery
+            .gallery,
+            .textField(model: TextFieldModel(text: nil, placeholder: "Назва послуги", associatedKeyPath: nil, keyboardType: .default)),
+            .title(text: "Вартість послуги:"),
+            .textField(model: TextFieldModel(text: nil, placeholder: "Вкажіть вартість", associatedKeyPath: nil, keyboardType: .default))
         ]
 
         dataSource?[Service.CreationSectionAccessoryIndex.contacts].items = [
             .sectionSeparator,
-            .textField(model: TextFieldModel(text: nil, placeholder: "Назва послуги", associatedKeyPath: nil, keyboardType: .default)),
-            .title(text: "Вартість послуги"),
-            .textField(model: TextFieldModel(text: nil, placeholder: "В гривнях", associatedKeyPath: nil, keyboardType: .default))
+            .title(text: "Контактні дані:"),
+            .textField(model: TextFieldModel(text: nil, placeholder: "Телефон для звязку", associatedKeyPath: nil, keyboardType: .phonePad)),
+            .textField(model: TextFieldModel(text: nil, placeholder: "Робочий емейл для звязку", associatedKeyPath: nil, keyboardType: .emailAddress)),
         ]
 
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,
-            .textField(model: TextFieldModel(text: nil, placeholder: "Назва послуги", associatedKeyPath: nil, keyboardType: .default)),
-            .textView(model: TextFieldModel(text: nil, placeholder: "Опис послуги", associatedKeyPath: nil, keyboardType: .default))
+            .textField(model: TextFieldModel(text: nil, placeholder: "Заголовок послуги", associatedKeyPath: nil, keyboardType: .default)),
+            .textView(model: TextFieldModel(text: nil, placeholder: "Опис товару", associatedKeyPath: nil, keyboardType: .default))
         ]
 
     }
