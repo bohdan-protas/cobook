@@ -7,15 +7,9 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
 
 class CreatePasswordViewController: BaseViewController, CreatePasswordView {
 
-    enum Defaults {
-        static let bottomContainerHeight: CGFloat = 80
-    }
-
-    // MARK: IBOutlets
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
     @IBOutlet var passwordTextField: DesignableTextField!
     @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
@@ -23,7 +17,8 @@ class CreatePasswordViewController: BaseViewController, CreatePasswordView {
 
     var presenter: CreatePasswordPresenter = CreatePasswordPresenter()
 
-    // MARK: Actions
+    // MARK: - Actions
+
     @IBAction func passwordTextFieldDidChangeValue(_ sender: UITextField) {
         presenter.set(password: sender.text)
     }
@@ -32,27 +27,22 @@ class CreatePasswordViewController: BaseViewController, CreatePasswordView {
         presenter.finishRegistration()
     }
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         presenter.attachView(self)
-        setupLayout()
+        telephoneNumberTextField.placeholder = presenter.currentTelephoneNumberToShow
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        passwordTextField.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-    }
+    // MARK: - Public
 
-    // MARK: Public
     func setContinueButton(enabled: Bool) {
         continueButton.isEnabled = enabled
     }
@@ -74,39 +64,8 @@ class CreatePasswordViewController: BaseViewController, CreatePasswordView {
 
 }
 
-// MARK: - Privates
-private extension CreatePasswordViewController {
-
-    func setupLayout() {
-        telephoneNumberTextField.placeholder = presenter.currentTelephoneNumberToShow
-        addKeyboardObserver()
-        passwordTextField.becomeFirstResponder()
-    }
-
-    private func addKeyboardObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    private func removeKeyboardObserver() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    // MARK: Observers
-    @objc private func onKeyboardWillShow(notification: NSNotification) {
-        let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-        bottomContainerConstraint.constant = keyboardSize.height
-    }
-
-    @objc private func onKeyboardWillHide(notification: NSNotification) {
-        bottomContainerConstraint.constant = Defaults.bottomContainerHeight
-    }
-
-
-}
-
 // MARK: - UITextFieldDelegate
+
 extension CreatePasswordViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

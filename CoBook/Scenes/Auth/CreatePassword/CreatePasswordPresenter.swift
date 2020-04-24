@@ -16,8 +16,7 @@ protocol CreatePasswordView: LoadDisplayableView, AlertDisplayableView {
 
 // MARK: - ConfirmTelephoneNumberPresenter
 class CreatePasswordPresenter: BasePresenter {
-    
-    // MARK: Properties
+
     private weak var view: CreatePasswordView?
     private var password: String = ""
     private var telephone: String = AppStorage.User.data?.telephone.number ?? "Undefined"
@@ -26,7 +25,8 @@ class CreatePasswordPresenter: BasePresenter {
         return telephone
     }
 
-    // MARK: Public
+    // MARK: - Public
+
     func attachView(_ view: CreatePasswordView) {
         self.view = view
     }
@@ -67,6 +67,7 @@ class CreatePasswordPresenter: BasePresenter {
 }
 
 // MARK: - Privates
+
 private extension CreatePasswordPresenter {
 
     func validateFields() -> String? {
