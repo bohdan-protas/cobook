@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import MessageUI
 
 private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
@@ -98,26 +97,6 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     func reload() {
         tableView.reloadData()
-    }
-
-    func makeCall(to telephoneNumber: String?) {
-        guard let telephoneNumber = telephoneNumber, let numberUrl = URL(string: "tel://" + telephoneNumber) else {
-            errorAlert(message: "Telephone number of user have bad format")
-            return
-        }
-        UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
-    }
-
-    func sendEmail(to emailAddress: String) {
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients([emailAddress])
-
-            present(mail, animated: true)
-        } else {
-            errorAlert(message: "Device is not configured for mailing")
-        }
     }
 
     func openGoogleMaps() {
@@ -238,15 +217,6 @@ extension BusinessCardDetailsViewController: CLLocationManagerDelegate {
     }
 
 
-}
-
-// MARK: - MFMailComposeViewControllerDelegate
-
-extension BusinessCardDetailsViewController: MFMailComposeViewControllerDelegate {
-
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true)
-    }
 }
 
 

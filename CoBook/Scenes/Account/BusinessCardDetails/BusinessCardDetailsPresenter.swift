@@ -10,14 +10,12 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MapDirectionTableViewCellDelegate {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate {
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex)
     func reload()
     func setupEditCardView()
     func setupHideCardView()
-    func sendEmail(to emailAddress: String)
-    func makeCall(to telephoneNumber: String?)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {

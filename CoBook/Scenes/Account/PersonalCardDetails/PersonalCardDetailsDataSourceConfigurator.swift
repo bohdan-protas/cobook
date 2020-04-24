@@ -49,6 +49,7 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
         }
 
         getInTouchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
+            cell.delegate = presenter
             return cell
         }
 
