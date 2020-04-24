@@ -8,22 +8,16 @@
 
 import UIKit
 
+fileprivate enum Defaults {
+    static let bottomContainerHeight: CGFloat = 80
+}
+
 class SignInViewController: BaseViewController, SignInView {
 
-    enum Defaults {
-        static let bottomContainerHeight: CGFloat = 80
-    }
-
-    // MARK: IBOutlets
     @IBOutlet var loginTextField: DesignableTextField!
     @IBOutlet var passwordTextField: DesignableTextField!
     @IBOutlet var signInButton: LoaderDesignableButton!
-    @IBOutlet var navBar: TransparentNavigationBar!
 
-    @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
-    @IBOutlet var fieldToTitleConstraint: NSLayoutConstraint!
-
-    // MARK: Properties
     var presenter: SignInPresenter = SignInPresenter()
 
     private lazy var forgotPasswordAlert: UIAlertController = {
@@ -48,16 +42,14 @@ class SignInViewController: BaseViewController, SignInView {
         return alertController
     }()
 
-    // MARK: Actions
+    // MARK: - Actions
+
     @IBAction func textFieldDidChanged(_ sender: Any) {
         presenter.set(login: loginTextField.text, password: passwordTextField.text)
     }
 
     @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
-        removeKeyboardObserver()
-        self.present(forgotPasswordAlert, animated: true, completion: {
-            self.addKeyboardObservers()
-        })
+        self.present(forgotPasswordAlert, animated: true, completion: nil)
     }
 
     @IBAction func signInButtonTapped(_ sender: LoaderDesignableButton) {
@@ -68,7 +60,8 @@ class SignInViewController: BaseViewController, SignInView {
         goToSignUp()
     }
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
@@ -83,7 +76,8 @@ class SignInViewController: BaseViewController, SignInView {
         presenter.detachView()
     }
 
-    // MARK: Public
+    // MARK: - Public
+
     override func startLoading() {
         signInButton.isLoading = true
     }
@@ -96,7 +90,8 @@ class SignInViewController: BaseViewController, SignInView {
         signInButton.isEnabled = enabled
     }
 
-    // MARK: Navigation
+    // MARK: - Navigation
+
     func goToSignUp() {
         if presentingViewController is SignUpNavigationController {
             performSegue(withIdentifier: SignUpNavigationController.unwindSegueId, sender: self)
@@ -118,60 +113,18 @@ class SignInViewController: BaseViewController, SignInView {
 }
 
 // MARK: - Private
+
 private extension SignInViewController {
 
     func setupLayout() {
-        navBar.topItem?.title = "SignIn.title".localized
 
-        // In small screen devices disable title image
-        if UIDevice().isSmallScreenType {
-            fieldToTitleConstraint.isActive = true
-            view.layoutIfNeeded()
-        } else {
-            addKeyboardObservers()
-        }
-    }
-
-    private func addKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    private func removeKeyboardObserver() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    // MARK: Observers
-    @objc private func onKeyboardWillShow(notification: NSNotification) {
-        let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
-
-        bottomContainerConstraint.constant = keyboardSize.height
-        fieldToTitleConstraint.isActive = true
-
-        UIView.animate(withDuration: duration, delay: 0.0, options: UIView.AnimationOptions(rawValue: curve), animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-
-    @objc private func onKeyboardWillHide(notification: NSNotification) {
-        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
-
-        bottomContainerConstraint.constant = Defaults.bottomContainerHeight
-        fieldToTitleConstraint.isActive = false
-
-        UIView.animate(withDuration: duration, delay: 0.0, options: UIView.AnimationOptions(rawValue: curve), animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
     }
 
 
 }
 
 // MARK: - UITextFieldDelegate
+
 extension SignInViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

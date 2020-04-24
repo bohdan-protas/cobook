@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0vd-fA-VJG">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -31,11 +31,11 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardingViewController" id="0vd-fA-VJG" customClass="OnboardingViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ub8-kG-WhQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BuO-Xo-8SW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="661"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="562"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Pwy-bt-de6">
                                     <size key="itemSize" width="377" height="509"/>
@@ -50,7 +50,7 @@
                                 </connections>
                             </collectionView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bdo-da-PJ7" customClass="DesignableProgressView" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="-3" y="661" width="381" height="6"/>
+                                <rect key="frame" x="-3" y="562" width="326" height="6"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="Theme_Green"/>
                                 <constraints>
@@ -91,17 +91,17 @@
             <objects>
                 <viewController storyboardIdentifier="SignUpViewController" id="fTX-yw-dca" customClass="SignUpViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u6J-Q4-jZL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-58-TRF" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="24" y="54" width="327" height="533"/>
+                                <rect key="frame" x="24" y="60" width="272" height="428"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C9-tT-k89" userLabel="Title Container">
-                                        <rect key="frame" x="0.0" y="32" width="327" height="54"/>
+                                        <rect key="frame" x="0.0" y="10" width="272" height="48"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Реєстрація" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knn-GO-XXv">
-                                                <rect key="frame" x="16" y="0.0" width="295" height="30"/>
+                                                <rect key="frame" x="16" y="14" width="240" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="KSs-AB-lKJ"/>
                                                 </constraints>
@@ -112,38 +112,38 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="Knn-GO-XXv" firstAttribute="top" secondItem="7C9-tT-k89" secondAttribute="top" id="WVp-hP-t6V"/>
+                                            <constraint firstItem="Knn-GO-XXv" firstAttribute="top" secondItem="7C9-tT-k89" secondAttribute="top" constant="14" id="WVp-hP-t6V"/>
                                             <constraint firstAttribute="trailing" secondItem="Knn-GO-XXv" secondAttribute="trailing" constant="16" id="eKg-FO-J7i"/>
-                                            <constraint firstAttribute="bottom" secondItem="Knn-GO-XXv" secondAttribute="bottom" constant="24" id="fSz-Gm-Eik"/>
+                                            <constraint firstAttribute="bottom" secondItem="Knn-GO-XXv" secondAttribute="bottom" constant="4" id="fSz-Gm-Eik"/>
                                             <constraint firstItem="Knn-GO-XXv" firstAttribute="leading" secondItem="7C9-tT-k89" secondAttribute="leading" constant="16" id="rgW-qi-mCa"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-LX-vFB" userLabel="Image Container">
-                                        <rect key="frame" x="8" y="86" width="311" height="189"/>
+                                        <rect key="frame" x="8" y="58" width="256" height="120"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_registration" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="144"/>
+                                                <rect key="frame" x="0.0" y="10" width="256" height="80"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="jqD-Mj-wPr" firstAttribute="leading" secondItem="kqV-LX-vFB" secondAttribute="leading" id="bGg-fe-yh7"/>
-                                            <constraint firstAttribute="bottom" secondItem="jqD-Mj-wPr" secondAttribute="bottom" priority="999" constant="45" id="gXQ-Oq-fex"/>
-                                            <constraint firstItem="jqD-Mj-wPr" firstAttribute="top" secondItem="kqV-LX-vFB" secondAttribute="top" id="qQo-Ol-BCi"/>
+                                            <constraint firstAttribute="bottom" secondItem="jqD-Mj-wPr" secondAttribute="bottom" constant="30" id="gXQ-Oq-fex"/>
+                                            <constraint firstItem="jqD-Mj-wPr" firstAttribute="top" secondItem="kqV-LX-vFB" secondAttribute="top" constant="10" id="qQo-Ol-BCi"/>
                                             <constraint firstAttribute="trailing" secondItem="jqD-Mj-wPr" secondAttribute="trailing" id="yfh-9v-xBx"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-Rd-0iZ" userLabel="Fields Stack View">
-                                        <rect key="frame" x="16" y="275" width="295" height="168"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ft-Dt-DKe" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
+                                        <rect key="frame" x="16" y="178" width="240" height="168"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIn-Tu-MOa" userLabel="Name container">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
+                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-Rd-0iZ" userLabel="Fields Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="168"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dNK-MC-EhC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Імя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="48"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="114" height="48"/>
                                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                                 <accessibility key="accessibilityConfiguration">
                                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -182,7 +182,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Прізвище" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Brs-c2-PMN" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                                <rect key="frame" x="153.5" y="0.0" width="141.5" height="48"/>
+                                                                <rect key="frame" x="126" y="0.0" width="114" height="48"/>
                                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                                 <accessibility key="accessibilityConfiguration">
                                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -221,99 +221,101 @@
                                                                 </connections>
                                                             </textField>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="YXW-U4-WD0"/>
+                                                        </constraints>
                                                     </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+380XXXXXXXX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-LB-IQc" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="60" width="240" height="48"/>
+                                                        <color key="tintColor" name="Theme_TextField-borderActive"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        </accessibility>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="c6K-bE-9uk"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                <color key="value" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                                <real key="value" value="16"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                                <real key="value" value="16"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="disabledBorderColor">
+                                                                <color key="value" name="Theme_TextField-borderInactive"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="enabledBorderColor">
+                                                                <color key="value" name="Theme_TextField-borderActive"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="fTX-yw-dca" eventType="editingChanged" id="Xdq-Ud-eXA"/>
+                                                            <outlet property="delegate" destination="fTX-yw-dca" id="mdg-iS-C7r"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Емейл" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQ0-b1-5dq" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="120" width="240" height="48"/>
+                                                        <color key="tintColor" name="Theme_TextField-borderActive"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        </accessibility>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="Dhq-Uo-Tdw"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="continue" textContentType="email"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                <color key="value" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                                <real key="value" value="16"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                                <real key="value" value="16"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="disabledBorderColor">
+                                                                <color key="value" name="Theme_TextField-borderInactive"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="enabledBorderColor">
+                                                                <color key="value" name="Theme_TextField-borderActive"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="fTX-yw-dca" eventType="editingChanged" id="F2C-FG-J9O"/>
+                                                            <outlet property="delegate" destination="fTX-yw-dca" id="Txn-Ml-fHC"/>
+                                                        </connections>
+                                                    </textField>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <constraints>
-                                                    <constraint firstItem="dNK-MC-EhC" firstAttribute="top" secondItem="cIn-Tu-MOa" secondAttribute="top" id="6vq-ho-FEq"/>
-                                                    <constraint firstAttribute="bottom" secondItem="dNK-MC-EhC" secondAttribute="bottom" id="DXy-nC-iIm"/>
-                                                    <constraint firstAttribute="trailing" secondItem="dNK-MC-EhC" secondAttribute="trailing" id="Nix-5z-caN"/>
-                                                    <constraint firstAttribute="height" constant="48" id="dOH-qT-QS5"/>
-                                                    <constraint firstItem="dNK-MC-EhC" firstAttribute="leading" secondItem="cIn-Tu-MOa" secondAttribute="leading" id="dar-pQ-r7S"/>
-                                                </constraints>
-                                            </view>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+380XXXXXXXX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-LB-IQc" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="60" width="295" height="48"/>
-                                                <color key="tintColor" name="Theme_TextField-borderActive"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                </accessibility>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="c6K-bE-9uk"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                        <color key="value" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
-                                                        <real key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
-                                                        <real key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBorderColor">
-                                                        <color key="value" name="Theme_TextField-borderInactive"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="enabledBorderColor">
-                                                        <color key="value" name="Theme_TextField-borderActive"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="textFieldEditingChanged:" destination="fTX-yw-dca" eventType="editingChanged" id="Xdq-Ud-eXA"/>
-                                                    <outlet property="delegate" destination="fTX-yw-dca" id="mdg-iS-C7r"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Емейл" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQ0-b1-5dq" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="120" width="295" height="48"/>
-                                                <color key="tintColor" name="Theme_TextField-borderActive"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                </accessibility>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="Dhq-Uo-Tdw"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="continue"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                        <color key="value" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
-                                                        <real key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
-                                                        <real key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBorderColor">
-                                                        <color key="value" name="Theme_TextField-borderInactive"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="enabledBorderColor">
-                                                        <color key="value" name="Theme_TextField-borderActive"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="textFieldEditingChanged:" destination="fTX-yw-dca" eventType="editingChanged" id="F2C-FG-J9O"/>
-                                                    <outlet property="delegate" destination="fTX-yw-dca" id="Txn-Ml-fHC"/>
-                                                </connections>
-                                            </textField>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="vLw-Rd-0iZ" firstAttribute="top" secondItem="5ft-Dt-DKe" secondAttribute="top" id="Df5-P7-fai"/>
+                                            <constraint firstItem="vLw-Rd-0iZ" firstAttribute="leading" secondItem="5ft-Dt-DKe" secondAttribute="leading" id="HR3-ab-ujA"/>
+                                            <constraint firstAttribute="trailing" secondItem="vLw-Rd-0iZ" secondAttribute="trailing" id="XXs-Ue-giG"/>
+                                            <constraint firstAttribute="bottom" secondItem="vLw-Rd-0iZ" secondAttribute="bottom" id="ypt-xZ-KBg"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7e-D1-uuF" userLabel="Continue Button" customClass="LoaderDesignableButton" customModule="CoBook" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="467" width="295" height="50"/>
+                                        <rect key="frame" x="16" y="362" width="240" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="KcQ-yB-2eM"/>
                                         </constraints>
@@ -346,20 +348,19 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="vLw-Rd-0iZ" firstAttribute="top" secondItem="kqV-LX-vFB" secondAttribute="bottom" id="2pj-jg-Hfn"/>
                                     <constraint firstItem="kqV-LX-vFB" firstAttribute="top" secondItem="7C9-tT-k89" secondAttribute="bottom" id="5AR-Dh-fSZ"/>
+                                    <constraint firstItem="5ft-Dt-DKe" firstAttribute="leading" secondItem="nYz-58-TRF" secondAttribute="leading" constant="16" id="BKf-qO-VHR"/>
+                                    <constraint firstItem="5ft-Dt-DKe" firstAttribute="top" secondItem="kqV-LX-vFB" secondAttribute="bottom" id="BYy-TH-Chd"/>
                                     <constraint firstItem="kqV-LX-vFB" firstAttribute="leading" secondItem="nYz-58-TRF" secondAttribute="leading" constant="8" id="Clg-Vj-Dtl"/>
                                     <constraint firstItem="7C9-tT-k89" firstAttribute="leading" secondItem="nYz-58-TRF" secondAttribute="leading" id="ES2-AX-Udq"/>
                                     <constraint firstItem="C7e-D1-uuF" firstAttribute="leading" secondItem="nYz-58-TRF" secondAttribute="leading" constant="16" id="Eoc-TG-THb"/>
-                                    <constraint firstItem="vLw-Rd-0iZ" firstAttribute="leading" secondItem="nYz-58-TRF" secondAttribute="leading" constant="16" id="dxz-Jc-SXg"/>
+                                    <constraint firstAttribute="trailing" secondItem="5ft-Dt-DKe" secondAttribute="trailing" constant="16" id="NbI-pw-8LU"/>
                                     <constraint firstAttribute="trailing" secondItem="kqV-LX-vFB" secondAttribute="trailing" constant="8" id="fEA-Xt-aCz"/>
-                                    <constraint firstItem="vLw-Rd-0iZ" firstAttribute="top" secondItem="7C9-tT-k89" secondAttribute="bottom" id="hlS-Of-J8f"/>
-                                    <constraint firstAttribute="trailing" secondItem="vLw-Rd-0iZ" secondAttribute="trailing" constant="16" id="lTL-ex-jMG"/>
-                                    <constraint firstItem="C7e-D1-uuF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vLw-Rd-0iZ" secondAttribute="bottom" constant="24" id="rOD-pF-ZOA"/>
+                                    <constraint firstItem="C7e-D1-uuF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5ft-Dt-DKe" secondAttribute="bottom" constant="16" id="ovT-Rq-kOK"/>
                                     <constraint firstAttribute="bottom" secondItem="C7e-D1-uuF" secondAttribute="bottom" constant="16" id="s6a-le-K7Z"/>
                                     <constraint firstAttribute="trailing" secondItem="C7e-D1-uuF" secondAttribute="trailing" constant="16" id="uFf-Sl-KiE"/>
                                     <constraint firstAttribute="trailing" secondItem="7C9-tT-k89" secondAttribute="trailing" id="vyE-Hp-CLn"/>
-                                    <constraint firstItem="7C9-tT-k89" firstAttribute="top" secondItem="nYz-58-TRF" secondAttribute="top" constant="32" id="wH5-Ff-QoO"/>
+                                    <constraint firstItem="7C9-tT-k89" firstAttribute="top" secondItem="nYz-58-TRF" secondAttribute="top" constant="10" id="wH5-Ff-QoO"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -378,39 +379,34 @@
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="hlS-Of-J8f"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndJ-BG-QLR" userLabel="Bottom Container">
-                                <rect key="frame" x="0.0" y="597" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="498" width="320" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="9kg-Qe-QIE" userLabel="someQuestionStackView">
-                                        <rect key="frame" x="10" y="20" width="355" height="20"/>
+                                        <rect key="frame" x="10" y="20" width="300" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gJF-03-fFg">
-                                                <rect key="frame" x="0.0" y="0.0" width="86.5" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="59" height="20"/>
                                             </view>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вже маєте аккаунт?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6YP-2W-RYg">
-                                                <rect key="frame" x="89.5" y="0.0" width="124" height="20"/>
+                                                <rect key="frame" x="62" y="0.0" width="124" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E46-yR-0JZ">
-                                                <rect key="frame" x="216.5" y="0.0" width="49" height="20"/>
+                                                <rect key="frame" x="189" y="0.0" width="49" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Увійдіть">
                                                     <color key="titleColor" name="Theme_Green"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="F97-Yl-JnX" kind="presentation" modalPresentationStyle="fullScreen" id="lZW-my-AUf"/>
+                                                    <segue destination="Qct-Ni-k9W" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="qAF-yj-Zf3"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="D49-SM-mdP">
-                                                <rect key="frame" x="268.5" y="0.0" width="86.5" height="20"/>
+                                                <rect key="frame" x="241" y="0.0" width="59" height="20"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -431,7 +427,7 @@
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="ndJ-BG-QLR" firstAttribute="leading" secondItem="HF5-1H-6Mi" secondAttribute="leading" id="4PJ-48-WU1"/>
-                            <constraint firstItem="nYz-58-TRF" firstAttribute="top" secondItem="HF5-1H-6Mi" secondAttribute="top" constant="10" id="Eie-mV-D4T"/>
+                            <constraint firstItem="nYz-58-TRF" firstAttribute="top" secondItem="HF5-1H-6Mi" secondAttribute="top" constant="16" id="Eie-mV-D4T"/>
                             <constraint firstItem="HF5-1H-6Mi" firstAttribute="trailing" secondItem="ndJ-BG-QLR" secondAttribute="trailing" id="ThQ-Wm-06Y"/>
                             <constraint firstItem="HF5-1H-6Mi" firstAttribute="trailing" secondItem="nYz-58-TRF" secondAttribute="trailing" constant="24" id="geH-Mq-GA4"/>
                             <constraint firstItem="nYz-58-TRF" firstAttribute="leading" secondItem="HF5-1H-6Mi" secondAttribute="leading" constant="24" id="l0e-wp-GZ6"/>
@@ -442,10 +438,8 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="NR1-pg-PO8"/>
                     <connections>
-                        <outlet property="bottomContainerConstraint" destination="lYH-2h-lDg" id="8w5-SV-MLu"/>
                         <outlet property="continueButton" destination="C7e-D1-uuF" id="YjZ-la-jrd"/>
                         <outlet property="emailTextField" destination="pQ0-b1-5dq" id="mTo-Kt-SDw"/>
-                        <outlet property="fieldToTitleConstraint" destination="hlS-Of-J8f" id="nPC-Ay-MVG"/>
                         <outlet property="firstNameTextField" destination="Wsn-BH-QOy" id="zks-YZ-omO"/>
                         <outlet property="lastNameTextField" destination="Brs-c2-PMN" id="XfX-2v-sqH"/>
                         <outlet property="telephoneNumberTextField" destination="l9w-LB-IQc" id="uKH-Dv-0xE"/>
@@ -462,7 +456,7 @@
                 <navigationController storyboardIdentifier="SignUpNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iqt-wc-tgP" customClass="SignUpNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="0yi-nR-6cb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gLC-BX-Ueb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -478,26 +472,17 @@
             <objects>
                 <viewController storyboardIdentifier="SignInViewController" title="SignInViewController" modalPresentationStyle="fullScreen" id="F97-Yl-JnX" customClass="SignInViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s66-4Y-56G">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqO-51-e7S" customClass="TransparentNavigationBar" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="7bH-f7-VLF"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem id="rhk-Y9-O7g"/>
-                                </items>
-                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bo-yh-juf" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="24" y="54" width="327" height="533"/>
+                                <rect key="frame" x="24" y="60" width="272" height="428"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVv-S3-gEV" userLabel="Title Container">
-                                        <rect key="frame" x="0.0" y="32" width="327" height="54"/>
+                                        <rect key="frame" x="0.0" y="10" width="272" height="58"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вхід" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25y-2C-nVa">
-                                                <rect key="frame" x="16" y="0.0" width="295" height="30"/>
+                                                <rect key="frame" x="16" y="14" width="240" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="JfZ-CY-S3b"/>
                                                 </constraints>
@@ -509,31 +494,31 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="25y-2C-nVa" secondAttribute="trailing" constant="16" id="LBc-ks-mnB"/>
-                                            <constraint firstItem="25y-2C-nVa" firstAttribute="top" secondItem="rVv-S3-gEV" secondAttribute="top" id="cgT-GG-FIH"/>
+                                            <constraint firstItem="25y-2C-nVa" firstAttribute="top" secondItem="rVv-S3-gEV" secondAttribute="top" constant="14" id="cgT-GG-FIH"/>
                                             <constraint firstItem="25y-2C-nVa" firstAttribute="leading" secondItem="rVv-S3-gEV" secondAttribute="leading" constant="16" id="jsY-Bm-ni4"/>
-                                            <constraint firstAttribute="bottom" secondItem="25y-2C-nVa" secondAttribute="bottom" constant="24" id="zgl-d0-zxH"/>
+                                            <constraint firstAttribute="bottom" secondItem="25y-2C-nVa" secondAttribute="bottom" constant="14" id="zgl-d0-zxH"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8gR-LW-xGF" userLabel="Image Container">
-                                        <rect key="frame" x="8" y="86" width="311" height="169"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8gR-LW-xGF" userLabel="Image Container">
+                                        <rect key="frame" x="8" y="68" width="256" height="134"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_login" translatesAutoresizingMaskIntoConstraints="NO" id="oHs-EN-K3K">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="124"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_login" translatesAutoresizingMaskIntoConstraints="NO" id="oHs-EN-K3K">
+                                                <rect key="frame" x="0.0" y="0.0" width="256" height="104"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="oHs-EN-K3K" secondAttribute="bottom" priority="999" constant="45" id="8Jc-c6-YMt"/>
+                                            <constraint firstAttribute="bottom" secondItem="oHs-EN-K3K" secondAttribute="bottom" constant="30" id="8Jc-c6-YMt"/>
                                             <constraint firstItem="oHs-EN-K3K" firstAttribute="leading" secondItem="8gR-LW-xGF" secondAttribute="leading" id="W3Z-K7-gkE"/>
                                             <constraint firstAttribute="trailing" secondItem="oHs-EN-K3K" secondAttribute="trailing" id="kl9-fr-FgN"/>
                                             <constraint firstItem="oHs-EN-K3K" firstAttribute="top" secondItem="8gR-LW-xGF" secondAttribute="top" id="mxk-7g-iFx"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-9w-2Sf" userLabel="Fields Stack View">
-                                        <rect key="frame" x="16" y="255" width="295" height="120"/>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-9w-2Sf" userLabel="Fields Stack View">
+                                        <rect key="frame" x="16" y="202" width="240" height="144"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+380XXXXXXXX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1w-rc-cAA" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -542,7 +527,7 @@
                                                     <constraint firstAttribute="height" constant="48" id="mgR-by-rsb"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad" returnKeyType="next" textContentType="tel"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                         <real key="value" value="1"/>
@@ -572,7 +557,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-DN-Hf3" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="60" width="295" height="48"/>
+                                                <rect key="frame" x="0.0" y="60" width="240" height="48"/>
                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -581,7 +566,7 @@
                                                     <constraint firstAttribute="height" constant="48" id="37G-X5-KBV"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="continue" secureTextEntry="YES" textContentType="one-time-code"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="continue" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                         <real key="value" value="1"/>
@@ -610,8 +595,11 @@
                                                     <outlet property="delegate" destination="F97-Yl-JnX" id="G2b-qg-IL4"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xj-uY-QYt">
-                                                <rect key="frame" x="0.0" y="120" width="295" height="0.0"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xj-uY-QYt">
+                                                <rect key="frame" x="0.0" y="120" width="240" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="Dq5-Rz-twM"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Забули пароль?">
                                                     <color key="titleColor" name="Theme_Green"/>
@@ -623,7 +611,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQy-Ru-7gM" userLabel="Continue Button" customClass="LoaderDesignableButton" customModule="CoBook" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="467" width="295" height="50"/>
+                                        <rect key="frame" x="16" y="362" width="240" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="jVN-yN-PUg"/>
                                         </constraints>
@@ -660,15 +648,14 @@
                                     <constraint firstAttribute="trailing" secondItem="8gR-LW-xGF" secondAttribute="trailing" constant="8" id="5pt-Gf-mFC"/>
                                     <constraint firstAttribute="trailing" secondItem="hQy-Ru-7gM" secondAttribute="trailing" constant="16" id="DfD-Ru-jxf"/>
                                     <constraint firstItem="rVv-S3-gEV" firstAttribute="leading" secondItem="1bo-yh-juf" secondAttribute="leading" id="DmZ-ry-pWK"/>
-                                    <constraint firstItem="RMB-9w-2Sf" firstAttribute="top" secondItem="rVv-S3-gEV" secondAttribute="bottom" id="E2A-vq-XIa"/>
                                     <constraint firstItem="hQy-Ru-7gM" firstAttribute="leading" secondItem="1bo-yh-juf" secondAttribute="leading" constant="16" id="J6n-g1-aII"/>
                                     <constraint firstItem="RMB-9w-2Sf" firstAttribute="leading" secondItem="1bo-yh-juf" secondAttribute="leading" constant="16" id="UBH-JZ-f5p"/>
                                     <constraint firstAttribute="trailing" secondItem="RMB-9w-2Sf" secondAttribute="trailing" constant="16" id="W51-Ya-ICL"/>
                                     <constraint firstItem="RMB-9w-2Sf" firstAttribute="top" secondItem="8gR-LW-xGF" secondAttribute="bottom" id="gQI-OU-YcR"/>
                                     <constraint firstItem="8gR-LW-xGF" firstAttribute="leading" secondItem="1bo-yh-juf" secondAttribute="leading" constant="8" id="gRu-XD-eVv"/>
-                                    <constraint firstItem="hQy-Ru-7gM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RMB-9w-2Sf" secondAttribute="bottom" constant="24" id="kTq-9B-k7h"/>
+                                    <constraint firstItem="hQy-Ru-7gM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RMB-9w-2Sf" secondAttribute="bottom" constant="16" id="kTq-9B-k7h"/>
                                     <constraint firstItem="8gR-LW-xGF" firstAttribute="top" secondItem="rVv-S3-gEV" secondAttribute="bottom" id="lTn-8B-92v"/>
-                                    <constraint firstItem="rVv-S3-gEV" firstAttribute="top" secondItem="1bo-yh-juf" secondAttribute="top" constant="32" id="pFX-pN-Re5"/>
+                                    <constraint firstItem="rVv-S3-gEV" firstAttribute="top" secondItem="1bo-yh-juf" secondAttribute="top" constant="10" id="pFX-pN-Re5"/>
                                     <constraint firstAttribute="bottom" secondItem="hQy-Ru-7gM" secondAttribute="bottom" constant="16" id="vkN-DI-gS2"/>
                                     <constraint firstAttribute="trailing" secondItem="rVv-S3-gEV" secondAttribute="trailing" id="whB-Vh-djQ"/>
                                 </constraints>
@@ -689,29 +676,24 @@
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="E2A-vq-XIa"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNg-Rk-wfJ" userLabel="Bottom Container">
-                                <rect key="frame" x="0.0" y="597" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="498" width="320" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="PnP-0I-LTU" userLabel="someQuestionStackView">
-                                        <rect key="frame" x="10" y="20" width="355" height="20"/>
+                                        <rect key="frame" x="10" y="20" width="300" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-4M-Ndt">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="37.5" height="20"/>
                                             </view>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вперше в CoBook?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yJ2-0v-hQM">
-                                                <rect key="frame" x="68" y="0.0" width="117" height="20"/>
+                                                <rect key="frame" x="40.5" y="0.0" width="117" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zq-NY-pq3">
-                                                <rect key="frame" x="188" y="0.0" width="99" height="20"/>
+                                                <rect key="frame" x="160.5" y="0.0" width="99" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Зареєструйтесь">
                                                     <color key="titleColor" name="Theme_Green"/>
@@ -721,7 +703,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-UX-7KI">
-                                                <rect key="frame" x="290" y="0.0" width="65" height="20"/>
+                                                <rect key="frame" x="262.5" y="0.0" width="37.5" height="20"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -742,24 +724,18 @@
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="KLR-gR-XXG" firstAttribute="bottom" secondItem="YNg-Rk-wfJ" secondAttribute="bottom" constant="10" id="9bI-UJ-JtE"/>
-                            <constraint firstItem="fqO-51-e7S" firstAttribute="top" secondItem="KLR-gR-XXG" secondAttribute="top" id="C8D-6l-QNO"/>
                             <constraint firstItem="KLR-gR-XXG" firstAttribute="bottom" secondItem="1bo-yh-juf" secondAttribute="bottom" constant="80" id="Ihi-FU-6qB"/>
-                            <constraint firstItem="fqO-51-e7S" firstAttribute="trailing" secondItem="KLR-gR-XXG" secondAttribute="trailing" id="KLF-ah-8kR"/>
                             <constraint firstItem="YNg-Rk-wfJ" firstAttribute="leading" secondItem="s66-4Y-56G" secondAttribute="leading" id="Ppu-xH-swT"/>
                             <constraint firstItem="KLR-gR-XXG" firstAttribute="trailing" secondItem="1bo-yh-juf" secondAttribute="trailing" constant="24" id="QPj-A1-Lv1"/>
-                            <constraint firstItem="fqO-51-e7S" firstAttribute="leading" secondItem="KLR-gR-XXG" secondAttribute="leading" id="RPr-hQ-1L3"/>
-                            <constraint firstItem="1bo-yh-juf" firstAttribute="top" secondItem="fqO-51-e7S" secondAttribute="bottom" constant="10" id="cbn-do-inw"/>
                             <constraint firstItem="1bo-yh-juf" firstAttribute="leading" secondItem="s66-4Y-56G" secondAttribute="leading" constant="24" id="faw-E0-kcd"/>
+                            <constraint firstItem="1bo-yh-juf" firstAttribute="top" secondItem="KLR-gR-XXG" secondAttribute="top" constant="16" id="jv2-V7-cu6"/>
                             <constraint firstItem="KLR-gR-XXG" firstAttribute="trailing" secondItem="YNg-Rk-wfJ" secondAttribute="trailing" id="nmx-Yz-Fab"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KLR-gR-XXG"/>
                     </view>
-                    <navigationItem key="navigationItem" title="title" id="rUj-tS-RtB"/>
+                    <navigationItem key="navigationItem" id="rUj-tS-RtB"/>
                     <connections>
-                        <outlet property="bottomContainerConstraint" destination="Ihi-FU-6qB" id="dCD-IS-OjL"/>
-                        <outlet property="fieldToTitleConstraint" destination="E2A-vq-XIa" id="SYy-8b-gbk"/>
                         <outlet property="loginTextField" destination="y1w-rc-cAA" id="wo6-cK-YCA"/>
-                        <outlet property="navBar" destination="fqO-51-e7S" id="2Wd-f7-iJA"/>
                         <outlet property="passwordTextField" destination="wOZ-DN-Hf3" id="Evh-oX-f0h"/>
                         <outlet property="signInButton" destination="hQy-Ru-7gM" id="uGQ-0d-dB8"/>
                         <segue destination="YHt-xW-dOj" kind="unwind" identifier="unwindToSignUpNavigationController" unwindAction="myUnwindActionWithUnwindSegue:" id="7C2-iu-IyO"/>
@@ -768,24 +744,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lT-4G-bsA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="YHt-xW-dOj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="153" y="2312"/>
+            <point key="canvasLocation" x="152" y="2341"/>
         </scene>
         <!--Confirm Telephone Number View Controller-->
         <scene sceneID="W9V-zd-2ZX">
             <objects>
                 <viewController storyboardIdentifier="ConfirmTelephoneNumberViewController" id="LDQ-N8-u8m" customClass="ConfirmTelephoneNumberViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dk9-WA-u2Y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z04-Fr-TSW" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="24" y="54" width="327" height="533"/>
+                                <rect key="frame" x="24" y="54" width="272" height="434"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46F-ZB-tZF" userLabel="Title View">
-                                        <rect key="frame" x="0.0" y="32" width="327" height="56"/>
+                                        <rect key="frame" x="0.0" y="32" width="272" height="56"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Підтвердьте номер телефону" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slK-jZ-rWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="HGH-7f-O4Z"/>
                                                 </constraints>
@@ -803,10 +779,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTV-JR-GM0" userLabel="Subtitle View">
-                                        <rect key="frame" x="0.0" y="108" width="327" height="20"/>
+                                        <rect key="frame" x="0.0" y="108" width="272" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введіть код із смс-повідомлення" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB0-hw-F8D">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="cMG-FG-2s5"/>
                                                 </constraints>
@@ -824,10 +800,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQy-TG-Dxs" userLabel="Fields View">
-                                        <rect key="frame" x="0.0" y="160" width="327" height="56"/>
+                                        <rect key="frame" x="0.0" y="160" width="272" height="56"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Ja2-xs-q5x">
-                                                <rect key="frame" x="74.5" y="0.0" width="178" height="56"/>
+                                                <rect key="frame" x="47" y="0.0" width="178" height="56"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VcM-CC-HeV" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="56"/>
@@ -955,10 +931,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdp-gq-8RF">
-                                        <rect key="frame" x="0.0" y="240" width="327" height="20"/>
+                                        <rect key="frame" x="0.0" y="240" width="272" height="20"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2a-oM-Zzj">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="cOe-tt-dEz"/>
                                                 </constraints>
@@ -967,7 +943,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6y-tS-4Y0" customClass="LoaderButton" customModule="CoBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="ZVD-Lo-BsQ"/>
                                                 </constraints>
@@ -993,7 +969,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKo-FM-UJ3" userLabel="Continue Button" customClass="LoaderDesignableButton" customModule="CoBook" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="465" width="295" height="50"/>
+                                        <rect key="frame" x="16" y="366" width="240" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="vve-go-Yrk"/>
                                         </constraints>
@@ -1093,17 +1069,17 @@
             <objects>
                 <viewController storyboardIdentifier="CreatePasswordViewController" id="anr-NO-wiA" customClass="CreatePasswordViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ayB-qR-T3C">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDu-ft-cWr" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="24" y="54" width="327" height="533"/>
+                                <rect key="frame" x="24" y="54" width="272" height="434"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5TJ-1t-GG1" userLabel="Title Container">
-                                        <rect key="frame" x="0.0" y="32" width="327" height="30"/>
+                                        <rect key="frame" x="0.0" y="32" width="272" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Останній крок" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYo-sN-TQa">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Kvz-nP-6yi"/>
                                                 </constraints>
@@ -1121,10 +1097,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2E-J9-DEe" userLabel="Subtitle View">
-                                        <rect key="frame" x="0.0" y="82" width="327" height="20"/>
+                                        <rect key="frame" x="0.0" y="82" width="272" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Придумайте пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcJ-7T-hKb">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="qZ6-ad-oLL"/>
                                                 </constraints>
@@ -1142,10 +1118,10 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="1qw-FS-ADL" userLabel="Fields Stack View">
-                                        <rect key="frame" x="8" y="134" width="311" height="112"/>
+                                        <rect key="frame" x="16" y="134" width="240" height="112"/>
                                         <subviews>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+380XXXXXXXX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pdv-Yc-edk" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -1183,7 +1159,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bHx-WY-jMo" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="64" width="311" height="48"/>
+                                                <rect key="frame" x="0.0" y="64" width="240" height="48"/>
                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -1224,7 +1200,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gcl-uK-roT" userLabel="Continue Button" customClass="LoaderDesignableButton" customModule="CoBook" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="467" width="295" height="50"/>
+                                        <rect key="frame" x="16" y="368" width="240" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="2pQ-0Y-GXc"/>
                                         </constraints>
@@ -1258,7 +1234,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="1qw-FS-ADL" firstAttribute="leading" secondItem="yDu-ft-cWr" secondAttribute="leading" constant="8" id="6ud-rR-Sa6"/>
+                                    <constraint firstItem="1qw-FS-ADL" firstAttribute="leading" secondItem="yDu-ft-cWr" secondAttribute="leading" constant="16" id="6ud-rR-Sa6"/>
                                     <constraint firstItem="5TJ-1t-GG1" firstAttribute="top" secondItem="yDu-ft-cWr" secondAttribute="top" constant="32" id="8u1-EE-La0"/>
                                     <constraint firstItem="Gcl-uK-roT" firstAttribute="leading" secondItem="yDu-ft-cWr" secondAttribute="leading" constant="16" id="Avs-Za-eNs"/>
                                     <constraint firstItem="z2E-J9-DEe" firstAttribute="leading" secondItem="yDu-ft-cWr" secondAttribute="leading" id="Dgn-WH-jQT"/>
@@ -1268,7 +1244,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Gcl-uK-roT" secondAttribute="trailing" constant="16" id="WhL-RI-Uby"/>
                                     <constraint firstItem="Gcl-uK-roT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1qw-FS-ADL" secondAttribute="bottom" constant="24" id="abR-0M-Jcd"/>
                                     <constraint firstItem="1qw-FS-ADL" firstAttribute="top" secondItem="z2E-J9-DEe" secondAttribute="bottom" constant="32" id="cz9-8Q-6V1"/>
-                                    <constraint firstAttribute="trailing" secondItem="1qw-FS-ADL" secondAttribute="trailing" constant="8" id="l8O-5J-jsi"/>
+                                    <constraint firstAttribute="trailing" secondItem="1qw-FS-ADL" secondAttribute="trailing" constant="16" id="l8O-5J-jsi"/>
                                     <constraint firstItem="1qw-FS-ADL" firstAttribute="top" secondItem="5TJ-1t-GG1" secondAttribute="bottom" id="mmH-12-U45"/>
                                     <constraint firstItem="z2E-J9-DEe" firstAttribute="top" secondItem="5TJ-1t-GG1" secondAttribute="bottom" constant="20" id="oe4-LQ-Jxx"/>
                                     <constraint firstAttribute="bottom" secondItem="Gcl-uK-roT" secondAttribute="bottom" constant="16" id="qLU-5L-rsX"/>
@@ -1317,6 +1293,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PUg-II-Arf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1865" y="1534"/>
+        </scene>
+        <!--Sign In Navigation Controller-->
+        <scene sceneID="KUz-Gu-p6D">
+            <objects>
+                <navigationController storyboardIdentifier="SignInNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Qct-Ni-k9W" customClass="SignInNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7FR-du-vsI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="F97-Yl-JnX" kind="relationship" relationship="rootViewController" id="YXk-uU-rGv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CN9-jc-r14" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-690" y="2341"/>
         </scene>
     </scenes>
     <resources>

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
-        /// back button image and color
+        /// Navigation Bar appearance
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back")
         UINavigationBar.appearance().tintColor = UIColor.Theme.blackMiddle
@@ -67,8 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             if AppStorage.Auth.refreshToken == nil {
-                let signInViewController: SignInViewController = UIStoryboard.auth.initiateViewControllerFromType()
-                window?.rootViewController = signInViewController
+                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signInNavigationController
             } else {
                 window?.rootViewController = MainTabBarController()
             }

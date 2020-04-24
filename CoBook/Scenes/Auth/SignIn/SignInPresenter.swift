@@ -18,7 +18,6 @@ protocol SignInView: LoadDisplayableView, AlertDisplayableView {
 // MARK: - SignInPresenter
 class SignInPresenter: BasePresenter {
 
-    // MARK: Properties
     private weak var view: SignInView?
 
     private var login: String = ""
@@ -32,7 +31,7 @@ class SignInPresenter: BasePresenter {
         view = nil
     }
 
-    // MARK: Public
+    // MARK: - Public
     func set(login: String?, password: String?) {
         self.login = login ?? ""
         self.password = password ?? ""
@@ -86,6 +85,7 @@ class SignInPresenter: BasePresenter {
 }
 
 // MARK: - Privates
+
 private extension SignInPresenter {
 
     /**

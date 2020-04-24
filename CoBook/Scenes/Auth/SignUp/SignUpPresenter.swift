@@ -15,15 +15,17 @@ protocol SignUpView: LoadDisplayableView, AlertDisplayableView {
 }
 
 class SignUpPresenter: BasePresenter {
+
+    /// Managed view
     weak var view: SignUpView?
 
-    // MARK: Properties
     private var firstName: String = ""
     private var lastName: String = ""
     private var telephone: String = ""
     private var email: String = ""
 
-    // MARK: Public
+    // MARK: - Public
+
     func attachView(_ view: SignUpView) {
         self.view = view
     }
@@ -71,6 +73,7 @@ class SignUpPresenter: BasePresenter {
 }
 
 // MARK: - Privates
+
 private extension SignUpPresenter {
 
     func validateFields() -> String? {
