@@ -11,7 +11,7 @@ import GooglePlaces
 
 class StaticMapConfiguratorService {
 
-    func constructStaticMapURL(mapSize: CGSize, center placeID: String, callback: ((URL?) -> Void)?) {
+    static func constructStaticMapURL(mapSize: CGSize, center placeID: String, callback: ((URL?) -> Void)?) {
         GMSPlacesClient.shared().fetchPlace(fromPlaceID: placeID, placeFields: .all, sessionToken: nil) { (place, error) in
             DispatchQueue.main.async {
                 if error != nil {
@@ -27,17 +27,17 @@ class StaticMapConfiguratorService {
     }
 
 
-    func constructStaticMapURL(mapSize: CGSize,
+    static func constructStaticMapURL(mapSize: CGSize,
                                center coordinates: (latitude: Double?, longitude: Double?)) -> URL? {
 
         var mapUrl = APIConstants.StaticMap.baseURL
-        
+
         mapUrl.append("&size=\(Int(mapSize.width))x\(Int(mapSize.height))")
-        mapUrl.append("&scale=2")
+        mapUrl.append("&scale=\(2)")
         mapUrl.append("&format=png")
 
         let marker: String = {
-            var marker = "&markers=scale:2%7Cicon:\(APIConstants.StaticMap.markerURL)"
+            var marker = "&markers=scale:\(1)%7Cicon:\(APIConstants.StaticMap.markerURL)"
             if let lt = coordinates.latitude, let ln = coordinates.longitude {
                 marker.append("%7C\(lt),\(ln)")
             }

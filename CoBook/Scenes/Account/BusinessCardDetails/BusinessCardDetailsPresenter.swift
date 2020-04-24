@@ -109,7 +109,7 @@ private extension BusinessCardDetailsPresenter {
             case .general:
                 dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
-                                                   .map(path: ""),
+                                                   .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),
                                                    .mapDirection]
             case .contacts:
                 dataSource?[.cardDetails].items.append(.title(text: "Звязок:"))
@@ -266,17 +266,6 @@ extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
-    }
-
-
-}
-
-// MARK: - MapTableViewCellDelegate
-
-extension BusinessCardDetailsPresenter: MapTableViewCellDelegate {
-
-    func openSettingsAction(_ cell: MapTableViewCell) {
-        view?.openSettings()
     }
 
 
