@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MapDirectionTableViewCellDelegate {
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
@@ -15,8 +16,8 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func reload()
     func setupEditCardView()
     func setupHideCardView()
-    func sendEmail(to address: String)
-    func openSettings()
+    func sendEmail(to emailAddress: String)
+    func makeCall(to telephoneNumber: String?)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -84,6 +85,28 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             let controller: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
             view?.push(controller: controller, animated: true)
         }
+    }
+
+    func getRouteDestination(callback: ((CLLocationCoordinate2D?) -> Void)?) {
+
+        guard let addressId = self.cardDetails?.address?.googlePlaceId else {
+            view?.errorAlert(message: "Невизначений адрес призначення маршруту")
+            return
+        }
+
+        GMSPlacesClient.shared().fetchPlace(fromPlaceID: addressId, placeFields: .all, sessionToken: nil) { [unowned self] (place, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    let errorDescr = error?.localizedDescription ?? "Невизначений адрес призначення маршруту"
+                    self.view?.errorAlert(message: errorDescr)
+                }
+                callback?(place?.coordinate)
+            }
+        }
+    }
+
+    func getDestination() {
+        
     }
 
 
@@ -257,11 +280,7 @@ extension BusinessCardDetailsPresenter: SocialsListTableViewCellDelegate {
 extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredCallAction(_ cell: GetInTouchTableViewCell) {
-        guard let number = cardDetails?.contactTelephone?.number, let numberUrl = URL(string: "tel://" + number) else {
-            view?.errorAlert(message: "Telephone number of user have bad format")
-            return
-        }
-        UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
+        view?.makeCall(to: cardDetails?.contactTelephone?.number)
     }
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {

@@ -68,7 +68,7 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
 
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 5000
         locationManager.startUpdatingLocation()
         locationManager.delegate = self

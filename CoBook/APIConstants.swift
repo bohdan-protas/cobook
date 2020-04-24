@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import CoreLocation
 
 enum APIConstants {
+
+    // MARK: - Base
 
     static var baseURLPath: URLComponents {
         get {
@@ -25,15 +28,6 @@ enum APIConstants {
         case contentManager     = "/cm/v1"
     }
 
-    enum Google {
-        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"
-    }
-
-    enum StaticMap {
-        static let baseURL = "https://maps.googleapis.com/maps/api/staticmap?"
-        static let markerURL = "https://s3.eu-central-1.amazonaws.com/cobook.attachments/static/personal.png"
-    }
-
     enum ParameterKey {
         static let password     = "password"
         static let email        = "email"
@@ -47,14 +41,46 @@ enum APIConstants {
         static let id           = "id"
     }
 
-    static let additionalAcceptableImageContentTypes: Set<String> = [
-        "image/*"
-    ]
-
     enum ContentType: String {
         case json = "application/json"
         case xFormUrlencoded = "application/x-www-form-urlencoded"
     }
+
+    // MARK: - Google
+
+    enum Google {
+
+        enum DirectionMode: String {
+            case driving
+            case transit
+            case bicycling
+            case walking
+        }
+
+        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"
+
+        static func googleMapsRouteURL(saddr: CLLocationCoordinate2D?, daddr: CLLocationCoordinate2D?, directionMode: DirectionMode) -> URL? {
+            guard let saddr = saddr, let daddr = daddr else {
+                return nil
+            }
+
+            let routeURL = URL.init(string: "comgooglemaps://?" + "saddr=\(saddr.latitude),\(saddr.longitude)" + "&daddr=\(daddr.latitude),\(daddr.longitude)" + "&directionsmode=\(directionMode.rawValue)")
+            return routeURL
+        }
+    }
+
+    // MARK: - StaticMap
+
+    enum StaticMap {
+        static let baseURL = "https://maps.googleapis.com/maps/api/staticmap?"
+        static let markerURL = "https://s3.eu-central-1.amazonaws.com/cobook.attachments/static/personal.png"
+    }
+
+    // MARK: - Helpers
+
+    static let additionalAcceptableImageContentTypes: Set<String> = [
+        "image/*"
+    ]
 
 
 }

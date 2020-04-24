@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+import MessageUI
 
 private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
@@ -42,6 +44,12 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: self.presenter?.barItems ?? [])
         view.delegate = self.presenter
         return view
+    }()
+
+    private lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        return locationManager
     }()
 
     // MARK: - View Lifecycle
@@ -92,12 +100,51 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         tableView.reloadData()
     }
 
-    func sendEmail(to address: String) {
-        
+    func makeCall(to telephoneNumber: String?) {
+        guard let telephoneNumber = telephoneNumber, let numberUrl = URL(string: "tel://" + telephoneNumber) else {
+            errorAlert(message: "Telephone number of user have bad format")
+            return
+        }
+        UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
     }
 
-    func openSettings() {
-        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
+    func sendEmail(to emailAddress: String) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([emailAddress])
+
+            present(mail, animated: true)
+        } else {
+            errorAlert(message: "Device is not configured for mailing")
+        }
+    }
+
+    func openGoogleMaps() {
+        let currentUserLocation = locationManager.location
+
+        startLoading()
+        presenter?.getRouteDestination(callback: { [unowned self] (destination) in
+            self.stopLoading()
+
+            guard let routeURL = APIConstants.Google.googleMapsRouteURL(saddr: currentUserLocation?.coordinate, daddr: destination, directionMode: .driving) else {
+                self.errorAlert(message: "Не визначені адреси маршрутів")
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(routeURL) {
+                UIApplication.shared.open(routeURL)
+            } else {
+                self.errorAlert(message: "Не вдається відкрити карти")
+                Log.error("Can't use comgooglemaps://")
+            }
+
+        })
+
+    }
+
+    func openSettings(message: String?) {
+        let alertController = UIAlertController (title: nil, message: message, preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
 
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
@@ -143,17 +190,63 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
 extension BusinessCardDetailsViewController: MapDirectionTableViewCellDelegate {
 
     func didOpenGoogleMaps(_ view: MapDirectionTableViewCell) {
-
-        if let googleMapsUrl = URL.init(string: "comgooglemaps://"), UIApplication.shared.canOpenURL(googleMapsUrl) {
-
-            UIApplication.shared.open(googleMapsUrl)
-
+        if locationManager.location == nil {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
         } else {
-            errorAlert(message: "Не вдається відкрити карти")
-            Log.error("Can't use comgooglemaps://")
+            openGoogleMaps()
         }
-
     }
 
 
 }
+
+// MARK: - LLocationManagerDelegate
+
+extension BusinessCardDetailsViewController: CLLocationManagerDelegate {
+
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
+
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            Log.debug("Location status is OK.")
+            openGoogleMaps()
+            break
+        case .restricted:
+            Log.error("Location access was restricted.")
+            fallthrough
+        case .denied:
+            Log.error("User denied access to location.")
+            fallthrough
+        case .notDetermined:
+            Log.error("Location status not determined.")
+            fallthrough
+        @unknown default:
+            break
+        }
+    }
+
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        Log.error(error)
+        openSettings(message: "Для цьої дії потрібно дозволити додатку відстежити ваше місцеположення.")
+    }
+
+
+}
+
+// MARK: - MFMailComposeViewControllerDelegate
+
+extension BusinessCardDetailsViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+}
+
+
