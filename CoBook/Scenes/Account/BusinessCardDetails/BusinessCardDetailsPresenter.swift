@@ -16,6 +16,8 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func reload()
     func setupEditCardView()
     func setupHideCardView()
+
+    func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -50,7 +52,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         
         self.dataSource = DataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
-                                     Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.barItems.rawValue, items: []),
                                      Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue, items: [])]
     }
 
@@ -58,7 +59,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: BusinessCardDetailsView) {
         self.view = view
-        view.set(dataSource: dataSource)
+
     }
 
     func detachView() {
@@ -100,56 +101,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
                     self.view?.errorAlert(message: errorDescr)
                 }
                 callback?(place?.coordinate)
-            }
-        }
-    }
-
-    func getDestination() {
-        
-    }
-
-
-}
-
-// MARK: - Update data source
-
-private extension BusinessCardDetailsPresenter {
-    
-    func updateViewDataSource() {
-
-        dataSource?[.userHeader].items = [
-                    .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
-                                                                         avatartImagePath: cardDetails?.avatar?.sourceUrl,
-                                                                         bgimagePath: cardDetails?.background?.sourceUrl,
-                                                                         profession: cardDetails?.practiceType?.title,
-                                                                         telephoneNumber: cardDetails?.contactTelephone?.number,
-                                                                         websiteAddress: cardDetails?.companyWebSite))
-        ]
-
-        dataSource?[.cardDetails].items.removeAll()
-        if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
-            switch item {
-            case .general:
-                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
-                                                   .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
-                                                   .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),
-                                                   .mapDirection]
-            case .contacts:
-                dataSource?[.cardDetails].items.append(.title(text: "Звязок:"))
-                dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
-
-                dataSource?[.cardDetails].items.append(.getInTouch)
-
-                let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
-                if !listListItems.isEmpty {
-                    dataSource?[.cardDetails].items.append(.title(text: "Соціальні мережі:"))
-                    dataSource?[.cardDetails].items.append(.socialList)
-                }
-
-            case .team:
-                let emplCells = employee.compactMap { BusinessCardDetails.Cell.employee(model: $0) }
-                dataSource?[.cardDetails].items = emplCells
-
             }
         }
     }
@@ -213,6 +164,7 @@ private extension BusinessCardDetailsPresenter {
                                                               position: $0.position,
                                                               telephone: $0.telephone?.number,
                                                               practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) }
+                self?.view?.set(dataSource: self!.dataSource)
                 self?.updateViewDataSource()
                 self?.view?.setupEditCardView()
                 self?.view?.reload()
@@ -223,16 +175,83 @@ private extension BusinessCardDetailsPresenter {
 
 }
 
+// MARK: - Update data source
+
+private extension BusinessCardDetailsPresenter {
+    
+    func updateViewDataSource() {
+
+        dataSource?[.userHeader].items = [
+                    .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
+                                                                         avatartImagePath: cardDetails?.avatar?.sourceUrl,
+                                                                         bgimagePath: cardDetails?.background?.sourceUrl,
+                                                                         profession: cardDetails?.practiceType?.title,
+                                                                         telephoneNumber: cardDetails?.contactTelephone?.number,
+                                                                         websiteAddress: cardDetails?.companyWebSite))
+        ]
+        dataSource?[.cardDetails].items.removeAll()
+        if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
+            switch item {
+            case .general:
+                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
+                                                   .getInTouch,
+                                                   .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
+                                                   .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),
+                                                   .mapDirection]
+            case .contacts:
+                dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
+
+                dataSource?[.cardDetails].items.append(.getInTouch)
+
+                let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+                if !listListItems.isEmpty {
+                    dataSource?[.cardDetails].items.append(.title(text: "Соціальні мережі:"))
+                    dataSource?[.cardDetails].items.append(.socialList)
+                }
+
+            case .team:
+                let emplCells = employee.compactMap { BusinessCardDetails.Cell.employee(model: $0) }
+                dataSource?[.cardDetails].items = emplCells
+
+            }
+        }
+    }
+
+
+}
+
+
+
 // MARK: - HorizontalItemsBarViewDelegate
 
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        let animation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
+        if index == selectedBarItem.index {
+            return
+        }
+
+        let insertionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
+        let deletionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .right : .left
+
+        var deletionIndexPaths = [IndexPath]()
+        var insertionIndexPaths = [IndexPath]()
+
+        for row in 0..<dataSource![.cardDetails].items.count {
+            deletionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))
+        }
 
         selectedBarItem = barItems[index]
         updateViewDataSource()
-        self.view?.reload(section: .cardDetails, animation: animation)
+
+        for row in 0..<dataSource![.cardDetails].items.count {
+            insertionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))
+        }
+
+        self.view?.updateRows(insertion: insertionIndexPaths,
+                              deletion: deletionIndexPaths,
+                              insertionAnimation: insertionAnimation,
+                              deletionAnimation: deletionAnimation)
     }
 
 

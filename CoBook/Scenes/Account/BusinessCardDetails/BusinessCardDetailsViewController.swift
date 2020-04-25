@@ -71,12 +71,12 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         presenter?.detachView()
     }
 
+    // MARK: - BusinessCardDetailsView
+
     func setupLayout() {
         self.navigationItem.title = "Бізнес візитка"
         self.tableView.delegate = self
     }
-
-    // MARK: - BusinessCardDetailsView
 
     func setupEditCardView() {
         tableView.tableFooterView = editCardView
@@ -91,9 +91,22 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     }
 
     func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation) {
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integer: section.rawValue), with: animation)
-        tableView.endUpdates()
+        let section = IndexSet(integer: section.rawValue)
+        tableView.performBatchUpdates({
+            tableView.reloadSections(section, with: animation)
+        }) { (_) in
+
+        }
+
+    }
+
+    func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation) {
+        tableView.performBatchUpdates({
+            tableView.deleteRows(at: deletion, with: insertionAnimation)
+            tableView.insertRows(at: insertion, with: deletionAnimation)
+        }) { (_) in
+
+        }
     }
 
     func reload() {
@@ -153,11 +166,14 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 extension BusinessCardDetailsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return itemsBarView
+        if section == BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue {
+            return itemsBarView
+        }
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == BusinessCardDetails.SectionAccessoryIndex.barItems.rawValue {
+        if section == BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue {
             return itemsBarView.frame.height
         }
         return 0
