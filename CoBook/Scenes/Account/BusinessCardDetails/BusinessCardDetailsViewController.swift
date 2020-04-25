@@ -90,9 +90,9 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         dataSource?.connect(to: tableView)
     }
 
-    func reload(section: BusinessCardDetails.SectionAccessoryIndex) {
+    func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation) {
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .automatic)
+        tableView.reloadSections(IndexSet(integer: section.rawValue), with: animation)
         tableView.endUpdates()
     }
 
@@ -152,16 +152,12 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
 extension BusinessCardDetailsViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return itemsBarView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
+        if section == BusinessCardDetails.SectionAccessoryIndex.barItems.rawValue {
             return itemsBarView.frame.height
         }
         return 0

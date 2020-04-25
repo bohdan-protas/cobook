@@ -12,7 +12,7 @@ import GooglePlaces
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate {
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
-    func reload(section: BusinessCardDetails.SectionAccessoryIndex)
+    func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation)
     func reload()
     func setupEditCardView()
     func setupHideCardView()
@@ -25,7 +25,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     /// bar items busienss logic
     var barItems: [BarItemViewModel]
-    var selectedBarItem: BarItemViewModel?
+    var selectedBarItem: BarItemViewModel
 
     /// Datasource
     private var businessCardId: Int
@@ -44,12 +44,13 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
             /*BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),*/
         ]
-        self.selectedBarItem = barItems.first
+        self.selectedBarItem = barItems.first!
 
         super.init()
         
         self.dataSource = DataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
+                                     Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.barItems.rawValue, items: []),
                                      Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue, items: [])]
     }
 
@@ -124,8 +125,9 @@ private extension BusinessCardDetailsPresenter {
                                                                          telephoneNumber: cardDetails?.contactTelephone?.number,
                                                                          websiteAddress: cardDetails?.companyWebSite))
         ]
+
         dataSource?[.cardDetails].items.removeAll()
-        if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
+        if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
             switch item {
             case .general:
                 dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
@@ -226,9 +228,11 @@ private extension BusinessCardDetailsPresenter {
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        selectedBarItem = barItems[safe: index]
+        let animation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
+
+        selectedBarItem = barItems[index]
         updateViewDataSource()
-        self.view?.reload(section: .cardDetails)
+        self.view?.reload(section: .cardDetails, animation: animation)
     }
 
 

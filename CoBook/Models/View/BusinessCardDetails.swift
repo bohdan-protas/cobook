@@ -34,8 +34,7 @@ enum BusinessCardDetails {
     }
 
     enum SectionAccessoryIndex: Int {
-        case userHeader
-        case cardDetails
+        case userHeader, barItems, cardDetails
     }
 
     enum BarSectionsTypeIndex: Int {
