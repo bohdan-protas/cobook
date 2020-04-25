@@ -53,17 +53,6 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         tableView.tableFooterView = editCardView
     }
 
-    func sendEmail(to address: String) {
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients([address])
-            present(mail, animated: true)
-        } else {
-            errorAlert(message: "Unaviable send email to \(address)")
-        }
-    }
-
     func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator) {
         dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
         tableView.dataSource = dataSource
@@ -95,16 +84,5 @@ extension PersonalCardDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
-
-}
-
-// MARK: - MFMailComposeViewControllerDelegate
-
-extension PersonalCardDetailsViewController: MFMailComposeViewControllerDelegate {
-
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true)
-    }
-
 
 }

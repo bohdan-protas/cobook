@@ -8,15 +8,14 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MapDirectionTableViewCellDelegate {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate {
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex)
     func reload()
     func setupEditCardView()
     func setupHideCardView()
-    func sendEmail(to address: String)
-    func openSettings()
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -86,6 +85,28 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         }
     }
 
+    func getRouteDestination(callback: ((CLLocationCoordinate2D?) -> Void)?) {
+
+        guard let addressId = self.cardDetails?.address?.googlePlaceId else {
+            view?.errorAlert(message: "Невизначений адрес призначення маршруту")
+            return
+        }
+
+        GMSPlacesClient.shared().fetchPlace(fromPlaceID: addressId, placeFields: .all, sessionToken: nil) { [unowned self] (place, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    let errorDescr = error?.localizedDescription ?? "Невизначений адрес призначення маршруту"
+                    self.view?.errorAlert(message: errorDescr)
+                }
+                callback?(place?.coordinate)
+            }
+        }
+    }
+
+    func getDestination() {
+        
+    }
+
 
 }
 
@@ -109,7 +130,7 @@ private extension BusinessCardDetailsPresenter {
             case .general:
                 dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
-                                                   .map(path: ""),
+                                                   .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),
                                                    .mapDirection]
             case .contacts:
                 dataSource?[.cardDetails].items.append(.title(text: "Звязок:"))
@@ -257,26 +278,11 @@ extension BusinessCardDetailsPresenter: SocialsListTableViewCellDelegate {
 extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredCallAction(_ cell: GetInTouchTableViewCell) {
-        guard let number = cardDetails?.contactTelephone?.number, let numberUrl = URL(string: "tel://" + number) else {
-            view?.errorAlert(message: "Telephone number of user have bad format")
-            return
-        }
-        UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
+        view?.makeCall(to: cardDetails?.contactTelephone?.number)
     }
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
-    }
-
-
-}
-
-// MARK: - MapTableViewCellDelegate
-
-extension BusinessCardDetailsPresenter: MapTableViewCellDelegate {
-
-    func openSettingsAction(_ cell: MapTableViewCell) {
-        view?.openSettings()
     }
 
 

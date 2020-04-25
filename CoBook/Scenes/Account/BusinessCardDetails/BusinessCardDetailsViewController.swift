@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
@@ -44,14 +45,21 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         return view
     }()
 
+    private lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        return locationManager
+    }()
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
 
         presenter?.attachView(self)
         presenter?.onViewDidLoad()
+
+        setupLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -64,8 +72,8 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     }
 
     func setupLayout() {
-        navigationItem.title = "Бізнес візитка"
-        tableView.delegate = self
+        self.navigationItem.title = "Бізнес візитка"
+        self.tableView.delegate = self
     }
 
     // MARK: - BusinessCardDetailsView
@@ -92,12 +100,31 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         tableView.reloadData()
     }
 
-    func sendEmail(to address: String) {
-        
+    func openGoogleMaps() {
+        let currentUserLocation = locationManager.location
+
+        startLoading()
+        presenter?.getRouteDestination(callback: { [unowned self] (destination) in
+            self.stopLoading()
+
+            guard let routeURL = APIConstants.Google.googleMapsRouteURL(saddr: currentUserLocation?.coordinate, daddr: destination, directionMode: .driving) else {
+                self.errorAlert(message: "Не визначені адреси маршрутів")
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(routeURL) {
+                UIApplication.shared.open(routeURL)
+            } else {
+                self.errorAlert(message: "Не вдається відкрити карти")
+                Log.error("Can't use comgooglemaps://")
+            }
+
+        })
+
     }
 
-    func openSettings() {
-        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
+    func openSettings(message: String?) {
+        let alertController = UIAlertController (title: nil, message: message, preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
 
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
@@ -125,6 +152,10 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
 extension BusinessCardDetailsViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return itemsBarView
     }
@@ -143,17 +174,54 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
 extension BusinessCardDetailsViewController: MapDirectionTableViewCellDelegate {
 
     func didOpenGoogleMaps(_ view: MapDirectionTableViewCell) {
-
-        if let googleMapsUrl = URL.init(string: "comgooglemaps://"), UIApplication.shared.canOpenURL(googleMapsUrl) {
-
-            UIApplication.shared.open(googleMapsUrl)
-
+        if locationManager.location == nil {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
         } else {
-            errorAlert(message: "Не вдається відкрити карти")
-            Log.error("Can't use comgooglemaps://")
+            openGoogleMaps()
         }
-
     }
 
 
 }
+
+// MARK: - LLocationManagerDelegate
+
+extension BusinessCardDetailsViewController: CLLocationManagerDelegate {
+
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
+
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            Log.debug("Location status is OK.")
+            openGoogleMaps()
+            break
+        case .restricted:
+            Log.error("Location access was restricted.")
+            fallthrough
+        case .denied:
+            Log.error("User denied access to location.")
+            fallthrough
+        case .notDetermined:
+            Log.error("Location status not determined.")
+            fallthrough
+        @unknown default:
+            break
+        }
+    }
+
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        Log.error(error)
+        openSettings(message: "Для цьої дії потрібно дозволити додатку відстежити ваше місцеположення.")
+    }
+
+
+}
+
+
