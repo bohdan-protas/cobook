@@ -55,10 +55,11 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
 
         presenter?.attachView(self)
         presenter?.onViewDidLoad()
+
+        setupLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -71,8 +72,8 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     }
 
     func setupLayout() {
-        navigationItem.title = "Бізнес візитка"
-        tableView.delegate = self
+        self.navigationItem.title = "Бізнес візитка"
+        self.tableView.delegate = self
     }
 
     // MARK: - BusinessCardDetailsView
@@ -150,6 +151,10 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 // MARK: - UITableViewDelegate
 
 extension BusinessCardDetailsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return itemsBarView

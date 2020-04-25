@@ -14,4 +14,6 @@ class StaticMapTableViewCell: UITableViewCell {
     @IBOutlet var mapImageView: UIImageView!
 
 
+
+
 }

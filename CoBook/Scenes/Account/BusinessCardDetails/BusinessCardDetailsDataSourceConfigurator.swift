@@ -170,7 +170,7 @@ extension BusinessCardDetailsPresenter {
             // mapCellConfigurator
             configurator.mapCellConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> StaticMapTableViewCell in
                 cell.activityIndicator.startAnimating()
-                StaticMapConfiguratorService.constructStaticMapURL(mapSize: cell.mapImageView!.frame.size, center: model) { (url) in
+                StaticMapConfiguratorService.constructStaticMapURL(mapSize: .init(width: cell.frame.width, height: cell.frame.height), center: model) { (url) in
                     cell.mapImageView?.setImage(withPath: url?.absoluteString)
                     cell.activityIndicator.stopAnimating()
                 }
