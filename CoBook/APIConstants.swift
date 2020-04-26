@@ -60,19 +60,19 @@ enum APIConstants {
         }
 
         static func googleMapsRouteURL(saddr: CLLocationCoordinate2D? = nil, daddr: CLLocationCoordinate2D? = nil, directionMode: DirectionMode) -> URL? {
-            var routeURLPath: String = "comgooglemaps://?"
+            var routeURLPath: String = "https://www.google.com/maps/dir/?api=1"
 
-            routeURLPath.append("&saddr=")
+            routeURLPath.append("&origin=")
             if let saddr = saddr {
                 routeURLPath.append("\(saddr.latitude),\(saddr.longitude)")
             }
 
-            routeURLPath.append("&daddr=")
+            routeURLPath.append("&destination=")
             if let daddr = daddr {
                 routeURLPath.append("\(daddr.latitude),\(daddr.longitude)")
             }
 
-            routeURLPath.append("&directionsmode=\(directionMode.rawValue)")
+            routeURLPath.append("&travelmode=\(directionMode.rawValue)")
             return URL.init(string: routeURLPath)
         }
     }
