@@ -25,6 +25,7 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
     private var details: Service.CreationDetailsModel {
         didSet {
+            validateInput()
             updateViewDataSource()
         }
     }
@@ -84,6 +85,20 @@ class CreateServicePresenter: NSObject, BasePresenter {
 // MARK: - Updating View Data Source
 
 private extension CreateServicePresenter {
+
+    func validateInput() {
+        let whitespaceCharacterSet = CharacterSet.whitespaces
+        let isEnabled: Bool = {
+            return
+                !details.photos.isEmpty &&
+                !(details.name ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                (!(details.price ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty || details.isContractPrice) &&
+                !(details.email ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(details.descriptionTitle ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(details.desctiptionBody ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty
+        }()
+        view?.setSaveButtonEnabled(isEnabled)
+    }
 
     func updateViewDataSource() {
 
