@@ -15,6 +15,7 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
     var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
     var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
     var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
+    var checkboxConfigurator: CellConfigurator<CheckboxModel, CheckboxTableViewCell>?
 
     func reuseIdentifier(for item: Service.CreationItem, indexPath: IndexPath) -> String {
         switch item {
@@ -28,7 +29,8 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
             return textFieldConfigurator?.reuseIdentifier ?? ""
         case .textView:
             return textViewConfigurator?.reuseIdentifier ?? ""
-        default: return ""
+        case .checkbox:
+            return checkboxConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -44,8 +46,8 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
             return textFieldConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .textView(let model):
             return textViewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
-        case .checkbox:
-            return UITableViewCell()
+        case .checkbox(let model):
+            return checkboxConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -55,6 +57,7 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
         sectionTitleConfigurator?.registerCells(in: tableView)
         textFieldConfigurator?.registerCells(in: tableView)
         textViewConfigurator?.registerCells(in: tableView)
+        checkboxConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -92,6 +95,8 @@ extension CreateServicePresenter {
             // textFieldConfigurator
             configurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
+                cell.textField.isEnabled = model.isEnabled
+                cell.textField.alpha = model.isEnabled ? 1 : 0.5
                 cell.textField.text = model.text
                 cell.textKeyPath = model.associatedKeyPath
                 cell.textField.placeholder = model.placeholder
@@ -105,6 +110,15 @@ extension CreateServicePresenter {
                 cell.textView.text = model.text
                 cell.textView.placeholder = model.placeholder
                 cell.textKeyPath = model.associatedKeyPath
+                return cell
+            }
+
+            // checkboxConfigurator
+            configurator.checkboxConfigurator = CellConfigurator { (cell, model: CheckboxModel, tableView, indexPath) -> CheckboxTableViewCell in
+                cell.checkboxButton.setTitle(model.title, for: .normal)
+                cell.checkboxButton.setTitle(model.title, for: .selected)
+                cell.checkboxButton.isSelected = model.isSelected
+                cell.checkboxActionHandler = model.handler
                 return cell
             }
 

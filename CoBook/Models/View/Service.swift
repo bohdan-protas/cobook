@@ -18,7 +18,7 @@ enum Service {
         case title(text: String)
         case textField(model: TextFieldModel)
         case textView(model: TextFieldModel)
-        case checkbox
+        case checkbox(_ model: CheckboxModel)
     }
 
     enum CreationSectionAccessoryIndex: Int {
@@ -54,6 +54,8 @@ enum Service {
 
     /// Model for describing data on details screen
     struct CreationDetailsModel {
+        var isContractPrice: Bool = false
+        var isUseContactsFromSite: Bool = false
         var photos: [EditablePhotoListItem] = []
     }
 

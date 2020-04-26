@@ -10,15 +10,18 @@ import UIKit
 
 class CheckboxTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet var checkboxButton: UIButton!
+
+    var checkboxActionHandler: ((_ button: UIButton) -> Void)?
+
+    @IBAction func checkboxButtonTapped(_ sender: UIButton) {
+        checkboxActionHandler?(sender)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        checkboxActionHandler = nil
     }
+
     
 }

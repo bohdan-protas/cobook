@@ -51,7 +51,6 @@ class CreateServicePresenter: NSObject, BasePresenter {
     func onViewDidLoad() {
         updateViewDataSource()
         view?.set(dataSource: dataSource)
-
         view?.setupSaveView()
         view?.reload()
     }
@@ -88,14 +87,40 @@ private extension CreateServicePresenter {
             .gallery,
             .textField(model: TextFieldModel(text: nil, placeholder: "Назва послуги", associatedKeyPath: nil, keyboardType: .default)),
             .title(text: "Вартість послуги:"),
-            .textField(model: TextFieldModel(text: nil, placeholder: "Вкажіть вартість", associatedKeyPath: nil, keyboardType: .default))
+            .textField(model: TextFieldModel(isEnabled: !details.isContractPrice,
+                                             text: details.isContractPrice ? nil : nil,
+                                             placeholder: details.isContractPrice ? "Ціна договірна" : "Вкажіть вартість",
+                                             associatedKeyPath: nil,
+                                             keyboardType: .default)),
+            .checkbox(CheckboxModel(title: "Ціна договірна", isSelected: details.isContractPrice, handler: { checkbox in
+                checkbox.isSelected.toggle()
+                self.details.isContractPrice = checkbox.isSelected
+                self.updateViewDataSource()
+                self.view?.reload()
+            })),
         ]
 
         dataSource?[Service.CreationSectionAccessoryIndex.contacts].items = [
             .sectionSeparator,
             .title(text: "Контактні дані:"),
-            .textField(model: TextFieldModel(text: nil, placeholder: "Телефон для звязку", associatedKeyPath: nil, keyboardType: .phonePad)),
-            .textField(model: TextFieldModel(text: nil, placeholder: "Робочий емейл для звязку", associatedKeyPath: nil, keyboardType: .emailAddress)),
+            .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
+                                             text: details.isUseContactsFromSite ? nil : nil,
+                                             placeholder: "Телефон для звязку",
+                                             associatedKeyPath: nil,
+                                             keyboardType: .phonePad)),
+
+            .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
+                                             text: details.isUseContactsFromSite ? nil : nil,
+                                             placeholder: "Робочий емейл для звязку",
+                                             associatedKeyPath: nil,
+                                             keyboardType: .emailAddress)),
+
+            .checkbox(CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
+                checkbox.isSelected.toggle()
+                self.details.isUseContactsFromSite = checkbox.isSelected
+                self.updateViewDataSource()
+                self.view?.reload()
+            })),
         ]
 
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
