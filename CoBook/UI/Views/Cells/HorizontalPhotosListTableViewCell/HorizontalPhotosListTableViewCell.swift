@@ -106,7 +106,7 @@ extension HorizontalPhotosListTableViewCell: UICollectionViewDelegate {
         case .view:
             let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { action in
 
-                let edit = UIAction(title: "Змінити", image: nil, identifier: nil, handler: { action in
+                let edit = UIAction(title: "Змінити", image: UIImage(systemName: "arrow.clockwise"), identifier: nil, handler: { action in
                     self.delegate?.didUpdatePhoto(self, at: indexPath)
                 })
 
