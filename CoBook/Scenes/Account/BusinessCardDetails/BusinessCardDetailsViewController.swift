@@ -45,12 +45,6 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         return view
     }()
 
-    private lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        return locationManager
-    }()
-
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -114,13 +108,11 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
     }
 
     func openGoogleMaps() {
-        let currentUserLocation = locationManager.location
-
         startLoading()
         presenter?.getRouteDestination(callback: { [unowned self] (destination) in
             self.stopLoading()
 
-            guard let routeURL = APIConstants.Google.googleMapsRouteURL(saddr: currentUserLocation?.coordinate, daddr: destination, directionMode: .driving) else {
+            guard let routeURL = APIConstants.Google.googleMapsRouteURL(daddr: destination, directionMode: .driving) else {
                 self.errorAlert(message: "Не визначені адреси маршрутів")
                 return
             }
@@ -134,28 +126,6 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
         })
 
-    }
-
-    func openSettings(message: String?) {
-        let alertController = UIAlertController (title: nil, message: message, preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
-
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    Log.debug("Settings opened")
-                })
-            }
-        }
-
-        alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
     }
 
 
@@ -186,54 +156,9 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
 extension BusinessCardDetailsViewController: MapDirectionTableViewCellDelegate {
 
     func didOpenGoogleMaps(_ view: MapDirectionTableViewCell) {
-        if locationManager.location == nil {
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.requestLocation()
-        } else {
-            openGoogleMaps()
-        }
+        openGoogleMaps()
     }
 
 
 }
-
-// MARK: - LLocationManagerDelegate
-
-extension BusinessCardDetailsViewController: CLLocationManagerDelegate {
-
-    // Handle incoming location events.
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
-
-    // Handle authorization for the location manager.
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways: fallthrough
-        case .authorizedWhenInUse:
-            Log.debug("Location status is OK.")
-            openGoogleMaps()
-            break
-        case .restricted:
-            Log.error("Location access was restricted.")
-            fallthrough
-        case .denied:
-            Log.error("User denied access to location.")
-            fallthrough
-        case .notDetermined:
-            Log.error("Location status not determined.")
-            fallthrough
-        @unknown default:
-            break
-        }
-    }
-
-    // Handle location manager errors.
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationManager.stopUpdatingLocation()
-        Log.error(error)
-        openSettings(message: "Для цьої дії потрібно дозволити додатку відстежити ваше місцеположення.")
-    }
-
-
-}
-
 
