@@ -121,7 +121,7 @@ extension HorizontalItemsBarView: UICollectionViewDelegate {
         selectionIndicatorWidth?.constant = cell.frame.width
 
         collectionView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.15, animations: {
             self.collectionView.layoutIfNeeded()
         }, completion: { isFinished in
             self.delegate?.horizontalItemsBarView(self, didSelectedItemAt: indexPath.item)

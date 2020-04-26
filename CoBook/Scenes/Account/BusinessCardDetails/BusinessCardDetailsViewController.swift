@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
@@ -48,10 +49,11 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
 
         presenter?.attachView(self)
         presenter?.onViewDidLoad()
+
+        setupLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,12 +65,12 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         presenter?.detachView()
     }
 
-    func setupLayout() {
-        navigationItem.title = "Бізнес візитка"
-        tableView.delegate = self
-    }
-
     // MARK: - BusinessCardDetailsView
+
+    func setupLayout() {
+        self.navigationItem.title = "Бізнес візитка"
+        self.tableView.delegate = self
+    }
 
     func setupEditCardView() {
         tableView.tableFooterView = editCardView
@@ -82,40 +84,48 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         dataSource?.connect(to: tableView)
     }
 
-    func reload(section: BusinessCardDetails.SectionAccessoryIndex) {
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .automatic)
-        tableView.endUpdates()
+    func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation) {
+        let section = IndexSet(integer: section.rawValue)
+        tableView.performBatchUpdates({
+            tableView.reloadSections(section, with: animation)
+        }) { (_) in
+
+        }
+
+    }
+
+    func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation) {
+        tableView.performBatchUpdates({
+            tableView.deleteRows(at: deletion, with: insertionAnimation)
+            tableView.insertRows(at: insertion, with: deletionAnimation)
+        }) { (_) in
+
+        }
     }
 
     func reload() {
         tableView.reloadData()
     }
 
-    func sendEmail(to address: String) {
-        
-    }
+    func openGoogleMaps() {
+        startLoading()
+        presenter?.getRouteDestination(callback: { [unowned self] (destination) in
+            self.stopLoading()
 
-    func openSettings() {
-        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
-
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            guard let routeURL = APIConstants.Google.googleMapsRouteURL(daddr: destination, directionMode: .driving) else {
+                self.errorAlert(message: "Не визначені адреси маршрутів")
                 return
             }
 
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    Log.debug("Settings opened")
-                })
+            if UIApplication.shared.canOpenURL(routeURL) {
+                UIApplication.shared.open(routeURL)
+            } else {
+                self.errorAlert(message: "Не вдається відкрити карти")
+                Log.error("Can't use comgooglemaps://")
             }
-        }
 
-        alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
+        })
 
-        present(alertController, animated: true, completion: nil)
     }
 
 
@@ -126,11 +136,14 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 extension BusinessCardDetailsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return itemsBarView
+        if section == BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue {
+            return itemsBarView
+        }
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
+        if section == BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue {
             return itemsBarView.frame.height
         }
         return 0
@@ -143,17 +156,9 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
 extension BusinessCardDetailsViewController: MapDirectionTableViewCellDelegate {
 
     func didOpenGoogleMaps(_ view: MapDirectionTableViewCell) {
-
-        if let googleMapsUrl = URL.init(string: "comgooglemaps://"), UIApplication.shared.canOpenURL(googleMapsUrl) {
-
-            UIApplication.shared.open(googleMapsUrl)
-
-        } else {
-            errorAlert(message: "Не вдається відкрити карти")
-            Log.error("Can't use comgooglemaps://")
-        }
-
+        openGoogleMaps()
     }
 
 
 }
+

@@ -18,7 +18,7 @@ enum BusinessCardDetails {
         case getInTouch
         case socialList
         case addressInfo(model: AddressInfoCellModel)
-        case map(path: String?)
+        case map(centerPlaceID: String)
         case mapDirection
         case employee(model: EmployeeModel?)
         case contacts(model: ContactsModel?)
@@ -34,8 +34,7 @@ enum BusinessCardDetails {
     }
 
     enum SectionAccessoryIndex: Int {
-        case userHeader
-        case cardDetails
+        case userHeader, cardDetails
     }
 
     enum BarSectionsTypeIndex: Int {

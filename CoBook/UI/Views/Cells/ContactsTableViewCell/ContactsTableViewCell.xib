@@ -12,19 +12,40 @@
         <array key="HelveticaNeueCyr-Roman.ttf">
             <string>HelveticaNeueCyr-Roman</string>
         </array>
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="104" id="KGk-i7-Jjw" customClass="ContactsTableViewCell" customModule="CoBook" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="148" id="KGk-i7-Jjw" customClass="ContactsTableViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зв’язок:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5J-bX-Nm4">
+                        <rect key="frame" x="16" y="24" width="288" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="4j5-4l-LIM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
+                        <color key="textColor" name="Theme_Black-Middle"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0VJ-lt-K47">
+                        <rect key="frame" x="16" y="56" width="288" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="hsp-nv-hCA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
+                        <color key="textColor" name="Theme_TextField-text"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guV-U8-592">
-                        <rect key="frame" x="16" y="40" width="288" height="20"/>
+                        <rect key="frame" x="16" y="84" width="288" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="C9o-5e-hLU"/>
                         </constraints>
@@ -36,17 +57,8 @@
                             <action selector="websiteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="p8O-Wh-cUN"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0VJ-lt-K47">
-                        <rect key="frame" x="16" y="12" width="288" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="hsp-nv-hCA"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
-                        <color key="textColor" name="Theme_TextField-text"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E17-iF-Cln">
-                        <rect key="frame" x="16" y="68" width="288" height="20"/>
+                        <rect key="frame" x="16" y="112" width="288" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="40P-Yp-ytJ"/>
                         </constraints>
@@ -54,18 +66,31 @@
                         <color key="textColor" name="Theme_TextField-text"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JdN-SH-KK6">
+                        <rect key="frame" x="16" y="147" width="288" height="1"/>
+                        <color key="backgroundColor" name="Theme_Separator"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ZbQ-qr-03l"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="guV-U8-592" firstAttribute="top" secondItem="0VJ-lt-K47" secondAttribute="bottom" constant="8" id="J8m-zX-FkZ"/>
+                    <constraint firstItem="n5J-bX-Nm4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="LQn-wD-Rz9"/>
                     <constraint firstAttribute="bottom" secondItem="E17-iF-Cln" secondAttribute="bottom" constant="16" id="Lc6-NJ-Qht"/>
                     <constraint firstItem="0VJ-lt-K47" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="QuT-tS-GYg"/>
+                    <constraint firstItem="n5J-bX-Nm4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="S4c-AN-77n"/>
+                    <constraint firstItem="JdN-SH-KK6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Uhs-RA-eZU"/>
                     <constraint firstItem="guV-U8-592" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ZIw-3u-K2G"/>
                     <constraint firstItem="E17-iF-Cln" firstAttribute="top" secondItem="guV-U8-592" secondAttribute="bottom" constant="8" id="alR-nw-gDO"/>
+                    <constraint firstAttribute="trailing" secondItem="n5J-bX-Nm4" secondAttribute="trailing" constant="16" id="bpu-iJ-jww"/>
                     <constraint firstAttribute="trailing" secondItem="0VJ-lt-K47" secondAttribute="trailing" constant="16" id="ccU-b6-lAw"/>
+                    <constraint firstAttribute="bottom" secondItem="JdN-SH-KK6" secondAttribute="bottom" id="eHb-dS-v5A"/>
                     <constraint firstAttribute="trailing" secondItem="E17-iF-Cln" secondAttribute="trailing" constant="16" id="ehM-dV-JyM"/>
-                    <constraint firstItem="0VJ-lt-K47" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="p2E-1x-k23"/>
+                    <constraint firstAttribute="trailing" secondItem="JdN-SH-KK6" secondAttribute="trailing" constant="16" id="fSW-Q7-4I2"/>
                     <constraint firstAttribute="trailing" secondItem="guV-U8-592" secondAttribute="trailing" constant="16" id="sV3-eQ-4ln"/>
                     <constraint firstItem="E17-iF-Cln" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="yQG-kM-GQI"/>
+                    <constraint firstItem="0VJ-lt-K47" firstAttribute="top" secondItem="n5J-bX-Nm4" secondAttribute="bottom" constant="12" id="zxL-vn-gxx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -74,10 +99,16 @@
                 <outlet property="telephoneNumberLabel" destination="0VJ-lt-K47" id="hYd-pA-vzg"/>
                 <outlet property="websiteButton" destination="guV-U8-592" id="7dx-2P-ql3"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="172.76785714285714"/>
+            <point key="canvasLocation" x="137.68115942028987" y="158.03571428571428"/>
         </tableViewCell>
     </objects>
     <resources>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Separator">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Theme_TextField-text">
             <color red="0.17299999296665192" green="0.17299999296665192" blue="0.17299999296665192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
