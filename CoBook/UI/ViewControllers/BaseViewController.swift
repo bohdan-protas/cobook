@@ -9,6 +9,7 @@
 import UIKit
 import JGProgressHUD
 import Alamofire
+import MessageUI
 
 class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayableView {
 
@@ -73,10 +74,31 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
         }
     }
 
+    func makeCall(to telephoneNumber: String?) {
+        guard let telephoneNumber = telephoneNumber, let numberUrl = URL(string: "tel://" + telephoneNumber) else {
+            errorAlert(message: "Telephone number of user have bad format")
+            return
+        }
+        UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
+    }
+
+    func sendEmail(to emailAddress: String) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([emailAddress])
+
+            present(mail, animated: true)
+        } else {
+            errorAlert(message: "Device is not configured for mailing")
+        }
+    }
+
 
 }
 
 // MARK: - NavigableView
+
 extension BaseViewController: NavigableView {
 
     func push(controller: UIViewController, animated: Bool) {
@@ -95,6 +117,7 @@ extension BaseViewController: NavigableView {
 }
 
 // MARK: - JGProgressHUDDelegate
+
 extension BaseViewController: JGProgressHUDDelegate {
 
     func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
@@ -102,4 +125,13 @@ extension BaseViewController: JGProgressHUDDelegate {
         onFinishDownloadCompletion = nil
     }
 
+}
+
+// MARK: - MFMailComposeViewControllerDelegate
+
+extension BaseViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
 }

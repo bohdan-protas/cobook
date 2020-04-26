@@ -37,10 +37,6 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
     var currentLocation: CLLocation?
     var zoomLevel: Float = 10.0
 
-
-    var isSetupUserCurrentLocationByMarker: Bool = false
-
-    private var currentUserLocationMarker: GMSMarker?
     private var isCameraFitted: Bool = false
 
     var markers: [GMSMarker] = [] {
@@ -72,7 +68,7 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
 
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 5000
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
@@ -118,15 +114,6 @@ extension MapTableViewCell: CLLocationManagerDelegate {
 
             mapView.isHidden = false
             mapView.camera = camera
-
-            currentUserLocationMarker?.map = nil
-
-            if isSetupUserCurrentLocationByMarker {
-                let position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                currentUserLocationMarker = GMSMarker(position: position)
-                currentUserLocationMarker?.icon = UIImage(named: "ic_mapmarker_business")
-                currentUserLocationMarker?.map = mapView
-            }
         }
     }
 

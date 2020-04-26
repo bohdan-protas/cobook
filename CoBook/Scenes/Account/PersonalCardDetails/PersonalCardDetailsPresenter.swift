@@ -8,11 +8,9 @@
 
 import UIKit
 
-protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView {
+protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
     var tableView: UITableView! { get set }
     func setupLayout()
-    func sendEmail(to address: String)
-
     func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator)
     func updateDataSource(sections: [Section<PersonalCardDetails.Cell>])
 }
@@ -147,11 +145,7 @@ extension PersonalCardDetailsPresenter: SocialsListTableViewCellDelegate {
 extension PersonalCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredCallAction(_ cell: GetInTouchTableViewCell) {
-        guard let number = cardDetails?.contactTelephone?.number, let numberUrl = URL(string: "tel://" + number) else {
-            view?.errorAlert(message: "Telephone number of user have bad format")
-            return
-        }
-        UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
+        view?.makeCall(to: cardDetails?.contactTelephone?.number)
     }
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {

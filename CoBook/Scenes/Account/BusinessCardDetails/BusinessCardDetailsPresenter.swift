@@ -8,16 +8,15 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MapDirectionTableViewCellDelegate {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate {
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
-    func reload(section: BusinessCardDetails.SectionAccessoryIndex)
+    func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation)
     func reload()
     func setupEditCardView()
     func setupHideCardView()
-    func sendEmail(to address: String)
-    func openSettings()
-
+    func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
     func goToCreateService()
 }
 
@@ -28,7 +27,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     /// bar items busienss logic
     var barItems: [BarItem]
-    var selectedBarItem: BarItem?
+    var selectedBarItem: BarItem
 
     /// Datasource
     private var businessCardId: Int
@@ -54,7 +53,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
         ]
-        self.selectedBarItem = barItems.first
+        self.selectedBarItem = barItems.first!
 
         super.init()
         
@@ -67,7 +66,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: BusinessCardDetailsView) {
         self.view = view
-        view.set(dataSource: dataSource)
+
     }
 
     func detachView() {
@@ -118,56 +117,24 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     }
 
+    func getRouteDestination(callback: ((CLLocationCoordinate2D?) -> Void)?) {
+        guard let addressId = self.cardDetails?.address?.googlePlaceId else {
+            view?.errorAlert(message: "Невизначений адрес призначення маршруту")
+            return
+        }
 
-}
-
-// MARK: - Update data source
-
-private extension BusinessCardDetailsPresenter {
-    
-    func updateViewDataSource() {
-
-        dataSource?[.userHeader].items = [
-                    .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
-                                                                         avatartImagePath: cardDetails?.avatar?.sourceUrl,
-                                                                         bgimagePath: cardDetails?.background?.sourceUrl,
-                                                                         profession: cardDetails?.practiceType?.title,
-                                                                         telephoneNumber: cardDetails?.contactTelephone?.number,
-                                                                         websiteAddress: cardDetails?.companyWebSite))
-        ]
-        dataSource?[.cardDetails].items.removeAll()
-        if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
-            switch item {
-
-            case .general:
-                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
-                                                   .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
-                                                   .map(path: ""),
-                                                   .mapDirection]
-
-            case .services:
-                if isUserOwner {
-                    dataSource?[.cardDetails].items.append(.service(model: .add))
+        GMSPlacesClient.shared().fetchPlace(fromPlaceID: addressId, placeFields: .all, sessionToken: nil) { [unowned self] (place, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    let errorDescr = error?.localizedDescription ?? "Невизначений адрес призначення маршруту"
+                    self.view?.errorAlert(message: errorDescr)
                 }
-
-            case .contacts:
-                dataSource?[.cardDetails].items.append(.title(text: "Звязок:"))
-                dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
-                dataSource?[.cardDetails].items.append(.getInTouch)
-
-                let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
-                if !listListItems.isEmpty {
-                    dataSource?[.cardDetails].items.append(.title(text: "Соціальні мережі:"))
-                    dataSource?[.cardDetails].items.append(.socialList)
-                }
-
-            case .team:
-                let emplCells = employee.compactMap { BusinessCardDetails.Cell.employee(model: $0) }
-                dataSource?[.cardDetails].items = emplCells
-
+                callback?(place?.coordinate)
             }
         }
     }
+
+    
 
 
 }
@@ -228,8 +195,7 @@ private extension BusinessCardDetailsPresenter {
                                                               position: $0.position,
                                                               telephone: $0.telephone?.number,
                                                               practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) }
-
-
+                self?.view?.set(dataSource: self!.dataSource)
                 self?.updateViewDataSource()
 
                 if self?.isUserOwner ?? false {
@@ -246,14 +212,87 @@ private extension BusinessCardDetailsPresenter {
 
 }
 
+// MARK: - Update data source
+
+private extension BusinessCardDetailsPresenter {
+    
+    func updateViewDataSource() {
+
+        dataSource?[.userHeader].items = [
+                    .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
+                                                                         avatartImagePath: cardDetails?.avatar?.sourceUrl,
+                                                                         bgimagePath: cardDetails?.background?.sourceUrl,
+                                                                         profession: cardDetails?.practiceType?.title,
+                                                                         telephoneNumber: cardDetails?.contactTelephone?.number,
+                                                                         websiteAddress: cardDetails?.companyWebSite))
+        ]
+        dataSource?[.cardDetails].items.removeAll()
+        if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
+            switch item {
+            case .general:
+                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
+                                                   .getInTouch,
+                                                   .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
+                                                   .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),
+                                                   .mapDirection]
+            case .contacts:
+                dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
+
+                dataSource?[.cardDetails].items.append(.getInTouch)
+
+                let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
+                if !listListItems.isEmpty {
+                    dataSource?[.cardDetails].items.append(.title(text: "Соціальні мережі:"))
+                    dataSource?[.cardDetails].items.append(.socialList)
+                }
+
+            case .team:
+                let emplCells = employee.compactMap { BusinessCardDetails.Cell.employee(model: $0) }
+                dataSource?[.cardDetails].items = emplCells
+
+            case .services:
+                if isUserOwner {
+                    dataSource?[.cardDetails].items.append(.service(model: .add))
+                }
+            }
+        }
+    }
+
+
+}
+
+
+
 // MARK: - HorizontalItemsBarViewDelegate
 
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        selectedBarItem = barItems[safe: index]
+        if index == selectedBarItem.index {
+            return
+        }
+
+        let insertionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
+        let deletionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .right : .left
+
+        var deletionIndexPaths = [IndexPath]()
+        var insertionIndexPaths = [IndexPath]()
+
+        for row in 0..<dataSource![.cardDetails].items.count {
+            deletionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))
+        }
+
+        selectedBarItem = barItems[index]
         updateViewDataSource()
-        self.view?.reload(section: .cardDetails)
+
+        for row in 0..<dataSource![.cardDetails].items.count {
+            insertionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))
+        }
+
+        self.view?.updateRows(insertion: insertionIndexPaths,
+                              deletion: deletionIndexPaths,
+                              insertionAnimation: insertionAnimation,
+                              deletionAnimation: deletionAnimation)
     }
 
 
@@ -303,26 +342,11 @@ extension BusinessCardDetailsPresenter: SocialsListTableViewCellDelegate {
 extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredCallAction(_ cell: GetInTouchTableViewCell) {
-        guard let number = cardDetails?.contactTelephone?.number, let numberUrl = URL(string: "tel://" + number) else {
-            view?.errorAlert(message: "Telephone number of user have bad format")
-            return
-        }
-        UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
+        view?.makeCall(to: cardDetails?.contactTelephone?.number)
     }
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
-    }
-
-
-}
-
-// MARK: - MapTableViewCellDelegate
-
-extension BusinessCardDetailsPresenter: MapTableViewCellDelegate {
-
-    func openSettingsAction(_ cell: MapTableViewCell) {
-        view?.openSettings()
     }
 
 

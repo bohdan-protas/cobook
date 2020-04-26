@@ -111,6 +111,8 @@
 		B825B22B244897E9007C70DF /* String + ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825B22A244897E9007C70DF /* String + ImageGeneration.swift */; };
 		B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825B6F824391448002A27EC /* SearchTableViewCell.swift */; };
 		B825B6FB24391448002A27EC /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B825B6F924391448002A27EC /* SearchTableViewCell.xib */; };
+		B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8263C71245345250075A499 /* StaticMapTableViewCell.swift */; };
+		B8263C74245345250075A499 /* StaticMapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8263C72245345250075A499 /* StaticMapTableViewCell.xib */; };
 		B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* DesignableProgressView.swift */; };
 		B826B0F223F459A1009041DD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0F123F459A1009041DD /* Onboarding.swift */; };
 		B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828282C241A970D0003D056 /* InterestsSelectionTableViewCell.swift */; };
@@ -358,6 +360,8 @@
 		B825B22A244897E9007C70DF /* String + ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + ImageGeneration.swift"; sourceTree = "<group>"; };
 		B825B6F824391448002A27EC /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		B825B6F924391448002A27EC /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		B8263C71245345250075A499 /* StaticMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapTableViewCell.swift; sourceTree = "<group>"; };
+		B8263C72245345250075A499 /* StaticMapTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaticMapTableViewCell.xib; sourceTree = "<group>"; };
 		B826B0E523F4109C009041DD /* DesignableProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableProgressView.swift; sourceTree = "<group>"; };
 		B826B0F123F459A1009041DD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		B828282C241A970D0003D056 /* InterestsSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsSelectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -930,6 +934,15 @@
 			path = EmployersSearchTableViewCell;
 			sourceTree = "<group>";
 		};
+		B8263C70245345010075A499 /* StaticMapTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8263C71245345250075A499 /* StaticMapTableViewCell.swift */,
+				B8263C72245345250075A499 /* StaticMapTableViewCell.xib */,
+			);
+			path = StaticMapTableViewCell;
+			sourceTree = "<group>";
+		};
 		B826B0EB23F442AC009041DD /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1426,6 +1439,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8263C70245345010075A499 /* StaticMapTableViewCell */,
 				B8A3B0AA2450A547007C4F05 /* PhotoListItemCollectionViewCell */,
 				B8A3B0A52450A3FD007C4F05 /* HorizontalPhotosListTableViewCell */,
 				B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */,
@@ -1576,6 +1590,7 @@
 				B83FD7DD2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib in Resources */,
 				B8A3B0B22450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib in Resources */,
 				B823B090242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib in Resources */,
+				B8263C74245345250075A499 /* StaticMapTableViewCell.xib in Resources */,
 				B8559F95243CC67E00787349 /* HideCardView.xib in Resources */,
 				B823B089242CD4F30012529D /* AccountHeaderTableViewCell.xib in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
@@ -1831,6 +1846,7 @@
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
+				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,

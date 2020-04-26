@@ -18,7 +18,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>?
     var expandableDescriptionCellConfigurator: CellConfigurator<String?, ExpandableDescriptionTableViewCell>?
     var mapDirectionCellConfigurator: CellConfigurator<Void?, MapDirectionTableViewCell>?
-    var mapCellConfigurator: CellConfigurator<String?, MapTableViewCell>?
+    var mapCellConfigurator: CellConfigurator<String, StaticMapTableViewCell>?
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>?
     var employeeCellConfigurator: CellConfigurator<EmployeeModel?, CardItemTableViewCell>?
     var contactsCellConfigurator: CellConfigurator<ContactsModel?, ContactsTableViewCell>?
@@ -175,10 +175,12 @@ extension BusinessCardDetailsPresenter {
             }
 
             // mapCellConfigurator
-            configurator.mapCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> MapTableViewCell in
-                cell.isSetupUserCurrentLocationByMarker = true
-                cell.mapView.isUserInteractionEnabled = false
-                cell.delegate = self
+            configurator.mapCellConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> StaticMapTableViewCell in
+                cell.activityIndicator.startAnimating()
+                StaticMapConfiguratorService.constructStaticMapURL(mapSize: .init(width: cell.frame.width, height: cell.frame.height), center: model) { (url) in
+                    cell.mapImageView?.setImage(withPath: url?.absoluteString)
+                    cell.activityIndicator.stopAnimating()
+                }
                 return cell
             }
 

@@ -13,3 +13,8 @@ protocol NavigableView {
     func present(controller: UIViewController, animated: Bool)
     func popController()
 }
+
+protocol MessagingCallingView {
+    func sendEmail(to emailAddress: String)
+    func makeCall(to telephoneNumber: String?)
+}
