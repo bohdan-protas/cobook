@@ -11,19 +11,13 @@ import UIKit
 class EditablePhotoListItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var titleImageView: UIImageView!
-    @IBOutlet var addPhotoPlaceholderView: DesignableView!
-
 
     // MARK: - View Life Cycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         titleImageView.cancelImageRequest()
+        titleImageView.image = nil
     }
 
 }

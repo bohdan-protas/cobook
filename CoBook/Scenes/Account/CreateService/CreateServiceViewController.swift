@@ -44,6 +44,16 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
         presenter.onViewDidLoad()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+
     deinit {
         presenter.detachView()
     }
@@ -101,14 +111,24 @@ extension CreateServiceViewController: UITableViewDelegate {
 
 extension CreateServiceViewController: HorizontalPhotosListDelegate {
 
-    func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell) {
-        self.view.endEditing(true)
-
+    func didUpdatePhoto(_ cell: HorizontalPhotosListTableViewCell, at indexPath: IndexPath) {
         self.imagePicker.onImagePicked = { image in
-            self.startLoading()
-            self.presenter.uploadImage(image: image) { [weak self] (imagePath, imageData) in
-                self?.stopLoading()
-                cell.create(socialListItem: .view(imagePath: imagePath, imageData: imageData))
+            self.presenter.uploadImage(image: image) { (imagePath) in
+                cell.updateAt(indexPath: indexPath, with: .view(imagePath: imagePath))
+            }
+        }
+        self.imagePicker.present()
+    }
+
+    func didDeletePhoto(_ cell: HorizontalPhotosListTableViewCell, at indexPath: IndexPath) {
+        cell.deleteAt(indexPath: indexPath)
+    }
+
+
+    func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell) {
+        self.imagePicker.onImagePicked = { image in
+            self.presenter.uploadImage(image: image) {  (imagePath) in
+                cell.create(socialListItem: .view(imagePath: imagePath))
             }
         }
         self.imagePicker.present()

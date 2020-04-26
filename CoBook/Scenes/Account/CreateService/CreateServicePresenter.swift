@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate {
+protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate, LoadDisplayableView {
     func reload()
     func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?)
     func setupSaveView()
@@ -56,17 +56,19 @@ class CreateServicePresenter: NSObject, BasePresenter {
         view?.reload()
     }
 
-    func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageData: Data?) -> Void)?) {
+    func uploadImage(image: UIImage?, completion: ((_ imagePath: String?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
             view?.errorAlert(message: "Помилка завантаження фото")
             return
         }
 
+        view?.startLoading()
         APIClient.default.upload(imageData: imageData) { [weak self] (result) in
             guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
-                completion?(response?.sourceUrl, imageData)
+                completion?(response?.sourceUrl)
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }

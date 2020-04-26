@@ -9,6 +9,6 @@
 import Foundation
 
 enum EditablePhotoListItem {
-    case view(imagePath: String?, imageData: Data?)
+    case view(imagePath: String?)
     case add
 }
