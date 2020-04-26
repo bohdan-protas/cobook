@@ -10,7 +10,11 @@ import UIKit
 
 protocol TextFieldTableViewCellDelegate: class {
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?)
-    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?)
+
+}
+
+extension TextFieldTableViewCellDelegate {
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {}
 }
 
 protocol TextFieldTableViewCellDataSource: class {

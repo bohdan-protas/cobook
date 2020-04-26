@@ -54,9 +54,15 @@ enum Service {
 
     /// Model for describing data on details screen
     struct CreationDetailsModel {
-        var isContractPrice: Bool = false
-        var isUseContactsFromSite: Bool = false
         var photos: [EditablePhotoListItem] = []
+        var name: String?
+        var price: String?
+        var isUseContactsFromSite: Bool = false
+        var telephoneNumber: String?
+        var email: String?
+        var isContractPrice: Bool = false
+        var descriptionTitle: String?
+        var desctiptionBody: String?
     }
 
 

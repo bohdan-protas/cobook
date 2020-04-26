@@ -23,7 +23,11 @@ class CreateServicePresenter: NSObject, BasePresenter {
     /// View data source
     private var dataSource: DataSource<CreateServiceDataSourceConfigurator>?
 
-    private var details: Service.CreationDetailsModel
+    private var details: Service.CreationDetailsModel {
+        didSet {
+            updateViewDataSource()
+        }
+    }
 
     // MARK: - Object Life Cycle
 
@@ -85,17 +89,19 @@ private extension CreateServicePresenter {
 
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
             .gallery,
-            .textField(model: TextFieldModel(text: nil, placeholder: "Назва послуги", associatedKeyPath: nil, keyboardType: .default)),
+            .textField(model: TextFieldModel(text: details.name, placeholder: "Назва послуги", associatedKeyPath: \Service.CreationDetailsModel.name, keyboardType: .default)),
             .title(text: "Вартість послуги:"),
             .textField(model: TextFieldModel(isEnabled: !details.isContractPrice,
-                                             text: details.isContractPrice ? nil : nil,
-                                             placeholder: details.isContractPrice ? "Ціна договірна" : "Вкажіть вартість",
-                                             associatedKeyPath: nil,
+                                             text: details.price,
+                                             placeholder: "Вкажіть вартість",
+                                             associatedKeyPath: \Service.CreationDetailsModel.price,
                                              keyboardType: .default)),
             .checkbox(CheckboxModel(title: "Ціна договірна", isSelected: details.isContractPrice, handler: { checkbox in
                 checkbox.isSelected.toggle()
                 self.details.isContractPrice = checkbox.isSelected
-                self.updateViewDataSource()
+                if checkbox.isSelected {
+                    self.details.price =  nil
+                }
                 self.view?.reload()
             })),
         ]
@@ -104,29 +110,32 @@ private extension CreateServicePresenter {
             .sectionSeparator,
             .title(text: "Контактні дані:"),
             .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
-                                             text: details.isUseContactsFromSite ? nil : nil,
+                                             text: details.telephoneNumber,
                                              placeholder: "Телефон для звязку",
-                                             associatedKeyPath: nil,
+                                             associatedKeyPath: \Service.CreationDetailsModel.telephoneNumber,
                                              keyboardType: .phonePad)),
 
             .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
-                                             text: details.isUseContactsFromSite ? nil : nil,
+                                             text: details.email,
                                              placeholder: "Робочий емейл для звязку",
-                                             associatedKeyPath: nil,
+                                             associatedKeyPath: \Service.CreationDetailsModel.email,
                                              keyboardType: .emailAddress)),
 
             .checkbox(CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
                 checkbox.isSelected.toggle()
+                if checkbox.isSelected {
+                    self.details.telephoneNumber = nil
+                    self.details.email = nil
+                }
                 self.details.isUseContactsFromSite = checkbox.isSelected
-                self.updateViewDataSource()
                 self.view?.reload()
             })),
         ]
 
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,
-            .textField(model: TextFieldModel(text: nil, placeholder: "Заголовок послуги", associatedKeyPath: nil, keyboardType: .default)),
-            .textView(model: TextFieldModel(text: nil, placeholder: "Опис товару", associatedKeyPath: nil, keyboardType: .default))
+            .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "Заголовок послуги", associatedKeyPath: \Service.CreationDetailsModel.descriptionTitle, keyboardType: .default)),
+            .textView(model: TextFieldModel(text: details.desctiptionBody, placeholder: "Опис товару", associatedKeyPath: \Service.CreationDetailsModel.desctiptionBody, keyboardType: .default))
         ]
 
     }
@@ -145,11 +154,10 @@ private extension CreateServicePresenter {
 extension CreateServicePresenter: TextFieldTableViewCellDelegate {
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?) {
-
-    }
-
-    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {
-
+        guard let keyPath = keyPath as? WritableKeyPath<Service.CreationDetailsModel, String?> else {
+            return
+        }
+        details[keyPath: keyPath] = text
     }
 
 
@@ -160,7 +168,10 @@ extension CreateServicePresenter: TextFieldTableViewCellDelegate {
 extension CreateServicePresenter: TextViewTableViewCellDelegate {
 
     func textViewTableViewCell(_ cell: TextViewTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?) {
-
+        guard let keyPath = keyPath as? WritableKeyPath<Service.CreationDetailsModel, String?> else {
+            return
+        }
+        details[keyPath: keyPath] = text
     }
 
 
