@@ -93,7 +93,7 @@ class APIClient {
 
         return session.upload(multipartFormData: { multipartFormData in
             let randomName = "\(String.random())-image"
-            multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).png", mimeType: "image/png")
+            multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).jpg", mimeType: "image/jpeg")
         }, to: endpoint, headers: headers)
             .response { (response) in
                 

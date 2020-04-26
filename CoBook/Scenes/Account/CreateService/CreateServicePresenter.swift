@@ -6,7 +6,7 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate {
     func reload()
@@ -54,6 +54,23 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
         view?.setupSaveView()
         view?.reload()
+    }
+
+    func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageData: Data?) -> Void)?) {
+        guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
+            view?.errorAlert(message: "Помилка завантаження фото")
+            return
+        }
+
+        APIClient.default.upload(imageData: imageData) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case let .success(response):
+                completion?(response?.sourceUrl, imageData)
+            case let .failure(error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
 

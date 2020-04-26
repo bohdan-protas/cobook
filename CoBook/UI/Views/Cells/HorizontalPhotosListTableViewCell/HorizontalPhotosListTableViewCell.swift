@@ -64,6 +64,9 @@ class HorizontalPhotosListTableViewCell: UITableViewCell {
                 self.dataSource?.photos.insert(socialListItem, at: photosCollectionView.numberOfItems(inSection: 0)-1)
                 self.photosCollectionView.insertItems(at: [IndexPath(item: photosCollectionView.numberOfItems(inSection: 0)-1, section: 0)])
             }) { (finished) in
+                if let count = self.dataSource?.photos.count {
+                    self.photosCollectionView.scrollToItem(at: IndexPath(item: count-1, section: 0), at: .right, animated: true)
+                }
 
             }
         }

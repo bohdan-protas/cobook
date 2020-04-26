@@ -103,8 +103,13 @@ extension CreateServiceViewController: HorizontalPhotosListDelegate {
 
     func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell) {
         self.view.endEditing(true)
+
         self.imagePicker.onImagePicked = { image in
-            Log.debug("picked image")
+            self.startLoading()
+            self.presenter.uploadImage(image: image) { [weak self] (imagePath, imageData) in
+                self?.stopLoading()
+                cell.create(socialListItem: .view(imagePath: imagePath, imageData: imageData))
+            }
         }
         self.imagePicker.present()
     }
