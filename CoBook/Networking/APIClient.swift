@@ -439,3 +439,18 @@ extension APIClient {
 
 
 }
+
+// MARK: - Services requests
+
+extension APIClient {
+
+    @discardableResult
+    func createService(with parameters: CreateServiceApiModel,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ServicesEndpoint.createService(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
+}

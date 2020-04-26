@@ -54,8 +54,10 @@ enum Service {
 
     /// Model for describing data on details screen
     struct CreationDetailsModel {
+        var cardID: Int
         var photos: [EditablePhotoListItem] = []
-        var name: String?
+        var companyName: String?
+        var serviceName: String?
         var price: String?
         var isUseContactsFromSite: Bool = false
         var telephoneNumber: String?

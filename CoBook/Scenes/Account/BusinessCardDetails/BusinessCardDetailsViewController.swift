@@ -128,8 +128,11 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     }
 
-    func goToCreateService() {
+    // MARK: - Navigation
+
+    func goToCreateService(presenter: CreateServicePresenter?) {
         let controller: CreateServiceViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
         push(controller: controller, animated: true)
     }
 

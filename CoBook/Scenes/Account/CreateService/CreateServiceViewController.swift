@@ -21,7 +21,7 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.saveButton.setTitle("Зберегти послугу", for: .normal)
         view.onSaveTapped = { [weak self] in
-            
+            self?.presenter?.createService()
         }
         return view
     }()
@@ -32,7 +32,7 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
         return imagePicker
     }()
 
-    var presenter = CreateServicePresenter()
+    var presenter: CreateServicePresenter?
 
     // MARK: ViewController Life Cycle
 
@@ -40,8 +40,8 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
         super.viewDidLoad()
 
         setupLayout()
-        presenter.attachView(self)
-        presenter.onViewDidLoad()
+        presenter?.attachView(self)
+        presenter?.onViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +55,7 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
     }
 
     deinit {
-        presenter.detachView()
+        presenter?.detachView()
     }
 
     // MARK: - CreateServiceView
@@ -113,8 +113,8 @@ extension CreateServiceViewController: HorizontalPhotosListDelegate {
 
     func didUpdatePhoto(_ cell: HorizontalPhotosListTableViewCell, at indexPath: IndexPath) {
         self.imagePicker.onImagePicked = { image in
-            self.presenter.uploadImage(image: image) { (imagePath) in
-                cell.updateAt(indexPath: indexPath, with: .view(imagePath: imagePath))
+            self.presenter?.uploadImage(image: image) { (imagePath, imageID) in
+                cell.updateAt(indexPath: indexPath, with: .view(imagePath: imagePath, imageID: imageID))
             }
         }
         self.imagePicker.present()
@@ -127,8 +127,8 @@ extension CreateServiceViewController: HorizontalPhotosListDelegate {
 
     func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell) {
         self.imagePicker.onImagePicked = { image in
-            self.presenter.uploadImage(image: image) {  (imagePath) in
-                cell.create(socialListItem: .view(imagePath: imagePath))
+            self.presenter?.uploadImage(image: image) { (imagePath, imageID) in
+                cell.create(socialListItem: .view(imagePath: imagePath, imageID: imageID))
             }
         }
         self.imagePicker.present()

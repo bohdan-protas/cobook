@@ -130,6 +130,8 @@
 		B82B4D3B2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B4D392455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib */; };
 		B82B4D3F2456059C0061A98B /* CheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D3D2456059C0061A98B /* CheckboxTableViewCell.swift */; };
 		B82B4D402456059C0061A98B /* CheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B4D3E2456059C0061A98B /* CheckboxTableViewCell.xib */; };
+		B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D41245632460061A98B /* ServicesEndpoint.swift */; };
+		B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D43245632970061A98B /* CreateServiceApiModel.swift */; };
 		B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* DesignableView.swift */; };
 		B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F1A2406C8C700AFE578 /* AppStorage.swift */; };
 		B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */; };
@@ -383,6 +385,8 @@
 		B82B4D392455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPhotoListItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B82B4D3D2456059C0061A98B /* CheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxTableViewCell.swift; sourceTree = "<group>"; };
 		B82B4D3E2456059C0061A98B /* CheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckboxTableViewCell.xib; sourceTree = "<group>"; };
+		B82B4D41245632460061A98B /* ServicesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesEndpoint.swift; sourceTree = "<group>"; };
+		B82B4D43245632970061A98B /* CreateServiceApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceApiModel.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		B8307F1A2406C8C700AFE578 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageWrapper.swift; sourceTree = "<group>"; };
@@ -1117,6 +1121,7 @@
 				B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */,
 				B8AB3F082422FBE800E06E53 /* ProfileEndpoint.swift */,
 				B8255A25243A58A400C4169D /* UsersEndpoint.swift */,
+				B82B4D41245632460061A98B /* ServicesEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -1141,6 +1146,7 @@
 				B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */,
 				B823E8A6243F753D00EE1830 /* CardMapMarkerApiModel.swift */,
 				B82079402444A60500FCCC17 /* EmployApiModel.swift */,
+				B82B4D43245632970061A98B /* CreateServiceApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1756,6 +1762,7 @@
 				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
+				B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
 				B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
@@ -1881,6 +1888,7 @@
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
+				B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */,
 				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,

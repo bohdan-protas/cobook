@@ -17,7 +17,8 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func setupEditCardView()
     func setupHideCardView()
     func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
-    func goToCreateService()
+
+    func goToCreateService(presenter: CreateServicePresenter?)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -108,7 +109,8 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             switch model {
             case .view(let model): break
             case .add:
-                view?.goToCreateService()
+                let presenter = CreateServicePresenter(businessCardID: cardDetails?.id ?? -1, companyName: cardDetails?.company?.name)
+                view?.goToCreateService(presenter: presenter)
             }
         default:
             break

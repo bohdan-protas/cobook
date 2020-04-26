@@ -165,7 +165,7 @@ extension HorizontalPhotosListTableViewCell: UICollectionViewDataSource {
         case .some(let value):
             switch value {
 
-            case .view(let imagePath):
+            case .view(let imagePath, _):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditablePhotoListItemCollectionViewCell.identifier, for: indexPath) as! EditablePhotoListItemCollectionViewCell
                 cell.titleImageView.setImage(withPath: imagePath)
                 return cell

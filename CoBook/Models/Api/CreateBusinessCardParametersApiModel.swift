@@ -47,8 +47,10 @@ struct CreateBusinessCardParametersApiModel {
         self.socialNetworks = model.socials
             .compactMap {
                 switch $0 {
-                case .view(let model): return SocialNetworkApiModel(title: model.title, link: model.url?.absoluteString)
-                default: return nil
+                case .view(let model):
+                    return SocialNetworkApiModel(title: model.title, link: model.url?.absoluteString)
+                default:
+                    return nil
             }
         }
 

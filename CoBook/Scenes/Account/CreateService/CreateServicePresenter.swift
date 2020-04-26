@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate, LoadDisplayableView {
+protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate, LoadDisplayableView, NavigableView {
     func reload()
     func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?)
     func setupSaveView()
@@ -32,15 +32,18 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
     // MARK: - Object Life Cycle
 
-    override init() {
-        self.details = Service.CreationDetailsModel()
+    init(businessCardID: Int, companyName: String? = nil) {
+        self.details = Service.CreationDetailsModel(cardID: businessCardID, companyName: companyName)
 
         super.init()
-
         self.dataSource = DataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [Section<Service.CreationItem>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
                                      Section<Service.CreationItem>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
                                      Section<Service.CreationItem>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]
+    }
+
+    deinit {
+        view = nil
     }
 
     // MARK: - Public
@@ -60,7 +63,45 @@ class CreateServicePresenter: NSObject, BasePresenter {
         view?.reload()
     }
 
-    func uploadImage(image: UIImage?, completion: ((_ imagePath: String?) -> Void)?) {
+
+}
+
+// MARK: - Use cases
+
+extension CreateServicePresenter {
+
+    func createService() {
+        let creationParameters = CreateServiceApiModel(cardId: details.cardID,
+                                                       title: details.serviceName,
+                                                       header: details.descriptionTitle,
+                                                       description: details.desctiptionBody,
+                                                       priceDetails: details.price,
+                                                       contactTelephone: details.telephoneNumber,
+                                                       contactEmail: details.email,
+                                                       photosIds: details.photos.compactMap {
+                                                        switch $0 {
+                                                        case .view(_ ,let imageID):
+                                                            return imageID
+                                                        default:
+                                                            return nil
+                                                        }})
+
+        view?.startLoading(text: "Створення...")
+        APIClient.default.createService(with: creationParameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageID: String?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
             view?.errorAlert(message: "Помилка завантаження фото")
             return
@@ -72,13 +113,12 @@ class CreateServicePresenter: NSObject, BasePresenter {
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
-                completion?(response?.sourceUrl)
+                completion?(response?.sourceUrl, response?.id)
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
     }
-
 
 }
 
@@ -91,7 +131,7 @@ private extension CreateServicePresenter {
         let isEnabled: Bool = {
             return
                 !details.photos.isEmpty &&
-                !(details.name ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(details.serviceName ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 (!(details.price ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty || details.isContractPrice) &&
                 !(details.email ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(details.descriptionTitle ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
@@ -104,7 +144,7 @@ private extension CreateServicePresenter {
 
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
             .gallery,
-            .textField(model: TextFieldModel(text: details.name, placeholder: "Назва послуги", associatedKeyPath: \Service.CreationDetailsModel.name, keyboardType: .default)),
+            .textField(model: TextFieldModel(text: details.serviceName, placeholder: "Назва послуги", associatedKeyPath: \Service.CreationDetailsModel.serviceName, keyboardType: .default)),
             .title(text: "Вартість послуги:"),
             .textField(model: TextFieldModel(isEnabled: !details.isContractPrice,
                                              text: details.price,
@@ -158,11 +198,7 @@ private extension CreateServicePresenter {
 
 }
 
-// MARK: - Use cases
 
-private extension CreateServicePresenter {
-
-}
 
 // MARK: - TextFieldTableViewCellDelegate
 
