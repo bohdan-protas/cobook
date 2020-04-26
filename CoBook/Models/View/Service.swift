@@ -12,7 +12,7 @@ enum Service {
 
     // MARK: - Creation
 
-    enum CreationItem {
+    enum CreationCell {
         case gallery
         case sectionSeparator
         case title(text: String)
@@ -27,32 +27,6 @@ enum Service {
         case description
     }
 
-    // MARK: - Details
-
-    enum DetailsItem {
-
-    }
-
-    enum DetailsSectionAccessoryIndex: Int {
-        case header
-    }
-
-    // MARK: - Helpers
-
-    /// Interface for add&view preview items
-    enum PreviewListItem {
-        case view(model: PreviewListItemModel)
-        case add
-    }
-
-    /// Model for describing data on preview list items
-    struct PreviewListItemModel {
-        var imagePath: String?
-        var title: String?
-        var subtitle: String?
-    }
-
-    /// Model for describing data on details screen
     struct CreationDetailsModel {
         var cardID: Int
         var photos: [EditablePhotoListItem] = []
@@ -66,6 +40,36 @@ enum Service {
         var descriptionTitle: String?
         var desctiptionBody: String?
     }
+
+    // MARK: - Details
+
+    enum DetailsCell {
+
+    }
+
+    enum DetailsSectionAccessoryIndex: Int {
+        case header
+    }
+
+
+    // MARK: - Preview
+
+    enum PreviewListItem {
+        case view(model: PreviewModel)
+        case add
+    }
+
+    struct PreviewModel {
+        var id: Int?
+        var name: String?
+        var avatarPath: String?
+        var price: String?
+        var descriptionTitle: String?
+        var descriptionHeader: String?
+        var contactTelephone: String?
+        var contactEmail: String?
+    }
+
 
 
 }

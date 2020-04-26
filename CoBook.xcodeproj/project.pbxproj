@@ -132,6 +132,9 @@
 		B82B4D402456059C0061A98B /* CheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B4D3E2456059C0061A98B /* CheckboxTableViewCell.xib */; };
 		B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D41245632460061A98B /* ServicesEndpoint.swift */; };
 		B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D43245632970061A98B /* CreateServiceApiModel.swift */; };
+		B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D45245644160061A98B /* ServiceDetailsApiModel.swift */; };
+		B82B4D48245645840061A98B /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D47245645840061A98B /* ServiceModel.swift */; };
+		B82B4D4A24564EEF0061A98B /* ServicePreviewApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D4924564EEF0061A98B /* ServicePreviewApiModel.swift */; };
 		B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* DesignableView.swift */; };
 		B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F1A2406C8C700AFE578 /* AppStorage.swift */; };
 		B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */; };
@@ -387,6 +390,9 @@
 		B82B4D3E2456059C0061A98B /* CheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckboxTableViewCell.xib; sourceTree = "<group>"; };
 		B82B4D41245632460061A98B /* ServicesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesEndpoint.swift; sourceTree = "<group>"; };
 		B82B4D43245632970061A98B /* CreateServiceApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceApiModel.swift; sourceTree = "<group>"; };
+		B82B4D45245644160061A98B /* ServiceDetailsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsApiModel.swift; sourceTree = "<group>"; };
+		B82B4D47245645840061A98B /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
+		B82B4D4924564EEF0061A98B /* ServicePreviewApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePreviewApiModel.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		B8307F1A2406C8C700AFE578 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageWrapper.swift; sourceTree = "<group>"; };
@@ -1059,6 +1065,7 @@
 				B82079422444B49F00FCCC17 /* EmployModel.swift */,
 				B8970B4824505763006676DF /* Service.swift */,
 				B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */,
+				B82B4D47245645840061A98B /* ServiceModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1147,6 +1154,8 @@
 				B823E8A6243F753D00EE1830 /* CardMapMarkerApiModel.swift */,
 				B82079402444A60500FCCC17 /* EmployApiModel.swift */,
 				B82B4D43245632970061A98B /* CreateServiceApiModel.swift */,
+				B82B4D45245644160061A98B /* ServiceDetailsApiModel.swift */,
+				B82B4D4924564EEF0061A98B /* ServicePreviewApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1773,6 +1782,7 @@
 				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
 				B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */,
 				B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */,
+				B82B4D48245645840061A98B /* ServiceModel.swift in Sources */,
 				B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
@@ -1784,6 +1794,7 @@
 				B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */,
 				B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */,
 				B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */,
+				B82B4D4A24564EEF0061A98B /* ServicePreviewApiModel.swift in Sources */,
 				B823B093242D3DA90012529D /* CreateBusinessCardViewController.swift in Sources */,
 				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
@@ -1885,6 +1896,7 @@
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
+				B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */,
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,

@@ -17,7 +17,7 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
     var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
     var checkboxConfigurator: CellConfigurator<CheckboxModel, CheckboxTableViewCell>?
 
-    func reuseIdentifier(for item: Service.CreationItem, indexPath: IndexPath) -> String {
+    func reuseIdentifier(for item: Service.CreationCell, indexPath: IndexPath) -> String {
         switch item {
         case .gallery:
             return galleryConfigurator?.reuseIdentifier ?? ""
@@ -34,7 +34,7 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
         }
     }
 
-    func configuredCell(for item: Service.CreationItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    func configuredCell(for item: Service.CreationCell, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         switch item {
         case .gallery:
             return galleryConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()

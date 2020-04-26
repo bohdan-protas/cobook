@@ -212,9 +212,9 @@ extension BusinessCardDetailsPresenter {
             configurator.serviceItemCellConfigurator = CellConfigurator { (cell, model: Service.PreviewListItem, tableView, indexPath) -> ServiceListItemTableViewCell in
                 switch model {
                 case .view(let model):
-                    cell.titleLabel.text = model.title
-                    cell.subtitleLabel.text = model.subtitle
-                    cell.titleImageView.setImage(withPath: model.imagePath)
+                    cell.titleLabel.text = model.name
+                    cell.subtitleLabel.text = model.price
+                    cell.titleImageView.setImage(withPath: model.avatarPath)
                     cell.subtitleLabel.isHidden = false
                 case .add:
                     cell.titleLabel.text = "Додати послугу"

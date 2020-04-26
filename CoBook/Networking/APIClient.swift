@@ -448,7 +448,17 @@ extension APIClient {
     func createService(with parameters: CreateServiceApiModel,
                        completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
 
-        let endpoint = ServicesEndpoint.createService(parameters: parameters)
+        let endpoint = ServicesEndpoint.create(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func getServiceList(cardID: Int,
+                        limit: Int? = nil,
+                        offset: Int? = nil,
+                        completion: @escaping (Result<[ServicePreviewApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ServicesEndpoint.getList(cardID: cardID, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

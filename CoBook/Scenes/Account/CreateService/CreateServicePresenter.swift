@@ -37,9 +37,9 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
         super.init()
         self.dataSource = DataSource(configurator: dataSouceConfigurator)
-        self.dataSource?.sections = [Section<Service.CreationItem>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
-                                     Section<Service.CreationItem>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
-                                     Section<Service.CreationItem>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]
+        self.dataSource?.sections = [Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
+                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
+                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]
     }
 
     deinit {
