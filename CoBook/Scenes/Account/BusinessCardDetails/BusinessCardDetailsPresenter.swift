@@ -88,7 +88,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func getRouteDestination(callback: ((CLLocationCoordinate2D?) -> Void)?) {
-
         guard let addressId = self.cardDetails?.address?.googlePlaceId else {
             view?.errorAlert(message: "Невизначений адрес призначення маршруту")
             return
