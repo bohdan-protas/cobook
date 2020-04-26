@@ -50,6 +50,8 @@ enum APIConstants {
 
     enum Google {
 
+        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"
+
         enum DirectionMode: String {
             case driving
             case transit
@@ -57,15 +59,21 @@ enum APIConstants {
             case walking
         }
 
-        static let placesApiKey: String = "AIzaSyDLbwSAzqZY0085ClTgTuxvFEt-Tg672qk"
+        static func googleMapsRouteURL(saddr: CLLocationCoordinate2D? = nil, daddr: CLLocationCoordinate2D? = nil, directionMode: DirectionMode) -> URL? {
+            var routeURLPath: String = "comgooglemaps://?"
 
-        static func googleMapsRouteURL(saddr: CLLocationCoordinate2D?, daddr: CLLocationCoordinate2D?, directionMode: DirectionMode) -> URL? {
-            guard let saddr = saddr, let daddr = daddr else {
-                return nil
+            routeURLPath.append("&saddr=")
+            if let saddr = saddr {
+                routeURLPath.append("\(saddr.latitude),\(saddr.longitude)")
             }
 
-            let routeURL = URL.init(string: "comgooglemaps://?" + "saddr=\(saddr.latitude),\(saddr.longitude)" + "&daddr=\(daddr.latitude),\(daddr.longitude)" + "&directionsmode=\(directionMode.rawValue)")
-            return routeURL
+            routeURLPath.append("&daddr=")
+            if let daddr = daddr {
+                routeURLPath.append("\(daddr.latitude),\(daddr.longitude)")
+            }
+
+            routeURLPath.append("&directionsmode=\(directionMode.rawValue)")
+            return URL.init(string: routeURLPath)
         }
     }
 
