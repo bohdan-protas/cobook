@@ -37,7 +37,7 @@ class StaticMapConfiguratorService {
         mapUrl.append("&format=png")
 
         let marker: String = {
-            var marker = "&markers=scale:\(1)%7Cicon:\(APIConstants.StaticMap.markerURL)"
+            var marker = "&markers=scale:\(1)%7Cicon:\(APIConstants.StaticMap.personalCardMarkerURL)"
             if let lt = coordinates.latitude, let ln = coordinates.longitude {
                 marker.append("%7C\(lt),\(ln)")
             }
