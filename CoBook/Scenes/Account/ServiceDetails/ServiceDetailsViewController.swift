@@ -44,7 +44,7 @@ class ServiceDetailsViewController: BaseViewController, ServiceDetailsView {
         setupLayout()
 
         presenter?.attachView(self)
-        presenter?.onViewDidLoad()
+        presenter?.fetchServiceDetails()
     }
 
     // MARK: - ServiceDetailsView

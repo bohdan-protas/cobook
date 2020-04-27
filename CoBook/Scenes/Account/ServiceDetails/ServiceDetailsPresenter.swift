@@ -50,7 +50,7 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
         view = nil
     }
 
-    func onViewDidLoad() {
+    func setup() {
         updateViewDataSource()
         view?.set(dataSource: dataSource)
         view?.setupEditCardView()
@@ -63,6 +63,23 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
 
 extension ServiceDetailsPresenter {
 
+    func fetchServiceDetails() {
+
+        view?.startLoading()
+        APIClient.default.getServiceDetails(serviceID: details.serviceID) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+            switch result {
+            case .success(let response):
+                strongSelf.setup()
+                dump(response)
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+
+        }
+
+    }
 
 
 }

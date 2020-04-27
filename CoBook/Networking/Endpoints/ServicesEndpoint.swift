@@ -12,6 +12,7 @@ enum ServicesEndpoint: Endpoint {
 
     case create(parameters: CreateServiceApiModel)
     case getList(cardID: Int, limit: Int?, offset: Int?)
+    case getDetails(serviceID: Int)
 
     var useAuthirizationToken: Bool {
         return true
@@ -21,6 +22,8 @@ enum ServicesEndpoint: Endpoint {
         switch self {
         case .create, .getList:
             return .post
+        case .getDetails:
+            return .get
         }
     }
 
@@ -30,6 +33,8 @@ enum ServicesEndpoint: Endpoint {
             return "/services"
         case .getList:
             return "/services/list"
+        case .getDetails(let serviceID):
+            return "/services/\(serviceID)"
         }
     }
 
@@ -52,6 +57,9 @@ enum ServicesEndpoint: Endpoint {
             }
 
             return params
+
+        case .getDetails:
+            return nil
         }
     }
 

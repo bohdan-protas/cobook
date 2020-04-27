@@ -12,11 +12,11 @@ struct ServiceDetailsApiModel: Decodable {
     var id: Int?
     var title: String?
     var description: String?
+    var priceDetails: String?
     var header: String?
     var contactTelephone: TelephoneApiModel?
-    var priceDetails: String?
     var contactEmail: EmailApiModel?
-    var photos: [String]?
+    var photos: [FileDataApiModel]?
 
     enum CodingKeys: String, CodingKey {
         case id
