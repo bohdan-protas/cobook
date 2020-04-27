@@ -38,9 +38,9 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
                 !(personalCardDetailsModel.practiseType == nil) &&
                 !(personalCardDetailsModel.city == nil) &&
                 !(personalCardDetailsModel.region == nil) &&
-                !(personalCardDetailsModel.description ?? "").isEmpty &&
-                !(personalCardDetailsModel.contactTelephone ?? "").isEmpty &&
-                !(personalCardDetailsModel.contactEmail ?? "").isEmpty
+                !(personalCardDetailsModel.description ?? "").trimmingCharacters(in: CharacterSet.whitespaces).isEmpty &&
+                !(personalCardDetailsModel.contactTelephone ?? "").trimmingCharacters(in: CharacterSet.whitespaces).isEmpty &&
+                !(personalCardDetailsModel.contactEmail ?? "").trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
             )
 
             view?.setSaveButtonEnabled(isRequiredDataFilled)
