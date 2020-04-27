@@ -81,7 +81,8 @@ enum APIConstants {
 
     enum StaticMap {
         static let baseURL = "https://maps.googleapis.com/maps/api/staticmap?"
-        static let markerURL = "https://s3.eu-central-1.amazonaws.com/cobook.attachments/static/personal.png"
+        static let businessCardMarkerURL = "https://s3.eu-central-1.amazonaws.com/cobook.attachments/static/personal.png"
+        static let personalCardMarkerURL = "https://s3.eu-central-1.amazonaws.com/cobook.attachments/static/Group.png"
     }
 
     // MARK: - Helpers
