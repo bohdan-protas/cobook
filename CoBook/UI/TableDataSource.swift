@@ -114,3 +114,15 @@ extension DataSource {
          }
      }
 }
+
+extension DataSource {
+    subscript(serviceDetailsIndex: Service.DetailsSectionAccessoryIndex) -> Section<Configurator.Item> {
+         get {
+             return sections[serviceDetailsIndex.rawValue]
+         }
+
+         set {
+             sections[serviceDetailsIndex.rawValue] = newValue
+         }
+     }
+}

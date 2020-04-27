@@ -143,8 +143,6 @@ private extension CreateServicePresenter {
 
     func updateViewDataSource() {
 
-        //view?.set(headerModel: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar))
-
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
