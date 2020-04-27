@@ -33,16 +33,16 @@ struct CreateBusinessCardParametersApiModel {
         self.cityPlaceId = model.city?.googlePlaceId
         self.regionPlaceId = model.region?.googlePlaceId
         self.companyName = model.companyName
-        self.companyWebSite = model.companyWebSite
+        self.companyWebSite = model.companyWebSite?.trimmingCharacters(in: CharacterSet.whitespaces)
         self.addressPlaceId = model.address?.googlePlaceId
-        self.schedule = model.schedule
-        self.description = model.description
+        self.schedule = model.schedule?.trimmingCharacters(in: CharacterSet.whitespaces)
+        self.description = model.description?.trimmingCharacters(in: CharacterSet.whitespaces)
         self.practiseTypeId = model.practiseType?.id
         self.interestsIds = model.interests
             .filter { $0.isSelected }
             .compactMap { $0.id }
-        self.contactTelephone = model.contactTelephone
-        self.contactEmail = model.companyEmail
+        self.contactTelephone = model.contactTelephone?.trimmingCharacters(in: CharacterSet.whitespaces)
+        self.contactEmail = model.companyEmail?.trimmingCharacters(in: CharacterSet.whitespaces)
 
         self.socialNetworks = model.socials
             .compactMap {

@@ -39,19 +39,21 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     /// Business logic
     private var businessCardDetailsModel: CreateBusinessCard.DetailsModel {
         didSet {
+
+            let whitespaceCharacterSet = CharacterSet.whitespaces
             let isRequiredDataFilled = (
                 !(businessCardDetailsModel.avatarImage == nil) &&
                 !(businessCardDetailsModel.backgroudImage == nil) &&
-                !(businessCardDetailsModel.companyName ?? "").isEmpty &&
+                !(businessCardDetailsModel.companyName ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.practiseType == nil) &&
                 !(businessCardDetailsModel.contactTelephone ?? "").isEmpty &&
-                !(businessCardDetailsModel.companyEmail ?? "").isEmpty &&
-                !(businessCardDetailsModel.companyWebSite ?? "").isEmpty &&
+                !(businessCardDetailsModel.companyEmail ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(businessCardDetailsModel.companyWebSite ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.city == nil) &&
                 !(businessCardDetailsModel.region == nil) &&
                 !(businessCardDetailsModel.address == nil) &&
-                !(businessCardDetailsModel.schedule ?? "").isEmpty &&
-                !(businessCardDetailsModel.description ?? "").isEmpty
+                !(businessCardDetailsModel.schedule ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(businessCardDetailsModel.description ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty
             )
 
             view?.setSaveButtonEnabled(isRequiredDataFilled)

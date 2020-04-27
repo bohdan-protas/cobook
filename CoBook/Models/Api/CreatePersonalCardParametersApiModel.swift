@@ -25,13 +25,13 @@ struct CreatePersonalCardParametersApiModel: Encodable {
         self.cityPlaceId = model.city?.googlePlaceId
         self.regionPlaceId = model.region?.googlePlaceId
         self.position = model.position
-        self.description = model.description
+        self.description = model.description?.trimmingCharacters(in: CharacterSet.whitespaces)
         self.practiceTypeId = model.practiseType?.id
         self.interestsIds = model.interests
             .filter { $0.isSelected }
             .compactMap { $0.id }
-        self.contactTelephone = model.contactTelephone
-        self.contactEmail = model.contactEmail
+        self.contactTelephone = model.contactTelephone?.trimmingCharacters(in: CharacterSet.whitespaces)
+        self.contactEmail = model.contactEmail?.trimmingCharacters(in: CharacterSet.whitespaces)
         self.socialNetworks = model.socials
             .compactMap {
                 switch $0 {
