@@ -32,8 +32,8 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
     // MARK: - Object Life Cycle
 
-    init(businessCardID: Int, companyName: String? = nil) {
-        self.details = Service.CreationDetailsModel(cardID: businessCardID, companyName: companyName)
+    init(businessCardID: Int, companyName: String?, companyAvatar: String?) {
+        self.details = Service.CreationDetailsModel(cardID: businessCardID, companyName: companyName, companyAvatar: companyAvatar)
 
         super.init()
         self.dataSource = DataSource(configurator: dataSouceConfigurator)
@@ -96,6 +96,7 @@ extension CreateServicePresenter {
                     strongSelf.view?.popController()
                 })
             case .failure(let error):
+                strongSelf.view?.stopLoading()
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
@@ -142,7 +143,10 @@ private extension CreateServicePresenter {
 
     func updateViewDataSource() {
 
+        //view?.set(headerModel: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar))
+
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
+            .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
             .textField(model: TextFieldModel(text: details.serviceName, placeholder: "Назва послуги", associatedKeyPath: \Service.CreationDetailsModel.serviceName, keyboardType: .default)),
             .title(text: "Вартість послуги:"),
@@ -151,7 +155,7 @@ private extension CreateServicePresenter {
                                              placeholder: "Вкажіть вартість",
                                              associatedKeyPath: \Service.CreationDetailsModel.price,
                                              keyboardType: .default)),
-            .checkbox(CheckboxModel(title: "Ціна договірна", isSelected: details.isContractPrice, handler: { checkbox in
+            .checkbox(model: CheckboxModel(title: "Ціна договірна", isSelected: details.isContractPrice, handler: { checkbox in
                 checkbox.isSelected.toggle()
                 self.details.isContractPrice = checkbox.isSelected
                 if checkbox.isSelected {
@@ -176,9 +180,12 @@ private extension CreateServicePresenter {
                                              associatedKeyPath: \Service.CreationDetailsModel.email,
                                              keyboardType: .emailAddress)),
 
-            .checkbox(CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
+            .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
                 checkbox.isSelected.toggle()
                 if checkbox.isSelected {
+                    self.details.telephoneNumber = AppStorage.User.data?.telephone.number
+                    self.details.email = AppStorage.User.data?.email.address
+                } else {
                     self.details.telephoneNumber = nil
                     self.details.email = nil
                 }

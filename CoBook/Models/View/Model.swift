@@ -75,3 +75,8 @@ struct CheckboxModel {
     var isSelected: Bool
     var handler: ((_ button: UIButton) -> Void)? = nil
 }
+
+struct CompanyPreviewHeaderModel {
+    var title: String?
+    var image: String?
+}

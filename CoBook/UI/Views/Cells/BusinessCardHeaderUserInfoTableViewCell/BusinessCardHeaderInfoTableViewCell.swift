@@ -25,6 +25,10 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
         websiteLabel.text = ""
         bgImageView.image = nil
         avatarImageView.image = nil
+
+        bgImageView.clipsToBounds = true
+        bgImageView.layer.cornerRadius = 10
+        bgImageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
 
     override func prepareForReuse() {

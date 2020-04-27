@@ -109,7 +109,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             switch model {
             case .view(let model): break
             case .add:
-                let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name)
+                let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
                 view?.goToCreateService(presenter: presenter)
             }
         default:
@@ -188,7 +188,7 @@ private extension BusinessCardDetailsPresenter {
                 self?.services = response?.compactMap { Service.PreviewModel(id: $0.id,
                                                                              name: $0.title,
                                                                              avatarPath: $0.avatar?.sourceUrl,
-                                                                             price: $0.priceDetails,
+                                                                             price: $0.priceDetails ?? "Ціна договірна",
                                                                              descriptionTitle: $0.header,
                                                                              descriptionHeader: $0.description,
                                                                              contactTelephone: $0.contactTelephone?.number,

@@ -16,6 +16,7 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
     var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
     var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
     var checkboxConfigurator: CellConfigurator<CheckboxModel, CheckboxTableViewCell>?
+    var companyHeaderConfigurator: CellConfigurator<CompanyPreviewHeaderModel, CompanyPreviewHeaderTableViewCell>?
 
     func reuseIdentifier(for item: Service.CreationCell, indexPath: IndexPath) -> String {
         switch item {
@@ -31,6 +32,8 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
             return textViewConfigurator?.reuseIdentifier ?? ""
         case .checkbox:
             return checkboxConfigurator?.reuseIdentifier ?? ""
+        case .companyHeader:
+            return companyHeaderConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -48,6 +51,8 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
             return textViewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .checkbox(let model):
             return checkboxConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .companyHeader(let model):
+            return companyHeaderConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -58,6 +63,7 @@ struct CreateServiceDataSourceConfigurator: CellConfiguratorType {
         textFieldConfigurator?.registerCells(in: tableView)
         textViewConfigurator?.registerCells(in: tableView)
         checkboxConfigurator?.registerCells(in: tableView)
+        companyHeaderConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -119,6 +125,13 @@ extension CreateServicePresenter {
                 cell.checkboxButton.setTitle(model.title, for: .selected)
                 cell.checkboxButton.isSelected = model.isSelected
                 cell.checkboxActionHandler = model.handler
+                return cell
+            }
+
+            // companyHeaderConfigurator
+            configurator.companyHeaderConfigurator = CellConfigurator { (cell, model: CompanyPreviewHeaderModel, tableView, indexPath) -> CompanyPreviewHeaderTableViewCell in
+                cell.avatarImageView.setImage(withPath: model.image)
+                cell.nameLabel.text = model.title
                 return cell
             }
 

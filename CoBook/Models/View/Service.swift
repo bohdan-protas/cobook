@@ -18,7 +18,8 @@ enum Service {
         case title(text: String)
         case textField(model: TextFieldModel)
         case textView(model: TextFieldModel)
-        case checkbox(_ model: CheckboxModel)
+        case checkbox(model: CheckboxModel)
+        case companyHeader(model: CompanyPreviewHeaderModel)
     }
 
     enum CreationSectionAccessoryIndex: Int {
@@ -31,6 +32,7 @@ enum Service {
         var cardID: Int
         var photos: [EditablePhotoListItem] = []
         var companyName: String?
+        var companyAvatar: String?
         var serviceName: String?
         var price: String?
         var isUseContactsFromSite: Bool = false
@@ -63,7 +65,7 @@ enum Service {
         var id: Int?
         var name: String?
         var avatarPath: String?
-        var price: String?
+        var price: String
         var descriptionTitle: String?
         var descriptionHeader: String?
         var contactTelephone: String?
