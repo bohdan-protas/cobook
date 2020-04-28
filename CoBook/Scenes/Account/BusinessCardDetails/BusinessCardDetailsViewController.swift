@@ -21,6 +21,8 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     var presenter: BusinessCardDetailsPresenter?
 
+    var cachedCellHeights = [IndexPath: CGFloat]()
+
     /// hideCardView
     private lazy var hideCardView: HideCardView = {
         let view = HideCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
@@ -166,6 +168,14 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         presenter?.selectedRow(at: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cachedCellHeights[indexPath] = cell.frame.size.height
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cachedCellHeights[indexPath] ?? UITableView.automaticDimension
     }
 
 }
