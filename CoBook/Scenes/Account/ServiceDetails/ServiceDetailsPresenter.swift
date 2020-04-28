@@ -14,6 +14,8 @@ protocol ServiceDetailsView: AlertDisplayableView, LoadDisplayableView, Navigabl
     func set(dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?)
     func setupEmptyCardView()
     func setupEditCardView()
+
+    func goToEditService(_ presenter: CreateServicePresenter?)
 }
 
 class ServiceDetailsPresenter: NSObject, BasePresenter {
@@ -26,17 +28,19 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
     private var cardID: Int
     private var companyName: String?
     private var companyAvatar: String?
+    private var isUserOwner: Bool
 
     private var details: Service.DetailsViewModel
     private var dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?
 
     // MARK: - Object Life Cycle
 
-    init(serviceID: Int, cardID: Int, companyName: String?, companyAvatar: String?) {
+    init(serviceID: Int, cardID: Int, companyName: String?, companyAvatar: String?, isUserOwner: Bool = false) {
         self.serviceID = serviceID
         self.cardID = cardID
         self.companyName = companyName
         self.companyAvatar = companyAvatar
+        self.isUserOwner = isUserOwner
         self.details = Service.DetailsViewModel()
 
         super.init()
@@ -57,6 +61,24 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
 
     func detachView() {
         view = nil
+    }
+
+    func editService() {
+        let detailsModel = Service.CreationDetailsModel(cardID: cardID,
+                                                        photos: details.photos,
+                                                        companyName: companyName,
+                                                        companyAvatar: companyAvatar,
+                                                        serviceName: details.title,
+                                                        price: details.price,
+                                                        isUseContactsFromSite: false,
+                                                        telephoneNumber: details.telephoneNumber,
+                                                        email: details.email,
+                                                        isContractPrice: details.price == nil,
+                                                        descriptionTitle: details.descriptionTitle,
+                                                        desctiptionBody: details.desctiptionBody)
+
+        let editServicePresenter = CreateServicePresenter(detailsModel: detailsModel)
+        view?.goToEditService(editServicePresenter)
     }
 
 }
@@ -87,7 +109,12 @@ extension ServiceDetailsPresenter {
 
                 strongSelf.updateViewDataSource()
                 strongSelf.view?.set(dataSource: strongSelf.dataSource)
-                strongSelf.view?.setupEditCardView()
+
+                if strongSelf.isUserOwner {
+                    strongSelf.view?.setupEditCardView()
+                } else {
+                    strongSelf.view?.setupEmptyCardView()
+                }
                 strongSelf.view?.reload()
 
             case .failure(let error):

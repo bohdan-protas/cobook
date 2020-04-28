@@ -110,7 +110,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         case .service(let model):
             switch model {
             case .view(let model):
-                let presenter = ServiceDetailsPresenter(serviceID: model.id ?? -1, cardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
+                let presenter = ServiceDetailsPresenter(serviceID: model.id ?? -1, cardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl, isUserOwner: isUserOwner)
                 view?.goToServiceDetails(presenter: presenter)
             case .add:
                 let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)

@@ -30,16 +30,22 @@ class CreateServicePresenter: NSObject, BasePresenter {
         }
     }
 
+    fileprivate var isEditing: Bool
+
     // MARK: - Object Life Cycle
+
+    init(detailsModel: Service.CreationDetailsModel) {
+        self.details = detailsModel
+        self.isEditing = true
+        super.init()
+        setupDataSource()
+    }
 
     init(businessCardID: Int, companyName: String?, companyAvatar: String?) {
         self.details = Service.CreationDetailsModel(cardID: businessCardID, companyName: companyName, companyAvatar: companyAvatar)
-
+        self.isEditing = false
         super.init()
-        self.dataSource = DataSource(configurator: dataSouceConfigurator)
-        self.dataSource?.sections = [Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
-                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
-                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]
+        setupDataSource()
     }
 
     deinit {
@@ -123,9 +129,16 @@ extension CreateServicePresenter {
 
 }
 
-// MARK: - Updating View Data Source
+// MARK: - Privates
 
 private extension CreateServicePresenter {
+
+    func setupDataSource() {
+        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource?.sections = [Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
+                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
+                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]
+    }
 
     func validateInput() {
         let whitespaceCharacterSet = CharacterSet.whitespaces
@@ -177,20 +190,23 @@ private extension CreateServicePresenter {
                                              placeholder: "Робочий емейл для звязку",
                                              associatedKeyPath: \Service.CreationDetailsModel.email,
                                              keyboardType: .emailAddress)),
-
-            .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
-                checkbox.isSelected.toggle()
-                if checkbox.isSelected {
-                    self.details.telephoneNumber = AppStorage.User.data?.telephone.number
-                    self.details.email = AppStorage.User.data?.email.address
-                } else {
-                    self.details.telephoneNumber = nil
-                    self.details.email = nil
-                }
-                self.details.isUseContactsFromSite = checkbox.isSelected
-                self.view?.reload()
-            })),
         ]
+        if !isEditing {
+            dataSource?[.contacts].items.append(
+                .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
+                    checkbox.isSelected.toggle()
+                    if checkbox.isSelected {
+                        self.details.telephoneNumber = AppStorage.User.data?.telephone.number
+                        self.details.email = AppStorage.User.data?.email.address
+                    } else {
+                        self.details.telephoneNumber = nil
+                        self.details.email = nil
+                    }
+                    self.details.isUseContactsFromSite = checkbox.isSelected
+                    self.view?.reload()
+                }))
+            )
+        }
 
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,
