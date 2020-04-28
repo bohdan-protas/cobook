@@ -23,7 +23,7 @@ class ServiceDetailsViewController: BaseViewController, ServiceDetailsView {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.editCardViewHeight)))
         view.editButton.setTitle("Редагувати послугу", for: .normal)
         view.onEditTapped = { [weak self] in
-            //self?.presenter?.editBusinessCard()
+            self?.presenter?.editService()
         }
         return view
     }()
@@ -31,7 +31,7 @@ class ServiceDetailsViewController: BaseViewController, ServiceDetailsView {
     /// empty footer view
     private lazy var emptyFooterView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.editCardViewHeight)))
-        view.editButton.isHidden = false
+        view.editButton.isHidden = true
         return view
     }()
 
@@ -63,6 +63,14 @@ class ServiceDetailsViewController: BaseViewController, ServiceDetailsView {
 
     func set(dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
+    }
+
+    // MARK: - Navigation
+
+    func goToEditService(_ presenter: CreateServicePresenter?) {
+        let controller: CreateServiceViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
 

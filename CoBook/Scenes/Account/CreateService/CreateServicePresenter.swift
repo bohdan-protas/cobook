@@ -12,13 +12,19 @@ protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate, 
     func reload()
     func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?)
     func setupSaveView()
+    func setupUpdateView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
+}
+
+protocol CreateServicePresenterDelegate: class {
+    func didUpdatedService(_ presenter: CreateServicePresenter)
 }
 
 class CreateServicePresenter: NSObject, BasePresenter {
 
     /// Managed view
     weak var view: CreateServiceView?
+    weak var delegate: CreateServicePresenterDelegate?
 
     /// View data source
     private var dataSource: DataSource<CreateServiceDataSourceConfigurator>?
@@ -30,16 +36,22 @@ class CreateServicePresenter: NSObject, BasePresenter {
         }
     }
 
+    fileprivate var isEditing: Bool
+
     // MARK: - Object Life Cycle
+
+    init(detailsModel: Service.CreationDetailsModel) {
+        self.details = detailsModel
+        self.isEditing = true
+        super.init()
+        setupDataSource()
+    }
 
     init(businessCardID: Int, companyName: String?, companyAvatar: String?) {
         self.details = Service.CreationDetailsModel(cardID: businessCardID, companyName: companyName, companyAvatar: companyAvatar)
-
+        self.isEditing = false
         super.init()
-        self.dataSource = DataSource(configurator: dataSouceConfigurator)
-        self.dataSource?.sections = [Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
-                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
-                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]
+        setupDataSource()
     }
 
     deinit {
@@ -59,7 +71,7 @@ class CreateServicePresenter: NSObject, BasePresenter {
     func onViewDidLoad() {
         updateViewDataSource()
         view?.set(dataSource: dataSource)
-        view?.setupSaveView()
+        isEditing ? view?.setupUpdateView() : view?.setupSaveView()
         view?.reload()
     }
 
@@ -70,8 +82,43 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
 extension CreateServicePresenter {
 
+    func updateService() {
+        let creationParameters = UpdateServiceApiModel(serviceID: details.serviceID,
+                                                       cardID: details.cardID,
+                                                       title: details.serviceName,
+                                                       header: details.descriptionTitle,
+                                                       description: details.desctiptionBody,
+                                                       priceDetails: details.price,
+                                                       contactTelephone: details.telephoneNumber,
+                                                       contactEmail: details.email,
+                                                       photosIds: details.photos.compactMap {
+                                                        switch $0 {
+                                                        case .view(_ ,let imageID):
+                                                            return imageID
+                                                        default:
+                                                            return nil
+                                                        }})
+
+        view?.startLoading(text: "Оновлення...")
+        APIClient.default.updateService(with: creationParameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.delegate?.didUpdatedService(strongSelf)
+                    strongSelf.view?.popController()
+                })
+            case .failure(let error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
     func createService() {
-        let creationParameters = CreateServiceApiModel(cardId: details.cardID,
+
+        let creationParameters = CreateServiceApiModel(cardID: details.cardID,
                                                        title: details.serviceName,
                                                        header: details.descriptionTitle,
                                                        description: details.desctiptionBody,
@@ -123,9 +170,16 @@ extension CreateServicePresenter {
 
 }
 
-// MARK: - Updating View Data Source
+// MARK: - Privates
 
 private extension CreateServicePresenter {
+
+    func setupDataSource() {
+        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource?.sections = [Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
+                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
+                                     Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]
+    }
 
     func validateInput() {
         let whitespaceCharacterSet = CharacterSet.whitespaces
@@ -177,20 +231,23 @@ private extension CreateServicePresenter {
                                              placeholder: "Робочий емейл для звязку",
                                              associatedKeyPath: \Service.CreationDetailsModel.email,
                                              keyboardType: .emailAddress)),
-
-            .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
-                checkbox.isSelected.toggle()
-                if checkbox.isSelected {
-                    self.details.telephoneNumber = AppStorage.User.data?.telephone.number
-                    self.details.email = AppStorage.User.data?.email.address
-                } else {
-                    self.details.telephoneNumber = nil
-                    self.details.email = nil
-                }
-                self.details.isUseContactsFromSite = checkbox.isSelected
-                self.view?.reload()
-            })),
         ]
+        if !isEditing {
+            dataSource?[.contacts].items.append(
+                .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
+                    checkbox.isSelected.toggle()
+                    if checkbox.isSelected {
+                        self.details.telephoneNumber = AppStorage.User.data?.telephone.number
+                        self.details.email = AppStorage.User.data?.email.address
+                    } else {
+                        self.details.telephoneNumber = nil
+                        self.details.email = nil
+                    }
+                    self.details.isUseContactsFromSite = checkbox.isSelected
+                    self.view?.reload()
+                }))
+            )
+        }
 
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,

@@ -453,6 +453,14 @@ extension APIClient {
     }
 
     @discardableResult
+    func updateService(with parameters: UpdateServiceApiModel,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ServicesEndpoint.update(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
     func getServiceList(cardID: Int,
                         limit: Int? = nil,
                         offset: Int? = nil,
