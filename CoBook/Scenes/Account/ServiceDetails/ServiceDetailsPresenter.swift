@@ -74,7 +74,8 @@ extension ServiceDetailsPresenter {
             switch result {
             case .success(let response):
 
-                strongSelf.details = Service.DetailsViewModel(photos: response?.photos?.compactMap { EditablePhotoListItem.view(imagePath: $0.sourceUrl, imageID: $0.id) } ?? [],
+                strongSelf.details = Service.DetailsViewModel(title: response?.title,
+                                                              photos: response?.photos?.compactMap { EditablePhotoListItem.view(imagePath: $0.sourceUrl, imageID: $0.id) } ?? [],
                                                               companyName: strongSelf.companyName,
                                                               companyAvatar: strongSelf.companyAvatar,
                                                               serviceName: response?.title,
@@ -109,12 +110,13 @@ private extension ServiceDetailsPresenter {
         dataSource?[Service.DetailsSectionAccessoryIndex.header].items = [
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
-            .sectionSeparator,
+            .serviceHeaderDescr(model: TitleDescrModel(title: details.title, descr: details.price)),
             .getInTouch
         ]
 
         dataSource?[Service.DetailsSectionAccessoryIndex.description].items = [
-
+            .sectionSeparator,
+            .serviceDescription(model: TitleDescrModel(title: details.descriptionTitle, descr: details.desctiptionBody))
         ]
 
     }

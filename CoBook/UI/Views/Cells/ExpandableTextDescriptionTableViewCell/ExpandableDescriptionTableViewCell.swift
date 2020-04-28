@@ -8,14 +8,13 @@
 
 import UIKit
 
-class ExpandableDescriptionTableViewCell: UITableViewCell, UITextViewDelegate {
+class ExpandableDescriptionTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var desctiptionTextView: SelfSizingTextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        desctiptionTextView.delegate = self
         desctiptionTextView.textContainer.lineFragmentPadding = 0
     }
 

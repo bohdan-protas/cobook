@@ -50,7 +50,8 @@ enum Service {
         case gallery
         case getInTouch
         case sectionSeparator
-
+        case serviceHeaderDescr(model: TitleDescrModel?)
+        case serviceDescription(model: TitleDescrModel?)
     }
 
     enum DetailsSectionAccessoryIndex: Int {
@@ -58,6 +59,7 @@ enum Service {
     }
 
     struct DetailsViewModel {
+        var title: String?
         var photos: [EditablePhotoListItem] = []
         var companyName: String?
         var companyAvatar: String?

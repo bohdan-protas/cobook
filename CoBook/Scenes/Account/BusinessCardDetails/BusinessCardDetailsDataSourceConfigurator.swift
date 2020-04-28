@@ -163,7 +163,7 @@ extension BusinessCardDetailsPresenter {
 
             // expandableDescriptionCellConfigurator
             configurator.expandableDescriptionCellConfigurator = CellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
-                cell.titleLabel.text = model?.title
+                cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 20)])
                 cell.desctiptionTextView.text = model?.descr
 
                 return cell
