@@ -12,13 +12,19 @@ protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate, 
     func reload()
     func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?)
     func setupSaveView()
+    func setupUpdateView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
+}
+
+protocol CreateServicePresenterDelegate: class {
+    func didUpdatedService(_ presenter: CreateServicePresenter)
 }
 
 class CreateServicePresenter: NSObject, BasePresenter {
 
     /// Managed view
     weak var view: CreateServiceView?
+    weak var delegate: CreateServicePresenterDelegate?
 
     /// View data source
     private var dataSource: DataSource<CreateServiceDataSourceConfigurator>?
@@ -65,7 +71,7 @@ class CreateServicePresenter: NSObject, BasePresenter {
     func onViewDidLoad() {
         updateViewDataSource()
         view?.set(dataSource: dataSource)
-        view?.setupSaveView()
+        isEditing ? view?.setupUpdateView() : view?.setupSaveView()
         view?.reload()
     }
 
@@ -76,8 +82,43 @@ class CreateServicePresenter: NSObject, BasePresenter {
 
 extension CreateServicePresenter {
 
+    func updateService() {
+        let creationParameters = UpdateServiceApiModel(serviceID: details.serviceID,
+                                                       cardID: details.cardID,
+                                                       title: details.serviceName,
+                                                       header: details.descriptionTitle,
+                                                       description: details.desctiptionBody,
+                                                       priceDetails: details.price,
+                                                       contactTelephone: details.telephoneNumber,
+                                                       contactEmail: details.email,
+                                                       photosIds: details.photos.compactMap {
+                                                        switch $0 {
+                                                        case .view(_ ,let imageID):
+                                                            return imageID
+                                                        default:
+                                                            return nil
+                                                        }})
+
+        view?.startLoading(text: "Оновлення...")
+        APIClient.default.updateService(with: creationParameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.delegate?.didUpdatedService(strongSelf)
+                    strongSelf.view?.popController()
+                })
+            case .failure(let error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
     func createService() {
-        let creationParameters = CreateServiceApiModel(cardId: details.cardID,
+
+        let creationParameters = CreateServiceApiModel(cardID: details.cardID,
                                                        title: details.serviceName,
                                                        header: details.descriptionTitle,
                                                        description: details.desctiptionBody,

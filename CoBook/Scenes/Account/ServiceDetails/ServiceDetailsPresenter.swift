@@ -64,7 +64,8 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
     }
 
     func editService() {
-        let detailsModel = Service.CreationDetailsModel(cardID: cardID,
+        let detailsModel = Service.CreationDetailsModel(serviceID: details.id,
+                                                        cardID: cardID,
                                                         photos: details.photos,
                                                         companyName: companyName,
                                                         companyAvatar: companyAvatar,
@@ -78,6 +79,7 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
                                                         desctiptionBody: details.desctiptionBody)
 
         let editServicePresenter = CreateServicePresenter(detailsModel: detailsModel)
+        editServicePresenter.delegate = self
         view?.goToEditService(editServicePresenter)
     }
 
@@ -96,7 +98,8 @@ extension ServiceDetailsPresenter {
             switch result {
             case .success(let response):
 
-                strongSelf.details = Service.DetailsViewModel(title: response?.title,
+                strongSelf.details = Service.DetailsViewModel(id: response?.id,
+                                                              title: response?.title,
                                                               photos: response?.photos?.compactMap { EditablePhotoListItem.view(imagePath: $0.sourceUrl, imageID: $0.id) } ?? [],
                                                               companyName: strongSelf.companyName,
                                                               companyAvatar: strongSelf.companyAvatar,
@@ -109,12 +112,7 @@ extension ServiceDetailsPresenter {
 
                 strongSelf.updateViewDataSource()
                 strongSelf.view?.set(dataSource: strongSelf.dataSource)
-
-                if strongSelf.isUserOwner {
-                    strongSelf.view?.setupEditCardView()
-                } else {
-                    strongSelf.view?.setupEmptyCardView()
-                }
+                strongSelf.isUserOwner ? strongSelf.view?.setupEditCardView() : strongSelf.view?.setupEmptyCardView()
                 strongSelf.view?.reload()
 
             case .failure(let error):
@@ -137,7 +135,7 @@ private extension ServiceDetailsPresenter {
         dataSource?[Service.DetailsSectionAccessoryIndex.header].items = [
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
-            .serviceHeaderDescr(model: TitleDescrModel(title: details.title, descr: details.price)),
+            .serviceHeaderDescr(model: TitleDescrModel(title: details.title, descr: details.price ?? "Ціна договірна")),
             .getInTouch
         ]
 
@@ -177,6 +175,17 @@ extension ServiceDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {
         view?.sendEmail(to: details.email ?? "")
+    }
+
+
+}
+
+// MARK: - CreateServicePresenterDelegate
+
+extension ServiceDetailsPresenter: CreateServicePresenterDelegate {
+
+    func didUpdatedService(_ presenter: CreateServicePresenter) {
+        fetchServiceDetails()
     }
 
 

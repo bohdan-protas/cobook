@@ -108,8 +108,7 @@ extension ServiceDetailsPresenter {
 
             // expandableDescriptionCellConfigurator
             configurator.titleHeaderConfigurator = CellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
-
-                cell.titleLabel.attributedText = NSAttributedString(string: model?.descr ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 20)])
+                cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 20)])
                 cell.desctiptionTextView.attributedText = NSAttributedString(string: model?.descr ?? "", attributes: [.foregroundColor: UIColor.Theme.greenDark, .font: UIFont.SFProDisplay_Regular(size: 14)])
                 cell.desctiptionTextView.isUserInteractionEnabled = false
                 return cell

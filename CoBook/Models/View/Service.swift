@@ -29,6 +29,7 @@ enum Service {
     }
 
     struct CreationDetailsModel {
+        var serviceID: Int?
         var cardID: Int
         var photos: [EditablePhotoListItem] = []
         var companyName: String?
@@ -59,6 +60,7 @@ enum Service {
     }
 
     struct DetailsViewModel {
+        var id: Int?
         var title: String?
         var photos: [EditablePhotoListItem] = []
         var companyName: String?

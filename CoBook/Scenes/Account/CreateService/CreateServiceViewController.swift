@@ -26,6 +26,16 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
         return view
     }()
 
+    /// bottom save button
+    private lazy var updateView: CardSaveView = {
+        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
+        view.saveButton.setTitle("Оновити послугу", for: .normal)
+        view.onSaveTapped = { [weak self] in
+            self?.presenter?.updateService()
+        }
+        return view
+    }()
+
     /// picker that manage fetching images from gallery
     private lazy var imagePicker: ImagePicker = {
         let imagePicker = ImagePicker(presentationController: self, allowsEditing: false)
@@ -72,8 +82,13 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
         tableView.tableFooterView = saveView
     }
 
+    func setupUpdateView() {
+        tableView.tableFooterView = updateView
+    }
+
     func setSaveButtonEnabled(_ isEnabled: Bool) {
         saveView.saveButton.isEnabled = isEnabled
+        updateView.saveButton.isEnabled = isEnabled
     }
 
 
@@ -85,7 +100,6 @@ private extension CreateServiceViewController {
 
     func setupLayout() {
         self.navigationItem.title = "Послуга компанії"
-
         tableView.delegate = self
     }
 

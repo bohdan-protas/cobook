@@ -11,6 +11,7 @@ import Alamofire
 enum ServicesEndpoint: Endpoint {
 
     case create(parameters: CreateServiceApiModel)
+    case update(parameters: UpdateServiceApiModel)
     case getList(cardID: Int, limit: Int?, offset: Int?)
     case getDetails(serviceID: Int)
 
@@ -24,15 +25,20 @@ enum ServicesEndpoint: Endpoint {
             return .post
         case .getDetails:
             return .get
+        case .update:
+            return .put
         }
     }
 
     var path: String {
         switch self {
-        case .create:
+
+        case .create, .update:
             return "/services"
+
         case .getList:
             return "/services/list"
+
         case .getDetails(let serviceID):
             return "/services/\(serviceID)"
         }
@@ -42,6 +48,9 @@ enum ServicesEndpoint: Endpoint {
         switch self {
 
         case .create(let parameters):
+            return parameters.dictionary
+
+        case .update(let parameters):
             return parameters.dictionary
 
         case .getList(let cardID, let limit, let offset):
