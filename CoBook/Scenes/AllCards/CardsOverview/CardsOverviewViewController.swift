@@ -136,7 +136,6 @@ private extension CardsOverviewViewController {
         searchBar.delegate = self
         searchBar.sizeToFit()
         searchBar.searchBarStyle = .default
-        searchBar.searchTextField.backgroundColor = .white
         searchBar.barTintColor = UIColor.Theme.blackMiddle
         searchBar.tintColor = UIColor.Theme.blackMiddle
         searchBar.setImage(UIImage(named: "ic_search"), for: .search, state: .normal)
