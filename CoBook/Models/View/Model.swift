@@ -9,6 +9,7 @@
 import UIKit
 
 struct TextFieldModel {
+    var isEnabled: Bool = true
     var text: String? = nil
     var placeholder: String? = nil
     var associatedKeyPath: AnyKeyPath? = nil
@@ -67,4 +68,20 @@ struct ContactsModel {
     var telNumber: String?
     var website: String?
     var email: String?
+}
+
+struct CheckboxModel {
+    var title: String
+    var isSelected: Bool
+    var handler: ((_ button: UIButton) -> Void)? = nil
+}
+
+struct CompanyPreviewHeaderModel {
+    var title: String?
+    var image: String?
+}
+
+struct TitleDescrModel {
+    var title: String?
+    var descr: String?
 }

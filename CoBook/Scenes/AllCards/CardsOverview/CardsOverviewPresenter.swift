@@ -27,8 +27,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     weak var view: CardsOverviewView?
 
     /// bar items busienss logic
-    var barItems: [BarItemViewModel]
-    var selectedBarItem: BarItemViewModel?
+    var barItems: [BarItem]
+    var selectedBarItem: BarItem?
 
     private var dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
     private var searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
@@ -49,10 +49,10 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     override init() {
 
         self.barItems = [
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
         ]
         self.selectedBarItem = barItems.first
 
@@ -93,7 +93,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         pendingSearchResultWorkItem?.cancel()
 
         if query.isEmpty {
-            searchDataSource?[.header].items.removeAll()
+            searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items.removeAll()
             view?.reloadSearch(resultText: "Немає результатів пошуку")
             return
         }
@@ -119,7 +119,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                                                                                telephoneNumber: $0.contactTelephone?.number) } ?? []
 
 
-                    strongSelf.searchDataSource?[.header].items = searchCards.map { .cardItem(model: $0) }
+                    strongSelf.searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items = searchCards.map { .cardItem(model: $0) }
                     let text = searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count)"
                     strongSelf.view?.reloadSearch(resultText: text)
 

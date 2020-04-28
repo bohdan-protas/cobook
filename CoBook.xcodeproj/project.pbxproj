@@ -31,6 +31,7 @@
 		B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82248DD242C0CD700392D10 /* CardSaveView.xib */; };
 		B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */; };
 		B82248E4242C106D00392D10 /* SectionHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */; };
+		B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */; };
 		B8237F38244740F80006E8D1 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */; };
 		B8237F39244740F80006E8D1 /* ContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */; };
 		B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6A723FD34A0007540D0 /* Array + Extensions.swift */; };
@@ -126,6 +127,20 @@
 		B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */; };
 		B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */; };
 		B82A211E2421700A00D0D9F5 /* AuthRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */; };
+		B82B4D3A2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D382455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift */; };
+		B82B4D3B2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B4D392455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib */; };
+		B82B4D3F2456059C0061A98B /* CheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D3D2456059C0061A98B /* CheckboxTableViewCell.swift */; };
+		B82B4D402456059C0061A98B /* CheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B4D3E2456059C0061A98B /* CheckboxTableViewCell.xib */; };
+		B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D41245632460061A98B /* ServicesEndpoint.swift */; };
+		B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D43245632970061A98B /* CreateServiceApiModel.swift */; };
+		B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D45245644160061A98B /* ServiceDetailsApiModel.swift */; };
+		B82B4D48245645840061A98B /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D47245645840061A98B /* ServiceModel.swift */; };
+		B82B4D4A24564EEF0061A98B /* ServicePreviewApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D4924564EEF0061A98B /* ServicePreviewApiModel.swift */; };
+		B82B4D4E245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D4C245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.swift */; };
+		B82B4D4F245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B4D4D245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib */; };
+		B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D56245668340061A98B /* ServiceDetailsViewController.swift */; };
+		B82B4D59245668420061A98B /* ServiceDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D58245668420061A98B /* ServiceDetailsPresenter.swift */; };
+		B82B4D5B2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D5A2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift */; };
 		B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* DesignableView.swift */; };
 		B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F1A2406C8C700AFE578 /* AppStorage.swift */; };
 		B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */; };
@@ -202,6 +217,17 @@
 		B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C1240020F4002E91F7 /* BasePresenter.swift */; };
 		B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */; };
 		B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C72400515B002E91F7 /* OnboardingPresenter.swift */; };
+		B8970B4924505763006676DF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4824505763006676DF /* Service.swift */; };
+		B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */; };
+		B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */; };
+		B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B09F24507D55007C4F05 /* CreateServiceViewController.swift */; };
+		B8A3B0A224507D65007C4F05 /* CreateServicePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0A124507D65007C4F05 /* CreateServicePresenter.swift */; };
+		B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0A324507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift */; };
+		B8A3B0AD2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0AB2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.swift */; };
+		B8A3B0AE2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8A3B0AC2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.xib */; };
+		B8A3B0B12450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0AF2450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift */; };
+		B8A3B0B22450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8A3B0B02450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib */; };
+		B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */; };
 		B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */; };
 		B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */; };
 		B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F022422B38300E06E53 /* Data + Extensions.swift */; };
@@ -268,6 +294,7 @@
 		B82248DD242C0CD700392D10 /* CardSaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardSaveView.xib; sourceTree = "<group>"; };
 		B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
 		B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsTableViewCell.xib; sourceTree = "<group>"; };
 		B823A6A723FD34A0007540D0 /* Array + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Extensions.swift"; sourceTree = "<group>"; };
@@ -364,6 +391,20 @@
 		B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Extensions.swift"; sourceTree = "<group>"; };
 		B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerEventMonitor.swift; sourceTree = "<group>"; };
 		B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestInterceptor.swift; sourceTree = "<group>"; };
+		B82B4D382455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoListItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B82B4D392455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPhotoListItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		B82B4D3D2456059C0061A98B /* CheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxTableViewCell.swift; sourceTree = "<group>"; };
+		B82B4D3E2456059C0061A98B /* CheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckboxTableViewCell.xib; sourceTree = "<group>"; };
+		B82B4D41245632460061A98B /* ServicesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesEndpoint.swift; sourceTree = "<group>"; };
+		B82B4D43245632970061A98B /* CreateServiceApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceApiModel.swift; sourceTree = "<group>"; };
+		B82B4D45245644160061A98B /* ServiceDetailsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsApiModel.swift; sourceTree = "<group>"; };
+		B82B4D47245645840061A98B /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
+		B82B4D4924564EEF0061A98B /* ServicePreviewApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePreviewApiModel.swift; sourceTree = "<group>"; };
+		B82B4D4C245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyPreviewHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		B82B4D4D245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyPreviewHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		B82B4D56245668340061A98B /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
+		B82B4D58245668420061A98B /* ServiceDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsPresenter.swift; sourceTree = "<group>"; };
+		B82B4D5A2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		B8307F1A2406C8C700AFE578 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageWrapper.swift; sourceTree = "<group>"; };
@@ -444,6 +485,17 @@
 		B88906C1240020F4002E91F7 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDisplayableView.swift; sourceTree = "<group>"; };
 		B88906C72400515B002E91F7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
+		B8970B4824505763006676DF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListItemTableViewCell.swift; sourceTree = "<group>"; };
+		B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceListItemTableViewCell.xib; sourceTree = "<group>"; };
+		B8A3B09F24507D55007C4F05 /* CreateServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceViewController.swift; sourceTree = "<group>"; };
+		B8A3B0A124507D65007C4F05 /* CreateServicePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServicePresenter.swift; sourceTree = "<group>"; };
+		B8A3B0A324507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceDataSourceConfigurator.swift; sourceTree = "<group>"; };
+		B8A3B0AB2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePhotoListItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8A3B0AC2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditablePhotoListItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		B8A3B0AF2450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPhotosListTableViewCell.swift; sourceTree = "<group>"; };
+		B8A3B0B02450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalPhotosListTableViewCell.xib; sourceTree = "<group>"; };
+		B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePhotoListItemModel.swift; sourceTree = "<group>"; };
 		B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
 		B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManagerEndpoint.swift; sourceTree = "<group>"; };
 		B8AB3F022422B38300E06E53 /* Data + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extensions.swift"; sourceTree = "<group>"; };
@@ -595,6 +647,8 @@
 				B8AB83E824280E7E0041B879 /* PersonalCardDetails */,
 				B8DD431724178F0200C7D940 /* CreatePersonalCard */,
 				B823B091242D3D390012529D /* CreateBusinessCard */,
+				B8A3B09E24507D30007C4F05 /* CreateService */,
+				B82B4D55245667FC0061A98B /* ServiceDetails */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -736,6 +790,7 @@
 				B82248DB242C0CD700392D10 /* CardSaveView */,
 				B8AB840124283C440041B879 /* EditCardView */,
 				B8DE5E3A2418E1C600F4F60B /* Cells */,
+				B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -979,6 +1034,43 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		B82B4D372455FD440061A98B /* AddPhotoListItemCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B82B4D382455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift */,
+				B82B4D392455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib */,
+			);
+			path = AddPhotoListItemCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		B82B4D3C245605790061A98B /* CheckboxTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B82B4D3D2456059C0061A98B /* CheckboxTableViewCell.swift */,
+				B82B4D3E2456059C0061A98B /* CheckboxTableViewCell.xib */,
+			);
+			path = CheckboxTableViewCell;
+			sourceTree = "<group>";
+		};
+		B82B4D4B245656A70061A98B /* CompanyPreviewHeaderTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B82B4D4C245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.swift */,
+				B82B4D4D245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib */,
+			);
+			path = CompanyPreviewHeaderTableViewCell;
+			sourceTree = "<group>";
+		};
+		B82B4D55245667FC0061A98B /* ServiceDetails */ = {
+			isa = PBXGroup;
+			children = (
+				B82B4D56245668340061A98B /* ServiceDetailsViewController.swift */,
+				B82B4D58245668420061A98B /* ServiceDetailsPresenter.swift */,
+				B82B4D5A2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift */,
+			);
+			path = ServiceDetails;
+			sourceTree = "<group>";
+		};
 		B8307F1F2406FED000AFE578 /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
@@ -1004,6 +1096,9 @@
 				B824923F243DE28E00A1AC39 /* CardItemViewModel.swift */,
 				B8249251243E26A300A1AC39 /* CardsOverview.swift */,
 				B82079422444B49F00FCCC17 /* EmployModel.swift */,
+				B8970B4824505763006676DF /* Service.swift */,
+				B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */,
+				B82B4D47245645840061A98B /* ServiceModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1066,6 +1161,7 @@
 				B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */,
 				B8AB3F082422FBE800E06E53 /* ProfileEndpoint.swift */,
 				B8255A25243A58A400C4169D /* UsersEndpoint.swift */,
+				B82B4D41245632460061A98B /* ServicesEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -1090,6 +1186,9 @@
 				B823E8A4243F713B00EE1830 /* CoordinateApiModel.swift */,
 				B823E8A6243F753D00EE1830 /* CardMapMarkerApiModel.swift */,
 				B82079402444A60500FCCC17 /* EmployApiModel.swift */,
+				B82B4D43245632970061A98B /* CreateServiceApiModel.swift */,
+				B82B4D45245644160061A98B /* ServiceDetailsApiModel.swift */,
+				B82B4D4924564EEF0061A98B /* ServicePreviewApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1301,6 +1400,43 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */,
+				B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */,
+			);
+			path = ServiceListItemTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8A3B09E24507D30007C4F05 /* CreateService */ = {
+			isa = PBXGroup;
+			children = (
+				B8A3B09F24507D55007C4F05 /* CreateServiceViewController.swift */,
+				B8A3B0A124507D65007C4F05 /* CreateServicePresenter.swift */,
+				B8A3B0A324507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift */,
+			);
+			path = CreateService;
+			sourceTree = "<group>";
+		};
+		B8A3B0A52450A3FD007C4F05 /* HorizontalPhotosListTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8A3B0AF2450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift */,
+				B8A3B0B02450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib */,
+			);
+			path = HorizontalPhotosListTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8A3B0AA2450A547007C4F05 /* PhotoListItemCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8A3B0AB2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.swift */,
+				B8A3B0AC2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.xib */,
+			);
+			path = PhotoListItemCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		B8AB83E824280E7E0041B879 /* PersonalCardDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1377,7 +1513,13 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B82B4D4B245656A70061A98B /* CompanyPreviewHeaderTableViewCell */,
+				B82B4D3C245605790061A98B /* CheckboxTableViewCell */,
 				B8263C70245345010075A499 /* StaticMapTableViewCell */,
+				B82B4D372455FD440061A98B /* AddPhotoListItemCollectionViewCell */,
+				B8A3B0AA2450A547007C4F05 /* PhotoListItemCollectionViewCell */,
+				B8A3B0A52450A3FD007C4F05 /* HorizontalPhotosListTableViewCell */,
+				B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */,
 				B8237F35244740CE0006E8D1 /* ContactsTableViewCell */,
 				B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */,
 				B8559F87243C841100787349 /* ExpandableTextDescriptionTableViewCell */,
@@ -1505,6 +1647,7 @@
 			files = (
 				B825B6FB24391448002A27EC /* SearchTableViewCell.xib in Resources */,
 				B8237F39244740F80006E8D1 /* ContactsTableViewCell.xib in Resources */,
+				B8A3B0AE2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.xib in Resources */,
 				B828282F241A970D0003D056 /* InterestsSelectionTableViewCell.xib in Resources */,
 				B825741923F5621500C8CBF8 /* HelveticaNeueCyr-LightItalic.ttf in Resources */,
 				B8559F58243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib in Resources */,
@@ -1522,6 +1665,8 @@
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
 				B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */,
 				B83FD7DD2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib in Resources */,
+				B82B4D3B2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib in Resources */,
+				B8A3B0B22450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib in Resources */,
 				B823B090242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib in Resources */,
 				B8263C74245345250075A499 /* StaticMapTableViewCell.xib in Resources */,
 				B8559F95243CC67E00787349 /* HideCardView.xib in Resources */,
@@ -1531,11 +1676,13 @@
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
 				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
 				B8AB840524283C7C0041B879 /* EditCardView.xib in Resources */,
+				B82B4D402456059C0061A98B /* CheckboxTableViewCell.xib in Resources */,
 				B820793824446EE600FCCC17 /* FilterSectionHeaderView.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
 				B8559F7C243C7E0E00787349 /* AddressInfoTableViewCell.xib in Resources */,
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
 				B8559F76243B785800787349 /* BusinessCardHeaderInfoTableViewCell.xib in Resources */,
+				B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */,
 				B8DE5E562419262600F4F60B /* TextViewTableViewCell.xib in Resources */,
 				B825741223F5621500C8CBF8 /* HelveticaNeueCyr-Medium.ttf in Resources */,
 				B823E8AC243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib in Resources */,
@@ -1545,6 +1692,7 @@
 				B825741423F5621500C8CBF8 /* HelveticaNeueCyr-Black.ttf in Resources */,
 				B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */,
 				B8559F5D243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib in Resources */,
+				B82B4D4F245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib in Resources */,
 				B825741623F5621500C8CBF8 /* HelveticaNeueCyr-ThinItalic.ttf in Resources */,
 				B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */,
 				B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */,
@@ -1642,19 +1790,23 @@
 				B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */,
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
+				B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */,
 				B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */,
 				B823DD8524439B6F00A74495 /* FilterViewController.swift in Sources */,
 				B8559F7B243C7E0E00787349 /* AddressInfoTableViewCell.swift in Sources */,
 				B8212A5D241B6A690066700C /* InterestItemCollectionViewCell.swift in Sources */,
+				B8A3B0AD2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.swift in Sources */,
 				B8559F9E243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift in Sources */,
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
 				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
 				B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */,
+				B8970B4924505763006676DF /* Service.swift in Sources */,
 				B824E1B42437C5940091C491 /* CreatePersonalCardParametersApiModel.swift in Sources */,
 				B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */,
 				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
+				B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
 				B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
@@ -1665,6 +1817,7 @@
 				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
 				B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */,
 				B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */,
+				B82B4D48245645840061A98B /* ServiceModel.swift in Sources */,
 				B8CB0E7524053BE800AF431B /* VerifyAPIResponseData.swift in Sources */,
 				B82573F523F545F100C8CBF8 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
@@ -1676,6 +1829,7 @@
 				B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */,
 				B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */,
 				B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */,
+				B82B4D4A24564EEF0061A98B /* ServicePreviewApiModel.swift in Sources */,
 				B823B093242D3DA90012529D /* CreateBusinessCardViewController.swift in Sources */,
 				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
@@ -1689,16 +1843,20 @@
 				B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
+				B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */,
 				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,
 				B8559F98243CD69B00787349 /* HorizontalItemsBarView.swift in Sources */,
+				B8A3B0A224507D65007C4F05 /* CreateServicePresenter.swift in Sources */,
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B8237F38244740F80006E8D1 /* ContactsTableViewCell.swift in Sources */,
 				B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
+				B82B4D4E245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
 				B82200BF240FBC1C00A17D2C /* AccountViewController.swift in Sources */,
 				B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */,
 				B836DF2C2433792600CB84D3 /* CreateBusinessCardPresenter.swift in Sources */,
 				B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */,
+				B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */,
 				B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */,
 				B8559F66243AD0B900787349 /* BusinessCardDetailsPresenter.swift in Sources */,
 				B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */,
@@ -1725,6 +1883,7 @@
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
 				B8AB83FF242831E60041B879 /* PersonalCardUserInfoTableViewCell.swift in Sources */,
 				B828BCC024366F170099D1A8 /* Model.swift in Sources */,
+				B82B4D5B2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift in Sources */,
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
 				B8249247243DE64A00A1AC39 /* CardsOverviewPresenter.swift in Sources */,
 				B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */,
@@ -1742,6 +1901,7 @@
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */,
 				B8559F61243AA76800787349 /* PersonalCardDetailsDataSourceConfigurator.swift in Sources */,
+				B82B4D3F2456059C0061A98B /* CheckboxTableViewCell.swift in Sources */,
 				B8559F6E243B2BC400787349 /* ProfileApiModel.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8559F68243AD0CD00787349 /* BusinessCardDetailsDataSourceConfigurator.swift in Sources */,
@@ -1749,7 +1909,9 @@
 				B823E8A1243F173A00EE1830 /* StaticMapConfiguratorService.swift in Sources */,
 				B8AB840324283C580041B879 /* EditCardView.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
+				B82B4D3A2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift in Sources */,
 				B8559F6A243AD2A200787349 /* BusinessCardDetails.swift in Sources */,
+				B8A3B0B12450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift in Sources */,
 				B8AB3F072422D5B900E06E53 /* NSError + Extensions.swift in Sources */,
 				B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */,
 				B8559F8A243C843400787349 /* ExpandableDescriptionTableViewCell.swift in Sources */,
@@ -1761,6 +1923,7 @@
 				B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */,
 				B823B08B242CEFDF0012529D /* UIImageView + AFImageWrappers.swift in Sources */,
 				B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */,
+				B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */,
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
 				B823C6212431F585002CFB02 /* UIImage + AverageColor.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
@@ -1772,10 +1935,14 @@
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
+				B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */,
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
+				B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */,
+				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
+				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,
 				B8249249243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift in Sources */,
 				B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */,
@@ -1802,6 +1969,7 @@
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
 				B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */,
+				B82B4D59245668420061A98B /* ServiceDetailsPresenter.swift in Sources */,
 				B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */,
 				B8DE5E552419262600F4F60B /* TextViewTableViewCell.swift in Sources */,
 				B84B94EA240329D50007EB60 /* APIConstants.swift in Sources */,

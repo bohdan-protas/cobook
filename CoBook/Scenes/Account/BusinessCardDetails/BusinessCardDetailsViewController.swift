@@ -128,6 +128,20 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     }
 
+    // MARK: - Navigation
+
+    func goToCreateService(presenter: CreateServicePresenter?) {
+        let controller: CreateServiceViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
+    func goToServiceDetails(presenter: ServiceDetailsPresenter?) {
+        let controller: ServiceDetailsViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
 
 }
 
@@ -147,6 +161,11 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
             return itemsBarView.frame.height
         }
         return 0
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.selectedRow(at: indexPath)
     }
 
 }

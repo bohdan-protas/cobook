@@ -16,8 +16,10 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func reload()
     func setupEditCardView()
     func setupHideCardView()
-
     func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
+
+    func goToCreateService(presenter: CreateServicePresenter?)
+    func goToServiceDetails(presenter: ServiceDetailsPresenter?)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -26,25 +28,32 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     weak var view: BusinessCardDetailsView?
 
     /// bar items busienss logic
-    var barItems: [BarItemViewModel]
-    var selectedBarItem: BarItemViewModel
+    var barItems: [BarItem]
+    var selectedBarItem: BarItem
 
     /// Datasource
     private var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
+    private var services: [Service.PreviewModel] = []
 
     /// View datasource
     private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
+
+    /// Flag for owner identifire
+    private var isUserOwner: Bool {
+        return AppStorage.User.data?.userId == cardDetails?.cardCreator?.id
+    }
 
     // MARK: - Object Lifecycle
 
     init(id: Int) {
         self.businessCardId = id
         self.barItems = [
-            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
-            BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
-            /*BarItemViewModel(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),*/
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
         ]
         self.selectedBarItem = barItems.first!
 
@@ -71,7 +80,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func onViewWillAppear() {
-        setupDataSource()
+        fetchDataSource()
     }
 
     func editBusinessCard() {
@@ -84,6 +93,32 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         } else {
             let controller: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
             view?.push(controller: controller, animated: true)
+        }
+    }
+
+    func selectedRow(at indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+            Log.debug("Cannot select \(indexPath)")
+            return
+        }
+
+        switch item {
+        case .employee(let model):
+            // TODO: - Add segue to card details VC
+            break
+
+        case .service(let model):
+            switch model {
+            case .view(let model):
+                let presenter = ServiceDetailsPresenter(serviceID: model.id ?? -1, cardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl, isUserOwner: isUserOwner)
+                view?.goToServiceDetails(presenter: presenter)
+            case .add:
+                let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
+                view?.goToCreateService(presenter: presenter)
+            }
+            
+        default:
+            break
         }
     }
 
@@ -111,36 +146,60 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
 private extension BusinessCardDetailsPresenter {
 
-    func setupDataSource() {
+    func fetchDataSource() {
         let group = DispatchGroup()
         var errors = [Error]()
 
-        var cardDetails: CardDetailsApiModel?
-        var employee: [EmployApiModel] = []
-
         view?.startLoading(text: "Завантаження")
 
+        // Fetch card details
         group.enter()
-        APIClient.default.getCardInfo(id: businessCardId) { (result) in
+        APIClient.default.getCardInfo(id: businessCardId) { [weak self] (result) in
+            group.leave()
             switch result {
             case let .success(response):
-                cardDetails = response
-                group.leave()
+                self?.cardDetails = response
             case let .failure(error):
                 errors.append(error)
-                group.leave()
             }
         }
 
+        // Fetch employeeList
         group.enter()
-        APIClient.default.employeeList(cardId: businessCardId) { (result) in
+        APIClient.default.employeeList(cardId: businessCardId) { [weak self] (result) in
+            group.leave()
             switch result {
             case let .success(response):
-                employee = response ?? []
-                group.leave()
+                self?.employee = response?.compactMap { EmployeeModel(userId: $0.userId,
+                                                                      cardId: $0.cardId,
+                                                                      firstName: $0.firstName,
+                                                                      lastName: $0.lastName,
+                                                                      avatar: $0.avatar?.sourceUrl,
+                                                                      position: $0.position,
+                                                                      telephone: $0.telephone?.number,
+                                                                      practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) } ?? []
             case let .failure(error):
                 errors.append(error)
-                group.leave()
+            }
+        }
+
+        // Fetch Services list
+        group.enter()
+        APIClient.default.getServiceList(cardID: businessCardId) { [weak self] (result) in
+            group.leave()
+            switch result {
+            case .success(let response):
+
+                self?.services = response?.compactMap { Service.PreviewModel(id: $0.id,
+                                                                             name: $0.title,
+                                                                             avatarPath: $0.avatar?.sourceUrl,
+                                                                             price: $0.priceDetails ?? "Ціна договірна",
+                                                                             descriptionTitle: $0.header,
+                                                                             descriptionHeader: $0.description,
+                                                                             contactTelephone: $0.contactTelephone?.number,
+                                                                             contactEmail: $0.contactEmail?.address) } ?? []
+            case .failure(let error):
+                errors.append(error)
             }
         }
 
@@ -149,25 +208,24 @@ private extension BusinessCardDetailsPresenter {
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
+            /// Errors handling
             if !errors.isEmpty {
                 errors.forEach {
-                    self?.view?.errorAlert(message: $0.localizedDescription)
+                    strongSelf.view?.errorAlert(message: $0.localizedDescription)
                 }
-            } else {
-                self?.cardDetails = cardDetails
-                self?.employee = employee.map { EmployeeModel(userId: $0.userId,
-                                                              cardId: $0.cardId,
-                                                              firstName: $0.firstName,
-                                                              lastName: $0.lastName,
-                                                              avatar: $0.avatar?.sourceUrl,
-                                                              position: $0.position,
-                                                              telephone: $0.telephone?.number,
-                                                              practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) }
-                self?.view?.set(dataSource: self!.dataSource)
-                self?.updateViewDataSource()
-                self?.view?.setupEditCardView()
-                self?.view?.reload()
             }
+
+            /// Datasource configuration
+            strongSelf.view?.set(dataSource: strongSelf.dataSource)
+
+            if strongSelf.isUserOwner {
+                strongSelf.view?.setupEditCardView()
+            } else {
+                 strongSelf.view?.setupHideCardView()
+            }
+
+            strongSelf.updateViewDataSource()
+            strongSelf.view?.reload()
         }
     }
 
@@ -192,14 +250,13 @@ private extension BusinessCardDetailsPresenter {
         if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
             switch item {
             case .general:
-                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
+                dataSource?[.cardDetails].items = [.companyDescription(model: TitleDescrModel(title: cardDetails?.company?.name, descr: cardDetails?.description)),
                                                    .getInTouch,
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
                                                    .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),
                                                    .mapDirection]
             case .contacts:
                 dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
-
                 dataSource?[.cardDetails].items.append(.getInTouch)
 
                 let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
@@ -212,6 +269,12 @@ private extension BusinessCardDetailsPresenter {
                 let emplCells = employee.compactMap { BusinessCardDetails.Cell.employee(model: $0) }
                 dataSource?[.cardDetails].items = emplCells
 
+            case .services:
+                if isUserOwner {
+                    dataSource?[.cardDetails].items.append(.service(model: .add))
+                }
+                let previews: [BusinessCardDetails.Cell] = services.compactMap { BusinessCardDetails.Cell.service(model: .view(model: $0)) }
+                dataSource?[.cardDetails].items.append(contentsOf: previews)
             }
         }
     }

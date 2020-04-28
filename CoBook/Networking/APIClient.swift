@@ -93,7 +93,7 @@ class APIClient {
 
         return session.upload(multipartFormData: { multipartFormData in
             let randomName = "\(String.random())-image"
-            multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).png", mimeType: "image/png")
+            multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).jpg", mimeType: "image/jpeg")
         }, to: endpoint, headers: headers)
             .response { (response) in
                 
@@ -434,6 +434,47 @@ extension APIClient {
                       completion: @escaping (Result<[EmployApiModel]?, Error>) -> Void) -> DataRequest {
 
         let endpoint = UsersEndpoint.employeeList(cardId: cardId, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
+}
+
+// MARK: - Services requests
+
+extension APIClient {
+
+    @discardableResult
+    func createService(with parameters: CreateServiceApiModel,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ServicesEndpoint.create(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func updateService(with parameters: UpdateServiceApiModel,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ServicesEndpoint.update(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func getServiceList(cardID: Int,
+                        limit: Int? = nil,
+                        offset: Int? = nil,
+                        completion: @escaping (Result<[ServicePreviewApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ServicesEndpoint.getList(cardID: cardID, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func getServiceDetails(serviceID: Int,
+                           completion: @escaping (Result<ServiceDetailsApiModel?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ServicesEndpoint.getDetails(serviceID: serviceID)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

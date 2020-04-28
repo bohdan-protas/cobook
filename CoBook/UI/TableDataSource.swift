@@ -80,23 +80,18 @@ class DataSource<Configurator: CellConfiguratorType>: NSObject, UITableViewDataS
 }
 
 extension DataSource {
-
-    subscript(cardsOverviewHeader: CardsOverview.SectionAccessoryIndex) -> Section<Configurator.Item> {
+    subscript(cardsOverviewIndex: CardsOverview.SectionAccessoryIndex) -> Section<Configurator.Item> {
         get {
-            return sections[cardsOverviewHeader.rawValue]
+            return sections[cardsOverviewIndex.rawValue]
         }
 
         set {
-            sections[cardsOverviewHeader.rawValue] = newValue
+            sections[cardsOverviewIndex.rawValue] = newValue
         }
-
-
     }
-
 }
 
 extension DataSource {
-
     subscript(businessCardDetailsIndex: BusinessCardDetails.SectionAccessoryIndex) -> Section<Configurator.Item> {
         get {
             return sections[businessCardDetailsIndex.rawValue]
@@ -105,8 +100,29 @@ extension DataSource {
         set {
             sections[businessCardDetailsIndex.rawValue] = newValue
         }
-
-
     }
+}
 
+extension DataSource {
+    subscript(createServiceIndex: Service.CreationSectionAccessoryIndex) -> Section<Configurator.Item> {
+         get {
+             return sections[createServiceIndex.rawValue]
+         }
+
+         set {
+             sections[createServiceIndex.rawValue] = newValue
+         }
+     }
+}
+
+extension DataSource {
+    subscript(serviceDetailsIndex: Service.DetailsSectionAccessoryIndex) -> Section<Configurator.Item> {
+         get {
+             return sections[serviceDetailsIndex.rawValue]
+         }
+
+         set {
+             sections[serviceDetailsIndex.rawValue] = newValue
+         }
+     }
 }

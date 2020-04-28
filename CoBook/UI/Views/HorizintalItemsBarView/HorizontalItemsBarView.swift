@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct BarItemViewModel {
+struct BarItem {
     var index: Int
     var title: String?
 }
@@ -37,13 +37,13 @@ class HorizontalItemsBarView: BaseFromNibView {
     var selectionIndicatorCenterX: NSLayoutConstraint?
 
     weak var delegate: HorizontalItemsBarViewDelegate?
-    var dataSource: [BarItemViewModel] = []
+    var dataSource: [BarItem] = []
 
     override func getNib() -> UINib {
         return HorizontalItemsBarView.nib
     }
 
-    init(frame: CGRect, dataSource: [BarItemViewModel]) {
+    init(frame: CGRect, dataSource: [BarItem]) {
         super.init(frame: frame)
         self.dataSource = dataSource
 

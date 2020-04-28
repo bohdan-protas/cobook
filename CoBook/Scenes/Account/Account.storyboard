@@ -161,6 +161,66 @@
             </objects>
             <point key="canvasLocation" x="2798" y="-464"/>
         </scene>
+        <!--Create Service View Controller-->
+        <scene sceneID="E24-Xe-U25">
+            <objects>
+                <viewController storyboardIdentifier="CreateServiceViewController" id="4eu-MI-uca" customClass="CreateServiceViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xgr-kZ-1JX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jza-nU-u34">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jza-nU-u34" firstAttribute="top" secondItem="4L6-en-ffe" secondAttribute="top" id="FFi-b9-TIp"/>
+                            <constraint firstItem="jza-nU-u34" firstAttribute="trailing" secondItem="4L6-en-ffe" secondAttribute="trailing" id="GV2-rZ-aVp"/>
+                            <constraint firstItem="jza-nU-u34" firstAttribute="leading" secondItem="4L6-en-ffe" secondAttribute="leading" id="S5q-Tm-QoH"/>
+                            <constraint firstItem="jza-nU-u34" firstAttribute="bottom" secondItem="4L6-en-ffe" secondAttribute="bottom" id="zBv-ot-ICQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4L6-en-ffe"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="jza-nU-u34" id="K4H-iQ-LSz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WJm-Jx-Xmp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3832.8000000000002" y="-464.6176911544228"/>
+        </scene>
+        <!--Service Details View Controller-->
+        <scene sceneID="soh-9s-TGG">
+            <objects>
+                <viewController storyboardIdentifier="ServiceDetailsViewController" id="6qK-IL-72o" customClass="ServiceDetailsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vaf-Cg-EMq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="o0b-qt-WXP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="o0b-qt-WXP" firstAttribute="top" secondItem="5L0-LI-Mh1" secondAttribute="top" id="AhP-ac-247"/>
+                            <constraint firstItem="o0b-qt-WXP" firstAttribute="bottom" secondItem="5L0-LI-Mh1" secondAttribute="bottom" id="DNa-Vi-ktP"/>
+                            <constraint firstItem="o0b-qt-WXP" firstAttribute="trailing" secondItem="5L0-LI-Mh1" secondAttribute="trailing" id="gyR-NG-Kl4"/>
+                            <constraint firstItem="o0b-qt-WXP" firstAttribute="leading" secondItem="5L0-LI-Mh1" secondAttribute="leading" id="uJs-y2-3lw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5L0-LI-Mh1"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="o0b-qt-WXP" id="LCN-gx-zi3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LLA-YD-6pm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4604" y="-465"/>
+        </scene>
         <!--Account Navigation Controller-->
         <scene sceneID="Azw-7v-TXN">
             <objects>
