@@ -23,6 +23,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var employeeCellConfigurator: CellConfigurator<EmployeeModel?, CardItemTableViewCell>?
     var contactsCellConfigurator: CellConfigurator<ContactsModel?, ContactsTableViewCell>?
     var serviceItemCellConfigurator: CellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>?
+    var addGoodsConfigurator: CellConfigurator<Void?, ServiceListItemTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -52,6 +53,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return contactsCellConfigurator?.reuseIdentifier ?? ""
         case .service:
             return serviceItemCellConfigurator?.reuseIdentifier ?? ""
+        case .addGoods:
+            return addGoodsConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -81,6 +84,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return contactsCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .service(let model):
             return serviceItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .addGoods:
+            return addGoodsConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -97,6 +102,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         employeeCellConfigurator?.registerCells(in: tableView)
         contactsCellConfigurator?.registerCells(in: tableView)
         serviceItemCellConfigurator?.registerCells(in: tableView)
+        addGoodsConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -223,6 +229,14 @@ extension BusinessCardDetailsPresenter {
                     cell.subtitleLabel.isHidden = true
                 }
 
+                return cell
+            }
+
+            // addGoodsConfigurator
+            configurator.addGoodsConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> ServiceListItemTableViewCell in
+                cell.titleLabel.text = "Додати товар"
+                cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
+                cell.subtitleLabel.isHidden = true
                 return cell
             }
 

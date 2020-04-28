@@ -52,6 +52,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.barItems = [
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.goods.rawValue, title: "Крамниця"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
         ]
@@ -116,6 +117,9 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
                 let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
                 view?.goToCreateService(presenter: presenter)
             }
+
+        case .addGoods:
+            break
             
         default:
             break
@@ -275,6 +279,9 @@ private extension BusinessCardDetailsPresenter {
                 }
                 let previews: [BusinessCardDetails.Cell] = services.compactMap { BusinessCardDetails.Cell.service(model: .view(model: $0)) }
                 dataSource?[.cardDetails].items.append(contentsOf: previews)
+
+            case .goods:
+                dataSource?[.cardDetails].items.append(.addGoods)
             }
         }
     }
