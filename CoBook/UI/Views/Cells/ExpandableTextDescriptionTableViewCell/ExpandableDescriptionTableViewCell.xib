@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
         <array key="SFProDisplay-Regular.ttf">
             <string>SFProDisplay-Regular</string>
         </array>
@@ -16,60 +19,72 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="89" id="KGk-i7-Jjw" customClass="ExpandableDescriptionTableViewCell" customModule="CoBook" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="83" id="KGk-i7-Jjw" customClass="ExpandableDescriptionTableViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iRG-37-xzO" customClass="DesignableTextView" customModule="CoBook" customModuleProvider="target">
-                        <rect key="frame" x="16" y="20" width="288" height="49"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFX-2q-3nM">
+                        <rect key="frame" x="16" y="24" width="288" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Rcr-fY-gLG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                        <color key="textColor" name="Theme_TextField-text"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iRG-37-xzO" customClass="SelfSizingTextView" customModule="CoBook" customModuleProvider="target">
+                        <rect key="frame" x="16" y="56" width="288" height="11"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="tintColor" name="Theme_Green-Dark"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="49" id="Zb5-KD-Oi7"/>
-                        </constraints>
                         <color key="textColor" name="Theme_Black-Middle"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                     </textView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vb-dB-Bcu">
-                        <rect key="frame" x="16" y="88" width="288" height="1"/>
-                        <color key="backgroundColor" name="Theme_Separator"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GzW-ab-dVn">
+                        <rect key="frame" x="8" y="82" width="304" height="1"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="7a0-6k-rfC"/>
+                            <constraint firstAttribute="height" constant="1" id="CFX-aV-dCo"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="1Vb-dB-Bcu" secondAttribute="bottom" id="0d6-fv-Vt1"/>
-                    <constraint firstItem="iRG-37-xzO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FDe-U2-zMh"/>
-                    <constraint firstAttribute="trailing" secondItem="iRG-37-xzO" secondAttribute="trailing" constant="16" id="cSm-5y-tSq"/>
-                    <constraint firstAttribute="bottom" secondItem="iRG-37-xzO" secondAttribute="bottom" constant="20" id="geJ-iv-7rJ"/>
-                    <constraint firstItem="1Vb-dB-Bcu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="qi6-PF-nwj"/>
-                    <constraint firstAttribute="trailing" secondItem="1Vb-dB-Bcu" secondAttribute="trailing" constant="16" id="tv4-kq-rQj"/>
-                    <constraint firstItem="iRG-37-xzO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="xYt-eV-l8t"/>
+                    <constraint firstItem="iRG-37-xzO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1jw-Yc-GG2"/>
+                    <constraint firstItem="vFX-2q-3nM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="4Os-d9-cA9"/>
+                    <constraint firstAttribute="trailing" secondItem="vFX-2q-3nM" secondAttribute="trailing" constant="16" id="DtZ-kX-eZg"/>
+                    <constraint firstAttribute="trailing" secondItem="GzW-ab-dVn" secondAttribute="trailing" constant="8" id="IDm-fy-xb3"/>
+                    <constraint firstAttribute="bottom" secondItem="GzW-ab-dVn" secondAttribute="bottom" id="VrZ-vY-f5r"/>
+                    <constraint firstAttribute="trailing" secondItem="iRG-37-xzO" secondAttribute="trailing" constant="16" id="aA4-sV-Xle"/>
+                    <constraint firstAttribute="bottom" secondItem="iRG-37-xzO" secondAttribute="bottom" constant="16" id="hsa-ld-Jyx"/>
+                    <constraint firstItem="GzW-ab-dVn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="jld-gX-mgU"/>
+                    <constraint firstItem="iRG-37-xzO" firstAttribute="top" secondItem="vFX-2q-3nM" secondAttribute="bottom" constant="12" id="tLb-gt-U2U"/>
+                    <constraint firstItem="vFX-2q-3nM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="xNv-mI-lXN"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="desctiptionTextView" destination="iRG-37-xzO" id="JCn-8f-WoN"/>
-                <outlet property="desctiptionTextViewHeight" destination="Zb5-KD-Oi7" id="1ip-54-QPp"/>
+                <outlet property="titleLabel" destination="vFX-2q-3nM" id="oL9-Ow-dAn"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="168.41517857142856"/>
+            <point key="canvasLocation" x="137.68115942028987" y="166.40625"/>
         </tableViewCell>
     </objects>
     <resources>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Theme_Green-Dark">
             <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Theme_Separator">
-            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Theme_TextField-text">
+            <color red="0.17299999296665192" green="0.17299999296665192" blue="0.17299999296665192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

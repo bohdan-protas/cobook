@@ -80,3 +80,8 @@ struct CompanyPreviewHeaderModel {
     var title: String?
     var image: String?
 }
+
+struct TitleDescrModel {
+    var title: String?
+    var descr: String?
+}

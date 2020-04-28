@@ -22,13 +22,22 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
     weak var view: ServiceDetailsView?
 
     // Data source
+    private var serviceID: Int
+    private var cardID: Int
+    private var companyName: String?
+    private var companyAvatar: String?
+
     private var details: Service.DetailsViewModel
     private var dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?
 
     // MARK: - Object Life Cycle
 
-    init(serviceID: Int, cardID: Int) {
-        self.details = Service.DetailsViewModel(serviceID: serviceID, cardID: cardID)
+    init(serviceID: Int, cardID: Int, companyName: String?, companyAvatar: String?) {
+        self.serviceID = serviceID
+        self.cardID = cardID
+        self.companyName = companyName
+        self.companyAvatar = companyAvatar
+        self.details = Service.DetailsViewModel()
 
         super.init()
         self.dataSource = DataSource(configurator: dataSouceConfigurator)
@@ -50,13 +59,6 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
         view = nil
     }
 
-    func setup() {
-        updateViewDataSource()
-        view?.set(dataSource: dataSource)
-        view?.setupEditCardView()
-        view?.reload()
-    }
-
 }
 
 // MARK: - Use cases
@@ -66,13 +68,27 @@ extension ServiceDetailsPresenter {
     func fetchServiceDetails() {
 
         view?.startLoading()
-        APIClient.default.getServiceDetails(serviceID: details.serviceID) { [weak self] (result) in
+        APIClient.default.getServiceDetails(serviceID: serviceID) { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
             switch result {
             case .success(let response):
-                strongSelf.setup()
-                dump(response)
+
+                strongSelf.details = Service.DetailsViewModel(photos: response?.photos?.compactMap { EditablePhotoListItem.view(imagePath: $0.sourceUrl, imageID: $0.id) } ?? [],
+                                                              companyName: strongSelf.companyName,
+                                                              companyAvatar: strongSelf.companyAvatar,
+                                                              serviceName: response?.title,
+                                                              price: response?.priceDetails,
+                                                              telephoneNumber: response?.contactTelephone?.number,
+                                                              email: response?.contactEmail?.address,
+                                                              descriptionTitle: response?.header,
+                                                              desctiptionBody: response?.description)
+
+                strongSelf.updateViewDataSource()
+                strongSelf.view?.set(dataSource: strongSelf.dataSource)
+                strongSelf.view?.setupEditCardView()
+                strongSelf.view?.reload()
+
             case .failure(let error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }

@@ -31,6 +31,7 @@
 		B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82248DD242C0CD700392D10 /* CardSaveView.xib */; };
 		B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */; };
 		B82248E4242C106D00392D10 /* SectionHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */; };
+		B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */; };
 		B8237F38244740F80006E8D1 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */; };
 		B8237F39244740F80006E8D1 /* ContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */; };
 		B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6A723FD34A0007540D0 /* Array + Extensions.swift */; };
@@ -293,6 +294,7 @@
 		B82248DD242C0CD700392D10 /* CardSaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardSaveView.xib; sourceTree = "<group>"; };
 		B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
 		B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsTableViewCell.xib; sourceTree = "<group>"; };
 		B823A6A723FD34A0007540D0 /* Array + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Extensions.swift"; sourceTree = "<group>"; };
@@ -788,6 +790,7 @@
 				B82248DB242C0CD700392D10 /* CardSaveView */,
 				B8AB840124283C440041B879 /* EditCardView */,
 				B8DE5E3A2418E1C600F4F60B /* Cells */,
+				B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1840,6 +1843,7 @@
 				B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
+				B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */,
 				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,
 				B8559F98243CD69B00787349 /* HorizontalItemsBarView.swift in Sources */,
 				B8A3B0A224507D65007C4F05 /* CreateServicePresenter.swift in Sources */,

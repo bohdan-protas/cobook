@@ -51,7 +51,7 @@ struct ServiceDetailsDataSourceConfigurator: CellConfiguratorType {
 
 }
 
-// MARK: - CreateServicePresenter data source configuration
+// MARK: - ServiceDetailsPresenter data source configuration
 
 extension ServiceDetailsPresenter {
 

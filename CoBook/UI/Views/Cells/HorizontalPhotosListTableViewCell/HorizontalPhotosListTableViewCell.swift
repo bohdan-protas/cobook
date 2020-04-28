@@ -98,7 +98,7 @@ extension HorizontalPhotosListTableViewCell: UICollectionViewDelegate {
 
     @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        guard let item = dataSource?.photos[safe: indexPath.item] else {
+        guard let item = dataSource?.photos[safe: indexPath.item], isEditable else {
             return nil
         }
 

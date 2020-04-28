@@ -16,7 +16,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
     var getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>?
     var socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>?
-    var expandableDescriptionCellConfigurator: CellConfigurator<String?, ExpandableDescriptionTableViewCell>?
+    var expandableDescriptionCellConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
     var mapDirectionCellConfigurator: CellConfigurator<Void?, MapDirectionTableViewCell>?
     var mapCellConfigurator: CellConfigurator<String, StaticMapTableViewCell>?
     var addressInfoCellConfigurator: CellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>?
@@ -71,8 +71,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return mapCellConfigurator?.configuredCell(for: path, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .mapDirection:
             return mapDirectionCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
-        case .companyDescription(let text):
-            return expandableDescriptionCellConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .companyDescription(let model):
+            return expandableDescriptionCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .title(let text):
             return sectionTitleConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .employee(let model):
@@ -162,9 +162,10 @@ extension BusinessCardDetailsPresenter {
             }
 
             // expandableDescriptionCellConfigurator
-            configurator.expandableDescriptionCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
-                cell.desctiptionTextView.text = model
-                cell.desctiptionTextViewHeight.constant = model?.height(withConstrainedWidth: cell.desctiptionTextView.frame.width, font: UIFont.SFProDisplay_Regular(size: 15)) ?? 0
+            configurator.expandableDescriptionCellConfigurator = CellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+                cell.titleLabel.text = model?.title
+                cell.desctiptionTextView.text = model?.descr
+
                 return cell
             }
 

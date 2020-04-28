@@ -110,7 +110,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         case .service(let model):
             switch model {
             case .view(let model):
-                let presenter = ServiceDetailsPresenter(serviceID: model.id ?? -1, cardID: businessCardId)
+                let presenter = ServiceDetailsPresenter(serviceID: model.id ?? -1, cardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
                 view?.goToServiceDetails(presenter: presenter)
             case .add:
                 let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
@@ -250,7 +250,7 @@ private extension BusinessCardDetailsPresenter {
         if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
             switch item {
             case .general:
-                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
+                dataSource?[.cardDetails].items = [.companyDescription(model: TitleDescrModel(title: cardDetails?.company?.name, descr: cardDetails?.description)),
                                                    .getInTouch,
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
                                                    .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),

@@ -58,8 +58,6 @@ enum Service {
     }
 
     struct DetailsViewModel {
-        var serviceID: Int
-        var cardID: Int
         var photos: [EditablePhotoListItem] = []
         var companyName: String?
         var companyAvatar: String?
