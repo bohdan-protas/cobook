@@ -19,6 +19,7 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
 
     func goToCreateService(presenter: CreateServicePresenter?)
+    func goToServiceDetails(presenter: ServiceDetailsPresenter?)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -105,13 +106,17 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         case .employee(let model):
             // TODO: - Add segue to card details VC
             break
+
         case .service(let model):
             switch model {
-            case .view(let model): break
+            case .view(let model):
+                let presenter = ServiceDetailsPresenter(serviceID: model.id ?? -1, cardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
+                view?.goToServiceDetails(presenter: presenter)
             case .add:
                 let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
                 view?.goToCreateService(presenter: presenter)
             }
+            
         default:
             break
         }
@@ -245,7 +250,7 @@ private extension BusinessCardDetailsPresenter {
         if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
             switch item {
             case .general:
-                dataSource?[.cardDetails].items = [.companyDescription(text: cardDetails?.description),
+                dataSource?[.cardDetails].items = [.companyDescription(model: TitleDescrModel(title: cardDetails?.company?.name, descr: cardDetails?.description)),
                                                    .getInTouch,
                                                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
                                                    .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),

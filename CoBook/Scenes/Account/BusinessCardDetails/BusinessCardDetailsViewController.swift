@@ -136,6 +136,12 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         push(controller: controller, animated: true)
     }
 
+    func goToServiceDetails(presenter: ServiceDetailsPresenter?) {
+        let controller: ServiceDetailsViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
 
 }
 

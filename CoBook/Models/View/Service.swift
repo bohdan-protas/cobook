@@ -46,11 +46,30 @@ enum Service {
     // MARK: - Details
 
     enum DetailsCell {
-
+        case companyHeader(model: CompanyPreviewHeaderModel)
+        case gallery
+        case getInTouch
+        case sectionSeparator
+        case serviceHeaderDescr(model: TitleDescrModel?)
+        case serviceDescription(model: TitleDescrModel?)
     }
 
     enum DetailsSectionAccessoryIndex: Int {
-        case header
+        case header, description
+    }
+
+    struct DetailsViewModel {
+        var title: String?
+        var photos: [EditablePhotoListItem] = []
+        var companyName: String?
+        var companyAvatar: String?
+        var serviceName: String?
+        var price: String?
+        var telephoneNumber: String?
+        var email: String?
+        var descriptionTitle: String?
+        var desctiptionBody: String?
+
     }
 
 
