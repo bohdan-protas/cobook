@@ -85,12 +85,12 @@ extension CreateServicePresenter {
     func updateService() {
         let creationParameters = UpdateServiceApiModel(serviceID: details.serviceID,
                                                        cardID: details.cardID,
-                                                       title: details.serviceName,
-                                                       header: details.descriptionTitle,
-                                                       description: details.desctiptionBody,
-                                                       priceDetails: details.price,
-                                                       contactTelephone: details.telephoneNumber,
-                                                       contactEmail: details.email,
+                                                       title: details.serviceName?.trimmingCharacters(in: .whitespaces),
+                                                       header: details.descriptionTitle?.trimmingCharacters(in: .whitespaces),
+                                                       description: details.desctiptionBody?.trimmingCharacters(in: .whitespaces),
+                                                       priceDetails: details.price?.trimmingCharacters(in: .whitespaces),
+                                                       contactTelephone: details.telephoneNumber?.trimmingCharacters(in: .whitespaces),
+                                                       contactEmail: details.email?.trimmingCharacters(in: .whitespaces),
                                                        photosIds: details.photos.compactMap {
                                                         switch $0 {
                                                         case .view(_ ,let imageID):
@@ -119,12 +119,12 @@ extension CreateServicePresenter {
     func createService() {
 
         let creationParameters = CreateServiceApiModel(cardID: details.cardID,
-                                                       title: details.serviceName,
-                                                       header: details.descriptionTitle,
-                                                       description: details.desctiptionBody,
-                                                       priceDetails: details.price,
-                                                       contactTelephone: details.telephoneNumber,
-                                                       contactEmail: details.email,
+                                                       title: details.serviceName?.trimmingCharacters(in: .whitespaces),
+                                                       header: details.descriptionTitle?.trimmingCharacters(in: .whitespaces),
+                                                       description: details.desctiptionBody?.trimmingCharacters(in: .whitespaces),
+                                                       priceDetails: details.price?.trimmingCharacters(in: .whitespaces),
+                                                       contactTelephone: details.telephoneNumber?.trimmingCharacters(in: .whitespaces),
+                                                       contactEmail: details.email?.trimmingCharacters(in: .whitespaces),
                                                        photosIds: details.photos.compactMap {
                                                         switch $0 {
                                                         case .view(_ ,let imageID):
