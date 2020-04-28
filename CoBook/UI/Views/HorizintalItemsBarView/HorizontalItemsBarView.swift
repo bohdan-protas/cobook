@@ -107,6 +107,17 @@ extension HorizontalItemsBarView: UICollectionViewDataSource {
 
 }
 
+
+extension HorizontalItemsBarView: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var width = dataSource[indexPath.item].title?.width(withConstrainedHeight: collectionView.frame.height, font: UIFont.SFProDisplay_Regular(size: 14)) ?? 0
+        width += 20
+        return CGSize(width: width, height: collectionView.frame.height)
+    }
+
+}
+
 // MARK: - UICollectionViewDelegate
 
 extension HorizontalItemsBarView: UICollectionViewDelegate {
