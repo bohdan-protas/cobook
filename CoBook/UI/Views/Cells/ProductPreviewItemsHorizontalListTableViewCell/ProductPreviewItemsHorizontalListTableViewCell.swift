@@ -9,12 +9,18 @@
 import UIKit
 
 
+protocol ProductPreviewItemsHorizontalListDelegate: class {
+    func productPreviewItemsHorizontalList(_ view: ProductPreviewItemsHorizontalListTableViewCell, didSelectItem item: ProductPreviewItemModel)
+}
+
 class ProductPreviewItemsHorizontalListTableViewCell: UITableViewCell {
 
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
 
     var dataSource: [ProductPreviewItemModel] = []
+
+    weak var delegate: ProductPreviewItemsHorizontalListDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,9 +35,19 @@ class ProductPreviewItemsHorizontalListTableViewCell: UITableViewCell {
     
 }
 
+// MARK: - UICollectionViewDelegate
+
 extension ProductPreviewItemsHorizontalListTableViewCell: UICollectionViewDelegate {
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Log.debug(indexPath)
+        delegate?.productPreviewItemsHorizontalList(self, didSelectItem: dataSource[indexPath.item])
+    }
+
+
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension ProductPreviewItemsHorizontalListTableViewCell: UICollectionViewDataSource {
 

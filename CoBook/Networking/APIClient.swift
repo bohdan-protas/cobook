@@ -522,5 +522,14 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    @discardableResult
+    func getProductDetails(productID: Int,
+                           completion: @escaping (Result<ProductDetailsApiModel?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ProductEndpoint.getDetails(productID: productID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
 
 }

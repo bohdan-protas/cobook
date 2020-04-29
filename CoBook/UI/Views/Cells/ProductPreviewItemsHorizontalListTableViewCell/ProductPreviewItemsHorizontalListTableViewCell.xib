@@ -63,9 +63,9 @@
                             <constraint firstAttribute="trailing" secondItem="WJ2-Fb-KMA" secondAttribute="trailing" constant="16" id="xTc-hw-vfv"/>
                         </constraints>
                     </view>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jhB-wN-cZJ">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jhB-wN-cZJ">
                         <rect key="frame" x="0.0" y="52" width="425" height="234"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="234" id="sdf-mP-beB"/>
                         </constraints>

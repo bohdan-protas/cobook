@@ -97,6 +97,11 @@ struct ProductPreviewItemModel {
     var name: String?
     var price: String?
     var image: String?
+    var productID: Int
+    var cardID: Int
+    var companyName: String?
+    var companyAvatar: String?
+    var isUserOwner: Bool
 }
 
 

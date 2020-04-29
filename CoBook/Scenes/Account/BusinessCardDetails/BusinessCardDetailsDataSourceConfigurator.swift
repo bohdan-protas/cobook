@@ -262,6 +262,7 @@ extension BusinessCardDetailsPresenter {
 
             // productSectionConfigurator
             configurator.productSectionConfigurator = CellConfigurator { (cell, model: ProductPreviewSectionModel, tableView, indexPath) -> ProductPreviewItemsHorizontalListTableViewCell in
+                cell.delegate = self
                 cell.headerLabel.text = model.headerTitle
                 cell.dataSource = model.productPreviewItems
                 cell.collectionView.reloadData()

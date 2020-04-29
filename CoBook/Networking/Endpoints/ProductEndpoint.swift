@@ -13,6 +13,7 @@ enum ProductEndpoint: Endpoint {
     case create(parameters: CreateProductApiModel)
     case update(parameters: UpdateProductApiModel)
     case list(cardID: Int, limit: Int?, offset: Int?)
+    case getDetails(productID: Int)
 
     var useAuthirizationToken: Bool {
         return true
@@ -26,6 +27,8 @@ enum ProductEndpoint: Endpoint {
             return .put
         case .list:
             return .post
+        case .getDetails:
+            return .get
         }
     }
 
@@ -35,12 +38,14 @@ enum ProductEndpoint: Endpoint {
             return "/products"
         case .list:
             return "/products/list"
+        case .getDetails(let productID):
+            return "/products/\(productID)"
         }
     }
 
     var parameters: Parameters? {
-        switch self {
 
+        switch self {
         case .create(let parameters):
             return parameters.dictionary
 
@@ -57,6 +62,9 @@ enum ProductEndpoint: Endpoint {
                 params["offset"] = offset
             }
             return params
+
+        case .getDetails:
+            return nil
         }
     }
 
