@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+struct ProductPreviewItemModel {
+
+    
+
+}
+

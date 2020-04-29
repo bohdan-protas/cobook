@@ -163,19 +163,19 @@ private extension BusinessCardDetailsPresenter {
         // Fetch card details
         group.enter()
         APIClient.default.getCardInfo(id: businessCardId) { [weak self] (result) in
-            group.leave()
             switch result {
             case let .success(response):
                 self?.cardDetails = response
+                group.leave()
             case let .failure(error):
                 errors.append(error)
+                group.leave()
             }
         }
 
         // Fetch employeeList
         group.enter()
         APIClient.default.employeeList(cardId: businessCardId) { [weak self] (result) in
-            group.leave()
             switch result {
             case let .success(response):
                 self?.employee = response?.compactMap { EmployeeModel(userId: $0.userId,
@@ -186,18 +186,18 @@ private extension BusinessCardDetailsPresenter {
                                                                       position: $0.position,
                                                                       telephone: $0.telephone?.number,
                                                                       practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) } ?? []
+                group.leave()
             case let .failure(error):
                 errors.append(error)
+                group.leave()
             }
         }
 
-        // Fetch Services list
+        // fetch services
         group.enter()
         APIClient.default.getServiceList(cardID: businessCardId) { [weak self] (result) in
-            group.leave()
             switch result {
             case .success(let response):
-
                 self?.services = response?.compactMap { Service.PreviewModel(id: $0.id,
                                                                              name: $0.title,
                                                                              avatarPath: $0.avatar?.sourceUrl,
@@ -206,8 +206,23 @@ private extension BusinessCardDetailsPresenter {
                                                                              descriptionHeader: $0.description,
                                                                              contactTelephone: $0.contactTelephone?.number,
                                                                              contactEmail: $0.contactEmail?.address) } ?? []
+                group.leave()
             case .failure(let error):
                 errors.append(error)
+                group.leave()
+            }
+        }
+
+        // fetch products
+        group.enter()
+        APIClient.default.getProductList(cardID: businessCardId) { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                dump(response)
+                group.leave()
+            case .failure(let error):
+                errors.append(error)
+                group.leave()
             }
         }
 

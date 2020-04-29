@@ -512,5 +512,15 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    @discardableResult
+    func getProductList(cardID: Int,
+                        limit: Int? = nil,
+                        offset: Int? = nil,
+                        completion: @escaping (Result<[ProductPreviewApiModel]?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ProductEndpoint.list(cardID: cardID, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 }
