@@ -101,6 +101,36 @@
             </objects>
             <point key="canvasLocation" x="2797.5999999999999" y="235.23238380809596"/>
         </scene>
+        <!--Create Product View Controller-->
+        <scene sceneID="vSV-1B-qP7">
+            <objects>
+                <viewController storyboardIdentifier="CreateProductViewController" id="LeI-CT-29S" customClass="CreateProductViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MzU-Da-8q7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="31Y-hN-gok">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="31Y-hN-gok" firstAttribute="top" secondItem="Hrf-HG-VL6" secondAttribute="top" id="6Pw-C9-A4I"/>
+                            <constraint firstItem="31Y-hN-gok" firstAttribute="trailing" secondItem="Hrf-HG-VL6" secondAttribute="trailing" id="ECw-JI-dTa"/>
+                            <constraint firstItem="31Y-hN-gok" firstAttribute="bottom" secondItem="Hrf-HG-VL6" secondAttribute="bottom" id="Qjh-Ru-gUU"/>
+                            <constraint firstItem="31Y-hN-gok" firstAttribute="leading" secondItem="Hrf-HG-VL6" secondAttribute="leading" id="cQq-Ag-yeT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hrf-HG-VL6"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="31Y-hN-gok" id="NK9-TC-SOs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pYs-WY-EAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3832.8000000000002" y="235.23238380809596"/>
+        </scene>
         <!--Create Personal Card View Controller-->
         <scene sceneID="IAu-Gg-hD5">
             <objects>

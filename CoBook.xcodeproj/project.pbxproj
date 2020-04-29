@@ -32,6 +32,11 @@
 		B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */; };
 		B82248E4242C106D00392D10 /* SectionHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */; };
 		B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */; };
+		B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7002458B5A100883BE8 /* CreateProductViewController.swift */; };
+		B822D7042458B5B700883BE8 /* CreateProductPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7032458B5B700883BE8 /* CreateProductPresenter.swift */; };
+		B822D7062458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7052458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift */; };
+		B822D7092458B5EF00883BE8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7082458B5EF00883BE8 /* Product.swift */; };
+		B822D70B2458B60000883BE8 /* CreateProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D70A2458B60000883BE8 /* CreateProduct.swift */; };
 		B8237F38244740F80006E8D1 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */; };
 		B8237F39244740F80006E8D1 /* ContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */; };
 		B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6A723FD34A0007540D0 /* Array + Extensions.swift */; };
@@ -295,6 +300,11 @@
 		B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
+		B822D7002458B5A100883BE8 /* CreateProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductViewController.swift; sourceTree = "<group>"; };
+		B822D7032458B5B700883BE8 /* CreateProductPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductPresenter.swift; sourceTree = "<group>"; };
+		B822D7052458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductDataSourceConfigurator.swift; sourceTree = "<group>"; };
+		B822D7082458B5EF00883BE8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		B822D70A2458B60000883BE8 /* CreateProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProduct.swift; sourceTree = "<group>"; };
 		B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsTableViewCell.xib; sourceTree = "<group>"; };
 		B823A6A723FD34A0007540D0 /* Array + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Extensions.swift"; sourceTree = "<group>"; };
@@ -649,6 +659,7 @@
 				B823B091242D3D390012529D /* CreateBusinessCard */,
 				B8A3B09E24507D30007C4F05 /* CreateService */,
 				B82B4D55245667FC0061A98B /* ServiceDetails */,
+				B822D6FF2458B54E00883BE8 /* CreateProduct */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -680,6 +691,16 @@
 				B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */,
 			);
 			path = SectionHeaderTableViewCell;
+			sourceTree = "<group>";
+		};
+		B822D6FF2458B54E00883BE8 /* CreateProduct */ = {
+			isa = PBXGroup;
+			children = (
+				B822D7002458B5A100883BE8 /* CreateProductViewController.swift */,
+				B822D7032458B5B700883BE8 /* CreateProductPresenter.swift */,
+				B822D7052458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift */,
+			);
+			path = CreateProduct;
 			sourceTree = "<group>";
 		};
 		B8237F35244740CE0006E8D1 /* ContactsTableViewCell */ = {
@@ -1099,6 +1120,8 @@
 				B8970B4824505763006676DF /* Service.swift */,
 				B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */,
 				B82B4D47245645840061A98B /* ServiceModel.swift */,
+				B822D7082458B5EF00883BE8 /* Product.swift */,
+				B822D70A2458B60000883BE8 /* CreateProduct.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1804,8 +1827,10 @@
 				B824E1B42437C5940091C491 /* CreatePersonalCardParametersApiModel.swift in Sources */,
 				B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */,
 				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
+				B822D7042458B5B700883BE8 /* CreateProductPresenter.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
+				B822D7062458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift in Sources */,
 				B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
 				B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */,
@@ -1849,6 +1874,7 @@
 				B8A3B0A224507D65007C4F05 /* CreateServicePresenter.swift in Sources */,
 				B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */,
 				B8237F38244740F80006E8D1 /* ContactsTableViewCell.swift in Sources */,
+				B822D70B2458B60000883BE8 /* CreateProduct.swift in Sources */,
 				B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				B82B4D4E245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.swift in Sources */,
 				B823A6B823FDBC92007540D0 /* Collection + Extensions.swift in Sources */,
@@ -1935,6 +1961,7 @@
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
+				B822D7092458B5EF00883BE8 /* Product.swift in Sources */,
 				B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */,
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
@@ -1942,6 +1969,7 @@
 				B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */,
 				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
+				B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,
 				B8249249243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift in Sources */,
