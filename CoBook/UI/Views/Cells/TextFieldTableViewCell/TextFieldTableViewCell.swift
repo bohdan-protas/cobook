@@ -10,7 +10,6 @@ import UIKit
 
 protocol TextFieldTableViewCellDelegate: class {
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?)
-
 }
 
 extension TextFieldTableViewCellDelegate {

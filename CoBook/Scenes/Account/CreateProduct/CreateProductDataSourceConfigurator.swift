@@ -17,6 +17,7 @@ struct CreateProductDataSourceConfigurator: CellConfiguratorType {
     var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
     var checkboxConfigurator: CellConfigurator<CheckboxModel, CheckboxTableViewCell>?
     var companyHeaderConfigurator: CellConfigurator<CompanyPreviewHeaderModel, CompanyPreviewHeaderTableViewCell>?
+    var actionFieldConfigurator: CellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
 
     func reuseIdentifier(for item: CreateProduct.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -34,6 +35,8 @@ struct CreateProductDataSourceConfigurator: CellConfiguratorType {
             return checkboxConfigurator?.reuseIdentifier ?? ""
         case .companyHeader:
             return companyHeaderConfigurator?.reuseIdentifier ?? ""
+        case .actionField:
+            return actionFieldConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -53,6 +56,8 @@ struct CreateProductDataSourceConfigurator: CellConfiguratorType {
             return checkboxConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .companyHeader(let model):
             return companyHeaderConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .actionField(let model):
+            return actionFieldConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -64,6 +69,7 @@ struct CreateProductDataSourceConfigurator: CellConfiguratorType {
         textViewConfigurator?.registerCells(in: tableView)
         checkboxConfigurator?.registerCells(in: tableView)
         companyHeaderConfigurator?.registerCells(in: tableView)
+        actionFieldConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -132,6 +138,23 @@ extension CreateProductPresenter {
             configurator.companyHeaderConfigurator = CellConfigurator { (cell, model: CompanyPreviewHeaderModel, tableView, indexPath) -> CompanyPreviewHeaderTableViewCell in
                 cell.avatarImageView.setImage(withPath: model.image)
                 cell.nameLabel.text = model.title
+                return cell
+            }
+
+            // actionFieldConfigurator
+            configurator.actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+                cell.delegate = self
+                cell.dataSource = self
+                cell.textField.text = model.text
+                cell.textField.placeholder = model.placeholder
+                cell.actionIdentifier = model.actionTypeId
+
+                if let action = CreateProduct.ActionType(rawValue: model.actionTypeId ?? "") {
+                    switch action {
+                    case .showroomNumber:
+                        cell.textField.inputView = cell.pickerView
+                    }
+                }
                 return cell
             }
 

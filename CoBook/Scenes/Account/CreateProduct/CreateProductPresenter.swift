@@ -21,9 +21,9 @@ class CreateProductPresenter: NSObject, BasePresenter {
     /// Managed view
     weak var view: CreateProductView?
 
-    /// View data source
+    /// data source
     private var dataSource: DataSource<CreateProductDataSourceConfigurator>?
-
+    private var showRoomNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
     private var details: CreateProduct.DetailsModel {
         didSet {
             validateInput()
@@ -77,6 +77,14 @@ class CreateProductPresenter: NSObject, BasePresenter {
 
 extension CreateProductPresenter {
 
+    func createProduct() {
+
+    }
+
+    func updateProduct() {
+
+    }
+
     func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageID: String?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
             view?.errorAlert(message: "Помилка завантаження фото")
@@ -128,6 +136,8 @@ private extension CreateProductPresenter {
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
             .textField(model: TextFieldModel(text: details.productName, placeholder: "Назва товару", associatedKeyPath: \CreateProduct.DetailsModel.productName, keyboardType: .default)),
+            .title(text: "Номер Show room:"),
+            .actionField(model: ActionFieldModel(text: details.productShowRoom, placeholder: "Show room", actionTypeId: CreateProduct.ActionType.showroomNumber.rawValue)),
             .title(text: "Вартість послуги:"),
             .textField(model: TextFieldModel(isEnabled: !details.isContractPrice,
                                              text: details.price,
@@ -187,6 +197,17 @@ private extension CreateProductPresenter {
 
 }
 
+// MARK: - TextFieldTableViewCellDataSource
+
+extension CreateProductPresenter: TextFieldTableViewCellDataSource {
+
+    var pickerList: [String] {
+        return showRoomNumbers
+    }
+
+
+}
+
 // MARK: - TextFieldTableViewCellDelegate
 
 extension CreateProductPresenter: TextFieldTableViewCellDelegate {
@@ -196,6 +217,17 @@ extension CreateProductPresenter: TextFieldTableViewCellDelegate {
             return
         }
         details[keyPath: keyPath] = text
+    }
+
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {
+        guard let action = CreateProduct.ActionType.init(rawValue: identifier ?? "") else {
+            return
+        }
+
+        switch action {
+        case .showroomNumber:
+            details.productShowRoom = cell.textField.text
+        }
     }
 
 

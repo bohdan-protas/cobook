@@ -16,8 +16,13 @@ enum CreateProduct {
         case sectionSeparator
         case title(text: String)
         case textField(model: TextFieldModel)
+        case actionField(model: ActionFieldModel)
         case textView(model: TextFieldModel)
         case checkbox(model: CheckboxModel)
+    }
+
+    enum ActionType: String {
+        case showroomNumber
     }
 
     enum SectionAccessoryIndex: Int {
@@ -33,6 +38,7 @@ enum CreateProduct {
         var companyName: String?
         var companyAvatar: String?
         var productName: String?
+        var productShowRoom: String?
         var price: String?
         var isUseContactsFromSite: Bool = false
         var telephoneNumber: String?
