@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import GooglePlaces
 import GoogleMaps
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Google services setup
         GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
+
+        // Firebase configuration
+        FirebaseApp.configure()
 
         // App appearance setup
         /// Clear saved data in keychain if user reinstalled app

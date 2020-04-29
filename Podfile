@@ -1,4 +1,4 @@
-platform :ios, '11.0'
+platform :ios, '11.4'
 
 target 'CoBook' do
   use_frameworks!
@@ -11,4 +11,9 @@ target 'CoBook' do
   pod 'GoogleMaps'
   pod 'SwiftSoup'
   pod 'CropViewController'
+
+  # add the Firebase pod for Google Analytics
+  pod 'Firebase/Analytics'
+  pod 'Firebase/DynamicLinks'
+
 end
