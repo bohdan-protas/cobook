@@ -257,7 +257,7 @@ private extension CreateProductPresenter {
         // description section
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,
-            .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "Заголовок послуги", associatedKeyPath: \CreateProduct.DetailsModel.descriptionTitle, keyboardType: .default)),
+            .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "Заголовок товару", associatedKeyPath: \CreateProduct.DetailsModel.descriptionTitle, keyboardType: .default)),
             .textView(model: TextFieldModel(text: details.desctiptionBody, placeholder: "Опис товару", associatedKeyPath: \CreateProduct.DetailsModel.desctiptionBody, keyboardType: .default))
         ]
 

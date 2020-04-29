@@ -20,7 +20,6 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
 
     func goToCreateService(presenter: CreateServicePresenter?)
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
-
     func goToCreateProduct(presenter: CreateProductPresenter?)
 }
 
@@ -38,6 +37,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
+    private var products: [ProductPreviewSectionModel] = []
 
     /// View datasource
     private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
@@ -54,7 +54,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.barItems = [
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.goods.rawValue, title: "Крамниця"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "Крамниця"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
         ]
@@ -120,11 +120,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
                 view?.goToCreateService(presenter: presenter)
             }
 
-        case .addGoods:
+        case .addProduct:
             let presenter = CreateProductPresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
             view?.goToCreateProduct(presenter: presenter)
 
-            
         default:
             break
         }
@@ -218,7 +217,15 @@ private extension BusinessCardDetailsPresenter {
         APIClient.default.getProductList(cardID: businessCardId) { [weak self] (result) in
             switch result {
             case .success(let response):
-                dump(response)
+                self?.products.removeAll()
+                let previewItems = response?.compactMap { ProductPreviewItemModel(showroom: $0.showroom, name: $0.title, price: $0.price ?? "Ціна договірна", image: $0.image?.sourceUrl) } ?? []
+                let groupedItems = Dictionary(grouping: previewItems, by: { $0.showroom })
+                groupedItems.enumerated().forEach {
+                    self?.products.append(ProductPreviewSectionModel(showroom: $0.element.key, headerTitle: "Show room \($0.element.key)", productPreviewItems: $0.element.value))
+                }
+                self!.products.sort {
+                    $0.showroom < $1.showroom
+                }
                 group.leave()
             case .failure(let error):
                 errors.append(error)
@@ -299,8 +306,12 @@ private extension BusinessCardDetailsPresenter {
                 let previews: [BusinessCardDetails.Cell] = services.compactMap { BusinessCardDetails.Cell.service(model: .view(model: $0)) }
                 dataSource?[.cardDetails].items.append(contentsOf: previews)
 
-            case .goods:
-                dataSource?[.cardDetails].items.append(.addGoods)
+            case .products:
+                if isUserOwner {
+                    dataSource?[.cardDetails].items.append(.addProduct)
+                }
+                let previews: [BusinessCardDetails.Cell] = products.compactMap { BusinessCardDetails.Cell.productSection(model: $0) }
+                dataSource?[.cardDetails].items.append(contentsOf: previews)
             }
         }
     }

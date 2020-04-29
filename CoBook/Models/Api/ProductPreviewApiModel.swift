@@ -10,13 +10,13 @@ import Foundation
 
 
 struct ProductPreviewApiModel: Decodable {
-    var id: Int?
+    var id: Int
+    var showroom: Int
     var title: String?
     var image: FileDataApiModel?
     var descrTitle: String?
     var descrBody: String?
     var price: String?
-    var showroom: Int?
     var contactTelephone: TelephoneApiModel?
     var contactEmail: EmailApiModel?
 

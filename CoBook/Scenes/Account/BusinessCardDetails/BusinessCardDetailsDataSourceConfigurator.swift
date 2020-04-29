@@ -23,7 +23,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var employeeCellConfigurator: CellConfigurator<EmployeeModel?, CardItemTableViewCell>?
     var contactsCellConfigurator: CellConfigurator<ContactsModel?, ContactsTableViewCell>?
     var serviceItemCellConfigurator: CellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>?
-    var addGoodsConfigurator: CellConfigurator<Void?, ServiceListItemTableViewCell>?
+    var addProductConfigurator: CellConfigurator<Void?, ServiceListItemTableViewCell>?
+    var productSectionConfigurator: CellConfigurator<ProductPreviewSectionModel, ProductPreviewItemsHorizontalListTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -53,8 +54,10 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return contactsCellConfigurator?.reuseIdentifier ?? ""
         case .service:
             return serviceItemCellConfigurator?.reuseIdentifier ?? ""
-        case .addGoods:
-            return addGoodsConfigurator?.reuseIdentifier ?? ""
+        case .addProduct:
+            return addProductConfigurator?.reuseIdentifier ?? ""
+        case .productSection:
+            return productSectionConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -62,30 +65,46 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         switch item {
         case .sectionHeader:
             return sectionHeaderConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .userInfo(let model):
             return headerInfoCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .getInTouch:
             return getInTouchCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .socialList:
             return socialListConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .addressInfo(let model):
             return addressInfoCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .map(let path):
             return mapCellConfigurator?.configuredCell(for: path, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .mapDirection:
             return mapDirectionCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .companyDescription(let model):
             return expandableDescriptionCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .title(let text):
             return sectionTitleConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .employee(let model):
             return employeeCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .contacts(let model):
             return contactsCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .service(let model):
             return serviceItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
-        case .addGoods:
-            return addGoodsConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
+        case .addProduct:
+            return addProductConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
+        case .productSection(let model):
+            return productSectionConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         }
     }
 
@@ -102,7 +121,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         employeeCellConfigurator?.registerCells(in: tableView)
         contactsCellConfigurator?.registerCells(in: tableView)
         serviceItemCellConfigurator?.registerCells(in: tableView)
-        addGoodsConfigurator?.registerCells(in: tableView)
+        addProductConfigurator?.registerCells(in: tableView)
+        productSectionConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -233,10 +253,18 @@ extension BusinessCardDetailsPresenter {
             }
 
             // addGoodsConfigurator
-            configurator.addGoodsConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> ServiceListItemTableViewCell in
+            configurator.addProductConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> ServiceListItemTableViewCell in
                 cell.titleLabel.text = "Додати товар"
                 cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
                 cell.subtitleLabel.isHidden = true
+                return cell
+            }
+
+            // productSectionConfigurator
+            configurator.productSectionConfigurator = CellConfigurator { (cell, model: ProductPreviewSectionModel, tableView, indexPath) -> ProductPreviewItemsHorizontalListTableViewCell in
+                cell.headerLabel.text = model.headerTitle
+                cell.dataSource = model.productPreviewItems
+                cell.collectionView.reloadData()
                 return cell
             }
 
