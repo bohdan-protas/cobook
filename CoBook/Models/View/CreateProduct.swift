@@ -27,7 +27,19 @@ enum CreateProduct {
     }
 
     struct DetailsModel {
-
+        var serviceID: Int?
+        var cardID: Int
+        var photos: [EditablePhotoListItem] = []
+        var companyName: String?
+        var companyAvatar: String?
+        var productName: String?
+        var price: String?
+        var isUseContactsFromSite: Bool = false
+        var telephoneNumber: String?
+        var email: String?
+        var isContractPrice: Bool = false
+        var descriptionTitle: String?
+        var desctiptionBody: String?
     }
 
 

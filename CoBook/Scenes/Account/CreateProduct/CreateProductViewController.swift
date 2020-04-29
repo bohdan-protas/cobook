@@ -13,7 +13,7 @@ fileprivate enum Layout {
     static let footerHeight: CGFloat = 124
 }
 
-class CreateProductViewController: BaseViewController, CreateServiceView {
+class CreateProductViewController: BaseViewController, CreateProductView {
 
     @IBOutlet var tableView: UITableView!
 
@@ -50,7 +50,9 @@ class CreateProductViewController: BaseViewController, CreateServiceView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupLayout()
+        presenter?.attachView(self)
+        presenter?.onViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,7 +75,7 @@ class CreateProductViewController: BaseViewController, CreateServiceView {
         tableView.reloadData()
     }
 
-    func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?) {
+    func set(dataSource: DataSource<CreateProductDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 
@@ -96,7 +98,7 @@ class CreateProductViewController: BaseViewController, CreateServiceView {
 
 // MARK: - Privates
 
-private extension CreateServiceViewController {
+private extension CreateProductViewController {
 
     func setupLayout() {
         self.navigationItem.title = "Товар компанії"
@@ -125,16 +127,26 @@ extension CreateProductViewController: UITableViewDelegate {
 
 extension CreateProductViewController: HorizontalPhotosListDelegate {
 
-    func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell) {
-
-    }
-
     func didUpdatePhoto(_ cell: HorizontalPhotosListTableViewCell, at indexPath: IndexPath) {
-
+        self.imagePicker.onImagePicked = { image in
+            self.presenter?.uploadImage(image: image) { (imagePath, imageID) in
+                cell.updateAt(indexPath: indexPath, with: .view(imagePath: imagePath, imageID: imageID))
+            }
+        }
+        self.imagePicker.present()
     }
 
     func didDeletePhoto(_ cell: HorizontalPhotosListTableViewCell, at indexPath: IndexPath) {
+        cell.deleteAt(indexPath: indexPath)
+    }
 
+    func didAddNewPhoto(_ cell: HorizontalPhotosListTableViewCell) {
+        self.imagePicker.onImagePicked = { image in
+            self.presenter?.uploadImage(image: image) { (imagePath, imageID) in
+                cell.create(socialListItem: .view(imagePath: imagePath, imageID: imageID))
+            }
+        }
+        self.imagePicker.present()
     }
 
 

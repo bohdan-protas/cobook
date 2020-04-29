@@ -20,6 +20,8 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
 
     func goToCreateService(presenter: CreateServicePresenter?)
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
+
+    func goToCreateProduct(presenter: CreateProductPresenter?)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -119,7 +121,9 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             }
 
         case .addGoods:
-            break
+            let presenter = CreateProductPresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
+            view?.goToCreateProduct(presenter: presenter)
+
             
         default:
             break
