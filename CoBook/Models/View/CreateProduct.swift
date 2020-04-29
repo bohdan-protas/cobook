@@ -32,7 +32,7 @@ enum CreateProduct {
     }
 
     struct DetailsModel {
-        var serviceID: Int?
+        var productID: Int?
         var cardID: Int
         var photos: [EditablePhotoListItem] = []
         var companyName: String?

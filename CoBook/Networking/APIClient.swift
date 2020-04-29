@@ -12,7 +12,8 @@ import AlamofireImage
 
 class APIClient {
 
-    // MARK: Properties
+    // MARK: - Properties
+
     public static var `default`: APIClient = {
         let evaluators = [APIConstants.baseURLPath.host ?? "": DisabledEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
@@ -27,7 +28,8 @@ class APIClient {
 
     private var session: Session
 
-    // MARK: Initializer
+    // MARK: - Initializer
+
     private init(session: Session) {
 
         ImageResponseSerializer.addAcceptableImageContentTypes(APIConstants.additionalAcceptableImageContentTypes)
@@ -126,6 +128,7 @@ class APIClient {
 }
 
 // MARK: - Sign Up requests
+
 extension APIClient {
 
     /**
@@ -197,6 +200,7 @@ extension APIClient {
 }
 
 // MARK: - Sign In requests
+
 extension APIClient {
     /**
      Login request.
@@ -216,6 +220,7 @@ extension APIClient {
 }
 
 // MARK: - Auth requests
+
 extension APIClient {
 
     /**
@@ -247,6 +252,7 @@ extension APIClient {
 }
 
 // MARK: - InterestsEndpoint requests
+
 extension APIClient {
 
     /**
@@ -261,6 +267,7 @@ extension APIClient {
 }
 
 // MARK: - PracticeTypesEndpoint request
+
 extension APIClient {
 
     /**
@@ -276,6 +283,7 @@ extension APIClient {
 }
 
 // MARK: - CardsEndpoint requests
+
 extension APIClient {
     /**
      Request updaet business card
@@ -375,6 +383,7 @@ extension APIClient {
 }
 
 // MARK: - ContentManagerEndpoint requests
+
 extension APIClient {
 
     /**
@@ -397,6 +406,7 @@ extension APIClient {
 }
 
 // MARK: - ProfileEndpoint requests
+
 extension APIClient {
 
     /**
@@ -415,6 +425,7 @@ extension APIClient {
 }
 
 // MARK: - UsersEndpoint requests
+
 extension APIClient {
 
     @discardableResult
@@ -475,6 +486,29 @@ extension APIClient {
                            completion: @escaping (Result<ServiceDetailsApiModel?, Error>) -> Void) -> DataRequest {
 
         let endpoint = ServicesEndpoint.getDetails(serviceID: serviceID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
+}
+
+// MARK: Products requests
+
+extension APIClient {
+
+    @discardableResult
+    func createProduct(with parameters: CreateProductApiModel,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ProductEndpoint.create(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func updateProduct(with parameters: UpdateProductApiModel,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ProductEndpoint.update(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

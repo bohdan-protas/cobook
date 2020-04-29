@@ -373,6 +373,7 @@ extension CreateBusinessCardPresenter: EmployersPreviewHorizontalListTableViewCe
 }
 
 // MARK: - CardBackgroundManagmentTableViewCellDelegate
+
 extension CreateBusinessCardPresenter: SearchTableViewCellDelegate {
 
     func onSearchTapped(_ cell: SearchTableViewCell) {

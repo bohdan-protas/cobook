@@ -31,6 +31,7 @@ class CreateProductPresenter: NSObject, BasePresenter {
         }
     }
 
+    /// flag indicator for current state(editing&creating)
     fileprivate var isEditing: Bool
 
     // MARK: - Object Life Cycle
@@ -79,10 +80,74 @@ extension CreateProductPresenter {
 
     func createProduct() {
 
+        /// api create  parameters
+        let parameters = CreateProductApiModel(cardID: details.cardID,
+                                               title: details.productName?.trimmingCharacters(in: .whitespaces),
+                                               header: details.descriptionTitle?.trimmingCharacters(in: .whitespaces),
+                                               description: details.desctiptionBody?.trimmingCharacters(in: .whitespaces),
+                                               priceDetails: details.price?.trimmingCharacters(in: .whitespaces),
+                                               contactTelephone: details.telephoneNumber?.trimmingCharacters(in: .whitespaces),
+                                               contactEmail: details.email?.trimmingCharacters(in: .whitespaces),
+                                               photosIds: details.photos.compactMap {
+                                                switch $0 {
+                                                case .view(_ ,let imageID):
+                                                    return imageID
+                                                default:
+                                                    return nil
+                                                }},
+                                               showroom: Int(details.productShowRoom ?? ""))
+
+        /// api create request
+        view?.startLoading(text: "Створення...")
+        APIClient.default.createProduct(with: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case .failure(let error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
     func updateProduct() {
+        /// Creating paramenters for api
+        let parameters = UpdateProductApiModel(productID: details.productID,
+                                               cardID: details.cardID,
+                                               title: details.productName?.trimmingCharacters(in: .whitespaces),
+                                               header: details.descriptionTitle?.trimmingCharacters(in: .whitespaces),
+                                               description: details.desctiptionBody?.trimmingCharacters(in: .whitespaces),
+                                               priceDetails: details.price?.trimmingCharacters(in: .whitespaces),
+                                               contactTelephone: details.telephoneNumber?.trimmingCharacters(in: .whitespaces),
+                                               contactEmail: details.email?.trimmingCharacters(in: .whitespaces),
+                                               photosIds: details.photos.compactMap {
+                                                switch $0 {
+                                                case .view(_ ,let imageID):
+                                                    return imageID
+                                                default:
+                                                    return nil
+                                                }},
+                                               showroom: Int(details.productShowRoom ?? ""))
 
+        /// api update request
+        view?.startLoading(text: "Оновлення...")
+        APIClient.default.updateProduct(with: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    AppStorage.State.isNeedToUpdateAccountData = true
+                    strongSelf.view?.popController()
+                })
+            case .failure(let error):
+                strongSelf.view?.stopLoading()
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
     func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageID: String?) -> Void)?) {
@@ -123,6 +188,7 @@ private extension CreateProductPresenter {
             return
                 !details.photos.isEmpty &&
                 !(details.productName ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(details.productShowRoom ?? "").trimmingCharacters(in: .whitespaces).isEmpty &&
                 (!(details.price ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty || details.isContractPrice) &&
                 !(details.email ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(details.descriptionTitle ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
@@ -132,6 +198,7 @@ private extension CreateProductPresenter {
     }
 
     func updateViewDataSource() {
+        // Header section
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
@@ -154,6 +221,7 @@ private extension CreateProductPresenter {
             })),
         ]
 
+        // contacts section
         dataSource?[Service.CreationSectionAccessoryIndex.contacts].items = [
             .sectionSeparator,
             .title(text: "Контактні дані:"),
@@ -186,6 +254,7 @@ private extension CreateProductPresenter {
             )
         }
 
+        // description section
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,
             .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "Заголовок послуги", associatedKeyPath: \CreateProduct.DetailsModel.descriptionTitle, keyboardType: .default)),

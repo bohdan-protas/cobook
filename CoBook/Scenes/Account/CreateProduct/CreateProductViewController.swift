@@ -22,7 +22,7 @@ class CreateProductViewController: BaseViewController, CreateProductView {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.saveButton.setTitle("Зберегти товар", for: .normal)
         view.onSaveTapped = { [weak self] in
-
+            self?.presenter?.createProduct()
         }
         return view
     }()
@@ -32,7 +32,7 @@ class CreateProductViewController: BaseViewController, CreateProductView {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.saveButton.setTitle("Оновити товар", for: .normal)
         view.onSaveTapped = { [weak self] in
-
+            self?.presenter?.updateProduct()
         }
         return view
     }()

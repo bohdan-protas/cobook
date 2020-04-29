@@ -273,6 +273,8 @@ extension CreateServicePresenter: TextFieldTableViewCellDelegate {
         details[keyPath: keyPath] = text
     }
 
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didOccuredAction identifier: String?) {}
+
 
 }
 
