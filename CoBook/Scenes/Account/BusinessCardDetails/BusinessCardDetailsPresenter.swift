@@ -20,6 +20,8 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
 
     func goToCreateService(presenter: CreateServicePresenter?)
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
+    func goToCreateProduct(presenter: CreateProductPresenter?)
+    func goToProductDetails(presenter: ProductDetailsPresenter?)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -36,6 +38,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
+    private var products: [ProductPreviewSectionModel] = []
 
     /// View datasource
     private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
@@ -52,6 +55,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.barItems = [
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "Крамниця"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
         ]
@@ -116,7 +120,14 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
                 let presenter = CreateServicePresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
                 view?.goToCreateService(presenter: presenter)
             }
-            
+
+        case .addProduct:
+            let presenter = CreateProductPresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
+            view?.goToCreateProduct(presenter: presenter)
+
+        case .productSection(let model):
+            break
+
         default:
             break
         }
@@ -155,19 +166,19 @@ private extension BusinessCardDetailsPresenter {
         // Fetch card details
         group.enter()
         APIClient.default.getCardInfo(id: businessCardId) { [weak self] (result) in
-            group.leave()
             switch result {
             case let .success(response):
                 self?.cardDetails = response
+                group.leave()
             case let .failure(error):
                 errors.append(error)
+                group.leave()
             }
         }
 
         // Fetch employeeList
         group.enter()
         APIClient.default.employeeList(cardId: businessCardId) { [weak self] (result) in
-            group.leave()
             switch result {
             case let .success(response):
                 self?.employee = response?.compactMap { EmployeeModel(userId: $0.userId,
@@ -178,18 +189,18 @@ private extension BusinessCardDetailsPresenter {
                                                                       position: $0.position,
                                                                       telephone: $0.telephone?.number,
                                                                       practiceType: PracticeModel(id: $0.practiceType?.id, title: $0.practiceType?.title)) } ?? []
+                group.leave()
             case let .failure(error):
                 errors.append(error)
+                group.leave()
             }
         }
 
-        // Fetch Services list
+        // fetch services
         group.enter()
         APIClient.default.getServiceList(cardID: businessCardId) { [weak self] (result) in
-            group.leave()
             switch result {
             case .success(let response):
-
                 self?.services = response?.compactMap { Service.PreviewModel(id: $0.id,
                                                                              name: $0.title,
                                                                              avatarPath: $0.avatar?.sourceUrl,
@@ -198,8 +209,40 @@ private extension BusinessCardDetailsPresenter {
                                                                              descriptionHeader: $0.description,
                                                                              contactTelephone: $0.contactTelephone?.number,
                                                                              contactEmail: $0.contactEmail?.address) } ?? []
+                group.leave()
             case .failure(let error):
                 errors.append(error)
+                group.leave()
+            }
+        }
+
+        // fetch products
+        group.enter()
+        APIClient.default.getProductList(cardID: businessCardId) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let response):
+                self?.products.removeAll()
+                let previewItems = response?.compactMap { ProductPreviewItemModel(showroom: $0.showroom,
+                                                                                  name: $0.title,
+                                                                                  price: $0.price ?? "Ціна договірна",
+                                                                                  image: $0.image?.sourceUrl,
+                                                                                  productID: $0.id,
+                                                                                  cardID: strongSelf.cardDetails?.id ?? -1,
+                                                                                  companyName: strongSelf.cardDetails?.company?.name,
+                                                                                  companyAvatar: strongSelf.cardDetails?.avatar?.sourceUrl,
+                                                                                  isUserOwner: strongSelf.isUserOwner) } ?? []
+                let groupedItems = Dictionary(grouping: previewItems, by: { $0.showroom })
+                groupedItems.enumerated().forEach {
+                    self?.products.append(ProductPreviewSectionModel(showroom: $0.element.key, headerTitle: "Show room \($0.element.key)", productPreviewItems: $0.element.value))
+                }
+                self!.products.sort {
+                    $0.showroom < $1.showroom
+                }
+                group.leave()
+            case .failure(let error):
+                errors.append(error)
+                group.leave()
             }
         }
 
@@ -274,6 +317,13 @@ private extension BusinessCardDetailsPresenter {
                     dataSource?[.cardDetails].items.append(.service(model: .add))
                 }
                 let previews: [BusinessCardDetails.Cell] = services.compactMap { BusinessCardDetails.Cell.service(model: .view(model: $0)) }
+                dataSource?[.cardDetails].items.append(contentsOf: previews)
+
+            case .products:
+                if isUserOwner {
+                    dataSource?[.cardDetails].items.append(.addProduct)
+                }
+                let previews: [BusinessCardDetails.Cell] = products.compactMap { BusinessCardDetails.Cell.productSection(model: $0) }
                 dataSource?[.cardDetails].items.append(contentsOf: previews)
             }
         }
@@ -368,6 +418,18 @@ extension BusinessCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
     func getInTouchTableViewCellDidOccuredEmailAction(_ cell: GetInTouchTableViewCell) {
         view?.sendEmail(to: cardDetails?.contactEmail?.address ?? "")
+    }
+
+
+}
+
+// MARK: - ProductPreviewItemsHorizontalListDelegate
+
+extension BusinessCardDetailsPresenter: ProductPreviewItemsHorizontalListDelegate {
+
+    func productPreviewItemsHorizontalList(_ view: ProductPreviewItemsHorizontalListTableViewCell, didSelectItem item: ProductPreviewItemModel) {
+        let presenter = ProductDetailsPresenter(productID: item.productID, cardID: item.cardID, companyName: item.companyName, companyAvatar: item.companyAvatar, isUserOwner: isUserOwner)
+        self.view?.goToProductDetails(presenter: presenter)
     }
 
 

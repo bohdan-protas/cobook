@@ -144,6 +144,18 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         push(controller: controller, animated: true)
     }
 
+    func goToCreateProduct(presenter: CreateProductPresenter?) {
+        let controller: CreateProductViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
+    func goToProductDetails(presenter: ProductDetailsPresenter?) {
+        let controller: ProductDetailsViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
 
 }
 

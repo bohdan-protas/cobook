@@ -85,3 +85,23 @@ struct TitleDescrModel {
     var title: String?
     var descr: String?
 }
+
+struct ProductPreviewSectionModel {
+    var showroom: Int
+    var headerTitle: String?
+    var productPreviewItems: [ProductPreviewItemModel] = []
+}
+
+struct ProductPreviewItemModel {
+    var showroom: Int
+    var name: String?
+    var price: String?
+    var image: String?
+    var productID: Int
+    var cardID: Int
+    var companyName: String?
+    var companyAvatar: String?
+    var isUserOwner: Bool
+}
+
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="234" id="KGk-i7-Jjw" customClass="ProductPreviewItemCollectionViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="164" height="234"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="164" height="234"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="XMP-hk-0UE">
+                        <rect key="frame" x="0.0" y="0.0" width="164" height="218"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zE5-5A-Y7C" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="164" height="164"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="164" id="ERk-QS-vCQ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Товар" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ce4-qo-Thw">
+                                <rect key="frame" x="0.0" y="171" width="164" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="BBa-lA-1QZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
+                                <color key="textColor" name="Theme_Black-Middle"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRy-67-cRF">
+                                <rect key="frame" x="0.0" y="196" width="164" height="22"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oV0-b1-0td" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="88.5" height="22"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Від 2000 грн" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W87-gn-XuL">
+                                                <rect key="frame" x="6" y="3" width="76.5" height="16"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="13"/>
+                                                <color key="textColor" name="Theme_Black-Middle"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Theme_Accent"/>
+                                        <constraints>
+                                            <constraint firstItem="W87-gn-XuL" firstAttribute="top" secondItem="oV0-b1-0td" secondAttribute="top" constant="3" id="NH1-1U-Csy"/>
+                                            <constraint firstItem="W87-gn-XuL" firstAttribute="leading" secondItem="oV0-b1-0td" secondAttribute="leading" constant="6" id="Nb0-9M-scg"/>
+                                            <constraint firstAttribute="trailing" secondItem="W87-gn-XuL" secondAttribute="trailing" constant="6" id="k8B-s7-xW9"/>
+                                            <constraint firstAttribute="bottom" secondItem="W87-gn-XuL" secondAttribute="bottom" constant="3" id="x4D-Vt-udE"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="oV0-b1-0td" secondAttribute="bottom" id="5Te-wk-5Kc"/>
+                                    <constraint firstItem="oV0-b1-0td" firstAttribute="leading" secondItem="mRy-67-cRF" secondAttribute="leading" id="IbV-l1-S3e"/>
+                                    <constraint firstItem="oV0-b1-0td" firstAttribute="top" secondItem="mRy-67-cRF" secondAttribute="top" id="R8C-7e-Ucg"/>
+                                    <constraint firstAttribute="height" constant="22" id="ohn-Ib-gJT"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oV0-b1-0td" secondAttribute="trailing" id="zd0-u7-60Q"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="XMP-hk-0UE" secondAttribute="trailing" id="TFb-Z3-aQ0"/>
+                    <constraint firstItem="XMP-hk-0UE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Yjx-mr-oIZ"/>
+                    <constraint firstAttribute="bottom" secondItem="XMP-hk-0UE" secondAttribute="bottom" constant="16" id="Ymn-0d-iZm"/>
+                    <constraint firstItem="XMP-hk-0UE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bpP-MU-gXe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="productNameLabel" destination="ce4-qo-Thw" id="tAB-if-KYr"/>
+                <outlet property="productPriceLabel" destination="W87-gn-XuL" id="X02-df-KYp"/>
+                <outlet property="titleImageView" destination="zE5-5A-Y7C" id="CkG-Hv-HM9"/>
+            </connections>
+            <point key="canvasLocation" x="23.188405797101453" y="216.96428571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Theme_Accent">
+            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
