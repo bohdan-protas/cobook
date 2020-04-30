@@ -49,7 +49,6 @@
 		B8237F39244740F80006E8D1 /* ContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */; };
 		B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6A723FD34A0007540D0 /* Array + Extensions.swift */; };
 		B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6AC23FD3924007540D0 /* RegularExpression.swift */; };
-		B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6AE23FD3F29007540D0 /* UIDevice + Extensions.swift */; };
 		B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */; };
 		B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */; };
 		B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */; };
@@ -57,7 +56,7 @@
 		B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */; };
 		B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */; };
 		B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6BF23FDE244007540D0 /* SignInViewController.swift */; };
-		B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */; };
+		B823AB6F23F157A900DE13EA /* UIStoryboard + Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB6E23F157A900DE13EA /* UIStoryboard + Coordinators.swift */; };
 		B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */; };
 		B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */; };
 		B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B823AB7623F15E3600DE13EA /* Auth.storyboard */; };
@@ -88,6 +87,9 @@
 		B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */; };
 		B8249252243E26A300A1AC39 /* CardsOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249251243E26A300A1AC39 /* CardsOverview.swift */; };
 		B824AD802445FAE700410C23 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824AD7F2445FAE700410C23 /* ImagePicker.swift */; };
+		B824DA61245AE96D00700319 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B824DA60245AE96D00700319 /* Post.storyboard */; };
+		B824DA64245AE9A700700319 /* CreateArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824DA63245AE9A700700319 /* CreateArticleViewController.swift */; };
+		B824DA66245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824DA65245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift */; };
 		B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */; };
 		B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */; };
 		B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */; };
@@ -330,7 +332,6 @@
 		B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsTableViewCell.xib; sourceTree = "<group>"; };
 		B823A6A723FD34A0007540D0 /* Array + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Extensions.swift"; sourceTree = "<group>"; };
 		B823A6AC23FD3924007540D0 /* RegularExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpression.swift; sourceTree = "<group>"; };
-		B823A6AE23FD3F29007540D0 /* UIDevice + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice + Extensions.swift"; sourceTree = "<group>"; };
 		B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTelephoneNumberViewController.swift; sourceTree = "<group>"; };
 		B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		B823A6B523FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTelephoneNumberPresenter.swift; sourceTree = "<group>"; };
@@ -338,7 +339,7 @@
 		B823A6BA23FDD4B7007540D0 /* CreatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewController.swift; sourceTree = "<group>"; };
 		B823A6BC23FDDACC007540D0 /* CreatePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordPresenter.swift; sourceTree = "<group>"; };
 		B823A6BF23FDE244007540D0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + Extensions.swift"; sourceTree = "<group>"; };
+		B823AB6E23F157A900DE13EA /* UIStoryboard + Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + Coordinators.swift"; sourceTree = "<group>"; };
 		B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		B823AB7623F15E3600DE13EA /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
@@ -369,6 +370,9 @@
 		B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewNavigationController.swift; sourceTree = "<group>"; };
 		B8249251243E26A300A1AC39 /* CardsOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverview.swift; sourceTree = "<group>"; };
 		B824AD7F2445FAE700410C23 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B824DA60245AE96D00700319 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
+		B824DA63245AE9A700700319 /* CreateArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateArticleViewController.swift; sourceTree = "<group>"; };
+		B824DA65245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + ControllerInitiate.swift"; sourceTree = "<group>"; };
 		B824E1AD243767130091C491 /* CardBackgroundManagmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackgroundManagmentTableViewCell.swift; sourceTree = "<group>"; };
 		B824E1AE243767130091C491 /* CardBackgroundManagmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardBackgroundManagmentTableViewCell.xib; sourceTree = "<group>"; };
 		B824E1B124378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardDataSourceConfigurator.swift; sourceTree = "<group>"; };
@@ -802,6 +806,7 @@
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B8249243243DE62600A1AC39 /* AllCards */,
 				B82200B8240FB87A00A17D2C /* Account */,
+				B824DA5F245AE91400700319 /* Post */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -809,8 +814,8 @@
 		B823AB6B23F156DE00DE13EA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B823A6AE23FD3F29007540D0 /* UIDevice + Extensions.swift */,
-				B823AB6E23F157A900DE13EA /* UIStoryboard + Extensions.swift */,
+				B824DA65245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift */,
+				B823AB6E23F157A900DE13EA /* UIStoryboard + Coordinators.swift */,
 				B823AB7023F15A5600DE13EA /* UIViewController + Extensions.swift */,
 				B823AB7223F15AAE00DE13EA /* UIView + Extensions.swift */,
 				B82573F723F5548100C8CBF8 /* UIColor + Extensions.swift */,
@@ -968,6 +973,23 @@
 				B8249248243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift */,
 			);
 			path = CardsOverview;
+			sourceTree = "<group>";
+		};
+		B824DA5F245AE91400700319 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				B824DA60245AE96D00700319 /* Post.storyboard */,
+				B824DA62245AE98400700319 /* CreateArticle */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		B824DA62245AE98400700319 /* CreateArticle */ = {
+			isa = PBXGroup;
+			children = (
+				B824DA63245AE9A700700319 /* CreateArticleViewController.swift */,
+			);
+			path = CreateArticle;
 			sourceTree = "<group>";
 		};
 		B824E1AC243766C60091C491 /* CardBackgroundManagmentTableViewCell */ = {
@@ -1771,6 +1793,7 @@
 				B8559F76243B785800787349 /* BusinessCardHeaderInfoTableViewCell.xib in Resources */,
 				B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */,
 				B8DE5E562419262600F4F60B /* TextViewTableViewCell.xib in Resources */,
+				B824DA61245AE96D00700319 /* Post.storyboard in Resources */,
 				B825741223F5621500C8CBF8 /* HelveticaNeueCyr-Medium.ttf in Resources */,
 				B823E8AC243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib in Resources */,
 				B8AB83F3242828470041B879 /* CardDetails.json in Resources */,
@@ -1933,7 +1956,7 @@
 				B824AD802445FAE700410C23 /* ImagePicker.swift in Sources */,
 				B8255A26243A58A400C4169D /* UsersEndpoint.swift in Sources */,
 				B831C55B24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift in Sources */,
-				B823AB6F23F157A900DE13EA /* UIStoryboard + Extensions.swift in Sources */,
+				B823AB6F23F157A900DE13EA /* UIStoryboard + Coordinators.swift in Sources */,
 				B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
@@ -1966,7 +1989,6 @@
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
 				B82079412444A60500FCCC17 /* EmployApiModel.swift in Sources */,
 				B88906BC240002D5002E91F7 /* SignUpNavigationController.swift in Sources */,
-				B823A6AF23FD3F29007540D0 /* UIDevice + Extensions.swift in Sources */,
 				B8255A24243A2C2500C4169D /* SearchNavigationController.swift in Sources */,
 				B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */,
 				B8AB83EA24280ECB0041B879 /* PersonalCardDetailsViewController.swift in Sources */,
@@ -2039,6 +2061,7 @@
 				B822D7092458B5EF00883BE8 /* Product.swift in Sources */,
 				B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */,
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
+				B824DA64245AE9A700700319 /* CreateArticleViewController.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */,
@@ -2057,6 +2080,7 @@
 				B822F5252459BDA700F207CD /* ProductPreviewItemCollectionViewCell.swift in Sources */,
 				B82248DE242C0CD700392D10 /* CardSaveView.swift in Sources */,
 				B8559F8F243C8B0900787349 /* CardItemTableViewCell.swift in Sources */,
+				B824DA66245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift in Sources */,
 				B84B94E82403299F0007EB60 /* Endpoint.swift in Sources */,
 				B8DC630D2434FC1000A2ED58 /* CellConfigurator.swift in Sources */,
 				B823E8A7243F753D00EE1830 /* CardMapMarkerApiModel.swift in Sources */,
