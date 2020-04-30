@@ -32,12 +32,12 @@
 		B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */; };
 		B82248E4242C106D00392D10 /* SectionHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */; };
 		B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */; };
-		B822F50E24597F3E00F207CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B822F50D24597F3E00F207CD /* GoogleService-Info.plist */; };
 		B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7002458B5A100883BE8 /* CreateProductViewController.swift */; };
 		B822D7042458B5B700883BE8 /* CreateProductPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7032458B5B700883BE8 /* CreateProductPresenter.swift */; };
 		B822D7062458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7052458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift */; };
 		B822D7092458B5EF00883BE8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7082458B5EF00883BE8 /* Product.swift */; };
 		B822D70B2458B60000883BE8 /* CreateProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D70A2458B60000883BE8 /* CreateProduct.swift */; };
+		B822F50E24597F3E00F207CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B822F50D24597F3E00F207CD /* GoogleService-Info.plist */; };
 		B822F51024599C7700F207CD /* CreateProductApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822F50F24599C7700F207CD /* CreateProductApiModel.swift */; };
 		B822F51224599D4800F207CD /* ProductEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822F51124599D4800F207CD /* ProductEndpoint.swift */; };
 		B822F5162459B29E00F207CD /* ProductPreviewApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822F5152459B29E00F207CD /* ProductPreviewApiModel.swift */; };
@@ -313,12 +313,12 @@
 		B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B82248E2242C106D00392D10 /* SectionHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
-		B822F50D24597F3E00F207CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B822D7002458B5A100883BE8 /* CreateProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductViewController.swift; sourceTree = "<group>"; };
 		B822D7032458B5B700883BE8 /* CreateProductPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductPresenter.swift; sourceTree = "<group>"; };
 		B822D7052458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B822D7082458B5EF00883BE8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B822D70A2458B60000883BE8 /* CreateProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProduct.swift; sourceTree = "<group>"; };
+		B822F50D24597F3E00F207CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B822F50F24599C7700F207CD /* CreateProductApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductApiModel.swift; sourceTree = "<group>"; };
 		B822F51124599D4800F207CD /* ProductEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEndpoint.swift; sourceTree = "<group>"; };
 		B822F5152459B29E00F207CD /* ProductPreviewApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPreviewApiModel.swift; sourceTree = "<group>"; };
@@ -2235,7 +2235,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2260,7 +2260,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
