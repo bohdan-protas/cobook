@@ -14,7 +14,7 @@ protocol ProductDetailsView: AlertDisplayableView, LoadDisplayableView, Navigabl
     func setupEmptyCardView()
     func setupEditCardView()
 
-    func goToEditService(_ presenter: CreateServicePresenter?)
+    func goToEditProduct(_ presenter: CreateProductPresenter?)
 }
 
 class ProductDetailsPresenter: NSObject, BasePresenter {
@@ -62,25 +62,27 @@ class ProductDetailsPresenter: NSObject, BasePresenter {
         view = nil
     }
 
-//    func editService() {
-//        let detailsModel = Service.CreationDetailsModel(serviceID: details.id,
-//                                                        cardID: cardID,
-//                                                        photos: details.photos,
-//                                                        companyName: companyName,
-//                                                        companyAvatar: companyAvatar,
-//                                                        serviceName: details.title,
-//                                                        price: details.price,
-//                                                        isUseContactsFromSite: false,
-//                                                        telephoneNumber: details.telephoneNumber,
-//                                                        email: details.email,
-//                                                        isContractPrice: details.price == nil,
-//                                                        descriptionTitle: details.descriptionTitle,
-//                                                        desctiptionBody: details.desctiptionBody)
-//
-//        let editServicePresenter = CreateServicePresenter(detailsModel: detailsModel)
-//        editServicePresenter.delegate = self
-//        view?.goToEditService(editServicePresenter)
-//    }
+    func editProduct() {
+        let detailsModel = CreateProduct.DetailsModel(productID: details.id,
+                                                      cardID: cardID,
+                                                      photos: details.photos,
+                                                      companyName: companyName,
+                                                      companyAvatar: companyAvatar,
+                                                      productName: details.title,
+                                                      productShowRoom: details.showroom == nil ? nil : String(details.showroom!),
+                                                      price: details.price,
+                                                      isUseContactsFromSite: false,
+                                                      telephoneNumber: details.telephoneNumber,
+                                                      email: details.email,
+                                                      isContractPrice: details.price == nil,
+                                                      descriptionTitle: details.descriptionTitle,
+                                                      desctiptionBody: details.desctiptionBody)
+
+
+        let editProductPresenter = CreateProductPresenter(detailsModel: detailsModel)
+        editProductPresenter.delegate = self
+        view?.goToEditProduct(editProductPresenter)
+    }
 
 }
 
@@ -180,5 +182,15 @@ extension ProductDetailsPresenter: GetInTouchTableViewCellDelegate {
 
 }
 
+// MARK: - CreateProductPresenterDelegate
+
+extension ProductDetailsPresenter: CreateProductPresenterDelegate {
+
+    func didUpdatedProduct(_ presenter: CreateProductPresenter) {
+        fetchProductDetails()
+    }
+
+
+}
 
 

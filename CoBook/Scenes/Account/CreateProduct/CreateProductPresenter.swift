@@ -16,10 +16,16 @@ protocol CreateProductView: AlertDisplayableView, HorizontalPhotosListDelegate, 
     func setSaveButtonEnabled(_ isEnabled: Bool)
 }
 
+protocol CreateProductPresenterDelegate: class {
+    func didUpdatedProduct(_ presenter: CreateProductPresenter)
+}
+
 class CreateProductPresenter: NSObject, BasePresenter {
 
     /// Managed view
     weak var view: CreateProductView?
+
+    weak var delegate: CreateProductPresenterDelegate?
 
     /// data source
     private var dataSource: DataSource<CreateProductDataSourceConfigurator>?
@@ -79,7 +85,6 @@ class CreateProductPresenter: NSObject, BasePresenter {
 extension CreateProductPresenter {
 
     func createProduct() {
-
         /// api create  parameters
         let parameters = CreateProductApiModel(cardID: details.cardID,
                                                title: details.productName?.trimmingCharacters(in: .whitespaces),
@@ -104,8 +109,10 @@ extension CreateProductPresenter {
             switch result {
             case .success:
                 strongSelf.view?.stopLoading(success: true, completion: {
+                    strongSelf.delegate?.didUpdatedProduct(strongSelf)
                     AppStorage.State.isNeedToUpdateAccountData = true
                     strongSelf.view?.popController()
+
                 })
             case .failure(let error):
                 strongSelf.view?.stopLoading()
@@ -140,8 +147,10 @@ extension CreateProductPresenter {
             switch result {
             case .success:
                 strongSelf.view?.stopLoading(success: true, completion: {
+                    strongSelf.delegate?.didUpdatedProduct(strongSelf)
                     AppStorage.State.isNeedToUpdateAccountData = true
                     strongSelf.view?.popController()
+
                 })
             case .failure(let error):
                 strongSelf.view?.stopLoading()

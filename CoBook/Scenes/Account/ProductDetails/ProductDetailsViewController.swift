@@ -22,7 +22,7 @@ class ProductDetailsViewController: BaseViewController, ProductDetailsView {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.editCardViewHeight)))
         view.editButton.setTitle("Редагувати товар", for: .normal)
         view.onEditTapped = { [weak self] in
-            //self?.presenter?.editService()
+            self?.presenter?.editProduct()
         }
         return view
     }()
@@ -66,8 +66,8 @@ class ProductDetailsViewController: BaseViewController, ProductDetailsView {
 
     // MARK: - Navigation
 
-    func goToEditService(_ presenter: CreateServicePresenter?) {
-        let controller: CreateServiceViewController = self.storyboard!.initiateViewControllerFromType()
+    func goToEditProduct(_ presenter: CreateProductPresenter?) {
+        let controller: CreateProductViewController = self.storyboard!.initiateViewControllerFromType()
         controller.presenter = presenter
         self.navigationController?.pushViewController(controller, animated: true)
     }
