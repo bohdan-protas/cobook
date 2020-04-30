@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AlbumPreviewItemCollectionViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="66" height="104"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="66" height="104"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcd-TJ-Foq">
+                        <rect key="frame" x="0.0" y="0.0" width="66" height="104"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="EaZ-qp-pal">
+                        <rect key="frame" x="0.0" y="0.0" width="66" height="104"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M03-E7-TRF" userLabel="Image Container">
+                                <rect key="frame" x="0.0" y="0.0" width="66" height="86"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tQZ-62-Rfz" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="66" height="86"/>
+                                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeV-sE-dZD" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                                        <rect key="frame" x="46" y="66" width="20" height="20"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_plus_post" translatesAutoresizingMaskIntoConstraints="NO" id="fDX-wH-fab" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                                                <rect key="frame" x="2" y="2" width="16" height="16"/>
+                                                <color key="backgroundColor" name="Theme_Green-Dark"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="fDX-wH-fab" secondAttribute="bottom" constant="2" id="6O2-W9-g2R"/>
+                                            <constraint firstItem="fDX-wH-fab" firstAttribute="top" secondItem="AeV-sE-dZD" secondAttribute="top" constant="2" id="DPH-Pg-ri1"/>
+                                            <constraint firstAttribute="height" constant="20" id="NqR-Sd-Tnh"/>
+                                            <constraint firstAttribute="trailing" secondItem="fDX-wH-fab" secondAttribute="trailing" constant="2" id="d0X-aM-ztU"/>
+                                            <constraint firstItem="fDX-wH-fab" firstAttribute="leading" secondItem="AeV-sE-dZD" secondAttribute="leading" constant="2" id="iEe-ja-aQi"/>
+                                            <constraint firstAttribute="width" constant="20" id="mjN-qb-ANG"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="AeV-sE-dZD" secondAttribute="trailing" id="0BS-p0-eSJ"/>
+                                    <constraint firstItem="tQZ-62-Rfz" firstAttribute="leading" secondItem="M03-E7-TRF" secondAttribute="leading" id="EOY-xg-Yea"/>
+                                    <constraint firstAttribute="bottom" secondItem="AeV-sE-dZD" secondAttribute="bottom" id="Gzu-NY-yoA"/>
+                                    <constraint firstAttribute="bottom" secondItem="tQZ-62-Rfz" secondAttribute="bottom" id="K23-6e-tqi"/>
+                                    <constraint firstItem="tQZ-62-Rfz" firstAttribute="top" secondItem="M03-E7-TRF" secondAttribute="top" id="OGK-XQ-hRW"/>
+                                    <constraint firstAttribute="height" constant="86" id="lqa-pP-D1Q"/>
+                                    <constraint firstAttribute="trailing" secondItem="tQZ-62-Rfz" secondAttribute="trailing" id="pdR-Po-i1r"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zF0-zy-FBj">
+                                <rect key="frame" x="0.0" y="91" width="66" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="Mcm-MK-teu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="pcd-TJ-Foq" secondAttribute="bottom" id="E0Y-d6-g9L"/>
+                <constraint firstItem="EaZ-qp-pal" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="WEg-kB-MtB"/>
+                <constraint firstAttribute="trailing" secondItem="pcd-TJ-Foq" secondAttribute="trailing" id="gWb-GZ-v47"/>
+                <constraint firstItem="pcd-TJ-Foq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="h1I-2l-J7G"/>
+                <constraint firstItem="EaZ-qp-pal" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kWc-fZ-obH"/>
+                <constraint firstAttribute="bottom" secondItem="EaZ-qp-pal" secondAttribute="bottom" id="lND-5e-cC5"/>
+                <constraint firstItem="pcd-TJ-Foq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="yCJ-Cp-g2p"/>
+                <constraint firstAttribute="trailing" secondItem="EaZ-qp-pal" secondAttribute="trailing" id="zoL-7k-r2A"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="66" height="104"/>
+            <connections>
+                <outlet property="addItemIndicator" destination="AeV-sE-dZD" id="qQb-od-qsj"/>
+                <outlet property="textLabel" destination="zF0-zy-FBj" id="6cX-4P-xnp"/>
+                <outlet property="titleImageView" destination="tQZ-62-Rfz" id="6ki-WM-2Gi"/>
+            </connections>
+            <point key="canvasLocation" x="147.82608695652175" y="171.42857142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ic_plus_post" width="14" height="14"/>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green-Dark">
+            <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

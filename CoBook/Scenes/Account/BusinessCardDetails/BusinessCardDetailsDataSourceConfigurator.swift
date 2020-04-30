@@ -25,6 +25,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var serviceItemCellConfigurator: CellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>?
     var addProductConfigurator: CellConfigurator<Void?, ServiceListItemTableViewCell>?
     var productSectionConfigurator: CellConfigurator<ProductPreviewSectionModel, ProductPreviewItemsHorizontalListTableViewCell>?
+    var postPreviewConfigurator: CellConfigurator<PostPreviewSectionModel?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -58,6 +59,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return addProductConfigurator?.reuseIdentifier ?? ""
         case .productSection:
             return productSectionConfigurator?.reuseIdentifier ?? ""
+        case .postPreview:
+            return postPreviewConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -105,6 +108,9 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         case .productSection(let model):
             return productSectionConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
 
+        case .postPreview(let model):
+            return postPreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         }
     }
 
@@ -123,6 +129,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         serviceItemCellConfigurator?.registerCells(in: tableView)
         addProductConfigurator?.registerCells(in: tableView)
         productSectionConfigurator?.registerCells(in: tableView)
+        postPreviewConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -265,6 +272,16 @@ extension BusinessCardDetailsPresenter {
                 cell.delegate = self
                 cell.headerLabel.text = model.headerTitle
                 cell.dataSource = model.productPreviewItems
+                cell.collectionView.reloadData()
+                return cell
+            }
+
+            //
+            configurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreviewSectionModel?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.dataSourceID = model?.dataSourceID
+                cell.delegate = self
+                cell.dataSource = self
+                cell.headerLabel?.text = model?.title
                 cell.collectionView.reloadData()
                 return cell
             }

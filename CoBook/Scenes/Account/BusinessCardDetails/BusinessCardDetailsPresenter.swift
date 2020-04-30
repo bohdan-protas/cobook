@@ -22,6 +22,13 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
     func goToCreateProduct(presenter: CreateProductPresenter?)
     func goToProductDetails(presenter: ProductDetailsPresenter?)
+    func goToCreatePost()
+}
+
+struct PostPreviewSectionModel {
+    var title: String?
+    var dataSourceID: String?
+    var items: [PostPreview] = []
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -39,6 +46,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
     private var products: [ProductPreviewSectionModel] = []
+    private var postPreviewSection: PostPreviewSectionModel?
 
     /// View datasource
     private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
@@ -64,8 +72,11 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         super.init()
         
         self.dataSource = DataSource(configurator: dataSouceConfigurator)
-        self.dataSource?.sections = [Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
-                                     Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue, items: [])]
+        self.dataSource?.sections = [
+            Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
+            Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.postPreview.rawValue, items: []),
+            Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue, items: [])
+        ]
     }
 
     // MARK: - Public
@@ -107,10 +118,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         }
 
         switch item {
-        case .employee(let model):
-            // TODO: - Add segue to card details VC
-            break
-
         case .service(let model):
             switch model {
             case .view(let model):
@@ -124,9 +131,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         case .addProduct:
             let presenter = CreateProductPresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
             view?.goToCreateProduct(presenter: presenter)
-
-        case .productSection(let model):
-            break
 
         default:
             break
@@ -216,6 +220,13 @@ private extension BusinessCardDetailsPresenter {
             }
         }
 
+        // fetch albums list
+        group.enter()
+        APIClient.default.getAlbumsList(cardID: businessCardId) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            group.leave()
+        }
+
         // fetch products
         group.enter()
         APIClient.default.getProductList(cardID: businessCardId) { [weak self] (result) in
@@ -281,6 +292,7 @@ private extension BusinessCardDetailsPresenter {
     
     func updateViewDataSource() {
 
+        // User header section
         dataSource?[.userHeader].items = [
                     .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
                                                                          avatartImagePath: cardDetails?.avatar?.sourceUrl,
@@ -289,6 +301,19 @@ private extension BusinessCardDetailsPresenter {
                                                                          telephoneNumber: cardDetails?.contactTelephone?.number,
                                                                          websiteAddress: cardDetails?.companyWebSite))
         ]
+
+        // Post preview section
+        dataSource?[.postPreview].items.removeAll()
+        if let postPreviewSection = postPreviewSection {
+
+        }
+
+        postPreviewSection = PostPreviewSectionModel(title: "Збережені пости", dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [
+            .add(PostPreview.Model(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
+        ])
+        dataSource?[.postPreview].items = [.postPreview(model: postPreviewSection)]
+
+        // card details section
         dataSource?[.cardDetails].items.removeAll()
         if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
             switch item {
@@ -430,6 +455,44 @@ extension BusinessCardDetailsPresenter: ProductPreviewItemsHorizontalListDelegat
     func productPreviewItemsHorizontalList(_ view: ProductPreviewItemsHorizontalListTableViewCell, didSelectItem item: ProductPreviewItemModel) {
         let presenter = ProductDetailsPresenter(productID: item.productID, cardID: item.cardID, companyName: item.companyName, companyAvatar: item.companyAvatar, isUserOwner: isUserOwner)
         self.view?.goToProductDetails(presenter: presenter)
+    }
+
+
+}
+
+// MARK: - AlbumPreviewItemsViewDelegate, AlbumPreviewItemsViewDataSource
+
+extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPreviewItemsViewDataSource {
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, didSelectedAt indexPath: IndexPath, dataSourceID: String?) {
+        guard let id = dataSourceID, let dataSource = BusinessCardDetails.PostPreviewDataSourceID(rawValue: id) else {
+            return
+        }
+
+        switch dataSource {
+        case .albumPreviews:
+            if let selectedItem = postPreviewSection?.items[safe: indexPath.item] {
+                switch selectedItem {
+                case .add:
+                    self.view?.goToCreatePost()
+                case .view(let model):
+                    break
+                case .showMore:
+                    break
+                }
+            }
+        }
+    }
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview] {
+        guard let id = dataSourceID, let dataSource = BusinessCardDetails.PostPreviewDataSourceID(rawValue: id) else {
+            return []
+        }
+
+        switch dataSource {
+        case .albumPreviews:
+            return postPreviewSection?.items ?? []
+        }
     }
 
 

@@ -156,6 +156,11 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         push(controller: controller, animated: true)
     }
 
+    func goToCreatePost() {
+        let controller = UIStoryboard.Post.Controllers.createAtricle
+        push(controller: controller, animated: true)
+    }
+
 
 }
 

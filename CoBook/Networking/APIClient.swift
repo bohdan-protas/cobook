@@ -531,5 +531,21 @@ extension APIClient {
     }
 
 
+}
+
+// MARK: Albums requests
+
+extension APIClient {
+
+    @discardableResult
+    func getAlbumsList(cardID: Int,
+                       limit: Int? = nil,
+                       offset: Int? = nil,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.getAlbums(cardID: cardID, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 }
