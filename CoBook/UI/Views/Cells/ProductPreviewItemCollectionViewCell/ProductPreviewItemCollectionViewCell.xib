@@ -31,6 +31,7 @@
                                 <color key="backgroundColor" name="Theme_Gray-Background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="164" id="ERk-QS-vCQ"/>
+                                    <constraint firstAttribute="width" constant="164" id="wf0-gO-e0Z"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
