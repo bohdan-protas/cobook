@@ -7,102 +7,61 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 // MARK: - DesignableTextView
-@IBDesignable
-class DesignableTextView: UITextView {
+/** @abstract UITextView with placeholder support   */
+@IBDesignable class DesignableTextView: IQTextView {
 
-    // MARK: Title text
-    @IBInspectable
-    var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.clear
+    // MARK: - State colors
 
-    @IBInspectable
-    var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.clear
+    @IBInspectable var disabledBorderColor: UIColor = UIColor.Theme.TextField.borderInactive ?? UIColor.clear
+    @IBInspectable var enabledBorderColor: UIColor = UIColor.Theme.TextField.borderActive ?? UIColor.clear
 
-    @IBInspectable
-    var isEnabled: Bool = false {
-        didSet { layer.borderColor = isEnabled ? enabledBorderColor.cgColor : disabledBorderColor.cgColor }
+    @IBInspectable var isEnabled: Bool = false {
+        didSet { configureLayout() }
     }
 
-    // MARK: Title text
+    // MARK: - Title text insets
+
     @IBInspectable
     public var bottomTextInset: CGFloat = 0 {
-        didSet { textPadding.bottom = bottomTextInset }
+        didSet { textContainerInset.bottom = bottomTextInset }
     }
 
     @IBInspectable
     public var leftTextInset: CGFloat = 0 {
-        didSet { textPadding.left = leftTextInset }
+        didSet { textContainerInset.left = leftTextInset }
     }
 
     @IBInspectable
     public var rightTextInset: CGFloat = 0 {
-        didSet { textPadding.right = rightTextInset }
+        didSet { textContainerInset.right = rightTextInset }
     }
 
     @IBInspectable
     public var topTextInset: CGFloat = 0 {
-        didSet { textPadding.top = topTextInset }
+        didSet { textContainerInset.top = topTextInset }
     }
 
-    private var textPadding = UIEdgeInsets.zero
+    // MARK: - Lifecycle
 
-    // MARK: Placeholder
-    @IBInspectable
-    var placeholder: String?
-
-    @IBInspectable
-    var pTextColor: UIColor = .black
-
-    @IBInspectable
-    var pFontSize: CGFloat = 14
-
-    @IBInspectable var pBgColor: UIColor = .clear
-
-    @IBInspectable
-    public var pBottomTextInset: CGFloat = 16
-
-    @IBInspectable
-    public var pLeftTextInset: CGFloat = 16
-
-    @IBInspectable
-    public var pRightTextInset: CGFloat = 16
-
-    @IBInspectable
-    public var pTopTextInset: CGFloat = 16
-
-    private var placeholderLabel: UILabel!
-    private var placeholderLabelTopConstraint: NSLayoutConstraint?
-    private var placeholderLabelLeftConstraint: NSLayoutConstraint?
-    private var placeholderLabelRightConstraint: NSLayoutConstraint?
-    private var placeholderLabelBottomConstraint: NSLayoutConstraint?
-
-
-    private weak var proxyDelegate: UITextViewDelegate?
-    override weak var delegate: UITextViewDelegate? {
-        willSet {
-            if newValue !== self {
-                proxyDelegate = newValue
-            }
-        }
-    }
-
-    // MARK: - Initializers
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
+        setup()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        configureLayout()
+        setup()
     }
 
-    // MARK: Layout
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.delegate = self
-        configureLayout()
+        setup()
     }
+
+    // MARK: - Rendering
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
@@ -120,85 +79,64 @@ class DesignableTextView: UITextView {
         return resigned
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Public
+
+    @objc internal func setActivedState() {
+        isEnabled = true
+    }
+
+    @objc internal func seDefaultState() {
+        isEnabled = false
+    }
+
 
 }
 
 // MARK: - Privates
+
 private extension DesignableTextView {
+
+    func setup() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setActivedState), name: UITextView.textDidBeginEditingNotification, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.seDefaultState), name: UITextView.textDidEndEditingNotification, object: self)
+    }
 
     func configureLayout() {
         clipsToBounds = true
-
-        layer.borderWidth = borderWidth
-        layer.borderColor = isEnabled ? enabledBorderColor.cgColor : disabledBorderColor.cgColor
-        layer.cornerRadius = cornerRadius
-        textContainerInset = textPadding
         textContainer.lineFragmentPadding = 0
+        layer.borderColor = isEnabled ? enabledBorderColor.cgColor : disabledBorderColor.cgColor
+        layer.borderWidth = borderWidth
+        layer.cornerRadius = cornerRadius
 
-        if placeholderLabel == nil {
-            // Make sure we don't render the label outside of ourselves
-            placeholderLabel = UILabel()
-            placeholderLabel.numberOfLines = 0
-            placeholderLabel.textAlignment = .left
-            addSubview(placeholderLabel)
 
-            // Setup the label inside the placeholder space
-            placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-
-            // Setup the placeholder position
-            placeholderLabelLeftConstraint = placeholderLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: pLeftTextInset)
-            placeholderLabelRightConstraint = placeholderLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: pRightTextInset)
-            placeholderLabelTopConstraint = placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: pTopTextInset)
-            placeholderLabelBottomConstraint = placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: pBottomTextInset)
-
-            // Activate the placeholder position
-            placeholderLabelLeftConstraint?.isActive = true
-            placeholderLabelRightConstraint?.isActive = true
-            placeholderLabelTopConstraint?.isActive = true
-            placeholderLabelBottomConstraint?.isActive = true
-        }
-
-        // Update the placeholder position
-        placeholderLabelLeftConstraint?.constant = pLeftTextInset
-        placeholderLabelRightConstraint?.constant = pRightTextInset
-        placeholderLabelTopConstraint?.constant = pTopTextInset
-        placeholderLabelBottomConstraint?.constant = pBottomTextInset
-
-        let pAttrs = [NSAttributedString.Key.font: UIFont.SFProDisplay_Regular(size: pFontSize)]
-        let pString = NSMutableAttributedString(string: placeholder ?? "", attributes: pAttrs)
-
-        placeholderLabel.attributedText = pString
-        placeholderLabel.textColor = pTextColor
-        placeholderLabel.backgroundColor = pBgColor
-
-        placeholderLabel.layoutIfNeeded()
-        placeholderLabel.sizeToFit()
-
-        placeholderLabel?.isHidden = self.text.count > 0
     }
 
 
 }
 
 // MARK: - UITextViewDelegate
-extension DesignableTextView: UITextViewDelegate {
 
-    /// When the UITextView did change, show or hide the label based on if the UITextView is empty or not
-    func textViewDidChange(_ textView: UITextView) {
-        self.placeholderLabel?.isHidden = textView.text.count > 0
-        proxyDelegate?.textViewDidChange?(self)
-    }
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        isEnabled = true
-        proxyDelegate?.textViewDidBeginEditing?(self)
-    }
-
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        isEnabled = false
-        proxyDelegate?.textViewDidEndEditing?(self)
-    }
-
-
-}
+//extension DesignableTextView: UITextViewDelegate {
+//
+//    /// When the UITextView did change, show or hide the label based on if the UITextView is empty or not
+//    func textViewDidChange(_ textView: UITextView) {
+//        refreshPlaceholder()
+//        proxyDelegate?.textViewDidChange?(self)
+//    }
+//
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        isEnabled = true
+//        proxyDelegate?.textViewDidBeginEditing?(self)
+//    }
+//
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        isEnabled = false
+//        proxyDelegate?.textViewDidEndEditing?(self)
+//    }
+//
+//
+//}

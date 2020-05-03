@@ -173,6 +173,9 @@
 		B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8357DB2240C6372006AB78E /* SignInEndpoint.swift */; };
 		B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */; };
 		B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */; };
+		B835FFBE245F300900189406 /* CreateArticlePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835FFBD245F300900189406 /* CreateArticlePresenter.swift */; };
+		B835FFC2245F3AA700189406 /* PostEditablePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835FFC0245F3AA700189406 /* PostEditablePhotoCollectionViewCell.swift */; };
+		B835FFC3245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B835FFC1245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib */; };
 		B836DF2A243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B836DF29243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift */; };
 		B836DF2C2433792600CB84D3 /* CreateBusinessCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B836DF2B2433792600CB84D3 /* CreateBusinessCardPresenter.swift */; };
 		B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83FD7D52423B3CE00ACA1D4 /* SocialsListTableViewCell.swift */; };
@@ -463,6 +466,9 @@
 		B8357DB2240C6372006AB78E /* SignInEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEndpoint.swift; sourceTree = "<group>"; };
 		B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsApiModel.swift; sourceTree = "<group>"; };
 		B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeTypesEndpoint.swift; sourceTree = "<group>"; };
+		B835FFBD245F300900189406 /* CreateArticlePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateArticlePresenter.swift; sourceTree = "<group>"; };
+		B835FFC0245F3AA700189406 /* PostEditablePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditablePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		B835FFC1245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostEditablePhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		B836DF29243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B836DF2B2433792600CB84D3 /* CreateBusinessCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardPresenter.swift; sourceTree = "<group>"; };
 		B83FD7D52423B3CE00ACA1D4 /* SocialsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1000,6 +1006,7 @@
 			isa = PBXGroup;
 			children = (
 				B824DA63245AE9A700700319 /* CreateArticleViewController.swift */,
+				B835FFBD245F300900189406 /* CreateArticlePresenter.swift */,
 			);
 			path = CreateArticle;
 			sourceTree = "<group>";
@@ -1223,6 +1230,15 @@
 				B824DA72245B131C00700319 /* PostPreview.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B835FFBF245F3A6A00189406 /* PostEditablePhotoCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B835FFC0245F3AA700189406 /* PostEditablePhotoCollectionViewCell.swift */,
+				B835FFC1245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib */,
+			);
+			path = PostEditablePhotoCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */ = {
@@ -1462,10 +1478,10 @@
 		B870198323ED50EA00625D61 /* CoBook */ = {
 			isa = PBXGroup;
 			children = (
-				B870199223ED50EC00625D61 /* Info.plist */,
-				B822F50D24597F3E00F207CD /* GoogleService-Info.plist */,
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
+				B870199223ED50EC00625D61 /* Info.plist */,
+				B822F50D24597F3E00F207CD /* GoogleService-Info.plist */,
 				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
@@ -1651,6 +1667,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B835FFBF245F3A6A00189406 /* PostEditablePhotoCollectionViewCell */,
 				B824DA71245B073800700319 /* AlbumPreviewItemCollectionViewCell */,
 				B824DA68245B030E00700319 /* AlbumPreviewItemsHorizontalListTableViewCell */,
 				B822F5222459BD8100F207CD /* ProductPreviewItemCollectionViewCell */,
@@ -1850,6 +1867,7 @@
 				B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
+				B835FFC3245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib in Resources */,
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
 				B8559F8B243C843400787349 /* ExpandableDescriptionTableViewCell.xib in Resources */,
 				B825741723F5621500C8CBF8 /* HelveticaNeueCyr-MediumItalic.ttf in Resources */,
@@ -1947,6 +1965,7 @@
 				B8A3B0AD2450B05A007C4F05 /* EditablePhotoListItemCollectionViewCell.swift in Sources */,
 				B8559F9E243CD9D100787349 /* HorizontalBarItemCollectionViewCell.swift in Sources */,
 				B823A6B423FD7DD2007540D0 /* CustomNavigationController.swift in Sources */,
+				B835FFC2245F3AA700189406 /* PostEditablePhotoCollectionViewCell.swift in Sources */,
 				B8212A65241BD3480066700C /* BaseViewController.swift in Sources */,
 				B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */,
 				B8970B4924505763006676DF /* Service.swift in Sources */,
@@ -2135,6 +2154,7 @@
 				B82A211724212CB600D0D9F5 /* Logger.swift in Sources */,
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
+				B835FFBE245F300900189406 /* CreateArticlePresenter.swift in Sources */,
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
 				B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */,
 				B82B4D59245668420061A98B /* ServiceDetailsPresenter.swift in Sources */,
