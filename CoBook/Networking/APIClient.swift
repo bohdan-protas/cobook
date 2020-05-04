@@ -542,12 +542,20 @@ extension APIClient {
 extension APIClient {
 
     @discardableResult
-    func getAlbumsList(cardID: Int,
+    func createAlbum(parameters: CreateAlbumApiModel,
+                     completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.createAlbum(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func getAlbumsList(cardID: Int?,
                        limit: Int? = nil,
                        offset: Int? = nil,
-                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                       completion: @escaping (Result<[AlbumPreviewApiModel]?, Error>) -> Void) -> DataRequest {
 
-        let endpoint = ArticlesEndpoint.getAlbums(cardID: cardID, limit: limit, offset: offset)
+        let endpoint = ArticlesEndpoint.getAlbums
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

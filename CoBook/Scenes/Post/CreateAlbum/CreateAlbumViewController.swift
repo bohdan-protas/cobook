@@ -8,23 +8,95 @@
 
 import UIKit
 
-class CreateAlbumViewController: UIViewController {
+class CreateAlbumViewController: BaseViewController {
+
+    @IBOutlet var albumImageView: UIImageView!
+    @IBOutlet var deleteImageButton: DesignableButton!
+    @IBOutlet var addImageButton: UIButton!
+    @IBOutlet var saveButton: LoaderDesignableButton!
+    @IBOutlet var albumNameTextField: UITextField!
+    @IBOutlet var photoPlaceholderView: PhotosPlaceholderView!
+
+    /// picker that manage fetching images from gallery
+    private lazy var imagePicker: ImagePicker = {
+        let imagePicker = ImagePicker(presentationController: self, allowsEditing: false)
+        return imagePicker
+    }()
+
+    var presenter: CreateAlbumPresenter?
+
+    // MARK: - Actions
+
+    @IBAction func ablumTitleChanged(_ sender: UITextField) {
+        presenter?.update(title: sender.text)
+    }
+
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        presenter?.createAlbum()
+    }
+
+    @IBAction func deleteImageButtonTapped(_ sender: Any) {
+        presenter?.update(avatarID: nil)
+        set(avatarPath: nil)
+    }
+
+    @IBAction func addImageButtonTapped(_ sender: Any) {
+        imagePicker.onImagePicked = { [weak self] (image) in
+            self?.presenter?.uploadAlbumAvatar(image: image)
+        }
+
+        imagePicker.present()
+    }
+
+    // MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        photoPlaceholderView.bringSubviewToFront(addImageButton)
+        self.navigationItem.title = "Створити альбом"
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.attachView(self)
+        presenter?.setup()
     }
-    */
+
+    deinit {
+        presenter?.detachView()
+    }
+
+
+}
+
+// MARK: - CreateAlbumView
+
+extension CreateAlbumViewController: CreateAlbumView {
+
+    func set(avatarPath: String?) {
+        guard let avatarPath = avatarPath, !avatarPath.isEmpty else {
+            albumImageView.image = nil
+            photoPlaceholderView.isHidden = false
+            return
+        }
+
+        albumImageView?.setImage(withPath: avatarPath) { [weak self] (response) in
+            switch response.result {
+            case .success:
+                self?.photoPlaceholderView.isHidden = true
+            case .failure:
+                self?.photoPlaceholderView.isHidden = false
+            }
+        }
+    }
+
+    func set(title: String?) {
+        albumNameTextField.text = title
+    }
+
+    func setSaveButton(isEnabled: Bool) {
+        saveButton.isEnabled = isEnabled
+    }
+
 
 }

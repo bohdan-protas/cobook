@@ -17,6 +17,12 @@ class SelectAlbumTableViewCell: UITableViewCell {
 
     }
 
+    override var isSelected: Bool {
+        didSet {
+            albumImageView.borderWidth = isSelected ? 3 : 0
+        }
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
         albumImageView.cancelImageRequest()

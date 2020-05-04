@@ -156,8 +156,9 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         push(controller: controller, animated: true)
     }
 
-    func goToCreatePost() {
+    func goToCreatePost(cardID: Int) {
         let controller = UIStoryboard.Post.Controllers.createAtricle
+        controller.presenter = CreateArticlePresenter(cardID: cardID)
         self.navigationController?.pushViewController(controller, animated: true)
     }
 

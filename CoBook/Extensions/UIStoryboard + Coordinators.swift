@@ -31,6 +31,8 @@ extension UIStoryboard {
 
         enum Controllers {
             static let createAtricle: CreateArticleViewController = instance.initiateViewControllerFromType()
+            static let selectAlbum: SelectAlbumViewController = instance.initiateViewControllerFromType()
+            static let createAlbum: CreateAlbumViewController = instance.initiateViewControllerFromType()
         }
     }
 

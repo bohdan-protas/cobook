@@ -22,7 +22,7 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
     func goToCreateProduct(presenter: CreateProductPresenter?)
     func goToProductDetails(presenter: ProductDetailsPresenter?)
-    func goToCreatePost()
+    func goToCreatePost(cardID: Int)
 }
 
 struct PostPreviewSectionModel {
@@ -474,7 +474,7 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
             if let selectedItem = postPreviewSection?.items[safe: indexPath.item] {
                 switch selectedItem {
                 case .add:
-                    self.view?.goToCreatePost()
+                    self.view?.goToCreatePost(cardID: businessCardId)
                 case .view(let model):
                     break
                 case .showMore:

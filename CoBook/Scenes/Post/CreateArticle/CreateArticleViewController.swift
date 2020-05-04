@@ -13,12 +13,10 @@ class CreateArticleViewController: BaseViewController {
 
     @IBOutlet var photosCollectionView: UICollectionView!
     @IBOutlet var photosFlowLayout: UICollectionViewFlowLayout!
-
     @IBOutlet var headerTextField: UITextField!
     @IBOutlet var descriptionTextView: DesignableTextView!
     @IBOutlet var publicButton: LoaderDesignableButton!
     @IBOutlet var imageContainerView: UIView!
-
     @IBOutlet var albumImageView: DesignableImageView!
     @IBOutlet var albumTitleLabel: UILabel!
 
@@ -37,9 +35,7 @@ class CreateArticleViewController: BaseViewController {
     // MARK: - Actions
 
     @IBAction func selectAlbumTapped(_ sender: Any) {
-        performSegue(to: SelectAlbumViewController.self, sender: self) { (viewController) in
-            Log.debug(viewController)
-        }
+        presenter?.selectAlbumTapped()
     }
 
     @IBAction func publicButtonTapped(_ sender: Any) {
@@ -51,9 +47,7 @@ class CreateArticleViewController: BaseViewController {
         self.imagePicker.onImagePicked = { [weak self] image in
 
             self?.presenter?.uploadImage(image: image) { [weak self] (imagePath, imageID) in
-
                 guard let item = self?.presenter?.photos.count else { return }
-
                 self?.photosCollectionView.performBatchUpdates({
                     self?.presenter?.addPhoto(path: imagePath)
                     let indexPath = IndexPath(item: item, section: 0)
@@ -77,7 +71,6 @@ class CreateArticleViewController: BaseViewController {
         super.viewDidLoad()
         setupLayout()
 
-        presenter = CreateArticlePresenter(cardID: 0)
         presenter?.attachView(self)
         presenter?.onViewDidLoad()
     }
@@ -92,6 +85,12 @@ class CreateArticleViewController: BaseViewController {
 // MARK: - CreateArticleView
 
 extension CreateArticleViewController: CreateArticleView {
+
+    func goToSelectAlbum(presenter: SelectAlbumPresenter) {
+        let controller = UIStoryboard.Post.Controllers.selectAlbum
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 
     func set(title: String?) {
         self.headerTextField.text = title
@@ -151,15 +150,13 @@ extension CreateArticleViewController: PostEditablePhotoCollectionViewCellDelega
 
     func delete(_ cell: PostEditablePhotoCollectionViewCell) {
         if let indexPath = photosCollectionView.indexPath(for: cell) {
+            self.presenter?.deletePhoto(at: indexPath.item)
+            if self.presenter?.photos.isEmpty ?? true {
+                self.photosCollectionView.backgroundView = self.photosPlacholderView
+            }
             photosCollectionView.performBatchUpdates({
-                self.presenter?.deletePhoto(at: indexPath.item)
                 self.photosCollectionView.deleteItems(at: [indexPath])
-                if self.presenter?.photos.isEmpty ?? true {
-                    self.photosCollectionView.backgroundView = self.photosPlacholderView
-                }
-            }, completion: { (finished) in
-
-            })
+            }, completion: nil)
         }
     }
 

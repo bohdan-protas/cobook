@@ -13,6 +13,8 @@ protocol CreateArticleView: LoadDisplayableView, AlertDisplayableView {
 
     func set(title: String?)
     func set(body: String?)
+
+    func goToSelectAlbum(presenter: SelectAlbumPresenter)
 }
 
 class CreateArticlePresenter: BasePresenter {
@@ -61,6 +63,11 @@ class CreateArticlePresenter: BasePresenter {
 
     func deletePhoto(at index: Int) {
         self.photos.remove(at: index)
+    }
+
+    func selectAlbumTapped() {
+        let presenter = SelectAlbumPresenter(cardID: self.cardID)
+        view?.goToSelectAlbum(presenter: presenter)
     }
 
     func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageID: String?) -> Void)?) {

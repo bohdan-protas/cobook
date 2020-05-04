@@ -11,7 +11,12 @@
 		B81F189324602CFF003CBC84 /* SelectAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */; };
 		B81F189624602ECF003CBC84 /* SelectAlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189524602ECF003CBC84 /* SelectAlbumTableViewCell.swift */; };
 		B81F18992460317D003CBC84 /* CreateAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18982460317D003CBC84 /* CreateAlbumViewController.swift */; };
-		B81F189B24603438003CBC84 /* UIViewController + PerformSegueWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189A24603438003CBC84 /* UIViewController + PerformSegueWrapper.swift */; };
+		B81F189D24603BC6003CBC84 /* CreateAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189C24603BC6003CBC84 /* CreateAlbumPresenter.swift */; };
+		B81F189F24603F71003CBC84 /* CreateAlbumApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189E24603F71003CBC84 /* CreateAlbumApiModel.swift */; };
+		B81F18A124604506003CBC84 /* SelectAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18A024604506003CBC84 /* SelectAlbumPresenter.swift */; };
+		B81F18A3246080E4003CBC84 /* AlbumPreviewApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18A2246080E4003CBC84 /* AlbumPreviewApiModel.swift */; };
+		B81F18A524608130003CBC84 /* AlbumPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18A424608130003CBC84 /* AlbumPreviewModel.swift */; };
+		B81F18A72460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18A62460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift */; };
 		B82079342444638200FCCC17 /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82079322444638200FCCC17 /* FilterItemTableViewCell.swift */; };
 		B82079352444638200FCCC17 /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82079332444638200FCCC17 /* FilterItemTableViewCell.xib */; };
 		B820793824446EE600FCCC17 /* FilterSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B820793724446EE600FCCC17 /* FilterSectionHeaderView.xib */; };
@@ -309,7 +314,12 @@
 		B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumViewController.swift; sourceTree = "<group>"; };
 		B81F189524602ECF003CBC84 /* SelectAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumTableViewCell.swift; sourceTree = "<group>"; };
 		B81F18982460317D003CBC84 /* CreateAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumViewController.swift; sourceTree = "<group>"; };
-		B81F189A24603438003CBC84 /* UIViewController + PerformSegueWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + PerformSegueWrapper.swift"; sourceTree = "<group>"; };
+		B81F189C24603BC6003CBC84 /* CreateAlbumPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumPresenter.swift; sourceTree = "<group>"; };
+		B81F189E24603F71003CBC84 /* CreateAlbumApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumApiModel.swift; sourceTree = "<group>"; };
+		B81F18A024604506003CBC84 /* SelectAlbumPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumPresenter.swift; sourceTree = "<group>"; };
+		B81F18A2246080E4003CBC84 /* AlbumPreviewApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPreviewApiModel.swift; sourceTree = "<group>"; };
+		B81F18A424608130003CBC84 /* AlbumPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPreviewModel.swift; sourceTree = "<group>"; };
+		B81F18A62460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumCellsConfigurator.swift; sourceTree = "<group>"; };
 		B82079322444638200FCCC17 /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
 		B82079332444638200FCCC17 /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
 		B820793724446EE600FCCC17 /* FilterSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSectionHeaderView.xib; sourceTree = "<group>"; };
@@ -641,24 +651,26 @@
 		B81F18912460290A003CBC84 /* SelectAlbum */ = {
 			isa = PBXGroup;
 			children = (
-				B81F189424602EB6003CBC84 /* views */,
 				B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */,
+				B81F18A024604506003CBC84 /* SelectAlbumPresenter.swift */,
+				B81F18A62460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift */,
 			);
 			path = SelectAlbum;
 			sourceTree = "<group>";
 		};
-		B81F189424602EB6003CBC84 /* views */ = {
+		B81F189424602EB6003CBC84 /* SelectAlbumTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				B81F189524602ECF003CBC84 /* SelectAlbumTableViewCell.swift */,
 			);
-			path = views;
+			path = SelectAlbumTableViewCell;
 			sourceTree = "<group>";
 		};
 		B81F189724603164003CBC84 /* CreateAlbum */ = {
 			isa = PBXGroup;
 			children = (
 				B81F18982460317D003CBC84 /* CreateAlbumViewController.swift */,
+				B81F189C24603BC6003CBC84 /* CreateAlbumPresenter.swift */,
 			);
 			path = CreateAlbum;
 			sourceTree = "<group>";
@@ -887,7 +899,6 @@
 				B823B08A242CEFDF0012529D /* UIImageView + AFImageWrappers.swift */,
 				B823C6202431F585002CFB02 /* UIImage + AverageColor.swift */,
 				B825B22A244897E9007C70DF /* String + ImageGeneration.swift */,
-				B81F189A24603438003CBC84 /* UIViewController + PerformSegueWrapper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -907,9 +918,9 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B884AADF245F71F400ACC0D7 /* PhotosPlaceholderView */,
 				B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */,
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
+				B884AADF245F71F400ACC0D7 /* PhotosPlaceholderView */,
 				B820793B2444725A00FCCC17 /* CorneredEndgeView */,
 				B823DD78244348A600A74495 /* SearchResultHeaderView */,
 				B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */,
@@ -1269,6 +1280,7 @@
 				B822D70A2458B60000883BE8 /* CreateProduct.swift */,
 				B8B8B90A2459DB0000162224 /* ProductDetails.swift */,
 				B824DA72245B131C00700319 /* PostPreview.swift */,
+				B81F18A424608130003CBC84 /* AlbumPreviewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1373,6 +1385,8 @@
 				B822F50F24599C7700F207CD /* CreateProductApiModel.swift */,
 				B822F5152459B29E00F207CD /* ProductPreviewApiModel.swift */,
 				B8B8B90C2459F51400162224 /* ProductDetailsApiModel.swift */,
+				B81F189E24603F71003CBC84 /* CreateAlbumApiModel.swift */,
+				B81F18A2246080E4003CBC84 /* AlbumPreviewApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1717,6 +1731,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B81F189424602EB6003CBC84 /* SelectAlbumTableViewCell */,
 				B835FFBF245F3A6A00189406 /* PostEditablePhotoCollectionViewCell */,
 				B824DA71245B073800700319 /* AlbumPreviewItemCollectionViewCell */,
 				B824DA68245B030E00700319 /* AlbumPreviewItemsHorizontalListTableViewCell */,
@@ -2009,6 +2024,7 @@
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */,
+				B81F18A3246080E4003CBC84 /* AlbumPreviewApiModel.swift in Sources */,
 				B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */,
 				B822F5162459B29E00F207CD /* ProductPreviewApiModel.swift in Sources */,
 				B823DD8524439B6F00A74495 /* FilterViewController.swift in Sources */,
@@ -2023,6 +2039,7 @@
 				B8970B4924505763006676DF /* Service.swift in Sources */,
 				B824DA75245B3B0300700319 /* ArticlesEndpoint.swift in Sources */,
 				B824E1B42437C5940091C491 /* CreatePersonalCardParametersApiModel.swift in Sources */,
+				B81F18A124604506003CBC84 /* SelectAlbumPresenter.swift in Sources */,
 				B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */,
 				B8AB83EC24280EDC0041B879 /* PersonalCardDetailsPresenter.swift in Sources */,
 				B822D7042458B5B700883BE8 /* CreateProductPresenter.swift in Sources */,
@@ -2069,7 +2086,6 @@
 				B81F189324602CFF003CBC84 /* SelectAlbumViewController.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Coordinators.swift in Sources */,
 				B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */,
-				B81F189B24603438003CBC84 /* UIViewController + PerformSegueWrapper.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
 				B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */,
@@ -2097,6 +2113,7 @@
 				B884AAE3245F722800ACC0D7 /* PhotosPlaceholderView.swift in Sources */,
 				B820793A24446EFE00FCCC17 /* FilterSectionHeaderView.swift in Sources */,
 				B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */,
+				B81F189D24603BC6003CBC84 /* CreateAlbumPresenter.swift in Sources */,
 				B822F51224599D4800F207CD /* ProductEndpoint.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
@@ -2134,6 +2151,7 @@
 				B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */,
+				B81F18A72460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift in Sources */,
 				B8B8B90B2459DB0000162224 /* ProductDetails.swift in Sources */,
 				B8559F61243AA76800787349 /* PersonalCardDetailsDataSourceConfigurator.swift in Sources */,
 				B82B4D3F2456059C0061A98B /* CheckboxTableViewCell.swift in Sources */,
@@ -2141,6 +2159,7 @@
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
 				B8559F68243AD0CD00787349 /* BusinessCardDetailsDataSourceConfigurator.swift in Sources */,
 				B83FD7DC2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift in Sources */,
+				B81F18A524608130003CBC84 /* AlbumPreviewModel.swift in Sources */,
 				B823E8A1243F173A00EE1830 /* StaticMapConfiguratorService.swift in Sources */,
 				B8AB840324283C580041B879 /* EditCardView.swift in Sources */,
 				B8625AC623FAC88C0044605C /* LoaderButton.swift in Sources */,
@@ -2164,6 +2183,7 @@
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
 				B823C6212431F585002CFB02 /* UIImage + AverageColor.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
+				B81F189F24603F71003CBC84 /* CreateAlbumApiModel.swift in Sources */,
 				B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */,
 				B828BCBE24366C670099D1A8 /* ApiModel.swift in Sources */,
 				B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */,

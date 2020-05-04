@@ -355,11 +355,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3df-ma-OU7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3df-ma-OU7">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="68" id="3fI-cS-Tx5" customClass="SelectAlbumTableViewCell" customModule="CoBook" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectAlbumTableViewCell" rowHeight="68" id="3fI-cS-Tx5" customClass="SelectAlbumTableViewCell" customModule="CoBook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3fI-cS-Tx5" id="a0A-8j-3hl">
@@ -383,7 +383,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jG8-6g-vzg">
                                                             <rect key="frame" x="16" y="11" width="96" height="38"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cn3-Mr-igN" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cn3-Mr-igN" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                     <color key="backgroundColor" name="Theme_Gray-Background"/>
                                                                     <constraints>
@@ -424,7 +424,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="Theme_Gray-Background"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="1PJ-c9-D4V" secondAttribute="trailing" id="B7G-X1-cuR"/>
                                                 <constraint firstAttribute="bottom" secondItem="1PJ-c9-D4V" secondAttribute="bottom" constant="8" id="maJ-TT-0MN"/>
@@ -440,7 +440,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="3df-ma-OU7" firstAttribute="leading" secondItem="N6t-eB-l1X" secondAttribute="leading" id="0MW-Ws-bUC"/>
                             <constraint firstItem="3df-ma-OU7" firstAttribute="top" secondItem="N6t-eB-l1X" secondAttribute="top" id="DnR-88-5MC"/>
@@ -495,48 +495,76 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdd-Xk-0XY" userLabel="Image Collection Container">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="227"/>
                                                                                 <subviews>
-                                                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AJz-LU-6HK">
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ADS-2p-Mky">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="359" height="227"/>
-                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="DSG-Jc-t75">
-                                                                                            <size key="itemSize" width="50" height="50"/>
-                                                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                        </collectionViewFlowLayout>
-                                                                                        <cells/>
-                                                                                    </collectionView>
-                                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pu3-Fd-FSl">
-                                                                                        <rect key="frame" x="205" y="12" width="142" height="30"/>
-                                                                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <color key="backgroundColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                                                    </imageView>
+                                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iY9-jH-ZxT" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
+                                                                                        <rect key="frame" x="12" y="12" width="30" height="30"/>
+                                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="height" constant="30" id="SXy-Uv-nyi"/>
+                                                                                            <constraint firstAttribute="height" constant="30" id="iBd-IF-MZX"/>
+                                                                                            <constraint firstAttribute="width" constant="30" id="wbT-8P-sDh"/>
                                                                                         </constraints>
-                                                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="13"/>
-                                                                                        <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="12" maxY="0.0"/>
-                                                                                        <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                        <state key="normal" title="Додати фото" image="ic_plus">
-                                                                                            <color key="titleColor" name="Theme_Green-Dark"/>
-                                                                                        </state>
+                                                                                        <state key="normal" image="ic_delete"/>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                 <real key="value" value="15"/>
                                                                                             </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="defaultColor">
+                                                                                                <color key="value" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                            </userDefinedRuntimeAttribute>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                         <connections>
-                                                                                            <action selector="addPhotoTapped:" destination="Mg7-qv-8NB" eventType="touchUpInside" id="81g-ce-yJN"/>
+                                                                                            <action selector="deleteImageButtonTapped:" destination="vER-Ip-ZOt" eventType="touchUpInside" id="933-kB-qJt"/>
                                                                                         </connections>
                                                                                     </button>
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9C-nC-Pr3" customClass="PhotosPlaceholderView" customModule="CoBook" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="359" height="227"/>
+                                                                                        <subviews>
+                                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pu3-Fd-FSl">
+                                                                                                <rect key="frame" x="205" y="12" width="142" height="30"/>
+                                                                                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="height" constant="30" id="SXy-Uv-nyi"/>
+                                                                                                </constraints>
+                                                                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="13"/>
+                                                                                                <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="12" maxY="0.0"/>
+                                                                                                <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                                                <state key="normal" title="Додати фото" image="ic_plus">
+                                                                                                    <color key="titleColor" name="Theme_Green-Dark"/>
+                                                                                                </state>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                                <connections>
+                                                                                                    <action selector="addImageButtonTapped:" destination="vER-Ip-ZOt" eventType="touchUpInside" id="Xmc-8b-Awy"/>
+                                                                                                    <action selector="addPhotoTapped:" destination="Mg7-qv-8NB" eventType="touchUpInside" id="81g-ce-yJN"/>
+                                                                                                </connections>
+                                                                                            </button>
+                                                                                        </subviews>
+                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="trailing" secondItem="Pu3-Fd-FSl" secondAttribute="trailing" constant="12" id="RtF-R1-jiW"/>
+                                                                                            <constraint firstItem="Pu3-Fd-FSl" firstAttribute="top" secondItem="p9C-nC-Pr3" secondAttribute="top" constant="12" id="i4H-1D-Cdc"/>
+                                                                                        </constraints>
+                                                                                    </view>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="trailing" secondItem="Pu3-Fd-FSl" secondAttribute="trailing" constant="12" id="2CN-S8-wdj"/>
-                                                                                    <constraint firstItem="AJz-LU-6HK" firstAttribute="leading" secondItem="bdd-Xk-0XY" secondAttribute="leading" id="BTc-4i-nsO"/>
-                                                                                    <constraint firstItem="AJz-LU-6HK" firstAttribute="top" secondItem="bdd-Xk-0XY" secondAttribute="top" id="NeM-2K-y6N"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="p9C-nC-Pr3" secondAttribute="bottom" id="Ha7-kr-mJj"/>
+                                                                                    <constraint firstItem="iY9-jH-ZxT" firstAttribute="top" secondItem="bdd-Xk-0XY" secondAttribute="top" constant="12" id="QgL-0Y-JtS"/>
                                                                                     <constraint firstAttribute="width" secondItem="bdd-Xk-0XY" secondAttribute="height" multiplier="359:227" id="SPS-PP-yCC"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="AJz-LU-6HK" secondAttribute="bottom" id="eTz-BB-epE"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="AJz-LU-6HK" secondAttribute="trailing" id="m8I-NJ-vds"/>
-                                                                                    <constraint firstItem="Pu3-Fd-FSl" firstAttribute="top" secondItem="bdd-Xk-0XY" secondAttribute="top" constant="12" id="xJV-yw-b6V"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="ADS-2p-Mky" secondAttribute="trailing" id="Vk4-QA-MPB"/>
+                                                                                    <constraint firstItem="p9C-nC-Pr3" firstAttribute="leading" secondItem="bdd-Xk-0XY" secondAttribute="leading" id="WKE-QO-bAC"/>
+                                                                                    <constraint firstItem="ADS-2p-Mky" firstAttribute="top" secondItem="bdd-Xk-0XY" secondAttribute="top" id="YQL-kH-JBA"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="p9C-nC-Pr3" secondAttribute="trailing" id="ajS-hx-myD"/>
+                                                                                    <constraint firstItem="iY9-jH-ZxT" firstAttribute="leading" secondItem="bdd-Xk-0XY" secondAttribute="leading" constant="12" id="eUD-sd-F38"/>
+                                                                                    <constraint firstItem="p9C-nC-Pr3" firstAttribute="top" secondItem="bdd-Xk-0XY" secondAttribute="top" id="oOP-Bn-xxb"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="ADS-2p-Mky" secondAttribute="bottom" id="r1b-ri-C9q"/>
+                                                                                    <constraint firstItem="ADS-2p-Mky" firstAttribute="leading" secondItem="bdd-Xk-0XY" secondAttribute="leading" id="y1E-of-Dhq"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mG1-dJ-5E6" userLabel="Header Container">
@@ -553,6 +581,9 @@
                                                                                                 <color key="value" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             </userDefinedRuntimeAttribute>
                                                                                         </userDefinedRuntimeAttributes>
+                                                                                        <connections>
+                                                                                            <action selector="ablumTitleChanged:" destination="vER-Ip-ZOt" eventType="editingChanged" id="sIL-g6-A4k"/>
+                                                                                        </connections>
                                                                                     </textField>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -607,7 +638,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsl-lX-Qrd" userLabel="Bottom Button Container">
                                                         <rect key="frame" x="0.0" y="549" width="359" height="50"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsY-Wz-Ht7" userLabel="Continue Button" customClass="LoaderDesignableButton" customModule="CoBook" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsY-Wz-Ht7" userLabel="Continue Button" customClass="LoaderDesignableButton" customModule="CoBook" customModuleProvider="target">
                                                                 <rect key="frame" x="8" y="0.0" width="343" height="50"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -633,6 +664,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="publicButtonTapped:" destination="Mg7-qv-8NB" eventType="touchUpInside" id="fP6-fL-ovC"/>
+                                                                    <action selector="saveButtonTapped:" destination="vER-Ip-ZOt" eventType="touchUpInside" id="S9T-B1-ssQ"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -682,6 +714,14 @@
                         <viewLayoutGuide key="safeArea" id="0OO-14-aeK"/>
                     </view>
                     <navigationItem key="navigationItem" id="ukT-9a-AGq"/>
+                    <connections>
+                        <outlet property="addImageButton" destination="Pu3-Fd-FSl" id="3Qg-y5-Igf"/>
+                        <outlet property="albumImageView" destination="ADS-2p-Mky" id="KJ8-tn-dwQ"/>
+                        <outlet property="albumNameTextField" destination="NPy-7x-u7I" id="ouR-e9-sP2"/>
+                        <outlet property="deleteImageButton" destination="iY9-jH-ZxT" id="ULR-Y0-sE5"/>
+                        <outlet property="photoPlaceholderView" destination="p9C-nC-Pr3" id="PCO-BZ-hXm"/>
+                        <outlet property="saveButton" destination="zsY-Wz-Ht7" id="rL1-o2-Boc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbq-dh-5KP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -708,6 +748,7 @@
     </scenes>
     <resources>
         <image name="ic_arrow_right" width="24" height="24"/>
+        <image name="ic_delete" width="24" height="24"/>
         <image name="ic_plus" width="16" height="16"/>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

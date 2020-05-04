@@ -10,7 +10,8 @@ import Alamofire
 
 enum ArticlesEndpoint: Endpoint {
 
-    case getAlbums(cardID: Int?, limit: Int?, offset: Int?)
+    case getAlbums
+    case createAlbum(parameters: CreateAlbumApiModel)
 
     var useAuthirizationToken: Bool {
         return true
@@ -20,6 +21,8 @@ enum ArticlesEndpoint: Endpoint {
         switch self {
         case .getAlbums:
             return .get
+        case .createAlbum:
+            return .post
         }
     }
 
@@ -27,22 +30,19 @@ enum ArticlesEndpoint: Endpoint {
         switch self {
         case .getAlbums:
             return "/articles/albums"
+        case .createAlbum:
+            return "articles/albums"
         }
     }
 
     var parameters: Parameters? {
         switch self {
+        case .getAlbums:
+            return nil
 
-        case .getAlbums(let cardID, let limit, let offset):
-            var params: Parameters = [:]
-            params["card_id"] = cardID
-            if let limit = limit {
-                params["limit"] = limit
-            }
-            if let offset = offset {
-                params["offset"] = offset
-            }
-            return params
+        case .createAlbum(let parameters):
+            return parameters.dictionary
+
         }
     }
 
