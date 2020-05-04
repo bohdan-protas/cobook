@@ -117,26 +117,3 @@ private extension DesignableTextView {
 
 
 }
-
-// MARK: - UITextViewDelegate
-
-//extension DesignableTextView: UITextViewDelegate {
-//
-//    /// When the UITextView did change, show or hide the label based on if the UITextView is empty or not
-//    func textViewDidChange(_ textView: UITextView) {
-//        refreshPlaceholder()
-//        proxyDelegate?.textViewDidChange?(self)
-//    }
-//
-//    func textViewDidBeginEditing(_ textView: UITextView) {
-//        isEnabled = true
-//        proxyDelegate?.textViewDidBeginEditing?(self)
-//    }
-//
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        isEnabled = false
-//        proxyDelegate?.textViewDidEndEditing?(self)
-//    }
-//
-//
-//}

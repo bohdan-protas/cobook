@@ -233,6 +233,8 @@
 		B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B870198D23ED50EC00625D61 /* Assets.xcassets */; };
 		B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */; };
 		B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */; };
+		B884AAE1245F720D00ACC0D7 /* PhotosPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */; };
+		B884AAE3245F722800ACC0D7 /* PhotosPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */; };
 		B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */; };
 		B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */; };
 		B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */; };
@@ -530,6 +532,8 @@
 		B870199023ED50EC00625D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B870199223ED50EC00625D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataManager.swift; sourceTree = "<group>"; };
+		B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosPlaceholderView.xib; sourceTree = "<group>"; };
+		B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPlaceholderView.swift; sourceTree = "<group>"; };
 		B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItemTableViewCell.swift; sourceTree = "<group>"; };
 		B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemTableViewCell.xib; sourceTree = "<group>"; };
 		B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
@@ -869,6 +873,7 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B884AADF245F71F400ACC0D7 /* PhotosPlaceholderView */,
 				B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */,
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
 				B820793B2444725A00FCCC17 /* CorneredEndgeView */,
@@ -1495,6 +1500,15 @@
 			path = CoBook;
 			sourceTree = "<group>";
 		};
+		B884AADF245F71F400ACC0D7 /* PhotosPlaceholderView */ = {
+			isa = PBXGroup;
+			children = (
+				B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */,
+				B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */,
+			);
+			path = PhotosPlaceholderView;
+			sourceTree = "<group>";
+		};
 		B8858878240FE58500158751 /* AccountItemTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1865,6 +1879,7 @@
 				B820793D2444727F00FCCC17 /* CorneredEdgeView.xib in Resources */,
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
 				B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */,
+				B884AAE1245F720D00ACC0D7 /* PhotosPlaceholderView.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
 				B835FFC3245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib in Resources */,
@@ -2039,6 +2054,7 @@
 				B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */,
 				B8559F70243B2BDF00787349 /* CardPreviewApiModel.swift in Sources */,
 				B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */,
+				B884AAE3245F722800ACC0D7 /* PhotosPlaceholderView.swift in Sources */,
 				B820793A24446EFE00FCCC17 /* FilterSectionHeaderView.swift in Sources */,
 				B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */,
 				B822F51224599D4800F207CD /* ProductEndpoint.swift in Sources */,

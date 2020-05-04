@@ -38,7 +38,7 @@ class CreateArticlePresenter: BasePresenter {
         detachView()
     }
 
-    // MARK: - Public
+    // MARK: - Base presenter
 
     func attachView(_ view: CreateArticleView) {
         self.view = view
@@ -46,6 +46,13 @@ class CreateArticlePresenter: BasePresenter {
 
     func detachView() {
         view = nil
+    }
+
+    // MARK: - Public
+
+    func onViewDidLoad() {
+        view?.set(title: articleTitle)
+        view?.set(body: articleBody)
     }
 
     func addPhoto(path: String?) {

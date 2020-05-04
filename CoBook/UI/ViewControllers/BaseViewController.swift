@@ -13,7 +13,8 @@ import MessageUI
 
 class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayableView {
 
-    // MARK: Properties
+    // MARK: - Properties
+
     var prototypeHud: JGProgressHUD {
         let hud = JGProgressHUD(style: .extraLight)
         hud.vibrancyEnabled = false
@@ -61,15 +62,15 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
     func stopLoading(success: Bool, completion: (() -> Void)?) {
         onFinishDownloadCompletion = completion
-        UIView.animate(withDuration: 0.3) {
-            self.currentHud?.indicatorView = success ? JGProgressHUDSuccessIndicatorView.init() : JGProgressHUDErrorIndicatorView.init()
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.currentHud?.indicatorView = success ? JGProgressHUDSuccessIndicatorView.init() : JGProgressHUDErrorIndicatorView.init()
 
             let succesText = NSAttributedString(string: "Успішно!", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
             let failureText = NSAttributedString(string: "Помилка", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
-            self.currentHud?.textLabel.attributedText = success ? succesText : failureText
+            self?.currentHud?.textLabel.attributedText = success ? succesText : failureText
 
             DispatchQueue.main.async {
-                self.currentHud?.dismiss(afterDelay: 2, animated: true)
+                self?.currentHud?.dismiss(afterDelay: 2, animated: true)
             }
         }
     }

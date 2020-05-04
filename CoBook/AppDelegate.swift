@@ -61,28 +61,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppStorage.State.isFirstAppLaunch = false
         }
 
-        let navigation = CustomNavigationController(rootViewController: UIStoryboard.Post.Controllers.createAtricle)
-        window?.rootViewController = navigation
-
-
-
-//        if AppStorage.User.data?.userId == nil {
-//            if AppStorage.User.isTutorialShown {
-//                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-//                window?.rootViewController = signUpNavigationController
-//            } else {
-//                AppStorage.User.isTutorialShown = true
-//                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
-//                window?.rootViewController = onboardingViewController
-//            }
-//        } else {
-//            if AppStorage.Auth.refreshToken == nil {
-//                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-//                window?.rootViewController = signInNavigationController
-//            } else {
-//                window?.rootViewController = MainTabBarController()
-//            }
-//        }
+        // start screen routing
+        if AppStorage.User.data?.userId == nil {
+            if AppStorage.User.isTutorialShown {
+                let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signUpNavigationController
+            } else {
+                AppStorage.User.isTutorialShown = true
+                let onboardingViewController: OnboardingViewController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = onboardingViewController
+            }
+        } else {
+            if AppStorage.Auth.refreshToken == nil {
+                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                window?.rootViewController = signInNavigationController
+            } else {
+                window?.rootViewController = MainTabBarController()
+            }
+        }
 
 
         return true

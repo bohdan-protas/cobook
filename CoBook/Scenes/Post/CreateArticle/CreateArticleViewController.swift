@@ -11,16 +11,22 @@ import UIKit
 
 class CreateArticleViewController: BaseViewController {
 
-    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var photosCollectionView: UICollectionView!
+    @IBOutlet var photosFlowLayout: UICollectionViewFlowLayout!
+
     @IBOutlet var headerTextField: UITextField!
     @IBOutlet var descriptionTextView: DesignableTextView!
     @IBOutlet var publicButton: LoaderDesignableButton!
+    @IBOutlet var imageContainerView: UIView!
 
     /// picker that manage fetching images from gallery
     private lazy var imagePicker: ImagePicker = {
         let imagePicker = ImagePicker(presentationController: self, allowsEditing: false)
         return imagePicker
+    }()
+
+    private lazy var photosPlacholderView: UIView = {
+        return PhotosPlaceholderView(frame: photosCollectionView.frame)
     }()
 
     var presenter: CreateArticlePresenter?
@@ -33,15 +39,22 @@ class CreateArticleViewController: BaseViewController {
 
     @IBAction func addPhotoTapped(_ sender: Any) {
 
-        self.imagePicker.onImagePicked = { image in
-            self.presenter?.uploadImage(image: image) { [weak self] (imagePath, imageID) in
-                guard let strongSelf = self else { return }
-                guard let item = strongSelf.presenter?.photos.count else { return }
-                strongSelf.photosCollectionView.performBatchUpdates({
-                    strongSelf.presenter?.addPhoto(path: imagePath)
+        self.imagePicker.onImagePicked = { [weak self] image in
+
+            self?.presenter?.uploadImage(image: image) { [weak self] (imagePath, imageID) in
+
+                guard let item = self?.presenter?.photos.count else { return }
+
+                self?.photosCollectionView.performBatchUpdates({
+                    self?.presenter?.addPhoto(path: imagePath)
                     let indexPath = IndexPath(item: item, section: 0)
-                    strongSelf.photosCollectionView.insertItems(at: [indexPath])
-                }, completion: nil)
+                    self?.photosCollectionView.insertItems(at: [indexPath])
+                }, completion: { finished in
+                    let indexPath = IndexPath(item: item, section: 0)
+                    self?.photosCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+                    self?.photosCollectionView.backgroundView = nil
+                })
+
             }
         }
 
@@ -57,11 +70,11 @@ class CreateArticleViewController: BaseViewController {
 
         presenter = CreateArticlePresenter(cardID: 0)
         presenter?.attachView(self)
+        presenter?.onViewDidLoad()
     }
 
     deinit {
         presenter?.detachView()
-        presenter = nil
     }
 
 
@@ -80,7 +93,7 @@ extension CreateArticleViewController: CreateArticleView {
     }
 
     func setContinueButton(actived: Bool) {
-        //publicButton.isEnabled = actived
+        publicButton.isEnabled = actived
     }
 
 
@@ -94,9 +107,11 @@ private extension CreateArticleViewController {
         self.navigationItem.title = "Створити статтю"
         descriptionTextView.isScrollEnabled = false
 
-        photosCollectionView.register(PostEditablePhotoCollectionViewCell.nib, forCellWithReuseIdentifier: PostEditablePhotoCollectionViewCell.identifier)
         photosCollectionView.dataSource = self
         photosCollectionView.delegate = self
+        photosCollectionView.register(PostEditablePhotoCollectionViewCell.nib, forCellWithReuseIdentifier: PostEditablePhotoCollectionViewCell.identifier)
+
+        photosCollectionView.backgroundView = photosPlacholderView
     }
     
 
@@ -130,10 +145,21 @@ extension CreateArticleViewController: PostEditablePhotoCollectionViewCellDelega
             photosCollectionView.performBatchUpdates({
                 self.presenter?.deletePhoto(at: indexPath.item)
                 self.photosCollectionView.deleteItems(at: [indexPath])
-            }, completion: nil)
+                if self.presenter?.photos.isEmpty ?? true {
+                    self.photosCollectionView.backgroundView = self.photosPlacholderView
+                }
+            }, completion: { (finished) in
+
+            })
         }
     }
 
+
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension CreateArticleViewController: UICollectionViewDelegate {
 
 }
 
@@ -141,8 +167,16 @@ extension CreateArticleViewController: PostEditablePhotoCollectionViewCellDelega
 
 extension CreateArticleViewController: UICollectionViewDelegateFlowLayout {
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.frame.size
+        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.height)
     }
 
 

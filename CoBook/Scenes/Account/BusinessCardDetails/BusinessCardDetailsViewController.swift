@@ -158,7 +158,7 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     func goToCreatePost() {
         let controller = UIStoryboard.Post.Controllers.createAtricle
-        push(controller: controller, animated: true)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
 

@@ -19,6 +19,14 @@ class PostEditablePhotoCollectionViewCell: UICollectionViewCell {
 
     weak var delegate: PostEditablePhotoCollectionViewCellDelegate?
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        photoImageView.clipsToBounds = true
+        photoImageView.layer.cornerRadius = 10
+        photoImageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+    }
+
     @IBAction func deleteButtonTapped(_ sender: Any) {
         delegate?.delete(self)
     }
@@ -26,7 +34,7 @@ class PostEditablePhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         photoImageView.cancelImageRequest()
-        delegate = nil
+        photoImageView.image = nil
     }
 
 

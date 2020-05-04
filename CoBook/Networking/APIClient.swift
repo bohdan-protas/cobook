@@ -97,6 +97,7 @@ class APIClient {
             let randomName = "\(String.random())-image"
             multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).jpg", mimeType: "image/jpeg")
         }, to: endpoint, headers: headers)
+            .validate(statusCode: 200..<300)
             .response { (response) in
                 
                 guard let responseData = response.data else {
@@ -395,12 +396,15 @@ extension APIClient {
      */
     @discardableResult
     func upload(imageData: Data,
-                completion: @escaping (Result<FileDataApiModel?, Error>) -> Void) -> DataRequest {
+                completion: @escaping (Result<FileDataApiModel?, Error>) -> Void) -> DataRequest? {
 
         let endpoint = ContentManagerEndpoint.singleFileUpload
-        let url = endpoint.urlRequest!.url!
-        let headers = endpoint.urlRequest?.headers
-        return upload(imageData: imageData, to: url, headers: headers, completion: completion)
+        if let url = endpoint.urlRequest?.url {
+            let headers = endpoint.urlRequest?.headers
+            return upload(imageData: imageData, to: url, headers: headers, completion: completion)
+        } else {
+            return nil
+        }
     }
 
 }

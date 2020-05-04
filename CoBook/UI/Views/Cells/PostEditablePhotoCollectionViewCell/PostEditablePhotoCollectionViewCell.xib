@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="289" height="257"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T1j-Cc-Zjw">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T1j-Cc-Zjw">
                         <rect key="frame" x="0.0" y="0.0" width="289" height="257"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAL-5Q-oAk" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
@@ -32,6 +32,9 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="15"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="defaultColor">
+                                <color key="value" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
                             <action selector="deleteButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="7W8-rf-RGg"/>
@@ -40,12 +43,12 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="T1j-Cc-Zjw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3wt-cM-POi"/>
                 <constraint firstItem="DAL-5Q-oAk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="CiV-fc-5yt"/>
-                <constraint firstItem="T1j-Cc-Zjw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QpW-66-uJT"/>
-                <constraint firstAttribute="bottom" secondItem="T1j-Cc-Zjw" secondAttribute="bottom" id="VAq-vB-o36"/>
-                <constraint firstAttribute="trailing" secondItem="T1j-Cc-Zjw" secondAttribute="trailing" id="cAg-Cz-ywl"/>
+                <constraint firstAttribute="bottom" secondItem="T1j-Cc-Zjw" secondAttribute="bottom" id="Omw-4o-GZp"/>
+                <constraint firstItem="T1j-Cc-Zjw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="a7Q-5Q-bIS"/>
                 <constraint firstItem="DAL-5Q-oAk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="fAv-i5-bSQ"/>
-                <constraint firstItem="T1j-Cc-Zjw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vAU-Nr-fR2"/>
+                <constraint firstAttribute="trailing" secondItem="T1j-Cc-Zjw" secondAttribute="trailing" id="tme-dK-mHc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="289" height="257"/>

@@ -92,6 +92,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="66" id="vWM-ti-kdW"/>
+                        </constraints>
                     </stackView>
                 </subviews>
             </view>
