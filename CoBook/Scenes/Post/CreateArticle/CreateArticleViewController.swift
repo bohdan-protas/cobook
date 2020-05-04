@@ -19,6 +19,9 @@ class CreateArticleViewController: BaseViewController {
     @IBOutlet var publicButton: LoaderDesignableButton!
     @IBOutlet var imageContainerView: UIView!
 
+    @IBOutlet var albumImageView: DesignableImageView!
+    @IBOutlet var albumTitleLabel: UILabel!
+
     /// picker that manage fetching images from gallery
     private lazy var imagePicker: ImagePicker = {
         let imagePicker = ImagePicker(presentationController: self, allowsEditing: false)
@@ -32,7 +35,13 @@ class CreateArticleViewController: BaseViewController {
     var presenter: CreateArticlePresenter?
 
     // MARK: - Actions
-    
+
+    @IBAction func selectAlbumTapped(_ sender: Any) {
+        performSegue(to: SelectAlbumViewController.self, sender: self) { (viewController) in
+            Log.debug(viewController)
+        }
+    }
+
     @IBAction func publicButtonTapped(_ sender: Any) {
 
     }
