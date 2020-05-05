@@ -8,19 +8,13 @@
 
 import UIKit
 
-struct CreateArticleModel {
-    var cardID: Int
-    var title: String?
-    var body: String?
-    var album: AlbumPreviewModel?
-    var photos: [FileDataApiModel] = []
-}
 
 protocol CreateArticleView: LoadDisplayableView, AlertDisplayableView, NavigableView {
     func setContinueButton(actived: Bool)
     func set(title: String?)
     func set(body: String?)
     func set(albumTitle: String?, albumImage: String?)
+    func reloadPhotos()
     func goToSelectAlbum(presenter: SelectAlbumPresenter)
 }
 
@@ -78,6 +72,7 @@ class CreateArticlePresenter: BasePresenter {
         view?.set(title: parameters.title)
         view?.set(body: parameters.body)
         view?.set(albumTitle: parameters.album?.title, albumImage: parameters.album?.avatarPath)
+        view?.reloadPhotos()
         validateInput()
     }
 

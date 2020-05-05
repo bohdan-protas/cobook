@@ -1,5 +1,5 @@
 //
-//  CreateAlbumModel.swift
+//  CreateArticleModel.swift
 //  CoBook
 //
 //  Created by protas on 5/5/20.
@@ -9,10 +9,10 @@
 import Foundation
 
 
-struct CreateAlbumModel {
+struct CreateArticleModel {
     var cardID: Int
-    var albumID: Int?
-    var avatarID: String?
-    var avatarPath: String?
     var title: String?
+    var body: String?
+    var album: AlbumPreviewModel?
+    var photos: [FileDataApiModel] = []
 }

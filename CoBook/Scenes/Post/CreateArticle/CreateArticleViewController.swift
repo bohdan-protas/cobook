@@ -95,8 +95,19 @@ class CreateArticleViewController: BaseViewController, UITextViewDelegate {
 
 extension CreateArticleViewController: CreateArticleView {
 
+    func reloadPhotos() {
+        if self.presenter?.photos.isEmpty ?? true {
+            self.photosCollectionView.backgroundView = self.photosPlacholderView
+        } else {
+            self.photosCollectionView.backgroundView = nil
+        }
+        photosCollectionView.reloadData()
+    }
+
     func set(albumTitle: String?, albumImage: String?) {
         albumTitleLabel.text = albumTitle ?? "Виберіть альбом"
+        albumImageView.cancelImageRequest()
+        albumImageView.image = nil
         albumImageView.setImage(withPath: albumImage)
     }
 
@@ -202,11 +213,3 @@ extension CreateArticleViewController: UICollectionViewDelegateFlowLayout {
 
 
 }
-
-
-
-
-
-
-
-
