@@ -84,7 +84,6 @@ class SelectAlbumPresenter: BasePresenter {
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
-
     }
 
     func selectedAlbumAt(indexPath: IndexPath) {

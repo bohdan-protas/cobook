@@ -49,7 +49,7 @@ class CreateArticleViewController: BaseViewController, UITextViewDelegate {
     }
 
     @IBAction func publicButtonTapped(_ sender: Any) {
-
+        presenter?.onPublicButtonTapped()
     }
 
     @IBAction func addPhotoTapped(_ sender: Any) {

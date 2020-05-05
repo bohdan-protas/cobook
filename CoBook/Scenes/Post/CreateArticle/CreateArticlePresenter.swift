@@ -116,28 +116,8 @@ class CreateArticlePresenter: BasePresenter {
         }
     }
 
-    func createArticle() {
-        let parameters = CreateArticleApiModel(cardID: self.parameters.cardID,
-                                               albumID: self.parameters.album?.id,
-                                               title: self.parameters.title,
-                                               body: self.parameters.body,
-                                               photos: self.parameters.photos.compactMap { $0.id })
-
-        view?.startLoading()
-        APIClient.default.createArticle(parameters: parameters) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            switch result {
-            case .success:
-                strongSelf.view?.stopLoading(success: true, completion: {
-                    strongSelf.view?.popController()
-                })
-                strongSelf.view?.popController()
-            case .failure(let error):
-                strongSelf.view?.stopLoading(success: false, completion: {
-                    strongSelf.view?.errorAlert(message: error.localizedDescription)
-                })
-            }
-        }
+    func onPublicButtonTapped() {
+        createArticle()
     }
 
 
@@ -157,6 +137,29 @@ private extension CreateArticlePresenter {
                 !(parameters.album == nil)
         }()
         view?.setContinueButton(actived: isEnabled)
+    }
+
+    func createArticle() {
+        let parameters = CreateArticleApiModel(cardID: self.parameters.cardID,
+                                               albumID: self.parameters.album?.id,
+                                               title: self.parameters.title,
+                                               body: self.parameters.body,
+                                               photos: self.parameters.photos.compactMap { $0.id })
+
+        view?.startLoading()
+        APIClient.default.createArticle(parameters: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    strongSelf.view?.popController()
+                })
+            case .failure(let error):
+                strongSelf.view?.stopLoading(success: false, completion: {
+                    strongSelf.view?.errorAlert(message: error.localizedDescription)
+                })
+            }
+        }
     }
 
 
