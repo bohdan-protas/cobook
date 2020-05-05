@@ -62,7 +62,7 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
     func stopLoading(success: Bool, completion: (() -> Void)?) {
         onFinishDownloadCompletion = completion
-        UIView.animate(withDuration: 0.3) { [weak self] in
+        UIView.animate(withDuration: 0.2) { [weak self] in
             self?.currentHud?.indicatorView = success ? JGProgressHUDSuccessIndicatorView.init() : JGProgressHUDErrorIndicatorView.init()
 
             let succesText = NSAttributedString(string: "Успішно!", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])

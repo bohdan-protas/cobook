@@ -8,12 +8,19 @@
 
 import UIKit
 
-protocol CreateArticleView: LoadDisplayableView, AlertDisplayableView {
-    func setContinueButton(actived: Bool)
+struct CreateArticleModel {
+    var cardID: Int
+    var title: String?
+    var body: String?
+    var album: AlbumPreviewModel?
+    var photos: [FileDataApiModel] = []
+}
 
+protocol CreateArticleView: LoadDisplayableView, AlertDisplayableView, NavigableView {
+    func setContinueButton(actived: Bool)
     func set(title: String?)
     func set(body: String?)
-
+    func set(albumTitle: String?, albumImage: String?)
     func goToSelectAlbum(presenter: SelectAlbumPresenter)
 }
 
@@ -24,16 +31,23 @@ class CreateArticlePresenter: BasePresenter {
 
     /// Datasource
     private var cardID: Int
-    private var albumID: Int?
-    private var articleTitle: String?
-    private var articleBody: String?
+    var photos: [String] {
+        get {
+            parameters.photos.compactMap { $0.sourceUrl }
+        }
+    }
 
-    var photos: [String?] = []
+    var parameters: CreateArticleModel {
+        didSet {
+            validateInput()
+        }
+    }
 
     // MARK: Object Life Cycle
 
     init(cardID: Int) {
         self.cardID = cardID
+        self.parameters = CreateArticleModel(cardID: cardID)
     }
 
     deinit {
@@ -52,25 +66,38 @@ class CreateArticlePresenter: BasePresenter {
 
     // MARK: - Public
 
-    func onViewDidLoad() {
-        view?.set(title: articleTitle)
-        view?.set(body: articleBody)
+    func update(title: String?) {
+        self.parameters.title = title
     }
 
-    func addPhoto(path: String?) {
-        self.photos.append(path)
+    func update(body: String?) {
+        self.parameters.body = body
+    }
+
+    func setup() {
+        view?.set(title: parameters.title)
+        view?.set(body: parameters.body)
+        view?.set(albumTitle: parameters.album?.title, albumImage: parameters.album?.avatarPath)
+        validateInput()
+    }
+
+    func addPhoto(data: FileDataApiModel?) {
+        if let data = data {
+            self.parameters.photos.append(data)
+        }
     }
 
     func deletePhoto(at index: Int) {
-        self.photos.remove(at: index)
+        self.parameters.photos.remove(at: index)
     }
 
     func selectAlbumTapped() {
-        let presenter = SelectAlbumPresenter(cardID: self.cardID)
+        let presenter = SelectAlbumPresenter(cardID: self.cardID, selectedAlbumID: self.parameters.album?.id)
+        presenter.delegate = self
         view?.goToSelectAlbum(presenter: presenter)
     }
 
-    func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageID: String?) -> Void)?) {
+    func uploadImage(image: UIImage?, completion: ((FileDataApiModel?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
             view?.errorAlert(message: "Помилка завантаження фото")
             return
@@ -82,11 +109,66 @@ class CreateArticlePresenter: BasePresenter {
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
-                completion?(response?.sourceUrl, response?.id)
+                completion?(response)
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
+    }
+
+    func createArticle() {
+        let parameters = CreateArticleApiModel(cardID: self.parameters.cardID,
+                                               albumID: self.parameters.album?.id,
+                                               title: self.parameters.title,
+                                               body: self.parameters.body,
+                                               photos: self.parameters.photos.compactMap { $0.id })
+
+        view?.startLoading()
+        APIClient.default.createArticle(parameters: parameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                strongSelf.view?.stopLoading(success: true, completion: {
+                    strongSelf.view?.popController()
+                })
+                strongSelf.view?.popController()
+            case .failure(let error):
+                strongSelf.view?.stopLoading(success: false, completion: {
+                    strongSelf.view?.errorAlert(message: error.localizedDescription)
+                })
+            }
+        }
+    }
+
+
+}
+
+// MARK: - Privates
+
+private extension CreateArticlePresenter {
+
+    func validateInput() {
+        let whitespaceCharacterSet = CharacterSet.whitespaces
+        let isEnabled: Bool = {
+            return
+                !(parameters.title ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(parameters.body ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
+                !(parameters.photos.isEmpty) &&
+                !(parameters.album == nil)
+        }()
+        view?.setContinueButton(actived: isEnabled)
+    }
+
+
+}
+
+// MARK: - SelectAlbumDelegate
+
+extension CreateArticlePresenter: SelectAlbumDelegate {
+
+    func selectedAlbum(_ model: AlbumPreviewModel?) {
+        parameters.album = model
+        view?.set(albumTitle: parameters.album?.title, albumImage: parameters.album?.avatarPath)
     }
 
 

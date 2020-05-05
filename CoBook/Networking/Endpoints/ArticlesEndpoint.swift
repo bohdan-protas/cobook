@@ -12,6 +12,8 @@ enum ArticlesEndpoint: Endpoint {
 
     case getAlbums
     case createAlbum(parameters: CreateAlbumApiModel)
+    case updateAlbum(parameters: UpdateAlbumApiModel)
+    case createArticle(parameters: CreateArticleApiModel)
 
     var useAuthirizationToken: Bool {
         return true
@@ -23,6 +25,10 @@ enum ArticlesEndpoint: Endpoint {
             return .get
         case .createAlbum:
             return .post
+        case .createArticle:
+            return .post
+        case .updateAlbum:
+            return .put
         }
     }
 
@@ -31,7 +37,11 @@ enum ArticlesEndpoint: Endpoint {
         case .getAlbums:
             return "/articles/albums"
         case .createAlbum:
-            return "articles/albums"
+            return "/articles/albums"
+        case .createArticle:
+            return "/articles"
+        case .updateAlbum:
+            return "/articles/albums"
         }
     }
 
@@ -39,10 +49,12 @@ enum ArticlesEndpoint: Endpoint {
         switch self {
         case .getAlbums:
             return nil
-
         case .createAlbum(let parameters):
             return parameters.dictionary
-
+        case .createArticle(let parameters):
+            return parameters.dictionary
+        case .updateAlbum(let parameters):
+            return parameters.dictionary
         }
     }
 

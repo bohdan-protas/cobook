@@ -542,10 +542,26 @@ extension APIClient {
 extension APIClient {
 
     @discardableResult
+    func createArticle(parameters: CreateArticleApiModel,
+                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.createArticle(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
     func createAlbum(parameters: CreateAlbumApiModel,
                      completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
 
         let endpoint = ArticlesEndpoint.createAlbum(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func updateAlbum(parameters: UpdateAlbumApiModel,
+                     completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.updateAlbum(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

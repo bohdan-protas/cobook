@@ -91,10 +91,10 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4N-sE-DAH" userLabel="Header Container">
-                                                                                <rect key="frame" x="0.0" y="227" width="359" height="61.5"/>
+                                                                                <rect key="frame" x="0.0" y="227" width="359" height="60"/>
                                                                                 <subviews>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введіть заголовок" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s8R-se-brt">
-                                                                                        <rect key="frame" x="14" y="18" width="331" height="25.5"/>
+                                                                                        <rect key="frame" x="14" y="18" width="331" height="24"/>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <color key="tintColor" red="0.14901960784313725" green="0.18431372549019609" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="20"/>
@@ -104,6 +104,9 @@
                                                                                                 <color key="value" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             </userDefinedRuntimeAttribute>
                                                                                         </userDefinedRuntimeAttributes>
+                                                                                        <connections>
+                                                                                            <action selector="titleTextChanged:" destination="Mg7-qv-8NB" eventType="editingChanged" id="6Ud-cP-tcE"/>
+                                                                                        </connections>
                                                                                     </textField>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,19 +114,19 @@
                                                                                     <constraint firstAttribute="trailing" secondItem="s8R-se-brt" secondAttribute="trailing" constant="14" id="KIr-KY-R3O"/>
                                                                                     <constraint firstItem="s8R-se-brt" firstAttribute="leading" secondItem="e4N-sE-DAH" secondAttribute="leading" constant="14" id="RGp-EJ-Bq7"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="s8R-se-brt" secondAttribute="bottom" constant="18" id="RxK-Op-6yg"/>
-                                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="gOa-lE-fcR"/>
+                                                                                    <constraint firstAttribute="height" constant="60" id="gOa-lE-fcR"/>
                                                                                     <constraint firstItem="s8R-se-brt" firstAttribute="top" secondItem="e4N-sE-DAH" secondAttribute="top" constant="18" id="usd-ru-hyC"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htt-J5-rbP" userLabel="Separator">
-                                                                                <rect key="frame" x="0.0" y="288.5" width="359" height="1"/>
+                                                                                <rect key="frame" x="0.0" y="287" width="359" height="1"/>
                                                                                 <color key="backgroundColor" name="Theme_Separator"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="E1N-V5-0nE"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfC-MF-WC4" userLabel="Select Album Container" customClass="UIControl">
-                                                                                <rect key="frame" x="0.0" y="289.5" width="359" height="60"/>
+                                                                                <rect key="frame" x="0.0" y="288" width="359" height="60"/>
                                                                                 <subviews>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="UuS-wL-d1X">
                                                                                         <rect key="frame" x="329" y="20" width="20" height="20"/>
@@ -135,7 +138,7 @@
                                                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="OPB-Bh-YTU">
                                                                                         <rect key="frame" x="16" y="14" width="183" height="32"/>
                                                                                         <subviews>
-                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gp1-1h-UeP" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gp1-1h-UeP" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                                                                                 <color key="backgroundColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <accessibility key="accessibilityConfiguration">
@@ -179,14 +182,14 @@
                                                                                 </connections>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNA-je-Ezf" userLabel="Separator">
-                                                                                <rect key="frame" x="0.0" y="349.5" width="359" height="1"/>
+                                                                                <rect key="frame" x="0.0" y="348" width="359" height="1"/>
                                                                                 <color key="backgroundColor" name="Theme_Separator"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="aZT-gG-PvY"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ISD-Hf-vEw" customClass="DesignableTextView" customModule="CoBook" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="350.5" width="359" height="266"/>
+                                                                                <rect key="frame" x="0.0" y="349" width="359" height="267.5"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="541-c5-H2g"/>
@@ -359,29 +362,30 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" name="Theme_Gray-Background"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectAlbumTableViewCell" rowHeight="68" id="3fI-cS-Tx5" customClass="SelectAlbumTableViewCell" customModule="CoBook" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectAlbumTableViewCell" rowHeight="68" id="3fI-cS-Tx5" customClass="SelectAlbumTableViewCell" customModule="CoBook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3fI-cS-Tx5" id="a0A-8j-3hl">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PJ-c9-D4V">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PJ-c9-D4V" userLabel="Cell Content">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaQ-DX-kvr">
-                                                            <rect key="frame" x="337" y="20" width="20" height="20"/>
-                                                            <color key="backgroundColor" name="Theme_Green"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaQ-DX-kvr">
+                                                            <rect key="frame" x="335" y="15" width="30" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="3ho-57-zbv"/>
-                                                                <constraint firstAttribute="width" constant="20" id="Jda-oM-6qu"/>
+                                                                <constraint firstAttribute="height" constant="30" id="3ho-57-zbv"/>
+                                                                <constraint firstAttribute="width" secondItem="gaQ-DX-kvr" secondAttribute="height" multiplier="1:1" id="kLE-HL-mYq"/>
                                                             </constraints>
+                                                            <color key="tintColor" name="Theme_Green-Dark"/>
+                                                            <state key="normal" image="ic_edit"/>
                                                             <connections>
                                                                 <action selector="editButtonTapped:" destination="3fI-cS-Tx5" eventType="touchUpInside" id="57z-UO-JaW"/>
                                                             </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jG8-6g-vzg">
-                                                            <rect key="frame" x="16" y="11" width="96" height="38"/>
+                                                            <rect key="frame" x="16" y="11" width="104" height="38"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cn3-Mr-igN" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
@@ -401,8 +405,8 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTB-de-UhS">
-                                                                    <rect key="frame" x="54" y="0.0" width="42" height="38"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTB-de-UhS">
+                                                                    <rect key="frame" x="54" y="0.0" width="50" height="38"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                                                     <color key="textColor" red="0.14901960784313725" green="0.18431372549019609" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -413,28 +417,37 @@
                                                             </constraints>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="gaQ-DX-kvr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jG8-6g-vzg" secondAttribute="trailing" constant="16" id="4g8-XT-lkc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="gaQ-DX-kvr" secondAttribute="trailing" constant="18" id="F8x-9k-Oox"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gaQ-DX-kvr" secondAttribute="trailing" constant="10" id="F8x-9k-Oox"/>
                                                         <constraint firstItem="jG8-6g-vzg" firstAttribute="leading" secondItem="1PJ-c9-D4V" secondAttribute="leading" constant="16" id="Rjw-Gf-Q7a"/>
                                                         <constraint firstItem="gaQ-DX-kvr" firstAttribute="centerY" secondItem="1PJ-c9-D4V" secondAttribute="centerY" id="a0y-Yv-pFG"/>
                                                         <constraint firstItem="jG8-6g-vzg" firstAttribute="centerY" secondItem="1PJ-c9-D4V" secondAttribute="centerY" id="ymf-Sv-dd2"/>
                                                         <constraint firstAttribute="height" constant="60" id="ysi-mf-5ad"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AX5-7S-IWR" userLabel="Bottom Separator">
+                                                    <rect key="frame" x="0.0" y="60" width="375" height="8"/>
+                                                    <color key="backgroundColor" name="Theme_Gray-Background"/>
+                                                </view>
                                             </subviews>
-                                            <color key="backgroundColor" name="Theme_Gray-Background"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="1PJ-c9-D4V" secondAttribute="trailing" id="B7G-X1-cuR"/>
+                                                <constraint firstAttribute="trailing" secondItem="AX5-7S-IWR" secondAttribute="trailing" id="f46-67-zkL"/>
+                                                <constraint firstItem="AX5-7S-IWR" firstAttribute="leading" secondItem="a0A-8j-3hl" secondAttribute="leading" id="g13-sc-qkc"/>
                                                 <constraint firstAttribute="bottom" secondItem="1PJ-c9-D4V" secondAttribute="bottom" constant="8" id="maJ-TT-0MN"/>
                                                 <constraint firstItem="1PJ-c9-D4V" firstAttribute="leading" secondItem="a0A-8j-3hl" secondAttribute="leading" id="mlR-Dd-Q43"/>
+                                                <constraint firstAttribute="bottom" secondItem="AX5-7S-IWR" secondAttribute="bottom" id="sP3-qE-DdM"/>
                                                 <constraint firstItem="1PJ-c9-D4V" firstAttribute="top" secondItem="a0A-8j-3hl" secondAttribute="top" id="sTJ-dR-c3b"/>
+                                                <constraint firstItem="AX5-7S-IWR" firstAttribute="top" secondItem="1PJ-c9-D4V" secondAttribute="bottom" id="xez-Ak-atF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="albumImageView" destination="Cn3-Mr-igN" id="oWd-lW-Jxw"/>
                                             <outlet property="albumTitleLabel" destination="LTB-de-UhS" id="sNi-3Y-12W"/>
+                                            <outlet property="editButton" destination="gaQ-DX-kvr" id="3K5-d5-b5E"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -464,7 +477,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44V-05-RoK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="151"/>
+            <point key="canvasLocation" x="2764" y="150.67466266866569"/>
         </scene>
         <!--Create Album View Controller-->
         <scene sceneID="imj-XG-KEZ">
@@ -749,6 +762,7 @@
     <resources>
         <image name="ic_arrow_right" width="24" height="24"/>
         <image name="ic_delete" width="24" height="24"/>
+        <image name="ic_edit" width="24" height="24"/>
         <image name="ic_plus" width="16" height="16"/>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

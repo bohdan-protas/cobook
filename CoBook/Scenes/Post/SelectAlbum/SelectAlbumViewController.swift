@@ -23,6 +23,7 @@ class SelectAlbumViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.delegate = self
         self.navigationItem.title = "Вибрати альбом"
     }
 
@@ -39,6 +40,13 @@ class SelectAlbumViewController: BaseViewController {
 
 extension SelectAlbumViewController: SelectAlbumView {
 
+    func editAction(_ cell: SelectAlbumTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            presenter?.editAlbumAt(indexPath: indexPath)
+        }
+    }
+
+
     func set(albums: DataSource<SelectAlbumCellsConfigurator>?) {
         albums?.connect(to: tableView)
         tableView.reloadData()
@@ -50,5 +58,15 @@ extension SelectAlbumViewController: SelectAlbumView {
         self.navigationController?.pushViewController(controller, animated: true)
     }
 
+
+}
+
+// MARK: - UITableViewDelegate
+
+extension SelectAlbumViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.selectedAlbumAt(indexPath: indexPath)
+    }
 
 }

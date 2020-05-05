@@ -19,3 +19,15 @@ struct CreateAlbumApiModel: Encodable {
         case avatarID = "avatar_id"
     }
 }
+
+struct UpdateAlbumApiModel: Encodable {
+    var albumID: Int?
+    var title: String?
+    var avatarID: String?
+
+    enum CodingKeys: String, CodingKey {
+        case albumID = "id"
+        case title
+        case avatarID = "avatar_id"
+    }
+}

@@ -13,4 +13,5 @@ struct AlbumPreviewModel {
     var isSelected = false
     var title: String?
     var avatarPath: String?
+    var avatarID: String?
 }

@@ -56,6 +56,8 @@
 		B822F5262459BDA700F207CD /* ProductPreviewItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B822F5242459BDA700F207CD /* ProductPreviewItemCollectionViewCell.xib */; };
 		B8237F38244740F80006E8D1 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */; };
 		B8237F39244740F80006E8D1 /* ContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */; };
+		B823A1AB24617FF1004271AA /* CreateArticleApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A1AA24617FF1004271AA /* CreateArticleApiModel.swift */; };
+		B823A1AD2461B561004271AA /* CreateAlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A1AC2461B561004271AA /* CreateAlbumModel.swift */; };
 		B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6A723FD34A0007540D0 /* Array + Extensions.swift */; };
 		B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6AC23FD3924007540D0 /* RegularExpression.swift */; };
 		B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */; };
@@ -359,6 +361,8 @@
 		B822F5242459BDA700F207CD /* ProductPreviewItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductPreviewItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8237F36244740F80006E8D1 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		B8237F37244740F80006E8D1 /* ContactsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsTableViewCell.xib; sourceTree = "<group>"; };
+		B823A1AA24617FF1004271AA /* CreateArticleApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateArticleApiModel.swift; sourceTree = "<group>"; };
+		B823A1AC2461B561004271AA /* CreateAlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumModel.swift; sourceTree = "<group>"; };
 		B823A6A723FD34A0007540D0 /* Array + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Extensions.swift"; sourceTree = "<group>"; };
 		B823A6AC23FD3924007540D0 /* RegularExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpression.swift; sourceTree = "<group>"; };
 		B823A6B123FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTelephoneNumberViewController.swift; sourceTree = "<group>"; };
@@ -1281,6 +1285,7 @@
 				B8B8B90A2459DB0000162224 /* ProductDetails.swift */,
 				B824DA72245B131C00700319 /* PostPreview.swift */,
 				B81F18A424608130003CBC84 /* AlbumPreviewModel.swift */,
+				B823A1AC2461B561004271AA /* CreateAlbumModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1387,6 +1392,7 @@
 				B8B8B90C2459F51400162224 /* ProductDetailsApiModel.swift */,
 				B81F189E24603F71003CBC84 /* CreateAlbumApiModel.swift */,
 				B81F18A2246080E4003CBC84 /* AlbumPreviewApiModel.swift */,
+				B823A1AA24617FF1004271AA /* CreateArticleApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2052,6 +2058,7 @@
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
 				B8DC630B2434FBED00A2ED58 /* Section.swift in Sources */,
 				B82200C1240FBC2C00A17D2C /* AccountPresenter.swift in Sources */,
+				B823A1AD2461B561004271AA /* CreateAlbumModel.swift in Sources */,
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B8DC630F2434FC3A00A2ED58 /* TableDataSource.swift in Sources */,
 				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
@@ -2203,6 +2210,7 @@
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
+				B823A1AB24617FF1004271AA /* CreateArticleApiModel.swift in Sources */,
 				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,
 				B8249249243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift in Sources */,
 				B824DA6B245B071500700319 /* AlbumPreviewItemsTableViewCell.swift in Sources */,

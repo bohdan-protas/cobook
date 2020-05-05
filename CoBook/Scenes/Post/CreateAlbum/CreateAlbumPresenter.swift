@@ -11,6 +11,7 @@ import UIKit
 protocol CreateAlbumView: LoadDisplayableView, AlertDisplayableView, NavigableView {
     func setSaveButton(isEnabled: Bool)
     func set(avatarPath: String?)
+    func set(albumTitle: String?)
     func set(title: String?)
 }
 
@@ -21,17 +22,26 @@ class CreateAlbumPresenter: BasePresenter {
 
     // Data source
     private var cardID: Int
-    private var createParameters: CreateAlbumApiModel {
+    private var parameters: CreateAlbumModel {
         didSet {
             validateInput()
         }
     }
 
+    private var isEditing: Bool
+
     // MARK: - Object Life Cycle
 
     init(cardID: Int) {
         self.cardID = cardID
-        self.createParameters = CreateAlbumApiModel(cardID: cardID)
+        self.parameters = CreateAlbumModel(cardID: cardID)
+        self.isEditing = false
+    }
+
+    init(parameters: CreateAlbumModel) {
+        self.cardID = parameters.cardID
+        self.parameters = parameters
+        self.isEditing = true
     }
 
     // MARK: - Base Presenter
@@ -47,17 +57,18 @@ class CreateAlbumPresenter: BasePresenter {
     // MARK: - Public
 
     func setup() {
-        view?.set(title: nil)
-        view?.set(avatarPath: nil)
+        view?.set(title: isEditing ? "Редагувати альбом" : "Створити альбом")
+        view?.set(albumTitle: parameters.title)
+        view?.set(avatarPath: parameters.avatarPath)
         validateInput()
     }
 
     func update(title: String?) {
-        createParameters.title = title
+        parameters.title = title
     }
 
     func update(avatarID: String?) {
-        createParameters.avatarID = avatarID
+        parameters.avatarID = avatarID
     }
 
     func uploadAlbumAvatar(image: UIImage?) {
@@ -80,20 +91,14 @@ class CreateAlbumPresenter: BasePresenter {
         }
     }
 
-    func createAlbum() {
-        view?.startLoading()
-        APIClient.default.createAlbum(parameters: createParameters) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            switch result {
-            case .success(let response):
-                strongSelf.view?.stopLoading(success: true, completion: {
-                    strongSelf.view?.popController()
-                })
-            case .failure(let error):
-                strongSelf.view?.errorAlert(message: error.localizedDescription)
-            }
+    func obSaveAlbumButtonTapped() {
+        if isEditing {
+            updateAlbum()
+        } else {
+            createAlbum()
         }
     }
+
 
 }
 
@@ -105,10 +110,40 @@ private extension CreateAlbumPresenter {
         let whitespaceCharacterSet = CharacterSet.whitespaces
         let isEnabled: Bool = {
             return
-                !(createParameters.avatarID ?? "").isEmpty &&
-                !(createParameters.title ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty
+                !(parameters.avatarID ?? "").isEmpty &&
+                !(parameters.title ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty
         }()
         view?.setSaveButton(isEnabled: isEnabled)
+    }
+
+    func createAlbum() {
+        let createParameters = CreateAlbumApiModel(cardID: parameters.cardID, avatarID: parameters.avatarID, title: parameters.title)
+        view?.startLoading()
+        APIClient.default.createAlbum(parameters: createParameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+            switch result {
+            case .success:
+                strongSelf.view?.popController()
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func updateAlbum() {
+        let updateParameters = UpdateAlbumApiModel(albumID: parameters.albumID, title: parameters.title, avatarID: parameters.avatarID)
+        view?.startLoading()
+        APIClient.default.updateAlbum(parameters: updateParameters) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+            switch result {
+            case .success:
+                strongSelf.view?.popController()
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
 

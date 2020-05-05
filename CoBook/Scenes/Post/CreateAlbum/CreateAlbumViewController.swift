@@ -32,7 +32,7 @@ class CreateAlbumViewController: BaseViewController {
     }
 
     @IBAction func saveButtonTapped(_ sender: Any) {
-        presenter?.createAlbum()
+        presenter?.obSaveAlbumButtonTapped()
     }
 
     @IBAction func deleteImageButtonTapped(_ sender: Any) {
@@ -53,7 +53,7 @@ class CreateAlbumViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoPlaceholderView.bringSubviewToFront(addImageButton)
-        self.navigationItem.title = "Створити альбом"
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +73,10 @@ class CreateAlbumViewController: BaseViewController {
 
 extension CreateAlbumViewController: CreateAlbumView {
 
+    func set(title: String?) {
+        self.navigationItem.title = title
+    }
+
     func set(avatarPath: String?) {
         guard let avatarPath = avatarPath, !avatarPath.isEmpty else {
             albumImageView.image = nil
@@ -90,8 +94,8 @@ extension CreateAlbumViewController: CreateAlbumView {
         }
     }
 
-    func set(title: String?) {
-        albumNameTextField.text = title
+    func set(albumTitle: String?) {
+        albumNameTextField.text = albumTitle
     }
 
     func setSaveButton(isEnabled: Bool) {

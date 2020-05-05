@@ -9,7 +9,7 @@
 import UIKit
 
 
-class CreateArticleViewController: BaseViewController {
+class CreateArticleViewController: BaseViewController, UITextViewDelegate {
 
     @IBOutlet var photosCollectionView: UICollectionView!
     @IBOutlet var photosFlowLayout: UICollectionViewFlowLayout!
@@ -34,6 +34,16 @@ class CreateArticleViewController: BaseViewController {
 
     // MARK: - Actions
 
+    @IBAction func titleTextChanged(_ sender: UITextField) {
+        presenter?.update(title: sender.text)
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        if textView === self.descriptionTextView {
+            presenter?.update(body: textView.text)
+        }
+    }
+
     @IBAction func selectAlbumTapped(_ sender: Any) {
         presenter?.selectAlbumTapped()
     }
@@ -43,13 +53,11 @@ class CreateArticleViewController: BaseViewController {
     }
 
     @IBAction func addPhotoTapped(_ sender: Any) {
-
         self.imagePicker.onImagePicked = { [weak self] image in
-
-            self?.presenter?.uploadImage(image: image) { [weak self] (imagePath, imageID) in
+            self?.presenter?.uploadImage(image: image) { [weak self] (imageMetadata) in
                 guard let item = self?.presenter?.photos.count else { return }
+                self?.presenter?.addPhoto(data: imageMetadata)
                 self?.photosCollectionView.performBatchUpdates({
-                    self?.presenter?.addPhoto(path: imagePath)
                     let indexPath = IndexPath(item: item, section: 0)
                     self?.photosCollectionView.insertItems(at: [indexPath])
                 }, completion: { finished in
@@ -57,12 +65,9 @@ class CreateArticleViewController: BaseViewController {
                     self?.photosCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
                     self?.photosCollectionView.backgroundView = nil
                 })
-
             }
         }
-
         imagePicker.present()
-
     }
 
     // MARK: - Lifecycle
@@ -70,9 +75,13 @@ class CreateArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         presenter?.attachView(self)
-        presenter?.onViewDidLoad()
+        presenter?.setup()
     }
 
     deinit {
@@ -85,6 +94,11 @@ class CreateArticleViewController: BaseViewController {
 // MARK: - CreateArticleView
 
 extension CreateArticleViewController: CreateArticleView {
+
+    func set(albumTitle: String?, albumImage: String?) {
+        albumTitleLabel.text = albumTitle ?? "Виберіть альбом"
+        albumImageView.setImage(withPath: albumImage)
+    }
 
     func goToSelectAlbum(presenter: SelectAlbumPresenter) {
         let controller = UIStoryboard.Post.Controllers.selectAlbum
@@ -113,12 +127,13 @@ private extension CreateArticleViewController {
 
     func setupLayout() {
         self.navigationItem.title = "Створити статтю"
+
         descriptionTextView.isScrollEnabled = false
+        descriptionTextView.delegate = self
 
         photosCollectionView.dataSource = self
         photosCollectionView.delegate = self
         photosCollectionView.register(PostEditablePhotoCollectionViewCell.nib, forCellWithReuseIdentifier: PostEditablePhotoCollectionViewCell.identifier)
-
         photosCollectionView.backgroundView = photosPlacholderView
     }
     
