@@ -10,7 +10,7 @@ import Alamofire
 
 enum ArticlesEndpoint: Endpoint {
 
-    case getAlbums
+    case getAlbums(cardID: Int?)
     case createAlbum(parameters: CreateAlbumApiModel)
     case updateAlbum(parameters: UpdateAlbumApiModel)
     case createArticle(parameters: CreateArticleApiModel)
@@ -45,16 +45,28 @@ enum ArticlesEndpoint: Endpoint {
         }
     }
 
-    var parameters: Parameters? {
+    var urlParameters: [String : String]? {
         switch self {
-        case .getAlbums:
+        case .getAlbums(let cardID):
+            if let cardID = cardID {
+                return ["card_id": String(cardID)]
+            }
+            fallthrough
+        default:
             return nil
+        }
+    }
+
+    var bodyParameters: Parameters? {
+        switch self {
         case .createAlbum(let parameters):
             return parameters.dictionary
         case .createArticle(let parameters):
             return parameters.dictionary
         case .updateAlbum(let parameters):
             return parameters.dictionary
+        default:
+            return nil
         }
     }
 

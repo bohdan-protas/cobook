@@ -14,7 +14,7 @@ protocol SelectAlbumView: AlertDisplayableView, LoadDisplayableView, NavigableVi
 }
 
 protocol SelectAlbumDelegate: class {
-    func selectedAlbum(_ model: AlbumPreviewModel?)
+    func selectedAlbum(_ model: AlbumPreview.Item.Model?)
 }
 
 class SelectAlbumPresenter: BasePresenter {
@@ -37,7 +37,7 @@ class SelectAlbumPresenter: BasePresenter {
         self.selectedAlbumID = selectedAlbumID
 
         var photosDataSourceConfigurator = SelectAlbumCellsConfigurator()
-        photosDataSourceConfigurator.selectAlbumCellConfigurator = CellConfigurator { [weak self] (cell, model: AlbumPreviewModel, tableView, indexPath) -> SelectAlbumTableViewCell in
+        photosDataSourceConfigurator.selectAlbumCellConfigurator = CellConfigurator { [weak self] (cell, model: AlbumPreview.Item.Model, tableView, indexPath) -> SelectAlbumTableViewCell in
             cell.delegate = self?.view
             cell.editButton.isHidden = model.isSelected
             cell.isSelected = model.isSelected
@@ -73,11 +73,11 @@ class SelectAlbumPresenter: BasePresenter {
             strongSelf.view?.stopLoading()
             switch result {
             case .success(let apiItems):
-                let items: [AlbumPreviewModel] = apiItems?.compactMap { AlbumPreviewModel(id: $0.id,
-                                                                                          isSelected: $0.id == strongSelf.selectedAlbumID ?? -1,
-                                                                                          title: $0.title,
-                                                                                          avatarPath: $0.avatar?.sourceUrl,
-                                                                                          avatarID: $0.avatar?.id) } ?? []
+                let items: [AlbumPreview.Item.Model] = apiItems?.compactMap { AlbumPreview.Item.Model(id: $0.id,
+                                                                                                      isSelected: $0.id == strongSelf.selectedAlbumID ?? -1,
+                                                                                                      title: $0.title,
+                                                                                                      avatarPath: $0.avatar?.sourceUrl,
+                                                                                                      avatarID: $0.avatar?.id) } ?? []
                 strongSelf.albumsDataSource?.sections = [Section(items: items)]
                 strongSelf.view?.set(albums: strongSelf.albumsDataSource)
             case .failure(let error):

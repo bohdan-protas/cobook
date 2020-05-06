@@ -10,22 +10,13 @@ import Alamofire
 
 enum CardsEndpoint: Endpoint {
 
-    ///
     case updateBusinessCard(parameters: CreateBusinessCardParametersApiModel)
-
-    ///
     case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)
-
-    ///
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
-
-    ///
     case getCardInfo(id: Int)
 
     ///
     case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
-
-    ///
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
 
     var useAuthirizationToken: Bool {
@@ -66,7 +57,7 @@ enum CardsEndpoint: Endpoint {
         }
     }
 
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         switch self {
 
         case .getCardInfo(let id):

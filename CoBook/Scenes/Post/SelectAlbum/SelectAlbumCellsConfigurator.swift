@@ -10,13 +10,13 @@ import UIKit
 
 struct SelectAlbumCellsConfigurator: CellConfiguratorType {
 
-    var selectAlbumCellConfigurator: CellConfigurator<AlbumPreviewModel, SelectAlbumTableViewCell>?
+    var selectAlbumCellConfigurator: CellConfigurator<AlbumPreview.Item.Model, SelectAlbumTableViewCell>?
 
-    func reuseIdentifier(for item: AlbumPreviewModel, indexPath: IndexPath) -> String {
+    func reuseIdentifier(for item: AlbumPreview.Item.Model, indexPath: IndexPath) -> String {
         return selectAlbumCellConfigurator?.reuseIdentifier ?? ""
     }
 
-    func configuredCell(for item: AlbumPreviewModel, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    func configuredCell(for item: AlbumPreview.Item.Model, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         return selectAlbumCellConfigurator?.configuredCell(for: item, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
     }
 

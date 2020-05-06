@@ -47,7 +47,7 @@ enum SignUpEndpoint: Endpoint {
     }
 
     // MARK: - Parameters
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         switch self {
 
         case let .initialize(email, telephone, firstName, lastName):

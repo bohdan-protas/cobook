@@ -13,6 +13,6 @@ struct CreateArticleModel {
     var cardID: Int
     var title: String?
     var body: String?
-    var album: AlbumPreviewModel?
+    var album: AlbumPreview.Item.Model?
     var photos: [FileDataApiModel] = []
 }

@@ -8,15 +8,29 @@
 
 import UIKit
 
-enum PostPreview {
+enum AlbumPreview {
 
-    struct Model {
+    struct Section {
         var title: String?
-        var imagePath: String?
-        var image: UIImage?
+        var dataSourceID: String?
+        var items: [Item] = []
     }
 
-    case add(_ model: Model)
-    case view(_ model: Model)
-    case showMore(_ model: Model)
+    enum Item {
+
+        struct Model {
+            var id: Int
+            var isSelected = false
+            var title: String?
+            var avatarPath: String?
+            var avatarID: String?
+        }
+
+        case add(title: String?, imagePath: String?)
+        case view(_ model: Model)
+        case showMore(title: String?, imageName: String)
+    }
+
+
+
 }

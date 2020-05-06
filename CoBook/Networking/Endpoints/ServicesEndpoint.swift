@@ -44,7 +44,7 @@ enum ServicesEndpoint: Endpoint {
         }
     }
 
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         switch self {
 
         case .create(let parameters):

@@ -571,7 +571,7 @@ extension APIClient {
                        offset: Int? = nil,
                        completion: @escaping (Result<[AlbumPreviewApiModel]?, Error>) -> Void) -> DataRequest {
 
-        let endpoint = ArticlesEndpoint.getAlbums
+        let endpoint = ArticlesEndpoint.getAlbums(cardID: cardID)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

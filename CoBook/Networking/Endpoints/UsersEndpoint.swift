@@ -26,11 +26,12 @@ enum UsersEndpoint: Endpoint {
         case .searchEmployee:
             return "users/employee/search"
         case .employeeList:
+            
             return "users/employee/list"
         }
     }
 
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         switch self {
         case .searchEmployee(let searchQuery, let limit, let offset):
             return [

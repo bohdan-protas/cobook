@@ -164,7 +164,7 @@ private extension CreateArticlePresenter {
 
 extension CreateArticlePresenter: SelectAlbumDelegate {
 
-    func selectedAlbum(_ model: AlbumPreviewModel?) {
+    func selectedAlbum(_ model: AlbumPreview.Item.Model?) {
         parameters.album = model
         view?.set(albumTitle: parameters.album?.title, albumImage: parameters.album?.avatarPath)
     }

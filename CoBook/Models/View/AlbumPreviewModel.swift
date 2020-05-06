@@ -8,10 +8,4 @@
 
 import Foundation
 
-struct AlbumPreviewModel {
-    var id: Int
-    var isSelected = false
-    var title: String?
-    var avatarPath: String?
-    var avatarID: String?
-}
+

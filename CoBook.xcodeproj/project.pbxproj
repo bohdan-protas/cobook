@@ -36,6 +36,7 @@
 		B82200BC240FB99D00A17D2C /* AccountNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */; };
 		B82200BF240FBC1C00A17D2C /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82200BE240FBC1C00A17D2C /* AccountViewController.swift */; };
 		B82200C1240FBC2C00A17D2C /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82200C0240FBC2C00A17D2C /* AccountPresenter.swift */; };
+		B82206482463006400D49D16 /* RequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82206472463006400D49D16 /* RequestParameters.swift */; };
 		B82248DE242C0CD700392D10 /* CardSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82248DC242C0CD700392D10 /* CardSaveView.swift */; };
 		B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82248DD242C0CD700392D10 /* CardSaveView.xib */; };
 		B82248E3242C106D00392D10 /* SectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */; };
@@ -342,6 +343,7 @@
 		B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationController.swift; sourceTree = "<group>"; };
 		B82200BE240FBC1C00A17D2C /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		B82200C0240FBC2C00A17D2C /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
+		B82206472463006400D49D16 /* RequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestParameters.swift; sourceTree = "<group>"; };
 		B82248DC242C0CD700392D10 /* CardSaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSaveView.swift; sourceTree = "<group>"; };
 		B82248DD242C0CD700392D10 /* CardSaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardSaveView.xib; sourceTree = "<group>"; };
 		B82248E1242C106D00392D10 /* SectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -777,6 +779,14 @@
 				B8559F6B243B280500787349 /* AccountDataSourceConfigurator.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		B82206462463004200D49D16 /* RequestParameters */ = {
+			isa = PBXGroup;
+			children = (
+				B82206472463006400D49D16 /* RequestParameters.swift */,
+			);
+			path = RequestParameters;
 			sourceTree = "<group>";
 		};
 		B82248DB242C0CD700392D10 /* CardSaveView */ = {
@@ -1370,6 +1380,7 @@
 		B84B94F224033B030007EB60 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				B82206462463004200D49D16 /* RequestParameters */,
 				B828BCBD24366C670099D1A8 /* ApiModel.swift */,
 				B84B94F0240337390007EB60 /* BaseApiResponse.swift */,
 				B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */,
@@ -2243,6 +2254,7 @@
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
 				B835FFBE245F300900189406 /* CreateArticlePresenter.swift in Sources */,
+				B82206482463006400D49D16 /* RequestParameters.swift in Sources */,
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
 				B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */,
 				B82B4D59245668420061A98B /* ServiceDetailsPresenter.swift in Sources */,

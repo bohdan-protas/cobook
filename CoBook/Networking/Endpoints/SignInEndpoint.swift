@@ -38,7 +38,7 @@ enum SignInEndpoint: Endpoint {
     }
 
     // MARK: - Parameters
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         switch self {
 
         case let .login(login, password):

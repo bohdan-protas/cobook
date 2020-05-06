@@ -43,8 +43,7 @@ enum ProductEndpoint: Endpoint {
         }
     }
 
-    var parameters: Parameters? {
-
+    var bodyParameters: Parameters? {
         switch self {
         case .create(let parameters):
             return parameters.dictionary

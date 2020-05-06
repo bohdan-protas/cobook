@@ -25,7 +25,7 @@ enum InterestsEndpoint: Endpoint {
         return "/interests/list"
     }
 
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         return nil
     }
 

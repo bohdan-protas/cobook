@@ -13,7 +13,7 @@ protocol AlbumPreviewItemsViewDelegate: class {
 }
 
 protocol AlbumPreviewItemsViewDataSource: class {
-    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview]
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [AlbumPreview.Item]
 }
 
 class AlbumPreviewItemsTableViewCell: UITableViewCell {
@@ -54,14 +54,17 @@ extension AlbumPreviewItemsTableViewCell: UICollectionViewDataSource {
                 cell.titleImageView.setImage(withPath: model.imagePath)
                 cell.textLabel.text = model.title
                 cell.textLabel.textColor = UIColor.Theme.greenDark
+                cell.addItemIndicator.isHidden = false
             case .view(let model):
-                cell.titleImageView.setImage(withPath: model.imagePath)
+                cell.titleImageView.setImage(withPath: model.avatarPath)
                 cell.textLabel.text = model.title
                 cell.textLabel.textColor = UIColor.Theme.blackMiddle
-            case .showMore(let model):
-                cell.titleImageView.image = model.image
-                cell.textLabel.text = model.title
+                cell.addItemIndicator.isHidden = true
+            case .showMore(let title, let imageName):
+                cell.titleImageView.image = UIImage(named: imageName)
+                cell.textLabel.text = title
                 cell.textLabel.textColor = UIColor.Theme.greenDark
+                cell.addItemIndicator.isHidden = true
             }
         }
         return cell

@@ -25,7 +25,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var serviceItemCellConfigurator: CellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>?
     var addProductConfigurator: CellConfigurator<Void?, ServiceListItemTableViewCell>?
     var productSectionConfigurator: CellConfigurator<ProductPreviewSectionModel, ProductPreviewItemsHorizontalListTableViewCell>?
-    var postPreviewConfigurator: CellConfigurator<PostPreviewSectionModel?, AlbumPreviewItemsTableViewCell>?
+    var postPreviewConfigurator: CellConfigurator<AlbumPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -277,7 +277,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             //
-            configurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreviewSectionModel?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+            configurator.postPreviewConfigurator = CellConfigurator { (cell, model: AlbumPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
                 cell.dataSource = self
