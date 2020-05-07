@@ -350,6 +350,37 @@
             </objects>
             <point key="canvasLocation" x="1791.2" y="150.67466266866569"/>
         </scene>
+        <!--Article Details View Controller-->
+        <scene sceneID="Hdh-Pe-b2Z">
+            <objects>
+                <viewController storyboardIdentifier="ArticleDetailsViewController" id="W3M-Lu-IPt" customClass="ArticleDetailsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PoO-nc-11e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Yl-31-YTR">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5Yl-31-YTR" firstAttribute="trailing" secondItem="a6w-NN-lbH" secondAttribute="trailing" id="KBN-Hw-44Z"/>
+                            <constraint firstItem="5Yl-31-YTR" firstAttribute="top" secondItem="a6w-NN-lbH" secondAttribute="top" id="MFv-KZ-ulu"/>
+                            <constraint firstItem="5Yl-31-YTR" firstAttribute="leading" secondItem="a6w-NN-lbH" secondAttribute="leading" id="d3Q-y6-i9S"/>
+                            <constraint firstItem="5Yl-31-YTR" firstAttribute="bottom" secondItem="a6w-NN-lbH" secondAttribute="bottom" id="xrv-ka-glf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a6w-NN-lbH"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="I6a-SR-2k6"/>
+                    <connections>
+                        <outlet property="tableView" destination="5Yl-31-YTR" id="xgl-dJ-36v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p46-HQ-GTf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1789.5999999999999" y="895.50224887556226"/>
+        </scene>
         <!--Select Album View Controller-->
         <scene sceneID="WkV-Ya-Hjr">
             <objects>
@@ -757,6 +788,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ug9-Ex-aR3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="817" y="151"/>
+        </scene>
+        <!--Custom Navigation Controller-->
+        <scene sceneID="FBH-Zd-Fwu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Wc-Wa-gff" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7zL-Qm-isb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="W3M-Lu-IPt" kind="relationship" relationship="rootViewController" id="u7p-R7-qsT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S7y-hC-giM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="896"/>
         </scene>
     </scenes>
     <resources>

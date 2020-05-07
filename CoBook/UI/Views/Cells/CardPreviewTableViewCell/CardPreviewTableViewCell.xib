@@ -61,10 +61,10 @@
                                         <color key="textColor" name="Theme_Black-Middle"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tu-Am-nAk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tu-Am-nAk">
                                         <rect key="frame" x="0.0" y="23" width="181" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="16" id="f6S-vZ-bWy"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="f6S-vZ-bWy"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

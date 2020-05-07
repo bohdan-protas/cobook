@@ -256,6 +256,14 @@
 		B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C1240020F4002E91F7 /* BasePresenter.swift */; };
 		B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */; };
 		B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906C72400515B002E91F7 /* OnboardingPresenter.swift */; };
+		B8909F9A2464121A00AA56F7 /* ArticleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909F992464121A00AA56F7 /* ArticleDetailsViewController.swift */; };
+		B8909F9C2464122C00AA56F7 /* ArticleDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909F9B2464122C00AA56F7 /* ArticleDetailsPresenter.swift */; };
+		B8909FA72464166800AA56F7 /* ArticleDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FA52464166800AA56F7 /* ArticleDescriptionTableViewCell.swift */; };
+		B8909FA82464166800AA56F7 /* ArticleDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8909FA62464166800AA56F7 /* ArticleDescriptionTableViewCell.xib */; };
+		B8909FAC24641A7D00AA56F7 /* PhotoCollageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FAA24641A7D00AA56F7 /* PhotoCollageTableViewCell.swift */; };
+		B8909FAD24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8909FAB24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib */; };
+		B8909FB124641C3900AA56F7 /* ArticleHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FAF24641C3900AA56F7 /* ArticleHeaderTableViewCell.swift */; };
+		B8909FB224641C3900AA56F7 /* ArticleHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8909FB024641C3900AA56F7 /* ArticleHeaderTableViewCell.xib */; };
 		B8970B4924505763006676DF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4824505763006676DF /* Service.swift */; };
 		B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */; };
 		B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */; };
@@ -568,6 +576,14 @@
 		B88906C1240020F4002E91F7 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDisplayableView.swift; sourceTree = "<group>"; };
 		B88906C72400515B002E91F7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
+		B8909F992464121A00AA56F7 /* ArticleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewController.swift; sourceTree = "<group>"; };
+		B8909F9B2464122C00AA56F7 /* ArticleDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsPresenter.swift; sourceTree = "<group>"; };
+		B8909FA52464166800AA56F7 /* ArticleDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		B8909FA62464166800AA56F7 /* ArticleDescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleDescriptionTableViewCell.xib; sourceTree = "<group>"; };
+		B8909FAA24641A7D00AA56F7 /* PhotoCollageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollageTableViewCell.swift; sourceTree = "<group>"; };
+		B8909FAB24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollageTableViewCell.xib; sourceTree = "<group>"; };
+		B8909FAF24641C3900AA56F7 /* ArticleHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		B8909FB024641C3900AA56F7 /* ArticleHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		B8970B4824505763006676DF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListItemTableViewCell.swift; sourceTree = "<group>"; };
 		B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceListItemTableViewCell.xib; sourceTree = "<group>"; };
@@ -1063,6 +1079,7 @@
 			isa = PBXGroup;
 			children = (
 				B824DA60245AE96D00700319 /* Post.storyboard */,
+				B8909F98246411E900AA56F7 /* ArticleDetails */,
 				B824DA62245AE98400700319 /* CreateArticle */,
 				B81F18912460290A003CBC84 /* SelectAlbum */,
 				B81F189724603164003CBC84 /* CreateAlbum */,
@@ -1628,6 +1645,42 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		B8909F98246411E900AA56F7 /* ArticleDetails */ = {
+			isa = PBXGroup;
+			children = (
+				B8909F992464121A00AA56F7 /* ArticleDetailsViewController.swift */,
+				B8909F9B2464122C00AA56F7 /* ArticleDetailsPresenter.swift */,
+			);
+			path = ArticleDetails;
+			sourceTree = "<group>";
+		};
+		B8909FA42464164A00AA56F7 /* ArticleDescriptionTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8909FA52464166800AA56F7 /* ArticleDescriptionTableViewCell.swift */,
+				B8909FA62464166800AA56F7 /* ArticleDescriptionTableViewCell.xib */,
+			);
+			path = ArticleDescriptionTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8909FA9246418E900AA56F7 /* PhotoCollage */ = {
+			isa = PBXGroup;
+			children = (
+				B8909FAA24641A7D00AA56F7 /* PhotoCollageTableViewCell.swift */,
+				B8909FAB24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib */,
+			);
+			path = PhotoCollage;
+			sourceTree = "<group>";
+		};
+		B8909FAE24641C1500AA56F7 /* ArticleHeaderTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8909FAF24641C3900AA56F7 /* ArticleHeaderTableViewCell.swift */,
+				B8909FB024641C3900AA56F7 /* ArticleHeaderTableViewCell.xib */,
+			);
+			path = ArticleHeaderTableViewCell;
+			sourceTree = "<group>";
+		};
 		B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1751,6 +1804,9 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8909FA9246418E900AA56F7 /* PhotoCollage */,
+				B8909FAE24641C1500AA56F7 /* ArticleHeaderTableViewCell */,
+				B8909FA42464164A00AA56F7 /* ArticleDescriptionTableViewCell */,
 				B81F189424602EB6003CBC84 /* SelectAlbumTableViewCell */,
 				B835FFBF245F3A6A00189406 /* PostEditablePhotoCollectionViewCell */,
 				B824DA71245B073800700319 /* AlbumPreviewItemCollectionViewCell */,
@@ -1901,6 +1957,7 @@
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
 				B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */,
+				B8909FB224641C3900AA56F7 /* ArticleHeaderTableViewCell.xib in Resources */,
 				B823DD7A244348D300A74495 /* SearchResultHeaderView.xib in Resources */,
 				B8559F81243C809D00787349 /* MapTableViewCell.xib in Resources */,
 				B8559F90243C8B0900787349 /* CardItemTableViewCell.xib in Resources */,
@@ -1939,6 +1996,7 @@
 				B825742123F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf in Resources */,
 				B825741423F5621500C8CBF8 /* HelveticaNeueCyr-Black.ttf in Resources */,
 				B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */,
+				B8909FAD24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib in Resources */,
 				B8559F5D243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib in Resources */,
 				B822F50E24597F3E00F207CD /* GoogleService-Info.plist in Resources */,
 				B82B4D4F245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib in Resources */,
@@ -1955,6 +2013,7 @@
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
 				B835FFC3245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib in Resources */,
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
+				B8909FA82464166800AA56F7 /* ArticleDescriptionTableViewCell.xib in Resources */,
 				B8559F8B243C843400787349 /* ExpandableDescriptionTableViewCell.xib in Resources */,
 				B825741723F5621500C8CBF8 /* HelveticaNeueCyr-MediumItalic.ttf in Resources */,
 				B822F5212459BD7D00F207CD /* ProductPreviewItemsHorizontalListTableViewCell.xib in Resources */,
@@ -2036,6 +2095,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8909FAC24641A7D00AA56F7 /* PhotoCollageTableViewCell.swift in Sources */,
 				B836DF2A243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift in Sources */,
 				B8559F6C243B280500787349 /* AccountDataSourceConfigurator.swift in Sources */,
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
@@ -2043,6 +2103,7 @@
 				B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */,
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
+				B8909FB124641C3900AA56F7 /* ArticleHeaderTableViewCell.swift in Sources */,
 				B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */,
 				B81F18A3246080E4003CBC84 /* AlbumPreviewApiModel.swift in Sources */,
 				B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */,
@@ -2067,6 +2128,7 @@
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
 				B822D7062458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift in Sources */,
 				B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */,
+				B8909FA72464166800AA56F7 /* ArticleDescriptionTableViewCell.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
 				B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
@@ -2200,6 +2262,7 @@
 				B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */,
 				B823B08B242CEFDF0012529D /* UIImageView + AFImageWrappers.swift in Sources */,
 				B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */,
+				B8909F9A2464121A00AA56F7 /* ArticleDetailsViewController.swift in Sources */,
 				B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */,
 				B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */,
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
@@ -2226,6 +2289,7 @@
 				B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B823A1AB24617FF1004271AA /* CreateArticleApiModel.swift in Sources */,
+				B8909F9C2464122C00AA56F7 /* ArticleDetailsPresenter.swift in Sources */,
 				B8559F5C243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.swift in Sources */,
 				B8249249243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift in Sources */,
 				B824DA6B245B071500700319 /* AlbumPreviewItemsTableViewCell.swift in Sources */,
