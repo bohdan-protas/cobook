@@ -105,6 +105,14 @@ class ArticleDetailsPresenter: BasePresenter {
         view?.set(dataSource: dataSource)
     }
 
+    func refresh() {
+        self.dataSource?.sections = [
+            Section<ArticleDetails.Cell>(accessoryIndex: ArticleDetails.SectionAccessory.details.rawValue, items: []),
+            Section<ArticleDetails.Cell>(accessoryIndex: ArticleDetails.SectionAccessory.list.rawValue, items: [])
+        ]
+        view?.reload()
+    }
+
     func fetchDetails() {
         view?.startLoading()
         APIClient.default.getArticlesList(albumID: albumID) { [weak self] (result) in
@@ -126,6 +134,34 @@ class ArticleDetailsPresenter: BasePresenter {
                 self?.view?.errorAlert(message: error.localizedDescription)
             }
         }
+    }
+
+    func cellSelected(at indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+            debugPrint("Error occured when selected account action type")
+            return
+        }
+
+        switch item {
+        case .creator(let model):
+            break
+        case .articlePreview(let model):
+            refresh()
+            view?.startLoading()
+            APIClient.default.getArticleDetails(articleID: model.id) { [weak self] (result) in
+                self?.view?.stopLoading()
+                switch result {
+                case .success(let articleDetails):
+                    self?.articleDetails = articleDetails
+                    self?.updateViewDataSource()
+                case .failure(let error):
+                    self?.view?.errorAlert(message: error.localizedDescription)
+                }
+            }
+        default:
+            break
+        }
+
     }
 
 
@@ -160,10 +196,11 @@ private extension ArticleDetailsPresenter {
         ]
 
         // articles list
-        dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.removeAll()
-        let items = articles?.compactMap { ArticlePreviewModel(id: $0.id, title: $0.title, image: $0.avatar?.sourceUrl) } ?? []
-        dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items = items.map { ArticleDetails.Cell.articlePreview(model: $0) }
+        let items = articles?
+            .compactMap { ArticlePreviewModel(id: $0.id, title: $0.title, image: $0.avatar?.sourceUrl) }
+            .filter { $0.id != (self.articleDetails?.articleID ?? -1) } ?? []
 
+        dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items = items.map { ArticleDetails.Cell.articlePreview(model: $0) }
         view?.reload()
     }
     

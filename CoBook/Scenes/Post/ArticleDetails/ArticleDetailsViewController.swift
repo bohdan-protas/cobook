@@ -19,6 +19,7 @@ class ArticleDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+
         presenter?.attachView(self)
         presenter?.setup()
         presenter?.fetchDetails()
@@ -55,7 +56,6 @@ extension ArticleDetailsViewController: ArticleDetailsView {
 
     func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?) {
         dataSource?.connect(to: tableView)
-        tableView.reloadData()
     }
 
 
@@ -67,6 +67,7 @@ extension ArticleDetailsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.cellSelected(at: indexPath)
     }
 
 
