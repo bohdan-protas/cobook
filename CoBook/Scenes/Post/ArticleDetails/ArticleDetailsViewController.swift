@@ -18,7 +18,7 @@ class ArticleDetailsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupLayout()
         presenter?.attachView(self)
         presenter?.setup()
         presenter?.fetchDetails()

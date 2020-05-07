@@ -46,6 +46,7 @@ class ArticleDetailsPresenter: BasePresenter {
 
         configurator.photoCollageConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
             cell.dataSource = self
+            cell.prepareLayout()
             return cell
         }
 

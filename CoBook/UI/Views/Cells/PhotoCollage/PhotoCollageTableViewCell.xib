@@ -22,13 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="341"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjj-fX-tip" userLabel="Top Container">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="238.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="241"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JRR-UP-V05">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="238.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JRR-UP-V05">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="241"/>
+                                        <color key="backgroundColor" name="Theme_Gray-UI"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="JRR-UP-V05" secondAttribute="bottom" id="XB2-KP-SfF"/>
                                     <constraint firstItem="JRR-UP-V05" firstAttribute="top" secondItem="sjj-fX-tip" secondAttribute="top" id="auw-pG-fgq"/>
@@ -37,12 +38,12 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Q0-tw-eId" userLabel="Bottom List Container">
-                                <rect key="frame" x="0.0" y="238.5" width="320" height="102.5"/>
+                                <rect key="frame" x="0.0" y="241" width="320" height="100"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3ry-S5-vuI">
-                                        <rect key="frame" x="0.0" y="4" width="320" height="98.5"/>
+                                        <rect key="frame" x="0.0" y="4" width="320" height="96"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m0h-bQ-uB3">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="4" minimumInteritemSpacing="4" id="m0h-bQ-uB3">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -50,11 +51,12 @@
                                         </collectionViewFlowLayout>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" name="Theme_Green"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="3ry-S5-vuI" secondAttribute="bottom" id="2BB-xj-RzW"/>
                                     <constraint firstAttribute="trailing" secondItem="3ry-S5-vuI" secondAttribute="trailing" id="7cd-5N-Sb8"/>
-                                    <constraint firstItem="3ry-S5-vuI" firstAttribute="top" secondItem="7Q0-tw-eId" secondAttribute="top" constant="4" id="rlz-em-zIN"/>
+                                    <constraint firstAttribute="height" constant="100" id="TrW-2F-mra"/>
+                                    <constraint firstItem="3ry-S5-vuI" firstAttribute="top" secondItem="7Q0-tw-eId" secondAttribute="top" priority="999" constant="4" id="rlz-em-zIN"/>
                                     <constraint firstItem="3ry-S5-vuI" firstAttribute="leading" secondItem="7Q0-tw-eId" secondAttribute="leading" id="uXr-bY-WFz"/>
                                 </constraints>
                             </view>
@@ -69,7 +71,6 @@
                             <constraint firstItem="7Q0-tw-eId" firstAttribute="top" secondItem="sjj-fX-tip" secondAttribute="bottom" id="OfU-jt-5aR"/>
                             <constraint firstAttribute="trailing" secondItem="sjj-fX-tip" secondAttribute="trailing" id="biy-3a-rxJ"/>
                             <constraint firstAttribute="bottom" secondItem="7Q0-tw-eId" secondAttribute="bottom" id="tVn-Zo-FwF"/>
-                            <constraint firstItem="sjj-fX-tip" firstAttribute="height" secondItem="7pb-hc-TFY" secondAttribute="height" multiplier="0.7" id="zps-NO-acZ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -82,14 +83,16 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bottomContainerHeight" destination="TrW-2F-mra" id="wOL-DJ-ca7"/>
                 <outlet property="collectionView" destination="3ry-S5-vuI" id="F2K-8K-PEt"/>
+                <outlet property="titlePhotoImageView" destination="JRR-UP-V05" id="3mq-Tt-pRW"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="252.79017857142856"/>
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="Theme_Green">
-            <color red="0.48199999332427979" green="0.73299998044967651" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Theme_Gray-UI">
+            <color red="0.53299999237060547" green="0.53299999237060547" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
