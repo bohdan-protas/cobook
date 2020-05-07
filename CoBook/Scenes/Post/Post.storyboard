@@ -358,7 +358,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Yl-31-YTR">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Yl-31-YTR">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
@@ -774,7 +774,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="4ii-lt-jKJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JK5-Uo-Qin" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CreateArticleNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="JK5-Uo-Qin" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6P9-GB-Oa5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -792,7 +792,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="FBH-Zd-Fwu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Wc-Wa-gff" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ArticleDetailsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="6Wc-Wa-gff" customClass="CustomNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7zL-Qm-isb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

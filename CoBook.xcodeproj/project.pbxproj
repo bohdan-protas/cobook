@@ -267,6 +267,10 @@
 		B8909FB42464233700AA56F7 /* ArticleDetailsCellConfigutator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FB32464233700AA56F7 /* ArticleDetailsCellConfigutator.swift */; };
 		B8909FB62464321800AA56F7 /* ArticleDetailsAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FB52464321800AA56F7 /* ArticleDetailsAPIModel.swift */; };
 		B8909FB824646A5700AA56F7 /* ArticlePreviewAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */; };
+		B8909FBC246499EE00AA56F7 /* ArticlePreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FBA246499EE00AA56F7 /* ArticlePreviewTableViewCell.swift */; };
+		B8909FBD246499EE00AA56F7 /* ArticlePreviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8909FBB246499EE00AA56F7 /* ArticlePreviewTableViewCell.xib */; };
+		B8909FC12464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FBF2464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift */; };
+		B8909FC22464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8909FC02464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.xib */; };
 		B8970B4924505763006676DF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4824505763006676DF /* Service.swift */; };
 		B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */; };
 		B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */; };
@@ -590,6 +594,10 @@
 		B8909FB32464233700AA56F7 /* ArticleDetailsCellConfigutator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsCellConfigutator.swift; sourceTree = "<group>"; };
 		B8909FB52464321800AA56F7 /* ArticleDetailsAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsAPIModel.swift; sourceTree = "<group>"; };
 		B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePreviewAPIModel.swift; sourceTree = "<group>"; };
+		B8909FBA246499EE00AA56F7 /* ArticlePreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePreviewTableViewCell.swift; sourceTree = "<group>"; };
+		B8909FBB246499EE00AA56F7 /* ArticlePreviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticlePreviewTableViewCell.xib; sourceTree = "<group>"; };
+		B8909FBF2464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollageItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8909FC02464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollageItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8970B4824505763006676DF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListItemTableViewCell.swift; sourceTree = "<group>"; };
 		B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceListItemTableViewCell.xib; sourceTree = "<group>"; };
@@ -1675,6 +1683,7 @@
 		B8909FA9246418E900AA56F7 /* PhotoCollage */ = {
 			isa = PBXGroup;
 			children = (
+				B8909FBE2464AA5900AA56F7 /* PhotoCollageItem */,
 				B8909FAA24641A7D00AA56F7 /* PhotoCollageTableViewCell.swift */,
 				B8909FAB24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib */,
 			);
@@ -1688,6 +1697,24 @@
 				B8909FB024641C3900AA56F7 /* ArticleHeaderTableViewCell.xib */,
 			);
 			path = ArticleHeaderTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8909FB9246499CF00AA56F7 /* ArticlePreviewTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8909FBA246499EE00AA56F7 /* ArticlePreviewTableViewCell.swift */,
+				B8909FBB246499EE00AA56F7 /* ArticlePreviewTableViewCell.xib */,
+			);
+			path = ArticlePreviewTableViewCell;
+			sourceTree = "<group>";
+		};
+		B8909FBE2464AA5900AA56F7 /* PhotoCollageItem */ = {
+			isa = PBXGroup;
+			children = (
+				B8909FBF2464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift */,
+				B8909FC02464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.xib */,
+			);
+			path = PhotoCollageItem;
 			sourceTree = "<group>";
 		};
 		B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */ = {
@@ -1813,6 +1840,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8909FB9246499CF00AA56F7 /* ArticlePreviewTableViewCell */,
 				B8909FA9246418E900AA56F7 /* PhotoCollage */,
 				B8909FAE24641C1500AA56F7 /* ArticleHeaderTableViewCell */,
 				B8909FA42464164A00AA56F7 /* ArticleDescriptionTableViewCell */,
@@ -1988,6 +2016,7 @@
 				B8AB840524283C7C0041B879 /* EditCardView.xib in Resources */,
 				B82B4D402456059C0061A98B /* CheckboxTableViewCell.xib in Resources */,
 				B820793824446EE600FCCC17 /* FilterSectionHeaderView.xib in Resources */,
+				B8909FC22464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.xib in Resources */,
 				B822F5262459BDA700F207CD /* ProductPreviewItemCollectionViewCell.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
 				B8559F7C243C7E0E00787349 /* AddressInfoTableViewCell.xib in Resources */,
@@ -2005,6 +2034,7 @@
 				B825742123F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf in Resources */,
 				B825741423F5621500C8CBF8 /* HelveticaNeueCyr-Black.ttf in Resources */,
 				B823AB7723F15E3600DE13EA /* Auth.storyboard in Resources */,
+				B8909FBD246499EE00AA56F7 /* ArticlePreviewTableViewCell.xib in Resources */,
 				B8909FAD24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib in Resources */,
 				B8559F5D243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib in Resources */,
 				B822F50E24597F3E00F207CD /* GoogleService-Info.plist in Resources */,
@@ -2291,11 +2321,13 @@
 				B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */,
 				B8909FB42464233700AA56F7 /* ArticleDetailsCellConfigutator.swift in Sources */,
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
+				B8909FBC246499EE00AA56F7 /* ArticlePreviewTableViewCell.swift in Sources */,
 				B824DA64245AE9A700700319 /* CreateArticleViewController.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
 				B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */,
 				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,
+				B8909FC12464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,

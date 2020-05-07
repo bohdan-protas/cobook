@@ -12,23 +12,30 @@ import UIKit
 
 enum ArticleDetails {
 
+    enum SectionAccessory: Int {
+        case details, list
+    }
+
     struct HeaderModel {
+        var avatar: String?
         var name: String?
         var date: String?
-        var viewersCount: Int?
+        var viewersCount: String?
     }
 
     struct DescriptionModel {
         var title: String?
         var desctiption: String?
-        var avatarImage: String?
-        var avatarTitle: String?
+        var albumAvatarImage: String?
+        var albumAvatarTitle: String?
     }
 
     enum Cell {
         case header(model: HeaderModel)
         case descriptionDetails(model: DescriptionModel)
         case creator(model: CardPreviewModel)
+        case photoCollage
+        case articlePreview(model: ArticlePreviewModel)
     }
 
 }
@@ -38,8 +45,10 @@ enum ArticleDetails {
 struct ArticleDetailsCellConfigutator: CellConfiguratorType {
 
     var headerConfigurator: CellConfigurator<ArticleDetails.HeaderModel, ArticleHeaderTableViewCell>?
-    var descriptionCellConfigurator: CellConfigurator<ArticleDetails.DescriptionModel, ArticleHeaderTableViewCell>?
-    let creatorCellConfigurator: CellConfigurator<CardPreviewModel, CardPreviewTableViewCell>?
+    var descriptionCellConfigurator: CellConfigurator<ArticleDetails.DescriptionModel, ArticleDescriptionTableViewCell>?
+    var creatorCellConfigurator: CellConfigurator<CardPreviewModel, CardPreviewTableViewCell>?
+    var photoCollageConfigurator: CellConfigurator<Void?, PhotoCollageTableViewCell>?
+    var articlePreviewConfigurator: CellConfigurator<ArticlePreviewModel, ArticlePreviewTableViewCell>?
 
     func reuseIdentifier(for item: ArticleDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -49,6 +58,10 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
             return descriptionCellConfigurator?.reuseIdentifier ?? ""
         case .creator:
             return creatorCellConfigurator?.reuseIdentifier ?? ""
+        case .photoCollage:
+            return photoCollageConfigurator?.reuseIdentifier ?? ""
+        case .articlePreview:
+            return articlePreviewConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -60,6 +73,10 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
             return descriptionCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .creator(let model):
             return creatorCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .photoCollage:
+            return photoCollageConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .articlePreview(let model):
+            return articlePreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -67,6 +84,8 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
         headerConfigurator?.registerCells(in: tableView)
         descriptionCellConfigurator?.registerCells(in: tableView)
         creatorCellConfigurator?.registerCells(in: tableView)
+        photoCollageConfigurator?.registerCells(in: tableView)
+        articlePreviewConfigurator?.registerCells(in: tableView)
     }
 
 

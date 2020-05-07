@@ -20,11 +20,24 @@ class ArticleDetailsViewController: BaseViewController {
         super.viewDidLoad()
 
         presenter?.attachView(self)
+        presenter?.setup()
         presenter?.fetchDetails()
     }
 
-    // MARK: - Public
-    
+    deinit {
+        presenter?.detachView()
+    }
+
+
+}
+
+// MARK: - Privates
+
+extension ArticleDetailsViewController {
+
+    func setupLayout() {
+        tableView.delegate = self
+    }
 
 }
 
@@ -32,4 +45,31 @@ class ArticleDetailsViewController: BaseViewController {
 
 extension ArticleDetailsViewController: ArticleDetailsView {
 
+    func set(title: String?) {
+        self.navigationItem.title = title
+    }
+
+    func reload() {
+        tableView.reloadData()
+    }
+
+    func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?) {
+        dataSource?.connect(to: tableView)
+        tableView.reloadData()
+    }
+
+
 }
+
+// MARK: - UITableViewDelegate
+
+extension ArticleDetailsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+
+}
+
+

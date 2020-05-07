@@ -38,53 +38,6 @@ class APIClient {
         self.session = session
     }
 
-    // MARK: Public
-    /**
-     request builder using features
-
-    - parameters:
-       - endpoint: path to endpoint
-       - decoder: decoder for decode response, by default JSONDecoder()
-       - completion: parsed response from server
-    */
-    @discardableResult
-    private func performFutureRequest<T: Decodable>(endpoint: URLRequestConvertible,
-                                                    decoder: JSONDecoder = JSONDecoder()) -> Future<T> {
-
-
-        return Future { (completion) in
-            self.session.request(endpoint)
-                .validate(statusCode: 200..<300)
-                .response { (response) in
-                    if let responseData = response.data {
-                        do {
-                            let decodedResponse = try decoder.decode(APIResponse<T>.self, from: responseData)
-                            switch decodedResponse.status {
-                            case .ok:
-                                if let data = decodedResponse.data {
-                                    completion(.success(data))
-                                } else {
-                                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in unexpected format")
-                                    completion(.failure(error))
-                                }
-                            case .error:
-                                let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: decodedResponse.errorLocalizadMessage ?? "Undefined error occured")
-                                completion(.failure(error))
-                            }
-                        } catch let decodeErrror {
-                            Log.error(decodeErrror)
-                            let userError = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Received data in unexpected format")
-                            completion(.failure(userError))
-                        }
-                    } else {
-                        let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
-                        completion(.failure(error))
-                    }
-                }
-        }
-
-    } // end performRequest
-
     /**
     Base request builder
 
@@ -629,14 +582,18 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
-    func getArticlesList(albumID: Int) -> Future<[ArticlePreviewAPIModel]> {
+    @discardableResult
+    func getArticlesList(albumID: Int,
+                         completion: @escaping (Result<[ArticlePreviewAPIModel]?>) -> Void) -> DataRequest {
         let endpoint = ArticlesEndpoint.getArticlesList(albumID: albumID)
-        return performFutureRequest(endpoint: endpoint)
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
-    func getArticleDetails(articleID: Int) -> Future<ArticleDetailsAPIModel> {
+    @discardableResult
+    func getArticleDetails(articleID: Int,
+                           completion: @escaping (Result<ArticleDetailsAPIModel?>) -> Void) -> DataRequest {
         let endpoint = ArticlesEndpoint.getArticleDetails(id: articleID)
-        return performFutureRequest(endpoint: endpoint)
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
 

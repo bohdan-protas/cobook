@@ -44,7 +44,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="qdr-hh-37Q">
                                         <rect key="frame" x="104" y="0.0" width="80" height="32"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OuG-Pd-tjh" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OuG-Pd-tjh" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                                 <color key="backgroundColor" name="Theme_Gray-Background"/>
                                                 <constraints>
@@ -88,11 +88,21 @@
                         </subviews>
                         <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="30" trailing="16"/>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jYX-BN-bbd">
+                        <rect key="frame" x="16" y="311" width="288" height="1"/>
+                        <color key="backgroundColor" name="Theme_Separator"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="xVz-m0-gZl"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="jYX-BN-bbd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="C5b-2c-oKs"/>
+                    <constraint firstAttribute="trailing" secondItem="jYX-BN-bbd" secondAttribute="trailing" constant="16" id="IKA-HH-ZYn"/>
                     <constraint firstAttribute="trailing" secondItem="18I-U5-w2X" secondAttribute="trailing" id="JgJ-g5-Iz2"/>
                     <constraint firstItem="18I-U5-w2X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OmI-XK-ovB"/>
                     <constraint firstAttribute="bottom" secondItem="18I-U5-w2X" secondAttribute="bottom" id="eat-Ef-Yrm"/>
+                    <constraint firstAttribute="bottom" secondItem="jYX-BN-bbd" secondAttribute="bottom" id="o2T-Ok-leN"/>
                     <constraint firstItem="18I-U5-w2X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zEx-fZ-uPK"/>
                 </constraints>
             </tableViewCellContentView>
@@ -109,6 +119,9 @@
     <resources>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Separator">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
