@@ -26,14 +26,8 @@ extension UIStoryboard {
         return UIStoryboard(name: "AllCards", bundle: nil)
     }
 
-    enum Post {
-        static var instance = UIStoryboard(name: "Post", bundle: nil)
-
-        enum Controllers {
-            static let createAtricle: CreateArticleViewController = instance.initiateViewControllerFromType()
-            static let selectAlbum: SelectAlbumViewController = instance.initiateViewControllerFromType()
-            static let createAlbum: CreateAlbumViewController = instance.initiateViewControllerFromType()
-        }
+    static var post: UIStoryboard {
+        return UIStoryboard(name: "Post", bundle: nil)
     }
 
 

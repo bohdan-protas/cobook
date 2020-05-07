@@ -13,7 +13,10 @@ enum ArticlesEndpoint: Endpoint {
     case getAlbums(cardID: Int?)
     case createAlbum(parameters: CreateAlbumApiModel)
     case updateAlbum(parameters: UpdateAlbumApiModel)
+
     case createArticle(parameters: CreateArticleApiModel)
+    case getArticleDetails(id: Int)
+    case getArticlesList(albumID: Int)
 
     var useAuthirizationToken: Bool {
         return true
@@ -29,6 +32,10 @@ enum ArticlesEndpoint: Endpoint {
             return .post
         case .updateAlbum:
             return .put
+        case .getArticleDetails:
+            return .post
+        case .getArticlesList:
+            return .get
         }
     }
 
@@ -42,6 +49,10 @@ enum ArticlesEndpoint: Endpoint {
             return "/articles"
         case .updateAlbum:
             return "/articles/albums"
+        case .getArticleDetails:
+            return "/articles/info"
+        case .getArticlesList:
+            return "/articles"
         }
     }
 
@@ -51,7 +62,9 @@ enum ArticlesEndpoint: Endpoint {
             if let cardID = cardID {
                 return ["card_id": String(cardID)]
             }
-            fallthrough
+            return nil
+        case .getArticlesList(let albumID):
+            return ["album_id": String(albumID)]
         default:
             return nil
         }
@@ -65,6 +78,8 @@ enum ArticlesEndpoint: Endpoint {
             return parameters.dictionary
         case .updateAlbum(let parameters):
             return parameters.dictionary
+        case .getArticleDetails(let id):
+            return ["id": id]
         default:
             return nil
         }

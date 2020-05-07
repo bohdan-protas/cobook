@@ -53,7 +53,7 @@ extension SelectAlbumViewController: SelectAlbumView {
     }
 
     func goToCreateAlbum(presenter: CreateAlbumPresenter) {
-        let controller = UIStoryboard.Post.Controllers.createAlbum
+        let controller: CreateAlbumViewController = UIStoryboard.post.initiateViewControllerFromType()
         controller.presenter = presenter
         self.navigationController?.pushViewController(controller, animated: true)
     }

@@ -264,6 +264,9 @@
 		B8909FAD24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8909FAB24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib */; };
 		B8909FB124641C3900AA56F7 /* ArticleHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FAF24641C3900AA56F7 /* ArticleHeaderTableViewCell.swift */; };
 		B8909FB224641C3900AA56F7 /* ArticleHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8909FB024641C3900AA56F7 /* ArticleHeaderTableViewCell.xib */; };
+		B8909FB42464233700AA56F7 /* ArticleDetailsCellConfigutator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FB32464233700AA56F7 /* ArticleDetailsCellConfigutator.swift */; };
+		B8909FB62464321800AA56F7 /* ArticleDetailsAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FB52464321800AA56F7 /* ArticleDetailsAPIModel.swift */; };
+		B8909FB824646A5700AA56F7 /* ArticlePreviewAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */; };
 		B8970B4924505763006676DF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4824505763006676DF /* Service.swift */; };
 		B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */; };
 		B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */; };
@@ -584,6 +587,9 @@
 		B8909FAB24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollageTableViewCell.xib; sourceTree = "<group>"; };
 		B8909FAF24641C3900AA56F7 /* ArticleHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B8909FB024641C3900AA56F7 /* ArticleHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		B8909FB32464233700AA56F7 /* ArticleDetailsCellConfigutator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsCellConfigutator.swift; sourceTree = "<group>"; };
+		B8909FB52464321800AA56F7 /* ArticleDetailsAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsAPIModel.swift; sourceTree = "<group>"; };
+		B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePreviewAPIModel.swift; sourceTree = "<group>"; };
 		B8970B4824505763006676DF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B8970B4B245058C2006676DF /* ServiceListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListItemTableViewCell.swift; sourceTree = "<group>"; };
 		B8970B4C245058C2006676DF /* ServiceListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceListItemTableViewCell.xib; sourceTree = "<group>"; };
@@ -1424,6 +1430,8 @@
 				B81F189E24603F71003CBC84 /* CreateAlbumApiModel.swift */,
 				B81F18A2246080E4003CBC84 /* AlbumPreviewApiModel.swift */,
 				B823A1AA24617FF1004271AA /* CreateArticleApiModel.swift */,
+				B8909FB52464321800AA56F7 /* ArticleDetailsAPIModel.swift */,
+				B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1650,6 +1658,7 @@
 			children = (
 				B8909F992464121A00AA56F7 /* ArticleDetailsViewController.swift */,
 				B8909F9B2464122C00AA56F7 /* ArticleDetailsPresenter.swift */,
+				B8909FB32464233700AA56F7 /* ArticleDetailsCellConfigutator.swift */,
 			);
 			path = ArticleDetails;
 			sourceTree = "<group>";
@@ -2211,6 +2220,7 @@
 				B8559F57243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B8B8B9092459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift in Sources */,
+				B8909FB62464321800AA56F7 /* ArticleDetailsAPIModel.swift in Sources */,
 				B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */,
 				B8B8B9052459DA5500162224 /* ProductDetailsViewController.swift in Sources */,
 				B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */,
@@ -2279,6 +2289,7 @@
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
 				B822D7092458B5EF00883BE8 /* Product.swift in Sources */,
 				B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */,
+				B8909FB42464233700AA56F7 /* ArticleDetailsCellConfigutator.swift in Sources */,
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
 				B824DA64245AE9A700700319 /* CreateArticleViewController.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
@@ -2300,6 +2311,7 @@
 				B8559F93243CC4FD00787349 /* HideCardView.swift in Sources */,
 				B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */,
 				B822F5252459BDA700F207CD /* ProductPreviewItemCollectionViewCell.swift in Sources */,
+				B8909FB824646A5700AA56F7 /* ArticlePreviewAPIModel.swift in Sources */,
 				B82248DE242C0CD700392D10 /* CardSaveView.swift in Sources */,
 				B8559F8F243C8B0900787349 /* CardItemTableViewCell.swift in Sources */,
 				B824DA66245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift in Sources */,

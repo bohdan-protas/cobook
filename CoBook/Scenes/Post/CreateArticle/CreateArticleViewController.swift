@@ -75,11 +75,6 @@ class CreateArticleViewController: BaseViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         presenter?.attachView(self)
         presenter?.setup()
     }
@@ -112,7 +107,7 @@ extension CreateArticleViewController: CreateArticleView {
     }
 
     func goToSelectAlbum(presenter: SelectAlbumPresenter) {
-        let controller = UIStoryboard.Post.Controllers.selectAlbum
+        let controller: SelectAlbumViewController = UIStoryboard.post.initiateViewControllerFromType()
         controller.presenter = presenter
         self.navigationController?.pushViewController(controller, animated: true)
     }

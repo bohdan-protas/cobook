@@ -23,6 +23,7 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToCreateProduct(presenter: CreateProductPresenter?)
     func goToProductDetails(presenter: ProductDetailsPresenter?)
     func goToCreatePost(cardID: Int)
+    func goToArticleDetails(presenter: ArticleDetailsPresenter)
 }
 
 
@@ -481,7 +482,8 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
                 case .add:
                     self.view?.goToCreatePost(cardID: businessCardId)
                 case .view(let model):
-                    break
+                    let presenter = ArticleDetailsPresenter(albumID: model.id)
+                    self.view?.goToArticleDetails(presenter: presenter)
                 case .showMore:
                     break
                 }

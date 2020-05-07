@@ -8,15 +8,28 @@
 
 import UIKit
 
-class ArticleDetailsViewController: UIViewController {
-    
+class ArticleDetailsViewController: BaseViewController {
+
     @IBOutlet var tableView: UITableView!
+
+    var presenter: ArticleDetailsPresenter?
+
+    // MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        presenter?.attachView(self)
+        presenter?.fetchDetails()
     }
+
+    // MARK: - Public
     
+
+}
+
+// MARK: - ArticleDetailsView
+
+extension ArticleDetailsViewController: ArticleDetailsView {
 
 }
