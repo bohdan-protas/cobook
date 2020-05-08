@@ -27,16 +27,19 @@ enum AuthEndpoint: Endpoint {
     case refresh(refreshToken: String)
 
     // MARK: - Auth token usage
+    
     var useAuthirizationToken: Bool {
         return false
     }
 
     // MARK: - HTTPMethod
+
     var method: HTTPMethod {
         return .post
     }
 
     // MARK: - Path
+
     var path: String {
         switch self {
         case .forgotPassword:
@@ -47,7 +50,8 @@ enum AuthEndpoint: Endpoint {
     }
 
     // MARK: - Parameters
-    var parameters: Parameters? {
+
+    var bodyParameters: Parameters? {
         switch self {
 
         case let .forgotPassword(telephone):

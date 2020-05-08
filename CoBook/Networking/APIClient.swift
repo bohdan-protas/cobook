@@ -9,11 +9,13 @@
 import Foundation
 import Alamofire
 import AlamofireImage
+import PromisedFuture
 
 class APIClient {
 
     // MARK: - Properties
 
+    /// Default session configuraton
     public static var `default`: APIClient = {
         let evaluators = [APIConstants.baseURLPath.host ?? "": DisabledEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
@@ -26,18 +28,16 @@ class APIClient {
         return apiClient
     }()
 
+    /// Current session variable
     private var session: Session
 
     // MARK: - Initializer
 
     private init(session: Session) {
-
         ImageResponseSerializer.addAcceptableImageContentTypes(APIConstants.additionalAcceptableImageContentTypes)
-
         self.session = session
     }
 
-    // MARK: Public
     /**
     Base request builder
 
@@ -49,7 +49,7 @@ class APIClient {
     @discardableResult
     private func performRequest<T: Decodable>(endpoint: URLRequestConvertible,
                                               decoder: JSONDecoder = JSONDecoder(),
-                                              completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
+                                              completion: @escaping (Result<T?>) -> Void) -> DataRequest {
 
         return session.request(endpoint)
             .validate(statusCode: 200..<300)
@@ -91,12 +91,13 @@ class APIClient {
                                       to endpoint: URLConvertible,
                                       headers: HTTPHeaders?,
                                       decoder: JSONDecoder = JSONDecoder(),
-                                      completion: @escaping (Result<T?, Error>) -> Void) -> DataRequest {
+                                      completion: @escaping (Result<T?>) -> Void) -> DataRequest {
 
         return session.upload(multipartFormData: { multipartFormData in
             let randomName = "\(String.random())-image"
             multipartFormData.append(imageData, withName: randomName, fileName: "\(randomName).jpg", mimeType: "image/jpeg")
         }, to: endpoint, headers: headers)
+            .validate(statusCode: 200..<300)
             .response { (response) in
                 
                 guard let responseData = response.data else {
@@ -144,7 +145,7 @@ extension APIClient {
                                      telephone: String,
                                      firstName: String,
                                      lastName: String,
-                                     completion: @escaping (Result<SignInAPIResponseData?, Error>) -> Void) {
+                                     completion: @escaping (Result<SignInAPIResponseData?>) -> Void) {
 
         let endpoint = SignUpEndpoint.initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName)
         performRequest(endpoint: endpoint, completion: completion)
@@ -160,7 +161,7 @@ extension APIClient {
      */
     func verifyRequest(smsCode: Int,
                        accessToken: String,
-                       completion: @escaping (Result<VerifyAPIResponseData?, Error>) -> Void) {
+                       completion: @escaping (Result<VerifyAPIResponseData?>) -> Void) {
 
         let endpoint = SignUpEndpoint.verify(smsCode: smsCode, accessToken: accessToken)
         performRequest(endpoint: endpoint, completion: completion)
@@ -174,7 +175,7 @@ extension APIClient {
         - completion: parsed response from server
      */
     func resendSmsRequest(accessToken: String,
-                          completion: @escaping (Result<SignInAPIResponseData?, Error>) -> Void) {
+                          completion: @escaping (Result<SignInAPIResponseData?>) -> Void) {
 
         let endpoint = SignUpEndpoint.resend(accessToken: accessToken)
         performRequest(endpoint: endpoint, completion: completion)
@@ -190,7 +191,7 @@ extension APIClient {
      */
     func signUpFinishRequest(accessToken: String,
                              password: String,
-                             completion: @escaping (Result<RegisterAPIResponseData?, Error>) -> Void) {
+                             completion: @escaping (Result<RegisterAPIResponseData?>) -> Void) {
 
         let endpoint = SignUpEndpoint.finish(accessToken: accessToken, password: password)
         performRequest(endpoint: endpoint, completion: completion)
@@ -212,7 +213,7 @@ extension APIClient {
      */
     func signInRequest(login: String,
                        password: String,
-                       completion: @escaping (Result<RegisterAPIResponseData?, Error>) -> Void) {
+                       completion: @escaping (Result<RegisterAPIResponseData?>) -> Void) {
 
         let endpoint = SignInEndpoint.login(login: login, password: password)
         performRequest(endpoint: endpoint, completion: completion)
@@ -230,7 +231,7 @@ extension APIClient {
         - refreshToken: current users refresh token
         - completion: parsed response from server
      */
-    func refreshTokenRequest(refreshToken: String, completion: @escaping (Result<RefreshTokenAPIResponseData?, Error>) -> Void) {
+    func refreshTokenRequest(refreshToken: String, completion: @escaping (Result<RefreshTokenAPIResponseData?>) -> Void) {
         let endpoint = AuthEndpoint.refresh(refreshToken: refreshToken)
         performRequest(endpoint: endpoint, completion: completion)
     }
@@ -243,7 +244,7 @@ extension APIClient {
         - completion: parsed response from server
      */
     func forgotPasswordRequest(telephone: String,
-                               completion: @escaping (Result<VoidResponseData?, Error>) -> Void) {
+                               completion: @escaping (Result<VoidResponseData?>) -> Void) {
 
         let endpoint = AuthEndpoint.forgotPassword(telephone: telephone)
         performRequest(endpoint: endpoint, completion: completion)
@@ -258,7 +259,7 @@ extension APIClient {
     /**
      Request localized list of interests
     */
-    func interestsListRequest(completion: @escaping (Result<[InterestApiModel]?, Error>) -> Void) {
+    func interestsListRequest(completion: @escaping (Result<[InterestApiModel]?>) -> Void) {
         let endpoint = InterestsEndpoint.list
         performRequest(endpoint: endpoint, completion: completion)
     }
@@ -274,7 +275,7 @@ extension APIClient {
      Request localized list of practice types
     */
     @discardableResult
-    func practicesTypesListRequest(completion: @escaping (Result<[PracticeTypeApiModel]?, Error>) -> Void) -> DataRequest{
+    func practicesTypesListRequest(completion: @escaping (Result<[PracticeTypeApiModel]?>) -> Void) -> DataRequest{
         let endpoint = PracticeTypesEndpoint.list
         return performRequest(endpoint: endpoint, completion: completion)
     }
@@ -290,7 +291,7 @@ extension APIClient {
     */
     @discardableResult
     func updateBusinessCard(parameters: CreateBusinessCardParametersApiModel,
-                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                            completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.updateBusinessCard(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -301,7 +302,7 @@ extension APIClient {
     */
     @discardableResult
     func createBusinessCard(parameters: CreateBusinessCardParametersApiModel,
-                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                            completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.createBusinessCard(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -312,7 +313,7 @@ extension APIClient {
     */
     @discardableResult
     func createPersonalCard(parameters: CreatePersonalCardParametersApiModel,
-                            completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                            completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.createPersonalCard(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -328,7 +329,7 @@ extension APIClient {
      */
     @discardableResult
     func getCardInfo(id: Int,
-                     completion: @escaping (Result<CardDetailsApiModel?, Error>) -> Void) -> DataRequest {
+                     completion: @escaping (Result<CardDetailsApiModel?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardInfo(id: id)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -354,7 +355,7 @@ extension APIClient {
                       search: String? = nil,
                       limit: Int? = nil,
                       offset: Int? = nil,
-                      completion: @escaping (Result<[CardItemApiModel]?, Error>) -> Void) -> DataRequest {
+                      completion: @escaping (Result<[CardItemApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardsList(type: type, interestsIds: interestIds, practiseTypeIds: practiseTypeIds, search: search, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -373,7 +374,7 @@ extension APIClient {
     @discardableResult
     func getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel,
                                   bottomRightRectCoordinate: CoordinateApiModel,
-                                  completion: @escaping (Result<[CardMapMarkerApiModel]?, Error>) -> Void) -> DataRequest {
+                                  completion: @escaping (Result<[CardMapMarkerApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -395,12 +396,15 @@ extension APIClient {
      */
     @discardableResult
     func upload(imageData: Data,
-                completion: @escaping (Result<FileDataApiModel?, Error>) -> Void) -> DataRequest {
+                completion: @escaping (Result<FileDataApiModel?>) -> Void) -> DataRequest? {
 
         let endpoint = ContentManagerEndpoint.singleFileUpload
-        let url = endpoint.urlRequest!.url!
-        let headers = endpoint.urlRequest?.headers
-        return upload(imageData: imageData, to: url, headers: headers, completion: completion)
+        if let url = endpoint.urlRequest?.url {
+            let headers = endpoint.urlRequest?.headers
+            return upload(imageData: imageData, to: url, headers: headers, completion: completion)
+        } else {
+            return nil
+        }
     }
 
 }
@@ -417,7 +421,7 @@ extension APIClient {
         - completion: parsed  'FileAPIResponseData' response from server
      */
     @discardableResult
-    func profileDetails(completion: @escaping (Result<ProfileApiModel?, Error>) -> Void) -> DataRequest {
+    func profileDetails(completion: @escaping (Result<ProfileApiModel?>) -> Void) -> DataRequest {
         let endpoint = ProfileEndpoint.profile
         return performRequest(endpoint: endpoint, completion: completion)
     }
@@ -432,7 +436,7 @@ extension APIClient {
     func searchEmployee(searchQuery: String?,
                      limit: Int? = nil,
                      offset: Int? = nil,
-                     completion: @escaping (Result<[EmployersSearchItemApiModel]?, Error>) -> Void) -> DataRequest {
+                     completion: @escaping (Result<[EmployersSearchItemApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = UsersEndpoint.searchEmployee(searchQuery: searchQuery, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -442,7 +446,7 @@ extension APIClient {
     func employeeList(cardId: Int,
                       limit: Int? = nil,
                       offset: Int? = nil,
-                      completion: @escaping (Result<[EmployApiModel]?, Error>) -> Void) -> DataRequest {
+                      completion: @escaping (Result<[EmployApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = UsersEndpoint.employeeList(cardId: cardId, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -457,7 +461,7 @@ extension APIClient {
 
     @discardableResult
     func createService(with parameters: CreateServiceApiModel,
-                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                       completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = ServicesEndpoint.create(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -465,7 +469,7 @@ extension APIClient {
 
     @discardableResult
     func updateService(with parameters: UpdateServiceApiModel,
-                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                       completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = ServicesEndpoint.update(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -475,7 +479,7 @@ extension APIClient {
     func getServiceList(cardID: Int,
                         limit: Int? = nil,
                         offset: Int? = nil,
-                        completion: @escaping (Result<[ServicePreviewApiModel]?, Error>) -> Void) -> DataRequest {
+                        completion: @escaping (Result<[ServicePreviewApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = ServicesEndpoint.getList(cardID: cardID, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -483,7 +487,7 @@ extension APIClient {
 
     @discardableResult
     func getServiceDetails(serviceID: Int,
-                           completion: @escaping (Result<ServiceDetailsApiModel?, Error>) -> Void) -> DataRequest {
+                           completion: @escaping (Result<ServiceDetailsApiModel?>) -> Void) -> DataRequest {
 
         let endpoint = ServicesEndpoint.getDetails(serviceID: serviceID)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -498,7 +502,7 @@ extension APIClient {
 
     @discardableResult
     func createProduct(with parameters: CreateProductApiModel,
-                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                       completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = ProductEndpoint.create(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -506,7 +510,7 @@ extension APIClient {
 
     @discardableResult
     func updateProduct(with parameters: UpdateProductApiModel,
-                       completion: @escaping (Result<VoidResponseData?, Error>) -> Void) -> DataRequest {
+                       completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = ProductEndpoint.update(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -516,7 +520,7 @@ extension APIClient {
     func getProductList(cardID: Int,
                         limit: Int? = nil,
                         offset: Int? = nil,
-                        completion: @escaping (Result<[ProductPreviewApiModel]?, Error>) -> Void) -> DataRequest {
+                        completion: @escaping (Result<[ProductPreviewApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = ProductEndpoint.list(cardID: cardID, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
@@ -524,12 +528,81 @@ extension APIClient {
 
     @discardableResult
     func getProductDetails(productID: Int,
-                           completion: @escaping (Result<ProductDetailsApiModel?, Error>) -> Void) -> DataRequest {
+                           completion: @escaping (Result<ProductDetailsApiModel?>) -> Void) -> DataRequest {
 
         let endpoint = ProductEndpoint.getDetails(productID: productID)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+
+}
+
+// MARK: Albums requests
+
+extension APIClient {
+
+    @discardableResult
+    func createAlbum(parameters: CreateAlbumApiModel,
+                     completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.createAlbum(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func updateAlbum(parameters: UpdateAlbumApiModel,
+                     completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.updateAlbum(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func getAlbumsList(cardID: Int?,
+                       limit: Int? = nil,
+                       offset: Int? = nil,
+                       completion: @escaping (Result<[AlbumPreviewApiModel]?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.getAlbums(cardID: cardID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
+}
+
+// MARK: - Article requests
+
+extension APIClient {
+
+    @discardableResult
+    func createArticle(parameters: CreateArticleApiModel,
+                       completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.createArticle(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func updateArticle(parameters: UpdateArticleApiModel,
+                       completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.updateArticle(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func getArticlesList(albumID: Int,
+                         completion: @escaping (Result<[ArticlePreviewAPIModel]?>) -> Void) -> DataRequest {
+        let endpoint = ArticlesEndpoint.getArticlesList(albumID: albumID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
+    func getArticleDetails(articleID: Int,
+                           completion: @escaping (Result<ArticleDetailsAPIModel?>) -> Void) -> DataRequest {
+        let endpoint = ArticlesEndpoint.getArticleDetails(id: articleID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
 
 
 }

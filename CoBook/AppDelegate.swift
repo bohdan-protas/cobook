@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppStorage.State.isFirstAppLaunch = false
         }
 
+        // start screen routing
         if AppStorage.User.data?.userId == nil {
             if AppStorage.User.isTutorialShown {
                 let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()

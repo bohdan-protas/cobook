@@ -24,7 +24,7 @@ enum ProfileEndpoint: Endpoint {
         return "/profile"
     }
 
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         return nil
     }
 

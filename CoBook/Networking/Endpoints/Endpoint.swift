@@ -13,22 +13,28 @@ protocol Endpoint: URLRequestConvertible {
     var method: HTTPMethod { get }
     var baseUrlPath: URLComponents { get }
     var path: String { get }
-    var parameters: Parameters? { get }
+    var urlParameters: [String: String]? { get }
+    var bodyParameters: Parameters? { get }
 }
 
 extension Endpoint {
     var baseUrlPath: URLComponents {
         return APIConstants.baseURLPath
     }
+
+    var urlParameters: [String: String]? { return nil }
+    var bodyParameters: Parameters? { return nil }
 }
 
 // MARK: - Base configuration
+
 extension Endpoint {
 
     func asURLRequest() throws -> URLRequest {
+
         // Base URL
-        let url = try baseUrlPath.asURL()
-        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        let url = try baseUrlPath.asURL().appendingPathComponent(path)
+        var urlRequest = URLRequest(url: url)
 
         // HTTP Method
         urlRequest.httpMethod = method.rawValue
@@ -41,8 +47,18 @@ extension Endpoint {
             urlRequest.headers.add(.authorization(bearerToken: accessToken))
         }
 
-        // Parameters
-        if let parameters = parameters {
+        // URL parameters encoding
+        if let urlParameters = urlParameters {
+            do {
+                let encoder = URLEncodedFormParameterEncoder(destination: URLEncodedFormParameterEncoder.Destination.queryString)
+                urlRequest = try encoder.encode(urlParameters, into: urlRequest)
+            } catch {
+                throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
+            }
+        }
+
+        // Body parameters encoding
+        if let parameters = bodyParameters {
             do {
                 urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
             } catch {

@@ -30,7 +30,7 @@ enum ContentManagerEndpoint: Endpoint {
         return "/upload/single"
     }
 
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         return nil
     }
 

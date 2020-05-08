@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="178" id="KGk-i7-Jjw" customClass="ArticlePreviewTableViewCell" customModule="CoBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="178"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="178"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B45-iJ-UX4" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                        <rect key="frame" x="8" y="0.0" width="304" height="162"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="abP-iv-NBG">
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="162"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LnS-C3-4Gl">
+                                <rect key="frame" x="0.0" y="88" width="304" height="74"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JSe-b7-WcP">
+                                    <rect key="frame" x="0.0" y="0.0" width="304" height="74"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="44Y-4g-gHg"/>
+                                </constraints>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeZ-hY-X2T">
+                                <rect key="frame" x="0.0" y="88" width="304" height="74"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CeZ-hY-X2T" firstAttribute="trailing" secondItem="LnS-C3-4Gl" secondAttribute="trailing" id="2bG-JZ-RRy"/>
+                            <constraint firstAttribute="bottom" secondItem="LnS-C3-4Gl" secondAttribute="bottom" id="37Y-27-yr9"/>
+                            <constraint firstItem="CeZ-hY-X2T" firstAttribute="centerY" secondItem="LnS-C3-4Gl" secondAttribute="centerY" id="47E-hs-24L"/>
+                            <constraint firstAttribute="bottom" secondItem="abP-iv-NBG" secondAttribute="bottom" id="8KX-yd-5GP"/>
+                            <constraint firstItem="CeZ-hY-X2T" firstAttribute="leading" secondItem="LnS-C3-4Gl" secondAttribute="leading" id="HAZ-bm-j5E"/>
+                            <constraint firstItem="LnS-C3-4Gl" firstAttribute="leading" secondItem="B45-iJ-UX4" secondAttribute="leading" id="QbH-Fm-TW1"/>
+                            <constraint firstItem="abP-iv-NBG" firstAttribute="leading" secondItem="B45-iJ-UX4" secondAttribute="leading" id="Ql8-lA-qzi"/>
+                            <constraint firstAttribute="height" constant="162" id="TIo-mw-aBM"/>
+                            <constraint firstItem="CeZ-hY-X2T" firstAttribute="centerX" secondItem="LnS-C3-4Gl" secondAttribute="centerX" id="fcg-Zt-2Md"/>
+                            <constraint firstAttribute="trailing" secondItem="LnS-C3-4Gl" secondAttribute="trailing" id="fmm-zS-Hs4"/>
+                            <constraint firstItem="CeZ-hY-X2T" firstAttribute="top" secondItem="LnS-C3-4Gl" secondAttribute="top" id="j1U-sA-kM9"/>
+                            <constraint firstAttribute="trailing" secondItem="abP-iv-NBG" secondAttribute="trailing" id="p9h-H1-Fo8"/>
+                            <constraint firstItem="CeZ-hY-X2T" firstAttribute="bottom" secondItem="LnS-C3-4Gl" secondAttribute="bottom" id="tmQ-0J-x4O"/>
+                            <constraint firstItem="abP-iv-NBG" firstAttribute="top" secondItem="B45-iJ-UX4" secondAttribute="top" id="vh0-kZ-yMc"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="B45-iJ-UX4" secondAttribute="trailing" constant="8" id="1Zh-P9-QZK"/>
+                    <constraint firstAttribute="bottom" secondItem="B45-iJ-UX4" secondAttribute="bottom" constant="16" id="j12-1T-iKc"/>
+                    <constraint firstItem="B45-iJ-UX4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="sy5-31-qU0"/>
+                    <constraint firstItem="B45-iJ-UX4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vYa-wH-lMt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="Theme_Gray-Background"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="articleImageView" destination="abP-iv-NBG" id="5wy-JW-tde"/>
+                <outlet property="articleTitle" destination="CeZ-hY-X2T" id="3UE-eV-ZsG"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="198.21428571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

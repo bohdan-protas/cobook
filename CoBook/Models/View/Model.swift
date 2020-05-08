@@ -104,4 +104,9 @@ struct ProductPreviewItemModel {
     var isUserOwner: Bool
 }
 
+struct ArticlePreviewModel {
+    var id: Int
+    var title: String?
+    var image: String?
+}
 
