@@ -17,7 +17,12 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeniedAccessToLocationPlaceholderView" customModule="CoBook" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeniedAccessToLocationPlaceholderView" customModule="CoBook" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="1s3-Kq-MWS" id="fhw-MU-2GP"/>
+                <outlet property="titleLabel" destination="xOW-eN-bXu" id="xUG-nX-JHC"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="305"/>

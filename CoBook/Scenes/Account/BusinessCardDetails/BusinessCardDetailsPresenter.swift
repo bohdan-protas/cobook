@@ -315,8 +315,7 @@ private extension BusinessCardDetailsPresenter {
         albumPreviewSection = AlbumPreview.Section(title: "Збережені пости", dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
         albumPreviewSection?.items.append(.add(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
         albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { AlbumPreview.Item.view($0) })
-        // TODO: - Add in future
-        //albumPreviewSection?.items.append(.showMore(title: "Показати всі", imageName: "ic_add_item"))
+        albumPreviewSection?.items.append(.showMore)
         dataSource?[.postPreview].items = [.postPreview(model: albumPreviewSection)]
 
         // card details section

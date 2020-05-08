@@ -12,6 +12,7 @@ protocol ArticleDetailsView: LoadDisplayableView, AlertDisplayableView, Navigabl
     func reload()
     func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?)
     func set(title: String?)
+    func setPlaceholderView(_ visible: Bool)
     func goToEditArticle(presenter: CreateArticlePresenter)
 }
 
@@ -113,7 +114,7 @@ class ArticleDetailsPresenter: BasePresenter {
     // MARK: - Public
 
     func setup() {
-        view?.set(title: "Пост")
+        view?.set(title: "Стаття")
         view?.set(dataSource: dataSource)
     }
 
@@ -132,7 +133,11 @@ class ArticleDetailsPresenter: BasePresenter {
             switch result {
             case .success(let articles):
                 self?.articles = articles
-                guard let id = articles?.first?.id else { return }
+                guard let id = articles?.first?.id else {
+                    self?.view?.setPlaceholderView(true)
+                    return
+                }
+                self?.view?.setPlaceholderView(false)
                 self?.fetchArticleDetails(articleID: id)
             case .failure(let error):
                 self?.view?.errorAlert(message: error.localizedDescription)

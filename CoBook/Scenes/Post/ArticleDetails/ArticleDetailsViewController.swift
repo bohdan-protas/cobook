@@ -11,8 +11,17 @@ import UIKit
 class ArticleDetailsViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
-
     var presenter: ArticleDetailsPresenter?
+
+    private lazy var placeholderView: UIView = {
+        let placeholderView = DeniedAccessToLocationPlaceholderView(frame: tableView.bounds)
+        placeholderView.titleLabel.text = "В даному альбомі статті відсутні..."
+        placeholderView.actionButton.setTitle("Повернутися назад", for: .normal)
+        placeholderView.onOpenSettingsHandler = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        return placeholderView
+    }()
 
     // MARK: - View Life Cycle
 
@@ -45,6 +54,14 @@ extension ArticleDetailsViewController {
 // MARK: - ArticleDetailsView
 
 extension ArticleDetailsViewController: ArticleDetailsView {
+
+    func setPlaceholderView(_ visible: Bool) {
+        if visible {
+            tableView.backgroundView = placeholderView
+        } else {
+            tableView.backgroundView = nil
+        }
+    }
 
     func goToEditArticle(presenter: CreateArticlePresenter) {
         let controller: CreateArticleViewController = UIStoryboard.post.initiateViewControllerFromType()

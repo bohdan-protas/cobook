@@ -28,7 +28,7 @@ enum AlbumPreview {
 
         case add(title: String?, imagePath: String?)
         case view(_ model: Model)
-        case showMore(title: String?, imageName: String)
+        case showMore
     }
 
 

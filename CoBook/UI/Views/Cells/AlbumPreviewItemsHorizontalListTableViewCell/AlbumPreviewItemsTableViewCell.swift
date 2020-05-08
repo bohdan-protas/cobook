@@ -60,9 +60,10 @@ extension AlbumPreviewItemsTableViewCell: UICollectionViewDataSource {
                 cell.textLabel.text = model.title
                 cell.textLabel.textColor = UIColor.Theme.blackMiddle
                 cell.addItemIndicator.isHidden = true
-            case .showMore(let title, let imageName):
-                cell.titleImageView.image = UIImage(named: imageName)
-                cell.textLabel.text = title
+            case .showMore:
+                cell.arrowIndicatorImageView.isHidden = false
+                cell.titleImageView.image = nil
+                cell.textLabel.text = "Показати всі"
                 cell.textLabel.textColor = UIColor.Theme.greenDark
                 cell.addItemIndicator.isHidden = true
             }
