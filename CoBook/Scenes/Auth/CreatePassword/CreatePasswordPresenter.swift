@@ -19,7 +19,7 @@ class CreatePasswordPresenter: BasePresenter {
 
     private weak var view: CreatePasswordView?
     private var password: String = ""
-    private var telephone: String = AppStorage.User.data?.telephone.number ?? "Undefined"
+    private var telephone: String = AppStorage.User.Profile?.telephone.number ?? "Undefined"
 
     var currentTelephoneNumberToShow: String {
         return telephone
@@ -54,7 +54,7 @@ class CreatePasswordPresenter: BasePresenter {
 
                 AppStorage.User.isUserCompletedRegistration = true
                 AppStorage.User.isUserInitiatedRegistration = false
-                AppStorage.User.data = response?.profile
+                AppStorage.User.Profile = response?.profile
 
                 self.view?.goTo(viewController: MainTabBarController())
             case let .failure(error):

@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // start screen routing
-        if AppStorage.User.data?.userId == nil {
+        if AppStorage.User.Profile?.userId == nil {
             if AppStorage.User.isTutorialShown {
                 let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                 window?.rootViewController = signUpNavigationController
@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         if AppStorage.User.isUserInitiatedRegistration && !AppStorage.User.isUserCompletedRegistration {
             AppStorage.Auth.deleteAllData()
-            AppStorage.User.data = nil
+            AppStorage.User.Profile = nil
             AppStorage.User.isUserInitiatedRegistration = false
         }
     }

@@ -237,8 +237,8 @@ private extension CreateServicePresenter {
                 .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
                     checkbox.isSelected.toggle()
                     if checkbox.isSelected {
-                        self.details.telephoneNumber = AppStorage.User.data?.telephone.number
-                        self.details.email = AppStorage.User.data?.email.address
+                        self.details.telephoneNumber = AppStorage.User.Profile?.telephone.number
+                        self.details.email = AppStorage.User.Profile?.email.address
                     } else {
                         self.details.telephoneNumber = nil
                         self.details.email = nil

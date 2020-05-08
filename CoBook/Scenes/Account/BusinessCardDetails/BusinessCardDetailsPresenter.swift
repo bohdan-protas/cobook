@@ -51,7 +51,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     /// Flag for owner identifire
     private var isUserOwner: Bool {
-        return AppStorage.User.data?.userId == cardDetails?.cardCreator?.id
+        return AppStorage.User.Profile?.userId == cardDetails?.cardCreator?.id
     }
 
     // MARK: - Object Lifecycle

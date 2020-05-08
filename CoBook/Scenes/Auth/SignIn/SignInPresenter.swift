@@ -51,7 +51,7 @@ class SignInPresenter: BasePresenter {
             self.view?.stopLoading()
             switch result {
             case let .success(response):
-                AppStorage.User.data = response?.profile
+                AppStorage.User.Profile = response?.profile
                 AppStorage.Auth.accessToken = response?.assessToken
                 AppStorage.Auth.refreshToken = response?.refreshToken
 

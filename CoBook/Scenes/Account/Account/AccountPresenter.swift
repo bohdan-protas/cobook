@@ -122,13 +122,13 @@ private extension AccountPresenter {
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
-                AppStorage.User.data = response
+                AppStorage.User.Profile = response
                 strongSelf.personalCard = response?.cardsPreviews?
                     .filter { $0.type == CardType.personal }
                     .compactMap { CardPreviewModel(id: String($0.id),
                                                    image: $0.avatar?.sourceUrl,
-                                                   firstName: AppStorage.User.data?.firstName,
-                                                   lastName: AppStorage.User.data?.lastName,
+                                                   firstName: AppStorage.User.Profile?.firstName,
+                                                   lastName: AppStorage.User.Profile?.lastName,
                                                    profession: $0.practiceType?.title,
                                                    telephone: $0.telephone?.number) }.first
 
@@ -153,10 +153,10 @@ private extension AccountPresenter {
         // header Section
         let cardHeaderSection = Section<Account.Item>(items: [
             .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: personalCard?.image,
-                                                               firstName: AppStorage.User.data?.firstName,
-                                                               lastName: AppStorage.User.data?.lastName,
-                                                               telephone: AppStorage.User.data?.telephone.number,
-                                                               email: AppStorage.User.data?.email.address))
+                                                               firstName: AppStorage.User.Profile?.firstName,
+                                                               lastName: AppStorage.User.Profile?.lastName,
+                                                               telephone: AppStorage.User.Profile?.telephone.number,
+                                                               email: AppStorage.User.Profile?.email.address))
         ])
 
         // cardsPreviews Section

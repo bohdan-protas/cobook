@@ -30,7 +30,7 @@ class ArticleDetailsPresenter: BasePresenter {
     private var cardID: Int
 
     var isOwner: Bool {
-        return articleDetails?.userID == AppStorage.User.data?.userId
+        return articleDetails?.userID == AppStorage.User.Profile?.userId
     }
 
     // MARK: Initialize

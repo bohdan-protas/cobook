@@ -66,7 +66,7 @@ class SignInViewController: BaseViewController, SignInView {
         super.viewDidLoad()
         presenter.attachView(self)
 
-        loginTextField.text = AppStorage.User.data?.telephone.number
+        loginTextField.text = AppStorage.User.Profile?.telephone.number
     }
 
     override func viewWillAppear(_ animated: Bool) {
