@@ -112,16 +112,20 @@ extension CreateArticleViewController: CreateArticleView {
         self.navigationController?.pushViewController(controller, animated: true)
     }
 
+    func setContinueButton(actived: Bool) {
+        publicButton.isEnabled = actived
+    }
+
     func set(title: String?) {
+        self.navigationItem.title = title
+    }
+
+    func set(articleTitle: String?) {
         self.headerTextField.text = title
     }
 
-    func set(body: String?) {
-        self.descriptionTextView.text = body
-    }
-
-    func setContinueButton(actived: Bool) {
-        publicButton.isEnabled = actived
+    func set(acticleBody: String?) {
+        self.descriptionTextView.text = acticleBody
     }
 
 
@@ -132,8 +136,6 @@ extension CreateArticleViewController: CreateArticleView {
 private extension CreateArticleViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Створити статтю"
-
         descriptionTextView.isScrollEnabled = false
         descriptionTextView.delegate = self
 

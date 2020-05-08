@@ -6,12 +6,13 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol ArticleDetailsView: LoadDisplayableView, AlertDisplayableView {
+protocol ArticleDetailsView: LoadDisplayableView, AlertDisplayableView, NavigableView {
     func reload()
     func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?)
     func set(title: String?)
+    func goToEditArticle(presenter: CreateArticlePresenter)
 }
 
 class ArticleDetailsPresenter: BasePresenter {
@@ -25,6 +26,11 @@ class ArticleDetailsPresenter: BasePresenter {
 
     private var dataSource: DataSource<ArticleDetailsCellConfigutator>?
     private var albumID: Int
+    private var cardID: Int
+
+    var isOwner: Bool {
+        return articleDetails?.userID == AppStorage.User.data?.userId
+    }
 
     // MARK: Initialize
 
@@ -34,10 +40,11 @@ class ArticleDetailsPresenter: BasePresenter {
     - parameters:
        - albumID: articles albumID
     */
-    init(albumID: Int) {
+    init(albumID: Int, cardID: Int) {
         self.albumID = albumID
+        self.cardID = cardID
+        
         var configurator = ArticleDetailsCellConfigutator()
-
         configurator.articlePreviewConfigurator = CellConfigurator { (cell, model: ArticlePreviewModel, tableView, indexPath) -> ArticlePreviewTableViewCell in
             cell.articleTitle.text = model.title
             cell.articleImageView.setImage(withPath: model.image)
@@ -51,6 +58,8 @@ class ArticleDetailsPresenter: BasePresenter {
         }
 
         configurator.headerConfigurator = CellConfigurator { (cell, model: ArticleDetails.HeaderModel, tableView, indexPath) -> ArticleHeaderTableViewCell in
+            cell.delegate = self
+
             let nameAbbr = "\(model.name?.first?.uppercased() ?? "")"
             let textPlaceholderImage = nameAbbr.image(size: cell.avatarImageView.frame.size)
 
@@ -77,6 +86,9 @@ class ArticleDetailsPresenter: BasePresenter {
             cell.proffesionLabel.text = model.profession
             cell.telephoneNumberLabel.text = model.telephone
             cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+
+            cell.selectionStyle = .none
+            cell.accessoryView = nil
             return cell
         }
 
@@ -121,15 +133,7 @@ class ArticleDetailsPresenter: BasePresenter {
             case .success(let articles):
                 self?.articles = articles
                 guard let id = articles?.first?.id else { return }
-                APIClient.default.getArticleDetails(articleID: id) { [weak self] (result) in
-                    switch result {
-                    case .success(let articleDetails):
-                        self?.articleDetails = articleDetails
-                        self?.updateViewDataSource()
-                    case .failure(let error):
-                        self?.view?.errorAlert(message: error.localizedDescription)
-                    }
-                }
+                self?.fetchArticleDetails(articleID: id)
             case .failure(let error):
                 self?.view?.errorAlert(message: error.localizedDescription)
             }
@@ -138,26 +142,14 @@ class ArticleDetailsPresenter: BasePresenter {
 
     func cellSelected(at indexPath: IndexPath) {
         guard let item = dataSource?.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
-            debugPrint("Error occured when selected account action type")
+            Log.error("Error occured when selected account action type")
             return
         }
 
         switch item {
-        case .creator(let model):
-            break
         case .articlePreview(let model):
             refresh()
-            view?.startLoading()
-            APIClient.default.getArticleDetails(articleID: model.id) { [weak self] (result) in
-                self?.view?.stopLoading()
-                switch result {
-                case .success(let articleDetails):
-                    self?.articleDetails = articleDetails
-                    self?.updateViewDataSource()
-                case .failure(let error):
-                    self?.view?.errorAlert(message: error.localizedDescription)
-                }
-            }
+            fetchArticleDetails(articleID: model.id)
         default:
             break
         }
@@ -170,6 +162,20 @@ class ArticleDetailsPresenter: BasePresenter {
 // MARK: - Privates
 
 private extension ArticleDetailsPresenter {
+
+    func fetchArticleDetails(articleID: Int) {
+        view?.startLoading()
+        APIClient.default.getArticleDetails(articleID: articleID) { [weak self] (result) in
+            self?.view?.stopLoading()
+            switch result {
+            case .success(let articleDetails):
+                self?.articleDetails = articleDetails
+                self?.updateViewDataSource()
+            case .failure(let error):
+                self?.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
 
     func updateViewDataSource() {
 
@@ -203,6 +209,22 @@ private extension ArticleDetailsPresenter {
         dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items = items.map { ArticleDetails.Cell.articlePreview(model: $0) }
         view?.reload()
     }
+
+    func goToEdit() {
+        let parameters = CreateArticleModel(articleID: articleDetails?.articleID,
+                                            cardID: cardID,
+                                            title: articleDetails?.title,
+                                            body: articleDetails?.body,
+                                            album: AlbumPreview.Item.Model(id: articleDetails?.album?.id ?? -1,
+                                                                           isSelected: true,
+                                                                           title: articleDetails?.album?.title,
+                                                                           avatarPath: articleDetails?.album?.avatar?.sourceUrl,
+                                                                           avatarID: articleDetails?.album?.avatar?.id),
+                                            photos: articleDetails?.photos ?? [])
+        let presenter = CreateArticlePresenter(parameters: parameters)
+        presenter.delegate = self
+        view?.goToEditArticle(presenter: presenter)
+    }
     
 
 }
@@ -213,6 +235,51 @@ extension ArticleDetailsPresenter: PhotoCollageTableViewCellDataSource {
 
     func photoCollage(_ view: PhotoCollageTableViewCell) -> [String?] {
         return articleDetails?.photos?.compactMap { $0.sourceUrl } ?? []
+    }
+
+
+}
+
+// MARK: - ArticleHeaderTableViewCellDelegate
+
+extension ArticleDetailsPresenter: ArticleHeaderTableViewCellDelegate {
+
+    func moreButtonAction(_ cell: ArticleHeaderTableViewCell) {
+        var actions: [UIAlertAction] = [
+
+            .init(title: "Зберегти", style: .default, handler: { (_) in
+                Log.debug("Зберегти")
+            }),
+
+            .init(title: "Поширити", style: .default, handler: { (_) in
+                Log.debug("Поширити")
+            })
+        ]
+
+        if isOwner {
+            actions.append(
+                .init(title: "Редагувати", style: .default, handler: { [weak self] (_) in
+                    self?.goToEdit()
+                })
+            )
+        }
+
+        actions.append(.init(title: "Відмінити", style: .cancel, handler: nil))
+        view?.actionSheetAlert(title: nil, message: nil, actions: actions)
+    }
+
+
+}
+
+// MARK: - CreateArticlePresenterDelegate
+
+extension ArticleDetailsPresenter: CreateArticlePresenterDelegate {
+
+    func didFinishUpdating(_ presenter: CreateArticlePresenter) {
+        if let id = articleDetails?.articleID {
+            fetchArticleDetails(articleID: id)
+        }
+
     }
 
 

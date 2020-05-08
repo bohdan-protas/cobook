@@ -10,6 +10,7 @@ import Foundation
 
 
 struct CreateArticleModel {
+    var articleID: Int?
     var cardID: Int
     var title: String?
     var body: String?

@@ -360,10 +360,10 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Yl-31-YTR">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="5Yl-31-YTR" firstAttribute="trailing" secondItem="a6w-NN-lbH" secondAttribute="trailing" id="KBN-Hw-44Z"/>
                             <constraint firstItem="5Yl-31-YTR" firstAttribute="top" secondItem="a6w-NN-lbH" secondAttribute="top" id="MFv-KZ-ulu"/>

@@ -89,13 +89,17 @@
                                     <constraint firstAttribute="height" constant="48" id="yIc-jo-f9c"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PC-MJ-ogx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PC-MJ-ogx">
                                 <rect key="frame" x="281" y="5" width="26" height="26"/>
-                                <color key="backgroundColor" name="Theme_Accent"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="KUC-00-66t"/>
                                     <constraint firstAttribute="width" constant="26" id="VdB-NE-kNL"/>
                                 </constraints>
+                                <color key="tintColor" name="Theme_Black-Middle"/>
+                                <state key="normal" image="ic_more"/>
+                                <connections>
+                                    <action selector="moreButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NsN-Sn-f2M"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -132,8 +136,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="Theme_Accent">
-            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="ic_more" width="12" height="24"/>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

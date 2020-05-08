@@ -15,6 +15,7 @@ enum ArticlesEndpoint: Endpoint {
     case updateAlbum(parameters: UpdateAlbumApiModel)
 
     case createArticle(parameters: CreateArticleApiModel)
+    case updateArticle(parameters: UpdateArticleApiModel)
     case getArticleDetails(id: Int)
     case getArticlesList(albumID: Int)
 
@@ -36,23 +37,21 @@ enum ArticlesEndpoint: Endpoint {
             return .post
         case .getArticlesList:
             return .get
+        case .updateArticle:
+            return .put
         }
     }
 
     var path: String {
         switch self {
-        case .getAlbums:
+        case .getAlbums, .createAlbum, .updateAlbum:
             return "/articles/albums"
-        case .createAlbum:
-            return "/articles/albums"
-        case .createArticle:
+
+        case .getArticlesList, .createArticle, .updateArticle:
             return "/articles"
-        case .updateAlbum:
-            return "/articles/albums"
+
         case .getArticleDetails:
             return "/articles/info"
-        case .getArticlesList:
-            return "/articles"
         }
     }
 
@@ -74,12 +73,19 @@ enum ArticlesEndpoint: Endpoint {
         switch self {
         case .createAlbum(let parameters):
             return parameters.dictionary
+
         case .createArticle(let parameters):
             return parameters.dictionary
+
         case .updateAlbum(let parameters):
             return parameters.dictionary
+
         case .getArticleDetails(let id):
             return ["id": id]
+
+        case .updateArticle(let parameters):
+            return parameters.dictionary
+
         default:
             return nil
         }

@@ -583,6 +583,14 @@ extension APIClient {
     }
 
     @discardableResult
+    func updateArticle(parameters: UpdateArticleApiModel,
+                       completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.updateArticle(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    @discardableResult
     func getArticlesList(albumID: Int,
                          completion: @escaping (Result<[ArticlePreviewAPIModel]?>) -> Void) -> DataRequest {
         let endpoint = ArticlesEndpoint.getArticlesList(albumID: albumID)

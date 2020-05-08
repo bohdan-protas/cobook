@@ -72,7 +72,7 @@ extension PhotoCollageTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollageItemCollectionViewCell.identifier, for: indexPath) as! PhotoCollageItemCollectionViewCell
         let photoPath = dataSource?.photoCollage(self)[indexPath.item + 1]
-        cell.photoImageView.setImage(withPath: photoPath)
+        cell.photoImageView.setImage(withPath: photoPath, placeholderImage: #imageLiteral(resourceName: "ic_photo_placeholder"))
         return cell
     }
 

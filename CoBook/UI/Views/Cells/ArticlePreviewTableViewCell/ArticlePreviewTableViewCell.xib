@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,6 +28,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="abP-iv-NBG">
                                 <rect key="frame" x="0.0" y="0.0" width="304" height="162"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LnS-C3-4Gl">
                                 <rect key="frame" x="0.0" y="88" width="304" height="74"/>
@@ -46,7 +48,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CeZ-hY-X2T" firstAttribute="trailing" secondItem="LnS-C3-4Gl" secondAttribute="trailing" id="2bG-JZ-RRy"/>
                             <constraint firstAttribute="bottom" secondItem="LnS-C3-4Gl" secondAttribute="bottom" id="37Y-27-yr9"/>
@@ -70,6 +72,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <color key="backgroundColor" name="Theme_Gray-Background"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="B45-iJ-UX4" secondAttribute="trailing" constant="8" id="1Zh-P9-QZK"/>
                     <constraint firstAttribute="bottom" secondItem="B45-iJ-UX4" secondAttribute="bottom" constant="16" id="j12-1T-iKc"/>
@@ -77,6 +80,7 @@
                     <constraint firstItem="B45-iJ-UX4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vYa-wH-lMt"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="Theme_Gray-Background"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="articleImageView" destination="abP-iv-NBG" id="5wy-JW-tde"/>
@@ -85,4 +89,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="198.21428571428569"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

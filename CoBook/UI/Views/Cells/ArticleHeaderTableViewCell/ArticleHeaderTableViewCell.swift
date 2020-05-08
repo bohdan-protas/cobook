@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ArticleHeaderTableViewCellDelegate: class {
+    func moreButtonAction(_ cell: ArticleHeaderTableViewCell)
+}
+
 class ArticleHeaderTableViewCell: UITableViewCell {
 
     @IBOutlet var avatarImageView: UIImageView!
@@ -16,14 +20,16 @@ class ArticleHeaderTableViewCell: UITableViewCell {
     @IBOutlet var viewsCountLabel: UILabel!
     @IBOutlet var moreButton: UIButton!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    weak var delegate: ArticleHeaderTableViewCellDelegate?
+
+    @IBAction func moreButtonTapped(_ sender: Any) {
+        self.delegate?.moreButtonAction(self)
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-
+        avatarImageView.cancelImageRequest()
+        avatarImageView.image = nil
     }
     
 }

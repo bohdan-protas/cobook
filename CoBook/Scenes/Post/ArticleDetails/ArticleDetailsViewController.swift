@@ -46,16 +46,22 @@ extension ArticleDetailsViewController {
 
 extension ArticleDetailsViewController: ArticleDetailsView {
 
+    func goToEditArticle(presenter: CreateArticlePresenter) {
+        let controller: CreateArticleViewController = UIStoryboard.post.initiateViewControllerFromType()
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
     func set(title: String?) {
         self.navigationItem.title = title
     }
 
-    func reload() {
-        tableView.reloadData()
-    }
-
     func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?) {
         dataSource?.connect(to: tableView)
+    }
+
+    func reload() {
+        tableView.reloadData()
     }
 
 

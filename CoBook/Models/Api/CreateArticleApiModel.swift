@@ -25,3 +25,23 @@ struct CreateArticleApiModel: Encodable {
     }
 
 }
+
+struct UpdateArticleApiModel: Encodable {
+    var articleID: Int?
+    var cardID: Int?
+    var albumID: Int?
+    var title: String?
+    var body: String?
+    var photos: [String] = []
+
+    enum CodingKeys: String, CodingKey {
+        case articleID = "id"
+        case albumID = "album_id"
+        case cardID = "card_id"
+        case title
+        case body
+        case photos = "attachments"
+    }
+
+}
+
