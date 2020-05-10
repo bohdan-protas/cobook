@@ -14,7 +14,7 @@ struct CreateServiceApiModel: Encodable {
     var title: String?
     var header: String?
     var description: String?
-    var priceDetails: String?
+    var priceDetails: String
     var contactTelephone: String?
     var contactEmail: String?
     var photosIds: [String]?
@@ -37,7 +37,7 @@ struct UpdateServiceApiModel: Encodable {
     var title: String?
     var header: String?
     var description: String?
-    var priceDetails: String?
+    var priceDetails: String
     var contactTelephone: String?
     var contactEmail: String?
     var photosIds: [String]?

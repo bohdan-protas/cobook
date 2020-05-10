@@ -74,7 +74,7 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
                                                         isUseContactsFromSite: false,
                                                         telephoneNumber: details.telephoneNumber,
                                                         email: details.email,
-                                                        isContractPrice: details.price == nil,
+                                                        isContractPrice: (details.price ?? "").isEmpty,
                                                         descriptionTitle: details.descriptionTitle,
                                                         desctiptionBody: details.desctiptionBody)
 
