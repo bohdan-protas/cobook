@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="HelveticaNeueCyr-Roman.ttf">
+            <string>HelveticaNeueCyr-Roman</string>
+        </array>
         <array key="SFProDisplay-Medium.ttf">
             <string>SFProDisplay-Medium</string>
         </array>
@@ -29,6 +32,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Cy-AX-W5z" userLabel="Top User Info Container">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fit-NH-eE2" userLabel="Separator View">
+                                <rect key="frame" x="8" y="96" width="304" height="1"/>
+                                <color key="backgroundColor" name="Theme_Separator"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Kuu-pQ-JFp"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CA2-BV-FzE">
                                 <rect key="frame" x="24" y="16.5" width="272" height="64"/>
                                 <subviews>
@@ -88,13 +98,6 @@
                                     <constraint firstAttribute="height" constant="64" id="xKY-8L-2HL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fit-NH-eE2" userLabel="Separator View">
-                                <rect key="frame" x="8" y="96" width="304" height="1"/>
-                                <color key="backgroundColor" name="Theme_Separator"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="Kuu-pQ-JFp"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -111,45 +114,39 @@
                         <rect key="frame" x="24" y="113" width="272" height="91"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vh3-7j-3TF">
-                                <rect key="frame" x="0.0" y="0.0" width="272" height="87"/>
+                                <rect key="frame" x="0.0" y="0.0" width="272" height="91"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PB-P9-mUf">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="TjA-UP-PeA"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
                                         <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tau-kA-391">
-                                        <rect key="frame" x="0.0" y="28" width="272" height="19"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O4Y-Ff-JrD" customClass="DesignableTextView" customModule="CoBook" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="272" height="63"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="Theme_Green-Dark"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="JcC-4z-Jsd"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="sDZ-48-INQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                         <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Y5L-Db-xbe">
-                                        <rect key="frame" x="0.0" y="55" width="272" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="RsN-cZ-BOW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="18"/>
-                                        <color key="textColor" name="Theme_Black-Middle"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
+                                    </textView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Vh3-7j-3TF" firstAttribute="leading" secondItem="adF-I1-1Ze" secondAttribute="leading" id="4km-TW-xVv"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Vh3-7j-3TF" secondAttribute="bottom" id="6Zp-Mo-ZHY"/>
                             <constraint firstAttribute="trailing" secondItem="Vh3-7j-3TF" secondAttribute="trailing" id="CDb-mr-2e5"/>
                             <constraint firstItem="Vh3-7j-3TF" firstAttribute="top" secondItem="adF-I1-1Ze" secondAttribute="top" id="EQ5-Ob-oP1"/>
                             <constraint firstAttribute="trailing" secondItem="Vh3-7j-3TF" secondAttribute="trailing" id="KPH-S6-hEo"/>
+                            <constraint firstAttribute="bottom" secondItem="Vh3-7j-3TF" secondAttribute="bottom" id="SaJ-yJ-rKT"/>
                             <constraint firstItem="Vh3-7j-3TF" firstAttribute="top" secondItem="adF-I1-1Ze" secondAttribute="top" id="fai-Pu-ipY"/>
                             <constraint firstItem="Vh3-7j-3TF" firstAttribute="leading" secondItem="adF-I1-1Ze" secondAttribute="leading" id="xrZ-Jx-zEz"/>
                         </constraints>
@@ -168,8 +165,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="avatarImageView" destination="Sgy-yI-82k" id="yT3-vj-Tsr"/>
-                <outlet property="descriptionLabel" destination="tau-kA-391" id="XjS-K3-AkY"/>
-                <outlet property="locationLabel" destination="Y5L-Db-xbe" id="HoX-uR-wLX"/>
+                <outlet property="detailInfoTextView" destination="O4Y-Ff-JrD" id="NQ5-4a-Fbg"/>
                 <outlet property="positionLabel" destination="8PB-P9-mUf" id="VPp-IH-abP"/>
                 <outlet property="practiceTypeLabel" destination="aBx-pB-mRg" id="h0I-Tf-uLj"/>
                 <outlet property="telephoneNumberLabel" destination="xuV-oa-ycm" id="lPr-e6-kn7"/>
@@ -181,6 +177,9 @@
     <resources>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green-Dark">
+            <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Separator">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

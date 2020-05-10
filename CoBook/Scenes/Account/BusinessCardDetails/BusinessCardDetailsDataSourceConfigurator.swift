@@ -232,8 +232,8 @@ extension BusinessCardDetailsPresenter {
 
                 let websiteLabelAttributes: [NSAttributedString.Key: Any] = [
                     .font: UIFont.HelveticaNeueCyr_Roman(size: 15),
-                    .foregroundColor: UIColor.Theme.blackMiddle,
-                    .underlineStyle: NSUnderlineStyle.single.rawValue]
+                    .foregroundColor: UIColor.Theme.greenDark,
+                ]
 
                 let attributeString = NSMutableAttributedString(string: model?.website ?? "", attributes: websiteLabelAttributes)
 

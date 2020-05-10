@@ -10,56 +10,12 @@ import UIKit
 
 struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
 
-    // MARK: Properties
-    weak var presenter: PersonalCardDetailsPresenter?
-
     let sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>
     let sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>
     let userInfoCellConfigurator: CellConfigurator<CardDetailsApiModel?, PersonalCardUserInfoTableViewCell>
     let getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>
     let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
-
-    // MARK: Initializer
-    init(presenter: PersonalCardDetailsPresenter) {
-        self.presenter = presenter
-
-        // MARK: Cell configurators
-        sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
-            cell.titleLabel.text = model
-            return cell
-        }
-
-        sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
-            return cell
-        }
-
-        userInfoCellConfigurator = CellConfigurator { (cell, model: CardDetailsApiModel?, tableView, indexPath) -> PersonalCardUserInfoTableViewCell in
-
-            let abbr = "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")"
-            let textImg = abbr.image(size: cell.avatarImageView.frame.size)
-
-            cell.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl, placeholderImage: textImg)
-            cell.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
-            cell.practiceTypeLabel.text = model?.practiceType?.title
-            cell.positionLabel.text = model?.position
-            cell.telephoneNumberLabel.text = model?.contactTelephone?.number
-            cell.descriptionLabel.text = model?.description
-            cell.locationLabel.text = "\(model?.city?.name ?? ""), \(model?.region?.name ?? "")"
-            return cell
-        }
-
-        getInTouchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
-            cell.delegate = presenter
-            return cell
-        }
-
-        socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
-            cell.delegate = presenter
-            cell.dataSource = presenter
-            cell.isEditable = false
-            return cell
-        }
-    }
+    let titleDescriptionCellConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>
 
     func reuseIdentifier(for item: PersonalCardDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -73,6 +29,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return getInTouchCellConfigurator.reuseIdentifier
         case .socialList:
             return socialListConfigurator.reuseIdentifier
+        case .personDescription:
+            return titleDescriptionCellConfigurator.reuseIdentifier
         }
     }
 
@@ -88,6 +46,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return getInTouchCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         case .socialList:
             return socialListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
+        case .personDescription(let model):
+            return titleDescriptionCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -97,5 +57,66 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
         userInfoCellConfigurator.registerCells(in: tableView)
         getInTouchCellConfigurator.registerCells(in: tableView)
         socialListConfigurator.registerCells(in: tableView)
+        titleDescriptionCellConfigurator.registerCells(in: tableView)
     }
+}
+
+extension PersonalCardDetailsPresenter {
+
+    var dataSourceConfigurator: PersonalCardDetailsDataSourceConfigurator {
+        get {
+
+            let sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+                cell.titleLabel.text = model
+                return cell
+            }
+
+            let sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+                return cell
+            }
+
+            let userInfoCellConfigurator = CellConfigurator { (cell, model: CardDetailsApiModel?, tableView, indexPath) -> PersonalCardUserInfoTableViewCell in
+                let abbr = "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")"
+                let textImg = abbr.image(size: cell.avatarImageView.frame.size)
+
+                cell.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl, placeholderImage: textImg)
+                cell.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
+                cell.practiceTypeLabel.text = model?.practiceType?.title
+                cell.positionLabel.text = model?.position
+                cell.telephoneNumberLabel.text = model?.city?.name
+                cell.detailInfoTextView.text = model?.description
+
+                return cell
+            }
+
+            let getInTouchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
+                cell.delegate = self
+                return cell
+            }
+
+            let socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
+                cell.delegate = self
+                cell.dataSource = self
+                cell.isEditable = false
+                return cell
+            }
+
+            // expandableDescriptionCellConfigurator
+            let titleDescriptionCellConfigurator = CellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+                cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 15)])
+                cell.desctiptionTextView.text = model?.descr
+                return cell
+            }
+
+            return PersonalCardDetailsDataSourceConfigurator(sectionTitleConfigurator: sectionTitleConfigurator,
+                                                             sectionHeaderConfigurator: sectionHeaderConfigurator,
+                                                             userInfoCellConfigurator: userInfoCellConfigurator,
+                                                             getInTouchCellConfigurator: getInTouchCellConfigurator,
+                                                             socialListConfigurator: socialListConfigurator,
+                                                             titleDescriptionCellConfigurator: titleDescriptionCellConfigurator)
+
+        }
+    }
+
+
 }

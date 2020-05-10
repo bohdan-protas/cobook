@@ -19,7 +19,7 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     @IBOutlet var tableView: UITableView!
 
     var presenter: PersonalCardDetailsPresenter?
-    var dataSource: TableDataSource<PersonalCardDetailsDataSourceConfigurator>?
+
 
     private lazy var editCardView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
@@ -53,14 +53,11 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         tableView.tableFooterView = editCardView
     }
 
-    func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator) {
-        dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
-        tableView.dataSource = dataSource
+    func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?) {
+        dataSource?.connect(to: tableView)
     }
 
-    func updateDataSource(sections: [Section<PersonalCardDetails.Cell>]) {
-        dataSource?.sections = sections
-        tableView.setContentOffset(.zero, animated: false)
+    func reload() {
         tableView.reloadData()
     }
 

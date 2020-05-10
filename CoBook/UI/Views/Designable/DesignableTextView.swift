@@ -103,6 +103,7 @@ private extension DesignableTextView {
     func setup() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.setActivedState), name: UITextView.textDidBeginEditingNotification, object: self)
         NotificationCenter.default.addObserver(self, selector: #selector(self.seDefaultState), name: UITextView.textDidEndEditingNotification, object: self)
+        configureLayout()
     }
 
     func configureLayout() {
@@ -111,8 +112,6 @@ private extension DesignableTextView {
         layer.borderColor = isEnabled ? enabledBorderColor.cgColor : disabledBorderColor.cgColor
         layer.borderWidth = borderWidth
         layer.cornerRadius = cornerRadius
-
-
     }
 
 
