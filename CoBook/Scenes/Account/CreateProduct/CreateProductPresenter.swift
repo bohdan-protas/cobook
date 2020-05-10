@@ -193,9 +193,19 @@ private extension CreateProductPresenter {
 
     func validateInput() {
         let whitespaceCharacterSet = CharacterSet.whitespaces
+
+        let photoIDS: [String] = details.photos.compactMap {
+            switch $0 {
+            case .view(_ ,let imageID):
+                return imageID
+            default:
+                return nil
+            }
+        }
+
         let isEnabled: Bool = {
             return
-                !details.photos.isEmpty &&
+                !(photoIDS.isEmpty) &&
                 !(details.productName ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(details.productShowRoom ?? "").trimmingCharacters(in: .whitespaces).isEmpty &&
                 (!(details.price ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty || details.isContractPrice) &&

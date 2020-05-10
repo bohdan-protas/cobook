@@ -183,9 +183,19 @@ private extension CreateServicePresenter {
 
     func validateInput() {
         let whitespaceCharacterSet = CharacterSet.whitespaces
+
+        let photoIDS: [String] = details.photos.compactMap {
+            switch $0 {
+            case .view(_ ,let imageID):
+                return imageID
+            default:
+                return nil
+            }
+        }
+
         let isEnabled: Bool = {
             return
-                !details.photos.isEmpty &&
+                !(photoIDS.isEmpty) &&
                 !(details.serviceName ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 (!(details.price ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty || details.isContractPrice) &&
                 !(details.email ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
