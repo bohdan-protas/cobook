@@ -62,9 +62,9 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "Крамниця"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
-        ]
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
+        ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
 
         super.init()
@@ -372,20 +372,18 @@ extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
         if index == selectedBarItem.index {
             return
         }
-
         let insertionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
         let deletionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .right : .left
+        selectedBarItem = barItems[index]
 
         var deletionIndexPaths = [IndexPath]()
-        var insertionIndexPaths = [IndexPath]()
-
         for row in 0..<dataSource![.cardDetails].items.count {
             deletionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))
         }
 
-        selectedBarItem = barItems[index]
         updateViewDataSource()
 
+        var insertionIndexPaths = [IndexPath]()
         for row in 0..<dataSource![.cardDetails].items.count {
             insertionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))
         }
