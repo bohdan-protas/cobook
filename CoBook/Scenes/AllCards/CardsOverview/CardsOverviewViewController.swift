@@ -14,12 +14,14 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var filterBarButtonItem: UIBarButtonItem!
 
+    /// Horizontal items bar view
     private lazy var itemsBarView: HorizontalItemsBarView = {
         let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: presenter.barItems)
         view.delegate = self.presenter
         return view
     }()
 
+    /// pull refresh controll
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.Theme.grayUI
@@ -70,6 +72,10 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         dataSource?.connect(to: self.tableView)
     }
 
+    func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
+        searchDataSource?.connect(to: searchResultsTableController.tableView)
+    }
+
     func reload(section: CardsOverview.SectionAccessoryIndex) {
         tableView.beginUpdates()
         tableView.setContentOffset(.zero, animated: false)
@@ -80,10 +86,6 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     func reload() {
         tableView.reloadData()
         refreshControl.endRefreshing()
-    }
-
-    func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
-        searchDataSource?.connect(to: searchResultsTableController.tableView)
     }
 
     func reloadSearch(resultText title: String) {
@@ -113,6 +115,20 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         present(alertController, animated: true, completion: nil)
     }
 
+    func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?) {
+        let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+        businessCardDetailsViewController.presenter = presenter
+        self.navigationController?.pushViewController(businessCardDetailsViewController, animated: true)
+        searchController.isActive = false
+    }
+
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?) {
+        let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+        personalCardDetailsViewController.presenter = presenter
+        self.navigationController?.pushViewController(personalCardDetailsViewController, animated: true)
+        searchController.isActive = false
+    }
+
 
 }
 
@@ -121,26 +137,30 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 private extension CardsOverviewViewController {
 
     func setupLayout() {
+        // Table View setup
         tableView.delegate = self
         tableView.refreshControl = refreshControl
 
-        self.searchResultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
+        // Search Result Contoller setup
+        searchResultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
+        searchResultsTableController.tableView.delegate = self
 
+        // Search Controller setup
         searchController = UISearchController(searchResultsController: searchResultsTableController)
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = true
 
+        // Search bar setup
         searchBar = searchController.searchBar
         searchBar.delegate = self
         searchBar.sizeToFit()
         searchBar.searchBarStyle = .default
-        searchBar.searchTextField.backgroundColor = .white
         searchBar.barTintColor = UIColor.Theme.blackMiddle
         searchBar.tintColor = UIColor.Theme.blackMiddle
         searchBar.setImage(UIImage(named: "ic_search"), for: .search, state: .normal)
-        searchBar.placeholder = "Пошук професії, виду діяльності"
+        searchBar.placeholder = "Пошук візитівки"
         searchBar.autocapitalizationType = .none
         searchBar.showsCancelButton = false
 
@@ -159,6 +179,8 @@ extension CardsOverviewViewController: UITableViewDelegate {
         switch tableView {
         case self.tableView:
             presenter.selectedCellAt(indexPath: indexPath)
+        case searchResultsTableController.tableView:
+            presenter.selectedSearchCellAt(indexPath: indexPath)
         default:
             break
         }

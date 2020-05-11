@@ -47,8 +47,8 @@ class SignUpPresenter: BasePresenter {
             switch result {
             case .success(let response):
                 AppStorage.User.isUserInitiatedRegistration = true
-                AppStorage.User.data?.telephone.number = self.telephone
-                AppStorage.User.data?.email.address = self.email
+                AppStorage.User.Profile?.telephone.number = self.telephone
+                AppStorage.User.Profile?.email.address = self.email
 
                 AppStorage.Auth.accessToken = response?.accessToken
 

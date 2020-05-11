@@ -28,37 +28,37 @@ final class AuthRequestInterceptor: RequestInterceptor {
             }
 
         case 403:
-            DispatchQueue.main.async {
-                if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
-                    AppStorage.Auth.accessToken = nil
-                    APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
-                        switch result {
 
-                        case let .success(response):
-                            AppStorage.Auth.accessToken = response?.accessToken
-                            completion(.retry)
+            if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
+                AppStorage.Auth.accessToken = nil
+                APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
+                    switch result {
 
-                        case .failure:
-                            DispatchQueue.main.async {
-                                AppStorage.Auth.deleteAllData()
-                                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                                if let topController = UIApplication.topViewController() {
-                                    topController.present(signInNavigationController, animated: true, completion: nil)
-                                }
-                                completion(.doNotRetry)
+                    case let .success(response):
+                        AppStorage.Auth.accessToken = response?.accessToken
+                        completion(.retry)
+
+                    case .failure:
+                        DispatchQueue.main.async {
+                            AppStorage.Auth.deleteAllData()
+                            let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                            if let topController = UIApplication.topViewController() {
+                                topController.present(signInNavigationController, animated: true, completion: nil)
                             }
-
+                            completion(.doNotRetry)
                         }
+
                     }
-                } else {
-                    AppStorage.Auth.deleteAllData()
-                    let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                    if let topController = UIApplication.topViewController() {
-                        topController.present(signInNavigationController, animated: true, completion: nil)
-                    }
-                    completion(.doNotRetry)
                 }
+            } else {
+                AppStorage.Auth.deleteAllData()
+                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                if let topController = UIApplication.topViewController() {
+                    topController.present(signInNavigationController, animated: true, completion: nil)
+                }
+                completion(.doNotRetry)
             }
+
 
         default:
             return completion(.doNotRetryWithError(error))

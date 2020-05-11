@@ -19,13 +19,18 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     @IBOutlet var tableView: UITableView!
 
     var presenter: PersonalCardDetailsPresenter?
-    var dataSource: TableDataSource<PersonalCardDetailsDataSourceConfigurator>?
 
     private lazy var editCardView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.onEditTapped = { [weak self] in
             self?.presenter?.editPerconalCard()
         }
+        return view
+    }()
+
+    private lazy var empeyBottomCardView: EditCardView = {
+        let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
+        view.editButton.setTitle("", for: .normal)
         return view
     }()
 
@@ -50,17 +55,21 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     func setupLayout() {
         navigationItem.title = "Персональна візитка"
         tableView.delegate = self
+    }
+
+    func setupEditView() {
         tableView.tableFooterView = editCardView
     }
 
-    func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator) {
-        dataSource = TableDataSource(tableView: self.tableView, configurator: configurator)
-        tableView.dataSource = dataSource
+    func setupEmptyBottomView() {
+        tableView.tableFooterView = empeyBottomCardView
     }
 
-    func updateDataSource(sections: [Section<PersonalCardDetails.Cell>]) {
-        dataSource?.sections = sections
-        tableView.setContentOffset(.zero, animated: false)
+    func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?) {
+        dataSource?.connect(to: tableView)
+    }
+
+    func reload() {
         tableView.reloadData()
     }
 

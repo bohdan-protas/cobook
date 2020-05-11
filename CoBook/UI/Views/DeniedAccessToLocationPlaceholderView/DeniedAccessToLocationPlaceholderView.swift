@@ -10,6 +10,9 @@ import UIKit
 
 class DeniedAccessToLocationPlaceholderView: BaseFromNibView {
 
+    @IBOutlet var actionButton: UIButton!
+    @IBOutlet var titleLabel: UILabel!
+    
     var onOpenSettingsHandler: (() -> Void)?
 
     override func getNib() -> UINib {

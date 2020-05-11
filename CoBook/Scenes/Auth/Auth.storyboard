@@ -1297,7 +1297,7 @@
         <!--Sign In Navigation Controller-->
         <scene sceneID="KUz-Gu-p6D">
             <objects>
-                <navigationController storyboardIdentifier="SignInNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Qct-Ni-k9W" customClass="SignInNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SignInNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Qct-Ni-k9W" customClass="SignInNavigationController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7FR-du-vsI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

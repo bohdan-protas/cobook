@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import GooglePlaces
 import GoogleMaps
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
 
+        // Firebase configuration
+        FirebaseApp.configure()
+
         // App appearance setup
         /// Clear saved data in keychain if user reinstalled app
         if AppStorage.State.isFirstAppLaunch {
@@ -57,7 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppStorage.State.isFirstAppLaunch = false
         }
 
-        if AppStorage.User.data?.userId == nil {
+        // start screen routing
+        if AppStorage.User.Profile?.userId == nil {
             if AppStorage.User.isTutorialShown {
                 let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                 window?.rootViewController = signUpNavigationController
@@ -82,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         if AppStorage.User.isUserInitiatedRegistration && !AppStorage.User.isUserCompletedRegistration {
             AppStorage.Auth.deleteAllData()
-            AppStorage.User.data = nil
+            AppStorage.User.Profile = nil
             AppStorage.User.isUserInitiatedRegistration = false
         }
     }

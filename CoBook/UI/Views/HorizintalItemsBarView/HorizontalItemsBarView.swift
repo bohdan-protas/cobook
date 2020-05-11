@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct BarItemViewModel {
+struct BarItem {
     var index: Int
     var title: String?
 }
@@ -37,13 +37,13 @@ class HorizontalItemsBarView: BaseFromNibView {
     var selectionIndicatorCenterX: NSLayoutConstraint?
 
     weak var delegate: HorizontalItemsBarViewDelegate?
-    var dataSource: [BarItemViewModel] = []
+    var dataSource: [BarItem] = []
 
     override func getNib() -> UINib {
         return HorizontalItemsBarView.nib
     }
 
-    init(frame: CGRect, dataSource: [BarItemViewModel]) {
+    init(frame: CGRect, dataSource: [BarItem]) {
         super.init(frame: frame)
         self.dataSource = dataSource
 
@@ -107,6 +107,17 @@ extension HorizontalItemsBarView: UICollectionViewDataSource {
 
 }
 
+
+extension HorizontalItemsBarView: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var width = dataSource[indexPath.item].title?.width(withConstrainedHeight: collectionView.frame.height, font: UIFont.SFProDisplay_Regular(size: 14)) ?? 0
+        width += 20
+        return CGSize(width: width, height: collectionView.frame.height)
+    }
+
+}
+
 // MARK: - UICollectionViewDelegate
 
 extension HorizontalItemsBarView: UICollectionViewDelegate {
@@ -120,7 +131,7 @@ extension HorizontalItemsBarView: UICollectionViewDelegate {
         selectionIndicatorCenterX?.constant = (cellCenter.x - (cell.frame.width/2))
         selectionIndicatorWidth?.constant = cell.frame.width
 
-        collectionView.layer.removeAllAnimations()
+        self.collectionView.layer.removeAllAnimations()
         UIView.animate(withDuration: 0.15, animations: {
             self.collectionView.layoutIfNeeded()
         }, completion: { isFinished in

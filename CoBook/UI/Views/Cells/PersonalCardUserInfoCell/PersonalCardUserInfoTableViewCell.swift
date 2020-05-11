@@ -15,8 +15,7 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
     @IBOutlet var practiceTypeLabel: UILabel!
     @IBOutlet var positionLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!
-    @IBOutlet var descriptionLabel: UILabel!
-    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var detailInfoTextView: DesignableTextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +25,6 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         clearLayout()
-
     }
 
     private func clearLayout() {
@@ -35,9 +33,6 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
         practiceTypeLabel.text = ""
         positionLabel.text = ""
         telephoneNumberLabel.text = ""
-        descriptionLabel.text = ""
-        locationLabel.text = ""
-
     }
 
     

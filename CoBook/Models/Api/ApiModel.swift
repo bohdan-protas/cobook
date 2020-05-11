@@ -30,7 +30,7 @@ struct PlaceApiModel: Decodable {
     }
 }
 
-struct CardCreatorApiModel: Decodable {
+struct CardCreatorApiModel: Codable {
     var id: String
     var firstName: String?
     var lastName: String?

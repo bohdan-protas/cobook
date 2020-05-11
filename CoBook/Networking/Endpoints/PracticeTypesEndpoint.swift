@@ -25,7 +25,7 @@ enum PracticeTypesEndpoint: Endpoint {
         return "/practice_types/list"
     }
 
-    var parameters: Parameters? {
+    var bodyParameters: Parameters? {
         return nil
     }
 

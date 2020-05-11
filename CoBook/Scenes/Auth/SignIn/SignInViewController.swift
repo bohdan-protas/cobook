@@ -66,7 +66,7 @@ class SignInViewController: BaseViewController, SignInView {
         super.viewDidLoad()
         presenter.attachView(self)
 
-        loginTextField.text = AppStorage.User.data?.telephone.number
+        loginTextField.text = AppStorage.User.Profile?.telephone.number
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -105,10 +105,14 @@ class SignInViewController: BaseViewController, SignInView {
         }
     }
 
-    func goTo(viewController: UIViewController) {
-        viewController.modalPresentationStyle = .overFullScreen
-        viewController.modalTransitionStyle = .crossDissolve
-        self.present(viewController, animated: true, completion: nil)
+    //MainTabBarController()
+
+    func goToMainTabbar() {
+        let mainTabbar = MainTabBarController()
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.window?.rootViewController = mainTabbar
+        }
+
     }
 
 
@@ -134,7 +138,7 @@ extension SignInViewController: UITextFieldDelegate {
         case loginTextField:
             passwordTextField.becomeFirstResponder()
         default:
-            dismissKeyboard()
+            view.endEditing(true)
         }
 
         return true

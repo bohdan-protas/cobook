@@ -19,13 +19,13 @@ final class LoggerEventMonitor: EventMonitor {
 
     func request(_ request: DataRequest, didParseResponse response: DataResponse<Data?, AFError>) {
         if let error = response.error {
-            Log.error("Failed request \(request.description): \(error.localizedDescription)" )
+            Log.httpRequest("Failed request \(request.description): \(error.localizedDescription)" )
         } else {
-            Log.info("Successed request: \(request.description)")
+            Log.httpRequest("Successed request: \(request.description)")
         }
 
         if let degubResponseString = response.data?.prettyPrintedJSONString {
-            Log.info("Response data: \n\(degubResponseString)")
+            Log.httpRequest("Response data: \n\(degubResponseString)")
         }
     }
 

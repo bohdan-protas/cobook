@@ -13,7 +13,7 @@ enum BusinessCardDetails {
     enum Cell {
         case title(text: String)
         case sectionHeader
-        case companyDescription(text: String?)
+        case companyDescription(model: TitleDescrModel?)
         case userInfo(model: BusinessCardDetails.HeaderInfoModel?)
         case getInTouch
         case socialList
@@ -22,6 +22,10 @@ enum BusinessCardDetails {
         case mapDirection
         case employee(model: EmployeeModel?)
         case contacts(model: ContactsModel?)
+        case service(model: Service.PreviewListItem)
+        case addProduct
+        case productSection(model: ProductPreviewSectionModel)
+        case postPreview(model: AlbumPreview.Section?)
     }
 
     struct HeaderInfoModel {
@@ -34,11 +38,15 @@ enum BusinessCardDetails {
     }
 
     enum SectionAccessoryIndex: Int {
-        case userHeader, cardDetails
+        case userHeader, postPreview, cardDetails
     }
 
     enum BarSectionsTypeIndex: Int {
-        case general, contacts, team
+        case general, services, products, team, contacts
+    }
+
+    enum PostPreviewDataSourceID: String {
+        case albumPreviews
     }
 
 }

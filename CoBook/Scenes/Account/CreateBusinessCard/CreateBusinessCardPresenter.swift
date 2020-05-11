@@ -9,6 +9,7 @@
 import UIKit
 import GooglePlaces
 
+
 protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate, CardBackgroundManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
     func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?)
@@ -151,6 +152,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
         }
     }
 
+
 }
 
 // MARK: - Data Source Configuration
@@ -218,6 +220,7 @@ extension CreateBusinessCardPresenter {
 
         viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, employersSection, interestsSection]
     }
+
 
 }
 
@@ -370,6 +373,7 @@ extension CreateBusinessCardPresenter: EmployersPreviewHorizontalListTableViewCe
 }
 
 // MARK: - CardBackgroundManagmentTableViewCellDelegate
+
 extension CreateBusinessCardPresenter: SearchTableViewCellDelegate {
 
     func onSearchTapped(_ cell: SearchTableViewCell) {

@@ -19,14 +19,15 @@ protocol TextFieldTableViewCellDataSource: class {
 
 class TextFieldTableViewCell: UITableViewCell {
 
-    // MARK: Properties
     @IBOutlet var textField: DesignableTextField!
     @IBOutlet var actionControlView: UIControl!
 
+    /// Data source&actions delegation
     weak var delegate: TextFieldTableViewCellDelegate?
     weak var dataSource: TextFieldTableViewCellDataSource?
 
-    private lazy var rightView: UIView = {
+    /// right arrow view
+    private lazy var arrowRightView: UIView = {
         let iconView = UIImageView(frame: CGRect(x: -15, y: 0, width: 10, height: 10))
         iconView.image = UIImage(named: "ic_arrow_bottom")
         let iconContainerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -34,6 +35,7 @@ class TextFieldTableViewCell: UITableViewCell {
         return iconContainerView
     }()
 
+    /// picker for list datasource
     lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.delegate = self
@@ -41,17 +43,21 @@ class TextFieldTableViewCell: UITableViewCell {
         return pickerView
     }()
 
+    /// associated text key path
     var textKeyPath: AnyKeyPath?
+
+    /// associated action identifier
     var actionIdentifier: String? {
         didSet {
             textField.rightViewMode = actionIdentifier == nil ? .never : .always
         }
     }
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        textField.rightView = rightView
+        textField.rightView = arrowRightView
     }
 
     override func prepareForReuse() {
@@ -64,7 +70,8 @@ class TextFieldTableViewCell: UITableViewCell {
         textField.isUserInteractionEnabled = true
     }
 
-    // MARK: Actions
+    // MARK: - Actions
+
     @IBAction func textViewEditingChanged(_ sender: UITextField) {
         delegate?.textFieldTableViewCell(self, didUpdatedText: sender.text, forKeyPath: textKeyPath)
     }
@@ -77,6 +84,7 @@ class TextFieldTableViewCell: UITableViewCell {
 }
 
 // MARK: - UIPickerViewDelegate Delegation
+
 extension TextFieldTableViewCell: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -92,6 +100,7 @@ extension TextFieldTableViewCell: UIPickerViewDelegate {
 }
 
 // MARK: - UIPickerViewDataSource Delegation
+
 extension TextFieldTableViewCell: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

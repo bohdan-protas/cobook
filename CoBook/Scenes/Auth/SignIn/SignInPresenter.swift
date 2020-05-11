@@ -12,7 +12,7 @@ import UIKit
 protocol SignInView: LoadDisplayableView, AlertDisplayableView {
     var presenter: SignInPresenter { get set }
     func setSignInButton(enabled: Bool)
-    func goTo(viewController: UIViewController)
+    func goToMainTabbar()
 }
 
 // MARK: - SignInPresenter
@@ -47,17 +47,16 @@ class SignInPresenter: BasePresenter {
         }
 
         view?.startLoading()
-        APIClient.default.signInRequest(login: self.login, password: self.password) { (result) in
-            self.view?.stopLoading()
+        APIClient.default.signInRequest(login: self.login, password: self.password) { [weak self] (result) in
+            self?.view?.stopLoading()
             switch result {
             case let .success(response):
-                AppStorage.User.data = response?.profile
+                AppStorage.User.Profile = response?.profile
                 AppStorage.Auth.accessToken = response?.assessToken
                 AppStorage.Auth.refreshToken = response?.refreshToken
-
-                self.view?.goTo(viewController: MainTabBarController())
+                self?.view?.goToMainTabbar()
             case let .failure(error):
-                self.view?.errorAlert(message: error.localizedDescription.description)
+                self?.view?.errorAlert(message: error.localizedDescription.description)
             }
         }
 

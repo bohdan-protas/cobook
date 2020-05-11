@@ -19,6 +19,9 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func reloadSearch(resultText: String)
 
     func openSettings()
+    func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
+
 }
 
 class CardsOverviewViewPresenter: NSObject, BasePresenter {
@@ -27,8 +30,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     weak var view: CardsOverviewView?
 
     /// bar items busienss logic
-    var barItems: [BarItemViewModel]
-    var selectedBarItem: BarItemViewModel?
+    var barItems: [BarItem]
+    var selectedBarItem: BarItem?
 
     private var dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
     private var searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
@@ -49,10 +52,10 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     override init() {
 
         self.barItems = [
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
-            BarItemViewModel(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
         ]
         self.selectedBarItem = barItems.first
 
@@ -93,7 +96,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         pendingSearchResultWorkItem?.cancel()
 
         if query.isEmpty {
-            searchDataSource?[.header].items.removeAll()
+            searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items.removeAll()
             view?.reloadSearch(resultText: "Немає результатів пошуку")
             return
         }
@@ -119,7 +122,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                                                                                telephoneNumber: $0.contactTelephone?.number) } ?? []
 
 
-                    strongSelf.searchDataSource?[.header].items = searchCards.map { .cardItem(model: $0) }
+                    strongSelf.searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items = searchCards.map { .cardItem(model: $0) }
                     let text = searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count)"
                     strongSelf.view?.reloadSearch(resultText: text)
 
@@ -134,51 +137,69 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
     }
 
-    func selectedCellAt(indexPath: IndexPath) {
-
-        switch dataSource?.sections[safe: indexPath.section]?.items[indexPath.item] {
-        case .some(let value):
-            switch value {
-            case .cardItem(let model):
-
-                switch model?.type {
-                case .some(let cardType):
-
-                    switch cardType {
-
-                    case .personal:
-                        let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
-                        if let strid = model?.id, let id = Int(strid) {
-                            personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
-                        }
-                        view?.push(controller: personalCardDetailsViewController, animated: true)
-
-                    case .business:
-                        let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
-                        if let strid = model?.id, let id = Int(strid) {
-                            businessCardDetailsViewController.presenter = BusinessCardDetailsPresenter(id: id)
-                        }
-                        view?.push(controller: businessCardDetailsViewController, animated: true)
-                    }
-
-                default: break
-                }
-
-            default: break
-            }
-        case .none:
-            break
-
+    func selectedSearchCellAt(indexPath: IndexPath) {
+        guard let item = searchDataSource?.sections[safe: indexPath.section]?.items[indexPath.item] else {
+            return
         }
+        goToItem(item)
+    }
 
+    func selectedCellAt(indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[indexPath.item] else {
+            return
+        }
+        goToItem(item)
     }
 
 
 }
 
-// MARK: - Use Cases
+// MARK: - Privates
 
 private extension CardsOverviewViewPresenter {
+
+    func goToItem(_ item: CardsOverview.Items) {
+        switch item {
+        case .cardItem(let model):
+            switch model?.type {
+
+            case .none: break
+            case .some(let cardType):
+
+                switch cardType {
+                case .personal:
+                    if let strid = model?.id, let id = Int(strid) {
+                        let presenter = PersonalCardDetailsPresenter(id: id)
+                        view?.goToPersonalCardDetails(presenter: presenter)
+                    }
+
+                case .business:
+                    if let strid = model?.id, let id = Int(strid) {
+                        let presenter = BusinessCardDetailsPresenter(id: id)
+                        view?.goToBusinessCardDetails(presenter: presenter)
+                    }
+                }
+
+            }
+        case .map:
+            break
+        }
+    }
+
+    func setupViewDataSource() {
+        if let item = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
+            switch item {
+            case .allCards:
+                dataSource?[.cards].items = allCards.map { .cardItem(model: $0) }
+            case .personalCards:
+                dataSource?[.cards].items = personalCards.map { .cardItem(model: $0) }
+            case .businessCards:
+                dataSource?[.cards].items = businessCards.map { .cardItem(model: $0) }
+            case .inMyRegionCards:
+                dataSource?[.cards].items = [.map]
+            }
+        }
+    }
 
     func getAllCardsList() {
         view?.startLoading()
@@ -213,27 +234,6 @@ private extension CardsOverviewViewPresenter {
         }
     }
 
-
-}
-
-// MARK: - Rendering
-
-private extension CardsOverviewViewPresenter {
-
-    func setupViewDataSource() {
-        if let item = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
-            switch item {
-            case .allCards:
-                dataSource?[.cards].items = allCards.map { .cardItem(model: $0) }
-            case .personalCards:
-                dataSource?[.cards].items = personalCards.map { .cardItem(model: $0) }
-            case .businessCards:
-                dataSource?[.cards].items = businessCards.map { .cardItem(model: $0) }
-            case .inMyRegionCards:
-                dataSource?[.cards].items = [.map]
-            }
-        }
-    }
 
 }
 

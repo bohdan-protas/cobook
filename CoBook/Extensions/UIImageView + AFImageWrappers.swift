@@ -13,7 +13,7 @@ extension UIImageView {
 
     public func setImage(withPath string: String?,
                          placeholderImage: UIImage? = nil,
-                         imageTransition: UIImageView.ImageTransition = .noTransition,
+                         imageTransition: UIImageView.ImageTransition = .crossDissolve(0.1),
                          completion: ((AFIDataResponse<UIImage>) -> Void)? = nil) {
 
         guard let stringPath = string, let url = URL.init(string: stringPath) else {

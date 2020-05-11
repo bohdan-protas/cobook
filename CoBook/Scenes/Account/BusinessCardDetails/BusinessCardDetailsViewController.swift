@@ -21,6 +21,8 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     var presenter: BusinessCardDetailsPresenter?
 
+    var cachedCellHeights = [IndexPath: CGFloat]()
+
     /// hideCardView
     private lazy var hideCardView: HideCardView = {
         let view = HideCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
@@ -128,6 +130,44 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     }
 
+    // MARK: - Navigation
+
+    func goToCreateService(presenter: CreateServicePresenter?) {
+        let controller: CreateServiceViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
+    func goToServiceDetails(presenter: ServiceDetailsPresenter?) {
+        let controller: ServiceDetailsViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
+    func goToCreateProduct(presenter: CreateProductPresenter?) {
+        let controller: CreateProductViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
+    func goToProductDetails(presenter: ProductDetailsPresenter?) {
+        let controller: ProductDetailsViewController = self.storyboard!.initiateViewControllerFromType()
+        controller.presenter = presenter
+        push(controller: controller, animated: true)
+    }
+
+    func goToCreatePost(cardID: Int) {
+        let controller: CreateArticleViewController = UIStoryboard.post.initiateViewControllerFromType()
+        controller.presenter = CreateArticlePresenter(cardID: cardID)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func goToArticleDetails(presenter: ArticleDetailsPresenter) {
+        let controller: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
 
 }
 
@@ -147,6 +187,19 @@ extension BusinessCardDetailsViewController: UITableViewDelegate {
             return itemsBarView.frame.height
         }
         return 0
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.selectedRow(at: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cachedCellHeights[indexPath] = cell.frame.size.height
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cachedCellHeights[indexPath] ?? UITableView.automaticDimension
     }
 
 }

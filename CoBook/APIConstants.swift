@@ -43,7 +43,7 @@ enum APIConstants {
 
     enum ContentType: String {
         case json = "application/json"
-        case xFormUrlencoded = "application/x-www-form-urlencoded"
+        case urlEncoded = "application/x-www-form-urlencoded"
     }
 
     // MARK: - Google

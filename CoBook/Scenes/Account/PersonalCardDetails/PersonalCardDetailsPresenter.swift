@@ -9,29 +9,37 @@
 import UIKit
 
 protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
-    var tableView: UITableView! { get set }
     func setupLayout()
-    func configureDataSource(with configurator: PersonalCardDetailsDataSourceConfigurator)
-    func updateDataSource(sections: [Section<PersonalCardDetails.Cell>])
+    func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?)
+    func reload()
+    func setupEditView()
+    func setupEmptyBottomView()
 }
 
 class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 
+    /// managed veiw
     private weak var view: PersonalCardDetailsView?
-    private lazy var dataSourceConfigurator: PersonalCardDetailsDataSourceConfigurator = {
-        let dataSourceConfigurator = PersonalCardDetailsDataSourceConfigurator(presenter: self)
-        return dataSourceConfigurator
-    }()
 
     private var personalCardId: Int
     private var cardDetails: CardDetailsApiModel?
+    private var dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?
 
-    // MARK: Lifecycle
-    init(id: Int) {
-        self.personalCardId = id
+    /// Flag for owner identifire
+    private var isUserOwner: Bool {
+        return AppStorage.User.Profile?.userId == cardDetails?.cardCreator?.id
     }
 
-    // MARK: Public
+    // MARK: - Lifecycle
+
+    init(id: Int) {
+        self.personalCardId = id
+        super.init()
+        self.dataSource = DataSource(configurator: self.dataSourceConfigurator)
+    }
+
+    // MARK: - Public
+
     func attachView(_ view: PersonalCardDetailsView) {
         self.view = view
     }
@@ -52,7 +60,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
             case let .success(response):
                 strongSelf.cardDetails = response
                 strongSelf.view?.setupLayout()
-                strongSelf.view?.configureDataSource(with: strongSelf.dataSourceConfigurator)
+                strongSelf.view?.set(dataSource: strongSelf.dataSource)
                 strongSelf.updateViewDataSource()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -81,7 +89,7 @@ private extension PersonalCardDetailsPresenter {
 
     func updateViewDataSource() {
         let userInfoSection = Section<PersonalCardDetails.Cell>(items: [
-            .userInfo(model: cardDetails)
+            .userInfo(model: cardDetails),
         ])
 
         var getInTouchSection = Section<PersonalCardDetails.Cell>(items: [
@@ -95,8 +103,10 @@ private extension PersonalCardDetailsPresenter {
         }
         getInTouchSection.items.append(.getInTouch)
 
+        isUserOwner ? view?.setupEditView() : view?.setupEmptyBottomView()
 
-        view?.updateDataSource(sections: [userInfoSection, getInTouchSection])
+        dataSource?.sections = [ userInfoSection, getInTouchSection ]
+        view?.reload()
     }
 
 

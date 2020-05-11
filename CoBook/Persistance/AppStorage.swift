@@ -21,6 +21,7 @@ struct UserFilters: Codable {
 }
 
 // MARK: - AppStorage
+
 enum AppStorage {
 
     enum Keys: String {
@@ -54,7 +55,7 @@ enum AppStorage {
         static var isUserCompletedRegistration: Bool
 
         @UserDefaultObjectStorageWrapper(key: Keys.profile.rawValue, defaultValue: ProfileApiModel())
-        static var data: ProfileApiModel?
+        static var Profile: ProfileApiModel?
 
         @UserDefaultObjectStorageWrapper(key: Keys.filters.rawValue, defaultValue: UserFilters())
         static var Filters: UserFilters?

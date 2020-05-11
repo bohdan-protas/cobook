@@ -32,7 +32,6 @@
                         <color key="textColor" name="Theme_TextField-text"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
-                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
@@ -58,11 +57,8 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
                                 <real key="value" value="16"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="pTextColor">
+                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
                                 <color key="value" name="Theme_TextField-placeholder"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="pFontSize">
-                                <real key="value" value="14"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </textView>
