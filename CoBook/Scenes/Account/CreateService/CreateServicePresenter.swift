@@ -88,7 +88,7 @@ extension CreateServicePresenter {
                                                        title: details.serviceName?.trimmingCharacters(in: .whitespaces),
                                                        header: details.descriptionTitle?.trimmingCharacters(in: .whitespaces),
                                                        description: details.desctiptionBody?.trimmingCharacters(in: .whitespaces),
-                                                       priceDetails: details.price?.trimmingCharacters(in: .whitespaces) ?? "",
+                                                       priceDetails: details.price?.trimmingCharacters(in: .whitespaces),
                                                        contactTelephone: details.telephoneNumber?.trimmingCharacters(in: .whitespaces),
                                                        contactEmail: details.email?.trimmingCharacters(in: .whitespaces),
                                                        photosIds: details.photos.compactMap {
@@ -122,7 +122,7 @@ extension CreateServicePresenter {
                                                        title: details.serviceName?.trimmingCharacters(in: .whitespaces),
                                                        header: details.descriptionTitle?.trimmingCharacters(in: .whitespaces),
                                                        description: details.desctiptionBody?.trimmingCharacters(in: .whitespaces),
-                                                       priceDetails: details.price?.trimmingCharacters(in: .whitespaces) ?? "",
+                                                       priceDetails: details.price?.trimmingCharacters(in: .whitespaces),
                                                        contactTelephone: details.telephoneNumber?.trimmingCharacters(in: .whitespaces),
                                                        contactEmail: details.email?.trimmingCharacters(in: .whitespaces),
                                                        photosIds: details.photos.compactMap {

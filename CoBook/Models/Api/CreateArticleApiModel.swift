@@ -42,6 +42,5 @@ struct UpdateArticleApiModel: Encodable {
         case body
         case photos = "attachments"
     }
-
 }
 
