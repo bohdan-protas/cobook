@@ -46,6 +46,7 @@ class ArticleDetailsPresenter: BasePresenter {
         self.cardID = cardID
         
         var configurator = ArticleDetailsCellConfigutator()
+
         configurator.articlePreviewConfigurator = CellConfigurator { (cell, model: ArticlePreviewModel, tableView, indexPath) -> ArticlePreviewTableViewCell in
             cell.articleTitle.text = model.title
             cell.articleImageView.setImage(withPath: model.image)
