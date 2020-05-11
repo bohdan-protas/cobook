@@ -42,7 +42,7 @@
                                 <rect key="frame" x="16" y="59" width="288" height="32"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="qdr-hh-37Q">
-                                        <rect key="frame" x="105.5" y="0.0" width="77.5" height="32"/>
+                                        <rect key="frame" x="104" y="0.0" width="80" height="32"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OuG-Pd-tjh" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -57,7 +57,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJX-nG-oHP">
-                                                <rect key="frame" x="43" y="0.0" width="34.5" height="32"/>
+                                                <rect key="frame" x="43" y="0.0" width="37" height="32"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
                                                 <color key="textColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
