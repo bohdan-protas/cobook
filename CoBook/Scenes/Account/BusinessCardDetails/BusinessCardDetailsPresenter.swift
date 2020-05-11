@@ -60,9 +60,9 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.businessCardId = id
         self.barItems = [
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "Крамниця"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
+            /*BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),*/
+            /*BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "Крамниця"),*/
+            /*BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),*/
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
@@ -311,12 +311,12 @@ private extension BusinessCardDetailsPresenter {
         ]
 
         // Post preview section
-        dataSource?[.postPreview].items.removeAll()
-        albumPreviewSection = AlbumPreview.Section(title: "Збережені пости", dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
-        albumPreviewSection?.items.append(.add(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
-        albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { AlbumPreview.Item.view($0) })
-        albumPreviewSection?.items.append(.showMore)
-        dataSource?[.postPreview].items = [.postPreview(model: albumPreviewSection)]
+//        dataSource?[.postPreview].items.removeAll()
+//        albumPreviewSection = AlbumPreview.Section(title: "Збережені пости", dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
+//        albumPreviewSection?.items.append(.add(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
+//        albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { AlbumPreview.Item.view($0) })
+//        albumPreviewSection?.items.append(.showMore)
+//        dataSource?[.postPreview].items = [.postPreview(model: albumPreviewSection)]
 
         // card details section
         dataSource?[.cardDetails].items.removeAll()
