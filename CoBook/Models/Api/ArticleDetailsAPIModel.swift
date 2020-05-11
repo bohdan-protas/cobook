@@ -13,10 +13,11 @@ struct ArticleDetailsAPIModel: Decodable {
     var userID: String
     var title: String?
     var body: String?
-    var createdAt: String?
+    var createdAt: Date?
     var photos: [FileDataApiModel]?
     var album: AlbumPreviewApiModel?
     var cardInfo: CardPreviewApiModel?
+    var isSaved: Bool?
     var viewsCount: String?
 
     enum CodingKeys: String, CodingKey {
@@ -29,5 +30,7 @@ struct ArticleDetailsAPIModel: Decodable {
         case album
         case cardInfo = "card_info"
         case viewsCount = "views"
+        case isSaved = "is_saved"
     }
+
 }

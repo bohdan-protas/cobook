@@ -66,9 +66,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="w6Q-iQ-K82">
                                         <rect key="frame" x="0.0" y="32" width="201" height="16"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gJ5-cY-Nvg">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_view" translatesAutoresizingMaskIntoConstraints="NO" id="gJ5-cY-Nvg">
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-                                                <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="gJ5-cY-Nvg" secondAttribute="height" multiplier="1:1" id="iml-bA-ktP"/>
                                                 </constraints>
@@ -137,6 +136,7 @@
     </objects>
     <resources>
         <image name="ic_more" width="12" height="24"/>
+        <image name="ic_view" width="16" height="11"/>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

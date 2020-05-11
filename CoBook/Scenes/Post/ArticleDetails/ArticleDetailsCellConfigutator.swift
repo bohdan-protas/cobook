@@ -18,7 +18,8 @@ enum ArticleDetails {
 
     struct HeaderModel {
         var avatar: String?
-        var name: String?
+        var firstName: String?
+        var lastName: String?
         var date: String?
         var viewersCount: String?
     }

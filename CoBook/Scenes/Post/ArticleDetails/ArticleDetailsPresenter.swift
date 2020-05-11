@@ -62,11 +62,11 @@ class ArticleDetailsPresenter: BasePresenter {
         configurator.headerConfigurator = CellConfigurator { (cell, model: ArticleDetails.HeaderModel, tableView, indexPath) -> ArticleHeaderTableViewCell in
             cell.delegate = self
 
-            let nameAbbr = "\(model.name?.first?.uppercased() ?? "")"
+            let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
             let textPlaceholderImage = nameAbbr.image(size: cell.avatarImageView.frame.size)
 
-            cell.avatarImageView.image = textPlaceholderImage
-            cell.nameLabel.text = model.name
+            cell.avatarImageView.setImage(withPath: model.avatar, placeholderImage: textPlaceholderImage)
+            cell.nameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
             cell.dateLabel.text = model.date
             cell.viewsCountLabel.text = model.viewersCount
             return cell
@@ -130,17 +130,18 @@ class ArticleDetailsPresenter: BasePresenter {
     func fetchDetails() {
         view?.startLoading()
         APIClient.default.getArticlesList(albumID: albumID) { [weak self] (result) in
-            self?.view?.stopLoading()
             switch result {
             case .success(let articles):
                 self?.articles = articles
                 guard let id = articles?.first?.id else {
                     self?.view?.setPlaceholderView(true)
+                    self?.view?.stopLoading()
                     return
                 }
                 self?.view?.setPlaceholderView(false)
                 self?.fetchArticleDetails(articleID: id)
             case .failure(let error):
+                self?.view?.stopLoading()
                 self?.view?.errorAlert(message: error.localizedDescription)
             }
         }
@@ -170,14 +171,14 @@ class ArticleDetailsPresenter: BasePresenter {
 private extension ArticleDetailsPresenter {
 
     func fetchArticleDetails(articleID: Int) {
-        view?.startLoading()
         APIClient.default.getArticleDetails(articleID: articleID) { [weak self] (result) in
-            self?.view?.stopLoading()
             switch result {
             case .success(let articleDetails):
+                self?.view?.stopLoading()
                 self?.articleDetails = articleDetails
                 self?.updateViewDataSource()
             case .failure(let error):
+                self?.view?.stopLoading()
                 self?.view?.errorAlert(message: error.localizedDescription)
             }
         }
@@ -188,8 +189,10 @@ private extension ArticleDetailsPresenter {
         // details
         dataSource?.sections[ArticleDetails.SectionAccessory.details.rawValue].items = [
 
-            .header(model: ArticleDetails.HeaderModel(name: "Name Name",
-                                                      date: articleDetails?.createdAt,
+            .header(model: ArticleDetails.HeaderModel(avatar: articleDetails?.cardInfo?.avatar?.sourceUrl,
+                                                      firstName: "\(articleDetails?.cardInfo?.cardCreator?.firstName ?? "")",
+                                                      lastName: "\(articleDetails?.cardInfo?.cardCreator?.lastName ?? "")",
+                                                      date: "",
                                                       viewersCount: articleDetails?.viewsCount)),
 
             .photoCollage,
@@ -283,6 +286,7 @@ extension ArticleDetailsPresenter: CreateArticlePresenterDelegate {
 
     func didFinishUpdating(_ presenter: CreateArticlePresenter) {
         if let id = articleDetails?.articleID {
+            view?.stopLoading()
             fetchArticleDetails(articleID: id)
         }
 
