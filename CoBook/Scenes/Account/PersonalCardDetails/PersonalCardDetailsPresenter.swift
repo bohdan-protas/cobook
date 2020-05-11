@@ -12,6 +12,8 @@ protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func setupLayout()
     func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?)
     func reload()
+    func setupEditView()
+    func setupEmptyBottomView()
 }
 
 class PersonalCardDetailsPresenter: NSObject, BasePresenter {
@@ -22,6 +24,11 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     private var personalCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?
+
+    /// Flag for owner identifire
+    private var isUserOwner: Bool {
+        return AppStorage.User.Profile?.userId == cardDetails?.cardCreator?.id
+    }
 
     // MARK: - Lifecycle
 
@@ -95,6 +102,8 @@ private extension PersonalCardDetailsPresenter {
             getInTouchSection.items.append(.socialList)
         }
         getInTouchSection.items.append(.getInTouch)
+
+        isUserOwner ? view?.setupEditView() : view?.setupEmptyBottomView()
 
         dataSource?.sections = [ userInfoSection, getInTouchSection ]
         view?.reload()

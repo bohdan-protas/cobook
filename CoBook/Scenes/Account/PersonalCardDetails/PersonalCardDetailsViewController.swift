@@ -20,12 +20,17 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
 
     var presenter: PersonalCardDetailsPresenter?
 
-
     private lazy var editCardView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
         view.onEditTapped = { [weak self] in
             self?.presenter?.editPerconalCard()
         }
+        return view
+    }()
+
+    private lazy var empeyBottomCardView: EditCardView = {
+        let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
+        view.editButton.setTitle("", for: .normal)
         return view
     }()
 
@@ -50,7 +55,14 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     func setupLayout() {
         navigationItem.title = "Персональна візитка"
         tableView.delegate = self
+    }
+
+    func setupEditView() {
         tableView.tableFooterView = editCardView
+    }
+
+    func setupEmptyBottomView() {
+        tableView.tableFooterView = empeyBottomCardView
     }
 
     func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?) {
