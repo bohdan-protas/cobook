@@ -20,7 +20,7 @@ enum ArticleDetails {
         var avatar: String?
         var firstName: String?
         var lastName: String?
-        var date: String?
+        var date: Date?
         var viewersCount: String?
     }
 

@@ -602,23 +602,12 @@ extension APIClient {
                            completion: @escaping (Result<ArticleDetailsAPIModel?>) -> Void) -> DataRequest {
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
         let endpoint = ArticlesEndpoint.getArticleDetails(id: articleID)
         return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 
 
-}
-
-extension DateFormatter {
-
-
-    static let iso8601Full: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:sssZ"
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        return formatter
-    }()
 }

@@ -64,11 +64,19 @@ class ArticleDetailsPresenter: BasePresenter {
 
             let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
             let textPlaceholderImage = nameAbbr.image(size: cell.avatarImageView.frame.size)
-
             cell.avatarImageView.setImage(withPath: model.avatar, placeholderImage: textPlaceholderImage)
             cell.nameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-            cell.dateLabel.text = model.date
+
             cell.viewsCountLabel.text = model.viewersCount
+
+            if let date = model.date {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd.MM.yyyy"
+                cell.dateLabel.text = formatter.string(from: date)
+            } else {
+                cell.dateLabel.text = ""
+            }
+
             return cell
         }
 
@@ -192,7 +200,7 @@ private extension ArticleDetailsPresenter {
             .header(model: ArticleDetails.HeaderModel(avatar: articleDetails?.cardInfo?.avatar?.sourceUrl,
                                                       firstName: "\(articleDetails?.cardInfo?.cardCreator?.firstName ?? "")",
                                                       lastName: "\(articleDetails?.cardInfo?.cardCreator?.lastName ?? "")",
-                                                      date: "",
+                                                      date: articleDetails?.createdAt,
                                                       viewersCount: articleDetails?.viewsCount)),
 
             .photoCollage,
