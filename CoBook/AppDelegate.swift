@@ -24,10 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back")
         UINavigationBar.appearance().tintColor = UIColor.Theme.blackMiddle
-        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15),
-                                                            .foregroundColor: UIColor.Theme.blackMiddle]
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 26), .foregroundColor: UIColor.Theme.blackMiddle]
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().barTintColor = UIColor.Theme.grayBG
+        UINavigationBar.appearance().backgroundColor = UIColor.Theme.grayBG
 
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().isTranslucent = false

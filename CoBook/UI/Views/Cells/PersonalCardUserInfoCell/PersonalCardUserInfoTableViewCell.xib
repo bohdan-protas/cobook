@@ -56,15 +56,35 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="oPr-84-Ba8">
                                         <rect key="frame" x="80" y="2" width="192" height="60"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YJ-Yt-IUk">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIV-Hs-zIb">
                                                 <rect key="frame" x="0.0" y="0.0" width="192" height="22"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YJ-Yt-IUk">
+                                                        <rect key="frame" x="0.0" y="0.0" width="170" height="22"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                                        <color key="textColor" name="Theme_Black-Middle"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uD1-Q4-f32">
+                                                        <rect key="frame" x="170" y="0.0" width="22" height="22"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="uD1-Q4-f32" secondAttribute="height" multiplier="1:1" id="TNp-7G-F1I"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="FFE-OQ-bGm"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uD1-Q4-f32" secondAttribute="trailing" id="DgH-hL-vhA"/>
+                                                    <constraint firstItem="uD1-Q4-f32" firstAttribute="top" secondItem="qIV-Hs-zIb" secondAttribute="top" id="Kbv-dI-trF"/>
+                                                    <constraint firstItem="uD1-Q4-f32" firstAttribute="leading" secondItem="3YJ-Yt-IUk" secondAttribute="trailing" id="On6-Zn-ZT6"/>
+                                                    <constraint firstItem="3YJ-Yt-IUk" firstAttribute="top" secondItem="qIV-Hs-zIb" secondAttribute="top" id="USy-S2-EFc"/>
+                                                    <constraint firstItem="3YJ-Yt-IUk" firstAttribute="leading" secondItem="qIV-Hs-zIb" secondAttribute="leading" id="VCi-1m-n8W"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uD1-Q4-f32" secondAttribute="bottom" id="dEs-Hp-IgL"/>
+                                                    <constraint firstAttribute="height" constant="22" id="rsN-Y6-qfE"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3YJ-Yt-IUk" secondAttribute="bottom" id="tLs-Nq-5Gf"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
-                                                <color key="textColor" name="Theme_Black-Middle"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Practise Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBx-pB-mRg">
                                                 <rect key="frame" x="0.0" y="25" width="192" height="16"/>
                                                 <constraints>

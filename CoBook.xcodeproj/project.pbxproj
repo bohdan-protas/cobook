@@ -100,6 +100,9 @@
 		B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */; };
 		B8249252243E26A300A1AC39 /* CardsOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249251243E26A300A1AC39 /* CardsOverview.swift */; };
 		B824AD802445FAE700410C23 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824AD7F2445FAE700410C23 /* ImagePicker.swift */; };
+		B824D14E246B120C00911629 /* Saved.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B824D14D246B120C00911629 /* Saved.storyboard */; };
+		B824D151246B127200911629 /* SavedContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824D150246B127200911629 /* SavedContentViewController.swift */; };
+		B824D153246B134300911629 /* SavedContentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824D152246B134300911629 /* SavedContentNavigationController.swift */; };
 		B824DA61245AE96D00700319 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B824DA60245AE96D00700319 /* Post.storyboard */; };
 		B824DA64245AE9A700700319 /* CreateArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824DA63245AE9A700700319 /* CreateArticleViewController.swift */; };
 		B824DA66245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B824DA65245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift */; };
@@ -422,6 +425,9 @@
 		B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewNavigationController.swift; sourceTree = "<group>"; };
 		B8249251243E26A300A1AC39 /* CardsOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverview.swift; sourceTree = "<group>"; };
 		B824AD7F2445FAE700410C23 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B824D14D246B120C00911629 /* Saved.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Saved.storyboard; sourceTree = "<group>"; };
+		B824D150246B127200911629 /* SavedContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedContentViewController.swift; sourceTree = "<group>"; };
+		B824D152246B134300911629 /* SavedContentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedContentNavigationController.swift; sourceTree = "<group>"; };
 		B824DA60245AE96D00700319 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		B824DA63245AE9A700700319 /* CreateArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateArticleViewController.swift; sourceTree = "<group>"; };
 		B824DA65245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard + ControllerInitiate.swift"; sourceTree = "<group>"; };
@@ -915,6 +921,7 @@
 		B823AB6A23F156D600DE13EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B824D14C246B11CB00911629 /* Saved */,
 				B826B0EB23F442AC009041DD /* Launch */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B8249243243DE62600A1AC39 /* AllCards */,
@@ -1087,6 +1094,24 @@
 				B8249248243DE65E00A1AC39 /* CardsOverviewDataSourceConfigurator.swift */,
 			);
 			path = CardsOverview;
+			sourceTree = "<group>";
+		};
+		B824D14C246B11CB00911629 /* Saved */ = {
+			isa = PBXGroup;
+			children = (
+				B824D14D246B120C00911629 /* Saved.storyboard */,
+				B824D152246B134300911629 /* SavedContentNavigationController.swift */,
+				B824D14F246B123800911629 /* SavedContent */,
+			);
+			path = Saved;
+			sourceTree = "<group>";
+		};
+		B824D14F246B123800911629 /* SavedContent */ = {
+			isa = PBXGroup;
+			children = (
+				B824D150246B127200911629 /* SavedContentViewController.swift */,
+			);
+			path = SavedContent;
 			sourceTree = "<group>";
 		};
 		B824DA5F245AE91400700319 /* Post */ = {
@@ -1992,6 +2017,7 @@
 				B8559F9F243CD9D100787349 /* HorizontalBarItemCollectionViewCell.xib in Resources */,
 				B8255A1E243A266B00C4169D /* Search.storyboard in Resources */,
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
+				B824D14E246B120C00911629 /* Saved.storyboard in Resources */,
 				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
 				B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */,
 				B8909FB224641C3900AA56F7 /* ArticleHeaderTableViewCell.xib in Resources */,
@@ -2199,6 +2225,7 @@
 				B824DA73245B131C00700319 /* PostPreview.swift in Sources */,
 				B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */,
 				B823AB7323F15AAE00DE13EA /* UIView + Extensions.swift in Sources */,
+				B824D153246B134300911629 /* SavedContentNavigationController.swift in Sources */,
 				B8DE5E512419227A00F4F60B /* UITableView + Extensions.swift in Sources */,
 				B82573FC23F5567700C8CBF8 /* UIFont + Extensions.swift in Sources */,
 				B88906C424003B6B002E91F7 /* LoadDisplayableView.swift in Sources */,
@@ -2338,6 +2365,7 @@
 				B824DA6B245B071500700319 /* AlbumPreviewItemsTableViewCell.swift in Sources */,
 				B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */,
 				B823A6B623FD98D5007540D0 /* ConfirmTelephoneNumberPresenter.swift in Sources */,
+				B824D151246B127200911629 /* SavedContentViewController.swift in Sources */,
 				B825B22B244897E9007C70DF /* String + ImageGeneration.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
 				B8559F93243CC4FD00787349 /* HideCardView.swift in Sources */,
