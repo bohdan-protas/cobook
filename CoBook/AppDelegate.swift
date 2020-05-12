@@ -19,28 +19,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
 
-        /// Navigation Bar appearance
+        // MARK: Appearence setup
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back")
         UINavigationBar.appearance().tintColor = UIColor.Theme.blackMiddle
-        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle]
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15),
+                                                            .foregroundColor: UIColor.Theme.blackMiddle]
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().barTintColor = UIColor.Theme.grayBG
 
-        // Tabbar appearance
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = UIColor.Theme.greenDark
 
-        // UITabBarItem appearance
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .selected)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
 
-        // IQKeyboard pod setup
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15),
+                                                             .foregroundColor: UIColor.Theme.blackMiddle], for: .normal)
+
+        // MARK: Pods setup
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -50,11 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Google services setup
         GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)
         GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
-
-        // Firebase configuration
         FirebaseApp.configure()
 
-        // App appearance setup
+        // MARK: App appearance setup
         /// Clear saved data in keychain if user reinstalled app
         if AppStorage.State.isFirstAppLaunch {
             AppStorage.deleteAllData()
@@ -79,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window?.rootViewController = MainTabBarController()
             }
         }
-
+        window?.makeKeyAndVisible()
 
         return true
     }
