@@ -164,3 +164,44 @@ extension PersonalCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
 
 }
+
+// MARK: - PersonalCardUserInfoTableViewCellDelegate
+
+extension PersonalCardDetailsPresenter: PersonalCardUserInfoTableViewCellDelegate {
+
+    func onSaveCard(cell: PersonalCardUserInfoTableViewCell) {
+        let state = cardDetails?.isSaved ?? false
+
+        switch state {
+
+        case false:
+            view?.startLoading()
+            APIClient.default.addCardToFavourites(id: personalCardId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    cell.saveButton.isSelected = true
+                    self?.cardDetails?.isSaved = true
+                    self?.view?.stopLoading(success: true, succesText: "Збережено", failureText: nil, completion: nil)
+                case .failure:
+                    self?.view?.stopLoading(success: false)
+                }
+            }
+
+        case true:
+            view?.startLoading()
+            APIClient.default.deleteCardFromFavourites(id: personalCardId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    cell.saveButton.isSelected = false
+                    self?.cardDetails?.isSaved = false
+                    self?.view?.stopLoading(success: true, succesText: "Вилучено із збережених", failureText: nil, completion: nil)
+                case .failure:
+                    self?.view?.stopLoading(success: false)
+                }
+            }
+        }
+
+    }
+
+
+}

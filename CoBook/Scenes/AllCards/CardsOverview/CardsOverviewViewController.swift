@@ -188,6 +188,7 @@ private extension CardsOverviewViewController {
 extension CardsOverviewViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch tableView {
         case self.tableView:
             presenter.selectedCellAt(indexPath: indexPath)

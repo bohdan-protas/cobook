@@ -14,10 +14,11 @@ enum CardsEndpoint: Endpoint {
     case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
-
-    ///
     case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
+
+    case addCardToFavourite(cardID: Int, tagID: String? = nil)
+    case deleteCardFromFavourite(cardID: Int)
 
     var useAuthirizationToken: Bool {
         return true
@@ -37,6 +38,10 @@ enum CardsEndpoint: Endpoint {
             return .post
         case .getCardLocationsInRegion:
             return .post
+        case .addCardToFavourite:
+            return .post
+        case .deleteCardFromFavourite:
+            return .delete
         }
     }
 
@@ -54,6 +59,8 @@ enum CardsEndpoint: Endpoint {
             return "/cards/list"
         case .getCardLocationsInRegion:
             return "/cards/area-list"
+        case .addCardToFavourite, .deleteCardFromFavourite:
+            return "/cards/favourites"
         }
     }
 
@@ -107,6 +114,15 @@ enum CardsEndpoint: Endpoint {
                 "bottom_right": bottomRightRectCoordinate.dictionary ?? []
             ]
 
+        case .addCardToFavourite(let cardID, let tagID):
+            var params: Parameters = ["card_id": cardID]
+            if let tagID = tagID {
+                params["tag_id"] = tagID
+            }
+            return params
+
+        case .deleteCardFromFavourite(let cardID):
+            return ["card_id": cardID]
 
         }
     }

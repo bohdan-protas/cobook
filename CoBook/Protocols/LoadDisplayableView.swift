@@ -16,6 +16,7 @@ public protocol LoadDisplayableView: class {
     func startLoading(text: String?)
     func stopLoading(success: Bool)
     func stopLoading(success: Bool, completion: (() -> Void)?)
+    func stopLoading(success: Bool, succesText: String?, failureText: String?, completion: (() -> Void)?)
 }
 
 

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +16,19 @@
                     <view key="view" contentMode="scaleToFill" id="Qgf-T6-XDB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A17-hW-8UH">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="A17-hW-8UH" secondAttribute="bottom" id="5E3-uY-o3J"/>
+                            <constraint firstItem="sCX-ym-5Eg" firstAttribute="trailing" secondItem="A17-hW-8UH" secondAttribute="trailing" id="h32-vW-nQa"/>
+                            <constraint firstItem="A17-hW-8UH" firstAttribute="top" secondItem="sCX-ym-5Eg" secondAttribute="top" id="iPx-p9-fIW"/>
+                            <constraint firstItem="A17-hW-8UH" firstAttribute="leading" secondItem="sCX-ym-5Eg" secondAttribute="leading" id="ziY-TP-hgH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sCX-ym-5Eg"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ZYY-Wb-JSb"/>
@@ -43,4 +56,9 @@
             <point key="canvasLocation" x="182.60869565217394" y="164.73214285714286"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

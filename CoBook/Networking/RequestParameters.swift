@@ -15,6 +15,13 @@ protocol PaginableRequestParameters {
 
 enum APIRequestParameters {
 
+    // Card
+
+    enum Card {
+
+
+    }
+
     // MARK: - Services
 
     enum Services {

@@ -820,7 +820,6 @@
 		B82206462463004200D49D16 /* RequestParameters */ = {
 			isa = PBXGroup;
 			children = (
-				B82206472463006400D49D16 /* RequestParameters.swift */,
 			);
 			path = RequestParameters;
 			sourceTree = "<group>";
@@ -962,6 +961,7 @@
 				B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */,
 				B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */,
 				B84B94F424033B3E0007EB60 /* APIClient.swift */,
+				B82206472463006400D49D16 /* RequestParameters.swift */,
 				B84B94EB24032A760007EB60 /* Endpoints */,
 				B8AB83F4242829060041B879 /* Mockup */,
 			);
@@ -1250,6 +1250,7 @@
 		B826B0F323F45ED8009041DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B8DC630A2434FBED00A2ED58 /* Section.swift */,
 				B84B94F224033B030007EB60 /* Api */,
 				B8359CD7241ECE570080263E /* View */,
 			);
@@ -1269,7 +1270,6 @@
 		B82A2118242135C200D0D9F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B8DC630A2434FBED00A2ED58 /* Section.swift */,
 				B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */,
 				B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */,
 				B82200B5240FB84B00A17D2C /* TabBarControllers */,

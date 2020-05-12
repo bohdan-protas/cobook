@@ -380,6 +380,39 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for save card in saved list
+
+     - parameters:
+        - id: card id
+        - folderID: custom user folder id
+        - completion: void response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func addCardToFavourites(id: Int,
+                             folderID: String? = nil,
+                             completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.addCardToFavourite(cardID: id, tagID: folderID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for deleted card from saved list
+
+     - parameters:
+        - id: card id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func deleteCardFromFavourites(id: Int,
+                                  completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.deleteCardFromFavourite(cardID: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 }
 
@@ -601,10 +634,12 @@ extension APIClient {
     func getArticleDetails(articleID: Int,
                            completion: @escaping (Result<ArticleDetailsAPIModel?>) -> Void) -> DataRequest {
 
-        let decoder = JSONDecoder()
         let customFormatter = DateFormatter()
         customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+
+        let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(customFormatter)
+
         let endpoint = ArticlesEndpoint.getArticleDetails(id: articleID)
         return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
