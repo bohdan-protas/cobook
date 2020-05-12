@@ -58,19 +58,31 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o1l-PW-a0F">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="b4D-hi-UsD">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <color key="color" name="Theme_Black-Middle"/>
+                            </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.40071168664383561" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="o1l-PW-a0F" firstAttribute="top" secondItem="PKx-cW-vQZ" secondAttribute="top" id="6Lu-qr-r3X"/>
                             <constraint firstItem="o1l-PW-a0F" firstAttribute="bottom" secondItem="PKx-cW-vQZ" secondAttribute="bottom" id="NaZ-mG-DbY"/>
+                            <constraint firstItem="b4D-hi-UsD" firstAttribute="centerX" secondItem="2PR-Np-hIy" secondAttribute="centerX" id="P26-GL-FLt"/>
+                            <constraint firstItem="b4D-hi-UsD" firstAttribute="centerY" secondItem="2PR-Np-hIy" secondAttribute="centerY" id="UhF-cz-NF7"/>
                             <constraint firstItem="o1l-PW-a0F" firstAttribute="leading" secondItem="PKx-cW-vQZ" secondAttribute="leading" id="Z4B-tS-Yaf"/>
                             <constraint firstItem="o1l-PW-a0F" firstAttribute="trailing" secondItem="PKx-cW-vQZ" secondAttribute="trailing" id="dkW-AS-gpi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PKx-cW-vQZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="Gz5-oh-u6U">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="save" id="29D-p5-S7I">
+                            <color key="tintColor" name="Theme_Green-Dark"/>
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="ILx-Ge-kZz" id="TKG-20-fgO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_nav_close" id="j8G-Oe-ldM">
                             <color key="tintColor" name="Theme_Black-Middle"/>
                             <connections>
@@ -79,12 +91,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="b4D-hi-UsD" id="mEe-kw-Xgh"/>
+                        <outlet property="saveBarButtonItem" destination="29D-p5-S7I" id="o3B-IA-gwE"/>
                         <outlet property="tableView" destination="o1l-PW-a0F" id="VYA-De-heB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BW2-Uo-QuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1962" y="74"/>
+            <point key="canvasLocation" x="1960.8" y="73.313343328335833"/>
         </scene>
         <!--Cards Overview Search Result Table View Controller-->
         <scene sceneID="ReO-PE-G1W">
@@ -131,6 +145,9 @@
         </namedColor>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green-Dark">
+            <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

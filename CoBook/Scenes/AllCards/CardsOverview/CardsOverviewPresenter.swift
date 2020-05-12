@@ -50,15 +50,13 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     // MARK: - BasePresenter
 
     override init() {
-
         self.barItems = [
             BarItem(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
             BarItem(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
             BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
             BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
-        ]
+        ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first
-
         super.init()
 
         // setup feed datasource
@@ -94,7 +92,6 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
     func updateSearchResult(query: String) {
         pendingSearchResultWorkItem?.cancel()
-
         if query.isEmpty {
             searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items.removeAll()
             view?.reloadSearch(resultText: "Немає результатів пошуку")
@@ -102,10 +99,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
         
         pendingSearchResultWorkItem = DispatchWorkItem { [weak self] in
-
             let interests = AppStorage.User.Filters?.interests
             let practiceTypeIds = AppStorage.User.Filters?.practicies
-
             APIClient.default.getCardsList(interestIds: interests, practiseTypeIds: practiceTypeIds, search: query) { [weak self] result in
                 guard let strongSelf = self else { return }
 

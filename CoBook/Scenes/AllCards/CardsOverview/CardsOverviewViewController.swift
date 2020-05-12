@@ -51,15 +51,17 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
     // MARK: Actions
 
-    @IBAction func filterBarButtonTapped(_ sender: Any) {
+    @IBAction func filterBarButtonTapped(_ sender: UIBarButtonItem) {
         let filterViewController: FilterViewController = self.storyboard!.initiateViewControllerFromType()
         filterViewController.delegate = self
 
-        let navigationController = CustomNavigationController(rootViewController: filterViewController)
-        navigationController.modalPresentationStyle = .overFullScreen
-        navigationController.modalTransitionStyle = .crossDissolve
+        let filterNavigation = CustomNavigationController(rootViewController: filterViewController)
+        filterNavigation.modalPresentationStyle = .popover
+        filterNavigation.popoverPresentationController?.delegate = self
+        filterNavigation.popoverPresentationController?.permittedArrowDirections = .up
+        filterNavigation.popoverPresentationController?.barButtonItem = sender
 
-        self.present(controller: navigationController, animated: true)
+        self.present(controller: filterNavigation, animated: true)
     }
 
     @objc private func refreshAllCardsData(_ sender: Any) {
@@ -96,15 +98,11 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     func openSettings() {
         let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
-
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
-
             if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    Log.debug("Settings opened")
-                })
+                UIApplication.shared.open(settingsUrl, completionHandler: nil)
             }
         }
 
@@ -129,6 +127,20 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         searchController.isActive = false
     }
 
+
+}
+
+// MARK: - UIPopoverPresentationControllerDelegate
+
+extension CardsOverviewViewController: UIPopoverPresentationControllerDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return true
+    }
 
 }
 
@@ -243,13 +255,11 @@ extension CardsOverviewViewController: UISearchControllerDelegate {
     func willPresentSearchController(_ searchController: UISearchController) {
         searchBar.setShowsCancelButton(true, animated: true)
         self.navigationItem.rightBarButtonItem = nil
-        
     }
 
     func willDismissSearchController(_ searchController: UISearchController) {
         searchBar.setShowsCancelButton(false, animated: true)
         navigationItem.rightBarButtonItems = [filterBarButtonItem]
-
     }
 
 
