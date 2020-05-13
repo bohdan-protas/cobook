@@ -307,7 +307,8 @@ private extension BusinessCardDetailsPresenter {
                                                                          bgimagePath: cardDetails?.background?.sourceUrl,
                                                                          profession: cardDetails?.practiceType?.title,
                                                                          telephoneNumber: cardDetails?.contactTelephone?.number,
-                                                                         websiteAddress: cardDetails?.companyWebSite))
+                                                                         websiteAddress: cardDetails?.companyWebSite,
+                                                                         isSaved: cardDetails?.isSaved ?? false))
         ]
 
         // Post preview section
@@ -497,6 +498,47 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
         case .albumPreviews:
             return albumPreviewSection?.items ?? []
         }
+    }
+
+
+}
+
+// MARK: - BusinessCardHeaderInfoTableViewCellDelegate
+
+extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDelegate {
+
+    func onSaveCard(cell: BusinessCardHeaderInfoTableViewCell) {
+        let state = cardDetails?.isSaved ?? false
+
+        switch state {
+        case false:
+            view?.startLoading()
+            APIClient.default.addCardToFavourites(id: businessCardId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    cell.saveCardButton.isSelected = true
+                    self?.cardDetails?.isSaved = true
+                    self?.view?.stopLoading(success: true, succesText: "Збережено", failureText: nil, completion: nil)
+                case .failure:
+                    self?.view?.stopLoading(success: false)
+                }
+            }
+        case true:
+            view?.startLoading()
+            APIClient.default.deleteCardFromFavourites(id: businessCardId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    cell.saveCardButton.isSelected = false
+                    self?.cardDetails?.isSaved = false
+                    self?.view?.stopLoading(success: true, succesText: "Вилучено із збережених", failureText: nil, completion: nil)
+                case .failure:
+                    self?.view?.stopLoading(success: false)
+                }
+            }
+        } // end state switching
+
+
+
     }
 
 

@@ -90,15 +90,30 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFG-RI-UX0" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
+                                <rect key="frame" x="327" y="0.0" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LFG-RI-UX0" secondAttribute="height" multiplier="1:1" id="DaI-ZO-yCL"/>
+                                    <constraint firstAttribute="height" constant="44" id="wg6-vB-Qy0"/>
+                                </constraints>
+                                <state key="normal" image="ic_save_unactive"/>
+                                <state key="selected" image="ic_save_active"/>
+                                <connections>
+                                    <action selector="saveCardButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MwF-Q4-fI3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="A6X-xq-Y2q" firstAttribute="top" secondItem="ANa-Ju-NEn" secondAttribute="bottom" constant="8" id="97M-vV-5IY"/>
                             <constraint firstItem="mv0-nt-aeu" firstAttribute="top" secondItem="BBE-6H-pie" secondAttribute="top" constant="-40" id="BCD-t4-hpc"/>
                             <constraint firstItem="mv0-nt-aeu" firstAttribute="centerX" secondItem="BBE-6H-pie" secondAttribute="centerX" id="EV0-oh-nRk"/>
+                            <constraint firstItem="LFG-RI-UX0" firstAttribute="top" secondItem="BBE-6H-pie" secondAttribute="top" id="MMV-Mc-ipS"/>
                             <constraint firstItem="ANa-Ju-NEn" firstAttribute="top" secondItem="mv0-nt-aeu" secondAttribute="bottom" constant="8" id="QeK-QS-mOM"/>
                             <constraint firstAttribute="trailing" secondItem="ANa-Ju-NEn" secondAttribute="trailing" constant="16" id="SSW-Au-dHM"/>
                             <constraint firstItem="ANa-Ju-NEn" firstAttribute="leading" secondItem="BBE-6H-pie" secondAttribute="leading" constant="16" id="Wfi-S5-cbB"/>
+                            <constraint firstItem="LFG-RI-UX0" firstAttribute="width" secondItem="LFG-RI-UX0" secondAttribute="height" multiplier="1:1" id="Zo3-ft-e9D"/>
+                            <constraint firstAttribute="trailing" secondItem="LFG-RI-UX0" secondAttribute="trailing" constant="8" id="abH-9t-F0B"/>
                             <constraint firstAttribute="bottom" secondItem="A6X-xq-Y2q" secondAttribute="bottom" constant="10" id="hPb-2L-PPW"/>
                             <constraint firstItem="A6X-xq-Y2q" firstAttribute="leading" secondItem="BBE-6H-pie" secondAttribute="leading" constant="16" id="sJn-yM-ZbH"/>
                             <constraint firstAttribute="trailing" secondItem="A6X-xq-Y2q" secondAttribute="trailing" constant="16" id="wBu-fs-JBI"/>
@@ -134,6 +149,7 @@
                 <outlet property="bgImageView" destination="QZa-ec-721" id="9Ye-LQ-iK6"/>
                 <outlet property="nameLabel" destination="ANa-Ju-NEn" id="Wz4-X2-UwU"/>
                 <outlet property="professionLabel" destination="cQh-Cn-edJ" id="gsA-85-uF5"/>
+                <outlet property="saveCardButton" destination="LFG-RI-UX0" id="ELj-kt-ddK"/>
                 <outlet property="telephoneNumberLabel" destination="bGx-af-SyC" id="eV7-Eu-ZIl"/>
                 <outlet property="websiteLabel" destination="6iN-zX-aUt" id="7aH-Oz-vwE"/>
             </connections>
@@ -141,6 +157,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ic_save_active" width="16" height="20"/>
+        <image name="ic_save_unactive" width="16" height="20"/>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

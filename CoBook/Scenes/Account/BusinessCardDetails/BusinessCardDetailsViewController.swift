@@ -18,7 +18,6 @@ private enum Defaults {
 class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetailsView {
 
     @IBOutlet var tableView: UITableView!
-
     var presenter: BusinessCardDetailsPresenter?
 
     var cachedCellHeights = [IndexPath: CGFloat]()
