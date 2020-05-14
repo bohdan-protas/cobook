@@ -630,6 +630,7 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    
     @discardableResult
     func getArticleDetails(articleID: Int,
                            completion: @escaping (Result<ArticleDetailsAPIModel?>) -> Void) -> DataRequest {
@@ -643,6 +644,39 @@ extension APIClient {
         let endpoint = ArticlesEndpoint.getArticleDetails(id: articleID)
         return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
+
+    /**
+     Request for save article in saved list
+
+     - parameters:
+        - id: article id
+        - completion: void response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func addArticleToFavourites(id: Int,
+                                completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.addToFavourite(articleID: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for deleted article from saved list
+
+     - parameters:
+        - id: aritcle id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func deleteArticleFromFavourites(id: Int,
+                                     completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.deleteFromFavourite(articleID: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
 
 
 }

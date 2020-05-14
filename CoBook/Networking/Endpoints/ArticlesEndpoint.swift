@@ -19,6 +19,9 @@ enum ArticlesEndpoint: Endpoint {
     case getArticleDetails(id: Int)
     case getArticlesList(albumID: Int)
 
+    case addToFavourite(articleID: Int)
+    case deleteFromFavourite(articleID: Int)
+
     var useAuthirizationToken: Bool {
         return true
     }
@@ -39,6 +42,10 @@ enum ArticlesEndpoint: Endpoint {
             return .get
         case .updateArticle:
             return .put
+        case .addToFavourite:
+            return .post
+        case .deleteFromFavourite:
+            return .delete
         }
     }
 
@@ -52,6 +59,9 @@ enum ArticlesEndpoint: Endpoint {
 
         case .getArticleDetails:
             return "/articles/info"
+
+        case .deleteFromFavourite, .addToFavourite:
+            return "/articles/favourites"
         }
     }
 
@@ -85,6 +95,12 @@ enum ArticlesEndpoint: Endpoint {
 
         case .updateArticle(let parameters):
             return parameters.dictionary
+
+        case .addToFavourite(let articleID):
+            return ["article_id": articleID]
+
+        case .deleteFromFavourite(let articleID):
+            return ["article_id": articleID]
 
         default:
             return nil
