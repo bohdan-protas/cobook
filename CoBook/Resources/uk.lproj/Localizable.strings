@@ -16,6 +16,9 @@
 "AllCards" = "Всі візитки";
 "Saved" = "Збережені";
 
+// MARK:-  Error
+"Error.connection" = "Не вдалося приєднатися до сервера";
+
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";
 "Onboarding.Subtitle01" = "Описособливостей додатку\nфічі, переваги, тощо";
@@ -53,3 +56,7 @@
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Почати заробляти з CoBook";
 "Account.item.quitAccount" = "Вийти з аккаунту";
+
+// MARK: - Card
+"Card.Saved" = "Візитку збережено";
+"Card.Unsaved" = "Видалено із збережених";

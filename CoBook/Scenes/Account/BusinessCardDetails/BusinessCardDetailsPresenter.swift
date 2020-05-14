@@ -536,9 +536,6 @@ extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDeleg
                 }
             }
         } // end state switching
-
-
-
     }
 
 

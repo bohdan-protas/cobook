@@ -17,7 +17,7 @@ enum APIConstants {
         get {
             var components = URLComponents()
             components.scheme   = "https"
-            components.host     = "3.124.214.212"
+            components.host     = "dev.api.cobook.app"
             components.path     = Path.api.rawValue
             return components
         }

@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class CardsOverviewViewController: BaseViewController, CardsOverviewView {
+class CardsOverviewViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var filterBarButtonItem: UIBarButtonItem!
@@ -34,6 +34,12 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     private var searchBar: UISearchBar!
 
     var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
+
+    var isSearchActived: Bool {
+        get {
+            return searchController.isActive
+        }
+    }
 
     // MARK: - View Lifecycle
 
@@ -68,7 +74,12 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         presenter.refreshDataSource()
     }
 
-    // MARK: - CardsOverviewView
+
+}
+
+// MARK: - CardsOverviewView
+
+extension CardsOverviewViewController: CardsOverviewView {
 
     func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
         dataSource?.connect(to: self.tableView)
@@ -93,6 +104,15 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     func reloadSearch(resultText title: String) {
         searchResultsTableController.set(resultsLabel: title)
         searchResultsTableController.tableView.reloadData()
+    }
+
+    func reloadItemAt(indexPath: IndexPath) {
+        if isSearchActived {
+            searchResultsTableController.tableView.reloadRows(at: [indexPath], with: .none)
+        } else {
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+
     }
 
     func openSettings() {
@@ -126,7 +146,6 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         self.navigationController?.pushViewController(personalCardDetailsViewController, animated: true)
         searchController.isActive = false
     }
-
 
 }
 
@@ -239,6 +258,7 @@ extension CardsOverviewViewController: UISearchBarDelegate {
 extension CardsOverviewViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
+
         // Strip out all the leading and trailing spaces.
         let whitespaceCharacterSet = CharacterSet.whitespaces
         let strippedString = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
@@ -277,4 +297,23 @@ extension CardsOverviewViewController: FilterViewControllerDelegate {
 
 }
 
+// MARK: - CardItemTableViewCellDelegate
+
+extension CardsOverviewViewController: CardItemTableViewCellDelegate {
+
+    func onSaveCard(cell: CardItemTableViewCell) {
+        if isSearchActived {
+            if let index = searchResultsTableController.tableView.indexPath(for: cell) {
+                presenter.saveCardAt(indexPath: index)
+            }
+        } else {
+            if let index = tableView.indexPath(for: cell) {
+                presenter.saveCardAt(indexPath: index)
+            }
+        }
+
+    }
+
+
+}
 

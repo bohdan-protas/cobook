@@ -70,7 +70,7 @@ class APIClient {
                         completion(.failure(userError))
                     }
                 } else {
-                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
+                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Error.connection".localized)
                     completion(.failure(error))
                 }
             }

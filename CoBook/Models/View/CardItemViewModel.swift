@@ -9,7 +9,7 @@
 import Foundation
 
 struct CardItemViewModel {
-    var id: String?
+    var id: Int
     var type: CardType
     var avatarPath: String?
     var firstName: String?
@@ -17,6 +17,7 @@ struct CardItemViewModel {
     var companyName: String?
     var profession: String?
     var telephoneNumber: String?
+    var isSaved: Bool
 
     var nameAbbreviation: String? {
         return (firstName?.first?.uppercased() ?? "") + " " + (lastName?.first?.uppercased() ?? "")

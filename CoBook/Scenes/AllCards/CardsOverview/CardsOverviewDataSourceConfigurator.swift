@@ -10,7 +10,7 @@ import UIKit
 
 class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
 
-    var cardItemCellConfigurator: CellConfigurator<CardItemViewModel?, CardItemTableViewCell>?
+    var cardItemCellConfigurator: CellConfigurator<CardItemViewModel, CardItemTableViewCell>?
     var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
 
     // MARK: - Cell configurator
@@ -51,26 +51,23 @@ extension CardsOverviewViewPresenter {
             let dataSourceConfigurator = CardsOverviewViewDataSourceConfigurator()
 
             // cardItemCellConfigurator
-            dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> CardItemTableViewCell in
+            dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> CardItemTableViewCell in
+                cell.delegate = self.view
+                let textPlaceholderImage = model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
+                cell.avatarImageView.setImage(withPath: model.avatarPath, placeholderImage: textPlaceholderImage)
+                cell.type = model.type
 
-                let textPlaceholderImage = model?.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
-                cell.avatarImageView.setImage(withPath: model?.avatarPath, placeholderImage: textPlaceholderImage)
-                cell.type = model?.type
-
-                switch model?.type {
-                case .none:
-                    cell.nameLabel.text = ""
-                case .some(let value):
-                    switch value {
-                    case .personal:
-                        cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
-                    case .business:
-                        cell.nameLabel.text = model?.companyName
-                    }
+                switch model.type {
+                case .personal:
+                    cell.nameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+                case .business:
+                    cell.nameLabel.text = model.companyName
                 }
 
-                cell.professionLabel.text = model?.profession
-                cell.telNumberLabel.text = model?.telephoneNumber
+                cell.professionLabel.text = model.profession
+                cell.telNumberLabel.text = model.telephoneNumber
+                //cell.saveButton.isHidden = self.view?.isSearchActived ?? true
+                cell.saveButton.isSelected = model.isSaved
                 return cell
             }
 

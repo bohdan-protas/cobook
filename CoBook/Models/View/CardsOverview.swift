@@ -11,7 +11,7 @@ import Foundation
 enum CardsOverview {
 
     enum Items {
-        case cardItem(model: CardItemViewModel?)
+        case cardItem(model: CardItemViewModel)
         case map
     }
 
