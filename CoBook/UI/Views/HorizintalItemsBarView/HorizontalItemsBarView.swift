@@ -15,6 +15,12 @@ struct BarItem {
 
 protocol HorizontalItemsBarViewDelegate: class {
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int)
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItem item: BarItem?)
+}
+
+extension HorizontalItemsBarViewDelegate {
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) { }
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItem item: BarItem?) { }
 }
 
 class HorizontalItemsBarView: BaseFromNibView {
@@ -58,7 +64,9 @@ class HorizontalItemsBarView: BaseFromNibView {
         collectionView.addSubview(selectionIndicatorView)
 
         var width = dataSource.first?.title?.width(withConstrainedHeight: self.collectionView.frame.height, font: UIFont.SFProDisplay_Regular(size: 14)) ?? 0
-        width += 20
+        if width > 0 {
+            width += 20
+        }
 
         selectionIndicatorWidth = selectionIndicatorView.widthAnchor.constraint(equalToConstant:  width)
         selectionIndicatorHeight = selectionIndicatorView.heightAnchor.constraint(equalToConstant: 4)
@@ -79,11 +87,13 @@ class HorizontalItemsBarView: BaseFromNibView {
         selectionIndicatorCenterX?.constant = 0
 
         var width = dataSource.first?.title?.width(withConstrainedHeight: self.collectionView.frame.height, font: UIFont.SFProDisplay_Regular(size: 14)) ?? 0
-        width += 20
+        if width > 0 {
+            width += 20
+        }
 
         selectionIndicatorWidth?.constant = width
-
         self.collectionView.layoutIfNeeded()
+        self.collectionView.reloadData()
     }
 
 }
@@ -135,6 +145,7 @@ extension HorizontalItemsBarView: UICollectionViewDelegate {
         UIView.animate(withDuration: 0.15, animations: {
             self.collectionView.layoutIfNeeded()
         }, completion: { isFinished in
+            self.delegate?.horizontalItemsBarView(self, didSelectedItem: self.dataSource[safe: indexPath.item])
             self.delegate?.horizontalItemsBarView(self, didSelectedItemAt: indexPath.item)
         })
     }

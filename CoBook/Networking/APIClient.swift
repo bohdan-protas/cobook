@@ -365,6 +365,28 @@ extension APIClient {
      Request for card items list
 
      - parameters:
+        - tagID: folrer identifier
+        - type: card id
+        - limit: pagination page list limit (default 15)
+        - offset: pagination offset (default 0)
+        - completion: parsed  'CardItemApiModel'  list response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getSavedCardsList(tagID: Int?,
+                           type: String? = nil,
+                           limit: Int? = nil,
+                           offset: Int? = nil,
+                           completion: @escaping (Result<SavedCardsApiModel?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.getSavedCardList(tagID: tagID, type: type, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for card items list
+
+     - parameters:
         - type: card id
         - limit: pagination page list limit (default 15)
         - offset: pagination offset (default 0)

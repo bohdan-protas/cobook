@@ -18,6 +18,12 @@
 "Save" = "Зберегти";
 "Unsave" = "Видалити із збережених";
 
+// MARK: - Bar Items
+"BarItem.allCards" = "Всі\nвізитки";
+"BarItem.personalCards" = "Персональні\nвізитки";
+"BarItem.businessCards" = "Бізнес\nвізитки";
+"BarItem.myRegion" = "В моєму\nрегіоні";
+
 // MARK:-  Error
 "Error.connection" = "Не вдалося приєднатися до сервера";
 

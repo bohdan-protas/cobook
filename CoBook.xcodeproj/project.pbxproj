@@ -17,6 +17,11 @@
 		B81F18A3246080E4003CBC84 /* AlbumPreviewApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18A2246080E4003CBC84 /* AlbumPreviewApiModel.swift */; };
 		B81F18A524608130003CBC84 /* AlbumPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18A424608130003CBC84 /* AlbumPreviewModel.swift */; };
 		B81F18A72460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F18A62460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift */; };
+		B8205C2D246D895E003C39F4 /* ContactableCardItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8205C2B246D895E003C39F4 /* ContactableCardItemTableViewCell.swift */; };
+		B8205C2E246D895E003C39F4 /* ContactableCardItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8205C2C246D895E003C39F4 /* ContactableCardItemTableViewCell.xib */; };
+		B8205C30246D8FBE003C39F4 /* SavedContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8205C2F246D8FBE003C39F4 /* SavedContentPresenter.swift */; };
+		B8205C32246D8FE0003C39F4 /* SavedContentCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8205C31246D8FE0003C39F4 /* SavedContentCellConfigurator.swift */; };
+		B8205C34246DA980003C39F4 /* SavedCardsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8205C33246DA980003C39F4 /* SavedCardsApiModel.swift */; };
 		B82079342444638200FCCC17 /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82079322444638200FCCC17 /* FilterItemTableViewCell.swift */; };
 		B82079352444638200FCCC17 /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82079332444638200FCCC17 /* FilterItemTableViewCell.xib */; };
 		B820793824446EE600FCCC17 /* FilterSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B820793724446EE600FCCC17 /* FilterSectionHeaderView.xib */; };
@@ -342,6 +347,11 @@
 		B81F18A2246080E4003CBC84 /* AlbumPreviewApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPreviewApiModel.swift; sourceTree = "<group>"; };
 		B81F18A424608130003CBC84 /* AlbumPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPreviewModel.swift; sourceTree = "<group>"; };
 		B81F18A62460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumCellsConfigurator.swift; sourceTree = "<group>"; };
+		B8205C2B246D895E003C39F4 /* ContactableCardItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactableCardItemTableViewCell.swift; sourceTree = "<group>"; };
+		B8205C2C246D895E003C39F4 /* ContactableCardItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactableCardItemTableViewCell.xib; sourceTree = "<group>"; };
+		B8205C2F246D8FBE003C39F4 /* SavedContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedContentPresenter.swift; sourceTree = "<group>"; };
+		B8205C31246D8FE0003C39F4 /* SavedContentCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedContentCellConfigurator.swift; sourceTree = "<group>"; };
+		B8205C33246DA980003C39F4 /* SavedCardsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardsApiModel.swift; sourceTree = "<group>"; };
 		B82079322444638200FCCC17 /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
 		B82079332444638200FCCC17 /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
 		B820793724446EE600FCCC17 /* FilterSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSectionHeaderView.xib; sourceTree = "<group>"; };
@@ -719,6 +729,15 @@
 			path = CreateAlbum;
 			sourceTree = "<group>";
 		};
+		B8205C2A246D88F2003C39F4 /* ContactableCardItemTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8205C2B246D895E003C39F4 /* ContactableCardItemTableViewCell.swift */,
+				B8205C2C246D895E003C39F4 /* ContactableCardItemTableViewCell.xib */,
+			);
+			path = ContactableCardItemTableViewCell;
+			sourceTree = "<group>";
+		};
 		B82079302444635900FCCC17 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,8 +939,8 @@
 		B823AB6A23F156D600DE13EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B824D14C246B11CB00911629 /* Saved */,
 				B826B0EB23F442AC009041DD /* Launch */,
+				B824D14C246B11CB00911629 /* Saved */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B8249243243DE62600A1AC39 /* AllCards */,
 				B82200B8240FB87A00A17D2C /* Account */,
@@ -1110,6 +1129,8 @@
 			isa = PBXGroup;
 			children = (
 				B824D150246B127200911629 /* SavedContentViewController.swift */,
+				B8205C2F246D8FBE003C39F4 /* SavedContentPresenter.swift */,
+				B8205C31246D8FE0003C39F4 /* SavedContentCellConfigurator.swift */,
 			);
 			path = SavedContent;
 			sourceTree = "<group>";
@@ -1465,6 +1486,7 @@
 				B823A1AA24617FF1004271AA /* CreateArticleApiModel.swift */,
 				B8909FB52464321800AA56F7 /* ArticleDetailsAPIModel.swift */,
 				B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */,
+				B8205C33246DA980003C39F4 /* SavedCardsApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1865,6 +1887,7 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B8205C2A246D88F2003C39F4 /* ContactableCardItemTableViewCell */,
 				B8909FB9246499CF00AA56F7 /* ArticlePreviewTableViewCell */,
 				B8909FA9246418E900AA56F7 /* PhotoCollage */,
 				B8909FAE24641C1500AA56F7 /* ArticleHeaderTableViewCell */,
@@ -2046,6 +2069,7 @@
 				B822F5262459BDA700F207CD /* ProductPreviewItemCollectionViewCell.xib in Resources */,
 				B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */,
 				B8559F7C243C7E0E00787349 /* AddressInfoTableViewCell.xib in Resources */,
+				B8205C2E246D895E003C39F4 /* ContactableCardItemTableViewCell.xib in Resources */,
 				B825741023F5621500C8CBF8 /* HelveticaNeueCyr-Heavy.ttf in Resources */,
 				B8559F76243B785800787349 /* BusinessCardHeaderInfoTableViewCell.xib in Resources */,
 				B8970B4E245058C2006676DF /* ServiceListItemTableViewCell.xib in Resources */,
@@ -2191,8 +2215,10 @@
 				B822D7042458B5B700883BE8 /* CreateProductPresenter.swift in Sources */,
 				B88906C2240020F4002E91F7 /* BasePresenter.swift in Sources */,
 				B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */,
+				B8205C34246DA980003C39F4 /* SavedCardsApiModel.swift in Sources */,
 				B822D7062458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift in Sources */,
 				B82B4D42245632460061A98B /* ServicesEndpoint.swift in Sources */,
+				B8205C30246D8FBE003C39F4 /* SavedContentPresenter.swift in Sources */,
 				B8909FA72464166800AA56F7 /* ArticleDescriptionTableViewCell.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
 				B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */,
@@ -2263,6 +2289,7 @@
 				B820793A24446EFE00FCCC17 /* FilterSectionHeaderView.swift in Sources */,
 				B823E8A5243F713B00EE1830 /* CoordinateApiModel.swift in Sources */,
 				B81F189D24603BC6003CBC84 /* CreateAlbumPresenter.swift in Sources */,
+				B8205C2D246D895E003C39F4 /* ContactableCardItemTableViewCell.swift in Sources */,
 				B822F51224599D4800F207CD /* ProductEndpoint.swift in Sources */,
 				B8625AC823FAD6C80044605C /* DesignableTextField.swift in Sources */,
 				B8625AC423FA94D30044605C /* DesignableButton.swift in Sources */,
@@ -2356,6 +2383,7 @@
 				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,
 				B8909FC12464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
+				B8205C32246D8FE0003C39F4 /* SavedContentCellConfigurator.swift in Sources */,
 				B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B823A1AB24617FF1004271AA /* CreateArticleApiModel.swift in Sources */,

@@ -19,6 +19,9 @@ enum CardsEndpoint: Endpoint {
 
     case addCardToFavourite(cardID: Int, tagID: String? = nil)
     case deleteCardFromFavourite(cardID: Int)
+    case getSavedCardList(tagID: Int?, type: String?, limit: Int?, offset: Int?)
+
+    case getFolders(limit: Int?, offset: Int?)
 
     var useAuthirizationToken: Bool {
         return true
@@ -42,6 +45,10 @@ enum CardsEndpoint: Endpoint {
             return .post
         case .deleteCardFromFavourite:
             return .delete
+        case .getSavedCardList:
+            return .get
+        case .getFolders:
+            return .get
         }
     }
 
@@ -59,8 +66,44 @@ enum CardsEndpoint: Endpoint {
             return "/cards/list"
         case .getCardLocationsInRegion:
             return "/cards/area-list"
-        case .addCardToFavourite, .deleteCardFromFavourite:
+        case .addCardToFavourite, .deleteCardFromFavourite, .getSavedCardList:
             return "/cards/favourites"
+        case .getFolders:
+            return "/cards/favourites/tag"
+        }
+    }
+
+    var urlParameters: [String : String]? {
+        switch self {
+
+        case .getSavedCardList(let tagID, let type, let limit, let offset):
+            var params: [String : String] = [:]
+            if let tagID = tagID {
+                params["tag_id"] = "\(tagID)"
+            }
+            if let type = type {
+                params["type"] = type
+            }
+            if let limit = limit {
+                params["limit"] = "\(limit)"
+            }
+            if let offset = offset {
+                params["offset"] = "\(offset)"
+            }
+            return params
+
+        case .getFolders(let limit, let offset):
+            var params: [String : String] = [:]
+            if let limit = limit {
+                params["limit"] = "\(limit)"
+            }
+            if let offset = offset {
+                params["offset"] = "\(offset)"
+            }
+            return params
+
+        default:
+            return nil
         }
     }
 
@@ -124,6 +167,7 @@ enum CardsEndpoint: Endpoint {
         case .deleteCardFromFavourite(let cardID):
             return ["card_id": cardID]
 
+        default: return nil
         }
     }
 

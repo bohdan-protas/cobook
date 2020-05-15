@@ -8,25 +8,98 @@
 
 import UIKit
 
-class SavedContentViewController: UIViewController {
+class SavedContentViewController: BaseViewController {
+
+    /// main tableView
+    @IBOutlet var tableView: UITableView!
+
+    /// itemsBarView
+    private lazy var itemsBarView: HorizontalItemsBarView = {
+        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: [])
+        view.delegate = self.presenter
+        return view
+    }()
+
+    var presenter: SavedContentPresenter = SavedContentPresenter()
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupLayout()
+
+        presenter.attachView(self)
+        presenter.setup()
+    }
+
+    deinit {
+        presenter.detachView()
+    }
+
+
+}
+
+// MARK: - Privates
+
+private extension SavedContentViewController {
+
+    func setupLayout() {
+        self.tableView.delegate = self
         self.navigationItem.title = "Saved".localized
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        //self.navigationItem.scrollEdgeAppearance = .some(<#T##UINavigationBarAppearance#>)
-        // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object Щto the new view controller.
+}
+
+// MARK: - SavedContentView
+
+extension SavedContentViewController: SavedContentView {
+
+    func reload() {
+        tableView.reloadData()
     }
-    */
+
+    func set(dataSource: DataSource<SavedContentCellConfigurator>?) {
+        dataSource?.connect(to: self.tableView)
+    }
+
+    func set(barItems: [BarItem]) {
+        itemsBarView.dataSource = barItems
+        itemsBarView.refresh()
+    }
+
+    func reload(section: SavedContent.SectionAccessoryIndex) {
+        tableView.beginUpdates()
+        tableView.setContentOffset(.zero, animated: false)
+        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .automatic)
+        tableView.endUpdates()
+    }
+
+
+}
+
+// MARK: - UITableViewDelegate
+
+extension SavedContentViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == SavedContent.SectionAccessoryIndex.card.rawValue {
+            return itemsBarView
+        }
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == SavedContent.SectionAccessoryIndex.card.rawValue {
+            return itemsBarView.frame.height
+        }
+        return 0
+    }
+
 
 }
