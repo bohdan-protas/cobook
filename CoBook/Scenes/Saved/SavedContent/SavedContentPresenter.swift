@@ -51,18 +51,23 @@ class SavedContentPresenter: BasePresenter {
 
     func setup() {
         self.barItems = [
-            BarItem(index: 0, title: "BarItem.allCards".localized),
-            BarItem(index: 1, title: "BarItem.personalCards".localized),
-            BarItem(index: 2, title: "BarItem.businessCards".localized),
-            BarItem(index: 3, title: "BarItem.myRegion".localized),
-        ].sorted { $0.index < $1.index }
+            BarItem(title: "BarItem.allCards".localized),
+            BarItem(title: "BarItem.personalCards".localized),
+            BarItem(title: "BarItem.businessCards".localized)
+        ]
 
-        fetchSavedCards { [unowned self] (cards) in
-            self.cards["BarItem.allCards".localized] = cards
-            self.selectedBarItem = self.barItems.first
+        view?.startLoading()
+        fetchUserFolders { [unowned self] (barItems) in
+            self.view?.stopLoading()
+
+            self.barItems.append(contentsOf: barItems)
+            self.barItems.append(BarItem(title: "BarItem.myRegion".localized))
             self.view?.set(barItems: self.barItems)
             self.updateViewDataSource()
             self.view?.reload()
+
+            self.selectedBarItem = self.barItems.first
+            self.updateCards()
         }
     }
 
@@ -77,9 +82,20 @@ extension SavedContentPresenter: HorizontalItemsBarViewDelegate {
         if selectedBarItem?.title == item?.title {
             return
         }
-        self.selectedBarItem = item
 
-        switch item?.title {
+        self.selectedBarItem = item
+        self.updateCards()
+    }
+
+
+}
+
+// MARK - Privates
+
+private extension SavedContentPresenter {
+
+    func updateCards() {
+        switch selectedBarItem?.title {
         case .none: break
         case .some(let title):
 
@@ -88,6 +104,7 @@ extension SavedContentPresenter: HorizontalItemsBarViewDelegate {
 
                 if self.cards["BarItem.allCards".localized]?.isEmpty ?? true {
                     fetchSavedCards { [unowned self] (cards) in
+                        self.view?.stopLoading()
                         self.cards["BarItem.allCards".localized] = cards
                         self.updateViewDataSource()
                         self.view?.reload(section: .card)
@@ -100,6 +117,7 @@ extension SavedContentPresenter: HorizontalItemsBarViewDelegate {
             case "BarItem.personalCards".localized:
                 if self.cards["BarItem.personalCards".localized]?.isEmpty ?? true {
                     fetchSavedCards(type: .personal) { [unowned self] (cards) in
+                        self.view?.stopLoading()
                         self.cards["BarItem.personalCards".localized] = cards
                         self.updateViewDataSource()
                         self.view?.reload(section: .card)
@@ -112,13 +130,14 @@ extension SavedContentPresenter: HorizontalItemsBarViewDelegate {
             case "BarItem.businessCards".localized:
                 if self.cards["BarItem.businessCards".localized]?.isEmpty ?? true {
                     fetchSavedCards(type: .business) { [unowned self] (cards) in
+                        self.view?.stopLoading()
                         self.cards["BarItem.businessCards".localized] = cards
                         self.updateViewDataSource()
                         self.view?.reload(section: .card)
                     }
                 } else {
                     self.updateViewDataSource()
-                    self.view?.reload(section: .card)
+                     self.view?.reload(section: .card)
                 }
 
             case "BarItem.myRegion".localized:
@@ -131,17 +150,31 @@ extension SavedContentPresenter: HorizontalItemsBarViewDelegate {
         }
     }
 
-
-}
-
-// MARK - Privates
-
-private extension SavedContentPresenter {
-
     func updateViewDataSource() {
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items = [
+            .title(model: SavedContent.TitleModel(title: "Збережені пости", counter: 0)),
+            .sectionSeparator,
+            .title(model: SavedContent.TitleModel(title: "Збережені візитки", counter: cardsTotalCount, actionTitle: "Додати візитку", actionHandler: { Log.debug("handle save") }))
+        ]
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.card.rawValue].items = []
+
         if let title = selectedBarItem?.title {
             let cardsToShow = cards[title] ?? []
             dataSource?.sections[SavedContent.SectionAccessoryIndex.card.rawValue].items = cardsToShow.compactMap { .cardItem(model: $0) }
+        }
+    }
+
+    func fetchUserFolders(completion: (([BarItem]) -> Void)?) {
+        APIClient.default.getFolderList { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let folders):
+                let items = folders?.compactMap { BarItem(index: $0.id, title: $0.title) }
+                completion?(items ?? [])
+            case .failure(let error):
+                completion?([])
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
         }
     }
 

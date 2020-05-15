@@ -183,6 +183,7 @@
 		B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D56245668340061A98B /* ServiceDetailsViewController.swift */; };
 		B82B4D59245668420061A98B /* ServiceDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D58245668420061A98B /* ServiceDetailsPresenter.swift */; };
 		B82B4D5B2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D5A2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift */; };
+		B82B6B8E246E8E960041134F /* SavedContentTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6B8D246E8E960041134F /* SavedContentTitleTableViewCell.swift */; };
 		B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* DesignableView.swift */; };
 		B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F1A2406C8C700AFE578 /* AppStorage.swift */; };
 		B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */; };
@@ -320,6 +321,7 @@
 		B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */; };
 		B8CB0E80240551A400AF431B /* RegisterAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E7F240551A400AF431B /* RegisterAPIResponseData.swift */; };
 		B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CB0E8124057B1700AF431B /* ValidationManager.swift */; };
+		B8D5F981246E81EF0032E885 /* FolderApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F980246E81EF0032E885 /* FolderApiModel.swift */; };
 		B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC63082434E27700A2ED58 /* CreateBusinessCard.swift */; };
 		B8DC630B2434FBED00A2ED58 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC630A2434FBED00A2ED58 /* Section.swift */; };
 		B8DC630D2434FC1000A2ED58 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */; };
@@ -514,6 +516,7 @@
 		B82B4D56245668340061A98B /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		B82B4D58245668420061A98B /* ServiceDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsPresenter.swift; sourceTree = "<group>"; };
 		B82B4D5A2456685C0061A98B /* ServiceDetailsDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsDataSourceConfigurator.swift; sourceTree = "<group>"; };
+		B82B6B8D246E8E960041134F /* SavedContentTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedContentTitleTableViewCell.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		B8307F1A2406C8C700AFE578 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageWrapper.swift; sourceTree = "<group>"; };
@@ -655,6 +658,7 @@
 		B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		B8CB0E7F240551A400AF431B /* RegisterAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAPIResponseData.swift; sourceTree = "<group>"; };
 		B8CB0E8124057B1700AF431B /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
+		B8D5F980246E81EF0032E885 /* FolderApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderApiModel.swift; sourceTree = "<group>"; };
 		B8DC63082434E27700A2ED58 /* CreateBusinessCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCard.swift; sourceTree = "<group>"; };
 		B8DC630A2434FBED00A2ED58 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
@@ -1128,6 +1132,7 @@
 		B824D14F246B123800911629 /* SavedContent */ = {
 			isa = PBXGroup;
 			children = (
+				B82B6B8A246E8C1A0041134F /* views */,
 				B824D150246B127200911629 /* SavedContentViewController.swift */,
 				B8205C2F246D8FBE003C39F4 /* SavedContentPresenter.swift */,
 				B8205C31246D8FE0003C39F4 /* SavedContentCellConfigurator.swift */,
@@ -1341,6 +1346,14 @@
 			path = ServiceDetails;
 			sourceTree = "<group>";
 		};
+		B82B6B8A246E8C1A0041134F /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B82B6B8D246E8E960041134F /* SavedContentTitleTableViewCell.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		B8307F1F2406FED000AFE578 /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
@@ -1487,6 +1500,7 @@
 				B8909FB52464321800AA56F7 /* ArticleDetailsAPIModel.swift */,
 				B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */,
 				B8205C33246DA980003C39F4 /* SavedCardsApiModel.swift */,
+				B8D5F980246E81EF0032E885 /* FolderApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2322,6 +2336,7 @@
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B8255A22243A26B400C4169D /* SearchTableViewController.swift in Sources */,
 				B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */,
+				B82B6B8E246E8E960041134F /* SavedContentTitleTableViewCell.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B8B8B90D2459F51400162224 /* ProductDetailsApiModel.swift in Sources */,
 				B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */,
@@ -2360,6 +2375,7 @@
 				B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */,
 				B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */,
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
+				B8D5F981246E81EF0032E885 /* FolderApiModel.swift in Sources */,
 				B823C6212431F585002CFB02 /* UIImage + AverageColor.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
 				B81F189F24603F71003CBC84 /* CreateAlbumApiModel.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 
 struct BarItem {
-    var index: Int
+    var index: Int = -1
     var title: String?
 }
 

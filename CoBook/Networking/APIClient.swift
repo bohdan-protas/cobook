@@ -435,6 +435,19 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for deleted card from saved list
+
+     - parameters:
+        - id: card id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getFolderList(limit: Int? = nil, offset: Int? = nil, completion: @escaping (Result<[FolderApiModel]?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.getFolders(limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 }
 

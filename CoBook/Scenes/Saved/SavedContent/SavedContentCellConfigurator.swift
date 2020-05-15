@@ -13,6 +13,8 @@ enum SavedContent {
     enum Cell {
         case cardItem(model: CardItemViewModel)
         case map
+        case title(model: TitleModel)
+        case sectionSeparator
     }
 
     enum SectionAccessoryIndex: Int {
@@ -20,8 +22,11 @@ enum SavedContent {
         case card
     }
 
-    enum BarItemIndex: Int {
-        case allCards, personalCards, businessCards, inMyRegionCards
+    struct TitleModel {
+        var title: String?
+        var counter: Int?
+        var actionTitle: String?
+        var actionHandler: (() -> Void)?
     }
 
 }
@@ -30,6 +35,8 @@ class SavedContentCellConfigurator: CellConfiguratorType {
 
     var cardItemCellConfigurator: CellConfigurator<CardItemViewModel, ContactableCardItemTableViewCell>?
     var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
+    var titleConfigurator: CellConfigurator<SavedContent.TitleModel, SavedContentTitleTableViewCell>?
+    var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -39,6 +46,10 @@ class SavedContentCellConfigurator: CellConfiguratorType {
             return cardItemCellConfigurator?.reuseIdentifier ?? ""
         case .map:
             return mapCellConfigurator?.reuseIdentifier ?? ""
+        case .title:
+            return titleConfigurator?.reuseIdentifier ?? ""
+        case .sectionSeparator:
+            return sectionHeaderConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -48,12 +59,17 @@ class SavedContentCellConfigurator: CellConfiguratorType {
             return cardItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .map:
             return mapCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .title(let model):
+            return titleConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .sectionSeparator:
+            return sectionHeaderConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
     func registerCells(in tableView: UITableView) {
         cardItemCellConfigurator?.registerCells(in: tableView)
         mapCellConfigurator?.registerCells(in: tableView)
+        sectionHeaderConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -67,6 +83,20 @@ extension SavedContentPresenter {
         get {
 
             let dataSourceConfigurator = SavedContentCellConfigurator()
+
+            // titleConfigurator
+            dataSourceConfigurator.titleConfigurator = CellConfigurator { (cell, model: SavedContent.TitleModel, tableView, indexPath) -> SavedContentTitleTableViewCell in
+                cell.titleLabel.text = model.title
+                cell.counterLabel.text = "\( model.counter ?? 0)"
+                cell.actionButton.setTitle(model.actionTitle, for: .normal)
+                cell.actionHandler = model.actionHandler
+                return cell
+            }
+
+            // sectionHeaderConfigurator
+            dataSourceConfigurator.sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+                return cell
+            }
 
             // cardItemCellConfigurator
             dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> ContactableCardItemTableViewCell in

@@ -16,11 +16,9 @@ enum CardsEndpoint: Endpoint {
     case getCardInfo(id: Int)
     case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
-
     case addCardToFavourite(cardID: Int, tagID: String? = nil)
     case deleteCardFromFavourite(cardID: Int)
     case getSavedCardList(tagID: Int?, type: String?, limit: Int?, offset: Int?)
-
     case getFolders(limit: Int?, offset: Int?)
 
     var useAuthirizationToken: Bool {
@@ -69,7 +67,7 @@ enum CardsEndpoint: Endpoint {
         case .addCardToFavourite, .deleteCardFromFavourite, .getSavedCardList:
             return "/cards/favourites"
         case .getFolders:
-            return "/cards/favourites/tag"
+            return "/cards/favourites/tags"
         }
     }
 
