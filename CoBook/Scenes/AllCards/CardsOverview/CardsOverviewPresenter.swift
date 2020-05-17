@@ -210,8 +210,6 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             default: break
             }
         }
-
-
     }
 
 

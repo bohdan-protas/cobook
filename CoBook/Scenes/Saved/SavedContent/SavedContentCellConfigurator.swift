@@ -107,7 +107,7 @@ extension SavedContentPresenter {
 
             // cardItemCellConfigurator
             dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> ContactableCardItemTableViewCell in
-                //cell.delegate = self.view
+                cell.delegate = self.view
                 let textPlaceholderImage = model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
                 cell.avatarImageView.setImage(withPath: model.avatarPath, placeholderImage: textPlaceholderImage)
                 cell.type = model.type

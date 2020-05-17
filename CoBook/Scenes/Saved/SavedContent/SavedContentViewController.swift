@@ -56,6 +56,24 @@ private extension SavedContentViewController {
 
 extension SavedContentViewController: SavedContentView {
 
+    func onSaveCard(cell: ContactableCardItemTableViewCell) {
+        if let index = tableView.indexPath(for: cell) {
+            presenter.saveCardAt(indexPath: index)
+        }
+    }
+
+    func onMakeCall(cell: ContactableCardItemTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell), let telephone = presenter.telephoneNumberForItemAt(indexPath: indexPath) {
+            self.makeCall(to: telephone)
+        }
+    }
+
+    func onSendMail(cell: ContactableCardItemTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell), let email = presenter.emailAddressForItemAt(indexPath: indexPath) {
+            self.sendEmail(to: email)
+        }
+    }
+
     func createFolder() {
         newFolderAlert(folderName: nil, completion: { [unowned self] (folderName) in
             self.presenter.createFolder(title: folderName) { (barItem) in
@@ -82,6 +100,10 @@ extension SavedContentViewController: SavedContentView {
         tableView.setContentOffset(.zero, animated: false)
         tableView.reloadSections(IndexSet(integer: section.rawValue), with: .automatic)
         tableView.endUpdates()
+    }
+
+    func reloadItemAt(indexPath: IndexPath) {
+        self.tableView.reloadRows(at: [indexPath], with: .none)
     }
 
 

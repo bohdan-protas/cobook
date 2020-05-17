@@ -8,8 +8,11 @@
 
 import UIKit
 
-protocol ContactableCardItemTableViewCellDelegate: class {
 
+protocol ContactableCardItemTableViewCellDelegate: class {
+    func onSaveCard(cell: ContactableCardItemTableViewCell)
+    func onMakeCall(cell: ContactableCardItemTableViewCell)
+    func onSendMail(cell: ContactableCardItemTableViewCell)
 }
 
 class ContactableCardItemTableViewCell: UITableViewCell {
@@ -51,11 +54,6 @@ class ContactableCardItemTableViewCell: UITableViewCell {
 
     // MARK: - Lifecycle
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
         avatarImageView.cancelImageRequest()
@@ -68,15 +66,15 @@ class ContactableCardItemTableViewCell: UITableViewCell {
     // MARK: - Actions
 
     @IBAction func saveButtonTapped(_ sender: Any) {
-
+        delegate?.onSaveCard(cell: self)
     }
 
     @IBAction func callButtonTapped(_ sender: Any) {
-
+        delegate?.onMakeCall(cell: self)
     }
 
     @IBAction func sendEmailButtonTapped(_ sender: Any) {
-
+        delegate?.onSendMail(cell: self)
     }
 
 }

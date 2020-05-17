@@ -8,9 +8,10 @@
 
 import Foundation
 
-protocol SavedContentView: LoadDisplayableView, AlertDisplayableView {
+protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, ContactableCardItemTableViewCellDelegate {
     func set(dataSource: DataSource<SavedContentCellConfigurator>?)
     func reload(section: SavedContent.SectionAccessoryIndex)
+    func reloadItemAt(indexPath: IndexPath)
     func reload()
     func set(barItems: [BarItem])
     func createFolder()
@@ -47,6 +48,8 @@ class SavedContentPresenter: BasePresenter {
         dataSource?.configurator = dataSourceConfigurator
     }
 
+    
+
     func attachView(_ view: SavedContentView) {
         self.view = view
         self.view?.set(dataSource: dataSource)
@@ -57,14 +60,6 @@ class SavedContentPresenter: BasePresenter {
     }
 
     // MARK: - Public
-
-    func isEditableBarItemAt(index: Int) -> Bool {
-        guard let item = barItems[safe: index] else {
-            return false
-        }
-
-        return item.index >= 0 && item.index != index
-    }
 
     func setup() {
         view?.startLoading()
@@ -77,6 +72,37 @@ class SavedContentPresenter: BasePresenter {
             self.selectedBarItem = self.barItems.first
             self.updateCards()
         }
+    }
+
+    func isEditableBarItemAt(index: Int) -> Bool {
+        guard let item = barItems[safe: index] else {
+            return false
+        }
+
+        return item.index >= 0 && item.index != index
+    }
+
+    func telephoneNumberForItemAt(indexPath: IndexPath) -> String? {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+            switch item {
+            case .cardItem(let model):
+                return model.telephoneNumber
+            default: break
+            }
+        }
+        return nil
+    }
+
+    func emailAddressForItemAt(indexPath: IndexPath) -> String? {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+            switch item {
+            case .cardItem:
+                // FIXME: Check api model for aviable email address
+                return nil
+            default: break
+            }
+        }
+        return nil
     }
 
     func selectedBarItemAt(index: Int) {
@@ -139,7 +165,44 @@ class SavedContentPresenter: BasePresenter {
                 }
             }
         }
+    }
 
+    func saveCardAt(indexPath: IndexPath) {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+
+            switch item {
+            case .cardItem(let model):
+                switch model.isSaved {
+                case false:
+                    view?.startLoading()
+                    APIClient.default.addCardToFavourites(id: model.id) { [weak self] (result) in
+                        switch result {
+                        case .success:
+                            self?.updateCardItem(id: model.id, withSavedFlag: true)
+                            self?.view?.reloadItemAt(indexPath: indexPath)
+                            self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
+                            break
+                        case .failure:
+                            self?.view?.stopLoading(success: false)
+                        }
+                    }
+                case true:
+                    view?.startLoading()
+                    APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
+                        switch result {
+                        case .success:
+                            self?.updateCardItem(id: model.id, withSavedFlag: false)
+                            self?.view?.reloadItemAt(indexPath: indexPath)
+                            self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
+                            break
+                        case .failure:
+                            self?.view?.stopLoading(success: false)
+                        }
+                    }
+                }
+            default: break
+            }
+        }
     }
 
 
@@ -219,6 +282,21 @@ private extension SavedContentPresenter {
         }
     }
 
+    func updateCardItem(id: Int, withSavedFlag flag: Bool) {
+        if let allCardsIndex = cards[SavedContent.BarItemAccessoryIndex.allCards.rawValue]?.firstIndex(where: { $0.id == id }) {
+            cards[SavedContent.BarItemAccessoryIndex.allCards.rawValue]?[safe: allCardsIndex]?.isSaved = flag
+        }
+
+        if let personalCardsIndex = cards[SavedContent.BarItemAccessoryIndex.personalCards.rawValue]?.firstIndex(where: { $0.id == id }) {
+            cards[SavedContent.BarItemAccessoryIndex.personalCards.rawValue]?[safe: personalCardsIndex]?.isSaved = flag
+        }
+
+        if let businessCardsIndex = cards[SavedContent.BarItemAccessoryIndex.businessCards.rawValue]?.firstIndex(where: { $0.id == id }) {
+            cards[SavedContent.BarItemAccessoryIndex.businessCards.rawValue]?[safe: businessCardsIndex]?.isSaved = flag
+        }
+        updateViewDataSource()
+    }
+
     func updateViewDataSource() {
         dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items = [
             .title(model: SavedContent.TitleModel(title: "Збережені пости", counter: 0)),
@@ -260,7 +338,6 @@ private extension SavedContentPresenter {
             switch result {
             case .success(let cardDetails):
                 strongSelf.cardsTotalCount = cardDetails?.totalCount ?? 0
-                
                 let cards = cardDetails?.rows?.compactMap { CardItemViewModel(id: $0.id,
                                                                               type: $0.type,
                                                                               avatarPath: $0.avatar?.sourceUrl,
