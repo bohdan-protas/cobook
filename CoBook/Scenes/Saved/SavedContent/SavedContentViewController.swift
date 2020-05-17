@@ -14,10 +14,18 @@ class SavedContentViewController: BaseViewController {
     @IBOutlet var tableView: UITableView!
 
     /// itemsBarView
-    private lazy var itemsBarView: HorizontalItemsBarView = {
+    lazy var itemsBarView: HorizontalItemsBarView = {
         let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: [])
         view.delegate = self
         return view
+    }()
+
+    /// pull refresh controll
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.Theme.grayUI
+        refreshControl.addTarget(self, action: #selector(refreshAllCardsData(_:)), for: .valueChanged)
+        return refreshControl
     }()
 
     var presenter: SavedContentPresenter = SavedContentPresenter()
@@ -36,6 +44,13 @@ class SavedContentViewController: BaseViewController {
         presenter.detachView()
     }
 
+    // MARK: - Actions
+
+    @objc private func refreshAllCardsData(_ sender: Any) {
+        self.refreshControl.endRefreshing()
+        presenter.setup()
+    }
+
 
 }
 
@@ -45,6 +60,7 @@ private extension SavedContentViewController {
 
     func setupLayout() {
         self.tableView.delegate = self
+        self.tableView.refreshControl = refreshControl
         self.navigationItem.title = "Saved".localized
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -56,9 +72,23 @@ private extension SavedContentViewController {
 
 extension SavedContentViewController: SavedContentView {
 
+    func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?) {
+        let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+        businessCardDetailsViewController.presenter = presenter
+        self.navigationController?.pushViewController(businessCardDetailsViewController, animated: true)
+    }
+
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?) {
+        let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+        personalCardDetailsViewController.presenter = presenter
+        self.navigationController?.pushViewController(personalCardDetailsViewController, animated: true)
+    }
+
     func onSaveCard(cell: ContactableCardItemTableViewCell) {
         if let index = tableView.indexPath(for: cell) {
-            presenter.saveCardAt(indexPath: index)
+            presenter.saveCardAt(indexPath: index, successCompletion: { (isSelected) in
+                cell.saveButton.isSelected = isSelected
+            })
         }
     }
 
@@ -83,7 +113,7 @@ extension SavedContentViewController: SavedContentView {
     }
 
     func reload() {
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
 
     func set(dataSource: DataSource<SavedContentCellConfigurator>?) {
@@ -115,6 +145,7 @@ extension SavedContentViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.selectedCellAt(indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

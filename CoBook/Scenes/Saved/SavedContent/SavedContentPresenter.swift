@@ -15,6 +15,9 @@ protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, Contactabl
     func reload()
     func set(barItems: [BarItem])
     func createFolder()
+
+    func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
 }
 
 class SavedContentPresenter: BasePresenter {
@@ -27,6 +30,8 @@ class SavedContentPresenter: BasePresenter {
     private var cardsTotalCount: Int = 0
     private var cards: [Int: [CardItemViewModel]] = [:]
 
+    private var isInitialFetching: Bool = true
+
     /// bar items busienss logic
     var barItems: [BarItem] = []
     var selectedBarItem: BarItem?
@@ -34,21 +39,11 @@ class SavedContentPresenter: BasePresenter {
     // MARK: - Lifecycle
 
     init() {
-        self.barItems = [
-            BarItem(index: SavedContent.BarItemAccessoryIndex.allCards.rawValue, title: "BarItem.allCards".localized),
-            BarItem(index: SavedContent.BarItemAccessoryIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
-            BarItem(index: SavedContent.BarItemAccessoryIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
-            BarItem(index: SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized)
-        ]
-
-        // setup feed datasource
         dataSource = DataSource()
         dataSource?.sections = [Section<SavedContent.Cell>(accessoryIndex: SavedContent.SectionAccessoryIndex.post.rawValue, items: []),
                                 Section<SavedContent.Cell>(accessoryIndex: CardsOverview.SectionAccessoryIndex.cards.rawValue, items: [])]
         dataSource?.configurator = dataSourceConfigurator
     }
-
-    
 
     func attachView(_ view: SavedContentView) {
         self.view = view
@@ -62,14 +57,20 @@ class SavedContentPresenter: BasePresenter {
     // MARK: - Public
 
     func setup() {
+        isInitialFetching = true
         view?.startLoading()
         fetchUserFolders { [unowned self] (barItems) in
             self.view?.stopLoading()
+            self.barItems = [
+                BarItem(index: SavedContent.BarItemAccessoryIndex.allCards.rawValue, title: "BarItem.allCards".localized),
+                BarItem(index: SavedContent.BarItemAccessoryIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
+                BarItem(index: SavedContent.BarItemAccessoryIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
+                BarItem(index: SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized)
+            ]
+
             self.barItems.append(contentsOf: barItems)
-            self.view?.set(barItems: self.barItems)
-            self.updateViewDataSource()
-            self.view?.reload()
             self.selectedBarItem = self.barItems.first
+            self.view?.set(barItems: self.barItems)
             self.updateCards()
         }
     }
@@ -167,7 +168,7 @@ class SavedContentPresenter: BasePresenter {
         }
     }
 
-    func saveCardAt(indexPath: IndexPath) {
+    func saveCardAt(indexPath: IndexPath, successCompletion: ((_ currentState: Bool) -> Void)?) {
         if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
 
             switch item {
@@ -179,8 +180,8 @@ class SavedContentPresenter: BasePresenter {
                         switch result {
                         case .success:
                             self?.updateCardItem(id: model.id, withSavedFlag: true)
-                            self?.view?.reloadItemAt(indexPath: indexPath)
                             self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
+                            successCompletion?(true)
                             break
                         case .failure:
                             self?.view?.stopLoading(success: false)
@@ -192,8 +193,8 @@ class SavedContentPresenter: BasePresenter {
                         switch result {
                         case .success:
                             self?.updateCardItem(id: model.id, withSavedFlag: false)
-                            self?.view?.reloadItemAt(indexPath: indexPath)
                             self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
+                            successCompletion?(false)
                             break
                         case .failure:
                             self?.view?.stopLoading(success: false)
@@ -206,11 +207,35 @@ class SavedContentPresenter: BasePresenter {
     }
 
 
+    func selectedCellAt(indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[indexPath.item] else {
+            return
+        }
+        goToItem(item)
+    }
+
 }
 
 // MARK - Privates
 
 private extension SavedContentPresenter {
+
+    func goToItem(_ item: SavedContent.Cell) {
+        switch item {
+        case .cardItem(let model):
+            switch model.type {
+            case .personal:
+                let presenter = PersonalCardDetailsPresenter(id: model.id)
+                view?.goToPersonalCardDetails(presenter: presenter)
+
+            case .business:
+                let presenter = BusinessCardDetailsPresenter(id: model.id)
+                view?.goToBusinessCardDetails(presenter: presenter)
+            }
+        default: break
+        }
+    }
+
 
     func updateCards() {
         switch selectedBarItem?.index {
@@ -219,61 +244,57 @@ private extension SavedContentPresenter {
 
             switch index {
             case SavedContent.BarItemAccessoryIndex.allCards.rawValue:
-                if self.cards[index]?.isEmpty ?? true {
+                if self.cards[index]?.isEmpty ?? true || isInitialFetching {
+                    view?.startLoading()
                     fetchSavedCards { [unowned self] (cards) in
                         self.view?.stopLoading()
                         self.cards[index] = cards
                         self.updateViewDataSource()
-                        self.view?.reload(section: .card)
                     }
                 } else {
                     self.updateViewDataSource()
-                    self.view?.reload(section: .card)
                 }
 
             case SavedContent.BarItemAccessoryIndex.personalCards.rawValue:
-                if self.cards[index]?.isEmpty ?? true {
+                if self.cards[index]?.isEmpty ?? true || isInitialFetching {
+                    view?.startLoading()
                     fetchSavedCards(type: .personal) { [unowned self] (cards) in
                         self.view?.stopLoading()
                         self.cards[index] = cards
                         self.updateViewDataSource()
-                        self.view?.reload(section: .card)
                     }
                 } else {
                     self.updateViewDataSource()
-                    self.view?.reload(section: .card)
                 }
 
             case SavedContent.BarItemAccessoryIndex.businessCards.rawValue:
-                if self.cards[index]?.isEmpty ?? true {
+                if self.cards[index]?.isEmpty ?? true || isInitialFetching {
+                    view?.startLoading()
                     fetchSavedCards(type: .business) { [unowned self] (cards) in
                         self.view?.stopLoading()
                         self.cards[index] = cards
                         self.updateViewDataSource()
-                        self.view?.reload(section: .card)
                     }
                 } else {
                     self.updateViewDataSource()
-                    self.view?.reload(section: .card)
+
                 }
 
             case SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue:
                 self.updateViewDataSource()
-                self.view?.reload(section: .card)
 
             // Another custom created lists
             default:
                 if index >= 0 {
-                    if self.cards[index]?.isEmpty ?? true {
+                    if self.cards[index]?.isEmpty ?? true || isInitialFetching{
+                        view?.startLoading()
                         fetchSavedCards(tagID: index) { [unowned self] (cards) in
                             self.view?.stopLoading()
                             self.cards[index] = cards
                             self.updateViewDataSource()
-                            self.view?.reload(section: .card)
                         }
                     } else {
                         self.updateViewDataSource()
-                        self.view?.reload(section: .card)
                     }
                 }
                 break
@@ -314,6 +335,14 @@ private extension SavedContentPresenter {
                 dataSource?.sections[SavedContent.SectionAccessoryIndex.card.rawValue].items = cardsToShow.compactMap { .cardItem(model: $0) }
             }
         }
+
+        if isInitialFetching {
+            self.view?.reload()
+            isInitialFetching = false
+        } else {
+            self.view?.reload(section: .card)
+        }
+
     }
 
     func fetchUserFolders(completion: (([BarItem]) -> Void)?) {
@@ -331,10 +360,8 @@ private extension SavedContentPresenter {
     }
 
     func fetchSavedCards(tagID: Int? = nil, type: CardType? = nil, limit: Int? = nil, offset: Int? = nil, completion: (([CardItemViewModel]) -> Void)?) {
-        view?.startLoading()
         APIClient.default.getSavedCardsList(tagID: tagID, type: type.map { $0.rawValue }, limit: limit, offset: offset) { [weak self] (result) in
             guard let strongSelf = self else { return }
-            strongSelf.view?.stopLoading()
             switch result {
             case .success(let cardDetails):
                 strongSelf.cardsTotalCount = cardDetails?.totalCount ?? 0
