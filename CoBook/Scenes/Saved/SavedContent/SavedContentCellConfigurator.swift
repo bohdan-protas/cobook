@@ -22,6 +22,13 @@ enum SavedContent {
         case card
     }
 
+    enum BarItemAccessoryIndex: Int {
+        case allCards = -1
+        case personalCards = -2
+        case businessCards = -3
+        case inMyRegionCards = -4
+    }
+
     struct TitleModel {
         var title: String?
         var counter: Int?

@@ -42,6 +42,15 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
     // MARK: - LoadDisplayableView
 
+    func showTextHud(_ text: String?) {
+        currentHud = prototypeHud
+        currentHud?.indicatorView = nil
+        currentHud?.position = .bottomCenter
+        currentHud?.textLabel.text = text
+        currentHud?.show(in: currentView)
+        currentHud?.dismiss(afterDelay: 1.5)
+    }
+
     func startLoading() {
         currentHud = prototypeHud
         currentHud?.show(in: currentView)

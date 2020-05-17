@@ -21,6 +21,10 @@ enum CardsEndpoint: Endpoint {
     case getSavedCardList(tagID: Int?, type: String?, limit: Int?, offset: Int?)
     case getFolders(limit: Int?, offset: Int?)
 
+    case createFolder(title: String)
+    case deleteFolder(id: Int)
+    case updateFolder(id: Int, title: String)
+
     var useAuthirizationToken: Bool {
         return true
     }
@@ -47,6 +51,12 @@ enum CardsEndpoint: Endpoint {
             return .get
         case .getFolders:
             return .get
+        case .createFolder:
+            return .post
+        case .deleteFolder:
+            return .delete
+        case .updateFolder:
+            return .post
         }
     }
 
@@ -66,7 +76,7 @@ enum CardsEndpoint: Endpoint {
             return "/cards/area-list"
         case .addCardToFavourite, .deleteCardFromFavourite, .getSavedCardList:
             return "/cards/favourites"
-        case .getFolders:
+        case .getFolders, .createFolder, .deleteFolder, .updateFolder:
             return "/cards/favourites/tags"
         }
     }
@@ -164,6 +174,15 @@ enum CardsEndpoint: Endpoint {
 
         case .deleteCardFromFavourite(let cardID):
             return ["card_id": cardID]
+
+        case .createFolder(let title):
+            return ["title": title]
+
+        case .deleteFolder(let id):
+            return ["id": id]
+
+        case .updateFolder(let id, let title):
+            return ["id": id, "title": title]
 
         default: return nil
         }

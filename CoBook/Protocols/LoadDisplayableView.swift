@@ -12,7 +12,7 @@ public protocol LoadDisplayableView: class {
     func startLoading()
     func stopLoading()
 
-
+    func showTextHud(_ text: String?)
     func startLoading(text: String?)
     func stopLoading(success: Bool)
     func stopLoading(success: Bool, completion: (() -> Void)?)

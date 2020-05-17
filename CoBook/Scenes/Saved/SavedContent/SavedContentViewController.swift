@@ -16,7 +16,7 @@ class SavedContentViewController: BaseViewController {
     /// itemsBarView
     private lazy var itemsBarView: HorizontalItemsBarView = {
         let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: [])
-        view.delegate = self.presenter
+        view.delegate = self
         return view
     }()
 
@@ -55,6 +55,14 @@ private extension SavedContentViewController {
 // MARK: - SavedContentView
 
 extension SavedContentViewController: SavedContentView {
+
+    func createFolder() {
+        newFolderAlert(folderName: nil, completion: { [unowned self] (folderName) in
+            self.presenter.createFolder(title: folderName) { (barItem) in
+                self.itemsBarView.append(barItem: barItem)
+            }
+        })
+    }
 
     func reload() {
         tableView.reloadData()
@@ -99,6 +107,43 @@ extension SavedContentViewController: UITableViewDelegate {
             return itemsBarView.frame.height
         }
         return 0
+    }
+
+
+}
+
+// MARK: - HorizontalItemsBarViewDelegate
+
+extension SavedContentViewController: HorizontalItemsBarViewDelegate {
+
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
+        presenter.selectedBarItemAt(index: index)
+    }
+
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, didLongTappedItemAt index: Int) {
+        let actions: [UIAlertAction] = [
+            .init(title: "Видалити", style: .destructive, handler: { [unowned self] (_) in
+                self.presenter.deleteFolder(at: index) { [unowned self] in
+                    self.itemsBarView.delete(at: index)
+                }
+            }),
+
+            .init(title: "Змінити", style: .default, handler: { [unowned self] (_) in
+                let title = self.itemsBarView.dataSource[safe: index]?.title
+                self.newFolderAlert(folderName: title, completion: { [unowned self] (folderName) in
+                    self.presenter.updateFolder(at: index, withNewTitle: folderName) { [unowned self] (updatedBarItem) in
+                        self.itemsBarView.update(at: index, with: updatedBarItem)
+                    }
+                })
+            }),
+
+            .init(title: "Відмінити", style: .cancel, handler: { (_) in
+                Log.debug("Cancel")
+            })
+        ]
+        if presenter.isEditableBarItemAt(index: index) {
+            actionSheetAlert(title: nil, message: nil, actions: actions)
+        }
     }
 
 

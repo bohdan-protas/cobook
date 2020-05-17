@@ -448,6 +448,45 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for create folder
+
+     - parameters:
+        - id: title
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func createFolder(title: String, completion: @escaping (Result<FolderApiResponse?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.createFolder(title: title)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for delete folder
+
+     - parameters:
+        - id: folder id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func deleteFolder(id: Int, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.deleteFolder(id: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for updating custom folder
+
+     - parameters:
+        - id: folder id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func updateFolder(id: Int, title: String, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.updateFolder(id: id, title: title)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 }
 
