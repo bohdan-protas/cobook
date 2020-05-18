@@ -151,7 +151,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         goToItem(item)
     }
 
-    func saveCardAt(indexPath: IndexPath) {
+    func saveCardAt(indexPath: IndexPath, toFolder folderID: Int?) {
         var cardOwerviewItem: CardsOverview.Items?
 
         switch view?.isSearchActived {
@@ -172,14 +172,11 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                 switch model.isSaved {
                 case false:
                     view?.startLoading()
-                    APIClient.default.addCardToFavourites(id: model.id) { [weak self] (result) in
+                    APIClient.default.addCardToFavourites(id: model.id, folderID: folderID) { [weak self] (result) in
                         switch result {
                         case .success:
                             self?.updateCardItem(id: model.id, withSavedFlag: true)
                             self?.view?.reloadItemAt(indexPath: indexPath)
-                            if self?.view?.isSearchActived ?? false {
-                                self?.view?.reload(section: .cards)
-                            }
                             NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
                             self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
                         case .failure:
@@ -233,7 +230,19 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         updateViewDataSource()
     }
 
-
+    func fetchUserFolders(completion: (([FolderApiModel]) -> Void)?) {
+        view?.startLoading()
+        APIClient.default.getFolderList { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+            switch result {
+            case .success(let folders):
+                completion?(folders ?? [])
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
 
 }
 

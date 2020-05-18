@@ -71,7 +71,7 @@ class SavedContentViewController: BaseViewController {
     @objc func onDidReceiveCardUnsaveOperationHandler(_ notification: Notification) {
         if let data = notification.userInfo as? [String: Any], let cardID = data[Notification.Key.cardID] as? Int, let controllerID = data[Notification.Key.controllerID] as? String {
             if SavedContentViewController.describing != controllerID {
-                self.presenter.updateCardItem(id: cardID, withSavedFlag: false)
+                self.presenter.unsaveCardItemWith(id: cardID)
                 self.reload()
             }
         }
@@ -117,11 +117,11 @@ extension SavedContentViewController: SavedContentView {
 
     func onSaveCard(cell: ContactableCardItemTableViewCell) {
         if let indexPath = tableView.indexPath(for: cell) {
-
-            presenter.saveCardAt(indexPath: indexPath, successCompletion: { (isSelected) in
-                cell.saveButton.isSelected = isSelected
+            presenter.unsaveCardAt(indexPath: indexPath, successCompletion: { [unowned self] in
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .right)
+                self.tableView.endUpdates()
             })
-
         }
     }
 

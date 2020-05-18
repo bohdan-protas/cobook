@@ -413,7 +413,7 @@ extension APIClient {
      */
     @discardableResult
     func addCardToFavourites(id: Int,
-                             folderID: String? = nil,
+                             folderID: Int? = nil,
                              completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.addCardToFavourite(cardID: id, tagID: folderID)

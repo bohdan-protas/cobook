@@ -324,14 +324,40 @@ extension CardsOverviewViewController: FilterViewControllerDelegate {
 
 extension CardsOverviewViewController: CardItemTableViewCellDelegate {
 
+    func onSaveCardWithOptions(cell: CardItemTableViewCell) {
+        guard let index = tableView.indexPath(for: cell) else {
+            return
+        }
+
+        presenter.fetchUserFolders { [unowned self] (items) in
+            var actions: [UIAlertAction] = []
+
+            actions.append(UIAlertAction(title: "Загальний список", style: .default, handler: { _ in
+                self.presenter.saveCardAt(indexPath: index, toFolder: nil)
+            }))
+
+            let folderSavingActions: [UIAlertAction] = items.compactMap { folder in
+                UIAlertAction.init(title: folder.title, style: .default, handler: { [unowned self] _ in
+                    self.presenter.saveCardAt(indexPath: index, toFolder: folder.id)
+                })
+            }
+            actions.append(contentsOf: folderSavingActions)
+            actions.append(UIAlertAction(title: "Відмінити", style: .cancel, handler: nil))
+            self.actionSheetAlert(title: "Зберегти візитку до:", message: nil, actions: actions)
+        }
+
+
+    }
+
+
     func onSaveCard(cell: CardItemTableViewCell) {
         if isSearchActived {
             if let index = searchResultsTableController.tableView.indexPath(for: cell) {
-                presenter.saveCardAt(indexPath: index)
+                presenter.saveCardAt(indexPath: index, toFolder: nil)
             }
         } else {
             if let index = tableView.indexPath(for: cell) {
-                presenter.saveCardAt(indexPath: index)
+                presenter.saveCardAt(indexPath: index, toFolder: nil)
             }
         }
 

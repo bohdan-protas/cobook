@@ -66,7 +66,7 @@ class SavedContentPresenter: BasePresenter {
 
         group.enter()
         fetchUserFolders { [unowned self] (barItems) in
-            self.view?.stopLoading()
+
             self.barItems = [
                 BarItem(index: SavedContent.BarItemAccessoryIndex.allCards.rawValue, title: "BarItem.allCards".localized),
                 BarItem(index: SavedContent.BarItemAccessoryIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
@@ -102,48 +102,23 @@ class SavedContentPresenter: BasePresenter {
 
             /// Datasource configuration
             self.view?.set(barItems: self.barItems)
-            self.updateCards(useLoader: useLoader)
+            self.updateCards(useLoader: false)
         }
-
-
-
-    }
-
-    func isEditableBarItemAt(index: Int) -> Bool {
-        guard let item = barItems[safe: index] else {
-            return false
-        }
-
-        return item.index >= 0 && item.index != index
-    }
-
-    func telephoneNumberForItemAt(indexPath: IndexPath) -> String? {
-        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
-            switch item {
-            case .cardItem(let model):
-                return model.telephoneNumber
-            default: break
-            }
-        }
-        return nil
-    }
-
-    func emailAddressForItemAt(indexPath: IndexPath) -> String? {
-        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
-            switch item {
-            case .cardItem:
-                // FIXME: Check api model for aviable email address
-                return nil
-            default: break
-            }
-        }
-        return nil
     }
 
     func selectedBarItemAt(index: Int) {
         self.selectedBarItem = barItems[safe: index]
         self.updateCards(useLoader: true)
     }
+
+    func selectedCellAt(indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[indexPath.item] else {
+            return
+        }
+        goToItem(item)
+    }
+
+    // MARK: Folder operations
 
     func createFolder(title: String, completion: ((BarItem) -> Void)?) {
         self.view?.startLoading()
@@ -202,70 +177,93 @@ class SavedContentPresenter: BasePresenter {
         }
     }
 
-    func saveCardAt(indexPath: IndexPath, successCompletion: ((_ currentState: Bool) -> Void)?) {
+
+
+    // MARK: Card saving operations
+
+    func unsaveCardAt(indexPath: IndexPath, successCompletion: (() -> Void)?) {
         if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
 
             switch item {
             case .cardItem(let model):
-                switch model.isSaved {
-                case false:
-                    view?.startLoading()
-                    APIClient.default.addCardToFavourites(id: model.id) { [weak self] (result) in
-                        switch result {
-                        case .success:
-                            self?.updateCardItem(id: model.id, withSavedFlag: true)
-                            NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: SavedContentViewController.describing])
-                            self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
-                            successCompletion?(true)
-                        case .failure:
-                            self?.view?.stopLoading(success: false)
-                        }
-                    }
-                case true:
-                    view?.startLoading()
-                    APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
-                        switch result {
-                        case .success:
-                            self?.updateCardItem(id: model.id, withSavedFlag: false)
-                            NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: SavedContentViewController.describing])
-                            self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
-                            successCompletion?(false)
-                        case .failure:
-                            self?.view?.stopLoading(success: false)
-                        }
+
+                view?.startLoading()
+                APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
+                    switch result {
+                    case .success:
+                        NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: SavedContentViewController.describing])
+
+                        self?.unsaveCardItemWith(id: model.id)
+                        self?.view?.stopLoading()
+                        self?.view?.showTextHud("Візитку видалено із збережених")
+
+                        successCompletion?()
+                    case .failure:
+                        self?.view?.stopLoading(success: false)
                     }
                 }
+
             default: break
             }
         }
     }
 
-
-    func selectedCellAt(indexPath: IndexPath) {
-        guard let item = dataSource?.sections[safe: indexPath.section]?.items[indexPath.item] else {
-            return
-        }
-        goToItem(item)
-    }
-
-    func updateCardItem(id: Int, withSavedFlag flag: Bool) {
-        if let allCardsIndex = cards[SavedContent.BarItemAccessoryIndex.allCards.rawValue]?.firstIndex(where: { $0.id == id }) {
-            cards[SavedContent.BarItemAccessoryIndex.allCards.rawValue]?[safe: allCardsIndex]?.isSaved = flag
-        }
-
-        if let personalCardsIndex = cards[SavedContent.BarItemAccessoryIndex.personalCards.rawValue]?.firstIndex(where: { $0.id == id }) {
-            cards[SavedContent.BarItemAccessoryIndex.personalCards.rawValue]?[safe: personalCardsIndex]?.isSaved = flag
-        }
-
-        if let businessCardsIndex = cards[SavedContent.BarItemAccessoryIndex.businessCards.rawValue]?.firstIndex(where: { $0.id == id }) {
-            cards[SavedContent.BarItemAccessoryIndex.businessCards.rawValue]?[safe: businessCardsIndex]?.isSaved = flag
+    func unsaveCardItemWith(id: Int) {
+        cards.enumerated().forEach { (offset, item) in
+            if let index = item.value.firstIndex(where: { $0.id == id }) {
+                cards[item.key]?.remove(at: index)
+            }
         }
         updateViewDataSource()
     }
 
+    // MARK: Helpers
+
+    func isEditableBarItemAt(index: Int) -> Bool {
+        guard let item = barItems[safe: index] else {
+            return false
+        }
+
+        return item.index >= 0 && item.index != index
+    }
+
+    func telephoneNumberForItemAt(indexPath: IndexPath) -> String? {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+            switch item {
+            case .cardItem(let model):
+                return model.telephoneNumber
+            default: break
+            }
+        }
+        return nil
+    }
+
+    func emailAddressForItemAt(indexPath: IndexPath) -> String? {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+            switch item {
+            case .cardItem:
+                // FIXME: Check api model for aviable email address
+                return nil
+            default: break
+            }
+        }
+        return nil
+    }
+
+    func reloadCardsSection() {
+        self.updateViewDataSource()
+        if self.isInitialFetch {
+            self.view?.reload()
+            self.isInitialFetch = false
+        } else {
+            self.view?.reload(section: .card)
+        }
+    }
+
+
 }
 
-// MARK - Privates
+// MARK: - Privates
 
 private extension SavedContentPresenter {
 
@@ -285,6 +283,7 @@ private extension SavedContentPresenter {
         }
     }
 
+    // MARK: Card updating
 
     func updateCards(useLoader: Bool) {
         switch selectedBarItem?.index {
@@ -298,22 +297,10 @@ private extension SavedContentPresenter {
                     fetchSavedCards { [unowned self] (cards) in
                         self.view?.stopLoading()
                         self.cards[index] = cards
-                        self.updateViewDataSource()
-                        if self.isInitialFetch {
-                            self.view?.reload()
-                            self.isInitialFetch = false
-                        } else {
-                            self.view?.reload(section: .card)
-                        }
+                        self.reloadCardsSection()
                     }
                 } else {
-                    self.updateViewDataSource()
-                    if self.isInitialFetch {
-                        self.view?.reload()
-                        self.isInitialFetch = false
-                    } else {
-                        self.view?.reload(section: .card)
-                    }
+                    self.reloadCardsSection()
                 }
 
             case SavedContent.BarItemAccessoryIndex.personalCards.rawValue:
@@ -322,22 +309,10 @@ private extension SavedContentPresenter {
                     fetchSavedCards(type: .personal) { [unowned self] (cards) in
                         self.view?.stopLoading()
                         self.cards[index] = cards
-                        self.updateViewDataSource()
-                        if self.isInitialFetch {
-                            self.view?.reload()
-                            self.isInitialFetch = false
-                        } else {
-                            self.view?.reload(section: .card)
-                        }
+                        self.reloadCardsSection()
                     }
                 } else {
-                    self.updateViewDataSource()
-                    if isInitialFetch {
-                        self.view?.reload()
-                        self.isInitialFetch = false
-                    } else {
-                        self.view?.reload(section: .card)
-                    }
+                    self.reloadCardsSection()
                 }
 
             case SavedContent.BarItemAccessoryIndex.businessCards.rawValue:
@@ -346,32 +321,14 @@ private extension SavedContentPresenter {
                     fetchSavedCards(type: .business) { [unowned self] (cards) in
                         self.view?.stopLoading()
                         self.cards[index] = cards
-                        self.updateViewDataSource()
-                        if self.isInitialFetch {
-                            self.view?.reload()
-                            self.isInitialFetch = false
-                        } else {
-                            self.view?.reload(section: .card)
-                        }
+                        self.reloadCardsSection()
                     }
                 } else {
-                    self.updateViewDataSource()
-                    if isInitialFetch {
-                        self.view?.reload()
-                        self.isInitialFetch = false
-                    } else {
-                        self.view?.reload(section: .card)
-                    }
+                    self.reloadCardsSection()
                 }
 
             case SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue:
-                self.updateViewDataSource()
-                if isInitialFetch {
-                    self.view?.reload()
-                    self.isInitialFetch = false
-                } else {
-                    self.view?.reload(section: .card)
-                }
+                self.reloadCardsSection()
 
             // Another custom created lists
             default:
@@ -381,29 +338,18 @@ private extension SavedContentPresenter {
                         fetchSavedCards(tagID: index) { [unowned self] (cards) in
                             self.view?.stopLoading()
                             self.cards[index] = cards
-                            self.updateViewDataSource()
-                            if self.isInitialFetch {
-                                 self.view?.reload()
-                                 self.isInitialFetch = false
-                             } else {
-                                 self.view?.reload(section: .card)
-                             }
+                            self.reloadCardsSection()
                         }
                     } else {
-                        self.updateViewDataSource()
-                        if self.isInitialFetch {
-                             self.view?.reload()
-                             self.isInitialFetch = false
-                         } else {
-                             self.view?.reload(section: .card)
-                         }
+                        self.reloadCardsSection()
                     }
                 }
                 break
             }
-
         }
     }
+
+    // MARK: Updating view data source
 
     func updateViewDataSource() {
         // Post preview section
@@ -411,7 +357,6 @@ private extension SavedContentPresenter {
         let items = albumPreviewItems.compactMap { AlbumPreview.Item.view($0) }
         albumPreviewSection = AlbumPreview.Section(title: "Збережені пости: \(items.count)", dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
         albumPreviewSection?.items.append(contentsOf: items)
-        //albumPreviewSection?.items.append(.showMore)
         dataSource?[.postPreview].items = []
 
         dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items = [

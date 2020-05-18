@@ -16,7 +16,8 @@ enum CardsEndpoint: Endpoint {
     case getCardInfo(id: Int)
     case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
-    case addCardToFavourite(cardID: Int, tagID: String? = nil)
+
+    case addCardToFavourite(cardID: Int, tagID: Int? = nil)
     case deleteCardFromFavourite(cardID: Int)
     case getSavedCardList(tagID: Int?, type: String?, limit: Int?, offset: Int?)
     case getFolders(limit: Int?, offset: Int?)
@@ -166,10 +167,9 @@ enum CardsEndpoint: Endpoint {
             ]
 
         case .addCardToFavourite(let cardID, let tagID):
-            var params: Parameters = ["card_id": cardID]
-            if let tagID = tagID {
-                params["tag_id"] = tagID
-            }
+            var params: Parameters = [:]
+            params["card_id"] = cardID
+            params["tag_id"] = tagID
             return params
 
         case .deleteCardFromFavourite(let cardID):

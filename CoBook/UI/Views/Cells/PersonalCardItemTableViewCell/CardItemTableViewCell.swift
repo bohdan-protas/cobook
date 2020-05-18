@@ -10,6 +10,7 @@ import UIKit
 
 protocol CardItemTableViewCellDelegate: class {
     func onSaveCard(cell: CardItemTableViewCell)
+    func onSaveCardWithOptions(cell: CardItemTableViewCell)
 }
 
 class CardItemTableViewCell: UITableViewCell {
@@ -58,6 +59,10 @@ class CardItemTableViewCell: UITableViewCell {
         nameLabel.text = ""
         professionLabel.text = ""
         telNumberLabel.text = ""
+
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGestureRecognizer.minimumPressDuration = 0.5
+        saveButton.addGestureRecognizer(longPressGestureRecognizer)
     }
 
     override func prepareForReuse() {
@@ -67,6 +72,19 @@ class CardItemTableViewCell: UITableViewCell {
         nameLabel.text = ""
         professionLabel.text = ""
         telNumberLabel.text = ""
+    }
+
+    // MARK: - Actions
+
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer!) {
+        if gesture.state != .began {
+            return
+        }
+
+        if !saveButton.isSelected {
+            delegate?.onSaveCardWithOptions(cell: self)
+        }
+
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {
