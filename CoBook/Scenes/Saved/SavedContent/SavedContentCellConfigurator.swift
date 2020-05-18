@@ -15,6 +15,7 @@ enum SavedContent {
         case map
         case title(model: TitleModel)
         case sectionSeparator
+        case postPreview(model: AlbumPreview.Section?)
     }
 
     enum SectionAccessoryIndex: Int {
@@ -36,6 +37,10 @@ enum SavedContent {
         var actionHandler: (() -> Void)?
     }
 
+    enum PostPreviewDataSourceID: String {
+        case albumPreviews
+    }
+
 }
 
 class SavedContentCellConfigurator: CellConfiguratorType {
@@ -44,6 +49,7 @@ class SavedContentCellConfigurator: CellConfiguratorType {
     var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
     var titleConfigurator: CellConfigurator<SavedContent.TitleModel, SavedContentTitleTableViewCell>?
     var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var postPreviewConfigurator: CellConfigurator<AlbumPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -57,6 +63,8 @@ class SavedContentCellConfigurator: CellConfiguratorType {
             return titleConfigurator?.reuseIdentifier ?? ""
         case .sectionSeparator:
             return sectionHeaderConfigurator?.reuseIdentifier ?? ""
+        case .postPreview:
+            return postPreviewConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -64,12 +72,18 @@ class SavedContentCellConfigurator: CellConfiguratorType {
         switch item {
         case .cardItem(let model):
             return cardItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .map:
             return mapCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .title(let model):
             return titleConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .sectionSeparator:
             return sectionHeaderConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
+        case .postPreview(let model):
+            return postPreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -77,6 +91,7 @@ class SavedContentCellConfigurator: CellConfiguratorType {
         cardItemCellConfigurator?.registerCells(in: tableView)
         mapCellConfigurator?.registerCells(in: tableView)
         sectionHeaderConfigurator?.registerCells(in: tableView)
+        postPreviewConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -131,6 +146,16 @@ extension SavedContentPresenter {
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
                 //cell.delegate = self
+                return cell
+            }
+
+            //
+            dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: AlbumPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.dataSourceID = model?.dataSourceID
+                cell.delegate = self
+                cell.dataSource = self
+                cell.headerLabel?.text = model?.title
+                cell.collectionView.reloadData()
                 return cell
             }
 

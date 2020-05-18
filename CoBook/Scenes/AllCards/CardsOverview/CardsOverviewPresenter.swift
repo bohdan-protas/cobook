@@ -180,7 +180,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                             if self?.view?.isSearchActived ?? false {
                                 self?.view?.reload(section: .cards)
                             }
-
+                            NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
                             self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
                         case .failure:
                             self?.view?.stopLoading(success: false)
@@ -198,6 +198,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                             if self?.view?.isSearchActived ?? false {
                                 self?.view?.reload(section: .cards)
                             }
+                            NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
                             self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
                         case .failure:
                             self?.view?.stopLoading(success: false)
@@ -211,6 +212,27 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             }
         }
     }
+
+    func updateCardItem(id: Int, withSavedFlag flag: Bool) {
+        if let allCardsIndex = allCards.firstIndex(where: { $0.id == id }) {
+            allCards[allCardsIndex].isSaved = flag
+        }
+
+        if let personalCardsIndex = personalCards.firstIndex(where: { $0.id == id }) {
+            personalCards[personalCardsIndex].isSaved = flag
+        }
+
+        if let businessCardsIndex = businessCards.firstIndex(where: { $0.id == id }) {
+            businessCards[businessCardsIndex].isSaved = flag
+        }
+
+        if let searchCardsIndex = searchCards.firstIndex(where: { $0.id == id }) {
+            searchCards[searchCardsIndex].isSaved = flag
+        }
+
+        updateViewDataSource()
+    }
+
 
 
 }
@@ -267,26 +289,6 @@ private extension CardsOverviewViewPresenter {
             }
         }
         searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items = searchCards.map { .cardItem(model: $0) }
-    }
-
-    func updateCardItem(id: Int, withSavedFlag flag: Bool) {
-        if let allCardsIndex = allCards.firstIndex(where: { $0.id == id }) {
-            allCards[allCardsIndex].isSaved = flag
-        }
-
-        if let personalCardsIndex = personalCards.firstIndex(where: { $0.id == id }) {
-            personalCards[personalCardsIndex].isSaved = flag
-        }
-
-        if let businessCardsIndex = businessCards.firstIndex(where: { $0.id == id }) {
-            businessCards[businessCardsIndex].isSaved = flag
-        }
-
-        if let searchCardsIndex = searchCards.firstIndex(where: { $0.id == id }) {
-            searchCards[searchCardsIndex].isSaved = flag
-        }
-
-        updateViewDataSource()
     }
 
     func goToItem(_ item: CardsOverview.Items) {

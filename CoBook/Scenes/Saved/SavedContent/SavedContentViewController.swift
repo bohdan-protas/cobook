@@ -34,13 +34,17 @@ class SavedContentViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupLayout()
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveCardSaveOperationHandler), name: .cardSaved, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveCardUnsaveOperationHandler), name: .cardUnsaved, object: nil)
 
+        setupLayout()
         presenter.attachView(self)
-        presenter.setup()
+        presenter.setup(useLoader: true)
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self, name: .cardSaved, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .cardUnsaved, object: nil)
         presenter.detachView()
     }
 
@@ -48,7 +52,24 @@ class SavedContentViewController: BaseViewController {
 
     @objc private func refreshAllCardsData(_ sender: Any) {
         self.refreshControl.endRefreshing()
-        presenter.setup()
+        presenter.setup(useLoader: true)
+    }
+
+    @objc func onDidReceiveCardSaveOperationHandler(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: Any], let controllerID = data[Notification.Key.controllerID] as? String {
+            if SavedContentViewController.describing != controllerID {
+                presenter.setup(useLoader: false)
+            }
+        }
+    }
+
+    @objc func onDidReceiveCardUnsaveOperationHandler(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: Any], let cardID = data[Notification.Key.cardID] as? Int, let controllerID = data[Notification.Key.controllerID] as? String {
+            if SavedContentViewController.describing != controllerID {
+                self.presenter.updateCardItem(id: cardID, withSavedFlag: false)
+                self.reload()
+            }
+        }
     }
 
 
@@ -85,10 +106,12 @@ extension SavedContentViewController: SavedContentView {
     }
 
     func onSaveCard(cell: ContactableCardItemTableViewCell) {
-        if let index = tableView.indexPath(for: cell) {
-            presenter.saveCardAt(indexPath: index, successCompletion: { (isSelected) in
+        if let indexPath = tableView.indexPath(for: cell) {
+
+            presenter.saveCardAt(indexPath: indexPath, successCompletion: { (isSelected) in
                 cell.saveButton.isSelected = isSelected
             })
+
         }
     }
 

@@ -160,9 +160,7 @@ class HorizontalItemsBarView: BaseFromNibView {
                     self.delegate?.horizontalItemsBarView(self, didSelectedItemAt: self.migrationIndex)
                 }
             } else {
-                self.setSelectedAt(index: itemIndex, animated: false, completion: {
-                    self.collectionView.reloadData()
-                })
+                self.collectionView.reloadData()
             }
         })
     }

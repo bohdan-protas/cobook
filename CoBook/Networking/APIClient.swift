@@ -750,6 +750,22 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for saved user articles list
+
+     - parameters:
+        - id: aritcle id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getUserFavouritedArticles(limit: Int?,
+                                   offset: Int?,
+                                   completion: @escaping (Result<[ArticlePreviewAPIModel]?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.getUserSavedList(limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 
 
 

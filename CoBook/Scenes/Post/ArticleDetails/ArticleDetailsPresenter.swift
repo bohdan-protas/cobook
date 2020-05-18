@@ -246,10 +246,14 @@ private extension ArticleDetailsPresenter {
     func saveArticle() {
         view?.startLoading()
         APIClient.default.addArticleToFavourites(id: articleDetails?.articleID ?? -1) { [weak self] (result) in
+            guard let strongSelf = self else { return }
             switch result {
             case .success:
                 self?.articleDetails?.isSaved = true
                 self?.view?.stopLoading(success: true, succesText: "Article.Saved".localized, failureText: nil, completion: nil)
+                if let id = strongSelf.articleDetails?.articleID {
+                    NotificationCenter.default.post(name: .articleSaved, object: nil, userInfo: [Notification.Key.articleID: id, Notification.Key.controllerID: ArticleDetailsViewController.describing])
+                }
             case .failure:
                 self?.view?.stopLoading(success: false)
             }
@@ -263,6 +267,9 @@ private extension ArticleDetailsPresenter {
             case .success:
                 self?.articleDetails?.isSaved = false
                 self?.view?.stopLoading(success: true, succesText: "Article.Unsaved".localized, failureText: nil, completion: nil)
+                if let id = self?.articleDetails?.articleID {
+                    NotificationCenter.default.post(name: .articleUnsaved, object: nil, userInfo: [Notification.Key.articleID: id, Notification.Key.controllerID: ArticleDetailsViewController.describing])
+                }
             case .failure:
                 self?.view?.stopLoading(success: false)
             }

@@ -116,7 +116,7 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
             present(mail, animated: true)
         } else {
-            errorAlert(message: "Device is not configured for mailing")
+            errorAlert(message: "Current device cannot send mail")
         }
     }
 

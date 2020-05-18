@@ -17,7 +17,6 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func setupEditCardView()
     func setupHideCardView()
     func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
-
     func goToCreateService(presenter: CreateServicePresenter?)
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
     func goToCreateProduct(presenter: CreateProductPresenter?)
@@ -25,8 +24,6 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToCreatePost(cardID: Int)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
 }
-
-
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
@@ -514,23 +511,28 @@ extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDeleg
         case false:
             view?.startLoading()
             APIClient.default.addCardToFavourites(id: businessCardId) { [weak self] (result) in
+                guard let strongSelf = self else { return }
                 switch result {
                 case .success:
                     cell.saveCardButton.isSelected = true
                     self?.cardDetails?.isSaved = true
                     self?.view?.stopLoading(success: true, succesText: "Збережено", failureText: nil, completion: nil)
+                    NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
                 case .failure:
                     self?.view?.stopLoading(success: false)
                 }
             }
+
         case true:
             view?.startLoading()
             APIClient.default.deleteCardFromFavourites(id: businessCardId) { [weak self] (result) in
+                guard let strongSelf = self else { return }
                 switch result {
                 case .success:
                     cell.saveCardButton.isSelected = false
                     self?.cardDetails?.isSaved = false
                     self?.view?.stopLoading(success: true, succesText: "Вилучено із збережених", failureText: nil, completion: nil)
+                    NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
                 case .failure:
                     self?.view?.stopLoading(success: false)
                 }

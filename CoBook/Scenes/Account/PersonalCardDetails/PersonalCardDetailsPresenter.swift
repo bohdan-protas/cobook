@@ -173,14 +173,15 @@ extension PersonalCardDetailsPresenter: PersonalCardUserInfoTableViewCellDelegat
         let state = cardDetails?.isSaved ?? false
 
         switch state {
-
         case false:
             view?.startLoading()
             APIClient.default.addCardToFavourites(id: personalCardId) { [weak self] (result) in
+                guard let strongSelf = self else { return }
                 switch result {
                 case .success:
                     cell.saveButton.isSelected = true
                     self?.cardDetails?.isSaved = true
+                    NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.personalCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
                     self?.view?.stopLoading(success: true, succesText: "Збережено", failureText: nil, completion: nil)
                 case .failure:
                     self?.view?.stopLoading(success: false)
@@ -190,10 +191,12 @@ extension PersonalCardDetailsPresenter: PersonalCardUserInfoTableViewCellDelegat
         case true:
             view?.startLoading()
             APIClient.default.deleteCardFromFavourites(id: personalCardId) { [weak self] (result) in
+                guard let strongSelf = self else { return }
                 switch result {
                 case .success:
                     cell.saveButton.isSelected = false
                     self?.cardDetails?.isSaved = false
+                    NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.personalCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
                     self?.view?.stopLoading(success: true, succesText: "Вилучено із збережених", failureText: nil, completion: nil)
                 case .failure:
                     self?.view?.stopLoading(success: false)

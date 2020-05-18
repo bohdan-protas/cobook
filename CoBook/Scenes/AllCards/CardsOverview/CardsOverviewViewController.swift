@@ -45,17 +45,22 @@ class CardsOverviewViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveCardSaveOperationHandler), name: .cardSaved, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveCardUnsaveOperationHandler), name: .cardUnsaved, object: nil)
 
+        setupLayout()
         presenter.attachView(self)
         presenter.onViewDidLoad()
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self, name: .cardSaved, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .cardUnsaved, object: nil)
         presenter.detachView()
     }
 
-    // MARK: Actions
+    // MARK: - Actions
 
     @IBAction func filterBarButtonTapped(_ sender: UIBarButtonItem) {
         let filterViewController: FilterViewController = self.storyboard!.initiateViewControllerFromType()
@@ -72,6 +77,24 @@ class CardsOverviewViewController: BaseViewController {
 
     @objc private func refreshAllCardsData(_ sender: Any) {
         presenter.refreshDataSource()
+    }
+
+    @objc func onDidReceiveCardSaveOperationHandler(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: Any], let cardID = data[Notification.Key.cardID] as? Int, let controllerID = data[Notification.Key.controllerID] as? String {
+            if CardsOverviewViewController.describing != controllerID {
+                self.presenter.updateCardItem(id: cardID, withSavedFlag: true)
+                self.reload()
+            }
+        }
+    }
+
+    @objc func onDidReceiveCardUnsaveOperationHandler(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: Any], let cardID = data[Notification.Key.cardID] as? Int, let controllerID = data[Notification.Key.controllerID] as? String {
+            if CardsOverviewViewController.describing != controllerID {
+                self.presenter.updateCardItem(id: cardID, withSavedFlag: false)
+                self.reload()
+            }
+        }
     }
 
 

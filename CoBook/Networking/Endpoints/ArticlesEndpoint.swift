@@ -21,6 +21,7 @@ enum ArticlesEndpoint: Endpoint {
 
     case addToFavourite(articleID: Int)
     case deleteFromFavourite(articleID: Int)
+    case getUserSavedList(limit: Int?, offset: Int?)
 
     var useAuthirizationToken: Bool {
         return true
@@ -46,6 +47,8 @@ enum ArticlesEndpoint: Endpoint {
             return .post
         case .deleteFromFavourite:
             return .delete
+        case .getUserSavedList:
+            return .get
         }
     }
 
@@ -60,20 +63,33 @@ enum ArticlesEndpoint: Endpoint {
         case .getArticleDetails:
             return "/articles/info"
 
-        case .deleteFromFavourite, .addToFavourite:
+        case .deleteFromFavourite, .addToFavourite, .getUserSavedList:
             return "/articles/favourites"
         }
     }
 
     var urlParameters: [String : String]? {
         switch self {
+
         case .getAlbums(let cardID):
             if let cardID = cardID {
                 return ["card_id": String(cardID)]
             }
             return nil
+
         case .getArticlesList(let albumID):
             return ["album_id": String(albumID)]
+
+        case .getUserSavedList(let limit, let offset):
+            var parameters: [String: String] = [:]
+            if let limit = limit {
+                parameters["limit"] = "\(limit)"
+            }
+            if let offset = offset {
+                parameters["offset"] = "\(offset)"
+            }
+            return parameters
+
         default:
             return nil
         }
