@@ -15,7 +15,9 @@ enum CardsEndpoint: Endpoint {
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
     case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
+
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
+    case getSavedCardsLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
 
     case addCardToFavourite(cardID: Int, tagID: Int? = nil)
     case deleteCardFromFavourite(cardID: Int)
@@ -58,6 +60,8 @@ enum CardsEndpoint: Endpoint {
             return .delete
         case .updateFolder:
             return .post
+        case .getSavedCardsLocationsInRegion:
+            return .post
         }
     }
 
@@ -79,6 +83,8 @@ enum CardsEndpoint: Endpoint {
             return "/cards/favourites"
         case .getFolders, .createFolder, .deleteFolder, .updateFolder:
             return "/cards/favourites/tags"
+        case .getSavedCardsLocationsInRegion:
+            return "/cards/favourites/area-list"
         }
     }
 
@@ -161,6 +167,12 @@ enum CardsEndpoint: Endpoint {
             return params
 
         case .getCardLocationsInRegion(let topLeftRectCoordinate, let bottomRightRectCoordinate):
+            return [
+                "top_left": topLeftRectCoordinate.dictionary ?? [],
+                "bottom_right": bottomRightRectCoordinate.dictionary ?? []
+            ]
+
+        case .getSavedCardsLocationsInRegion(let topLeftRectCoordinate, let bottomRightRectCoordinate):
             return [
                 "top_left": topLeftRectCoordinate.dictionary ?? [],
                 "bottom_right": bottomRightRectCoordinate.dictionary ?? []

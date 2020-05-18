@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SavedContentViewController: BaseViewController {
 
@@ -75,6 +76,26 @@ class SavedContentViewController: BaseViewController {
                 self.reload()
             }
         }
+    }
+
+    // MARK: - Public
+
+    func openSettings() {
+        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: nil)
+            }
+        }
+
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 
 
@@ -230,6 +251,25 @@ extension SavedContentViewController: HorizontalItemsBarViewDelegate {
         if presenter.isEditableBarItemAt(index: index) {
             actionSheetAlert(title: nil, message: nil, actions: actions)
         }
+    }
+
+
+}
+
+// MARK: - MapTableViewCellDelegate
+
+extension SavedContentViewController: MapTableViewCellDelegate {
+
+    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
+        let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
+        let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
+        presenter.fetchMapMarkersInRegionFittedBy(topLeft: topLeftRectCoordinate, bottomRight: bottomRightRectCoordinate) { markers in
+            cell.markers = markers
+        }
+    }
+
+    func openSettingsAction(_ cell: MapTableViewCell) {
+        openSettings()
     }
 
 

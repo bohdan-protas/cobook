@@ -403,6 +403,25 @@ extension APIClient {
     }
 
     /**
+     Request for saved cards map markers list
+
+     - parameters:
+     - type: card id
+     - limit: pagination page list limit (default 15)
+     - offset: pagination offset (default 0)
+     - completion: parsed  'CardItemApiModel'  list response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getSavedCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel,
+                                       bottomRightRectCoordinate: CoordinateApiModel,
+                                       completion: @escaping (Result<[CardMapMarkerApiModel]?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.getSavedCardsLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
      Request for save card in saved list
 
      - parameters:

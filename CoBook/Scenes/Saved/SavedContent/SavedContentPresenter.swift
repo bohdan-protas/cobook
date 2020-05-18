@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import GoogleMaps
 
-protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, ContactableCardItemTableViewCellDelegate {
+protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, ContactableCardItemTableViewCellDelegate, MapTableViewCellDelegate {
     func set(dataSource: DataSource<SavedContentCellConfigurator>?)
     func reload(section: SavedContent.SectionAccessoryIndex)
     func reloadItemAt(indexPath: IndexPath)
@@ -32,7 +33,11 @@ class SavedContentPresenter: BasePresenter {
 
     private var cardsTotalCount: Int = 0
     private var cards: [Int: [CardItemViewModel]] = [:]
+    private var cardMapMarkers: [GMSMarker] = []
     private var isInitialFetch: Bool = true
+
+    /// Current pin request work item
+    private var pendingCardMapMarkersRequestWorkItem: DispatchWorkItem?
 
     /// bar items busienss logic
     var barItems: [BarItem] = []
@@ -177,8 +182,6 @@ class SavedContentPresenter: BasePresenter {
         }
     }
 
-
-
     // MARK: Card saving operations
 
     func unsaveCardAt(indexPath: IndexPath, successCompletion: (() -> Void)?) {
@@ -215,6 +218,71 @@ class SavedContentPresenter: BasePresenter {
             }
         }
         updateViewDataSource()
+    }
+
+//    func a() {
+//        pendingCardMapMarkersRequestWorkItem?.cancel()
+//
+//        pendingCardMapMarkersRequestWorkItem = DispatchWorkItem { [weak self] in
+//            let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
+//            let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
+//
+//            APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate) { [weak self] (result) in
+//                switch result {
+//                case .success(let response):
+//                    let markers: [GMSMarker] = response?.compactMap { apiModel in
+//                        if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
+//                            let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
+//                            let marker = GMSMarker(position: position)
+//
+//                            switch apiModel.type {
+//                            case .personal:
+//                                marker.icon = UIImage(named: "ic_mapmarker_personal")
+//                            case .business:
+//                                marker.icon = UIImage(named: "ic_mapmarker_business")
+//                            }
+//                            return marker
+//                        } else {
+//                            return nil
+//                        }
+//                    } ?? []
+//
+//                    cell.markers = markers
+//                case .failure(let error):
+//                    self?.view?.errorAlert(message: error.localizedDescription)
+//                }
+//            }
+//    }
+
+    func fetchMapMarkersInRegionFittedBy(topLeft: CoordinateApiModel, bottomRight: CoordinateApiModel, completion: (([GMSMarker]) -> Void)?) {
+        pendingCardMapMarkersRequestWorkItem?.cancel()
+        pendingCardMapMarkersRequestWorkItem = DispatchWorkItem { [weak self] in
+            APIClient.default.getSavedCardLocationsInRegion(topLeftRectCoordinate: topLeft, bottomRightRectCoordinate: bottomRight) { [weak self] (result) in
+                switch result {
+                case .success(let response):
+                    let markers: [GMSMarker] = (response ?? []).compactMap { apiModel in
+                        if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
+                            let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
+                            let marker = GMSMarker(position: position)
+
+                            switch apiModel.type {
+                            case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
+                            case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
+                            }
+
+                            return marker
+                        } else { return nil }
+                    }
+                    completion?(markers)
+                case .failure(let error):
+                     self?.view?.errorAlert(message: error.localizedDescription)
+                }
+            }
+        }
+
+        if pendingCardMapMarkersRequestWorkItem != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingCardMapMarkersRequestWorkItem!)
+        }
     }
 
     // MARK: Helpers
@@ -463,6 +531,7 @@ extension SavedContentPresenter: AlbumPreviewItemsViewDataSource {
 
 
 }
+
 
 
 

@@ -141,11 +141,11 @@ extension SavedContentPresenter {
             }
 
             // mapCellConfigurator
-            dataSourceConfigurator.mapCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
+            dataSourceConfigurator.mapCellConfigurator = CellConfigurator { [unowned self] (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
                 cell.heightConstraint.constant = tableView.frame.height - 58
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
-                //cell.delegate = self
+                cell.delegate = self.view
                 return cell
             }
 
