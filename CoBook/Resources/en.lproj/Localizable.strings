@@ -14,6 +14,18 @@
 
 "Account" = "Аккаунт";
 "AllCards" = "Всі візитки";
+"Saved" = "Збережені";
+"Save" = "Зберегти";
+"Unsave" = "Видалити із збережених";
+
+// MARK: - Bar Items
+"BarItem.allCards" = "Всі\nвізитки";
+"BarItem.personalCards" = "Персональні\nвізитки";
+"BarItem.businessCards" = "Бізнес\nвізитки";
+"BarItem.myRegion" = "В моєму\nрегіоні";
+
+// MARK: - Error
+"Error.connection" = "Не вдалося приєднатися до сервера";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Title.01";
@@ -52,3 +64,11 @@
 "Account.item.faq" = "faq";
 "Account.item.startMakingMoney" = "Start making modey with CoBook";
 "Account.item.quitAccount" = "Quit account";
+
+// MARK: - Card
+"Card.Saved" = "Візитку збережено";
+"Card.Unsaved" = "Видалено із збережених";
+
+// MARK: - Acticles
+"Article.Saved" = "Статтю збережено";
+"Article.Unsaved" = "Статтю видалено із збережених";

@@ -40,7 +40,17 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
     var currentHud: JGProgressHUD?
     var onFinishDownloadCompletion: (() -> Void)?
 
-    // MARK: LoadDisplayableView
+    // MARK: - LoadDisplayableView
+
+    func showTextHud(_ text: String?) {
+        currentHud = prototypeHud
+        currentHud?.indicatorView = nil
+        currentHud?.position = .bottomCenter
+        currentHud?.textLabel.text = text
+        currentHud?.show(in: currentView)
+        currentHud?.dismiss(afterDelay: 1.5)
+    }
+
     func startLoading() {
         currentHud = prototypeHud
         currentHud?.show(in: currentView)
@@ -62,7 +72,7 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
     func stopLoading(success: Bool, completion: (() -> Void)?) {
         onFinishDownloadCompletion = completion
-        UIView.animate(withDuration: 0.2) { [weak self] in
+        UIView.animate(withDuration: 0.1) { [weak self] in
             self?.currentHud?.indicatorView = success ? JGProgressHUDSuccessIndicatorView.init() : JGProgressHUDErrorIndicatorView.init()
 
             let succesText = NSAttributedString(string: "Успішно!", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
@@ -70,7 +80,22 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
             self?.currentHud?.textLabel.attributedText = success ? succesText : failureText
 
             DispatchQueue.main.async {
-                self?.currentHud?.dismiss(afterDelay: 2, animated: true)
+                self?.currentHud?.dismiss(afterDelay: 0.8, animated: true)
+            }
+        }
+    }
+
+    func stopLoading(success: Bool, succesText: String?, failureText: String?, completion: (() -> Void)?) {
+        onFinishDownloadCompletion = completion
+        UIView.animate(withDuration: 0.1) { [weak self] in
+            self?.currentHud?.indicatorView = success ? JGProgressHUDSuccessIndicatorView.init() : JGProgressHUDErrorIndicatorView.init()
+
+            let succesText = NSAttributedString(string: succesText ?? "", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
+            let failureText = NSAttributedString(string: failureText ?? "", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
+            self?.currentHud?.textLabel.attributedText = success ? succesText : failureText
+
+            DispatchQueue.main.async {
+                self?.currentHud?.dismiss(afterDelay: 0.8, animated: true)
             }
         }
     }
@@ -91,7 +116,7 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
             present(mail, animated: true)
         } else {
-            errorAlert(message: "Device is not configured for mailing")
+            errorAlert(message: "Current device cannot send mail")
         }
     }
 

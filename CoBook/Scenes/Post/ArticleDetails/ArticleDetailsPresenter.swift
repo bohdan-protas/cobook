@@ -242,7 +242,41 @@ private extension ArticleDetailsPresenter {
         presenter.delegate = self
         view?.goToEditArticle(presenter: presenter)
     }
-    
+
+    func saveArticle() {
+        view?.startLoading()
+        APIClient.default.addArticleToFavourites(id: articleDetails?.articleID ?? -1) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success:
+                self?.articleDetails?.isSaved = true
+                self?.view?.stopLoading(success: true, succesText: "Article.Saved".localized, failureText: nil, completion: nil)
+                if let id = strongSelf.articleDetails?.articleID {
+                    NotificationCenter.default.post(name: .articleSaved, object: nil, userInfo: [Notification.Key.articleID: id, Notification.Key.controllerID: ArticleDetailsViewController.describing])
+                }
+            case .failure:
+                self?.view?.stopLoading(success: false)
+            }
+        }
+    }
+
+    func unsaveArticle() {
+        view?.startLoading()
+        APIClient.default.addArticleToFavourites(id: articleDetails?.articleID ?? -1) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.articleDetails?.isSaved = false
+                self?.view?.stopLoading(success: true, succesText: "Article.Unsaved".localized, failureText: nil, completion: nil)
+                if let id = self?.articleDetails?.articleID {
+                    NotificationCenter.default.post(name: .articleUnsaved, object: nil, userInfo: [Notification.Key.articleID: id, Notification.Key.controllerID: ArticleDetailsViewController.describing])
+                }
+            case .failure:
+                self?.view?.stopLoading(success: false)
+            }
+        }
+    }
+
+
 
 }
 
@@ -262,23 +296,35 @@ extension ArticleDetailsPresenter: PhotoCollageTableViewCellDataSource {
 extension ArticleDetailsPresenter: ArticleHeaderTableViewCellDelegate {
 
     func moreButtonAction(_ cell: ArticleHeaderTableViewCell) {
-        var actions: [UIAlertAction] = [
+        var actions: [UIAlertAction] = []
 
-            .init(title: "Зберегти", style: .default, handler: { (_) in
-                Log.debug("Зберегти")
-            }),
+        // save action
+        if let isSaved = self.articleDetails?.isSaved  {
+            actions.append(
+                .init(title: isSaved ? "Unsave".localized : "Save".localized, style: .default, handler: { (_) in
+                    switch isSaved {
+                    case true: self.unsaveArticle()
+                    case false: self.saveArticle()
+                    }
+                })
+            )
+        }
 
+        // share action
+        actions.append(
             .init(title: "Поширити", style: .default, handler: { (_) in
                 Log.debug("Поширити")
             })
-        ]
+        )
 
+        // edit action
         if isOwner {
             actions.append(
                 .init(title: "Редагувати", style: .default, handler: { [weak self] (_) in
                     self?.goToEdit()
                 })
             )
+
         }
 
         actions.append(.init(title: "Відмінити", style: .cancel, handler: nil))

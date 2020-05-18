@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class CardsOverviewViewController: BaseViewController, CardsOverviewView {
+class CardsOverviewViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var filterBarButtonItem: UIBarButtonItem!
@@ -35,21 +35,32 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
 
     var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
 
+    var isSearchActived: Bool {
+        get {
+            return searchController.isActive
+        }
+    }
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveCardSaveOperationHandler), name: .cardSaved, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveCardUnsaveOperationHandler), name: .cardUnsaved, object: nil)
 
+        setupLayout()
         presenter.attachView(self)
         presenter.onViewDidLoad()
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self, name: .cardSaved, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .cardUnsaved, object: nil)
         presenter.detachView()
     }
 
-    // MARK: Actions
+    // MARK: - Actions
 
     @IBAction func filterBarButtonTapped(_ sender: UIBarButtonItem) {
         let filterViewController: FilterViewController = self.storyboard!.initiateViewControllerFromType()
@@ -68,7 +79,30 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         presenter.refreshDataSource()
     }
 
-    // MARK: - CardsOverviewView
+    @objc func onDidReceiveCardSaveOperationHandler(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: Any], let cardID = data[Notification.Key.cardID] as? Int, let controllerID = data[Notification.Key.controllerID] as? String {
+            if CardsOverviewViewController.describing != controllerID {
+                self.presenter.updateCardItem(id: cardID, withSavedFlag: true)
+                self.reload()
+            }
+        }
+    }
+
+    @objc func onDidReceiveCardUnsaveOperationHandler(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: Any], let cardID = data[Notification.Key.cardID] as? Int, let controllerID = data[Notification.Key.controllerID] as? String {
+            if CardsOverviewViewController.describing != controllerID {
+                self.presenter.updateCardItem(id: cardID, withSavedFlag: false)
+                self.reload()
+            }
+        }
+    }
+
+
+}
+
+// MARK: - CardsOverviewView
+
+extension CardsOverviewViewController: CardsOverviewView {
 
     func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
         dataSource?.connect(to: self.tableView)
@@ -93,6 +127,15 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
     func reloadSearch(resultText title: String) {
         searchResultsTableController.set(resultsLabel: title)
         searchResultsTableController.tableView.reloadData()
+    }
+
+    func reloadItemAt(indexPath: IndexPath) {
+        if isSearchActived {
+            searchResultsTableController.tableView.reloadRows(at: [indexPath], with: .none)
+        } else {
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+
     }
 
     func openSettings() {
@@ -126,7 +169,6 @@ class CardsOverviewViewController: BaseViewController, CardsOverviewView {
         self.navigationController?.pushViewController(personalCardDetailsViewController, animated: true)
         searchController.isActive = false
     }
-
 
 }
 
@@ -188,6 +230,7 @@ private extension CardsOverviewViewController {
 extension CardsOverviewViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch tableView {
         case self.tableView:
             presenter.selectedCellAt(indexPath: indexPath)
@@ -238,6 +281,7 @@ extension CardsOverviewViewController: UISearchBarDelegate {
 extension CardsOverviewViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
+
         // Strip out all the leading and trailing spaces.
         let whitespaceCharacterSet = CharacterSet.whitespaces
         let strippedString = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
@@ -276,4 +320,23 @@ extension CardsOverviewViewController: FilterViewControllerDelegate {
 
 }
 
+// MARK: - CardItemTableViewCellDelegate
+
+extension CardsOverviewViewController: CardItemTableViewCellDelegate {
+
+    func onSaveCard(cell: CardItemTableViewCell) {
+        if isSearchActived {
+            if let index = searchResultsTableController.tableView.indexPath(for: cell) {
+                presenter.saveCardAt(indexPath: index)
+            }
+        } else {
+            if let index = tableView.indexPath(for: cell) {
+                presenter.saveCardAt(indexPath: index)
+            }
+        }
+
+    }
+
+
+}
 

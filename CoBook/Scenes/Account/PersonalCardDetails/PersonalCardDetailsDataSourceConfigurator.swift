@@ -76,16 +76,17 @@ extension PersonalCardDetailsPresenter {
             }
 
             let userInfoCellConfigurator = CellConfigurator { (cell, model: CardDetailsApiModel?, tableView, indexPath) -> PersonalCardUserInfoTableViewCell in
+                cell.delegate = self
+
                 let abbr = "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")"
                 let textImg = abbr.image(size: cell.avatarImageView.frame.size)
-
                 cell.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl, placeholderImage: textImg)
                 cell.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
                 cell.practiceTypeLabel.text = model?.practiceType?.title
                 cell.positionLabel.text = model?.position
                 cell.telephoneNumberLabel.text = model?.city?.name
                 cell.detailInfoTextView.text = model?.description
-
+                cell.saveButton.isSelected = model?.isSaved ?? false
                 return cell
             }
 

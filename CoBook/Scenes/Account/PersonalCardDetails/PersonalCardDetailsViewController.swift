@@ -43,6 +43,7 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .never
         presenter?.setupDataSource()
     }
 
@@ -53,6 +54,7 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     // MARK: - PersonalCardDetailsView
 
     func setupLayout() {
+
         navigationItem.title = "Персональна візитка"
         tableView.delegate = self
     }

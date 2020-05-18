@@ -11,7 +11,7 @@ import UIKit
 
 struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
 
-    var headerInfoCellConfigurator: CellConfigurator<BusinessCardDetails.HeaderInfoModel?, BusinessCardHeaderInfoTableViewCell>?
+    var headerInfoCellConfigurator: CellConfigurator<BusinessCardDetails.HeaderInfoModel, BusinessCardHeaderInfoTableViewCell>?
     var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
     var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
     var getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>?
@@ -159,13 +159,16 @@ extension BusinessCardDetailsPresenter {
             }
 
             // headerInfoCellConfigurator
-            configurator.headerInfoCellConfigurator = CellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel?, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
-                cell.bgImageView.setImage(withPath: model?.bgimagePath)
-                cell.avatarImageView.setImage(withPath: model?.avatartImagePath)
-                cell.nameLabel.text = model?.name
-                cell.professionLabel.text = model?.profession
-                cell.telephoneNumberLabel.text = model?.telephoneNumber
-                cell.websiteLabel.text = model?.websiteAddress
+            configurator.headerInfoCellConfigurator = CellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
+                cell.delegate = self
+                cell.bgImageView.setImage(withPath: model.bgimagePath)
+                cell.avatarImageView.setImage(withPath: model.avatartImagePath)
+                cell.nameLabel.text = model.name
+                cell.professionLabel.text = model.profession
+                cell.telephoneNumberLabel.text = model.telephoneNumber
+                cell.websiteLabel.text = model.websiteAddress
+                cell.saveCardButton.isSelected = model.isSaved
+
 
                 return cell
             }

@@ -67,6 +67,9 @@ struct PracticeTypeApiModel: Codable {
     var title: String?
 }
 
+struct FolderApiResponse: Decodable {
+    var id: Int
+}
 
 
 

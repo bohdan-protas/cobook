@@ -14,10 +14,16 @@ enum CardsEndpoint: Endpoint {
     case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
-
-    ///
     case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
+    case addCardToFavourite(cardID: Int, tagID: String? = nil)
+    case deleteCardFromFavourite(cardID: Int)
+    case getSavedCardList(tagID: Int?, type: String?, limit: Int?, offset: Int?)
+    case getFolders(limit: Int?, offset: Int?)
+
+    case createFolder(title: String)
+    case deleteFolder(id: Int)
+    case updateFolder(id: Int, title: String)
 
     var useAuthirizationToken: Bool {
         return true
@@ -37,6 +43,20 @@ enum CardsEndpoint: Endpoint {
             return .post
         case .getCardLocationsInRegion:
             return .post
+        case .addCardToFavourite:
+            return .post
+        case .deleteCardFromFavourite:
+            return .delete
+        case .getSavedCardList:
+            return .get
+        case .getFolders:
+            return .get
+        case .createFolder:
+            return .post
+        case .deleteFolder:
+            return .delete
+        case .updateFolder:
+            return .post
         }
     }
 
@@ -54,6 +74,44 @@ enum CardsEndpoint: Endpoint {
             return "/cards/list"
         case .getCardLocationsInRegion:
             return "/cards/area-list"
+        case .addCardToFavourite, .deleteCardFromFavourite, .getSavedCardList:
+            return "/cards/favourites"
+        case .getFolders, .createFolder, .deleteFolder, .updateFolder:
+            return "/cards/favourites/tags"
+        }
+    }
+
+    var urlParameters: [String : String]? {
+        switch self {
+
+        case .getSavedCardList(let tagID, let type, let limit, let offset):
+            var params: [String : String] = [:]
+            if let tagID = tagID {
+                params["tag_id"] = "\(tagID)"
+            }
+            if let type = type {
+                params["type"] = type
+            }
+            if let limit = limit {
+                params["limit"] = "\(limit)"
+            }
+            if let offset = offset {
+                params["offset"] = "\(offset)"
+            }
+            return params
+
+        case .getFolders(let limit, let offset):
+            var params: [String : String] = [:]
+            if let limit = limit {
+                params["limit"] = "\(limit)"
+            }
+            if let offset = offset {
+                params["offset"] = "\(offset)"
+            }
+            return params
+
+        default:
+            return nil
         }
     }
 
@@ -107,7 +165,26 @@ enum CardsEndpoint: Endpoint {
                 "bottom_right": bottomRightRectCoordinate.dictionary ?? []
             ]
 
+        case .addCardToFavourite(let cardID, let tagID):
+            var params: Parameters = ["card_id": cardID]
+            if let tagID = tagID {
+                params["tag_id"] = tagID
+            }
+            return params
 
+        case .deleteCardFromFavourite(let cardID):
+            return ["card_id": cardID]
+
+        case .createFolder(let title):
+            return ["title": title]
+
+        case .deleteFolder(let id):
+            return ["id": id]
+
+        case .updateFolder(let id, let title):
+            return ["id": id, "title": title]
+
+        default: return nil
         }
     }
 

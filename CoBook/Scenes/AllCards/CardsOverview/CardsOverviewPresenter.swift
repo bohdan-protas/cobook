@@ -10,9 +10,12 @@ import Foundation
 import CoreLocation
 import GoogleMaps
 
-protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView {
+protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardItemTableViewCellDelegate {
+    var isSearchActived: Bool { get }
+
     func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reload(section: CardsOverview.SectionAccessoryIndex)
+    func reloadItemAt(indexPath: IndexPath)
     func reload()
 
     func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
@@ -40,6 +43,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     private var allCards: [CardItemViewModel] = []
     private var personalCards: [CardItemViewModel] = []
     private var businessCards: [CardItemViewModel] = []
+    private var searchCards: [CardItemViewModel] = []
 
     /// Current pin request work item
     private var pendingCardPinRequestWorkItem: DispatchWorkItem?
@@ -107,19 +111,20 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                 switch result {
                 case .success(let response):
 
-                    let searchCards = response?.compactMap { CardItemViewModel(id: String($0.id),
-                                                                               type: $0.type,
-                                                                               avatarPath: $0.avatar?.sourceUrl,
-                                                                               firstName: $0.cardCreator?.firstName,
-                                                                               lastName: $0.cardCreator?.lastName,
-                                                                               companyName: $0.company?.name,
-                                                                               profession: $0.practiceType?.title,
-                                                                               telephoneNumber: $0.contactTelephone?.number) } ?? []
+                    strongSelf.searchCards = response?.compactMap { CardItemViewModel(id: $0.id,
+                                                                                      type: $0.type,
+                                                                                      avatarPath: $0.avatar?.sourceUrl,
+                                                                                      firstName: $0.cardCreator?.firstName,
+                                                                                      lastName: $0.cardCreator?.lastName,
+                                                                                      companyName: $0.company?.name,
+                                                                                      profession: $0.practiceType?.title,
+                                                                                      telephoneNumber: $0.contactTelephone?.number,
+                                                                                      isSaved: $0.isSaved ?? false) } ?? []
 
-
-                    strongSelf.searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items = searchCards.map { .cardItem(model: $0) }
-                    let text = searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count)"
+                    let text = strongSelf.searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(strongSelf.searchCards.count) візитки"
+                    strongSelf.updateViewDataSource()
                     strongSelf.view?.reloadSearch(resultText: text)
+
 
                 case .failure(let error):
                     strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -146,55 +151,95 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         goToItem(item)
     }
 
+    func saveCardAt(indexPath: IndexPath) {
+        var cardOwerviewItem: CardsOverview.Items?
+
+        switch view?.isSearchActived {
+        case .none: return
+        case .some(let isSearching):
+            switch isSearching {
+            case true:
+                cardOwerviewItem = searchDataSource?.sections[indexPath.section].items[indexPath.row]
+            case false:
+                cardOwerviewItem = dataSource?.sections[indexPath.section].items[indexPath.row]
+            }
+        }
+
+        if let item = cardOwerviewItem {
+            switch item {
+
+            case .cardItem(let model):
+                switch model.isSaved {
+                case false:
+                    view?.startLoading()
+                    APIClient.default.addCardToFavourites(id: model.id) { [weak self] (result) in
+                        switch result {
+                        case .success:
+                            self?.updateCardItem(id: model.id, withSavedFlag: true)
+                            self?.view?.reloadItemAt(indexPath: indexPath)
+                            if self?.view?.isSearchActived ?? false {
+                                self?.view?.reload(section: .cards)
+                            }
+                            NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
+                            self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
+                        case .failure:
+                            self?.view?.stopLoading(success: false)
+                        }
+                    }
+                    break
+
+                case true:
+                    view?.startLoading()
+                    APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
+                        switch result {
+                        case .success:
+                            self?.updateCardItem(id: model.id, withSavedFlag: false)
+                            self?.view?.reloadItemAt(indexPath: indexPath)
+                            if self?.view?.isSearchActived ?? false {
+                                self?.view?.reload(section: .cards)
+                            }
+                            NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
+                            self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
+                        case .failure:
+                            self?.view?.stopLoading(success: false)
+                        }
+                    }
+                    break
+                }
+
+                break
+            default: break
+            }
+        }
+    }
+
+    func updateCardItem(id: Int, withSavedFlag flag: Bool) {
+        if let allCardsIndex = allCards.firstIndex(where: { $0.id == id }) {
+            allCards[allCardsIndex].isSaved = flag
+        }
+
+        if let personalCardsIndex = personalCards.firstIndex(where: { $0.id == id }) {
+            personalCards[personalCardsIndex].isSaved = flag
+        }
+
+        if let businessCardsIndex = businessCards.firstIndex(where: { $0.id == id }) {
+            businessCards[businessCardsIndex].isSaved = flag
+        }
+
+        if let searchCardsIndex = searchCards.firstIndex(where: { $0.id == id }) {
+            searchCards[searchCardsIndex].isSaved = flag
+        }
+
+        updateViewDataSource()
+    }
+
+
 
 }
 
 // MARK: - Privates
 
 private extension CardsOverviewViewPresenter {
-
-    func goToItem(_ item: CardsOverview.Items) {
-        switch item {
-        case .cardItem(let model):
-            switch model?.type {
-
-            case .none: break
-            case .some(let cardType):
-
-                switch cardType {
-                case .personal:
-                    if let strid = model?.id, let id = Int(strid) {
-                        let presenter = PersonalCardDetailsPresenter(id: id)
-                        view?.goToPersonalCardDetails(presenter: presenter)
-                    }
-
-                case .business:
-                    if let strid = model?.id, let id = Int(strid) {
-                        let presenter = BusinessCardDetailsPresenter(id: id)
-                        view?.goToBusinessCardDetails(presenter: presenter)
-                    }
-                }
-
-            }
-        case .map:
-            break
-        }
-    }
-
-    func setupViewDataSource() {
-        if let item = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
-            switch item {
-            case .allCards:
-                dataSource?[.cards].items = allCards.map { .cardItem(model: $0) }
-            case .personalCards:
-                dataSource?[.cards].items = personalCards.map { .cardItem(model: $0) }
-            case .businessCards:
-                dataSource?[.cards].items = businessCards.map { .cardItem(model: $0) }
-            case .inMyRegionCards:
-                dataSource?[.cards].items = [.map]
-            }
-        }
-    }
 
     func getAllCardsList() {
         view?.startLoading()
@@ -209,23 +254,58 @@ private extension CardsOverviewViewPresenter {
             switch result {
             case let .success(response):
 
-                strongSelf.allCards = response?.compactMap { CardItemViewModel(id: String($0.id),
+                strongSelf.allCards = response?.compactMap { CardItemViewModel(id: $0.id,
                                                                                type: $0.type,
                                                                                avatarPath: $0.avatar?.sourceUrl,
                                                                                firstName: $0.cardCreator?.firstName,
                                                                                lastName: $0.cardCreator?.lastName,
                                                                                companyName: $0.company?.name,
                                                                                profession: $0.practiceType?.title,
-                                                                               telephoneNumber: $0.contactTelephone?.number) } ?? []
+                                                                               telephoneNumber: $0.contactTelephone?.number,
+                                                                               isSaved: $0.isSaved ?? false) } ?? []
 
                 strongSelf.personalCards = strongSelf.allCards.filter { $0.type == .personal }
                 strongSelf.businessCards = strongSelf.allCards.filter { $0.type == .business }
 
-                strongSelf.setupViewDataSource()
+                strongSelf.updateViewDataSource()
                 strongSelf.view?.reload()
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
+        }
+    }
+
+    func updateViewDataSource() {
+        if let item = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1) {
+            switch item {
+            case .allCards:
+                dataSource?[.cards].items = allCards.map { .cardItem(model: $0) }
+            case .personalCards:
+                dataSource?[.cards].items = personalCards.map { .cardItem(model: $0) }
+            case .businessCards:
+                dataSource?[.cards].items = businessCards.map { .cardItem(model: $0) }
+            case .inMyRegionCards:
+                dataSource?[.cards].items = [.map]
+            }
+        }
+        searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items = searchCards.map { .cardItem(model: $0) }
+    }
+
+    func goToItem(_ item: CardsOverview.Items) {
+        switch item {
+        case .cardItem(let model):
+            switch model.type {
+
+            case .personal:
+                let presenter = PersonalCardDetailsPresenter(id: model.id)
+                view?.goToPersonalCardDetails(presenter: presenter)
+
+            case .business:
+                let presenter = BusinessCardDetailsPresenter(id: model.id)
+                view?.goToBusinessCardDetails(presenter: presenter)
+            }
+        case .map:
+            break
         }
     }
 
@@ -238,7 +318,7 @@ extension CardsOverviewViewPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
         selectedBarItem = barItems[safe: index]
-        setupViewDataSource()
+        updateViewDataSource()
         self.view?.reload(section: .cards)
     }
 
@@ -294,3 +374,5 @@ extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
 
 
 }
+
+

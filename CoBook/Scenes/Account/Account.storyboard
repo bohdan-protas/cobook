@@ -207,7 +207,7 @@
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="99k-kN-JLI" firstAttribute="top" secondItem="g3K-bm-mIQ" secondAttribute="top" id="Tee-LS-bMm"/>
-                            <constraint firstItem="99k-kN-JLI" firstAttribute="trailing" secondItem="g3K-bm-mIQ" secondAttribute="trailing" id="Ux3-T6-YA0"/>
+                            <constraint firstItem="g3K-bm-mIQ" firstAttribute="trailing" secondItem="99k-kN-JLI" secondAttribute="trailing" id="Ux3-T6-YA0"/>
                             <constraint firstItem="99k-kN-JLI" firstAttribute="bottom" secondItem="g3K-bm-mIQ" secondAttribute="bottom" id="ach-LD-Ayw"/>
                             <constraint firstItem="99k-kN-JLI" firstAttribute="leading" secondItem="g3K-bm-mIQ" secondAttribute="leading" id="kwC-AM-lCz"/>
                         </constraints>
