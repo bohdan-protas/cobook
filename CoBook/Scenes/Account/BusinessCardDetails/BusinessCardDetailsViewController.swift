@@ -59,6 +59,7 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .never
         presenter?.onViewWillAppear()
     }
 

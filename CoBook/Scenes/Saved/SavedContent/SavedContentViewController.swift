@@ -42,6 +42,11 @@ class SavedContentViewController: BaseViewController {
         presenter.setup(useLoader: true)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .always
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: .cardSaved, object: nil)
         NotificationCenter.default.removeObserver(self, name: .cardUnsaved, object: nil)
@@ -83,7 +88,6 @@ private extension SavedContentViewController {
         self.tableView.delegate = self
         self.tableView.refreshControl = refreshControl
         self.navigationItem.title = "Saved".localized
-        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
 
@@ -92,6 +96,12 @@ private extension SavedContentViewController {
 // MARK: - SavedContentView
 
 extension SavedContentViewController: SavedContentView {
+
+    func goToArticleDetails(presenter: ArticleDetailsPresenter) {
+        let controller: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?) {
         let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()

@@ -17,6 +17,7 @@ protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, Contactabl
     func createFolder()
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
+    func goToArticleDetails(presenter: ArticleDetailsPresenter)
 }
 
 class SavedContentPresenter: BasePresenter {
@@ -84,12 +85,13 @@ class SavedContentPresenter: BasePresenter {
             guard let strongSelf = self else { return }
             switch result {
             case .success(let response):
-                strongSelf.albumPreviewItems = response?.compactMap { AlbumPreview.Item.Model(id: $0.id,
-                                                                                              title: $0.title,
-                                                                                              avatarPath: $0.avatar?.sourceUrl,
-                                                                                              avatarID: $0.avatar?.id) } ?? []
+                strongSelf.albumPreviewItems = response?.rows?.compactMap { AlbumPreview.Item.Model(id: $0.id,
+                                                                                                    title: $0.title,
+                                                                                                    avatarPath: $0.avatar?.sourceUrl,
+                                                                                                    avatarID: $0.avatar?.id) } ?? []
                 group.leave()
             case .failure(let error):
+                self?.view?.errorAlert(message: error.localizedDescription)
                 group.leave()
             }
         }
@@ -486,9 +488,9 @@ extension SavedContentPresenter: AlbumPreviewItemsViewDelegate {
                 switch selectedItem {
                 case .add: break
                     //self.view?.goToCreatePost(cardID: businessCardId)
-                case .view(let model): break
-                    //let presenter = ArticleDetailsPresenter(albumID: model.id, cardID: mod)
-                    //self.view?.goToArticleDetails(presenter: presenter)
+                case .view(let model):
+                    let presenter = ArticleDetailsPresenter(albumID: model.id, cardID: -1)
+                    self.view?.goToArticleDetails(presenter: presenter)
                 case .showMore:
                     break
                 }

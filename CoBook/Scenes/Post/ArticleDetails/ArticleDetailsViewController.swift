@@ -47,6 +47,7 @@ extension ArticleDetailsViewController {
 
     func setupLayout() {
         tableView.delegate = self
+        self.navigationItem.largeTitleDisplayMode = .never
     }
 
 }

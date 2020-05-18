@@ -760,7 +760,7 @@ extension APIClient {
     @discardableResult
     func getUserFavouritedArticles(limit: Int?,
                                    offset: Int?,
-                                   completion: @escaping (Result<[ArticlePreviewAPIModel]?>) -> Void) -> DataRequest {
+                                   completion: @escaping (Result<SavedPostsApiModel?>) -> Void) -> DataRequest {
 
         let endpoint = ArticlesEndpoint.getUserSavedList(limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)

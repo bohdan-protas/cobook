@@ -18,3 +18,15 @@ struct SavedCardsApiModel: Decodable {
     var totalCount: Int?
     var rows: [CardItemApiModel]?
 }
+
+struct SavedPostsApiModel: Decodable {
+
+    enum CodingKeys: String, CodingKey {
+        case totalCount = "total_count"
+        case rows
+    }
+
+    var totalCount: Int?
+    var rows: [ArticlePreviewAPIModel]?
+
+}
