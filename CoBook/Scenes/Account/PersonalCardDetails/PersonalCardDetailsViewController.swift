@@ -38,12 +38,12 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
         presenter?.attachView(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.largeTitleDisplayMode = .never
         presenter?.setupDataSource()
     }
 

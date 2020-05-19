@@ -21,27 +21,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         // MARK: Appearence setup
-        UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back")
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back")
+//        UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back")
+//        UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back")
         UINavigationBar.appearance().tintColor = UIColor.Theme.blackMiddle
         UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle]
         UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont.SFProDisplay_Medium(size: 26), .foregroundColor: UIColor.Theme.blackMiddle]
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().barTintColor = UIColor.Theme.grayBG
-        UINavigationBar.appearance().backgroundColor = UIColor.Theme.grayBG
+        //UINavigationBar.appearance().backgroundColor = UIColor.Theme.grayBG
 
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = UIColor.Theme.greenDark
 
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle.withAlphaComponent(0.5)], for: .disabled)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle.withAlphaComponent(0.5)], for: .highlighted)
+
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.HelveticaNeueCyr_Black(size: 12)], for: .selected)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.grayUI], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.Theme.greenDark], for: .selected)
-
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle.withAlphaComponent(0.5)], for: .disabled)
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle.withAlphaComponent(0.5)], for: .highlighted)
 
         // MARK: Pods setup
         IQKeyboardManager.shared.enable = true
