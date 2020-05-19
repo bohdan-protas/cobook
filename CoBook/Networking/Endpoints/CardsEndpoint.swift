@@ -59,7 +59,7 @@ enum CardsEndpoint: Endpoint {
         case .deleteFolder:
             return .delete
         case .updateFolder:
-            return .post
+            return .put
         case .getSavedCardsLocationsInRegion:
             return .post
         }

@@ -220,40 +220,6 @@ class SavedContentPresenter: BasePresenter {
         updateViewDataSource()
     }
 
-//    func a() {
-//        pendingCardMapMarkersRequestWorkItem?.cancel()
-//
-//        pendingCardMapMarkersRequestWorkItem = DispatchWorkItem { [weak self] in
-//            let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
-//            let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
-//
-//            APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate) { [weak self] (result) in
-//                switch result {
-//                case .success(let response):
-//                    let markers: [GMSMarker] = response?.compactMap { apiModel in
-//                        if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
-//                            let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
-//                            let marker = GMSMarker(position: position)
-//
-//                            switch apiModel.type {
-//                            case .personal:
-//                                marker.icon = UIImage(named: "ic_mapmarker_personal")
-//                            case .business:
-//                                marker.icon = UIImage(named: "ic_mapmarker_business")
-//                            }
-//                            return marker
-//                        } else {
-//                            return nil
-//                        }
-//                    } ?? []
-//
-//                    cell.markers = markers
-//                case .failure(let error):
-//                    self?.view?.errorAlert(message: error.localizedDescription)
-//                }
-//            }
-//    }
-
     func fetchMapMarkersInRegionFittedBy(topLeft: CoordinateApiModel, bottomRight: CoordinateApiModel, completion: (([GMSMarker]) -> Void)?) {
         pendingCardMapMarkersRequestWorkItem?.cancel()
         pendingCardMapMarkersRequestWorkItem = DispatchWorkItem { [weak self] in
@@ -264,12 +230,10 @@ class SavedContentPresenter: BasePresenter {
                         if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
                             let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
                             let marker = GMSMarker(position: position)
-
                             switch apiModel.type {
-                            case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
-                            case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
+                                case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
+                                case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
                             }
-
                             return marker
                         } else { return nil }
                     }
@@ -291,7 +255,6 @@ class SavedContentPresenter: BasePresenter {
         guard let item = barItems[safe: index] else {
             return false
         }
-
         return item.index >= 0 && item.index != index
     }
 
