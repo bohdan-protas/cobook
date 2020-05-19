@@ -165,6 +165,11 @@
 		B828BCC024366F170099D1A8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828BCBF24366F170099D1A8 /* Model.swift */; };
 		B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828C34A240CE0A800F8C371 /* AuthEndpoint.swift */; };
 		B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */; };
+		B828E3402473C63B00032C88 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828E33F2473C63B00032C88 /* SettingsTableViewController.swift */; };
+		B828E3442473CEFD00032C88 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828E3432473CEFD00032C88 /* ChangePasswordViewController.swift */; };
+		B828E3462473CF0D00032C88 /* UpdateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828E3452473CF0D00032C88 /* UpdateAccountViewController.swift */; };
+		B828E3482473CF2500032C88 /* UpdateAccountCellsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828E3472473CF2500032C88 /* UpdateAccountCellsConfigurator.swift */; };
+		B828E34A2473CF3100032C88 /* UpdateAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B828E3492473CF3100032C88 /* UpdateAccountPresenter.swift */; };
 		B82A21152421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A21142421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		B82A211724212CB600D0D9F5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A211624212CB600D0D9F5 /* Logger.swift */; };
 		B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */; };
@@ -499,6 +504,11 @@
 		B828BCBF24366F170099D1A8 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B828C34A240CE0A800F8C371 /* AuthEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndpoint.swift; sourceTree = "<group>"; };
 		B828C34C240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenAPIResponseData.swift; sourceTree = "<group>"; };
+		B828E33F2473C63B00032C88 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		B828E3432473CEFD00032C88 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		B828E3452473CF0D00032C88 /* UpdateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountViewController.swift; sourceTree = "<group>"; };
+		B828E3472473CF2500032C88 /* UpdateAccountCellsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountCellsConfigurator.swift; sourceTree = "<group>"; };
+		B828E3492473CF3100032C88 /* UpdateAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountPresenter.swift; sourceTree = "<group>"; };
 		B82A21142421171000D0D9F5 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		B82A211624212CB600D0D9F5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Extensions.swift"; sourceTree = "<group>"; };
@@ -819,6 +829,7 @@
 			children = (
 				B82200B9240FB8A400A17D2C /* Account.storyboard */,
 				B82200BD240FBBF700A17D2C /* Account */,
+				B828E33C2473C0CE00032C88 /* Settings */,
 				B8559F62243AD05900787349 /* BusinessCardDetails */,
 				B8AB83E824280E7E0041B879 /* PersonalCardDetails */,
 				B8DD431724178F0200C7D940 /* CreatePersonalCard */,
@@ -1294,6 +1305,34 @@
 				B828282D241A970D0003D056 /* InterestsSelectionTableViewCell.xib */,
 			);
 			path = InterestsSelectionTableViewCell;
+			sourceTree = "<group>";
+		};
+		B828E33C2473C0CE00032C88 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B828E33F2473C63B00032C88 /* SettingsTableViewController.swift */,
+				B828E3422473CECB00032C88 /* ChangePassword */,
+				B828E3412473CEB900032C88 /* UpdateAccount */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B828E3412473CEB900032C88 /* UpdateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				B828E3452473CF0D00032C88 /* UpdateAccountViewController.swift */,
+				B828E3472473CF2500032C88 /* UpdateAccountCellsConfigurator.swift */,
+				B828E3492473CF3100032C88 /* UpdateAccountPresenter.swift */,
+			);
+			path = UpdateAccount;
+			sourceTree = "<group>";
+		};
+		B828E3422473CECB00032C88 /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				B828E3432473CEFD00032C88 /* ChangePasswordViewController.swift */,
+			);
+			path = ChangePassword;
 			sourceTree = "<group>";
 		};
 		B82A2118242135C200D0D9F5 /* UI */ = {
@@ -2206,7 +2245,9 @@
 				B8559F6C243B280500787349 /* AccountDataSourceConfigurator.swift in Sources */,
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
 				B81F189624602ECF003CBC84 /* SelectAlbumTableViewCell.swift in Sources */,
+				B828E3482473CF2500032C88 /* UpdateAccountCellsConfigurator.swift in Sources */,
 				B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */,
+				B828E3402473C63B00032C88 /* SettingsTableViewController.swift in Sources */,
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8909FB124641C3900AA56F7 /* ArticleHeaderTableViewCell.swift in Sources */,
@@ -2297,6 +2338,7 @@
 				B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */,
 				B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */,
 				B8559F66243AD0B900787349 /* BusinessCardDetailsPresenter.swift in Sources */,
+				B828E34A2473CF3100032C88 /* UpdateAccountPresenter.swift in Sources */,
 				B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */,
 				B820793F2444729500FCCC17 /* CorneredEdgeView.swift in Sources */,
 				B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */,
@@ -2349,6 +2391,7 @@
 				B81F18A72460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift in Sources */,
 				B8B8B90B2459DB0000162224 /* ProductDetails.swift in Sources */,
 				B8559F61243AA76800787349 /* PersonalCardDetailsDataSourceConfigurator.swift in Sources */,
+				B828E3462473CF0D00032C88 /* UpdateAccountViewController.swift in Sources */,
 				B82B4D3F2456059C0061A98B /* CheckboxTableViewCell.swift in Sources */,
 				B8559F6E243B2BC400787349 /* ProfileApiModel.swift in Sources */,
 				B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */,
@@ -2431,6 +2474,7 @@
 				B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */,
 				B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */,
 				B8249245243DE63B00A1AC39 /* CardsOverviewViewController.swift in Sources */,
+				B828E3442473CEFD00032C88 /* ChangePasswordViewController.swift in Sources */,
 				B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */,
 				B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */,
 				B8559F85243C81D500787349 /* MapDirectionTableViewCell.swift in Sources */,

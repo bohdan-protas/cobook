@@ -38,6 +38,7 @@ class AccountViewController: BaseViewController, AccountView {
     }
 
     // MARK: - AccountView
+
     func setupLayout() {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension

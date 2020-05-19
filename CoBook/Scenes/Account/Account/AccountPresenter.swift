@@ -18,6 +18,7 @@ protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
 class AccountPresenter: BasePresenter {
 
     // MARK: Properties
+
     private weak var view: AccountView?
     private lazy var dataSourceConfigurator: AccountDataSourceConfigurator = {
         let dataSourceConfigurator = AccountDataSourceConfigurator(presenter: self)
@@ -33,7 +34,8 @@ class AccountPresenter: BasePresenter {
         }
     }
 
-    // MARK: Public
+    // MARK: - Public
+
     func attachView(_ view: AccountView) {
         self.view = view
     }
@@ -112,6 +114,7 @@ class AccountPresenter: BasePresenter {
 }
 
 // MARK: - Privates
+
 private extension AccountPresenter {
 
     func fetchProfileData() {
@@ -212,6 +215,16 @@ private extension AccountPresenter {
     }
 
 
+}
+
+// MARK: - AccountHeaderTableViewCellDelegate
+
+extension AccountPresenter: AccountHeaderTableViewCellDelegate {
+
+    func settingTapped(cell: AccountHeaderTableViewCell) {
+        let settingsController: SettingsTableViewController = UIStoryboard.account.initiateViewControllerFromType()
+        view?.push(controller: settingsController, animated: true)
+    }
 
 
 }

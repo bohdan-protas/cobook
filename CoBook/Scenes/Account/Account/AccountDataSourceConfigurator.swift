@@ -37,9 +37,9 @@ struct AccountDataSourceConfigurator: CellConfiguratorType {
         }
 
         accountHeaderCellConfigurator = CellConfigurator { (cell, model: Account.UserInfoHeaderModel?, tableView, indexPath) -> AccountHeaderTableViewCell in
+            cell.delegate = presenter
             let nameAbbr = "\(model?.firstName?.first?.uppercased() ?? "") \(model?.lastName?.first?.uppercased() ?? "")"
             let textPlaceholderImage = nameAbbr.image(size: cell.avatarTextPlaceholderImageView.frame.size)
-
             cell.avatarTextPlaceholderImageView.setImage(withPath: model?.avatarUrl, placeholderImage: textPlaceholderImage)
             cell.userNameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
             cell.emailLabel.text = model?.email
