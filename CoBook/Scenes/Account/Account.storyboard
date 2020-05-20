@@ -126,7 +126,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Налаштування додатку" id="lep-w9-z0v">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Hkr-yZ-1xy" style="IBUITableViewCellStyleDefault" id="FEb-yb-8R1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Hkr-yZ-1xy" style="IBUITableViewCellStyleDefault" id="FEb-yb-8R1">
                                         <rect key="frame" x="0.0" y="198.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FEb-yb-8R1" id="6VA-Bt-L85">
@@ -231,6 +231,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Wjj-3i-xQB"/>
+                    <connections>
+                        <outlet property="appVersionLabel" destination="c2m-gh-kOZ" id="zTH-5J-fdL"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hvl-ni-hOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
