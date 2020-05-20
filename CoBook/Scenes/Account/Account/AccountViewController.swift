@@ -12,7 +12,7 @@ private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
 }
 
-class AccountViewController: BaseViewController, AccountView {
+class AccountViewController: BaseViewController {
 
     // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
@@ -21,9 +21,22 @@ class AccountViewController: BaseViewController, AccountView {
     var presenter = AccountPresenter()
     var dataSource: TableDataSource<AccountDataSourceConfigurator>?
 
-    // MARK: Lifecycle
+    /// pull refresh controll
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.Theme.grayUI
+        refreshControl.attributedTitle = NSAttributedString.init(string: "Оновлення данних...", attributes: [.font: UIFont.SFProDisplay_Medium(size: 14), .foregroundColor: UIColor.Theme.blackMiddle])
+        refreshControl.addTarget(self, action: #selector(refreshActionHandler(_:)), for: .valueChanged)
+        return refreshControl
+    }()
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileNotificationHandler), name: .profideDataUpdated, object: nil)
+
         presenter.attachView(self)
         presenter.onViewDidLoad()
     }
@@ -34,16 +47,38 @@ class AccountViewController: BaseViewController, AccountView {
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self, name: .profideDataUpdated, object: nil)
         presenter.detachView()
     }
 
-    // MARK: - AccountView
+    // MARK: - Actions
+
+    @objc func refreshActionHandler(_ sender: Any) {
+        presenter.refresh()
+    }
+
+    @objc func updateProfileNotificationHandler(_ notification: Notification) {
+        presenter.refresh()
+    }
+
+
+}
+
+// MARK: - AccountView
+
+extension AccountViewController: AccountView {
+
+    func stopRefreshing() {
+        refreshControl.endRefreshing()
+    }
 
     func setupLayout() {
-        tableView.contentInsetAdjustmentBehavior = .never
+        //tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Defaults.estimatedRowHeight
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
+
+        tableView.refreshControl = refreshControl
 
         let footerView = UIView(frame: CGRect(origin: .zero, size: .init(width: tableView.frame.width, height: 8)))
         footerView.backgroundColor = .white
@@ -65,6 +100,7 @@ class AccountViewController: BaseViewController, AccountView {
 }
 
 // MARK: - UITableViewDelegate
+
 extension AccountViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

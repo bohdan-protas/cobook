@@ -9,10 +9,10 @@
 import UIKit
 
 protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
-    var tableView: UITableView! { get set }
     func setupLayout()
     func configureDataSource(with configurator: AccountDataSourceConfigurator)
     func updateDataSource(sections: [Section<Account.Item>])
+    func stopRefreshing()
 }
 
 class AccountPresenter: BasePresenter {
@@ -34,6 +34,8 @@ class AccountPresenter: BasePresenter {
         }
     }
 
+    private var isRefreshing: Bool = false
+
     // MARK: - Public
 
     func attachView(_ view: AccountView) {
@@ -42,6 +44,11 @@ class AccountPresenter: BasePresenter {
 
     func detachView() {
         view = nil
+    }
+
+    func refresh() {
+        isRefreshing = true
+        fetchProfileData()
     }
 
     func onViewDidLoad() {
@@ -118,10 +125,10 @@ class AccountPresenter: BasePresenter {
 private extension AccountPresenter {
 
     func fetchProfileData() {
-        view?.startLoading()
+        if !isRefreshing { view?.startLoading() }
         APIClient.default.profileDetails { [weak self] (result) in
             guard let strongSelf = self else { return }
-
+            strongSelf.isRefreshing = false
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
@@ -144,7 +151,9 @@ private extension AccountPresenter {
                                                    profession: $0.practiceType?.title,
                                                    telephone: $0.telephone?.number) } ?? []
 
+                strongSelf.view?.stopRefreshing()
                 strongSelf.updateViewDataSource()
+
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
@@ -155,7 +164,7 @@ private extension AccountPresenter {
 
         // header Section
         let cardHeaderSection = Section<Account.Item>(items: [
-            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: personalCard?.image,
+            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: AppStorage.User.Profile?.avatar?.sourceUrl,
                                                                firstName: AppStorage.User.Profile?.firstName,
                                                                lastName: AppStorage.User.Profile?.lastName,
                                                                telephone: AppStorage.User.Profile?.telephone.number,

@@ -22,7 +22,7 @@ class SettingsTableViewController: UITableViewController {
 
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let builsNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-        appVersionLabel.text = "v\(appVersion ?? "0")(\(builsNumber ?? "0"))"
+        //appVersionLabel.text = "v\(appVersion ?? "0")(\(builsNumber ?? "0"))"
     }
 
 

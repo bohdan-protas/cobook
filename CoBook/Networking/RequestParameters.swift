@@ -52,6 +52,26 @@ enum APIRequestParameters {
 
     }
 
+    // MARK: - ProfileEndpoint
+
+    enum Profile {
+
+        struct Update: Encodable {
+            var firstName: String?
+            var lastName: String?
+            var avatarID: String?
+            var email: String?
+
+            enum CodingKeys: String, CodingKey {
+                case firstName = "first_name"
+                case lastName = "last_name"
+                case avatarID = "avatar_id"
+                case email
+            }
+        }
+
+    }
+
 
 
 }
