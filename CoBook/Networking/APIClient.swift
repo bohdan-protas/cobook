@@ -250,6 +250,33 @@ extension APIClient {
         performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for change credentials
+
+     - parameters:
+        - parameters: credengials params
+        - completion: parsed response from server
+     */
+    @discardableResult
+    func changeCredentials(parameters: APIRequestParameters.Auth.Credentials,
+                           completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = AuthEndpoint.changeCredengials(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for logout
+
+     - parameters:
+        - completion: void result response
+     */
+    @discardableResult
+    func logout(completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = AuthEndpoint.logout
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 }
 
 // MARK: - InterestsEndpoint requests

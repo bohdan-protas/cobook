@@ -175,6 +175,8 @@
 		B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */; };
 		B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */; };
 		B82A211E2421700A00D0D9F5 /* AuthRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */; };
+		B82A62A124753C250052D6B2 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A62A024753C250052D6B2 /* ChangePasswordPresenter.swift */; };
+		B82A62A324753C520052D6B2 /* ChangePasswordCellsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A62A224753C520052D6B2 /* ChangePasswordCellsConfigurator.swift */; };
 		B82B4D3A2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D382455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift */; };
 		B82B4D3B2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B4D392455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib */; };
 		B82B4D3F2456059C0061A98B /* CheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B4D3D2456059C0061A98B /* CheckboxTableViewCell.swift */; };
@@ -514,6 +516,8 @@
 		B82A21192421657800D0D9F5 /* Encodable + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Extensions.swift"; sourceTree = "<group>"; };
 		B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerEventMonitor.swift; sourceTree = "<group>"; };
 		B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestInterceptor.swift; sourceTree = "<group>"; };
+		B82A62A024753C250052D6B2 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
+		B82A62A224753C520052D6B2 /* ChangePasswordCellsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordCellsConfigurator.swift; sourceTree = "<group>"; };
 		B82B4D382455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoListItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B82B4D392455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPhotoListItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B82B4D3D2456059C0061A98B /* CheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxTableViewCell.swift; sourceTree = "<group>"; };
@@ -1321,8 +1325,8 @@
 			isa = PBXGroup;
 			children = (
 				B828E3452473CF0D00032C88 /* UpdateAccountViewController.swift */,
-				B828E3472473CF2500032C88 /* UpdateAccountCellsConfigurator.swift */,
 				B828E3492473CF3100032C88 /* UpdateAccountPresenter.swift */,
+				B828E3472473CF2500032C88 /* UpdateAccountCellsConfigurator.swift */,
 			);
 			path = UpdateAccount;
 			sourceTree = "<group>";
@@ -1331,6 +1335,8 @@
 			isa = PBXGroup;
 			children = (
 				B828E3432473CEFD00032C88 /* ChangePasswordViewController.swift */,
+				B82A62A024753C250052D6B2 /* ChangePasswordPresenter.swift */,
+				B82A62A224753C520052D6B2 /* ChangePasswordCellsConfigurator.swift */,
 			);
 			path = ChangePassword;
 			sourceTree = "<group>";
@@ -2251,6 +2257,7 @@
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8909FB124641C3900AA56F7 /* ArticleHeaderTableViewCell.swift in Sources */,
+				B82A62A124753C250052D6B2 /* ChangePasswordPresenter.swift in Sources */,
 				B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */,
 				B81F18A3246080E4003CBC84 /* AlbumPreviewApiModel.swift in Sources */,
 				B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */,
@@ -2387,6 +2394,7 @@
 				B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */,
 				B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
+				B82A62A324753C520052D6B2 /* ChangePasswordCellsConfigurator.swift in Sources */,
 				B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */,
 				B81F18A72460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift in Sources */,
 				B8B8B90B2459DB0000162224 /* ProductDetails.swift in Sources */,

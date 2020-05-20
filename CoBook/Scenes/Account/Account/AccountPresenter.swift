@@ -83,18 +83,13 @@ class AccountPresenter: BasePresenter {
                 let createBusinessCardController: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: createBusinessCardController, animated: true)
 
-            case .inviteFriends:
-                break
-            case .statictics:
-                break
-            case .generateQrCode:
-                break
-            case .faq:
-                break
-            case .startMakingMoney:
-                break
+            case .inviteFriends: break
+            case .statictics: break
+            case .generateQrCode: break
+            case .faq: break
+            case .startMakingMoney: break
             case .quitAccount:
-                break
+                logout()
             }
 
         case .personalCardPreview(let model):
@@ -124,6 +119,22 @@ class AccountPresenter: BasePresenter {
 
 private extension AccountPresenter {
 
+    func logout() {
+        view?.startLoading()
+        APIClient.default.logout { [weak self] (result) in
+            switch result {
+            case .success:
+                AppStorage.Auth.deleteAllData()
+                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                if let topController = UIApplication.topViewController() {
+                    topController.present(signInNavigationController, animated: true, completion: nil)
+                }
+            case .failure(let error):
+                self?.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+    
     func fetchProfileData() {
         if !isRefreshing { view?.startLoading() }
         APIClient.default.profileDetails { [weak self] (result) in

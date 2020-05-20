@@ -267,21 +267,36 @@
             </objects>
             <point key="canvasLocation" x="2870" y="901"/>
         </scene>
-        <!--View Controller-->
+        <!--Change Password View Controller-->
         <scene sceneID="XFg-mV-zWT">
             <objects>
-                <viewController id="tpe-J6-PBp" sceneMemberID="viewController">
+                <viewController id="tpe-J6-PBp" customClass="ChangePasswordViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QSN-79-gRA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mz3-fC-Of6">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstItem="Mz3-fC-Of6" firstAttribute="trailing" secondItem="bCX-2z-9nK" secondAttribute="trailing" id="2Cp-X4-Trh"/>
+                            <constraint firstItem="Mz3-fC-Of6" firstAttribute="bottom" secondItem="bCX-2z-9nK" secondAttribute="bottom" id="8aB-le-J3I"/>
+                            <constraint firstItem="Mz3-fC-Of6" firstAttribute="top" secondItem="bCX-2z-9nK" secondAttribute="top" id="AfE-up-mFK"/>
+                            <constraint firstItem="Mz3-fC-Of6" firstAttribute="leading" secondItem="bCX-2z-9nK" secondAttribute="leading" id="Cyz-pP-2Uy"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bCX-2z-9nK"/>
                     </view>
                     <navigationItem key="navigationItem" id="np9-j1-Vla"/>
+                    <connections>
+                        <outlet property="tableView" destination="Mz3-fC-Of6" id="sxR-BO-6AH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2W-nL-V8K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2870" y="1562"/>
+            <point key="canvasLocation" x="2869.5999999999999" y="1561.169415292354"/>
         </scene>
         <!--Business Card Details View Controller-->
         <scene sceneID="3zZ-He-5vo">

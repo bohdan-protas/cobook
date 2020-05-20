@@ -8,23 +8,61 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController {
+fileprivate enum Layout {
+    static let footerHeight: CGFloat = 124
+}
+
+class ChangePasswordViewController: BaseViewController {
+
+    @IBOutlet var tableView: UITableView!
+    var presenter: ChangePasswordPresenter = ChangePasswordPresenter()
+
+    /// save view
+    lazy var saveView: CardSaveView = {
+        let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
+        view.saveButton.setTitle("Зберегти", for: .normal)
+        view.onSaveTapped = { [weak self] in
+            self?.presenter.chageCredentials()
+        }
+        return view
+    }()
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.navigationItem.title = "Зміна паролю"
+        presenter.attachView(self)
+        presenter.setup()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    deinit {
+        presenter.detachView()
     }
-    */
+
+
+}
+
+// MARK: - ChangePasswordView
+
+extension ChangePasswordViewController: ChangePasswordView {
+
+    func set(dataSource: DataSource<ChangePasswordCellsConfigutator>?) {
+        dataSource?.connect(to: tableView)
+    }
+
+    func reload() {
+        tableView.reloadData()
+    }
+
+    func setSaveButtonEnabled(_ isEnabled: Bool) {
+        saveView.saveButton.isEnabled = isEnabled
+    }
+
+    func setupSaveView() {
+        tableView.tableFooterView = saveView
+    }
+
 
 }
