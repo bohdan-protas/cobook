@@ -51,6 +51,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     /// Current card search request work item
     private var pendingSearchResultWorkItem: DispatchWorkItem?
 
+    private var isNewFolderSaving: Bool = false
+
     // MARK: - BasePresenter
 
     override init() {
@@ -171,7 +173,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             case .cardItem(let model):
                 switch model.isSaved {
                 case false:
-                    view?.startLoading()
+                    if !self.isNewFolderSaving { view?.startLoading() }
+                    isNewFolderSaving = false
                     APIClient.default.addCardToFavourites(id: model.id, folderID: folderID) { [weak self] (result) in
                         switch result {
                         case .success:
@@ -186,7 +189,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                     break
 
                 case true:
-                    view?.startLoading()
+                    if !self.isNewFolderSaving { view?.startLoading() }
+                    isNewFolderSaving = false
                     APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
                         switch result {
                         case .success:
@@ -238,6 +242,24 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             switch result {
             case .success(let folders):
                 completion?(folders ?? [])
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func createFolder(title: String, completion: ((BarItem) -> Void)?) {
+        isNewFolderSaving = true
+        self.view?.startLoading()
+        APIClient.default.createFolder(title: title) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let response):
+                if let id = response?.id {
+                    let item = BarItem(index: id, title: title)
+                    strongSelf.barItems.append(item)
+                    completion?(item)
+                }
             case .failure(let error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }

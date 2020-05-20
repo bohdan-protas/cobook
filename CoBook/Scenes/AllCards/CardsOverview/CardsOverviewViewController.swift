@@ -332,17 +332,31 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
         presenter.fetchUserFolders { [unowned self] (items) in
             var actions: [UIAlertAction] = []
 
+            // general list
             actions.append(UIAlertAction(title: "Загальний список", style: .default, handler: { _ in
                 self.presenter.saveCardAt(indexPath: index, toFolder: nil)
             }))
 
+            // current stored folders
             let folderSavingActions: [UIAlertAction] = items.compactMap { folder in
                 UIAlertAction.init(title: folder.title, style: .default, handler: { [unowned self] _ in
                     self.presenter.saveCardAt(indexPath: index, toFolder: folder.id)
                 })
             }
             actions.append(contentsOf: folderSavingActions)
+
+            // New list
+            actions.append(UIAlertAction(title: "Створити новий список", style: .default, handler: { _ in
+                self.newFolderAlert(folderName: nil) { (folderTitle) in
+                    self.presenter.createFolder(title: folderTitle) { (folder) in
+                        self.presenter.saveCardAt(indexPath: index, toFolder: folder.index)
+                    }
+                }
+            }))
+
+            // Calcel action
             actions.append(UIAlertAction(title: "Відмінити", style: .cancel, handler: nil))
+
             self.actionSheetAlert(title: "Зберегти візитку до:", message: nil, actions: actions)
         }
 
