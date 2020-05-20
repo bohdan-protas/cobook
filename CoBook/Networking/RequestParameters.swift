@@ -15,6 +15,20 @@ protocol PaginableRequestParameters {
 
 enum APIRequestParameters {
 
+    enum Auth {
+
+        struct Credentials: Encodable {
+            var oldPassword: String?
+            var newPassword: String?
+
+            enum CodingKeys: String, CodingKey {
+                case oldPassword = "old_password"
+                case newPassword = "new_password"
+            }
+        }
+
+    }
+
     // Card
 
     enum Card {
@@ -48,6 +62,26 @@ enum APIRequestParameters {
             var cardID: Int
             var limit: Int?
             var offset: Int?
+        }
+
+    }
+
+    // MARK: - ProfileEndpoint
+
+    enum Profile {
+
+        struct Update: Encodable {
+            var firstName: String?
+            var lastName: String?
+            var avatarID: String?
+            var email: String?
+
+            enum CodingKeys: String, CodingKey {
+                case firstName = "first_name"
+                case lastName = "last_name"
+                case avatarID = "avatar_id"
+                case email
+            }
         }
 
     }

@@ -10,22 +10,38 @@ import Alamofire
 
 enum ProfileEndpoint: Endpoint {
 
-    case profile
+    case details
+    case update(parameters: APIRequestParameters.Profile.Update)
 
     var useAuthirizationToken: Bool {
         return true
     }
 
     var method: HTTPMethod {
-        return .get
+        switch self {
+        case .details:
+            return .get
+        case .update:
+            return .put
+        }
     }
 
     var path: String {
-        return "/profile"
+        switch self {
+        case .details, .update:
+            return "/profile"
+        }
     }
 
     var bodyParameters: Parameters? {
-        return nil
+        switch self {
+
+        case .update(let parameters):
+            return parameters.dictionary
+
+        default:
+            return nil
+        }
     }
 
 

@@ -14,6 +14,8 @@ extension Notification.Name {
 
     static let articleSaved: Notification.Name = Notification.Name("saveArticleNotificationName")
     static let articleUnsaved: Notification.Name = Notification.Name("unsaveArticleNotificationName")
+
+    static let profideDataUpdated: Notification.Name = Notification.Name("profideDataUpdatedNotificationName")
 }
 
 extension Notification {

@@ -9,15 +9,16 @@
 import UIKit
 
 protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
-    var tableView: UITableView! { get set }
     func setupLayout()
     func configureDataSource(with configurator: AccountDataSourceConfigurator)
     func updateDataSource(sections: [Section<Account.Item>])
+    func stopRefreshing()
 }
 
 class AccountPresenter: BasePresenter {
 
     // MARK: Properties
+
     private weak var view: AccountView?
     private lazy var dataSourceConfigurator: AccountDataSourceConfigurator = {
         let dataSourceConfigurator = AccountDataSourceConfigurator(presenter: self)
@@ -33,13 +34,21 @@ class AccountPresenter: BasePresenter {
         }
     }
 
-    // MARK: Public
+    private var isRefreshing: Bool = false
+
+    // MARK: - Public
+
     func attachView(_ view: AccountView) {
         self.view = view
     }
 
     func detachView() {
         view = nil
+    }
+
+    func refresh() {
+        isRefreshing = true
+        fetchProfileData()
     }
 
     func onViewDidLoad() {
@@ -74,18 +83,13 @@ class AccountPresenter: BasePresenter {
                 let createBusinessCardController: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: createBusinessCardController, animated: true)
 
-            case .inviteFriends:
-                break
-            case .statictics:
-                break
-            case .generateQrCode:
-                break
-            case .faq:
-                break
-            case .startMakingMoney:
-                break
+            case .inviteFriends: break
+            case .statictics: break
+            case .generateQrCode: break
+            case .faq: break
+            case .startMakingMoney: break
             case .quitAccount:
-                break
+                logout()
             }
 
         case .personalCardPreview(let model):
@@ -112,13 +116,30 @@ class AccountPresenter: BasePresenter {
 }
 
 // MARK: - Privates
+
 private extension AccountPresenter {
 
-    func fetchProfileData() {
+    func logout() {
         view?.startLoading()
+        APIClient.default.logout { [weak self] (result) in
+            switch result {
+            case .success:
+                AppStorage.Auth.deleteAllData()
+                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                if let topController = UIApplication.topViewController() {
+                    topController.present(signInNavigationController, animated: true, completion: nil)
+                }
+            case .failure(let error):
+                self?.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchProfileData() {
+        if !isRefreshing { view?.startLoading() }
         APIClient.default.profileDetails { [weak self] (result) in
             guard let strongSelf = self else { return }
-
+            strongSelf.isRefreshing = false
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
@@ -141,7 +162,9 @@ private extension AccountPresenter {
                                                    profession: $0.practiceType?.title,
                                                    telephone: $0.telephone?.number) } ?? []
 
+                strongSelf.view?.stopRefreshing()
                 strongSelf.updateViewDataSource()
+
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
@@ -152,7 +175,7 @@ private extension AccountPresenter {
 
         // header Section
         let cardHeaderSection = Section<Account.Item>(items: [
-            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: personalCard?.image,
+            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: AppStorage.User.Profile?.avatar?.sourceUrl,
                                                                firstName: AppStorage.User.Profile?.firstName,
                                                                lastName: AppStorage.User.Profile?.lastName,
                                                                telephone: AppStorage.User.Profile?.telephone.number,
@@ -212,6 +235,16 @@ private extension AccountPresenter {
     }
 
 
+}
+
+// MARK: - AccountHeaderTableViewCellDelegate
+
+extension AccountPresenter: AccountHeaderTableViewCellDelegate {
+
+    func settingTapped(cell: AccountHeaderTableViewCell) {
+        let settingsController: SettingsTableViewController = UIStoryboard.account.initiateViewControllerFromType()
+        view?.push(controller: settingsController, animated: true)
+    }
 
 
 }

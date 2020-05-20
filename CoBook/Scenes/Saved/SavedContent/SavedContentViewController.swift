@@ -43,11 +43,6 @@ class SavedContentViewController: BaseViewController {
         presenter.setup(useLoader: true)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationItem.largeTitleDisplayMode = .always
-    }
-
     deinit {
         NotificationCenter.default.removeObserver(self, name: .cardSaved, object: nil)
         NotificationCenter.default.removeObserver(self, name: .cardUnsaved, object: nil)
@@ -109,6 +104,7 @@ private extension SavedContentViewController {
         self.tableView.delegate = self
         self.tableView.refreshControl = refreshControl
         self.navigationItem.title = "Saved".localized
+        self.navigationItem.largeTitleDisplayMode = .always
     }
 
 

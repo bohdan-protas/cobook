@@ -250,6 +250,33 @@ extension APIClient {
         performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for change credentials
+
+     - parameters:
+        - parameters: credengials params
+        - completion: parsed response from server
+     */
+    @discardableResult
+    func changeCredentials(parameters: APIRequestParameters.Auth.Credentials,
+                           completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = AuthEndpoint.changeCredengials(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for logout
+
+     - parameters:
+        - completion: void result response
+     */
+    @discardableResult
+    func logout(completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = AuthEndpoint.logout
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
 }
 
 // MARK: - InterestsEndpoint requests
@@ -543,12 +570,24 @@ extension APIClient {
      Request get profile data
 
      - parameters:
-        - imageData: image data(JPEG preffered)
-        - completion: parsed  'FileAPIResponseData' response from server
+        - completion: parsed  'ProfileApiModel' response from server
      */
     @discardableResult
     func profileDetails(completion: @escaping (Result<ProfileApiModel?>) -> Void) -> DataRequest {
-        let endpoint = ProfileEndpoint.profile
+        let endpoint = ProfileEndpoint.details
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request updating profile data
+
+     - parameters:
+        - parameters:
+        - completion:
+     */
+    @discardableResult
+    func updateProfile(parameters: APIRequestParameters.Profile.Update, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = ProfileEndpoint.update(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 

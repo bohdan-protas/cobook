@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AccountHeaderTableViewCellDelegate: class {
+    func settingTapped(cell: AccountHeaderTableViewCell)
+}
+
 class AccountHeaderTableViewCell: UITableViewCell {
 
     @IBOutlet var avatarTextPlaceholderImageView: DesignableImageView!
@@ -16,6 +20,10 @@ class AccountHeaderTableViewCell: UITableViewCell {
     @IBOutlet var telephoneNumberLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var settingsButton: DesignableButton!
+
+    weak var delegate: AccountHeaderTableViewCellDelegate?
+
+    // MARK: - Lifecycle
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -32,6 +40,13 @@ class AccountHeaderTableViewCell: UITableViewCell {
         emailLabel.text = ""
         avatarTextPlaceholderImageView.image = nil
     }
+
+    // MARK: - Actions
+
+    @IBAction func settingsButtonTapped(_ sender: Any) {
+        delegate?.settingTapped(cell: self)
+    }
+
 
     
 }
