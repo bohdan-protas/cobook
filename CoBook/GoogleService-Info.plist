@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>495417378343-nsor3fcptafgvpovci17cqddgffo8nm6.apps.googleusercontent.com</string>
+	<string>93520317051-69ucn38lh2ai18lq0hqdt42q5tr06um7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.495417378343-nsor3fcptafgvpovci17cqddgffo8nm6</string>
+	<string>com.googleusercontent.apps.93520317051-69ucn38lh2ai18lq0hqdt42q5tr06um7</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAURF0IuLz3BSU8NfUiH6T4yCvh-v7RCCg</string>
+	<string>AIzaSyCrM1DtZHXPhhqrs2g_6uxAfP88g4dkvEs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>495417378343</string>
+	<string>93520317051</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.cobook</string>
 	<key>PROJECT_ID</key>
-	<string>cobook-e1e4e</string>
+	<string>compact-voyager-272111</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cobook-e1e4e.appspot.com</string>
+	<string>compact-voyager-272111.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:495417378343:ios:eb366541868c8a4b313002</string>
+	<string>1:93520317051:ios:d971645d5a951c368cf0de</string>
 	<key>DATABASE_URL</key>
-	<string>https://cobook-e1e4e.firebaseio.com</string>
+	<string>https://compact-voyager-272111.firebaseio.com</string>
 </dict>
 </plist>

@@ -53,7 +53,6 @@
 		B822D7062458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7052458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift */; };
 		B822D7092458B5EF00883BE8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D7082458B5EF00883BE8 /* Product.swift */; };
 		B822D70B2458B60000883BE8 /* CreateProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822D70A2458B60000883BE8 /* CreateProduct.swift */; };
-		B822F50E24597F3E00F207CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B822F50D24597F3E00F207CD /* GoogleService-Info.plist */; };
 		B822F51024599C7700F207CD /* CreateProductApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822F50F24599C7700F207CD /* CreateProductApiModel.swift */; };
 		B822F51224599D4800F207CD /* ProductEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822F51124599D4800F207CD /* ProductEndpoint.swift */; };
 		B822F5162459B29E00F207CD /* ProductPreviewApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822F5152459B29E00F207CD /* ProductPreviewApiModel.swift */; };
@@ -318,6 +317,7 @@
 		B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */; };
 		B8AB840A2428411F0041B879 /* GetInTouchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */; };
 		B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB840B242845380041B879 /* PersonalCardDetails.swift */; };
+		B8B7FB982476917000D19C5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8B7FB972476917000D19C5E /* GoogleService-Info.plist */; };
 		B8B8B9052459DA5500162224 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8B9042459DA5500162224 /* ProductDetailsViewController.swift */; };
 		B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8B9062459DA6700162224 /* ProductDetailsPresenter.swift */; };
 		B8B8B9092459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8B9082459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift */; };
@@ -393,7 +393,6 @@
 		B822D7052458B5CB00883BE8 /* CreateProductDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B822D7082458B5EF00883BE8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B822D70A2458B60000883BE8 /* CreateProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProduct.swift; sourceTree = "<group>"; };
-		B822F50D24597F3E00F207CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B822F50F24599C7700F207CD /* CreateProductApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductApiModel.swift; sourceTree = "<group>"; };
 		B822F51124599D4800F207CD /* ProductEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEndpoint.swift; sourceTree = "<group>"; };
 		B822F5152459B29E00F207CD /* ProductPreviewApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPreviewApiModel.swift; sourceTree = "<group>"; };
@@ -663,6 +662,7 @@
 		B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInTouchTableViewCell.swift; sourceTree = "<group>"; };
 		B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetInTouchTableViewCell.xib; sourceTree = "<group>"; };
 		B8AB840B242845380041B879 /* PersonalCardDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetails.swift; sourceTree = "<group>"; };
+		B8B7FB972476917000D19C5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8B8B9042459DA5500162224 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		B8B8B9062459DA6700162224 /* ProductDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsPresenter.swift; sourceTree = "<group>"; };
 		B8B8B9082459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsDataSourceConfigurator.swift; sourceTree = "<group>"; };
@@ -1698,7 +1698,7 @@
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
 				B870199223ED50EC00625D61 /* Info.plist */,
-				B822F50D24597F3E00F207CD /* GoogleService-Info.plist */,
+				B8B7FB972476917000D19C5E /* GoogleService-Info.plist */,
 				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
@@ -2104,6 +2104,7 @@
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B824D14E246B120C00911629 /* Saved.storyboard in Resources */,
 				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
+				B8B7FB982476917000D19C5E /* GoogleService-Info.plist in Resources */,
 				B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */,
 				B8909FB224641C3900AA56F7 /* ArticleHeaderTableViewCell.xib in Resources */,
 				B823DD7A244348D300A74495 /* SearchResultHeaderView.xib in Resources */,
@@ -2149,7 +2150,6 @@
 				B8909FBD246499EE00AA56F7 /* ArticlePreviewTableViewCell.xib in Resources */,
 				B8909FAD24641A7D00AA56F7 /* PhotoCollageTableViewCell.xib in Resources */,
 				B8559F5D243A770500787349 /* EmployerPreviewHorizontalListItemCollectionViewCell.xib in Resources */,
-				B822F50E24597F3E00F207CD /* GoogleService-Info.plist in Resources */,
 				B82B4D4F245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib in Resources */,
 				B825741623F5621500C8CBF8 /* HelveticaNeueCyr-ThinItalic.ttf in Resources */,
 				B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */,
