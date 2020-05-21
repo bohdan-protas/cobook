@@ -18,7 +18,12 @@ enum AuthEndpoint: Endpoint {
     // MARK: - Auth token usage
     
     var useAuthirizationToken: Bool {
-        return false
+        switch self {
+        case .forgotPassword, .refresh:
+            return false
+        case .changeCredengials, .logout:
+            return true
+        }
     }
 
     // MARK: - HTTPMethod

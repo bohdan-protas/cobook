@@ -76,7 +76,7 @@ class ChangePasswordPresenter: BasePresenter {
                 })
             case .failure(let error):
                 self?.view?.stopLoading(success: false, completion: {
-                    self?.view?.errorAlert(message: error.localizedDescription)
+                    self?.view?.infoAlert(title: nil, message: error.localizedDescription)
                 })
             }
         }
