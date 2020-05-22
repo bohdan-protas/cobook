@@ -317,7 +317,7 @@
 		B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */; };
 		B8AB840A2428411F0041B879 /* GetInTouchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */; };
 		B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB840B242845380041B879 /* PersonalCardDetails.swift */; };
-		B8B7FB982476917000D19C5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8B7FB972476917000D19C5E /* GoogleService-Info.plist */; };
+		B8B7FB9B2476B92900D19C5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8B7FB9A2476B92900D19C5E /* GoogleService-Info.plist */; };
 		B8B8B9052459DA5500162224 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8B9042459DA5500162224 /* ProductDetailsViewController.swift */; };
 		B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8B9062459DA6700162224 /* ProductDetailsPresenter.swift */; };
 		B8B8B9092459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8B9082459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift */; };
@@ -662,7 +662,8 @@
 		B8AB84072428411F0041B879 /* GetInTouchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInTouchTableViewCell.swift; sourceTree = "<group>"; };
 		B8AB84082428411F0041B879 /* GetInTouchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetInTouchTableViewCell.xib; sourceTree = "<group>"; };
 		B8AB840B242845380041B879 /* PersonalCardDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCardDetails.swift; sourceTree = "<group>"; };
-		B8B7FB972476917000D19C5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B8B7FB992476B1A300D19C5E /* CoBook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoBook.entitlements; sourceTree = "<group>"; };
+		B8B7FB9A2476B92900D19C5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8B8B9042459DA5500162224 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		B8B8B9062459DA6700162224 /* ProductDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsPresenter.swift; sourceTree = "<group>"; };
 		B8B8B9082459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsDataSourceConfigurator.swift; sourceTree = "<group>"; };
@@ -1695,10 +1696,11 @@
 		B870198323ED50EA00625D61 /* CoBook */ = {
 			isa = PBXGroup;
 			children = (
+				B8B7FB992476B1A300D19C5E /* CoBook.entitlements */,
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
 				B870199223ED50EC00625D61 /* Info.plist */,
-				B8B7FB972476917000D19C5E /* GoogleService-Info.plist */,
+				B8B7FB9A2476B92900D19C5E /* GoogleService-Info.plist */,
 				B826B0F023F45973009041DD /* Services */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
@@ -2104,7 +2106,7 @@
 				B825741823F5621500C8CBF8 /* HelveticaNeueCyr-UltraLightItalic.ttf in Resources */,
 				B824D14E246B120C00911629 /* Saved.storyboard in Resources */,
 				B824E1B0243767130091C491 /* CardBackgroundManagmentTableViewCell.xib in Resources */,
-				B8B7FB982476917000D19C5E /* GoogleService-Info.plist in Resources */,
+				B8B7FB9B2476B92900D19C5E /* GoogleService-Info.plist in Resources */,
 				B824924E243DE73E00A1AC39 /* AllCards.storyboard in Resources */,
 				B8909FB224641C3900AA56F7 /* ArticleHeaderTableViewCell.xib in Resources */,
 				B823DD7A244348D300A74495 /* SearchResultHeaderView.xib in Resources */,
@@ -2644,6 +2646,7 @@
 			baseConfigurationReference = 5EAA0B323D42D9D8EC7633F5 /* Pods-CoBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
@@ -2669,6 +2672,7 @@
 			baseConfigurationReference = C93E9765F0DA3748E1CC0BAA /* Pods-CoBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
