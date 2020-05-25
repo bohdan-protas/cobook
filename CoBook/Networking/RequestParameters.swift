@@ -15,6 +15,30 @@ protocol PaginableRequestParameters {
 
 enum APIRequestParameters {
 
+    // MARK: - SignUp
+
+    enum SignUp {
+
+        struct Initialize: Encodable {
+            var email: String
+            var telephone: String
+            var firstName: String
+            var lastName: String
+            var invitedBy: String?
+
+            enum CodingKeys: String, CodingKey {
+                case email
+                case telephone = "telephone"
+                case firstName = "first_name"
+                case lastName = "last_name"
+                case invitedBy = "invited_by"
+            }
+        }
+
+    }
+
+    // MARK: - Auth
+
     enum Auth {
 
         struct Credentials: Encodable {
@@ -29,7 +53,7 @@ enum APIRequestParameters {
 
     }
 
-    // Card
+    // MARK: -  Card
 
     enum Card {
 

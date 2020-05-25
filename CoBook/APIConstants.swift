@@ -96,18 +96,29 @@ enum APIConstants {
 
 // MARK: - Dynamic link
 
-enum DynamicLinkParameter {
+enum DynamicLinkConstants {
+
+    static var baseURLPath: URLComponents {
+        get {
+            var components = URLComponents()
+            components.scheme   = "https"
+            components.host     = "cobook.app"
+            return components
+        }
+    }
 
     enum Path: String {
         case personalCard = "/personal_card"
         case businessCard = "/business_card"
         case article = "/article"
+        case download = "/download"
     }
 
     enum QueryName: String {
         case id
         case articleID = "article_id"
         case albumID = "album_id"
+        case shareableUserID = "shareable_user_id"
     }
 
 }

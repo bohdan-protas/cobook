@@ -11,7 +11,7 @@ import Alamofire
 enum SignUpEndpoint: Endpoint {
 
     /// Initialize registration session
-    case initialize(email: String, telephone: String, firstName: String, lastName: String)
+    case initialize(parameters: APIRequestParameters.SignUp.Initialize)
 
     /// Verify telephone via sms
     case verify(smsCode: Int, accessToken: String)
@@ -50,13 +50,8 @@ enum SignUpEndpoint: Endpoint {
     var bodyParameters: Parameters? {
         switch self {
 
-        case let .initialize(email, telephone, firstName, lastName):
-            return [
-                APIConstants.ParameterKey.email: email,
-                APIConstants.ParameterKey.telephone: telephone,
-                APIConstants.ParameterKey.firstName: firstName,
-                APIConstants.ParameterKey.lastName: lastName,
-            ]
+        case .initialize(let parameters):
+            return parameters.dictionary
 
         case .verify(let smsCode, let accessToken):
             return [
