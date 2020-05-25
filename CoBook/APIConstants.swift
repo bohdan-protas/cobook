@@ -94,4 +94,22 @@ enum APIConstants {
 
 }
 
+// MARK: - Dynamic link
+
+enum DynamicLinkParameter {
+
+    enum Path: String {
+        case personalCard = "/personal_card"
+        case businessCard = "/business_card"
+        case article = "/article"
+    }
+
+    enum QueryName: String {
+        case id
+        case articleID = "article_id"
+        case albumID = "album_id"
+    }
+
+}
+
 

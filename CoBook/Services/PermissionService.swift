@@ -7,12 +7,9 @@
 //
 
 import Foundation
-
 import AVFoundation
 import Photos
 
-
-// Services
 typealias AuthorizationCompletion = (status: Bool, message: String)
 
 class PermissionService: NSObject {

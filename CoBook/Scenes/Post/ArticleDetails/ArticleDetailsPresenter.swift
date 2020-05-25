@@ -27,7 +27,7 @@ class ArticleDetailsPresenter: BasePresenter {
 
     private var dataSource: DataSource<ArticleDetailsCellConfigutator>?
     private var albumID: Int
-    private var cardID: Int
+    private var articleID: Int?
 
     var isOwner: Bool {
         return articleDetails?.userID == AppStorage.User.Profile?.userId
@@ -41,73 +41,14 @@ class ArticleDetailsPresenter: BasePresenter {
     - parameters:
        - albumID: articles albumID
     */
-    init(albumID: Int, cardID: Int) {
+    init(albumID: Int, articleID: Int?) {
         self.albumID = albumID
-        self.cardID = cardID
-        
-        var configurator = ArticleDetailsCellConfigutator()
-
-        configurator.articlePreviewConfigurator = CellConfigurator { (cell, model: ArticlePreviewModel, tableView, indexPath) -> ArticlePreviewTableViewCell in
-            cell.articleTitle.text = model.title
-            cell.articleImageView.setImage(withPath: model.image)
-            return cell
-        }
-
-        configurator.photoCollageConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
-            cell.dataSource = self
-            cell.prepareLayout()
-            return cell
-        }
-
-        configurator.headerConfigurator = CellConfigurator { (cell, model: ArticleDetails.HeaderModel, tableView, indexPath) -> ArticleHeaderTableViewCell in
-            cell.delegate = self
-
-            let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
-            let textPlaceholderImage = nameAbbr.image(size: cell.avatarImageView.frame.size)
-            cell.avatarImageView.setImage(withPath: model.avatar, placeholderImage: textPlaceholderImage)
-            cell.nameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-
-            cell.viewsCountLabel.text = model.viewersCount
-
-            if let date = model.date {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd.MM.yyyy"
-                cell.dateLabel.text = formatter.string(from: date)
-            } else {
-                cell.dateLabel.text = ""
-            }
-
-            return cell
-        }
-
-        configurator.descriptionCellConfigurator = CellConfigurator { (cell, model: ArticleDetails.DescriptionModel, tableView, indexPath) -> ArticleDescriptionTableViewCell in
-            cell.albumNameLabel.text = model.albumAvatarTitle
-            cell.albumImageView.setImage(withPath: model.albumAvatarImage)
-            cell.titleLabel.text = model.title
-            cell.descriptionTextView.text = model.desctiption
-            return cell
-        }
-
-        configurator.creatorCellConfigurator = CellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
-            let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
-            let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
-
-            cell.titleImageView.setImage(withPath: model.image, placeholderImage: textPlaceholderImage)
-            cell.proffesionLabel.text = model.profession
-            cell.telephoneNumberLabel.text = model.telephone
-            cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-
-            cell.selectionStyle = .none
-            cell.accessoryView = nil
-            return cell
-        }
-
-        self.dataSource = DataSource(configurator: configurator)
+        self.articleID = articleID
+        self.dataSource = DataSource(configurator: dataSourceConfigurator)
         self.dataSource?.sections = [
             Section<ArticleDetails.Cell>(accessoryIndex: ArticleDetails.SectionAccessory.details.rawValue, items: []),
             Section<ArticleDetails.Cell>(accessoryIndex: ArticleDetails.SectionAccessory.list.rawValue, items: [])
         ]
-
     }
 
     // MARK: - Base
@@ -141,13 +82,13 @@ class ArticleDetailsPresenter: BasePresenter {
             switch result {
             case .success(let articles):
                 self?.articles = articles
-                guard let id = articles?.first?.id else {
+                if let id = self?.articleID ?? articles?.first?.id {
+                    self?.view?.setPlaceholderView(false)
+                    self?.fetchArticleDetails(articleID: id)
+                } else {
                     self?.view?.setPlaceholderView(true)
                     self?.view?.stopLoading()
-                    return
                 }
-                self?.view?.setPlaceholderView(false)
-                self?.fetchArticleDetails(articleID: id)
             case .failure(let error):
                 self?.view?.stopLoading()
                 self?.view?.errorAlert(message: error.localizedDescription)
@@ -178,22 +119,7 @@ class ArticleDetailsPresenter: BasePresenter {
 
 private extension ArticleDetailsPresenter {
 
-    func fetchArticleDetails(articleID: Int) {
-        APIClient.default.getArticleDetails(articleID: articleID) { [weak self] (result) in
-            switch result {
-            case .success(let articleDetails):
-                self?.view?.stopLoading()
-                self?.articleDetails = articleDetails
-                self?.updateViewDataSource()
-            case .failure(let error):
-                self?.view?.stopLoading()
-                self?.view?.errorAlert(message: error.localizedDescription)
-            }
-        }
-    }
-
     func updateViewDataSource() {
-
         // details
         dataSource?.sections[ArticleDetails.SectionAccessory.details.rawValue].items = [
 
@@ -202,14 +128,11 @@ private extension ArticleDetailsPresenter {
                                                       lastName: "\(articleDetails?.cardInfo?.cardCreator?.lastName ?? "")",
                                                       date: articleDetails?.createdAt,
                                                       viewersCount: articleDetails?.viewsCount)),
-
             .photoCollage,
-
             .descriptionDetails(model: ArticleDetails.DescriptionModel(title: articleDetails?.title,
                                                                        desctiption: articleDetails?.body,
                                                                        albumAvatarImage: articleDetails?.album?.avatar?.sourceUrl,
                                                                        albumAvatarTitle: articleDetails?.album?.title)),
-
             .creator(model: CardPreviewModel(id: articleDetails?.userID ?? "",
                                              image: articleDetails?.cardInfo?.avatar?.sourceUrl,
                                              firstName: articleDetails?.cardInfo?.company?.name,
@@ -229,7 +152,7 @@ private extension ArticleDetailsPresenter {
 
     func goToEdit() {
         let parameters = CreateArticleModel(articleID: articleDetails?.articleID,
-                                            cardID: cardID,
+                                            cardID: articleDetails?.cardInfo?.id ?? -1,
                                             title: articleDetails?.title,
                                             body: articleDetails?.body,
                                             album: AlbumPreview.Item.Model(id: articleDetails?.album?.id ?? -1,
@@ -241,6 +164,19 @@ private extension ArticleDetailsPresenter {
         let presenter = CreateArticlePresenter(parameters: parameters)
         presenter.delegate = self
         view?.goToEditArticle(presenter: presenter)
+    }
+
+    func fetchArticleDetails(articleID: Int) {
+        APIClient.default.getArticleDetails(articleID: articleID) { [weak self] (result) in
+            self?.view?.stopLoading()
+            switch result {
+            case .success(let articleDetails):
+                self?.articleDetails = articleDetails
+                self?.updateViewDataSource()
+            case .failure(let error):
+                self?.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
     func saveArticle() {

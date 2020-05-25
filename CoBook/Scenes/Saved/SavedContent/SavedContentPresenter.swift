@@ -462,12 +462,10 @@ extension SavedContentPresenter: AlbumPreviewItemsViewDelegate {
         case .albumPreviews:
             if let selectedItem = albumPreviewSection?.items[safe: indexPath.item] {
                 switch selectedItem {
-                case .add: break
-                    //self.view?.goToCreatePost(cardID: businessCardId)
                 case .view(let model):
-                    let presenter = ArticleDetailsPresenter(albumID: model.id, cardID: -1)
+                    let presenter = ArticleDetailsPresenter(albumID: model.id, articleID: nil)
                     self.view?.goToArticleDetails(presenter: presenter)
-                case .showMore:
+                default:
                     break
                 }
             }

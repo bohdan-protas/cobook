@@ -24,7 +24,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>Buindle ID</string>
+			<string>Bundle ID</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.cobook</string>
@@ -85,5 +85,9 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+    <key>FirebaseDynamicLinksCustomDomains</key>
+    <array>
+      <string>https://dev.share.cobook.app/link</string>
+    </array>
 </dict>
 </plist>

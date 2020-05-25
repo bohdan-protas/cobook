@@ -99,13 +99,11 @@ class SignInViewController: BaseViewController, SignInView {
             performSegue(withIdentifier: SignUpNavigationController.unwindSegueId, sender: self)
         } else {
             let navigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-            navigationController.modalTransitionStyle = .flipHorizontal
+            navigationController.modalTransitionStyle = .coverVertical
             navigationController.modalPresentationStyle = .overFullScreen
             present(navigationController, animated: true, completion: nil)
         }
     }
-
-    //MainTabBarController()
 
     func goToMainTabbar() {
         let mainTabbar = MainTabBarController()

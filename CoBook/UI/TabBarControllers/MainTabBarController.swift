@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import FirebaseDynamicLinks
 
 class MainTabBarController: UITabBarController {
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +27,54 @@ class MainTabBarController: UITabBarController {
 
         self.viewControllers = [allCardsController, savedContentController, accountController]
         self.selectedViewController = allCardsController
+
+        // If pending dynamic link exists - its time to show it
+        if let pendingDynamicLink = AppStorage.State.pendingDynamicLink {
+            handleDynamicLink(pendingDynamicLink)
+        }
+    }
+
+    // MARK: - Dynamic link handling
+
+    func handleDynamicLink(_ dynamicLink: DynamicLink) {
+        // clear the current pending state url
+        AppStorage.State.pendingDynamicLink = nil
+
+        // regognize contoller to push from dynamic link
+        if let recognizedController = DynamicLinkCoordinatorService().recognizeControllerFrom(dynamicLink: dynamicLink) {
+             pushDynamicLink(recognizedController: recognizedController)
+        } else {
+            Log.error("Cannot recognize contoller from dynamic link: \(dynamicLink)")
+        }
+    }
+
+    func handleDynamicLink(_ dynamicLink: DynamicLinkContainer) {
+        // clear the current pending state url
+        AppStorage.State.pendingDynamicLink = nil
+
+        // regognize contoller to push from dynamic link
+        if let recognizedController = DynamicLinkCoordinatorService().recognizeControllerFrom(dynamicLink: dynamicLink) {
+            pushDynamicLink(recognizedController: recognizedController)
+        } else {
+            Log.error("Cannot recognize contoller from dynamic link: \(dynamicLink)")
+        }
     }
     
+
+}
+
+// MARK: - Privates
+
+private extension MainTabBarController {
+
+    func pushDynamicLink(recognizedController: UIViewController) {
+        let currentNavigationController = selectedViewController as? UINavigationController
+        let currentControllersStack = currentNavigationController?.viewControllers
+        if let rootController = currentControllersStack?.first {
+            currentNavigationController?.setViewControllers([rootController, recognizedController], animated: true)
+        } else {
+            Log.error("Current dynamic links")
+        }
+    }
 
 }

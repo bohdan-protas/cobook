@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDynamicLinks
 
 struct TextFieldModel {
     var isEnabled: Bool = true
@@ -110,3 +111,24 @@ struct ArticlePreviewModel {
     var image: String?
 }
 
+struct FilterItemModel {
+    var id: Int?
+    var title: String?
+    var isSelected: Bool = false
+}
+
+struct UserFilters: Codable {
+    var interests: [Int] = []
+    var practicies: [Int] = []
+}
+
+struct DynamicLinkContainer: Codable {
+    let matchType: UInt?
+    let url: URL?
+
+    init(dynamicLink: DynamicLink) {
+        self.matchType = dynamicLink.matchType.rawValue
+        self.url = dynamicLink.url
+    }
+
+}

@@ -477,7 +477,7 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
                 case .add:
                     self.view?.goToCreatePost(cardID: businessCardId)
                 case .view(let model):
-                    let presenter = ArticleDetailsPresenter(albumID: model.id, cardID: businessCardId)
+                    let presenter = ArticleDetailsPresenter(albumID: model.id, articleID: nil)
                     self.view?.goToArticleDetails(presenter: presenter)
                 case .showMore:
                     break
