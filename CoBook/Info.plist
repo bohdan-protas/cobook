@@ -33,6 +33,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://dev.share.cobook.app/link</string>
+	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
@@ -85,9 +89,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-    <key>FirebaseDynamicLinksCustomDomains</key>
-    <array>
-      <string>https://dev.share.cobook.app/link</string>
-    </array>
 </dict>
 </plist>
