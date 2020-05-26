@@ -107,6 +107,8 @@ enum DynamicLinkConstants {
         }
     }
 
+    static let domainURIPrefix: URL = "https://dev.share.cobook.app/link"
+
     enum Path: String {
         case personalCard = "/personal_card"
         case businessCard = "/business_card"

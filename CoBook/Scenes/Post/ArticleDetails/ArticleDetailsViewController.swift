@@ -23,6 +23,12 @@ class ArticleDetailsViewController: BaseViewController {
         return placeholderView
     }()
 
+    // MARK: - Actions
+
+    @objc func shareTapped() {
+        presenter?.share()
+    }
+
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
@@ -48,6 +54,7 @@ extension ArticleDetailsViewController {
     func setupLayout() {
         tableView.delegate = self
         self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
     }
 
 }

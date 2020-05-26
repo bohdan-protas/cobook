@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FirebaseDynamicLinks
 
-protocol ArticleDetailsView: LoadDisplayableView, AlertDisplayableView, NavigableView {
+protocol ArticleDetailsView: LoadDisplayableView, AlertDisplayableView, NavigableView, ShareableView {
     func reload()
     func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?)
     func set(title: String?)
@@ -110,6 +111,14 @@ class ArticleDetailsPresenter: BasePresenter {
             break
         }
 
+    }
+
+    func share() {
+        let socialMetaTags = DynamicLinkSocialMetaTagParameters()
+        socialMetaTags.imageURL = URL.init(string: articleDetails?.photos?.first?.sourceUrl ?? "")
+        socialMetaTags.title = articleDetails?.title
+        socialMetaTags.descriptionText = articleDetails?.body
+        view?.showShareSheet(path: .article, parameters: [.articleID: "\(articleID ?? -1)", .albumID: "\(albumID)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
     }
 
 
@@ -245,13 +254,6 @@ extension ArticleDetailsPresenter: ArticleHeaderTableViewCellDelegate {
                 })
             )
         }
-
-        // share action
-        actions.append(
-            .init(title: "Поширити", style: .default, handler: { (_) in
-                Log.debug("Поширити")
-            })
-        )
 
         // edit action
         if isOwner {

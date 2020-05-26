@@ -193,6 +193,8 @@
 		B82B6B8E246E8E960041134F /* SavedContentTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6B8D246E8E960041134F /* SavedContentTitleTableViewCell.swift */; };
 		B82B6DB623FC118900BB0EFA /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B6DB523FC118900BB0EFA /* DesignableView.swift */; };
 		B83050AB247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */; };
+		B83050AD247C391C0060D9BE /* URL + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83050AC247C391C0060D9BE /* URL + Extensions.swift */; };
+		B83050AF247C3F6F0060D9BE /* ShareableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83050AE247C3F6F0060D9BE /* ShareableView.swift */; };
 		B8307F1B2406C8C700AFE578 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F1A2406C8C700AFE578 /* AppStorage.swift */; };
 		B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */; };
 		B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F222406FF9A00AFE578 /* KeychainStorageWrapper.swift */; };
@@ -535,6 +537,8 @@
 		B82B6B8D246E8E960041134F /* SavedContentTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedContentTitleTableViewCell.swift; sourceTree = "<group>"; };
 		B82B6DB523FC118900BB0EFA /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLinkCoordinatorService.swift; sourceTree = "<group>"; };
+		B83050AC247C391C0060D9BE /* URL + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL + Extensions.swift"; sourceTree = "<group>"; };
+		B83050AE247C3F6F0060D9BE /* ShareableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareableView.swift; sourceTree = "<group>"; };
 		B8307F1A2406C8C700AFE578 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageWrapper.swift; sourceTree = "<group>"; };
 		B8307F222406FF9A00AFE578 /* KeychainStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorageWrapper.swift; sourceTree = "<group>"; };
@@ -995,6 +999,7 @@
 				B823C6202431F585002CFB02 /* UIImage + AverageColor.swift */,
 				B825B22A244897E9007C70DF /* String + ImageGeneration.swift */,
 				B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */,
+				B83050AC247C391C0060D9BE /* URL + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1743,6 +1748,7 @@
 				B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */,
 				B8307F282407001800AFE578 /* AlertDisplayableView.swift */,
 				B8AB3F0A2422FF1B00E06E53 /* NavigableView.swift */,
+				B83050AE247C3F6F0060D9BE /* ShareableView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2385,6 +2391,7 @@
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
 				B8249247243DE64A00A1AC39 /* CardsOverviewPresenter.swift in Sources */,
 				B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */,
+				B83050AD247C391C0060D9BE /* URL + Extensions.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B8249252243E26A300A1AC39 /* CardsOverview.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
@@ -2480,6 +2487,7 @@
 				B82248DE242C0CD700392D10 /* CardSaveView.swift in Sources */,
 				B8559F8F243C8B0900787349 /* CardItemTableViewCell.swift in Sources */,
 				B824DA66245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift in Sources */,
+				B83050AF247C3F6F0060D9BE /* ShareableView.swift in Sources */,
 				B84B94E82403299F0007EB60 /* Endpoint.swift in Sources */,
 				B8DC630D2434FC1000A2ED58 /* CellConfigurator.swift in Sources */,
 				B823E8A7243F753D00EE1830 /* CardMapMarkerApiModel.swift in Sources */,

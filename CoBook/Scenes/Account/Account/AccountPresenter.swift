@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FirebaseDynamicLinks
 
-protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
+protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView, ShareableView {
     func setupLayout()
     func configureDataSource(with configurator: AccountDataSourceConfigurator)
     func updateDataSource(sections: [Section<Account.Item>])
@@ -83,7 +84,9 @@ class AccountPresenter: BasePresenter {
                 let createBusinessCardController: CreateBusinessCardViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: createBusinessCardController, animated: true)
 
-            case .inviteFriends: break
+            case .inviteFriends:
+                inviteFriends()
+
             case .statictics: break
             case .generateQrCode: break
             case .faq: break
@@ -118,6 +121,14 @@ class AccountPresenter: BasePresenter {
 // MARK: - Privates
 
 private extension AccountPresenter {
+
+    func inviteFriends() {
+        let socialMetaTags = DynamicLinkSocialMetaTagParameters()
+        socialMetaTags.imageURL = URL.init(string: AppStorage.User.Profile?.avatar?.sourceUrl ?? "")
+        socialMetaTags.title = "CoBook social meta tag title"
+        socialMetaTags.descriptionText = "Cobook social meta tag description"
+        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+    }
 
     func logout() {
         view?.startLoading()
