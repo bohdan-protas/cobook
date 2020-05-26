@@ -84,6 +84,7 @@ class ArticleDetailsPresenter: BasePresenter {
             case .success(let articles):
                 self?.articles = articles
                 if let id = self?.articleID ?? articles?.first?.id {
+                    self?.articleID = id
                     self?.view?.setPlaceholderView(false)
                     self?.fetchArticleDetails(articleID: id)
                 } else {
@@ -131,7 +132,6 @@ private extension ArticleDetailsPresenter {
     func updateViewDataSource() {
         // details
         dataSource?.sections[ArticleDetails.SectionAccessory.details.rawValue].items = [
-
             .header(model: ArticleDetails.HeaderModel(avatar: articleDetails?.cardInfo?.avatar?.sourceUrl,
                                                       firstName: "\(articleDetails?.cardInfo?.cardCreator?.firstName ?? "")",
                                                       lastName: "\(articleDetails?.cardInfo?.cardCreator?.lastName ?? "")",
