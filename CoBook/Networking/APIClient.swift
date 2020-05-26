@@ -145,9 +145,11 @@ extension APIClient {
                                      telephone: String,
                                      firstName: String,
                                      lastName: String,
+                                     invitedBy: String?,
                                      completion: @escaping (Result<SignInAPIResponseData?>) -> Void) {
 
-        let endpoint = SignUpEndpoint.initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName)
+        let params = APIRequestParameters.SignUp.Initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName, invitedBy: invitedBy)
+        let endpoint = SignUpEndpoint.initialize(parameters: params)
         performRequest(endpoint: endpoint, completion: completion)
     }
 

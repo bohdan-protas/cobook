@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FirebaseDynamicLinks
 
-protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
+protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, ShareableView {
     func setupLayout()
     func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?)
     func reload()
@@ -78,6 +79,14 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
             createPersonalCardViewController.presenter = presenter
         }
         view?.push(controller: createPersonalCardViewController, animated: true)
+    }
+
+    func share() {
+        let socialMetaTags = DynamicLinkSocialMetaTagParameters()
+        socialMetaTags.imageURL = URL.init(string: cardDetails?.avatar?.sourceUrl ?? "")
+        socialMetaTags.title = "\(cardDetails?.cardCreator?.firstName ?? "") \(cardDetails?.cardCreator?.lastName ?? "")"
+        socialMetaTags.descriptionText = cardDetails?.description
+        view?.showShareSheet(path: .personalCard, parameters: [.id: "\(personalCardId)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
     }
     
 

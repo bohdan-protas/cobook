@@ -52,8 +52,6 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         super.viewDidLoad()
 
         presenter?.attachView(self)
-        presenter?.onViewDidLoad()
-
         setupLayout()
     }
 
@@ -66,11 +64,18 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         presenter?.detachView()
     }
 
+    // MARK: - Actions
+
+    @objc func shareTapped() {
+        presenter?.share()
+    }
+
     // MARK: - BusinessCardDetailsView
 
     func setupLayout() {
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.title = "Бізнес візитка"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
         self.tableView.delegate = self
     }
 

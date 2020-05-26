@@ -9,8 +9,9 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import FirebaseDynamicLinks
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView {
     func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation)
     func reload()
@@ -85,10 +86,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         view = nil
     }
 
-    func onViewDidLoad() {
-
-    }
-
     func onViewWillAppear() {
         fetchDataSource()
     }
@@ -147,6 +144,14 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
                 callback?(place?.coordinate)
             }
         }
+    }
+
+    func share() {
+        let socialMetaTags = DynamicLinkSocialMetaTagParameters()
+        socialMetaTags.imageURL = URL.init(string: cardDetails?.avatar?.sourceUrl ?? "")
+        socialMetaTags.title = "\(cardDetails?.cardCreator?.firstName ?? "") \(cardDetails?.cardCreator?.lastName ?? "")"
+        socialMetaTags.descriptionText = cardDetails?.description
+        view?.showShareSheet(path: .businessCard, parameters: [.id: "\(businessCardId)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
     }
 
 
@@ -477,7 +482,7 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
                 case .add:
                     self.view?.goToCreatePost(cardID: businessCardId)
                 case .view(let model):
-                    let presenter = ArticleDetailsPresenter(albumID: model.id, cardID: businessCardId)
+                    let presenter = ArticleDetailsPresenter(albumID: model.id, articleID: nil)
                     self.view?.goToArticleDetails(presenter: presenter)
                 case .showMore:
                     break

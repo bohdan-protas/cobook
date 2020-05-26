@@ -7,18 +7,7 @@
 //
 
 import Foundation
-
-struct FilterItemModel {
-    var id: Int?
-    var title: String?
-    var isSelected: Bool = false
-}
-
-struct UserFilters: Codable {
-    var interests: [Int] = []
-    var practicies: [Int] = []
-
-}
+import FirebaseDynamicLinks
 
 // MARK: - AppStorage
 
@@ -34,6 +23,7 @@ enum AppStorage {
         case firstAppLaunch
         case isNeedToUpdateAccountData
         case filters
+        case pendingDynamicLink
     }
 
     enum State {
@@ -42,6 +32,9 @@ enum AppStorage {
 
         @UserDefaultValueStorageWrapper(key: Keys.isNeedToUpdateAccountData.rawValue, defaultValue: false)
         static var isNeedToUpdateAccountData: Bool
+
+        @UserDefaultObjectStorageWrapper(key: Keys.pendingDynamicLink.rawValue, defaultValue: nil)
+        static var pendingDynamicLink: DynamicLinkContainer?
     }
 
     enum User {
@@ -80,5 +73,3 @@ enum AppStorage {
     }
 
 }
-
-

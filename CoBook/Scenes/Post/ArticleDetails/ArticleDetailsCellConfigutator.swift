@@ -91,3 +91,74 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
 
 
 }
+
+// MARK: - Configurator
+
+extension ArticleDetailsPresenter {
+
+    var dataSourceConfigurator: ArticleDetailsCellConfigutator {
+        get {
+
+            var configurator = ArticleDetailsCellConfigutator()
+
+            configurator.articlePreviewConfigurator = CellConfigurator { (cell, model: ArticlePreviewModel, tableView, indexPath) -> ArticlePreviewTableViewCell in
+                cell.articleTitle.text = model.title
+                cell.articleImageView.setImage(withPath: model.image)
+                return cell
+            }
+
+            configurator.photoCollageConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
+                cell.dataSource = self
+                cell.prepareLayout()
+                return cell
+            }
+
+            configurator.headerConfigurator = CellConfigurator { (cell, model: ArticleDetails.HeaderModel, tableView, indexPath) -> ArticleHeaderTableViewCell in
+                cell.delegate = self
+
+                let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
+                let textPlaceholderImage = nameAbbr.image(size: cell.avatarImageView.frame.size)
+                cell.avatarImageView.setImage(withPath: model.avatar, placeholderImage: textPlaceholderImage)
+                cell.nameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+
+                cell.viewsCountLabel.text = model.viewersCount
+
+                if let date = model.date {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "dd.MM.yyyy"
+                    cell.dateLabel.text = formatter.string(from: date)
+                } else {
+                    cell.dateLabel.text = ""
+                }
+
+                return cell
+            }
+
+            configurator.descriptionCellConfigurator = CellConfigurator { (cell, model: ArticleDetails.DescriptionModel, tableView, indexPath) -> ArticleDescriptionTableViewCell in
+                cell.albumNameLabel.text = model.albumAvatarTitle
+                cell.albumImageView.setImage(withPath: model.albumAvatarImage)
+                cell.titleLabel.text = model.title
+                cell.descriptionTextView.text = model.desctiption
+                return cell
+            }
+
+            configurator.creatorCellConfigurator = CellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
+                let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
+                let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
+
+                cell.titleImageView.setImage(withPath: model.image, placeholderImage: textPlaceholderImage)
+                cell.proffesionLabel.text = model.profession
+                cell.telephoneNumberLabel.text = model.telephone
+                cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+
+                cell.selectionStyle = .none
+                cell.accessoryView = nil
+                return cell
+            }
+
+            return configurator
+        }
+    }
+
+
+}
