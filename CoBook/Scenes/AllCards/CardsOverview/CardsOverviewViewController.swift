@@ -14,10 +14,15 @@ class CardsOverviewViewController: BaseViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var filterBarButtonItem: UIBarButtonItem!
 
+    var searchController: UISearchController!
+    var searchResultsTableController: CardsOverviewSearchResultTableViewController!
+    var searchBar: UISearchBar!
+    var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
+
     /// Horizontal items bar view
     private lazy var itemsBarView: HorizontalItemsBarView = {
         let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: presenter.barItems)
-        view.delegate = self.presenter
+        view.delegate = self.self
         return view
     }()
 
@@ -28,12 +33,6 @@ class CardsOverviewViewController: BaseViewController {
         refreshControl.addTarget(self, action: #selector(refreshAllCardsData(_:)), for: .valueChanged)
         return refreshControl
     }()
-
-    private var searchController: UISearchController!
-    private var searchResultsTableController: CardsOverviewSearchResultTableViewController!
-    private var searchBar: UISearchBar!
-
-    var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
 
     var isSearchActived: Bool {
         get {
@@ -51,7 +50,7 @@ class CardsOverviewViewController: BaseViewController {
 
         setupLayout()
         presenter.attachView(self)
-        presenter.onViewDidLoad()
+        presenter.setup(useLoader: true)
     }
 
     deinit {
@@ -76,7 +75,7 @@ class CardsOverviewViewController: BaseViewController {
     }
 
     @objc private func refreshAllCardsData(_ sender: Any) {
-        presenter.refreshDataSource()
+        presenter.setup(useLoader: false)
     }
 
     @objc func onDidReceiveCardSaveOperationHandler(_ notification: Notification) {
@@ -210,6 +209,17 @@ private extension CardsOverviewViewController {
 
 }
 
+// MARK: - HorizontalItemsBarViewDelegate
+
+extension CardsOverviewViewController: HorizontalItemsBarViewDelegate {
+
+    func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
+        presenter.selectedBarItemAt(index: index)
+    }
+
+
+}
+
 // MARK: - UIPopoverPresentationControllerDelegate
 
 extension CardsOverviewViewController: UIPopoverPresentationControllerDelegate {
@@ -221,6 +231,7 @@ extension CardsOverviewViewController: UIPopoverPresentationControllerDelegate {
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
         return true
     }
+
 
 }
 
@@ -284,11 +295,9 @@ extension CardsOverviewViewController: UISearchBarDelegate {
 extension CardsOverviewViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
-        // Strip out all the leading and trailing spaces.
         let whitespaceCharacterSet = CharacterSet.whitespaces
         let strippedString = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
-
-        presenter.updateSearchResult(query: strippedString)
+        presenter.fetchSearchResult(query: strippedString)
     }
 
 
@@ -316,7 +325,7 @@ extension CardsOverviewViewController: UISearchControllerDelegate {
 extension CardsOverviewViewController: FilterViewControllerDelegate {
 
     func didFilterChanged(_ viewController: FilterViewController) {
-        presenter.refreshDataSource()
+        presenter.setup(useLoader: true)
     }
 
 

@@ -20,7 +20,7 @@ enum CardsOverview {
     }
 
     enum SectionAccessoryIndex: Int {
-        case header
+        case posts
         case cards
     }
 

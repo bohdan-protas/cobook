@@ -33,7 +33,6 @@ class SavedContentPresenter: BasePresenter {
 
     private var cardsTotalCount: Int = 0
     private var cards: [Int: [CardItemViewModel]] = [:]
-    private var cardMapMarkers: [GMSMarker] = []
     private var isInitialFetch: Bool = true
 
     /// Current pin request work item
