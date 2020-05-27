@@ -14,7 +14,7 @@ enum CardsEndpoint: Endpoint {
     case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
-    case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: Int? = nil, offset: Int? = nil)
+    case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: UInt? = nil, offset: UInt? = nil)
 
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
     case getSavedCardsLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)

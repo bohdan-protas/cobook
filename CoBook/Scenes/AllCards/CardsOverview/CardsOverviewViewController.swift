@@ -20,18 +20,23 @@ class CardsOverviewViewController: BaseViewController {
     var presenter: CardsOverviewViewPresenter = CardsOverviewViewPresenter()
 
     /// Horizontal items bar view
-    private lazy var itemsBarView: HorizontalItemsBarView = {
-        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 58)), dataSource: presenter.barItems)
+     lazy var itemsBarView: HorizontalItemsBarView = {
+        let view = HorizontalItemsBarView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 60)), dataSource: presenter.barItems)
         view.delegate = self.self
         return view
     }()
 
     /// pull refresh controll
-    private lazy var refreshControl: UIRefreshControl = {
+    lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.Theme.grayUI
         refreshControl.addTarget(self, action: #selector(refreshAllCardsData(_:)), for: .valueChanged)
         return refreshControl
+    }()
+
+    lazy var bottomLoaderView: BottomLoaderView = {
+        let bottomLoader = BottomLoaderView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 50)))
+        return bottomLoader
     }()
 
     var isSearchActived: Bool {
@@ -103,6 +108,14 @@ class CardsOverviewViewController: BaseViewController {
 
 extension CardsOverviewViewController: CardsOverviewView {
 
+    func showBottomLoaderView() {
+        tableView.tableFooterView = bottomLoaderView
+    }
+
+    func hideBottomLoaderView() {
+        tableView.tableFooterView = nil
+    }
+
     func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
         dataSource?.connect(to: self.tableView)
     }
@@ -126,14 +139,6 @@ extension CardsOverviewViewController: CardsOverviewView {
     func reloadSearch(resultText title: String) {
         searchResultsTableController.set(resultsLabel: title)
         searchResultsTableController.tableView.reloadData()
-    }
-
-    func reloadItemAt(indexPath: IndexPath) {
-        if isSearchActived {
-            searchResultsTableController.tableView.reloadRows(at: [indexPath], with: .none)
-        } else {
-            self.tableView.reloadRows(at: [indexPath], with: .none)
-        }
     }
 
     func openSettings() {
@@ -178,6 +183,7 @@ private extension CardsOverviewViewController {
         // Table View setup
         tableView.delegate = self
         tableView.refreshControl = refreshControl
+        tableView.estimatedRowHeight = 140
 
         // Search Result Contoller setup
         searchResultsTableController = UIStoryboard.allCards.initiateViewControllerFromType()
@@ -240,7 +246,13 @@ extension CardsOverviewViewController: UIPopoverPresentationControllerDelegate {
 extension CardsOverviewViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
+        switch tableView {
+        case self.tableView:
+            presenter.cellWillDisplayAt(indexPath: indexPath)
+            break
+        default:
+            break
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -377,7 +389,6 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
             self.actionSheetAlert(title: "Зберегти візитку до:", message: nil, actions: actions)
         }
     }
-
 
     func onSaveCard(cell: CardItemTableViewCell) {
         if isSearchActived {

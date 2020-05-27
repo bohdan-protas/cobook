@@ -12,19 +12,20 @@ import GoogleMaps
 
 protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardItemTableViewCellDelegate, MapTableViewCellDelegate {
     var isSearchActived: Bool { get }
-
     func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reload(section: CardsOverview.SectionAccessoryIndex)
-    func reloadItemAt(indexPath: IndexPath)
     func reload()
-
     func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reloadSearch(resultText: String)
-
     func openSettings()
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
+    func showBottomLoaderView()
+    func hideBottomLoaderView()
+}
 
+fileprivate enum Defaults {
+    static let pageSize: UInt = 15
 }
 
 class CardsOverviewViewPresenter: NSObject, BasePresenter {
@@ -41,7 +42,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
     /// cards data source
     private var searchCards: [CardItemViewModel] = []
-    private var cards: [CardsOverview.BarSectionsTypeIndex: [CardItemViewModel]] = [:]
+    private var cards: [CardsOverview.BarSectionsTypeIndex: PaginationPage<CardItemViewModel>] = [:]
 
     /// Current pin request work item
     private var pendingCardMapMarkersRequestWorkItem: DispatchWorkItem?
@@ -88,8 +89,6 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     // MARK: - Public
 
     func setup(useLoader: Bool) {
-        //let group = DispatchGroup()
-
         isInitialFetch = true
         if useLoader { view?.startLoading() }
         self.fetchSelectedBarSectionData(useLoader: false)
@@ -98,6 +97,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     func selectedBarItemAt(index: Int) {
         self.selectedBarItem = barItems[safe: index]
         self.fetchSelectedBarSectionData(useLoader: true)
+        self.view?.hideBottomLoaderView()
     }
 
     func selectedSearchCellAt(indexPath: IndexPath) {
@@ -112,6 +112,50 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             return
         }
         goToItem(item)
+    }
+
+    func cellWillDisplayAt(indexPath: IndexPath) {
+        switch selectedBarItem?.index {
+        case .none: break
+        case .some(let index):
+            guard let currentBarIndex = CardsOverview.BarSectionsTypeIndex(rawValue: index) else {
+                return
+            }
+            switch currentBarIndex {
+            case .allCards:
+                if let cardsCount = cards[.allCards]?.items.count, cardsCount - 1 == indexPath.row, cards[.allCards]?.isNeedToLoadNextPage ?? false {
+                    self.view?.showBottomLoaderView()
+                    fetchCards(type: nil, currentPaginationPage: cards[.allCards]) { (cards) in
+                        self.cards[.allCards]?.items.append(contentsOf: cards)
+                        self.view?.hideBottomLoaderView()
+                        self.update(section: .cards)
+                    }
+                }
+
+            case .personalCards:
+                if let cardsCount = cards[.personalCards]?.items.count, cardsCount - 1 == indexPath.row, cards[.personalCards]?.isNeedToLoadNextPage ?? false {
+                    self.view?.showBottomLoaderView()
+                    fetchCards(type: .personal, currentPaginationPage: cards[.personalCards]) { (cards) in
+                        self.cards[.personalCards]?.items.append(contentsOf: cards)
+                        self.view?.hideBottomLoaderView()
+                        self.update(section: .cards)
+                    }
+                }
+
+            case .businessCards:
+                if let cardsCount = cards[.businessCards]?.items.count, cardsCount - 1 == indexPath.row, cards[.businessCards]?.isNeedToLoadNextPage ?? false {
+                    self.view?.showBottomLoaderView()
+                    fetchCards(type: .business, currentPaginationPage: cards[.businessCards]) { (cards) in
+                        self.cards[.personalCards]?.items.append(contentsOf: cards)
+                        self.view?.hideBottomLoaderView()
+                        self.update(section: .cards)
+                    }
+                }
+
+            default:
+                break
+            }
+        }
     }
 
     func saveCardAt(indexPath: IndexPath, toFolder folderID: Int?, completion: ((_ success: Bool) -> Void)?) {
@@ -142,26 +186,32 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
     }
 
-    func fetchSearchResult(query: String) {
-        pendingSearchResultWorkItem?.cancel()
-        if query.isEmpty {
-            searchDataSource?[.posts].items.removeAll()
-            view?.reloadSearch(resultText: "Немає результатів пошуку")
-            return
+    func updateCardItem(id: Int, withSavedFlag flag: Bool) {
+        if let index = cards[.allCards]?.items.firstIndex(where: { $0.id == id }) {
+            cards[.allCards]?.items[index].isSaved = flag
         }
 
-        pendingSearchResultWorkItem = DispatchWorkItem { [weak self] in
-            self?.fetchCards(searchQuery: query) { [weak self] (searchCards) in
-                self?.searchCards = searchCards
-                self?.updateViewDataSource()
-                self?.view?.reloadSearch(resultText: searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count) візитки")
-            }
+        if let index = cards[.personalCards]?.items.firstIndex(where: { $0.id == id }) {
+            cards[.personalCards]?.items[index].isSaved = flag
         }
 
-        if pendingSearchResultWorkItem != nil, !(pendingSearchResultWorkItem?.isCancelled ?? true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingSearchResultWorkItem!)
+        if let index = cards[.businessCards]?.items.firstIndex(where: { $0.id == id }) {
+            cards[.businessCards]?.items[index].isSaved = flag
         }
+
+        if let index = searchCards.firstIndex(where: { $0.id == id }) {
+            searchCards[index].isSaved = flag
+        }
+
+        updateViewDataSource()
     }
+
+
+}
+
+// MARK: - Data fetching
+
+extension CardsOverviewViewPresenter {
 
     func fetchMapMarkersInRegionFittedBy(topLeft: CoordinateApiModel, bottomRight: CoordinateApiModel, completion: (([GMSMarker]) -> Void)?) {
         pendingCardMapMarkersRequestWorkItem?.cancel()
@@ -174,15 +224,15 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                             let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
                             let marker = GMSMarker(position: position)
                             switch apiModel.type {
-                                case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
-                                case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
+                            case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
+                            case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
                             }
                             return marker
                         } else { return nil }
                     }
                     completion?(markers)
                 case .failure(let error):
-                     self?.view?.errorAlert(message: error.localizedDescription)
+                    self?.view?.errorAlert(message: error.localizedDescription)
                 }
             }
         }
@@ -190,26 +240,6 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         if pendingCardMapMarkersRequestWorkItem != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingCardMapMarkersRequestWorkItem!)
         }
-    }
-
-    func updateCardItem(id: Int, withSavedFlag flag: Bool) {
-        if let index = cards[.allCards]?.firstIndex(where: { $0.id == id }) {
-            cards[.allCards]?[index].isSaved = flag
-        }
-
-        if let index = cards[.personalCards]?.firstIndex(where: { $0.id == id }) {
-            cards[.personalCards]?[index].isSaved = flag
-        }
-
-        if let index = cards[.businessCards]?.firstIndex(where: { $0.id == id }) {
-            cards[.businessCards]?[index].isSaved = flag
-        }
-
-        if let index = searchCards.firstIndex(where: { $0.id == id }) {
-            searchCards[index].isSaved = flag
-        }
-
-        updateViewDataSource()
     }
 
     func fetchUserFolders(completion: (([FolderApiModel]) -> Void)?) {
@@ -244,6 +274,28 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
     }
 
+    func fetchSearchResult(query: String) {
+        pendingSearchResultWorkItem?.cancel()
+        if query.isEmpty {
+            searchDataSource?[.posts].items.removeAll()
+            view?.reloadSearch(resultText: "Немає результатів пошуку")
+            return
+        }
+
+        pendingSearchResultWorkItem = DispatchWorkItem { [weak self] in
+            self?.fetchCards(searchQuery: query) { [weak self] (searchCards) in
+                self?.searchCards = searchCards
+                self?.updateViewDataSource()
+                self?.view?.reloadSearch(resultText: searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count) візитки")
+            }
+        }
+
+        if pendingSearchResultWorkItem != nil, !(pendingSearchResultWorkItem?.isCancelled ?? true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingSearchResultWorkItem!)
+        }
+    }
+
+
 }
 
 // MARK: - Privates
@@ -259,21 +311,22 @@ private extension CardsOverviewViewPresenter {
             }
             switch barIndex {
             case .allCards:
-                if cards[barIndex]?.isEmpty ?? true || isInitialFetch {
+                if cards[barIndex]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
-                    fetchCards { [unowned self] (cards) in
-                        self.cards[barIndex] = cards
-                        self.reload(section: .cards)
+                    fetchCards { [weak self] (cards) in
+                        self?.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
+                        self?.cards[barIndex]?.isNeedToLoadNextPage = true
+                        self?.reload(section: .cards)
                     }
                 } else {
                     self.reload(section: .cards)
                 }
 
             case .personalCards:
-                if cards[barIndex]?.isEmpty ?? true || isInitialFetch {
+                if cards[barIndex]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
                     fetchCards(type: .personal) { [unowned self] (cards) in
-                        self.cards[barIndex] = cards
+                        self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
                     }
                 } else {
@@ -281,10 +334,10 @@ private extension CardsOverviewViewPresenter {
                 }
 
             case .businessCards:
-                if cards[barIndex]?.isEmpty ?? true || isInitialFetch {
+                if cards[barIndex]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
                     fetchCards(type: .business) { [unowned self] (cards) in
-                        self.cards[barIndex] = cards
+                        self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
                     }
                 } else {
@@ -298,14 +351,18 @@ private extension CardsOverviewViewPresenter {
         }
     }
 
-    func fetchCards(searchQuery: String? = nil, type: CardType? = nil, completion: (([CardItemViewModel]) -> Void)?) {
+    func fetchCards(searchQuery: String? = nil, type: CardType? = nil, currentPaginationPage: PaginationPage<CardItemViewModel>? = nil, completion: (([CardItemViewModel]) -> Void)?) {
         let interests = AppStorage.User.Filters?.interests
         let practiceTypeIds = AppStorage.User.Filters?.practicies
 
-        APIClient.default.getCardsList(type: type?.rawValue, interestIds: interests, practiseTypeIds: practiceTypeIds, search: searchQuery) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            strongSelf.view?.stopLoading()
+        APIClient.default.getCardsList(type: type?.rawValue,
+                                       interestIds: interests,
+                                       practiseTypeIds: practiceTypeIds,
+                                       search: searchQuery,
+                                       limit:currentPaginationPage?.pageSize,
+                                       offset: currentPaginationPage?.offset) { [weak self] (result) in
 
+            guard let strongSelf = self else { return }
             switch result {
             case let .success(response):
                 let cards = response?.compactMap { CardItemViewModel(id: $0.id,
@@ -360,20 +417,32 @@ private extension CardsOverviewViewPresenter {
     }
 
     func updateViewDataSource() {
+        // Posts section
+        // TODO...
+
+        // Cards section
         let barItemIndex = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1)
         switch barItemIndex {
         case .none: break
         case .some(let index):
             switch index {
                 case .allCards, .personalCards, .businessCards:
-                    let cardsToShow = cards[index] ?? []
+                    let cardsToShow = cards[index]?.items ?? []
                     dataSource?[.cards].items = cardsToShow.compactMap { .cardItem(model: $0) }
                 case .inMyRegionCards:
                     dataSource?[.cards].items = [.map]
             }
         }
 
+        // Search cards
         searchDataSource?[.posts].items = searchCards.map { .cardItem(model: $0) }
+    }
+
+    func update(section: CardsOverview.SectionAccessoryIndex) {
+        self.view?.stopLoading()
+        self.updateViewDataSource()
+        self.isInitialFetch = false
+        self.view?.reload()
     }
 
     func reload(section: CardsOverview.SectionAccessoryIndex) {

@@ -382,8 +382,8 @@ extension APIClient {
                       interestIds: [Int]? = nil,
                       practiseTypeIds: [Int]? = nil,
                       search: String? = nil,
-                      limit: Int? = nil,
-                      offset: Int? = nil,
+                      limit: UInt? = nil,
+                      offset: UInt? = nil,
                       completion: @escaping (Result<[CardItemApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardsList(type: type, interestsIds: interestIds, practiseTypeIds: practiseTypeIds, search: search, limit: limit, offset: offset)

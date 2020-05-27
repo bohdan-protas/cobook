@@ -154,6 +154,9 @@
 		B825B22B244897E9007C70DF /* String + ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825B22A244897E9007C70DF /* String + ImageGeneration.swift */; };
 		B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825B6F824391448002A27EC /* SearchTableViewCell.swift */; };
 		B825B6FB24391448002A27EC /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B825B6F924391448002A27EC /* SearchTableViewCell.xib */; };
+		B825FC3E247EA8F000DB035D /* BottomLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FC3D247EA8F000DB035D /* BottomLoaderView.swift */; };
+		B825FC40247EA90600DB035D /* BottomLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B825FC3F247EA90600DB035D /* BottomLoaderView.xib */; };
+		B825FC42247ED02E00DB035D /* PaginationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FC41247ED02E00DB035D /* PaginationPage.swift */; };
 		B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8263C71245345250075A499 /* StaticMapTableViewCell.swift */; };
 		B8263C74245345250075A499 /* StaticMapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8263C72245345250075A499 /* StaticMapTableViewCell.xib */; };
 		B826B0E623F4109C009041DD /* DesignableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B0E523F4109C009041DD /* DesignableProgressView.swift */; };
@@ -498,6 +501,9 @@
 		B825B22A244897E9007C70DF /* String + ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + ImageGeneration.swift"; sourceTree = "<group>"; };
 		B825B6F824391448002A27EC /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		B825B6F924391448002A27EC /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		B825FC3D247EA8F000DB035D /* BottomLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLoaderView.swift; sourceTree = "<group>"; };
+		B825FC3F247EA90600DB035D /* BottomLoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomLoaderView.xib; sourceTree = "<group>"; };
+		B825FC41247ED02E00DB035D /* PaginationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationPage.swift; sourceTree = "<group>"; };
 		B8263C71245345250075A499 /* StaticMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticMapTableViewCell.swift; sourceTree = "<group>"; };
 		B8263C72245345250075A499 /* StaticMapTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaticMapTableViewCell.xib; sourceTree = "<group>"; };
 		B826B0E523F4109C009041DD /* DesignableProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableProgressView.swift; sourceTree = "<group>"; };
@@ -1022,6 +1028,7 @@
 			children = (
 				B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */,
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
+				B825FC3C247EA8C700DB035D /* BottomLoaderView */,
 				B884AADF245F71F400ACC0D7 /* PhotosPlaceholderView */,
 				B820793B2444725A00FCCC17 /* CorneredEndgeView */,
 				B823DD78244348A600A74495 /* SearchResultHeaderView */,
@@ -1267,6 +1274,15 @@
 			path = EmployersSearchTableViewCell;
 			sourceTree = "<group>";
 		};
+		B825FC3C247EA8C700DB035D /* BottomLoaderView */ = {
+			isa = PBXGroup;
+			children = (
+				B825FC3D247EA8F000DB035D /* BottomLoaderView.swift */,
+				B825FC3F247EA90600DB035D /* BottomLoaderView.xib */,
+			);
+			path = BottomLoaderView;
+			sourceTree = "<group>";
+		};
 		B8263C70245345010075A499 /* StaticMapTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1296,6 +1312,7 @@
 				B823E8A2243F590200EE1830 /* PermissionService.swift */,
 				B824AD7F2445FAE700410C23 /* ImagePicker.swift */,
 				B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */,
+				B825FC41247ED02E00DB035D /* PaginationPage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2171,6 +2188,7 @@
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
 				B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */,
 				B884AAE1245F720D00ACC0D7 /* PhotosPlaceholderView.xib in Resources */,
+				B825FC40247EA90600DB035D /* BottomLoaderView.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
 				B835FFC3245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib in Resources */,
@@ -2399,6 +2417,7 @@
 				B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B8255A22243A26B400C4169D /* SearchTableViewController.swift in Sources */,
+				B825FC3E247EA8F000DB035D /* BottomLoaderView.swift in Sources */,
 				B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */,
 				B82B6B8E246E8E960041134F /* SavedContentTitleTableViewCell.swift in Sources */,
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
@@ -2502,6 +2521,7 @@
 				B8559F85243C81D500787349 /* MapDirectionTableViewCell.swift in Sources */,
 				B82A211724212CB600D0D9F5 /* Logger.swift in Sources */,
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
+				B825FC42247ED02E00DB035D /* PaginationPage.swift in Sources */,
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
 				B835FFBE245F300900189406 /* CreateArticlePresenter.swift in Sources */,
 				B82206482463006400D49D16 /* RequestParameters.swift in Sources */,
