@@ -36,8 +36,8 @@ class SignInViewController: BaseViewController, SignInView {
         })
         let cancelAction = UIAlertAction(title: "Cancel".localized, style: .destructive, handler: nil)
 
-        alertController.addAction(okAction)
         alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
 
         return alertController
     }()
@@ -65,7 +65,6 @@ class SignInViewController: BaseViewController, SignInView {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-
         loginTextField.text = AppStorage.User.Profile?.telephone.number
     }
 
