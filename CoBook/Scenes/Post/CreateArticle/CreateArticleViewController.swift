@@ -121,7 +121,7 @@ extension CreateArticleViewController: CreateArticleView {
     }
 
     func set(articleTitle: String?) {
-        self.headerTextField.text = title
+        self.headerTextField.text = articleTitle
     }
 
     func set(acticleBody: String?) {
