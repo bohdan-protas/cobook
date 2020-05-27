@@ -47,16 +47,14 @@ extension CardsOverviewViewPresenter {
 
     var dataSourceConfigurator: CardsOverviewViewDataSourceConfigurator {
         get {
-
             let dataSourceConfigurator = CardsOverviewViewDataSourceConfigurator()
 
             // cardItemCellConfigurator
             dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> CardItemTableViewCell in
                 cell.delegate = self.view
-                let textPlaceholderImage = model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
-                cell.avatarImageView.setImage(withPath: model.avatarPath, placeholderImage: textPlaceholderImage)
+                cell.avatarImageView.setImage(withPath: model.avatarPath,
+                                              placeholderImage: model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size))
                 cell.type = model.type
-
                 switch model.type {
                 case .personal:
                     cell.nameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
@@ -66,7 +64,6 @@ extension CardsOverviewViewPresenter {
 
                 cell.professionLabel.text = model.profession
                 cell.telNumberLabel.text = model.telephoneNumber
-                //cell.saveButton.isHidden = self.view?.isSearchActived ?? true
                 cell.saveButton.isSelected = model.isSaved
                 return cell
             }
@@ -76,7 +73,7 @@ extension CardsOverviewViewPresenter {
                 cell.heightConstraint.constant = tableView.frame.height - 58
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
-                cell.delegate = self
+                cell.delegate = self.view
                 return cell
             }
 

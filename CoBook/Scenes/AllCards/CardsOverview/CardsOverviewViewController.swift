@@ -135,7 +135,6 @@ extension CardsOverviewViewController: CardsOverviewView {
         } else {
             self.tableView.reloadRows(at: [indexPath], with: .none)
         }
-
     }
 
     func openSettings() {
@@ -168,20 +167,6 @@ extension CardsOverviewViewController: CardsOverviewView {
         personalCardDetailsViewController.presenter = presenter
         self.navigationController?.pushViewController(personalCardDetailsViewController, animated: true)
         searchController.isActive = false
-    }
-
-}
-
-// MARK: - UIPopoverPresentationControllerDelegate
-
-extension CardsOverviewViewController: UIPopoverPresentationControllerDelegate {
-
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-
-    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-        return true
     }
 
 }
@@ -225,9 +210,27 @@ private extension CardsOverviewViewController {
 
 }
 
+// MARK: - UIPopoverPresentationControllerDelegate
+
+extension CardsOverviewViewController: UIPopoverPresentationControllerDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return true
+    }
+
+}
+
 // MARK: - UITableViewDelegate
 
 extension CardsOverviewViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -281,7 +284,6 @@ extension CardsOverviewViewController: UISearchBarDelegate {
 extension CardsOverviewViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
-
         // Strip out all the leading and trailing spaces.
         let whitespaceCharacterSet = CharacterSet.whitespaces
         let strippedString = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
@@ -334,13 +336,17 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
 
             // general list
             actions.append(UIAlertAction(title: "Загальний список", style: .default, handler: { _ in
-                self.presenter.saveCardAt(indexPath: index, toFolder: nil)
+                self.presenter.saveCardAt(indexPath: index, toFolder: nil, completion: { isSuccess in
+                    if isSuccess { cell.saveButton.isSelected.toggle() }
+                })
             }))
 
             // current stored folders
             let folderSavingActions: [UIAlertAction] = items.compactMap { folder in
                 UIAlertAction.init(title: folder.title, style: .default, handler: { [unowned self] _ in
-                    self.presenter.saveCardAt(indexPath: index, toFolder: folder.id)
+                    self.presenter.saveCardAt(indexPath: index, toFolder: folder.id, completion: { isSuccess in
+                        if isSuccess { cell.saveButton.isSelected.toggle() }
+                    })
                 })
             }
             actions.append(contentsOf: folderSavingActions)
@@ -349,7 +355,9 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
             actions.append(UIAlertAction(title: "Створити новий список", style: .default, handler: { _ in
                 self.newFolderAlert(folderName: nil) { (folderTitle) in
                     self.presenter.createFolder(title: folderTitle) { (folder) in
-                        self.presenter.saveCardAt(indexPath: index, toFolder: folder.index)
+                        self.presenter.saveCardAt(indexPath: index, toFolder: folder.index, completion: { isSuccess in
+                            if isSuccess { cell.saveButton.isSelected.toggle() }
+                        })
                     }
                 }
             }))
@@ -359,22 +367,42 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
 
             self.actionSheetAlert(title: "Зберегти візитку до:", message: nil, actions: actions)
         }
-
-
     }
 
 
     func onSaveCard(cell: CardItemTableViewCell) {
         if isSearchActived {
             if let index = searchResultsTableController.tableView.indexPath(for: cell) {
-                presenter.saveCardAt(indexPath: index, toFolder: nil)
+                presenter.saveCardAt(indexPath: index, toFolder: nil, completion: { isSuccess in
+                    if isSuccess { cell.saveButton.isSelected.toggle() }
+                })
             }
         } else {
             if let index = tableView.indexPath(for: cell) {
-                presenter.saveCardAt(indexPath: index, toFolder: nil)
+                presenter.saveCardAt(indexPath: index, toFolder: nil, completion: { isSuccess in
+                    if isSuccess { cell.saveButton.isSelected.toggle() }
+                })
             }
         }
+    }
 
+
+}
+
+// MARK: - MapTableViewCellDelegate
+
+extension CardsOverviewViewController: MapTableViewCellDelegate {
+
+    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
+        let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
+        let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
+        presenter.fetchMapMarkersInRegionFittedBy(topLeft: topLeftRectCoordinate, bottomRight: bottomRightRectCoordinate) { markers in
+            cell.markers = markers
+        }
+    }
+
+    func openSettingsAction(_ cell: MapTableViewCell) {
+        openSettings()
     }
 
 

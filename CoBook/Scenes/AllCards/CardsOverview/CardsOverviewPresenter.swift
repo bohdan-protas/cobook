@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import GoogleMaps
 
-protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardItemTableViewCellDelegate {
+protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardItemTableViewCellDelegate, MapTableViewCellDelegate {
     var isSearchActived: Bool { get }
 
     func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
@@ -45,8 +45,10 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     private var businessCards: [CardItemViewModel] = []
     private var searchCards: [CardItemViewModel] = []
 
+    private var cards: [Int: [CardItemViewModel]] = [:]
+
     /// Current pin request work item
-    private var pendingCardPinRequestWorkItem: DispatchWorkItem?
+    private var pendingCardMapMarkersRequestWorkItem: DispatchWorkItem?
 
     /// Current card search request work item
     private var pendingSearchResultWorkItem: DispatchWorkItem?
@@ -57,10 +59,10 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
     override init() {
         self.barItems = [
-            BarItem(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "Всі\nвізитки"),
-            BarItem(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "Персональні\nвізитки"),
-            BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "Бізнес\nвізитки"),
-            BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "В моєму\nрегіоні"),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "BarItem.allCards".localized),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first
         super.init()
@@ -139,6 +141,35 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         }
     }
 
+    func fetchMapMarkersInRegionFittedBy(topLeft: CoordinateApiModel, bottomRight: CoordinateApiModel, completion: (([GMSMarker]) -> Void)?) {
+        pendingCardMapMarkersRequestWorkItem?.cancel()
+        pendingCardMapMarkersRequestWorkItem = DispatchWorkItem { [weak self] in
+            APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeft, bottomRightRectCoordinate: bottomRight) { [weak self] (result) in
+                switch result {
+                case .success(let response):
+                    let markers: [GMSMarker] = (response ?? []).compactMap { apiModel in
+                        if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
+                            let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
+                            let marker = GMSMarker(position: position)
+                            switch apiModel.type {
+                                case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
+                                case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
+                            }
+                            return marker
+                        } else { return nil }
+                    }
+                    completion?(markers)
+                case .failure(let error):
+                     self?.view?.errorAlert(message: error.localizedDescription)
+                }
+            }
+        }
+
+        if pendingCardMapMarkersRequestWorkItem != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingCardMapMarkersRequestWorkItem!)
+        }
+    }
+
     func selectedSearchCellAt(indexPath: IndexPath) {
         guard let item = searchDataSource?.sections[safe: indexPath.section]?.items[indexPath.item] else {
             return
@@ -153,7 +184,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         goToItem(item)
     }
 
-    func saveCardAt(indexPath: IndexPath, toFolder folderID: Int?) {
+    func saveCardAt(indexPath: IndexPath, toFolder folderID: Int?, completion: ((_ success: Bool) -> Void)?) {
         var cardOwerviewItem: CardsOverview.Items?
 
         switch view?.isSearchActived {
@@ -169,46 +200,13 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
 
         if let item = cardOwerviewItem {
             switch item {
-
             case .cardItem(let model):
                 switch model.isSaved {
                 case false:
-                    if !self.isNewFolderSaving { view?.startLoading() }
-                    isNewFolderSaving = false
-                    APIClient.default.addCardToFavourites(id: model.id, folderID: folderID) { [weak self] (result) in
-                        switch result {
-                        case .success:
-                            self?.updateCardItem(id: model.id, withSavedFlag: true)
-                            self?.view?.reloadItemAt(indexPath: indexPath)
-                            NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
-                            self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
-                        case .failure:
-                            self?.view?.stopLoading(success: false)
-                        }
-                    }
-                    break
-
+                    saveCard(model, toFolder: folderID, completion: completion)
                 case true:
-                    if !self.isNewFolderSaving { view?.startLoading() }
-                    isNewFolderSaving = false
-                    APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
-                        switch result {
-                        case .success:
-                            self?.updateCardItem(id: model.id, withSavedFlag: false)
-                            self?.view?.reloadItemAt(indexPath: indexPath)
-                            if self?.view?.isSearchActived ?? false {
-                                self?.view?.reload(section: .cards)
-                            }
-                            NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
-                            self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
-                        case .failure:
-                            self?.view?.stopLoading(success: false)
-                        }
-                    }
-                    break
+                    unsaveCard(model, completion: completion)
                 }
-
-                break
             default: break
             }
         }
@@ -322,6 +320,40 @@ private extension CardsOverviewViewPresenter {
         searchDataSource?[CardsOverview.SectionAccessoryIndex.header].items = searchCards.map { .cardItem(model: $0) }
     }
 
+    func saveCard(_ model: CardItemViewModel, toFolder folderID: Int?, completion: ((_ success: Bool) -> Void)?) {
+        if !self.isNewFolderSaving { view?.startLoading() }
+        isNewFolderSaving = false
+        APIClient.default.addCardToFavourites(id: model.id, folderID: folderID) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.updateCardItem(id: model.id, withSavedFlag: true)
+                NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
+                completion?(true)
+                self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
+            case .failure:
+                completion?(false)
+                self?.view?.stopLoading(success: false)
+            }
+        }
+    }
+
+    func unsaveCard(_ model: CardItemViewModel, completion: ((_ success: Bool) -> Void)?) {
+        if !self.isNewFolderSaving { view?.startLoading() }
+        isNewFolderSaving = false
+        APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.updateCardItem(id: model.id, withSavedFlag: false)
+                NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
+                completion?(true)
+                self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
+            case .failure:
+                completion?(false)
+                self?.view?.stopLoading(success: false)
+            }
+        }
+    }
+
     func goToItem(_ item: CardsOverview.Items) {
         switch item {
         case .cardItem(let model):
@@ -355,55 +387,4 @@ extension CardsOverviewViewPresenter: HorizontalItemsBarViewDelegate {
 
 
 }
-
-// MARK: - MapTableViewCellDelegate
-
-extension CardsOverviewViewPresenter: MapTableViewCellDelegate {
-    
-    func openSettingsAction(_ cell: MapTableViewCell) {
-        view?.openSettings()
-    }
-
-    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
-        pendingCardPinRequestWorkItem?.cancel()
-
-        pendingCardPinRequestWorkItem = DispatchWorkItem { [weak self] in
-            let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
-            let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
-
-            APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate) { [weak self] (result) in
-                switch result {
-                case .success(let response):
-                    let markers: [GMSMarker] = response?.compactMap { apiModel in
-                        if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
-                            let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
-                            let marker = GMSMarker(position: position)
-
-                            switch apiModel.type {
-                            case .personal:
-                                marker.icon = UIImage(named: "ic_mapmarker_personal")
-                            case .business:
-                                marker.icon = UIImage(named: "ic_mapmarker_business")
-                            }
-                            return marker
-                        } else {
-                            return nil
-                        }
-                    } ?? []
-
-                    cell.markers = markers
-                case .failure(let error):
-                    self?.view?.errorAlert(message: error.localizedDescription)
-                }
-            }
-        }
-
-        if pendingCardPinRequestWorkItem != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingCardPinRequestWorkItem!)
-        }
-    }
-
-
-}
-
 
