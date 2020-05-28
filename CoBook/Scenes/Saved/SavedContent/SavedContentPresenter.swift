@@ -385,13 +385,13 @@ private extension SavedContentPresenter {
     func updateViewDataSource() {
         // Post preview section
         dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items = [
-            .title(model: SavedContent.TitleModel(title: "Збережені пости", counter: albumPreviewSection?.items.count ?? 0)),
+            .title(model: ActionTitleModel(title: "Збережені пости", counter: albumPreviewSection?.items.count ?? 0)),
         ]
         if !(albumPreviewSection?.items.isEmpty ?? true) {
             dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.postPreview(model: albumPreviewSection))
         }
         dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.sectionSeparator)
-        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.title(model: SavedContent.TitleModel(title: "Збережені візитки",
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.title(model: ActionTitleModel(title: "Збережені візитки",
                                                                                                                                   counter: cardsTotalCount,
                                                                                                                                   actionTitle: "Додати cписок",
                                                                                                                                   actionHandler: { self.view?.createFolder() })))

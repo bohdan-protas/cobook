@@ -16,7 +16,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
     let getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>
     let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
     let titleDescriptionCellConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>
-    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
+    let postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
+    let actionTitleConfigurator: CellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
 
     func reuseIdentifier(for item: PersonalCardDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -34,6 +35,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return titleDescriptionCellConfigurator.reuseIdentifier
         case .postPreview:
             return postPreviewConfigurator.reuseIdentifier
+        case .actionTitle:
+            return actionTitleConfigurator.reuseIdentifier
         }
     }
 
@@ -53,6 +56,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return titleDescriptionCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         case .postPreview(let model):
             return postPreviewConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .actionTitle(let model):
+            return actionTitleConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -64,6 +69,7 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
         socialListConfigurator.registerCells(in: tableView)
         titleDescriptionCellConfigurator.registerCells(in: tableView)
         postPreviewConfigurator.registerCells(in: tableView)
+        actionTitleConfigurator.registerCells(in: tableView)
     }
 }
 
@@ -115,12 +121,23 @@ extension PersonalCardDetailsPresenter {
                 return cell
             }
 
-            //
+            // postPreviewConfigurator
             let postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.topConstaint.constant = 0
+                cell.separatorView.isHidden = true
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
                 cell.dataSource = self
                 cell.collectionView.reloadData()
+                return cell
+            }
+
+            // actionTitleConfigurator
+            let actionTitleConfigurator = CellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
+                cell.titleLabel.text = model.title
+                cell.countLabel.text = "\( model.counter ?? 0)"
+                cell.actionButton.setTitle(model.actionTitle, for: .normal)
+                cell.actionHandler = model.actionHandler
                 return cell
             }
 
@@ -130,7 +147,8 @@ extension PersonalCardDetailsPresenter {
                                                              getInTouchCellConfigurator: getInTouchCellConfigurator,
                                                              socialListConfigurator: socialListConfigurator,
                                                              titleDescriptionCellConfigurator: titleDescriptionCellConfigurator,
-                                                             postPreviewConfigurator: postPreviewConfigurator)
+                                                             postPreviewConfigurator: postPreviewConfigurator,
+                                                             actionTitleConfigurator: actionTitleConfigurator)
 
         }
     }

@@ -8,12 +8,19 @@
 
 import UIKit
 
+struct ActionTitleModel {
+    var title: String?
+    var counter: Int?
+    var actionTitle: String?
+    var actionHandler: (() -> Void)?
+}
+
 enum SavedContent {
 
     enum Cell {
         case cardItem(model: CardItemViewModel)
         case map
-        case title(model: TitleModel)
+        case title(model: ActionTitleModel)
         case sectionSeparator
         case postPreview(model: PostPreview.Section?)
     }
@@ -30,13 +37,6 @@ enum SavedContent {
         case inMyRegionCards = -4
     }
 
-    struct TitleModel {
-        var title: String?
-        var counter: Int?
-        var actionTitle: String?
-        var actionHandler: (() -> Void)?
-    }
-
     enum PostPreviewDataSourceID: String {
         case albumPreviews
     }
@@ -47,7 +47,7 @@ class SavedContentCellConfigurator: CellConfiguratorType {
 
     var cardItemCellConfigurator: CellConfigurator<CardItemViewModel, ContactableCardItemTableViewCell>?
     var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
-    var titleConfigurator: CellConfigurator<SavedContent.TitleModel, SavedContentTitleTableViewCell>?
+    var titleConfigurator: CellConfigurator<ActionTitleModel, SavedContentTitleTableViewCell>?
     var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
     var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
@@ -107,7 +107,7 @@ extension SavedContentPresenter {
             let dataSourceConfigurator = SavedContentCellConfigurator()
 
             // titleConfigurator
-            dataSourceConfigurator.titleConfigurator = CellConfigurator { (cell, model: SavedContent.TitleModel, tableView, indexPath) -> SavedContentTitleTableViewCell in
+            dataSourceConfigurator.titleConfigurator = CellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> SavedContentTitleTableViewCell in
                 cell.titleLabel.text = model.title
                 cell.counterLabel.text = "\( model.counter ?? 0)"
                 cell.actionButton.setTitle(model.actionTitle, for: .normal)

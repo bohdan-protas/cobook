@@ -21,6 +21,7 @@ class AlbumPreviewItemsTableViewCell: UITableViewCell {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var separatorView: UIView!
     @IBOutlet var topConstaint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
 
     weak var delegate: AlbumPreviewItemsViewDelegate?
     weak var dataSource: AlbumPreviewItemsViewDataSource?

@@ -314,14 +314,16 @@ private extension BusinessCardDetailsPresenter {
         ]
 
         // Post preview section
-        dataSource?[.postPreview].items.removeAll()
         albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
+
+        dataSource?[.postPreview].items.removeAll()
+        dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "Створені статті:", counter: self.albumPreviewItems.count)))
         if isUserOwner {
             albumPreviewSection?.items.append(.add(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
         }
         albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { PostPreview.Item.view($0) })
         if !(albumPreviewSection?.items.isEmpty ?? true) {
-            dataSource?[.postPreview].items = [.postPreview(model: albumPreviewSection)]
+            dataSource?[.postPreview].items.append(.postPreview(model: albumPreviewSection))
         }
 
         // card details section
