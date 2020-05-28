@@ -56,6 +56,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     func setupDataSource() {
         let group = DispatchGroup()
         var errors = [Error]()
+        var items: [PostPreview.Item] = []
         view?.startLoading()
 
         // fetch card details
@@ -74,21 +75,14 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 
         // fetch albums list
         group.enter()
-        APIClient.default.getAlbumsList(cardID: personalCardId) { [weak self] (result) in
-            guard let strongSelf = self else { return }
+        APIClient.default.getAlbumsList(cardID: personalCardId) { (result) in
             switch result {
             case .success(let response):
                 let albumPreviewItems = response?.compactMap { PostPreview.Item.Model(albumID: $0.id,
                                                                                               title: $0.title,
                                                                                               avatarPath: $0.avatar?.sourceUrl,
                                                                                               avatarID: $0.avatar?.id) } ?? []
-
-                var items: [PostPreview.Item] = albumPreviewItems.compactMap { PostPreview.Item.view($0) }
-                if strongSelf.isUserOwner {
-                    items.insert(.add(title: "Ваш пост", imagePath: strongSelf.cardDetails?.avatar?.sourceUrl), at: 0)
-                }
-                strongSelf.albumPreviewSection = PostPreview.Section(dataSourceID: PersonalCardDetails.DataSourceID.albumPreviews.rawValue, items: items)
-
+                items = albumPreviewItems.compactMap { PostPreview.Item.view($0) }
                 group.leave()
             case .failure(let error):
                 errors.append(error)
@@ -107,6 +101,10 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
             }
 
             /// Datasource configuration
+            if strongSelf.isUserOwner {
+                items.insert(.add(title: "Ваш пост", imagePath: strongSelf.cardDetails?.avatar?.sourceUrl), at: 0)
+            }
+            strongSelf.albumPreviewSection = PostPreview.Section(dataSourceID: PersonalCardDetails.DataSourceID.albumPreviews.rawValue, items: items)
             strongSelf.view?.setupLayout()
             strongSelf.view?.set(dataSource: strongSelf.dataSource)
             strongSelf.updateViewDataSource()
