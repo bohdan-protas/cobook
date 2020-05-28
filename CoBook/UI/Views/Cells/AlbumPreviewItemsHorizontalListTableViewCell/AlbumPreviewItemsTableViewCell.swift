@@ -18,8 +18,9 @@ protocol AlbumPreviewItemsViewDataSource: class {
 
 class AlbumPreviewItemsTableViewCell: UITableViewCell {
 
-    @IBOutlet var headerLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var separatorView: UIView!
+    @IBOutlet var topConstaint: NSLayoutConstraint!
 
     weak var delegate: AlbumPreviewItemsViewDelegate?
     weak var dataSource: AlbumPreviewItemsViewDataSource?

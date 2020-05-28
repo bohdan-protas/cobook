@@ -28,7 +28,7 @@ class SavedContentPresenter: BasePresenter {
     private var dataSource: DataSource<SavedContentCellConfigurator>?
 
     // cards data source
-    private var albumPreviewItems: [AlbumPreview.Item.Model] = []
+    //private var albumPreviewItems: [AlbumPreview.Item.Model] = []
     private var albumPreviewSection: AlbumPreview.Section?
 
     private var cardsTotalCount: Int = 0
@@ -89,10 +89,12 @@ class SavedContentPresenter: BasePresenter {
             guard let strongSelf = self else { return }
             switch result {
             case .success(let response):
-                strongSelf.albumPreviewItems = response?.rows?.compactMap { AlbumPreview.Item.Model(id: $0.id,
-                                                                                                    title: $0.title,
-                                                                                                    avatarPath: $0.avatar?.sourceUrl,
-                                                                                                    avatarID: $0.avatar?.id) } ?? []
+                let items = response?.rows?
+                    .compactMap { AlbumPreview.Item.Model(id: $0.id,
+                                                          title: $0.title,
+                                                          avatarPath: $0.avatar?.sourceUrl,
+                                                          avatarID: $0.avatar?.id) }
+                strongSelf.albumPreviewSection = AlbumPreview.Section(dataSourceID: SavedContent.PostPreviewDataSourceID.albumPreviews.rawValue, items: items?.compactMap { AlbumPreview.Item.view($0) } ?? [])
                 group.leave()
             case .failure(let error):
                 self?.view?.errorAlert(message: error.localizedDescription)
@@ -383,19 +385,17 @@ private extension SavedContentPresenter {
 
     func updateViewDataSource() {
         // Post preview section
-        dataSource?[.postPreview].items.removeAll()
-        let items = albumPreviewItems.compactMap { AlbumPreview.Item.view($0) }
-        albumPreviewSection = AlbumPreview.Section(title: "Збережені пости: \(items.count)", dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
-        albumPreviewSection?.items.append(contentsOf: items)
-        dataSource?[.postPreview].items = []
-
         dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items = [
-            .postPreview(model: albumPreviewSection),
-            .sectionSeparator,
-            .title(model: SavedContent.TitleModel(title: "Збережені візитки", counter: cardsTotalCount, actionTitle: "Додати cписок", actionHandler: { self.view?.createFolder() })),
+            .title(model: SavedContent.TitleModel(title: "Збережені пости", counter: albumPreviewSection?.items.count ?? 0)),
         ]
-        dataSource?.sections[SavedContent.SectionAccessoryIndex.card.rawValue].items = []
-
+        if !(albumPreviewSection?.items.isEmpty ?? true) {
+            dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.postPreview(model: albumPreviewSection))
+        }
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.sectionSeparator)
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.title(model: SavedContent.TitleModel(title: "Збережені візитки",
+                                                                                                                                  counter: cardsTotalCount,
+                                                                                                                                  actionTitle: "Додати cписок",
+                                                                                                                                  actionHandler: { self.view?.createFolder() })))
         if let index = selectedBarItem?.index {
             switch index {
             case SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue:

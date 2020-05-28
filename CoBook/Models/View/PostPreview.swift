@@ -11,7 +11,6 @@ import UIKit
 enum AlbumPreview {
 
     struct Section {
-        var title: String?
         var dataSourceID: String?
         var items: [Item] = []
     }

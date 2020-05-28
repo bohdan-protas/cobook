@@ -151,10 +151,11 @@ extension SavedContentPresenter {
 
             //
             dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: AlbumPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.topConstaint.constant = 0
+                cell.separatorView.isHidden = true
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
                 cell.dataSource = self
-                cell.headerLabel?.text = model?.title
                 cell.collectionView.reloadData()
                 return cell
             }

@@ -284,7 +284,6 @@ extension BusinessCardDetailsPresenter {
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
                 cell.dataSource = self
-                cell.headerLabel?.text = model?.title
                 cell.collectionView.reloadData()
                 return cell
             }
