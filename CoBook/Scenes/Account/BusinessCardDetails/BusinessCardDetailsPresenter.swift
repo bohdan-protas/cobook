@@ -317,7 +317,7 @@ private extension BusinessCardDetailsPresenter {
         albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
 
         dataSource?[.postPreview].items.removeAll()
-        dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "Створені статті:", counter: self.albumPreviewItems.count)))
+        dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "Створені альбоми:", counter: self.albumPreviewItems.count)))
         if isUserOwner {
             albumPreviewSection?.items.append(.add(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
         }
