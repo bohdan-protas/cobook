@@ -62,7 +62,6 @@ enum CreatePersonalCard {
         }
     }
 
-    
 }
 
 

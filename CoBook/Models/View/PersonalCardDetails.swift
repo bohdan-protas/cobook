@@ -17,8 +17,12 @@ enum PersonalCardDetails {
         case userInfo(model: CardDetailsApiModel?)
         case getInTouch
         case socialList
+        case postPreview(model: PostPreview.Section?)
     }
 
+    enum DataSourceID: String {
+        case albumPreviews
+    }
 
 }
 

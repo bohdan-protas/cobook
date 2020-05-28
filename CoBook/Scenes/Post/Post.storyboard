@@ -58,7 +58,7 @@
                                                                                         <cells/>
                                                                                     </collectionView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATt-Sn-JEJ">
-                                                                                        <rect key="frame" x="224" y="12" width="123" height="30"/>
+                                                                                        <rect key="frame" x="205" y="12" width="142" height="30"/>
                                                                                         <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="30" id="TKW-RI-W77"/>
@@ -136,7 +136,7 @@
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="OPB-Bh-YTU">
-                                                                                        <rect key="frame" x="16" y="14" width="174" height="32"/>
+                                                                                        <rect key="frame" x="16" y="14" width="183" height="32"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gp1-1h-UeP" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -154,7 +154,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </imageView>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Виберіть альбом" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSp-8Y-SKh">
-                                                                                                <rect key="frame" x="48" y="0.0" width="126" height="32"/>
+                                                                                                <rect key="frame" x="48" y="0.0" width="135" height="32"/>
                                                                                                 <accessibility key="accessibilityConfiguration">
                                                                                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                                                                 </accessibility>
@@ -567,7 +567,7 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="359" height="227"/>
                                                                                         <subviews>
                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pu3-Fd-FSl">
-                                                                                                <rect key="frame" x="224" y="12" width="123" height="30"/>
+                                                                                                <rect key="frame" x="205" y="12" width="142" height="30"/>
                                                                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="height" constant="30" id="SXy-Uv-nyi"/>

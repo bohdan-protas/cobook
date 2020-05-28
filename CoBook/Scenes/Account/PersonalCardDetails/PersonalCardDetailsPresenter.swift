@@ -15,6 +15,9 @@ protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func reload()
     func setupEditView()
     func setupEmptyBottomView()
+
+    func goToArticleDetails(presenter: ArticleDetailsPresenter)
+    func goToCreatePost(cardID: Int)
 }
 
 class PersonalCardDetailsPresenter: NSObject, BasePresenter {
@@ -25,6 +28,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     private var personalCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?
+    private var albumPreviewSection: PostPreview.Section?
 
     /// Flag for owner identifire
     private var isUserOwner: Bool {
@@ -50,23 +54,64 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     }
 
     func setupDataSource() {
+        let group = DispatchGroup()
+        var errors = [Error]()
         view?.startLoading()
-        APIClient.default.getCardInfo(id: personalCardId) { [weak self] (result) in
-            guard let strongSelf = self else {
-                return
-            }
-            self?.view?.stopLoading()
 
+        // fetch card details
+        group.enter()
+        APIClient.default.getCardInfo(id: personalCardId) { [weak self] (result) in
+            self?.view?.stopLoading()
             switch result {
-            case let .success(response):
-                strongSelf.cardDetails = response
-                strongSelf.view?.setupLayout()
-                strongSelf.view?.set(dataSource: strongSelf.dataSource)
-                strongSelf.updateViewDataSource()
-            case let .failure(error):
-                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            case .success(let response):
+                self?.cardDetails = response
+                group.leave()
+            case .failure(let error):
+                errors.append(error)
+                group.leave()
             }
         }
+
+        // fetch albums list
+        group.enter()
+        APIClient.default.getAlbumsList(cardID: personalCardId) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let response):
+                let albumPreviewItems = response?.compactMap { PostPreview.Item.Model(albumID: $0.id,
+                                                                                              title: $0.title,
+                                                                                              avatarPath: $0.avatar?.sourceUrl,
+                                                                                              avatarID: $0.avatar?.id) } ?? []
+
+                var items: [PostPreview.Item] = albumPreviewItems.compactMap { PostPreview.Item.view($0) }
+                if strongSelf.isUserOwner {
+                    items.insert(.add(title: "Ваш пост", imagePath: strongSelf.cardDetails?.avatar?.sourceUrl), at: 0)
+                }
+                strongSelf.albumPreviewSection = PostPreview.Section(dataSourceID: PersonalCardDetails.DataSourceID.albumPreviews.rawValue, items: items)
+
+                group.leave()
+            case .failure(let error):
+                errors.append(error)
+                group.leave()
+            }
+        }
+
+        // setup data source
+        group.notify(queue: .main) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+
+            /// Errors handling
+            errors.forEach {
+                strongSelf.view?.errorAlert(message: $0.localizedDescription)
+            }
+
+            /// Datasource configuration
+            strongSelf.view?.setupLayout()
+            strongSelf.view?.set(dataSource: strongSelf.dataSource)
+            strongSelf.updateViewDataSource()
+        }
+
     }
 
     func editPerconalCard() {
@@ -97,10 +142,18 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 private extension PersonalCardDetailsPresenter {
 
     func updateViewDataSource() {
+        // User info section
         let userInfoSection = Section<PersonalCardDetails.Cell>(items: [
             .userInfo(model: cardDetails),
         ])
 
+        // album preview section
+        var albumPreviewSection = Section<PersonalCardDetails.Cell>(items: [])
+        if !(self.albumPreviewSection?.items.isEmpty ?? true) {
+            albumPreviewSection.items = [.postPreview(model: self.albumPreviewSection)]
+        }
+
+        // get in touch section
         var getInTouchSection = Section<PersonalCardDetails.Cell>(items: [
             .sectionHeader,
             .title(text: "Зв’язатись:")
@@ -112,9 +165,9 @@ private extension PersonalCardDetailsPresenter {
         }
         getInTouchSection.items.append(.getInTouch)
 
-        isUserOwner ? view?.setupEditView() : view?.setupEmptyBottomView()
+        dataSource?.sections = [userInfoSection, albumPreviewSection, getInTouchSection]
 
-        dataSource?.sections = [ userInfoSection, getInTouchSection ]
+        isUserOwner ? view?.setupEditView() : view?.setupEmptyBottomView()
         view?.reload()
     }
 
@@ -213,6 +266,45 @@ extension PersonalCardDetailsPresenter: PersonalCardUserInfoTableViewCellDelegat
             }
         }
 
+    }
+
+
+}
+
+// MARK: - AlbumPreviewItemsViewDelegate, AlbumPreviewItemsViewDataSource
+
+extension PersonalCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPreviewItemsViewDataSource {
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, didSelectedAt indexPath: IndexPath, dataSourceID: String?) {
+        guard let id = dataSourceID, let dataSource = BusinessCardDetails.PostPreviewDataSourceID(rawValue: id) else {
+            return
+        }
+
+        switch dataSource {
+        case .albumPreviews:
+            if let selectedItem = albumPreviewSection?.items[safe: indexPath.item] {
+                switch selectedItem {
+                case .add:
+                    self.view?.goToCreatePost(cardID: personalCardId)
+                case .view(let model):
+                    let presenter = ArticleDetailsPresenter(albumID: model.albumID, articleID: model.articleID)
+                    self.view?.goToArticleDetails(presenter: presenter)
+                case .showMore:
+                    break
+                }
+            }
+        }
+    }
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview.Item] {
+        guard let id = dataSourceID, let dataSource = BusinessCardDetails.PostPreviewDataSourceID(rawValue: id) else {
+            return []
+        }
+
+        switch dataSource {
+        case .albumPreviews:
+            return albumPreviewSection?.items ?? []
+        }
     }
 
 

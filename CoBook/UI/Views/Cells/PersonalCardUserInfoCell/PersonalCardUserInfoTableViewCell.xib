@@ -164,6 +164,14 @@
                             <constraint firstAttribute="bottom" secondItem="Vh3-7j-3TF" secondAttribute="bottom" constant="12" id="SaJ-yJ-rKT"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SK9-1M-n4e" userLabel="Separator View">
+                        <rect key="frame" x="8" y="167" width="304" height="1"/>
+                        <color key="backgroundColor" name="Theme_Separator"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Def-0q-WMh"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="DhP-d9-bVi"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" name="Theme_Gray-Background"/>
                 <constraints>
@@ -171,8 +179,11 @@
                     <constraint firstAttribute="bottom" secondItem="adF-I1-1Ze" secondAttribute="bottom" id="3dl-E1-CR4"/>
                     <constraint firstAttribute="trailing" secondItem="adF-I1-1Ze" secondAttribute="trailing" id="7AX-wt-JGk"/>
                     <constraint firstItem="8Cy-AX-W5z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Jzg-Rg-Gbf"/>
+                    <constraint firstItem="SK9-1M-n4e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ONB-U9-BUg"/>
                     <constraint firstItem="8Cy-AX-W5z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SUe-Ul-C6l"/>
                     <constraint firstAttribute="trailing" secondItem="8Cy-AX-W5z" secondAttribute="trailing" id="UJU-Kt-3HO"/>
+                    <constraint firstAttribute="bottom" secondItem="SK9-1M-n4e" secondAttribute="bottom" id="jxq-Gp-w6A"/>
+                    <constraint firstAttribute="trailing" secondItem="SK9-1M-n4e" secondAttribute="trailing" constant="8" id="wSx-82-Ze5"/>
                     <constraint firstItem="adF-I1-1Ze" firstAttribute="top" secondItem="8Cy-AX-W5z" secondAttribute="bottom" id="zlB-me-ZdE"/>
                 </constraints>
             </tableViewCellContentView>

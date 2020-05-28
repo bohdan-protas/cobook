@@ -16,6 +16,7 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
     let getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>
     let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
     let titleDescriptionCellConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>
+    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
 
     func reuseIdentifier(for item: PersonalCardDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -31,6 +32,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return socialListConfigurator.reuseIdentifier
         case .personDescription:
             return titleDescriptionCellConfigurator.reuseIdentifier
+        case .postPreview:
+            return postPreviewConfigurator.reuseIdentifier
         }
     }
 
@@ -48,6 +51,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return socialListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         case .personDescription(let model):
             return titleDescriptionCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .postPreview(let model):
+            return postPreviewConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -58,6 +63,7 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
         getInTouchCellConfigurator.registerCells(in: tableView)
         socialListConfigurator.registerCells(in: tableView)
         titleDescriptionCellConfigurator.registerCells(in: tableView)
+        postPreviewConfigurator.registerCells(in: tableView)
     }
 }
 
@@ -109,12 +115,22 @@ extension PersonalCardDetailsPresenter {
                 return cell
             }
 
+            //
+            let postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.dataSourceID = model?.dataSourceID
+                cell.delegate = self
+                cell.dataSource = self
+                cell.collectionView.reloadData()
+                return cell
+            }
+
             return PersonalCardDetailsDataSourceConfigurator(sectionTitleConfigurator: sectionTitleConfigurator,
                                                              sectionHeaderConfigurator: sectionHeaderConfigurator,
                                                              userInfoCellConfigurator: userInfoCellConfigurator,
                                                              getInTouchCellConfigurator: getInTouchCellConfigurator,
                                                              socialListConfigurator: socialListConfigurator,
-                                                             titleDescriptionCellConfigurator: titleDescriptionCellConfigurator)
+                                                             titleDescriptionCellConfigurator: titleDescriptionCellConfigurator,
+                                                             postPreviewConfigurator: postPreviewConfigurator)
 
         }
     }
