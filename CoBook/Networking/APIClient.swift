@@ -758,13 +758,14 @@ extension APIClient {
     }
 
     @discardableResult
-    func getArticlesList(albumID: Int,
+    func getArticlesList(albumID: Int?,
+                         limit: UInt? = 50,
+                         offset: UInt? = 0,
                          completion: @escaping (Result<[ArticlePreviewAPIModel]?>) -> Void) -> DataRequest {
-        let endpoint = ArticlesEndpoint.getArticlesList(albumID: albumID)
+        let endpoint = ArticlesEndpoint.getArticlesList(albumID: albumID, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
-    
     @discardableResult
     func getArticleDetails(articleID: Int,
                            completion: @escaping (Result<ArticleDetailsAPIModel?>) -> Void) -> DataRequest {

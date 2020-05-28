@@ -25,7 +25,7 @@ enum BusinessCardDetails {
         case service(model: Service.PreviewListItem)
         case addProduct
         case productSection(model: ProductPreviewSectionModel)
-        case postPreview(model: AlbumPreview.Section?)
+        case postPreview(model: PostPreview.Section?)
     }
 
     struct HeaderInfoModel {

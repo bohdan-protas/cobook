@@ -15,7 +15,7 @@ enum SavedContent {
         case map
         case title(model: TitleModel)
         case sectionSeparator
-        case postPreview(model: AlbumPreview.Section?)
+        case postPreview(model: PostPreview.Section?)
     }
 
     enum SectionAccessoryIndex: Int {
@@ -49,7 +49,7 @@ class SavedContentCellConfigurator: CellConfiguratorType {
     var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
     var titleConfigurator: CellConfigurator<SavedContent.TitleModel, SavedContentTitleTableViewCell>?
     var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var postPreviewConfigurator: CellConfigurator<AlbumPreview.Section?, AlbumPreviewItemsTableViewCell>?
+    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -150,7 +150,7 @@ extension SavedContentPresenter {
             }
 
             //
-            dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: AlbumPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+            dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
                 cell.topConstaint.constant = 0
                 cell.separatorView.isHidden = true
                 cell.dataSourceID = model?.dataSourceID

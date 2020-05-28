@@ -13,6 +13,7 @@ enum CardsOverview {
     enum Items {
         case cardItem(model: CardItemViewModel)
         case map
+        case postPreview(model: PostPreview.Section?)
     }
 
     enum BarSectionsTypeIndex: Int {
@@ -27,6 +28,8 @@ enum CardsOverview {
     enum SearchSectionAccessoryIndex: Int {
         case header, barSections
     }
+
+    static let postsDataSourceID: String = "postsDataSourceID"
 
 
 }

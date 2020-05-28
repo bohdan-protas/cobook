@@ -13,7 +13,7 @@ protocol AlbumPreviewItemsViewDelegate: class {
 }
 
 protocol AlbumPreviewItemsViewDataSource: class {
-    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [AlbumPreview.Item]
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview.Item]
 }
 
 class AlbumPreviewItemsTableViewCell: UITableViewCell {

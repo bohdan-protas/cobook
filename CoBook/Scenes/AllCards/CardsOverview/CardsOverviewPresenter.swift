@@ -20,6 +20,8 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func openSettings()
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
+    func goToArticleDetails(presenter: ArticleDetailsPresenter?)
+
     func showBottomLoaderView()
     func hideBottomLoaderView()
 }
@@ -43,6 +45,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     /// cards data source
     private var searchCards: [CardItemViewModel] = []
     private var cards: [CardsOverview.BarSectionsTypeIndex: PaginationPage<CardItemViewModel>] = [:]
+    private var albumPreviewSection: PostPreview.Section?
 
     /// Current pin request work item
     private var pendingCardMapMarkersRequestWorkItem: DispatchWorkItem?
@@ -91,7 +94,11 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     func setup(useLoader: Bool) {
         isInitialFetch = true
         if useLoader { view?.startLoading() }
-        self.fetchSelectedBarSectionData(useLoader: false)
+
+        self.fetchArticles { [weak self] items in
+            self?.albumPreviewSection = PostPreview.Section(dataSourceID: CardsOverview.postsDataSourceID, items: items.compactMap { PostPreview.Item.view($0) } )
+            self?.fetchSelectedBarSectionData(useLoader: false)
+        }
     }
 
     func selectedBarItemAt(index: Int) {
@@ -351,6 +358,23 @@ private extension CardsOverviewViewPresenter {
         }
     }
 
+    func fetchArticles(completion: (([PostPreview.Item.Model]) -> Void)?) {
+        APIClient.default.getArticlesList(albumID: nil, limit: 50, offset: 0) { [weak self] (result) in
+            switch result {
+            case .success(let articles):
+                let items = articles?.compactMap { PostPreview.Item.Model(albumID: $0.albumID,
+                                                                          articleID: $0.id,
+                                                                          title: $0.title,
+                                                                          avatarPath: $0.avatar?.sourceUrl,
+                                                                          avatarID: $0.avatar?.id) }
+                completion?(items ?? [])
+            case .failure(let error):
+                completion?([])
+                self?.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
     func fetchCards(searchQuery: String? = nil, type: CardType? = nil, currentPaginationPage: PaginationPage<CardItemViewModel>? = nil, completion: (([CardItemViewModel]) -> Void)?) {
         let interests = AppStorage.User.Filters?.interests
         let practiceTypeIds = AppStorage.User.Filters?.practicies
@@ -418,7 +442,9 @@ private extension CardsOverviewViewPresenter {
 
     func updateViewDataSource() {
         // Posts section
-        // TODO...
+        dataSource?[CardsOverview.SectionAccessoryIndex.posts].items = [
+            .postPreview(model: albumPreviewSection)
+        ]
 
         // Cards section
         let barItemIndex = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1)
@@ -469,7 +495,7 @@ private extension CardsOverviewViewPresenter {
                 let presenter = BusinessCardDetailsPresenter(id: model.id)
                 view?.goToBusinessCardDetails(presenter: presenter)
             }
-        case .map:
+        default:
             break
         }
     }
@@ -477,3 +503,37 @@ private extension CardsOverviewViewPresenter {
 
 }
 
+// MARK: - AlbumPreviewItemsViewDataSource
+
+extension CardsOverviewViewPresenter: AlbumPreviewItemsViewDataSource {
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview.Item] {
+        guard let id = dataSourceID, id == CardsOverview.postsDataSourceID else {
+            return []
+        }
+        return albumPreviewSection?.items ?? []
+    }
+
+
+}
+
+// MARK: - AlbumPreviewItemsViewDelegate
+
+extension CardsOverviewViewPresenter: AlbumPreviewItemsViewDelegate {
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, didSelectedAt indexPath: IndexPath, dataSourceID: String?) {
+        if let item = albumPreviewSection?.items[safe: indexPath.item] {
+            switch item {
+            case .add:
+                break
+            case .view(let model):
+                let presenter = ArticleDetailsPresenter(albumID: model.albumID, articleID: model.articleID)
+                self.view?.goToArticleDetails(presenter: presenter)
+            case .showMore:
+                break
+            }
+        }
+    }
+
+
+}

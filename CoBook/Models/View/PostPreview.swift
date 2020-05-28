@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum AlbumPreview {
+enum PostPreview {
 
     struct Section {
         var dataSourceID: String?
@@ -18,7 +18,8 @@ enum AlbumPreview {
     enum Item {
 
         struct Model {
-            var id: Int
+            var albumID: Int?
+            var articleID: Int?
             var isSelected = false
             var title: String?
             var avatarPath: String?

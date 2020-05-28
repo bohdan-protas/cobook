@@ -12,6 +12,7 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
 
     var cardItemCellConfigurator: CellConfigurator<CardItemViewModel, CardItemTableViewCell>?
     var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
+    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -21,21 +22,29 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
             return cardItemCellConfigurator?.reuseIdentifier ?? ""
         case .map:
             return mapCellConfigurator?.reuseIdentifier ?? ""
+        case .postPreview:
+            return postPreviewConfigurator?.reuseIdentifier ?? ""
         }
     }
 
     func configuredCell(for item: CardsOverview.Items, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         switch item {
+
         case .cardItem(let model):
             return cardItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .map:
             return mapCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
+        case .postPreview(let model):
+             return postPreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
     func registerCells(in tableView: UITableView) {
         cardItemCellConfigurator?.registerCells(in: tableView)
         mapCellConfigurator?.registerCells(in: tableView)
+        postPreviewConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -74,6 +83,14 @@ extension CardsOverviewViewPresenter {
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
                 cell.delegate = self.view
+                return cell
+            }
+
+            dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.dataSourceID = model?.dataSourceID
+                cell.delegate = self
+                cell.dataSource = self
+                cell.collectionView.reloadData()
                 return cell
             }
 

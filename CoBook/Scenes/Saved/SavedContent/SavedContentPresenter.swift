@@ -28,11 +28,9 @@ class SavedContentPresenter: BasePresenter {
     private var dataSource: DataSource<SavedContentCellConfigurator>?
 
     // cards data source
-    //private var albumPreviewItems: [AlbumPreview.Item.Model] = []
-    private var albumPreviewSection: AlbumPreview.Section?
-
     private var cardsTotalCount: Int = 0
     private var cards: [Int: [CardItemViewModel]] = [:]
+    private var albumPreviewSection: PostPreview.Section?
     private var isInitialFetch: Bool = true
 
     /// Current pin request work item
@@ -85,16 +83,17 @@ class SavedContentPresenter: BasePresenter {
 
         // fetch albums list
         group.enter()
-        APIClient.default.getUserFavouritedArticles(limit: 50, offset: nil) { [weak self] (result) in
+        APIClient.default.getUserFavouritedArticles(limit: 50, offset: 0) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case .success(let response):
                 let items = response?.rows?
-                    .compactMap { AlbumPreview.Item.Model(id: $0.id,
+                    .compactMap { PostPreview.Item.Model(albumID: nil,
+                                                          articleID: $0.id,
                                                           title: $0.title,
                                                           avatarPath: $0.avatar?.sourceUrl,
                                                           avatarID: $0.avatar?.id) }
-                strongSelf.albumPreviewSection = AlbumPreview.Section(dataSourceID: SavedContent.PostPreviewDataSourceID.albumPreviews.rawValue, items: items?.compactMap { AlbumPreview.Item.view($0) } ?? [])
+                strongSelf.albumPreviewSection = PostPreview.Section(dataSourceID: SavedContent.PostPreviewDataSourceID.albumPreviews.rawValue, items: items?.compactMap { PostPreview.Item.view($0) } ?? [])
                 group.leave()
             case .failure(let error):
                 self?.view?.errorAlert(message: error.localizedDescription)
@@ -462,7 +461,7 @@ extension SavedContentPresenter: AlbumPreviewItemsViewDelegate {
             if let selectedItem = albumPreviewSection?.items[safe: indexPath.item] {
                 switch selectedItem {
                 case .view(let model):
-                    let presenter = ArticleDetailsPresenter(albumID: model.id, articleID: nil)
+                    let presenter = ArticleDetailsPresenter(albumID: model.albumID, articleID: model.articleID)
                     self.view?.goToArticleDetails(presenter: presenter)
                 default:
                     break
@@ -478,7 +477,7 @@ extension SavedContentPresenter: AlbumPreviewItemsViewDelegate {
 
 extension SavedContentPresenter: AlbumPreviewItemsViewDataSource {
 
-    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [AlbumPreview.Item] {
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview.Item] {
         guard let id = dataSourceID, let dataSource = SavedContent.PostPreviewDataSourceID(rawValue: id) else {
             return []
         }

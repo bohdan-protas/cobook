@@ -173,6 +173,12 @@ extension CardsOverviewViewController: CardsOverviewView {
         searchController.isActive = false
     }
 
+    func goToArticleDetails(presenter: ArticleDetailsPresenter?) {
+        let articleDetailsController: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
+        articleDetailsController.presenter = presenter
+        self.navigationController?.pushViewController(articleDetailsController, animated: true)
+    }
+
 }
 
 // MARK: - Privates

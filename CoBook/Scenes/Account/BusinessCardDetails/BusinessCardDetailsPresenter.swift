@@ -41,8 +41,8 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
     private var products: [ProductPreviewSectionModel] = []
-    private var albumPreviewItems: [AlbumPreview.Item.Model] = []
-    private var albumPreviewSection: AlbumPreview.Section?
+    private var albumPreviewItems: [PostPreview.Item.Model] = []
+    private var albumPreviewSection: PostPreview.Section?
 
     /// View datasource
     private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
@@ -226,7 +226,7 @@ private extension BusinessCardDetailsPresenter {
             guard let strongSelf = self else { return }
             switch result {
             case .success(let response):
-                strongSelf.albumPreviewItems = response?.compactMap { AlbumPreview.Item.Model(id: $0.id,
+                strongSelf.albumPreviewItems = response?.compactMap { PostPreview.Item.Model(albumID: $0.id,
                                                                                               title: $0.title,
                                                                                               avatarPath: $0.avatar?.sourceUrl,
                                                                                               avatarID: $0.avatar?.id) } ?? []
@@ -315,11 +315,11 @@ private extension BusinessCardDetailsPresenter {
 
         // Post preview section
         dataSource?[.postPreview].items.removeAll()
-        albumPreviewSection = AlbumPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
+        albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
         if isUserOwner {
             albumPreviewSection?.items.append(.add(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
         }
-        albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { AlbumPreview.Item.view($0) })
+        albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { PostPreview.Item.view($0) })
         if !(albumPreviewSection?.items.isEmpty ?? true) {
             dataSource?[.postPreview].items = [.postPreview(model: albumPreviewSection)]
         }
@@ -485,7 +485,7 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
                 case .add:
                     self.view?.goToCreatePost(cardID: businessCardId)
                 case .view(let model):
-                    let presenter = ArticleDetailsPresenter(albumID: model.id, articleID: nil)
+                    let presenter = ArticleDetailsPresenter(albumID: model.albumID, articleID: model.articleID)
                     self.view?.goToArticleDetails(presenter: presenter)
                 case .showMore:
                     break
@@ -494,7 +494,7 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
         }
     }
 
-    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [AlbumPreview.Item] {
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview.Item] {
         guard let id = dataSourceID, let dataSource = BusinessCardDetails.PostPreviewDataSourceID(rawValue: id) else {
             return []
         }

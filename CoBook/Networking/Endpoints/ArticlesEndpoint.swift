@@ -17,7 +17,7 @@ enum ArticlesEndpoint: Endpoint {
     case createArticle(parameters: CreateArticleApiModel)
     case updateArticle(parameters: UpdateArticleApiModel)
     case getArticleDetails(id: Int)
-    case getArticlesList(albumID: Int)
+    case getArticlesList(albumID: Int?, limit: UInt?, offset: UInt?)
 
     case addToFavourite(articleID: Int)
     case deleteFromFavourite(articleID: Int)
@@ -77,8 +77,18 @@ enum ArticlesEndpoint: Endpoint {
             }
             return nil
 
-        case .getArticlesList(let albumID):
-            return ["album_id": String(albumID)]
+        case .getArticlesList(let albumID, let limit, let offset):
+            var parameters: [String: String] = [:]
+            if let albumID = albumID {
+                parameters["album_id"] = "\(albumID)"
+            }
+            if let limit = limit {
+                parameters["limit"] = "\(limit)"
+            }
+            if let offset = offset {
+                parameters["offset"] = "\(offset)"
+            }
+            return parameters
 
         case .getUserSavedList(let limit, let offset):
             var parameters: [String: String] = [:]

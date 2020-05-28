@@ -105,7 +105,7 @@ class CreateArticlePresenter: BasePresenter {
     }
 
     func selectAlbumTapped() {
-        let presenter = SelectAlbumPresenter(cardID: self.cardID, selectedAlbumID: self.parameters.album?.id)
+        let presenter = SelectAlbumPresenter(cardID: self.cardID, selectedAlbumID: self.parameters.album?.albumID)
         presenter.delegate = self
         view?.goToSelectAlbum(presenter: presenter)
     }
@@ -159,7 +159,7 @@ private extension CreateArticlePresenter {
 
     func createArticle() {
         let parameters = CreateArticleApiModel(cardID: self.parameters.cardID,
-                                               albumID: self.parameters.album?.id,
+                                               albumID: self.parameters.album?.albumID,
                                                title: self.parameters.title,
                                                body: self.parameters.body,
                                                photos: self.parameters.photos.compactMap { $0.id })
@@ -184,7 +184,7 @@ private extension CreateArticlePresenter {
     func updateArticle() {
         let parameters = UpdateArticleApiModel(articleID: self.parameters.articleID,
                                                cardID: self.parameters.cardID,
-                                               albumID: self.parameters.album?.id,
+                                               albumID: self.parameters.album?.albumID,
                                                title: self.parameters.title,
                                                body: self.parameters.body,
                                                photos: self.parameters.photos.compactMap { $0.id })
@@ -213,7 +213,7 @@ private extension CreateArticlePresenter {
 
 extension CreateArticlePresenter: SelectAlbumDelegate {
 
-    func selectedAlbum(_ model: AlbumPreview.Item.Model?) {
+    func selectedAlbum(_ model: PostPreview.Item.Model?) {
         parameters.album = model
         view?.set(albumTitle: parameters.album?.title, albumImage: parameters.album?.avatarPath)
     }

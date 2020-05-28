@@ -27,7 +27,7 @@ class ArticleDetailsPresenter: BasePresenter {
     private var articles: [ArticlePreviewAPIModel]?
 
     private var dataSource: DataSource<ArticleDetailsCellConfigutator>?
-    private var albumID: Int
+    private var albumID: Int?
     private var articleID: Int?
 
     var isOwner: Bool {
@@ -42,7 +42,7 @@ class ArticleDetailsPresenter: BasePresenter {
     - parameters:
        - albumID: articles albumID
     */
-    init(albumID: Int, articleID: Int?) {
+    init(albumID: Int?, articleID: Int?) {
         self.albumID = albumID
         self.articleID = articleID
         self.dataSource = DataSource(configurator: dataSourceConfigurator)
@@ -119,7 +119,7 @@ class ArticleDetailsPresenter: BasePresenter {
         socialMetaTags.imageURL = URL.init(string: articleDetails?.photos?.first?.sourceUrl ?? "")
         socialMetaTags.title = articleDetails?.title
         socialMetaTags.descriptionText = articleDetails?.body
-        view?.showShareSheet(path: .article, parameters: [.articleID: "\(articleID ?? -1)", .albumID: "\(albumID)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+        view?.showShareSheet(path: .article, parameters: [.articleID: "\(articleID ?? -1)", .albumID: "\(albumID ?? -1)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
     }
 
 
@@ -164,7 +164,7 @@ private extension ArticleDetailsPresenter {
                                             cardID: articleDetails?.cardInfo?.id ?? -1,
                                             title: articleDetails?.title,
                                             body: articleDetails?.body,
-                                            album: AlbumPreview.Item.Model(id: articleDetails?.album?.id ?? -1,
+                                            album: PostPreview.Item.Model(albumID: articleDetails?.album?.id ?? -1,
                                                                            isSelected: true,
                                                                            title: articleDetails?.album?.title,
                                                                            avatarPath: articleDetails?.album?.avatar?.sourceUrl,
