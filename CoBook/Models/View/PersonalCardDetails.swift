@@ -13,6 +13,7 @@ enum PersonalCardDetails {
     enum Cell {
         case sectionHeader
         case title(text: String)
+        case actionTitle(model: ActionTitleModel)
         case personDescription(model: TitleDescrModel?)
         case userInfo(model: CardDetailsApiModel?)
         case getInTouch

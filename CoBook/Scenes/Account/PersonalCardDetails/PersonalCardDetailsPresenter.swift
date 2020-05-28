@@ -146,9 +146,11 @@ private extension PersonalCardDetailsPresenter {
         ])
 
         // album preview section
-        var albumPreviewSection = Section<PersonalCardDetails.Cell>(items: [])
+        var albumPreviewSection = Section<PersonalCardDetails.Cell>(items: [
+            .actionTitle(model: ActionTitleModel(title: isUserOwner ? "Мій щоденник:" : "Створені статті:", counter: self.albumPreviewSection?.items.count))
+        ])
         if !(self.albumPreviewSection?.items.isEmpty ?? true) {
-            albumPreviewSection.items = [.postPreview(model: self.albumPreviewSection)]
+            albumPreviewSection.items.append(.postPreview(model: self.albumPreviewSection))
         }
 
         // get in touch section

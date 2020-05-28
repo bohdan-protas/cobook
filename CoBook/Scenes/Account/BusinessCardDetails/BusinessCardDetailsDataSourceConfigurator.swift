@@ -26,6 +26,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var addProductConfigurator: CellConfigurator<Void?, ServiceListItemTableViewCell>?
     var productSectionConfigurator: CellConfigurator<ProductPreviewSectionModel, ProductPreviewItemsHorizontalListTableViewCell>?
     var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
+    var actionTitleConfigurator: CellConfigurator<ActionTitleModel, ActionTitleTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -61,6 +62,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return productSectionConfigurator?.reuseIdentifier ?? ""
         case .postPreview:
             return postPreviewConfigurator?.reuseIdentifier ?? ""
+        case .actionTitle:
+            return actionTitleConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -111,6 +114,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         case .postPreview(let model):
             return postPreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
 
+        case .actionTitle(let model):
+            return actionTitleConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -130,6 +135,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         addProductConfigurator?.registerCells(in: tableView)
         productSectionConfigurator?.registerCells(in: tableView)
         postPreviewConfigurator?.registerCells(in: tableView)
+        actionTitleConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -281,10 +287,20 @@ extension BusinessCardDetailsPresenter {
 
             //
             configurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.topConstaint.constant = 0
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
                 cell.dataSource = self
                 cell.collectionView.reloadData()
+                return cell
+            }
+
+            // actionTitleConfigurator
+            configurator.actionTitleConfigurator = CellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
+                cell.titleLabel.text = model.title
+                cell.countLabel.text = "\( model.counter ?? 0)"
+                cell.actionButton.setTitle(model.actionTitle, for: .normal)
+                cell.actionHandler = model.actionHandler
                 return cell
             }
 

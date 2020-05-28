@@ -52,6 +52,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bottomConstraint" destination="BT4-oq-Vma" id="8s4-Wh-Kdw"/>
                 <outlet property="collectionView" destination="cMM-ML-tei" id="TU7-h4-Tqg"/>
                 <outlet property="separatorView" destination="sTJ-oQ-teW" id="dYZ-KW-zuk"/>
                 <outlet property="topConstaint" destination="a8W-q1-IbP" id="2nR-Od-BqI"/>
