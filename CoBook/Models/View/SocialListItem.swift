@@ -13,7 +13,6 @@ enum Social {
     enum LinkType: CaseIterable {
         case telegram
         case linkedin
-        case facebookMessanger
 
         var image: UIImage {
             switch self {
@@ -21,8 +20,6 @@ enum Social {
                 return #imageLiteral(resourceName: "ic_social_telegram")
             case .linkedin:
                 return #imageLiteral(resourceName: "ic_social_linkedin")
-            case .facebookMessanger:
-                return #imageLiteral(resourceName: "ic_social_facebook")
             }
         }
 
@@ -32,8 +29,6 @@ enum Social {
                 return ["t.me", "telegram.org"]
             case .linkedin:
                 return ["www.linkedin.com", "linkedin.com"]
-            case .facebookMessanger:
-                return ["www.facebook.com", "m.facebook.com", "facebook.com"]
             }
         }
 

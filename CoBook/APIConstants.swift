@@ -17,7 +17,7 @@ enum APIConstants {
         get {
             var components = URLComponents()
             components.scheme   = "https"
-            components.host     = Host.prod.rawValue
+            components.host     = Host.dev.rawValue
             components.path     = Path.api.rawValue
             return components
         }
@@ -91,6 +91,8 @@ enum APIConstants {
     }
 
     // MARK: - Helpers
+
+    static let cobookLogoURL: URL = "https://static.tildacdn.com/tild3930-3864-4365-b137-343937626266/logofuter.png"
 
     static let additionalAcceptableImageContentTypes: Set<String> = [
         "image/*"

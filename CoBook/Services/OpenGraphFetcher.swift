@@ -9,19 +9,21 @@
 import Foundation
 import SwiftSoup
 
-class OpenGraphFetcher {
+struct OpenGraphFetcher {
 
-    class func fetchOpenGraphImage(from url: URL, completion: @escaping (Result<String?, Error>) -> Void) -> DispatchWorkItem? {
-        var document: Document?
+    func fetchOpenGraphImage(from url: URL, completion: @escaping (Result<String?>) -> Void) -> DispatchWorkItem? {
+
+        var imageStrPath: String?
 
         let workItem = DispatchWorkItem {
             do {
                 let html = try String.init(contentsOf: url)
-                document = try SwiftSoup.parse(html)
+                let document = try SwiftSoup.parse(html)
+                let elements = try document.select("meta[property=\"og:image\"]")
+                imageStrPath = elements.first()?.getAttributes()?.get(key: "content")
             } catch let error {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                imageStrPath = nil
+                Log.error(error.localizedDescription)
             }
         }
 
@@ -30,13 +32,7 @@ class OpenGraphFetcher {
             if workItem.isCancelled {
                 return
             }
-            do {
-                let elements = try document?.select("meta[property=\"og:image\"]")
-                let imageStrPath = elements?.first()?.getAttributes()?.get(key: "content")
-                completion(.success(imageStrPath))
-            } catch let error {
-                completion(.failure(error))
-            }
+            completion(.success(imageStrPath))
         }
 
         return workItem

@@ -9,7 +9,11 @@
 import Foundation
 import Alamofire
 import AlamofireImage
-import PromisedFuture
+
+public enum Result<T> {
+    case success(T)
+    case failure(Error)
+}
 
 class APIClient {
 
