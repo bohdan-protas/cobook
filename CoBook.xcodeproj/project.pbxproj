@@ -35,8 +35,6 @@
 		B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */; };
 		B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A61241BCDDF0066700C /* InterestsEndpoint.swift */; };
 		B8212A65241BD3480066700C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A64241BD3480066700C /* BaseViewController.swift */; };
-		B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8212A69241BE15F0066700C /* LaunchScreenLoaderViewController.swift */; };
-		B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8212A6A241BE15F0066700C /* LaunchScreenLoaderViewController.xib */; };
 		B82200B7240FB87000A17D2C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82200B6240FB87000A17D2C /* MainTabBarController.swift */; };
 		B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B82200B9240FB8A400A17D2C /* Account.storyboard */; };
 		B82200BC240FB99D00A17D2C /* AccountNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */; };
@@ -383,8 +381,6 @@
 		B8212A5C241B6A690066700C /* InterestItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8212A61241BCDDF0066700C /* InterestsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsEndpoint.swift; sourceTree = "<group>"; };
 		B8212A64241BD3480066700C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		B8212A69241BE15F0066700C /* LaunchScreenLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenLoaderViewController.swift; sourceTree = "<group>"; };
-		B8212A6A241BE15F0066700C /* LaunchScreenLoaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreenLoaderViewController.xib; sourceTree = "<group>"; };
 		B82200B6240FB87000A17D2C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B82200B9240FB8A400A17D2C /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNavigationController.swift; sourceTree = "<group>"; };
@@ -826,15 +822,6 @@
 				B8212A64241BD3480066700C /* BaseViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		B8212A66241BE0770066700C /* LaunchScreenLoader */ = {
-			isa = PBXGroup;
-			children = (
-				B8212A69241BE15F0066700C /* LaunchScreenLoaderViewController.swift */,
-				B8212A6A241BE15F0066700C /* LaunchScreenLoaderViewController.xib */,
-			);
-			path = LaunchScreenLoader;
 			sourceTree = "<group>";
 		};
 		B82200B5240FB84B00A17D2C /* TabBarControllers */ = {
@@ -1302,7 +1289,6 @@
 			isa = PBXGroup;
 			children = (
 				B870198F23ED50EC00625D61 /* LaunchScreen.storyboard */,
-				B8212A66241BE0770066700C /* LaunchScreenLoader */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -1379,6 +1365,13 @@
 				B82A62A224753C520052D6B2 /* ChangePasswordCellsConfigurator.swift */,
 			);
 			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		B8298805248159C000E6838B /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Localizable;
 			sourceTree = "<group>";
 		};
 		B82A2118242135C200D0D9F5 /* UI */ = {
@@ -1739,9 +1732,10 @@
 				B8B7FB992476B1A300D19C5E /* CoBook.entitlements */,
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
-				B826B0F023F45973009041DD /* Services */,
-				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
+				B823AB6B23F156DE00DE13EA /* Extensions */,
+				B826B0F023F45973009041DD /* Services */,
+				B8298805248159C000E6838B /* Localizable */,
 				B8307F1F2406FED000AFE578 /* Persistance */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
 				B826B0F323F45ED8009041DD /* Models */,
@@ -2200,7 +2194,6 @@
 				B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */,
 				B820793D2444727F00FCCC17 /* CorneredEdgeView.xib in Resources */,
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
-				B8212A6C241BE15F0066700C /* LaunchScreenLoaderViewController.xib in Resources */,
 				B884AAE1245F720D00ACC0D7 /* PhotosPlaceholderView.xib in Resources */,
 				B825FC40247EA90600DB035D /* BottomLoaderView.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
@@ -2470,7 +2463,6 @@
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B824DA6F245B073200700319 /* AlbumPreviewItemCollectionViewCell.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
-				B8212A6B241BE15F0066700C /* LaunchScreenLoaderViewController.swift in Sources */,
 				B823B08B242CEFDF0012529D /* UIImageView + AFImageWrappers.swift in Sources */,
 				B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */,
 				B8909F9A2464121A00AA56F7 /* ArticleDetailsViewController.swift in Sources */,
