@@ -17,10 +17,15 @@ enum APIConstants {
         get {
             var components = URLComponents()
             components.scheme   = "https"
-            components.host     = "dev.api.cobook.app"
+            components.host     = Host.prod.rawValue
             components.path     = Path.api.rawValue
             return components
         }
+    }
+
+    enum Host: String {
+        case prod = "api.cobook.app"
+        case dev = "dev.api.cobook.app"
     }
 
     enum Path: String {
