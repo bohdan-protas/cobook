@@ -10,9 +10,19 @@ import UIKit
 
 class CreatePasswordViewController: BaseViewController, CreatePasswordView {
 
+    @Localized("CreatePassword.header")
+    @IBOutlet var headerLabel: UILabel!
+
+    @Localized("CreatePassword.description")
+    @IBOutlet var descriptionLabel: UILabel!
+
+    @Localized("TextInput.placeholder.telephone")
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
+
+    @Localized("TextInput.placeholder.password")
     @IBOutlet var passwordTextField: DesignableTextField!
-    @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
+
+    @Localized("Button.continue.normalTitle")
     @IBOutlet var continueButton: LoaderDesignableButton!
 
     var presenter: CreatePasswordPresenter = CreatePasswordPresenter()

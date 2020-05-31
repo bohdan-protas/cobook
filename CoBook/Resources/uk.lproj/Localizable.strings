@@ -42,8 +42,24 @@
 "SignUp.alreadyHaveAccountQuestion" = "Вже маєте аккаунт?";
 "SignUp.enterButton.normalTitle" = "Увійдіть";
 
+
+// MARK: - Create Password
+"ConfirmTelephone.header" = "Підтвердьт номер телефону";
+"ConfirmTelephone.description" = "Введіть код із смс-повідомлення";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС?";
+
+// MARK: - Confirm password
+
+"CreatePassword.header" = "Останній крок";
+"CreatePassword.description" = "Придумайте пароль";
+
 // MARK: - SighIn
 "SignIn.title" = "Вітаємо в спільноті CoBook";
+"SignIn.header" = "Вхід";
+"SignIn.forgotPassword.normalTitle" = "Забули пароль?";
+"SignIn.enterButton.normalTitle" = "Увійдіть";
+"SignIn.firstTimeInCobook" = "Вперше в CoBook?";
+"SignIn.register.normalTitle" = "Зареєструйтесь";
 
 // MARK: - Validation
 "Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
