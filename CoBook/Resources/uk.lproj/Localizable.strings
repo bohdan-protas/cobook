@@ -172,6 +172,7 @@
 
 // MARK: - Acticles
 
+"Article.details.title" = "Стаття";
 "Article.create.title" = "Створити статтю";
 "Article.edit.title" = "Редагувати статтю";
 "Article.addPhotoButton.normalTitle" = "Додати фото";
@@ -179,6 +180,9 @@
 "Article.selectAlbum.text" = "Виберіть альбом";
 "Article.description.placeholder" = "Текст статті...";
 "Article.publicButton.normalTitle" = "Публікувати";
+"Article.placeholder.emptyAlbumItems" = "В даному альбомі статті відсутні...";
+"Article.placeholder.back" = "Повернутися назад";
+
 "Article.Saved" = "Статтю збережено";
 "Article.Unsaved" = "Статтю видалено із збережених";
 
