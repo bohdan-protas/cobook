@@ -216,11 +216,13 @@
 
 // MARK: - Services
 "Service.create.title" = "Послуга компанії";
+"Service.details.title" = "Послуга компанії";
 "Service.negotiablePrice.text" = "Ціна договірна";
 "Service.showRoom.title" = "Show room";
 "Service.add.text" = "Додати послугу";
 "Service.saveButton.normalTitle" = "Зберегти послугу";
 "Service.updateButton.normalTitle" = "Оновити послугу";
+"Service.editButton.normalTitle" = "Редагувати послугу";
 "Service.section.price.title" = "Вартість послуги:";
 "Service.section.contacts.title" = "Контактні дані:";
 "Service.checkbox.title" = "Використати контакти сторінки";

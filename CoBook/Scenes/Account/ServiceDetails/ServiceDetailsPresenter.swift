@@ -135,7 +135,7 @@ private extension ServiceDetailsPresenter {
         dataSource?[Service.DetailsSectionAccessoryIndex.header].items = [
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
-            .serviceHeaderDescr(model: TitleDescrModel(title: details.title, descr: details.price ?? "Ціна договірна")),
+            .serviceHeaderDescr(model: TitleDescrModel(title: details.title, descr: details.price ?? "Service.negotiablePrice.text".localized)),
             .getInTouch
         ]
 
