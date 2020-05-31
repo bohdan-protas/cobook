@@ -17,7 +17,7 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func reload()
     func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reloadSearch(resultText: String)
-    func openSettings()
+
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
     func goToArticleDetails(presenter: ArticleDetailsPresenter?)
@@ -285,7 +285,7 @@ extension CardsOverviewViewPresenter {
         pendingSearchResultWorkItem?.cancel()
         if query.isEmpty {
             searchDataSource?[.posts].items.removeAll()
-            view?.reloadSearch(resultText: "Немає результатів пошуку")
+            view?.reloadSearch(resultText: "CardOverview.search.emptySearch".localized)
             return
         }
 
@@ -293,7 +293,10 @@ extension CardsOverviewViewPresenter {
             self?.fetchCards(searchQuery: query) { [weak self] (searchCards) in
                 self?.searchCards = searchCards
                 self?.updateViewDataSource()
-                self?.view?.reloadSearch(resultText: searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count) візитки")
+                self?.view?.reloadSearch(resultText: searchCards.isEmpty ?
+                    "CardOverview.search.emptySearch".localized :
+                    String(format: "CardOverview.search.cardSearchResult".localized, searchCards.count)
+                )
             }
         }
 

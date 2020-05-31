@@ -17,6 +17,23 @@
 "Save" = "Зберегти";
 "Unsave" = "Видалити із збережених";
 
+"AlertAction.generalList.title" = "Загальний список";
+"AlertAction.createNewList.title" = "Створити новий список";
+"AlertAction.saveTo" = "Зберегти візитку до:";
+
+"TextInput.placeholder.firstName" = "Імя";
+"TextInput.placeholder.lastName" = "Прізвище";
+"TextInput.placeholder.telephone" = "+380XXXXXXXX";
+"TextInput.placeholder.email" = "Емейл";
+"TextInput.placeholder.password" = "Пароль";
+"Button.continue.normalTitle" = "Продовжити";
+
+// MARK: - Card overview
+"CardOverview.search.placeholder" = "Пошук візитівки";
+"CardOverview.search.emptySearch" = "Немає результатів пошуку";
+"CardOverview.search.cardSearchResult" = "Знайдено %li візитку(и)";
+
+
 // MARK: - Bar Items
 "BarItem.allCards" = "Всі\nвізитки";
 "BarItem.personalCards" = "Персональні\nвізитки";
@@ -41,7 +58,6 @@
 "SignUp.registration" = "Реєстрація";
 "SignUp.alreadyHaveAccountQuestion" = "Вже маєте аккаунт?";
 "SignUp.enterButton.normalTitle" = "Увійдіть";
-
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Підтвердьт номер телефону";
@@ -91,10 +107,3 @@
 "Article.Saved" = "Статтю збережено";
 "Article.Unsaved" = "Статтю видалено із збережених";
 
-"TextInput.placeholder.firstName" = "Імя";
-"TextInput.placeholder.lastName" = "Прізвище";
-"TextInput.placeholder.telephone" = "+380XXXXXXXX";
-"TextInput.placeholder.email" = "Емейл";
-"TextInput.placeholder.password" = "Пароль";
-
-"Button.continue.normalTitle" = "Продовжити";

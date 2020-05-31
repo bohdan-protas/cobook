@@ -141,24 +141,6 @@ extension CardsOverviewViewController: CardsOverviewView {
         searchResultsTableController.tableView.reloadData()
     }
 
-    func openSettings() {
-        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: nil)
-            }
-        }
-
-        alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?) {
         let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
         businessCardDetailsViewController.presenter = presenter
@@ -210,7 +192,7 @@ private extension CardsOverviewViewController {
         searchBar.barTintColor = UIColor.Theme.blackMiddle
         searchBar.tintColor = UIColor.Theme.blackMiddle
         searchBar.setImage(UIImage(named: "ic_search"), for: .search, state: .normal)
-        searchBar.placeholder = "Пошук візитівки"
+        searchBar.placeholder = "CardOverview.search.placeholder".localized
         searchBar.autocapitalizationType = .none
         searchBar.showsCancelButton = false
 
@@ -362,7 +344,7 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
             var actions: [UIAlertAction] = []
 
             // general list
-            actions.append(UIAlertAction(title: "Загальний список", style: .default, handler: { _ in
+            actions.append(UIAlertAction(title: "AlertAction.generalList.title".localized, style: .default, handler: { _ in
                 self.presenter.saveCardAt(indexPath: index, toFolder: nil, completion: { isSuccess in
                     if isSuccess { cell.saveButton.isSelected.toggle() }
                 })
@@ -379,7 +361,7 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
             actions.append(contentsOf: folderSavingActions)
 
             // New list
-            actions.append(UIAlertAction(title: "Створити новий список", style: .default, handler: { _ in
+            actions.append(UIAlertAction(title: "AlertAction.createNewList.title".localized, style: .default, handler: { _ in
                 self.newFolderAlert(folderName: nil) { (folderTitle) in
                     self.presenter.createFolder(title: folderTitle) { (folder) in
                         self.presenter.saveCardAt(indexPath: index, toFolder: folder.index, completion: { isSuccess in
@@ -390,9 +372,9 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
             }))
 
             // Calcel action
-            actions.append(UIAlertAction(title: "Відмінити", style: .cancel, handler: nil))
+            actions.append(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
 
-            self.actionSheetAlert(title: "Зберегти візитку до:", message: nil, actions: actions)
+            self.actionSheetAlert(title: "AlertAction.saveTo".localized, message: nil, actions: actions)
         }
     }
 
@@ -428,7 +410,7 @@ extension CardsOverviewViewController: MapTableViewCellDelegate {
     }
 
     func openSettingsAction(_ cell: MapTableViewCell) {
-        openSettings()
+        openSettingsAlert()
     }
 
 

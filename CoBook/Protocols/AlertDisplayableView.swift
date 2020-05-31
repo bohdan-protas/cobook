@@ -21,9 +21,28 @@ protocol AlertDisplayableView {
     func newSocialAlert(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
 
     func newFolderAlert(folderName: String?, completion: ((_ name: String) -> Void)?)
+    func openSettingsAlert()
 }
 
 extension AlertDisplayableView where Self: UIViewController {
+
+    func openSettingsAlert() {
+        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: nil)
+            }
+        }
+
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
 
     func infoAlert(title: String? = "", message: String?, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
