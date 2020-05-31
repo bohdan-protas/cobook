@@ -12,10 +12,16 @@ class CreateAlbumViewController: BaseViewController {
 
     @IBOutlet var albumImageView: UIImageView!
     @IBOutlet var deleteImageButton: DesignableButton!
-    @IBOutlet var addImageButton: UIButton!
-    @IBOutlet var saveButton: LoaderDesignableButton!
-    @IBOutlet var albumNameTextField: UITextField!
     @IBOutlet var photoPlaceholderView: PhotosPlaceholderView!
+
+    @Localized("Album.addPhotoButton.normalTitle")
+    @IBOutlet var addImageButton: UIButton!
+
+    @Localized("Button.save.normalTitle")
+    @IBOutlet var saveButton: LoaderDesignableButton!
+
+    @Localized("Album.name.placeholder")
+    @IBOutlet var albumNameTextField: UITextField!
 
     /// picker that manage fetching images from gallery
     private lazy var imagePicker: ImagePicker = {

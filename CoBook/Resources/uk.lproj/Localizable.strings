@@ -54,6 +54,7 @@
 "TextInput.placeholder.showRoom" = "Show room";
 "TextInput.placeholder.productHeader" = "Заголовок товару";
 "TextInput.placeholder.productDescription" = "Опис товару";
+
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
 
@@ -171,7 +172,6 @@
 "Settings.UpdateAccount.section.email" = "Емейл:";
 
 // MARK: - Acticles
-
 "Article.details.title" = "Стаття";
 "Article.create.title" = "Створити статтю";
 "Article.edit.title" = "Редагувати статтю";
@@ -182,9 +182,15 @@
 "Article.publicButton.normalTitle" = "Публікувати";
 "Article.placeholder.emptyAlbumItems" = "В даному альбомі статті відсутні...";
 "Article.placeholder.back" = "Повернутися назад";
-
 "Article.Saved" = "Статтю збережено";
 "Article.Unsaved" = "Статтю видалено із збережених";
+
+// MARK: - Album
+"Album.createTitle" = "Створити альбом";
+"Album.selectTitle" = "Вибрати альбом";
+"Album.editTitle" = "Редагувати альбом";
+"Album.addPhotoButton.normalTitle" = "Додати фото";
+"Album.name.placeholder" = "Назва альбому";
 
 // MARK: - Filters
 "Filter.title" = "Фільтри";
