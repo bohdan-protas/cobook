@@ -73,27 +73,6 @@ class SavedContentViewController: BaseViewController {
         }
     }
 
-    // MARK: - Public
-
-    func openSettings() {
-        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: nil)
-            }
-        }
-
-        alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-
-
 }
 
 // MARK: - Privates
@@ -103,7 +82,7 @@ private extension SavedContentViewController {
     func setupLayout() {
         self.tableView.delegate = self
         self.tableView.refreshControl = refreshControl
-        self.navigationItem.title = "Saved".localized
+        self.navigationItem.title = "SavedContent.title".localized
         self.navigationItem.largeTitleDisplayMode = .always
     }
 
@@ -225,13 +204,13 @@ extension SavedContentViewController: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didLongTappedItemAt index: Int) {
         let actions: [UIAlertAction] = [
-            .init(title: "Видалити", style: .destructive, handler: { [unowned self] (_) in
+            .init(title: "AlertAction.Delete".localized, style: .destructive, handler: { [unowned self] (_) in
                 self.presenter.deleteFolder(at: index) { [unowned self] in
                     self.itemsBarView.delete(at: index)
                 }
             }),
 
-            .init(title: "Змінити", style: .default, handler: { [unowned self] (_) in
+            .init(title: "AlertAction.Change".localized, style: .default, handler: { [unowned self] (_) in
                 let title = self.itemsBarView.dataSource[safe: index]?.title
                 self.newFolderAlert(folderName: title, completion: { [unowned self] (folderName) in
                     self.presenter.updateFolder(at: index, withNewTitle: folderName) { [unowned self] (updatedBarItem) in
@@ -240,8 +219,7 @@ extension SavedContentViewController: HorizontalItemsBarViewDelegate {
                 })
             }),
 
-            .init(title: "Відмінити", style: .cancel, handler: { (_) in
-                Log.debug("Cancel")
+            .init(title: "Cancel".localized, style: .cancel, handler: { (_) in
             })
         ]
         if presenter.isEditableBarItemAt(index: index) {
@@ -265,7 +243,7 @@ extension SavedContentViewController: MapTableViewCellDelegate {
     }
 
     func openSettingsAction(_ cell: MapTableViewCell) {
-        openSettings()
+        openSettingsAlert()
     }
 
 

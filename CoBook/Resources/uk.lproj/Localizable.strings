@@ -14,9 +14,11 @@
 "Account" = "Аккаунт";
 "AllCards" = "Всі візитки";
 "Saved" = "Збережені";
-"Save" = "Зберегти";
-"Unsave" = "Видалити із збережених";
 
+"AlertAction.Save" = "Зберегти";
+"AlertAction.Unsave" = "Видалити із збережених";
+"AlertAction.Delete" = "Видалити";
+"AlertAction.Change" = "Змінити";
 "AlertAction.generalList.title" = "Загальний список";
 "AlertAction.createNewList.title" = "Створити новий список";
 "AlertAction.saveTo" = "Зберегти візитку до:";
@@ -99,10 +101,6 @@
 "Account.item.startMakingMoney" = "Почати заробляти з CoBook";
 "Account.item.quitAccount" = "Вийти з аккаунту";
 
-// MARK: - Card
-"Card.Saved" = "Візитку збережено";
-"Card.Unsaved" = "Видалено із збережених";
-
 // MARK: - Acticles
 "Article.Saved" = "Статтю збережено";
 "Article.Unsaved" = "Статтю видалено із збережених";
@@ -111,3 +109,14 @@
 "Filter.title" = "Фільтри";
 "Filter.section.interests.title" = "Інтереси";
 "Filter.section.practicies.title" = "Вид діяльності";
+
+//MARK: - Saved content
+"SavedContent.title" = "Збережені";
+"SavedContent.listCreated.message" = "Список %@ створено";
+"SavedContent.listUpdated.message" = "Список %@ оновлено";
+"SavedContent.listDeleted.message" = "Список %@ видалено";
+"SavedContent.cardSaved.message" = "Візитку збережено";
+"SavedContent.cardUnsaved.message" = "Видалено із збережених";
+"SavedContent.section.articles.title" = "Збережені пости";
+"SavedContent.section.cards.title" = "Збережені візитки";
+"SavedContent.addList.normalTitle" = "Додати список";

@@ -418,7 +418,7 @@ private extension CardsOverviewViewPresenter {
                 self?.updateCardItem(id: model.id, withSavedFlag: true)
                 NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
                 completion?(true)
-                self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
+                self?.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
             case .failure:
                 completion?(false)
                 self?.view?.stopLoading(success: false)
@@ -435,7 +435,7 @@ private extension CardsOverviewViewPresenter {
                 self?.updateCardItem(id: model.id, withSavedFlag: false)
                 NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
                 completion?(true)
-                self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
+                self?.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
             case .failure:
                 completion?(false)
                 self?.view?.stopLoading(success: false)
