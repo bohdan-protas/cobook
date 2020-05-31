@@ -73,7 +73,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func createPerconalCard() {
-        view?.startLoading(text: "Створення...")
+        view?.startLoading(text: "Loading.creating.title".localized)
         let params = CreatePersonalCardParametersApiModel(model: personalCardDetailsModel)
         
         APIClient.default.createPersonalCard(parameters: params) { [weak self] (result) in
@@ -94,7 +94,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     func uploadUserImage(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.imageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 
@@ -124,26 +124,31 @@ private extension CreatePersonalCardPresenter {
 
         let activitySection = Section<CreatePersonalCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Діяльність:"),
-            .textField(model: TextFieldModel(text: personalCardDetailsModel.position, placeholder: "Займана посада", associatedKeyPath: \CreatePersonalCard.DetailsModel.position, keyboardType: .default)),
-            .actionField(model: ActionFieldModel(text: personalCardDetailsModel.practiseType?.title, placeholder: "Вид діяльності", actionTypeId: CreatePersonalCard.ActionType.activityType.rawValue)),
-            .actionField(model: ActionFieldModel(text: personalCardDetailsModel.city?.name, placeholder: "Місто проживання", actionTypeId: CreatePersonalCard.ActionType.placeOfLiving.rawValue)),
-            .actionField(model: ActionFieldModel(text: personalCardDetailsModel.region?.name, placeholder: "Регіон діяльності", actionTypeId: CreatePersonalCard.ActionType.activityRegion.rawValue)),
-            .textView(model: TextFieldModel(text: personalCardDetailsModel.description, placeholder: "Опис діяльності", associatedKeyPath: \CreatePersonalCard.DetailsModel.description, keyboardType: .default))
+            .title(text: "PersonalCard.Creation.section.activity".localized),
+            .textField(model: TextFieldModel(text: personalCardDetailsModel.position, placeholder: "TextInput.placeholder.occupiedPosition".localized, associatedKeyPath: \CreatePersonalCard.DetailsModel.position, keyboardType: .default)),
+            .actionField(model: ActionFieldModel(text: personalCardDetailsModel.practiseType?.title,
+                                                 placeholder: "TextInput.placeholder.activityType".localized, actionTypeId: CreatePersonalCard.ActionType.activityType.rawValue)),
+            .actionField(model: ActionFieldModel(text: personalCardDetailsModel.city?.name,
+                                                 placeholder: "TextInput.placeholder.cityOfResidence".localized, actionTypeId: CreatePersonalCard.ActionType.placeOfLiving.rawValue)),
+            .actionField(model: ActionFieldModel(text: personalCardDetailsModel.region?.name,
+                                                 placeholder: "TextInput.placeholder.activityRegion".localized, actionTypeId: CreatePersonalCard.ActionType.activityRegion.rawValue)),
+            .textView(model: TextFieldModel(text: personalCardDetailsModel.description, placeholder:
+                "TextInput.placeholder.activityDescription".localized,
+                                            associatedKeyPath: \CreatePersonalCard.DetailsModel.description, keyboardType: .default))
         ])
 
         let contactsSection = Section<CreatePersonalCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Діяльність компанії:"),
-            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactTelephone, placeholder: "Робочий номер телефону", associatedKeyPath: \CreatePersonalCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
-            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactEmail, placeholder: "Робочий емайл для звязку", associatedKeyPath: \CreatePersonalCard.DetailsModel.contactEmail, keyboardType: .emailAddress)),
-            .title(text: "Соціальні мережі:"),
+            .title(text: "PersonalCard.Creation.section.companyActivity".localized),
+            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactTelephone, placeholder: "TextInput.placeholder.workingPhoneNumber".localized, associatedKeyPath: \CreatePersonalCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
+            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactEmail, placeholder: "TextInput.placeholder.workingEmailNumber".localized, associatedKeyPath: \CreatePersonalCard.DetailsModel.contactEmail, keyboardType: .emailAddress)),
+            .title(text: "PersonalCard.Creation.section.socials".localized),
             .socials,
         ])
 
         let interestsSection = Section<CreatePersonalCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Інтереси(для рекомендацій):"),
+            .title(text: "PersonalCard.Creation.section.interests".localized),
             .interests
         ])
 
@@ -159,7 +164,7 @@ private extension CreatePersonalCardPresenter {
         var practicies: [PracticeModel] = []
         var interests: [InterestModel] = []
 
-        view?.startLoading(text: "Завантаження")
+        view?.startLoading(text: "Loading.loading.title".localized)
 
         // fetch practices
         group.enter()
@@ -319,7 +324,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, Socials
         case .add:
             view?.newSocialAlert(name: nil, link: nil) { (name, strUrl) in
                 guard let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
-                    self.view?.errorAlert(message: "Посилання має хибний формат")
+                    self.view?.errorAlert(message: "Error.Social.badLink.message".localized)
                     return
                 }
 
@@ -333,13 +338,13 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, Socials
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath) {
         let actions: [UIAlertAction] = [
-            .init(title: "Видалити", style: .destructive, handler: { (_) in
+            .init(title: "AlertAction.Delete".localized, style: .destructive, handler: { (_) in
                 cell.deleteAt(indexPath: indexPath)
             }),
-            .init(title: "Змінити", style: .default, handler: { (_) in
+            .init(title: "AlertAction.Change".localized, style: .default, handler: { (_) in
                 self.view?.newSocialAlert(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
                     guard let name = name, let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
-                        self.view?.errorAlert(message: "Посилання має хибний формат")
+                        self.view?.errorAlert(message:  "Error.Social.badLink.message".localized)
                         return
                     }
 
@@ -347,8 +352,7 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, Socials
                     cell.updateAt(indexPath: indexPath, with: newItem)
                 }
             }),
-            .init(title: "Відмінити", style: .cancel, handler: { (_) in
-                Log.debug("Cancel")
+            .init(title: "AlertAction.Cancel".localized, style: .cancel, handler: { (_) in
             })
 
         ]

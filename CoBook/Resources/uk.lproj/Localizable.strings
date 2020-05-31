@@ -19,6 +19,7 @@
 "AlertAction.Unsave" = "Видалити із збережених";
 "AlertAction.Delete" = "Видалити";
 "AlertAction.Change" = "Змінити";
+"AlertAction.Cancel" = "Змінити";
 "AlertAction.generalList.title" = "Загальний список";
 "AlertAction.createNewList.title" = "Створити новий список";
 "AlertAction.saveTo" = "Зберегти візитку до:";
@@ -31,6 +32,14 @@
 "TextInput.placeholder.newPassword" = "Новий пароль";
 "TextInput.placeholder.oldPassword" = "Старий пароль";
 "TextInput.placeholder.repeatPassword" = "Підтвердіть новий пароль";
+"TextInput.placeholder.occupiedPosition" = "Займана посада";
+"TextInput.placeholder.activityType" = "Вид діяльності";
+"TextInput.placeholder.cityOfResidence" = "Місто проживання";
+"TextInput.placeholder.activityRegion" = "Регіон діяльності";
+"TextInput.placeholder.activityDescription" = "Опис діяльності";
+
+"TextInput.placeholder.workingPhoneNumber" = "Робочий номер телефону";
+"TextInput.placeholder.workingEmailNumber" = "Робочий емайл для звязку";
 
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
@@ -53,12 +62,14 @@
 // MARK: - Loading
 "Loading.photoLoading.title" = "Триває оновлення фото...";
 "Loading.loading.title" = "Завантаження...";
+"Loading.creating.title" = "Створення...";
 
-// MARK:-  Error
+// MARK: -  Error
 "Error.connection" = "Не вдалося приєднатися до сервера";
 "Error.photoLoading.message" = "Помилка завантаження фото";
 
 "Error.Social.unreadableFormat" = "Посилання соцмережі має нечитабельний формат";
+"Error.Social.badLink.message" = "Посилання має хибний формат";
 
 "Error.Map.notDefinedRoute.message" = "Не визначені адреси маршрутів";
 "Error.Map.cantOpen.message" = "Не вдається відкрити карти";
@@ -176,6 +187,12 @@
 "PersonalCard.section.contacts.title" = "Зв’язатись:";
 "PersonalCard.section.articles.title" = "Створені статті:";
 "PersonalCard.section.ownerArticles.title" = "Мій щоденник:";
+
+"PersonalCard.Creation.title" = "Створення персональної візитки";
+"PersonalCard.Creation.section.activity" = "Діяльність:";
+"PersonalCard.Creation.section.companyActivity" = "Діяльність компанії:";
+"PersonalCard.Creation.section.socials" = "Соціальні мережі:";
+"PersonalCard.Creation.section.interests" = "Інтереси(для рекомендацій):";
 
 // MARK: - Services
 "Service.negotiablePrice.text" = "Ціна договірна";
