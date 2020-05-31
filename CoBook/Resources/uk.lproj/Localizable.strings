@@ -28,7 +28,16 @@
 "TextInput.placeholder.telephone" = "+380XXXXXXXX";
 "TextInput.placeholder.email" = "Емейл";
 "TextInput.placeholder.password" = "Пароль";
+"TextInput.placeholder.newPassword" = "Новий пароль";
+"TextInput.placeholder.oldPassword" = "Старий пароль";
+"TextInput.placeholder.repeatPassword" = "Підтвердіть новий пароль";
+
 "Button.continue.normalTitle" = "Продовжити";
+"Button.save.normalTitle" = "Зберегти";
+
+// MARK: - Social
+"Social.metaTag.inviteFriends.title" = "CoBook";
+"Social.metaTag.inviteFriends.description" = "Персональна візитниця в телефоні CoBook — завантажуй! ІННОВАЦІЙНИЙ український додаток спеціально для тебе! CoBook — це розумна візитниця у твоєму смартфоні, яка допоможе в роботі та бізнесі лише за допомогою кількох кліків.";
 
 // MARK: - Card overview
 "CardOverview.search.placeholder" = "Пошук візитівки";
@@ -92,14 +101,31 @@
 "ForgotPassword.successMessage" = "Запит на відновлення паролю успішно наліслано.";
 
 // MARK: - Account
+"Account.updating.title" = "Оновлення данних...";
 "Account.item.createPersonalCard" = "Створити персональну візитку";
 "Account.item.createBusinessCard" = "Створити бізнес візитку";
+"Account.item.createAnotherOneBusinessCard" = "Створити ще одну бізнес візитку";
 "Account.item.inviteFriends" = "Запросити друзів";
 "Account.item.statictics" = "Статистика";
 "Account.item.generateQrCode" = "Згенерувати QR-code";
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Почати заробляти з CoBook";
 "Account.item.quitAccount" = "Вийти з аккаунту";
+"Account.section.myCards.title" = "Мої візитки:";
+
+// MARK: - Settings
+"Settings.title" = "Налаштування";
+"Settings.item.updateAccount.title" = "Оновлення аккаунту";
+"Settings.item.changePassword.title" = "Зміна паролю";
+"Settings.item.paymentMethods.title" = "Методи оплати";
+"Settings.item.appVersion.title" = "Версія додатку";
+
+"Settings.ChangePassword.title" = "Зміна паролю";
+"Settings.ChangePassword.passwordsDoNotMatch.title" = "Провірте вхідні дані";
+"Settings.ChangePassword.passwordsDoNotMatch.message" = "Старий і новий пароль не співпадають";
+"Settings.ChangePassword.section.oldPassword.title" = "Старий пароль:";
+"Settings.ChangePassword.section.newPassword.title" = "Новий пароль:";
+"Settings.ChangePassword.section.repeareNewPassword.title" = "Підтвердіть новий пароль:";
 
 // MARK: - Acticles
 "Article.Saved" = "Статтю збережено";
