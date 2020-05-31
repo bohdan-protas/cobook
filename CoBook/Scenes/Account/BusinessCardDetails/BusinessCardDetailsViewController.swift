@@ -74,7 +74,7 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
 
     func setupLayout() {
         self.navigationItem.largeTitleDisplayMode = .never
-        self.navigationItem.title = "Бізнес візитка"
+        self.navigationItem.title = "BusinessCard.title".localized
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
         self.tableView.delegate = self
     }
@@ -120,14 +120,14 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
             self.stopLoading()
 
             guard let routeURL = APIConstants.Google.googleMapsRouteURL(daddr: destination, directionMode: .driving) else {
-                self.errorAlert(message: "Не визначені адреси маршрутів")
+                self.errorAlert(message: "Error.Map.notDefinedRoute".localized)
                 return
             }
 
             if UIApplication.shared.canOpenURL(routeURL) {
                 UIApplication.shared.open(routeURL)
             } else {
-                self.errorAlert(message: "Не вдається відкрити карти")
+                self.errorAlert(message: "Error.Map.cantOpen.message".localized)
                 Log.error("Can't use comgooglemaps://")
             }
 

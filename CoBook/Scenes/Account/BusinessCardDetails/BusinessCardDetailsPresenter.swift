@@ -57,11 +57,11 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     init(id: Int) {
         self.businessCardId = id
         self.barItems = [
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "Загальна\n інформація"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "Послуги"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "Крамниця"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "Команда"),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "Контакти"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "BarItem.generalInfo".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "BarItem.shop".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "BarItem.team".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "BarItem.contacts".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
 
@@ -131,14 +131,14 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     func getRouteDestination(callback: ((CLLocationCoordinate2D?) -> Void)?) {
         guard let addressId = self.cardDetails?.address?.googlePlaceId else {
-            view?.errorAlert(message: "Невизначений адрес призначення маршруту")
+            view?.errorAlert(message: "Error.Map.notDefinedRoute.message".localized)
             return
         }
 
         GMSPlacesClient.shared().fetchPlace(fromPlaceID: addressId, placeFields: .all, sessionToken: nil) { [unowned self] (place, error) in
             DispatchQueue.main.async {
                 if error != nil {
-                    let errorDescr = error?.localizedDescription ?? "Невизначений адрес призначення маршруту"
+                    let errorDescr = error?.localizedDescription ?? "Error.Map.notDefinedRoute.message".localized
                     self.view?.errorAlert(message: errorDescr)
                 }
                 callback?(place?.coordinate)
@@ -165,7 +165,7 @@ private extension BusinessCardDetailsPresenter {
         let group = DispatchGroup()
         var errors = [Error]()
 
-        view?.startLoading(text: "Завантаження")
+        view?.startLoading(text: "Loading.loading.title".localized)
 
         // Fetch card details
         group.enter()
@@ -208,7 +208,7 @@ private extension BusinessCardDetailsPresenter {
                 self?.services = response?.compactMap { Service.PreviewModel(id: $0.id,
                                                                              name: $0.title,
                                                                              avatarPath: $0.avatar?.sourceUrl,
-                                                                             price: $0.priceDetails ?? "Ціна договірна",
+                                                                             price: $0.priceDetails ?? "Service.negotiablePrice.text".localized,
                                                                              descriptionTitle: $0.header,
                                                                              descriptionHeader: $0.description,
                                                                              contactTelephone: $0.contactTelephone?.number,
@@ -246,7 +246,7 @@ private extension BusinessCardDetailsPresenter {
                 self?.products.removeAll()
                 let previewItems = response?.compactMap { ProductPreviewItemModel(showroom: $0.showroom,
                                                                                   name: $0.title,
-                                                                                  price: $0.price ?? "Ціна договірна",
+                                                                                  price: $0.price ?? "Service.negotiablePrice.text".localized,
                                                                                   image: $0.image?.sourceUrl,
                                                                                   productID: $0.id,
                                                                                   cardID: strongSelf.cardDetails?.id ?? -1,
@@ -255,7 +255,7 @@ private extension BusinessCardDetailsPresenter {
                                                                                   isUserOwner: strongSelf.isUserOwner) } ?? []
                 let groupedItems = Dictionary(grouping: previewItems, by: { $0.showroom })
                 groupedItems.enumerated().forEach {
-                    self?.products.append(ProductPreviewSectionModel(showroom: $0.element.key, headerTitle: "Show room \($0.element.key)", productPreviewItems: $0.element.value))
+                    self?.products.append(ProductPreviewSectionModel(showroom: $0.element.key, headerTitle: "\("Service.showRoom.title".localized) \($0.element.key)", productPreviewItems: $0.element.value))
                 }
                 strongSelf.products.sort {
                     $0.showroom < $1.showroom
@@ -317,9 +317,9 @@ private extension BusinessCardDetailsPresenter {
         albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
 
         dataSource?[.postPreview].items.removeAll()
-        dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "Створені альбоми:", counter: self.albumPreviewItems.count)))
+        dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "BusinessCard.section.createdAlbums.title".localized, counter: self.albumPreviewItems.count)))
         if isUserOwner {
-            albumPreviewSection?.items.append(.add(title: "Ваш пост", imagePath: cardDetails?.avatar?.sourceUrl))
+            albumPreviewSection?.items.append(.add(title: "BusinessCard.createNewAlbum.text".localized, imagePath: cardDetails?.avatar?.sourceUrl))
         }
         albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { PostPreview.Item.view($0) })
         if !(albumPreviewSection?.items.isEmpty ?? true) {
@@ -342,7 +342,7 @@ private extension BusinessCardDetailsPresenter {
 
                 let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
                 if !listListItems.isEmpty {
-                    dataSource?[.cardDetails].items.append(.title(text: "Соціальні мережі:"))
+                    dataSource?[.cardDetails].items.append(.title(text: "BusinessCard.section.socials.title".localized))
                     dataSource?[.cardDetails].items.append(.socialList)
                 }
 
@@ -430,7 +430,7 @@ extension BusinessCardDetailsPresenter: SocialsListTableViewCellDelegate {
             if let url = model.url, UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
-                view?.errorAlert(message: "Посилання соцмережі має нечитабельний формат")
+                view?.errorAlert(message: "Error.Social.unreadableFormat".localized)
             }
         default:
             break
@@ -526,7 +526,7 @@ extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDeleg
                 case .success:
                     cell.saveCardButton.isSelected = true
                     self?.cardDetails?.isSaved = true
-                    self?.view?.stopLoading(success: true, succesText: "Збережено", failureText: nil, completion: nil)
+                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
                     NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
                 case .failure:
                     self?.view?.stopLoading(success: false)
@@ -541,7 +541,7 @@ extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDeleg
                 case .success:
                     cell.saveCardButton.isSelected = false
                     self?.cardDetails?.isSaved = false
-                    self?.view?.stopLoading(success: true, succesText: "Вилучено із збережених", failureText: nil, completion: nil)
+                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
                     NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
                 case .failure:
                     self?.view?.stopLoading(success: false)

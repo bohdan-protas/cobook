@@ -39,23 +39,29 @@
 "Social.metaTag.inviteFriends.title" = "CoBook";
 "Social.metaTag.inviteFriends.description" = "Персональна візитниця в телефоні CoBook — завантажуй! ІННОВАЦІЙНИЙ український додаток спеціально для тебе! CoBook — це розумна візитниця у твоєму смартфоні, яка допоможе в роботі та бізнесі лише за допомогою кількох кліків.";
 
-// MARK: - Card overview
-"CardOverview.search.placeholder" = "Пошук візитівки";
-"CardOverview.search.emptySearch" = "Немає результатів пошуку";
-"CardOverview.search.cardSearchResult" = "Знайдено %li візитку(и)";
-
 // MARK: - Bar Items
 "BarItem.allCards" = "Всі\nвізитки";
 "BarItem.personalCards" = "Персональні\nвізитки";
 "BarItem.businessCards" = "Бізнес\nвізитки";
 "BarItem.myRegion" = "В моєму\nрегіоні";
+"BarItem.generalInfo" = "Загальна\n інформація";
+"BarItem.services" = "Послуги";
+"BarItem.shop" = "Крамниця";
+"BarItem.team" = "Команда";
+"BarItem.contacts" = "Контакти";
 
 // MARK: - Loading
 "Loading.photoLoading.title" = "Триває оновлення фото...";
+"Loading.loading.title" = "Завантаження...";
 
 // MARK:-  Error
 "Error.connection" = "Не вдалося приєднатися до сервера";
 "Error.photoLoading.message" = "Помилка завантаження фото";
+
+"Error.Social.unreadableFormat" = "Посилання соцмережі має нечитабельний формат";
+
+"Error.Map.notDefinedRoute.message" = "Не визначені адреси маршрутів";
+"Error.Map.cantOpen.message" = "Не вдається відкрити карти";
 
 "Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
 "Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
@@ -72,6 +78,11 @@
 "Onboarding.Subtitle03" = "Описособливостей додатку\nфічі, переваги, тощо";
 "Onboarding.Next" = "Продовжити";
 "Onboarding.Start" = "Розпочати";
+
+// MARK: - Card overview
+"CardOverview.search.placeholder" = "Пошук візитівки";
+"CardOverview.search.emptySearch" = "Немає результатів пошуку";
+"CardOverview.search.cardSearchResult" = "Знайдено %li візитку(и)";
 
 // MARK: - SignUp
 "SignUp.title" = "Вітаємо в спільноті CoBook";
@@ -152,3 +163,18 @@
 "SavedContent.section.articles.title" = "Збережені пости";
 "SavedContent.section.cards.title" = "Збережені візитки";
 "SavedContent.addList.normalTitle" = "Додати список";
+
+// MARK: - Business Card
+"BusinessCard.title" = "Бізнес візитка";
+"BusinessCard.section.createdAlbums.title" = "Створені альбоми:";
+"BusinessCard.section.socials.title" = "Соціальні мережі:";
+
+"BusinessCard.createNewAlbum.text" = "Ваш пост";
+
+// MARK: - Services
+"Service.negotiablePrice.text" = "Ціна договірна";
+"Service.showRoom.title" = "Show room";
+"Service.add.text" = "Додати послугу";
+
+// MARK: - Product
+"Product.add.text" = "Додати товар";
