@@ -19,7 +19,7 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
     /// bottom save button
     private lazy var saveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
-        view.saveButton.setTitle("Зберегти послугу", for: .normal)
+        view.saveButton.setTitle("Service.saveButton.normalTitle".localized, for: .normal)
         view.onSaveTapped = { [weak self] in
             self?.presenter?.createService()
         }
@@ -29,7 +29,7 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
     /// bottom save button
     private lazy var updateView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
-        view.saveButton.setTitle("Оновити послугу", for: .normal)
+        view.saveButton.setTitle("Service.saveButton.normalTitle".localized, for: .normal)
         view.onSaveTapped = { [weak self] in
             self?.presenter?.updateService()
         }
@@ -99,7 +99,7 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
 private extension CreateServiceViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Послуга компанії"
+        self.navigationItem.title = "Service.create.title".localized
         tableView.delegate = self
     }
 

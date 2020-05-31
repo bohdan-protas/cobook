@@ -46,6 +46,10 @@
 "TextInput.placeholder.workingEmailNumber" = "Робочий емайл для звязку";
 "TextInput.placeholder.companyName" = "Назва компанії";
 "TextInput.placeholder.detailDescription" = "Детальний опис";
+"TextInput.placeholder.serviceName" = "Назва послуги";
+"TextInput.placeholder.priceEnter" = "Вкажіть вартість";
+"TextInput.placeholder.serviceHeader" = "Заголовок послуги";
+"TextInput.placeholder.serviceDescription" = "Опис товару";
 
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
@@ -69,6 +73,7 @@
 "Loading.photoLoading.title" = "Триває оновлення фото...";
 "Loading.loading.title" = "Завантаження...";
 "Loading.creating.title" = "Створення...";
+"Loading.updating.title" = "Оновлення...";
 
 // MARK: -  Error
 "Error.connection" = "Не вдалося приєднатися до сервера";
@@ -210,9 +215,15 @@
 "PersonalCard.Creation.section.interests" = "Інтереси(для рекомендацій):";
 
 // MARK: - Services
+"Service.create.title" = "Послуга компанії";
 "Service.negotiablePrice.text" = "Ціна договірна";
 "Service.showRoom.title" = "Show room";
 "Service.add.text" = "Додати послугу";
+"Service.saveButton.normalTitle" = "Зберегти послугу";
+"Service.updateButton.normalTitle" = "Оновити послугу";
+"Service.section.price.title" = "Вартість послуги:";
+"Service.section.contacts.title" = "Контактні дані:";
+"Service.checkbox.title" = "Використати контакти сторінки";
 
 // MARK: - Product
 "Product.add.text" = "Додати товар";

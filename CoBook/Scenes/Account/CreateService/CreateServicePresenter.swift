@@ -99,7 +99,7 @@ extension CreateServicePresenter {
                                                             return nil
                                                         }})
 
-        view?.startLoading(text: "Оновлення...")
+        view?.startLoading(text: "Loading.updating.title".localized)
         APIClient.default.updateService(with: creationParameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -133,7 +133,7 @@ extension CreateServicePresenter {
                                                             return nil
                                                         }})
 
-        view?.startLoading(text: "Створення...")
+        view?.startLoading(text: "Loading.creating.title".localized)
         APIClient.default.createService(with: creationParameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -151,7 +151,7 @@ extension CreateServicePresenter {
 
     func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageID: String?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 
@@ -212,14 +212,14 @@ private extension CreateServicePresenter {
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
-            .textField(model: TextFieldModel(text: details.serviceName, placeholder: "Назва послуги", associatedKeyPath: \Service.CreationDetailsModel.serviceName, keyboardType: .default)),
-            .title(text: "Вартість послуги:"),
+            .textField(model: TextFieldModel(text: details.serviceName, placeholder: "TextInput.placeholder.serviceName".localized, associatedKeyPath: \Service.CreationDetailsModel.serviceName, keyboardType: .default)),
+            .title(text: "Service.section.price.title".localized),
             .textField(model: TextFieldModel(isEnabled: !details.isContractPrice,
                                              text: details.price,
-                                             placeholder: "Вкажіть вартість",
+                                             placeholder: "TextInput.placeholder.priceEnter".localized,
                                              associatedKeyPath: \Service.CreationDetailsModel.price,
                                              keyboardType: .default)),
-            .checkbox(model: CheckboxModel(title: "Ціна договірна", isSelected: details.isContractPrice, handler: { checkbox in
+            .checkbox(model: CheckboxModel(title: "Service.negotiablePrice.text".localized, isSelected: details.isContractPrice, handler: { checkbox in
                 checkbox.isSelected.toggle()
                 self.details.isContractPrice = checkbox.isSelected
                 if checkbox.isSelected {
@@ -231,22 +231,22 @@ private extension CreateServicePresenter {
 
         dataSource?[Service.CreationSectionAccessoryIndex.contacts].items = [
             .sectionSeparator,
-            .title(text: "Контактні дані:"),
+            .title(text: "Service.section.contacts.title".localized),
             .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
                                              text: details.telephoneNumber,
-                                             placeholder: "Телефон для звязку",
+                                             placeholder: "TextInput.placeholder.workingPhoneNumber".localized,
                                              associatedKeyPath: \Service.CreationDetailsModel.telephoneNumber,
                                              keyboardType: .phonePad)),
 
             .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
                                              text: details.email,
-                                             placeholder: "Робочий емейл для звязку",
+                                             placeholder: "TextInput.placeholder.workingEmailNumber".localized,
                                              associatedKeyPath: \Service.CreationDetailsModel.email,
                                              keyboardType: .emailAddress)),
         ]
         if !isEditing {
             dataSource?[.contacts].items.append(
-                .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
+                .checkbox(model: CheckboxModel(title: "Service.checkbox.title".localized, isSelected: details.isUseContactsFromSite, handler: { checkbox in
                     checkbox.isSelected.toggle()
                     if checkbox.isSelected {
                         self.details.telephoneNumber = AppStorage.User.Profile?.telephone.number
@@ -263,8 +263,8 @@ private extension CreateServicePresenter {
 
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,
-            .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "Заголовок послуги", associatedKeyPath: \Service.CreationDetailsModel.descriptionTitle, keyboardType: .default)),
-            .textView(model: TextFieldModel(text: details.desctiptionBody, placeholder: "Опис товару", associatedKeyPath: \Service.CreationDetailsModel.desctiptionBody, keyboardType: .default))
+            .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "TextInput.placeholder.serviceHeader".localized, associatedKeyPath: \Service.CreationDetailsModel.descriptionTitle, keyboardType: .default)),
+            .textView(model: TextFieldModel(text: details.desctiptionBody, placeholder: "TextInput.placeholder.serviceDescription".localized, associatedKeyPath: \Service.CreationDetailsModel.desctiptionBody, keyboardType: .default))
         ]
 
     }
