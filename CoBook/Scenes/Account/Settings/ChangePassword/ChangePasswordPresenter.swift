@@ -63,7 +63,8 @@ class ChangePasswordPresenter: BasePresenter {
 
     func chageCredentials() {
         guard parametersModel.newPassword == parametersModel.repeatPassword else {
-            view?.infoAlert(title: "Провірте вхідні дані", message: "Старий і новий пароль не співпадають")
+            view?.infoAlert(title: "Settings.ChangePassword.passwordsDoNotMatch.title".localized,
+                            message: "Settings.ChangePassword.passwordsDoNotMatch.message".localized)
             return
         }
 
@@ -91,14 +92,14 @@ private extension ChangePasswordPresenter {
 
     func updateViewDataSource() {
         let infoSection = Section<ChangePassword.Cell>(items: [
-            .title(text: "Старий пароль:"),
-            .textField(model: TextFieldModel(text: parametersModel.oldPassword, placeholder: "Старий пароль", associatedKeyPath: \ChangePassword.Details.oldPassword, keyboardType: .default)),
+            .title(text: "Settings.ChangePassword.section.oldPassword.title".localized),
+            .textField(model: TextFieldModel(text: parametersModel.oldPassword, placeholder: "TextInput.placeholder.oldPassword".localized, associatedKeyPath: \ChangePassword.Details.oldPassword, keyboardType: .default)),
 
-            .title(text: "Новий пароль:"),
-            .textField(model: TextFieldModel(text: parametersModel.newPassword, placeholder: "Новий пароль", associatedKeyPath: \ChangePassword.Details.newPassword, keyboardType: .default)),
+            .title(text: "Settings.ChangePassword.section.newPassword.title".localized),
+            .textField(model: TextFieldModel(text: parametersModel.newPassword, placeholder: "TextInput.placeholder.newPassword".localized, associatedKeyPath: \ChangePassword.Details.newPassword, keyboardType: .default)),
 
-            .title(text: "Підтвердіть новий пароль:"),
-            .textField(model: TextFieldModel(text: parametersModel.repeatPassword, placeholder: "Підтвердіть новий пароль", associatedKeyPath: \ChangePassword.Details.repeatPassword, keyboardType: .default)),
+            .title(text: "Settings.ChangePassword.section.repeareNewPassword.title".localized),
+            .textField(model: TextFieldModel(text: parametersModel.repeatPassword, placeholder: "TextInput.placeholder.repeatPassword".localized, associatedKeyPath: \ChangePassword.Details.repeatPassword, keyboardType: .default)),
         ])
 
         viewDataSource?.sections = [infoSection]
