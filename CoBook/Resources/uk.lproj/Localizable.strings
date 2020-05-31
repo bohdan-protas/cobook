@@ -44,15 +44,24 @@
 "CardOverview.search.emptySearch" = "Немає результатів пошуку";
 "CardOverview.search.cardSearchResult" = "Знайдено %li візитку(и)";
 
-
 // MARK: - Bar Items
 "BarItem.allCards" = "Всі\nвізитки";
 "BarItem.personalCards" = "Персональні\nвізитки";
 "BarItem.businessCards" = "Бізнес\nвізитки";
 "BarItem.myRegion" = "В моєму\nрегіоні";
 
+// MARK: - Loading
+"Loading.photoLoading.title" = "Триває оновлення фото...";
+
 // MARK:-  Error
 "Error.connection" = "Не вдалося приєднатися до сервера";
+"Error.photoLoading.message" = "Помилка завантаження фото";
+
+"Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
+"Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
+"Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
+"Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
+"Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";
@@ -76,7 +85,6 @@
 "ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС?";
 
 // MARK: - Confirm password
-
 "CreatePassword.header" = "Останній крок";
 "CreatePassword.description" = "Придумайте пароль";
 
@@ -87,13 +95,6 @@
 "SignIn.enterButton.normalTitle" = "Увійдіть";
 "SignIn.firstTimeInCobook" = "Вперше в CoBook?";
 "SignIn.register.normalTitle" = "Зареєструйтесь";
-
-// MARK: - Validation
-"Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
-"Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
-"Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
-"Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
-"Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
 
 // MARK: - Forgot Password
 "ForgotPassword.title" = "Забули пароль?";
@@ -126,6 +127,11 @@
 "Settings.ChangePassword.section.oldPassword.title" = "Старий пароль:";
 "Settings.ChangePassword.section.newPassword.title" = "Новий пароль:";
 "Settings.ChangePassword.section.repeareNewPassword.title" = "Підтвердіть новий пароль:";
+
+"Settings.UpdateAccount.title" = "Оновлення аккаунту";
+"Settings.UpdateAccount.section.firstName" = "Імя:";
+"Settings.UpdateAccount.section.lastName" = "Прізвище:";
+"Settings.UpdateAccount.section.email" = "Емейл:";
 
 // MARK: - Acticles
 "Article.Saved" = "Статтю збережено";
