@@ -168,8 +168,14 @@
 "BusinessCard.title" = "Бізнес візитка";
 "BusinessCard.section.createdAlbums.title" = "Створені альбоми:";
 "BusinessCard.section.socials.title" = "Соціальні мережі:";
-
 "BusinessCard.createNewAlbum.text" = "Ваш пост";
+
+// MARK: - Personal Card
+"PersonalCard.title" = "Персональна візитка";
+"PersonalCard.createNewAlbum.text" = "Ваш пост";
+"PersonalCard.section.contacts.title" = "Зв’язатись:";
+"PersonalCard.section.articles.title" = "Створені статті:";
+"PersonalCard.section.ownerArticles.title" = "Мій щоденник:";
 
 // MARK: - Services
 "Service.negotiablePrice.text" = "Ціна договірна";
