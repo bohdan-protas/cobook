@@ -10,7 +10,6 @@
 "OK" = "OK";
 "Cancel" = "Відмінити";
 "Error" = "Помилка";
-"Login.placeholder" = "+380XXXXXXXX";
 
 "Account" = "Аккаунт";
 "AllCards" = "Всі візитки";
@@ -39,6 +38,9 @@
 
 // MARK: - SignUp
 "SignUp.title" = "Вітаємо в спільноті CoBook";
+"SignUp.registration" = "Реєстрація";
+"SignUp.alreadyHaveAccountQuestion" = "Вже маєте аккаунт?";
+"SignUp.enterButton.normalTitle" = "Увійдіть";
 
 // MARK: - SighIn
 "SignIn.title" = "Вітаємо в спільноті CoBook";
@@ -72,3 +74,11 @@
 // MARK: - Acticles
 "Article.Saved" = "Статтю збережено";
 "Article.Unsaved" = "Статтю видалено із збережених";
+
+"TextInput.placeholder.firstName" = "Імя";
+"TextInput.placeholder.lastName" = "Прізвище";
+"TextInput.placeholder.telephone" = "+380XXXXXXXX";
+"TextInput.placeholder.email" = "Емейл";
+"TextInput.placeholder.password" = "Пароль";
+
+"Button.continue.normalTitle" = "Продовжити";

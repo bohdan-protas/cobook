@@ -14,11 +14,29 @@ fileprivate enum Defaults {
 
 class SignUpViewController: BaseViewController, SignUpView {
 
+    @Localized("SignUp.registration")
+    @IBOutlet var headerLabel: UILabel!
+
+    @Localized("TextInput.placeholder.firstName")
     @IBOutlet var firstNameTextField: DesignableTextField!
+
+    @Localized("TextInput.placeholder.lastName")
     @IBOutlet var lastNameTextField: DesignableTextField!
+
+    @Localized("TextInput.placeholder.telephone")
     @IBOutlet var telephoneNumberTextField: DesignableTextField!
+
+    @Localized("TextInput.placeholder.email")
     @IBOutlet var emailTextField: DesignableTextField!
+
+    @Localized("Button.continue.normalTitle")
     @IBOutlet var continueButton: LoaderDesignableButton!
+
+    @Localized("SignUp.alreadyHaveAccountQuestion")
+    @IBOutlet var enterQuestionLabel: UILabel!
+
+    @Localized("SignUp.enterButton.normalTitle")
+    @IBOutlet var enterButton: UIButton!
 
     var presenter = SignUpPresenter()
 

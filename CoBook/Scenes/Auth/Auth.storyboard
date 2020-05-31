@@ -100,7 +100,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C9-tT-k89" userLabel="Title Container">
                                         <rect key="frame" x="0.0" y="10" width="272" height="48"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Реєстрація" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knn-GO-XXv">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SignUp.registration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knn-GO-XXv">
                                                 <rect key="frame" x="16" y="14" width="240" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="KSs-AB-lKJ"/>
@@ -122,7 +122,7 @@
                                         <rect key="frame" x="8" y="58" width="256" height="120"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_registration" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-Mj-wPr">
-                                                <rect key="frame" x="0.0" y="10" width="256" height="80"/>
+                                                <rect key="frame" x="0.0" y="10" width="256.00000000000006" height="80"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -142,7 +142,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dNK-MC-EhC">
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Імя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TextInput.placeholder.firstName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsn-BH-QOy" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="114" height="48"/>
                                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                                 <accessibility key="accessibilityConfiguration">
@@ -181,7 +181,7 @@
                                                                     <outlet property="delegate" destination="fTX-yw-dca" id="7fe-pQ-gRS"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Прізвище" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Brs-c2-PMN" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TextInput.placeholder.lastName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Brs-c2-PMN" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                                 <rect key="frame" x="126" y="0.0" width="114" height="48"/>
                                                                 <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                                 <accessibility key="accessibilityConfiguration">
@@ -225,7 +225,7 @@
                                                             <constraint firstAttribute="height" constant="48" id="YXW-U4-WD0"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+380XXXXXXXX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-LB-IQc" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TextInput.placeholder.telephone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-LB-IQc" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="60" width="240" height="48"/>
                                                         <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -264,7 +264,7 @@
                                                             <outlet property="delegate" destination="fTX-yw-dca" id="mdg-iS-C7r"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Емейл" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQ0-b1-5dq" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TextInput.placeholder.email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQ0-b1-5dq" customClass="DesignableTextField" customModule="CoBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="120" width="240" height="48"/>
                                                         <color key="tintColor" name="Theme_TextField-borderActive"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -321,7 +321,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Продовжити">
+                                        <state key="normal" title="Button.normal.continue">
                                             <color key="titleColor" name="Theme_Black-Middle"/>
                                         </state>
                                         <state key="disabled">
@@ -387,18 +387,18 @@
                                         <rect key="frame" x="10" y="20" width="300" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gJF-03-fFg">
-                                                <rect key="frame" x="0.0" y="0.0" width="59" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                             </view>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вже маєте аккаунт?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6YP-2W-RYg">
-                                                <rect key="frame" x="62" y="0.0" width="124" height="20"/>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="alreadyHaveAccountQuestion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6YP-2W-RYg">
+                                                <rect key="frame" x="3" y="0.0" width="178.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E46-yR-0JZ">
-                                                <rect key="frame" x="189" y="0.0" width="49" height="20"/>
+                                                <rect key="frame" x="184.5" y="0.0" width="112.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="13"/>
-                                                <state key="normal" title="Увійдіть">
+                                                <state key="normal" title="SignUp.enterButton.normalTitle">
                                                     <color key="titleColor" name="Theme_Green"/>
                                                 </state>
                                                 <connections>
@@ -406,7 +406,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="D49-SM-mdP">
-                                                <rect key="frame" x="241" y="0.0" width="59" height="20"/>
+                                                <rect key="frame" x="300" y="0.0" width="0.0" height="20"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -440,7 +440,10 @@
                     <connections>
                         <outlet property="continueButton" destination="C7e-D1-uuF" id="YjZ-la-jrd"/>
                         <outlet property="emailTextField" destination="pQ0-b1-5dq" id="mTo-Kt-SDw"/>
+                        <outlet property="enterButton" destination="E46-yR-0JZ" id="pBT-Iy-a4G"/>
+                        <outlet property="enterQuestionLabel" destination="6YP-2W-RYg" id="IGA-9b-t24"/>
                         <outlet property="firstNameTextField" destination="Wsn-BH-QOy" id="zks-YZ-omO"/>
+                        <outlet property="headerLabel" destination="Knn-GO-XXv" id="Ano-B9-6Pn"/>
                         <outlet property="lastNameTextField" destination="Brs-c2-PMN" id="XfX-2v-sqH"/>
                         <outlet property="telephoneNumberTextField" destination="l9w-LB-IQc" id="uKH-Dv-0xE"/>
                         <segue destination="LDQ-N8-u8m" kind="show" identifier="goToConfirmTelephoneNumberViewController" id="2eG-kn-x2A"/>
@@ -684,16 +687,16 @@
                                         <rect key="frame" x="10" y="20" width="300" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-4M-Ndt">
-                                                <rect key="frame" x="0.0" y="0.0" width="37.5" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="34" height="20"/>
                                             </view>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вперше в CoBook?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yJ2-0v-hQM">
-                                                <rect key="frame" x="40.5" y="0.0" width="117" height="20"/>
+                                                <rect key="frame" x="37" y="0.0" width="120" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <color key="textColor" name="Theme_Green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zq-NY-pq3">
-                                                <rect key="frame" x="160.5" y="0.0" width="99" height="20"/>
+                                                <rect key="frame" x="160" y="0.0" width="103" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="13"/>
                                                 <state key="normal" title="Зареєструйтесь">
                                                     <color key="titleColor" name="Theme_Green"/>
@@ -703,7 +706,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-UX-7KI">
-                                                <rect key="frame" x="262.5" y="0.0" width="37.5" height="20"/>
+                                                <rect key="frame" x="266" y="0.0" width="34" height="20"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -758,10 +761,10 @@
                                 <rect key="frame" x="24" y="60" width="272" height="428"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46F-ZB-tZF" userLabel="Title View">
-                                        <rect key="frame" x="0.0" y="32" width="272" height="56"/>
+                                        <rect key="frame" x="0.0" y="32" width="272" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Підтвердьте номер телефону" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slK-jZ-rWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="272" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="HGH-7f-O4Z"/>
                                                 </constraints>
@@ -779,7 +782,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTV-JR-GM0" userLabel="Subtitle View">
-                                        <rect key="frame" x="0.0" y="108" width="272" height="20"/>
+                                        <rect key="frame" x="0.0" y="96" width="272" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введіть код із смс-повідомлення" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB0-hw-F8D">
                                                 <rect key="frame" x="0.0" y="0.0" width="272" height="20"/>
@@ -800,7 +803,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQy-TG-Dxs" userLabel="Fields View">
-                                        <rect key="frame" x="0.0" y="160" width="272" height="56"/>
+                                        <rect key="frame" x="0.0" y="148" width="272" height="56"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Ja2-xs-q5x">
                                                 <rect key="frame" x="47" y="0.0" width="178" height="56"/>
@@ -931,7 +934,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdp-gq-8RF">
-                                        <rect key="frame" x="0.0" y="240" width="272" height="20"/>
+                                        <rect key="frame" x="0.0" y="228" width="272" height="20"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2a-oM-Zzj">
                                                 <rect key="frame" x="0.0" y="0.0" width="272" height="20"/>

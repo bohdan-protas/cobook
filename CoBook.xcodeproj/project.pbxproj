@@ -205,6 +205,9 @@
 		B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F262406FFF300AFE578 /* AnyOptional.swift */; };
 		B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8307F282407001800AFE578 /* AlertDisplayableView.swift */; };
 		B831C55B24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */; };
+		B834BD642483F8190037C623 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B834BD632483F8190037C623 /* Localizable.swift */; };
+		B834BD662483F8450037C623 /* LocalizedKeyProvided.swift in Sources */ = {isa = PBXBuildFile; fileRef = B834BD652483F8450037C623 /* LocalizedKeyProvided.swift */; };
+		B834BD682483FB620037C623 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B834BD672483FB620037C623 /* Localized.swift */; };
 		B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8357DB2240C6372006AB78E /* SignInEndpoint.swift */; };
 		B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */; };
 		B8359CD6241EC9D90080263E /* PracticeTypesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */; };
@@ -552,6 +555,9 @@
 		B8307F262406FFF300AFE578 /* AnyOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyOptional.swift; sourceTree = "<group>"; };
 		B8307F282407001800AFE578 /* AlertDisplayableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayableView.swift; sourceTree = "<group>"; };
 		B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOverviewSearchResultTableViewController.swift; sourceTree = "<group>"; };
+		B834BD632483F8190037C623 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		B834BD652483F8450037C623 /* LocalizedKeyProvided.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedKeyProvided.swift; sourceTree = "<group>"; };
+		B834BD672483FB620037C623 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 		B8357DB2240C6372006AB78E /* SignInEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEndpoint.swift; sourceTree = "<group>"; };
 		B8359CD2241EA9BF0080263E /* CardDetailsApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsApiModel.swift; sourceTree = "<group>"; };
 		B8359CD5241EC9D90080263E /* PracticeTypesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeTypesEndpoint.swift; sourceTree = "<group>"; };
@@ -967,9 +973,9 @@
 			isa = PBXGroup;
 			children = (
 				B826B0EB23F442AC009041DD /* Launch */,
-				B824D14C246B11CB00911629 /* Saved */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B8249243243DE62600A1AC39 /* AllCards */,
+				B824D14C246B11CB00911629 /* Saved */,
 				B82200B8240FB87A00A17D2C /* Account */,
 				B824DA5F245AE91400700319 /* Post */,
 			);
@@ -1367,11 +1373,14 @@
 			path = ChangePassword;
 			sourceTree = "<group>";
 		};
-		B8298805248159C000E6838B /* Localizable */ = {
+		B8298805248159C000E6838B /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				B834BD632483F8190037C623 /* Localizable.swift */,
+				B834BD672483FB620037C623 /* Localized.swift */,
+				B834BD652483F8450037C623 /* LocalizedKeyProvided.swift */,
 			);
-			path = Localizable;
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		B82A2118242135C200D0D9F5 /* UI */ = {
@@ -1735,7 +1744,7 @@
 				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B826B0F023F45973009041DD /* Services */,
-				B8298805248159C000E6838B /* Localizable */,
+				B8298805248159C000E6838B /* Localization */,
 				B8307F1F2406FED000AFE578 /* Persistance */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
 				B826B0F323F45ED8009041DD /* Models */,
@@ -2323,6 +2332,7 @@
 				B8205C30246D8FBE003C39F4 /* SavedContentPresenter.swift in Sources */,
 				B8909FA72464166800AA56F7 /* ArticleDescriptionTableViewCell.swift in Sources */,
 				B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */,
+				B834BD642483F8190037C623 /* Localizable.swift in Sources */,
 				B83FD7D72423B3CE00ACA1D4 /* SocialsListTableViewCell.swift in Sources */,
 				B823A6B223FD710F007540D0 /* ConfirmTelephoneNumberViewController.swift in Sources */,
 				B8DC630B2434FBED00A2ED58 /* Section.swift in Sources */,
@@ -2466,6 +2476,7 @@
 				B823B08B242CEFDF0012529D /* UIImageView + AFImageWrappers.swift in Sources */,
 				B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */,
 				B8909F9A2464121A00AA56F7 /* ArticleDetailsViewController.swift in Sources */,
+				B834BD662483F8450037C623 /* LocalizedKeyProvided.swift in Sources */,
 				B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */,
 				B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */,
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
@@ -2482,6 +2493,7 @@
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
 				B822D7092458B5EF00883BE8 /* Product.swift in Sources */,
+				B834BD682483FB620037C623 /* Localized.swift in Sources */,
 				B82B4D46245644160061A98B /* ServiceDetailsApiModel.swift in Sources */,
 				B8909FB42464233700AA56F7 /* ArticleDetailsCellConfigutator.swift in Sources */,
 				B8263C73245345250075A499 /* StaticMapTableViewCell.swift in Sources */,
