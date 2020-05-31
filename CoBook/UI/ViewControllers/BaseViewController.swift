@@ -75,8 +75,8 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
         UIView.animate(withDuration: 0.1) { [weak self] in
             self?.currentHud?.indicatorView = success ? JGProgressHUDSuccessIndicatorView.init() : JGProgressHUDErrorIndicatorView.init()
 
-            let succesText = NSAttributedString(string: "Успішно!", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
-            let failureText = NSAttributedString(string: "Помилка", attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
+            let succesText = NSAttributedString(string: "Successed".localized, attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
+            let failureText = NSAttributedString(string: "Error".localized, attributes: [.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.blackMiddle])
             self?.currentHud?.textLabel.attributedText = success ? succesText : failureText
 
             DispatchQueue.main.async {
@@ -102,7 +102,7 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
     func makeCall(to telephoneNumber: String?) {
         guard let telephoneNumber = telephoneNumber, let numberUrl = URL(string: "tel://" + telephoneNumber) else {
-            errorAlert(message: "Telephone number of user have bad format")
+            errorAlert(message: "Error.telephoneHaveUnexpectedFormat".localized)
             return
         }
         UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
@@ -116,7 +116,7 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
             present(mail, animated: true)
         } else {
-            errorAlert(message: "Current device cannot send mail")
+            errorAlert(message: "Error.deviceIsNotConfigureForMail".localized)
         }
     }
 

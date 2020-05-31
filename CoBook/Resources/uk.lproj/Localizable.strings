@@ -9,6 +9,7 @@
 // MARK: - Base
 "OK" = "OK";
 "Cancel" = "Відмінити";
+"Successed" = "Успішно!";
 "Error" = "Помилка";
 
 "Account" = "Аккаунт";
@@ -80,16 +81,17 @@
 "Loading.updating.title" = "Оновлення...";
 
 // MARK: -  Error
+"Error.telephoneHaveUnexpectedFormat" = "Номер телефону має нечитабельний формат";
+"Error.deviceIsNotConfigureForMail" = "З данного девайсу неможливо відправити листа.";
 "Error.connection" = "Не вдалося приєднатися до сервера";
 "Error.employAreadyAdded" = "Вибраний працівник вже доданий";
 "Error.photoLoading.message" = "Помилка завантаження фото";
-
 "Error.Social.unreadableFormat" = "Посилання соцмережі має нечитабельний формат";
 "Error.Social.badLink.message" = "Посилання має хибний формат";
-
 "Error.Map.notDefinedRoute.message" = "Не визначені адреси маршрутів";
 "Error.Map.cantOpen.message" = "Не вдається відкрити карти";
-
+"Error.Map.accessDenied.title" = "Для перегляду карти, надайте додатку доступ до вашої локації";
+"Error.Map.accessDeniedButton.normalTitle" = "Відкрити налаштування";
 "Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
 "Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
 "Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
