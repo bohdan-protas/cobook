@@ -20,7 +20,7 @@ class ChangePasswordViewController: BaseViewController {
     /// save view
     lazy var saveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
-        view.saveButton.setTitle("Зберегти", for: .normal)
+        view.saveButton.setTitle("Button.save.normalTitle".localized, for: .normal)
         view.onSaveTapped = { [weak self] in
             self?.presenter.chageCredentials()
         }
@@ -32,7 +32,7 @@ class ChangePasswordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "Зміна паролю"
+        self.navigationItem.title = "Settings.ChangePassword.title".localized
         presenter.attachView(self)
         presenter.setup()
     }

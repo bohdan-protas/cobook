@@ -102,7 +102,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     func addEmploy(model: EmployeeModel?) {
         if let model = model {
             if businessCardDetailsModel.employers.contains(where: { $0 == model }) {
-                view?.errorAlert(message: "Вибраний працівник вже доданий")
+                view?.errorAlert(message: "Error.employAreadyAdded".localized)
                 return
             }
 
@@ -116,7 +116,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     func uploadCompanyAvatar(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 
@@ -136,7 +136,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
     func uploadCompanyBg(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.avatarImageCompressionQuality) else {
             Log.error("Cannot find selected image data!")
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 
@@ -171,41 +171,41 @@ extension CreateBusinessCardPresenter {
 
         let mainDataSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Основні дані:"),
+            .title(text: "BusinessCard.section.mainData".localized),
             .textField(model: TextFieldModel(text: businessCardDetailsModel.companyName,
-                                             placeholder: "Назва компанії",
+                                             placeholder: "TextInput.placeholder.companyName".localized,
                                              associatedKeyPath: \CreateBusinessCard.DetailsModel.companyName,
                                              keyboardType: .default)),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.practiseType?.title, placeholder: "Вид діяльності", actionTypeId: CreateBusinessCard.ActionType.practice.rawValue)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.contactTelephone, placeholder: "Робочий номер телефону", associatedKeyPath: \CreateBusinessCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyWebSite, placeholder: "Веб сайт", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyWebSite, keyboardType: .URL)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyEmail, placeholder: "Емейл", associatedKeyPath: \CreateBusinessCard.DetailsModel.companyEmail, keyboardType: .emailAddress))
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.practiseType?.title, placeholder: "TextInput.placeholder.activityType".localized, actionTypeId: CreateBusinessCard.ActionType.practice.rawValue)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.contactTelephone, placeholder: "TextInput.placeholder.workingPhoneNumber".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyWebSite, placeholder: "TextInput.placeholder.website".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.companyWebSite, keyboardType: .URL)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyEmail, placeholder: "TextInput.placeholder.email".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.companyEmail, keyboardType: .emailAddress))
         ])
 
         let companyActivitySection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Діяльність компанії:"),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.city?.name, placeholder: "Місто розташування", actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.region?.name, placeholder: "Місто діяльності", actionTypeId: CreateBusinessCard.ActionType.region.rawValue)),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.address?.name, placeholder: "Вулиця", actionTypeId: CreateBusinessCard.ActionType.address.rawValue)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.schedule, placeholder: "Графік роботи (дні та години)", associatedKeyPath: \CreateBusinessCard.DetailsModel.schedule, keyboardType: .default))
+            .title(text: "BusinessCard.section.companyActivity".localized),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.city?.name, placeholder: "TextInput.placeholder.cityLocation".localized, actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.region?.name, placeholder: "TextInput.placeholder.activityLocation".localized, actionTypeId: CreateBusinessCard.ActionType.region.rawValue)),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.address?.name, placeholder: "TextInput.placeholder.street".localized, actionTypeId: CreateBusinessCard.ActionType.address.rawValue)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.schedule, placeholder: "TextInput.placeholder.workSchedule".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.schedule, keyboardType: .default))
         ])
 
         let aboutCompacySection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Про компанію:"),
-            .textView(model: TextFieldModel(text: businessCardDetailsModel.description, placeholder: "Детальний опис", associatedKeyPath: \CreateBusinessCard.DetailsModel.description, keyboardType: .default))
+            .title(text: "BusinessCard.section.aboutCompany.title".localized),
+            .textView(model: TextFieldModel(text: businessCardDetailsModel.description, placeholder: "TextInput.placeholder.detailDescription".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.description, keyboardType: .default))
         ])
 
         let socialSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Компанія у соцмережах:"),
+            .title(text: "BusinessCard.section.companyInSocials.title".localized),
             .socials,
         ])
 
         var employersSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Працівники компанії:"),
+            .title(text: "BusinessCard.section.companyEmployers.title".localized),
             .employersSearch,
         ])
         if !businessCardDetailsModel.employers.isEmpty {
@@ -214,7 +214,7 @@ extension CreateBusinessCardPresenter {
 
         let interestsSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
-            .title(text: "Інтереси(для рекомендацій):"),
+            .title(text: "BusinessCard.section.interests.title".localized),
             .interests
         ])
 
@@ -229,7 +229,7 @@ extension CreateBusinessCardPresenter {
 private extension CreateBusinessCardPresenter {
 
     func updateBusinessCard() {
-        view?.startLoading(text: "Створення...")
+        view?.startLoading(text: "Loading.creating.title".localized)
 
         let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
         APIClient.default.updateBusinessCard(parameters: parameters) { [weak self] (result) in
@@ -248,7 +248,7 @@ private extension CreateBusinessCardPresenter {
     }
 
     func createBusinessCard() {
-        view?.startLoading(text: "Створення...")
+        view?.startLoading(text: "Loading.creating.title".localized)
 
         let parameters = CreateBusinessCardParametersApiModel(model: businessCardDetailsModel)
         APIClient.default.createBusinessCard(parameters: parameters) { [weak self] (result) in
@@ -270,7 +270,7 @@ private extension CreateBusinessCardPresenter {
         let group = DispatchGroup()
         var errors = [Error]()
 
-        view?.startLoading(text: "Завантаження")
+        view?.startLoading(text: "Loading.loading.title".localized)
 
         // fetch practices
         group.enter()
@@ -492,7 +492,7 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
         case .add:
             view?.newSocialAlert(name: nil, link: nil) { (name, strUrl) in
                 guard let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
-                    self.view?.errorAlert(message: "Посилання має хибний формат")
+                    self.view?.errorAlert(message: "Error.Social.badLink.message".localized)
                     return
                 }
 
@@ -506,13 +506,13 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
 
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath) {
         let actions: [UIAlertAction] = [
-            .init(title: "Видалити", style: .destructive, handler: { (_) in
+            .init(title: "AlertAction.Delete".localized, style: .destructive, handler: { (_) in
                 cell.deleteAt(indexPath: indexPath)
             }),
-            .init(title: "Змінити", style: .default, handler: { (_) in
+            .init(title: "AlertAction.Change".localized, style: .default, handler: { (_) in
                 self.view?.newSocialAlert(name: value.title, link: value.url?.absoluteString) { (name, strUrl) in
                     guard let name = name, let url = URL.init(string: strUrl ?? ""), UIApplication.shared.canOpenURL(url) else {
-                        self.view?.errorAlert(message: "Посилання має хибний формат")
+                        self.view?.errorAlert(message: "Error.Social.badLink.message".localized)
                         return
                     }
 
@@ -520,7 +520,7 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
                     cell.updateAt(indexPath: indexPath, with: newItem)
                 }
             }),
-            .init(title: "Відмінити", style: .cancel, handler: nil)
+            .init(title: "AlertAction.Cancel".localized, style: .cancel, handler: nil)
         ]
 
         view?.actionSheetAlert(title: value.title, message: nil, actions: actions)

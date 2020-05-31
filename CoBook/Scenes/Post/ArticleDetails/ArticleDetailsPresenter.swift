@@ -65,7 +65,7 @@ class ArticleDetailsPresenter: BasePresenter {
     // MARK: - Public
 
     func setup() {
-        view?.set(title: "Стаття")
+        view?.set(title: "Article.details.title".localized)
         view?.set(dataSource: dataSource)
     }
 
@@ -258,14 +258,14 @@ extension ArticleDetailsPresenter: ArticleHeaderTableViewCellDelegate {
         // edit action
         if isOwner {
             actions.append(
-                .init(title: "Редагувати", style: .default, handler: { [weak self] (_) in
+                .init(title: "AlertAction.Change".localized, style: .default, handler: { [weak self] (_) in
                     self?.goToEdit()
                 })
             )
 
         }
 
-        actions.append(.init(title: "Відмінити", style: .cancel, handler: nil))
+        actions.append(.init(title: "AlertAction.Cancel".localized, style: .cancel, handler: nil))
         view?.actionSheetAlert(title: nil, message: nil, actions: actions)
     }
 

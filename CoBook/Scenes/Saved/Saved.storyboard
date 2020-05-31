@@ -37,10 +37,10 @@
                                                     <rect key="frame" x="16" y="24" width="382" height="18"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ray-d0-oB9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="148" height="18"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="189" height="18"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Збережені статті:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9M-ed-4eQ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="132" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9M-ed-4eQ">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="131" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="18" id="cbv-yr-QBy"/>
                                                                     </constraints>
@@ -48,8 +48,8 @@
                                                                     <color key="textColor" name="Theme_Black-Middle"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sh8-aL-LNg">
-                                                                    <rect key="frame" x="140" y="0.0" width="8" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sh8-aL-LNg">
+                                                                    <rect key="frame" x="139" y="0.0" width="50" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="18" id="sUv-k4-4hh"/>
                                                                     </constraints>
@@ -63,11 +63,11 @@
                                                             </constraints>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jke-Hq-lco">
-                                                            <rect key="frame" x="274" y="0.0" width="108" height="18"/>
+                                                            <rect key="frame" x="352" y="0.0" width="30" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="BSn-vZ-zl0"/>
                                                             </constraints>
-                                                            <state key="normal" title="Додати список">
+                                                            <state key="normal">
                                                                 <color key="titleColor" name="Theme_Green-Dark"/>
                                                             </state>
                                                             <connections>

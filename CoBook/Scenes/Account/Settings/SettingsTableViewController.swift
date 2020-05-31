@@ -10,18 +10,30 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
-    @IBOutlet var appVersionLabel: UILabel!
+    @Localized("Settings.item.updateAccount.title")
+    @IBOutlet var updateAccountTitleLabel: UILabel!
+
+    @Localized("Settings.item.changePassword.title")
+    @IBOutlet var changePasswordLabel: UILabel!
+
+    @Localized("Settings.item.paymentMethods.title")
+    @IBOutlet var paymentMethodsLabel: UILabel!
+
+    @Localized("Settings.item.appVersion.title")
+    @IBOutlet var appVersionTitleLabel: UILabel!
+
+    @IBOutlet var appVersionDetailLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        self.navigationItem.title = "Налаштування додатку"
+        self.navigationItem.title = "Settings.title".localized
     }
 
     func setupLayout() {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let builsNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-        appVersionLabel.text = "\(appVersion ?? "0")(\(builsNumber ?? "0"))"
+        appVersionDetailLabel.text = "\(appVersion ?? "0")(\(builsNumber ?? "0"))"
     }
 
 

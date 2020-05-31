@@ -60,8 +60,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="b4D-hi-UsD">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="b4D-hi-UsD">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" name="Theme_Black-Middle"/>
                             </activityIndicatorView>
                         </subviews>
@@ -77,7 +77,7 @@
                         <viewLayoutGuide key="safeArea" id="PKx-cW-vQZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="Gz5-oh-u6U">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="save" id="29D-p5-S7I">
+                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="29D-p5-S7I">
                             <color key="tintColor" name="Theme_Green-Dark"/>
                             <connections>
                                 <action selector="saveButtonTapped:" destination="ILx-Ge-kZz" id="TKG-20-fgO"/>

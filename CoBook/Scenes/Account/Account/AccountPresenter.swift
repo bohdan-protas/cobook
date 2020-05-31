@@ -124,9 +124,9 @@ private extension AccountPresenter {
 
     func inviteFriends() {
         let socialMetaTags = DynamicLinkSocialMetaTagParameters()
-        socialMetaTags.imageURL = URL.init(string: AppStorage.User.Profile?.avatar?.sourceUrl ?? "")
-        socialMetaTags.title = "CoBook social meta tag title"
-        socialMetaTags.descriptionText = "Cobook social meta tag description"
+        socialMetaTags.imageURL = APIConstants.cobookLogoURL
+        socialMetaTags.title = "Social.metaTag.inviteFriends.title".localized
+        socialMetaTags.descriptionText = "Social.metaTag.inviteFriends.description".localized
         view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags)
     }
 
@@ -199,7 +199,7 @@ private extension AccountPresenter {
         ])
 
         if !personalCard.isNil || !businessCardsList.isEmpty {
-            cardsPreviewSection.items.append(.title(text: "Мої візитки:"))
+            cardsPreviewSection.items.append(.title(text: "Account.section.myCards.title".localized))
         }
 
         if let personalCard = personalCard {
@@ -213,28 +213,28 @@ private extension AccountPresenter {
         if !businessCardsList.isEmpty {
             let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
             cardsPreviewSection.items.append(contentsOf: cards)
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Створити ще одну бізнес візитку",
+            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
                                                                                            image: UIImage(named: "ic_account_createbusinescard"),
                                                                                            actiontype: .createBusinessCard)))
         } else {
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Створити бізнес візитку",
+            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
                                                                                            image: UIImage(named: "ic_account_createbusinescard"),
                                                                                            actiontype: .createBusinessCard)))
         }
 
         // menuItems Section
-        var menuItemsSection = Section<Account.Item>(items: [
+        let menuItemsSection = Section<Account.Item>(items: [
             .sectionHeader,
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized, image: UIImage(named: "ic_account_createparsonalcard"), actiontype: .inviteFriends)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized, image: UIImage(named: "ic_account_faq"), actiontype: .faq)),
         ])
-        if !personalCard.isNil {
-            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
-                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
-                                                                                        actiontype: .startMakingMoney)))
-        }
+//        if !personalCard.isNil {
+//            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+//                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
+//                                                                                        actiontype: .startMakingMoney)))
+//        }
 
         // Quit account section
         let quitAccountSectin = Section<Account.Item>(items: [

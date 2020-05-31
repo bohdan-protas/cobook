@@ -36,6 +36,8 @@ extension ShareableView where Self: UIViewController {
         if let bundleID = Bundle.main.bundleIdentifier {
             shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
         }
+
+        // FIXME: - Change it to real appstore id
         shareLink.iOSParameters?.appStoreID = "962194608"
 
         // Android parameters

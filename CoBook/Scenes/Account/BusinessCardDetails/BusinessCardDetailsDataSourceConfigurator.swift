@@ -260,7 +260,7 @@ extension BusinessCardDetailsPresenter {
                     cell.titleImageView.setImage(withPath: model.avatarPath)
                     cell.subtitleLabel.isHidden = false
                 case .add:
-                    cell.titleLabel.text = "Додати послугу"
+                    cell.titleLabel.text = "Service.add.text".localized
                     cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
                     cell.subtitleLabel.isHidden = true
                 }
@@ -270,7 +270,7 @@ extension BusinessCardDetailsPresenter {
 
             // addGoodsConfigurator
             configurator.addProductConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> ServiceListItemTableViewCell in
-                cell.titleLabel.text = "Додати товар"
+                cell.titleLabel.text = "Product.add.text".localized
                 cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
                 cell.subtitleLabel.isHidden = true
                 return cell

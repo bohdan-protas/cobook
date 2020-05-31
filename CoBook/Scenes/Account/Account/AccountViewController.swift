@@ -25,7 +25,7 @@ class AccountViewController: BaseViewController {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.Theme.grayUI
-        refreshControl.attributedTitle = NSAttributedString.init(string: "Оновлення данних...", attributes: [.font: UIFont.SFProDisplay_Medium(size: 14), .foregroundColor: UIColor.Theme.blackMiddle])
+        refreshControl.attributedTitle = NSAttributedString.init(string: "Account.updating.title".localized, attributes: [.font: UIFont.SFProDisplay_Medium(size: 14), .foregroundColor: UIColor.Theme.blackMiddle])
         refreshControl.addTarget(self, action: #selector(refreshActionHandler(_:)), for: .valueChanged)
         return refreshControl
     }()

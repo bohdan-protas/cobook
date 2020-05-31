@@ -14,9 +14,26 @@ fileprivate enum Defaults {
 
 class SignInViewController: BaseViewController, SignInView {
 
+    @Localized("SignIn.header")
+    @IBOutlet var signInLabel: UILabel!
+
+    @Localized("TextInput.placeholder.telephone")
     @IBOutlet var loginTextField: DesignableTextField!
+
+    @Localized("TextInput.placeholder.password")
     @IBOutlet var passwordTextField: DesignableTextField!
+
+    @Localized("SignIn.forgotPassword.normalTitle")
+    @IBOutlet var forgotPasswordButton: UIButton!
+
+    @Localized("Button.continue.normalTitle")
     @IBOutlet var signInButton: LoaderDesignableButton!
+
+    @Localized("SignIn.firstTimeInCobook")
+    @IBOutlet var bottomDescrLabel: UILabel!
+
+    @Localized("SignIn.register.normalTitle")
+    @IBOutlet var signUpButton: UIButton!
 
     var presenter: SignInPresenter = SignInPresenter()
 

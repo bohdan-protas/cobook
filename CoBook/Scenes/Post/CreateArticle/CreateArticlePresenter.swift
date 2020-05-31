@@ -84,8 +84,8 @@ class CreateArticlePresenter: BasePresenter {
 
     func setup() {
         isEditing ?
-            view?.set(title: "Редагувати статтю") :
-            view?.set(title: "Створити статтю")
+            view?.set(title: "Article.edit.title".localized) :
+            view?.set(title: "Article.create.title".localized)
         
         view?.set(articleTitle: parameters.title)
         view?.set(acticleBody: parameters.body)
@@ -112,7 +112,7 @@ class CreateArticlePresenter: BasePresenter {
 
     func uploadImage(image: UIImage?, completion: ((FileDataApiModel?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 

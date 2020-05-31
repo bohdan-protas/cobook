@@ -135,7 +135,7 @@ class SavedContentPresenter: BasePresenter {
                 if let id = response?.id {
                     let item = BarItem(index: id, title: title)
                     strongSelf.barItems.append(item)
-                    strongSelf.view?.showTextHud("Список \(title) успішно створено")
+                    strongSelf.view?.showTextHud(String(format: "SavedContent.listCreated.message".localized, title))
                     completion?(item)
                 }
             case .failure(let error):
@@ -157,7 +157,7 @@ class SavedContentPresenter: BasePresenter {
             case .success:
                 item.title = title
                 strongSelf.barItems[safe: index] = item
-                strongSelf.view?.showTextHud("Список \(title) успішно оновлено")
+                strongSelf.view?.showTextHud(String(format: "SavedContent.listUpdated.message".localized, title))
                 completion?(item)
             case .failure(let error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
@@ -174,7 +174,7 @@ class SavedContentPresenter: BasePresenter {
                 switch result {
                 case .success:
                     successCompletion?()
-                    strongSelf.view?.showTextHud("Список \(self?.barItems[safe: index]?.title ?? "") видалено")
+                    strongSelf.view?.showTextHud(String(format: "SavedContent.listDeleted.message".localized, self?.barItems[safe: index]?.title ?? ""))
                 case .failure(let error):
                     strongSelf.view?.errorAlert(message: error.localizedDescription)
                 }
@@ -198,7 +198,7 @@ class SavedContentPresenter: BasePresenter {
 
                         self?.unsaveCardItemWith(id: model.id)
                         self?.view?.stopLoading()
-                        self?.view?.showTextHud("Візитку видалено із збережених")
+                        self?.view?.showTextHud("SavedContent.cardUnsaved.message".localized)
 
                         successCompletion?()
                     case .failure:
@@ -385,15 +385,15 @@ private extension SavedContentPresenter {
     func updateViewDataSource() {
         // Post preview section
         dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items = [
-            .title(model: ActionTitleModel(title: "Збережені пости", counter: albumPreviewSection?.items.count ?? 0)),
+            .title(model: ActionTitleModel(title: "SavedContent.section.articles.title".localized, counter: albumPreviewSection?.items.count ?? 0)),
         ]
         if !(albumPreviewSection?.items.isEmpty ?? true) {
             dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.postPreview(model: albumPreviewSection))
         }
         dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.sectionSeparator)
-        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.title(model: ActionTitleModel(title: "Збережені візитки",
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.title(model: ActionTitleModel(title: "SavedContent.section.cards.title".localized,
                                                                                                                                   counter: cardsTotalCount,
-                                                                                                                                  actionTitle: "Додати cписок",
+                                                                                                                                  actionTitle: "SavedContent.addList.normalTitle".localized,
                                                                                                                                   actionHandler: { self.view?.createFolder() })))
         if let index = selectedBarItem?.index {
             switch index {

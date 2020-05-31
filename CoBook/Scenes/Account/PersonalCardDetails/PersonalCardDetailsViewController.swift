@@ -60,7 +60,7 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     // MARK: - PersonalCardDetailsView
 
     func setupLayout() {
-        navigationItem.title = "Персональна візитка"
+        navigationItem.title = "PersonalCard.title".localized
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
         tableView.delegate = self
     }

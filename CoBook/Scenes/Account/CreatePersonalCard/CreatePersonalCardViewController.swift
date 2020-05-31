@@ -78,7 +78,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 private extension CreatePersonalCardViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Створення персональної візитки"
+        self.navigationItem.title = "PersonalCard.Creation.title".localized
 
         tableView.estimatedRowHeight = Layout.estimatedRowHeight
         tableView.delegate = self

@@ -58,7 +58,7 @@
                                                                                         <cells/>
                                                                                     </collectionView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATt-Sn-JEJ">
-                                                                                        <rect key="frame" x="205" y="12" width="142" height="30"/>
+                                                                                        <rect key="frame" x="80" y="12" width="267" height="30"/>
                                                                                         <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="30" id="TKW-RI-W77"/>
@@ -66,7 +66,7 @@
                                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="13"/>
                                                                                         <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="12" maxY="0.0"/>
                                                                                         <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                        <state key="normal" title="Додати фото" image="ic_plus">
+                                                                                        <state key="normal" title="Article.addPhotoButton.normalTitle" image="ic_plus">
                                                                                             <color key="titleColor" name="Theme_Green-Dark"/>
                                                                                         </state>
                                                                                         <userDefinedRuntimeAttributes>
@@ -93,7 +93,7 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4N-sE-DAH" userLabel="Header Container">
                                                                                 <rect key="frame" x="0.0" y="227" width="359" height="60"/>
                                                                                 <subviews>
-                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введіть заголовок" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s8R-se-brt">
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Article.header.placeholder" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s8R-se-brt">
                                                                                         <rect key="frame" x="14" y="18" width="331" height="24"/>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <color key="tintColor" red="0.14901960784313725" green="0.18431372549019609" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
@@ -136,7 +136,7 @@
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="OPB-Bh-YTU">
-                                                                                        <rect key="frame" x="16" y="14" width="183" height="32"/>
+                                                                                        <rect key="frame" x="16" y="14" width="228" height="32"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gp1-1h-UeP" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -153,8 +153,8 @@
                                                                                                     </userDefinedRuntimeAttribute>
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </imageView>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Виберіть альбом" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSp-8Y-SKh">
-                                                                                                <rect key="frame" x="48" y="0.0" width="135" height="32"/>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Article.selectAlbum.text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSp-8Y-SKh">
+                                                                                                <rect key="frame" x="48" y="0.0" width="180" height="32"/>
                                                                                                 <accessibility key="accessibilityConfiguration">
                                                                                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                                                                 </accessibility>
@@ -198,7 +198,7 @@
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                                 <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Текст статті..."/>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Article.description.placeholder"/>
                                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topTextInset">
                                                                                         <real key="value" value="22"/>
                                                                                     </userDefinedRuntimeAttribute>
@@ -263,7 +263,7 @@
                                                                 <rect key="frame" x="8" y="0.0" width="343" height="50"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Публікувати">
+                                                                <state key="normal" title="Article.publicButton.normalTitle">
                                                                     <color key="titleColor" name="Theme_Black-Middle"/>
                                                                 </state>
                                                                 <state key="disabled">
@@ -335,6 +335,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9mb-qR-41t"/>
                     <connections>
+                        <outlet property="addPhotoButton" destination="ATt-Sn-JEJ" id="T2z-J4-qgg"/>
                         <outlet property="albumImageView" destination="gp1-1h-UeP" id="WHu-Au-Kga"/>
                         <outlet property="albumTitleLabel" destination="CSp-8Y-SKh" id="U1N-C3-VuC"/>
                         <outlet property="descriptionTextView" destination="ISD-Hf-vEw" id="iln-U1-Xqy"/>
@@ -567,7 +568,7 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="359" height="227"/>
                                                                                         <subviews>
                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pu3-Fd-FSl">
-                                                                                                <rect key="frame" x="205" y="12" width="142" height="30"/>
+                                                                                                <rect key="frame" x="80" y="12" width="267" height="30"/>
                                                                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="height" constant="30" id="SXy-Uv-nyi"/>
@@ -575,7 +576,7 @@
                                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="13"/>
                                                                                                 <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="12" maxY="0.0"/>
                                                                                                 <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                                <state key="normal" title="Додати фото" image="ic_plus">
+                                                                                                <state key="normal" title="Album.addPhotoButton.normalTitle" image="ic_plus">
                                                                                                     <color key="titleColor" name="Theme_Green-Dark"/>
                                                                                                 </state>
                                                                                                 <userDefinedRuntimeAttributes>
@@ -614,7 +615,7 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mG1-dJ-5E6" userLabel="Header Container">
                                                                                 <rect key="frame" x="0.0" y="227" width="359" height="60"/>
                                                                                 <subviews>
-                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Назва альбому" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NPy-7x-u7I">
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Album.name.placeholder" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NPy-7x-u7I">
                                                                                         <rect key="frame" x="14" y="18" width="331" height="24"/>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <color key="tintColor" red="0.14901960780000001" green="0.1843137255" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
@@ -686,7 +687,7 @@
                                                                 <rect key="frame" x="8" y="0.0" width="343" height="50"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Зберегти">
+                                                                <state key="normal" title="Button.save.normalTitle">
                                                                     <color key="titleColor" name="Theme_Black-Middle"/>
                                                                 </state>
                                                                 <state key="disabled">

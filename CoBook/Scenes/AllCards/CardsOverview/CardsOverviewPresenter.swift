@@ -17,7 +17,7 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func reload()
     func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reloadSearch(resultText: String)
-    func openSettings()
+
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
     func goToArticleDetails(presenter: ArticleDetailsPresenter?)
@@ -285,7 +285,7 @@ extension CardsOverviewViewPresenter {
         pendingSearchResultWorkItem?.cancel()
         if query.isEmpty {
             searchDataSource?[.posts].items.removeAll()
-            view?.reloadSearch(resultText: "Немає результатів пошуку")
+            view?.reloadSearch(resultText: "CardOverview.search.emptySearch".localized)
             return
         }
 
@@ -293,7 +293,10 @@ extension CardsOverviewViewPresenter {
             self?.fetchCards(searchQuery: query) { [weak self] (searchCards) in
                 self?.searchCards = searchCards
                 self?.updateViewDataSource()
-                self?.view?.reloadSearch(resultText: searchCards.isEmpty ? "Немає результатів пошуку" : "Знайдено: \(searchCards.count) візитки")
+                self?.view?.reloadSearch(resultText: searchCards.isEmpty ?
+                    "CardOverview.search.emptySearch".localized :
+                    String(format: "CardOverview.search.cardSearchResult".localized, searchCards.count)
+                )
             }
         }
 
@@ -415,7 +418,7 @@ private extension CardsOverviewViewPresenter {
                 self?.updateCardItem(id: model.id, withSavedFlag: true)
                 NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
                 completion?(true)
-                self?.view?.stopLoading(success: true, succesText: "Card.Saved".localized, failureText: nil, completion: nil)
+                self?.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
             case .failure:
                 completion?(false)
                 self?.view?.stopLoading(success: false)
@@ -432,7 +435,7 @@ private extension CardsOverviewViewPresenter {
                 self?.updateCardItem(id: model.id, withSavedFlag: false)
                 NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: CardsOverviewViewController.describing])
                 completion?(true)
-                self?.view?.stopLoading(success: true, succesText: "Card.Unsaved".localized, failureText: nil, completion: nil)
+                self?.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
             case .failure:
                 completion?(false)
                 self?.view?.stopLoading(success: false)

@@ -10,8 +10,12 @@ import UIKit
 
 class DeniedAccessToLocationPlaceholderView: BaseFromNibView {
 
-    @IBOutlet var actionButton: UIButton!
+    @Localized("Error.Map.accessDenied.title")
     @IBOutlet var titleLabel: UILabel!
+
+    @Localized("Error.Map.accessDeniedButton.normalTitle")
+    @IBOutlet var actionButton: UIButton!
+
     
     var onOpenSettingsHandler: (() -> Void)?
 

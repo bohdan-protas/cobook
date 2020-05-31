@@ -12,7 +12,6 @@ import UIKit
 protocol UpdateAccountView: LoadDisplayableView, AlertDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate {
     func set(dataSource: DataSource<UpdateAccountCellsConfigutator>?)
     func reload()
-
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()
 }
@@ -72,11 +71,11 @@ class UpdateAccountPresenter: BasePresenter {
 
     func uploadAvatarImage(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: Defaults.imageCompressionQuality) else {
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 
-        view?.startLoading(text: "Триває оновлення фото...")
+        view?.startLoading(text: "Loading.photoLoading.title".localized)
         APIClient.default.upload(imageData: imageData) { [weak self] (result) in
             self?.view?.stopLoading()
             switch result {
@@ -131,14 +130,14 @@ private extension UpdateAccountPresenter {
 
         let personalDataSection = Section<UpdateAccount.Cell>(items: [
             .sectionSeparator,
-            .title(text: "Імя:"),
-            .textField(model: TextFieldModel(text: parametersModel.firstName, placeholder: "Імя", associatedKeyPath: \UpdateAccount.Details.firstName, keyboardType: .default)),
+            .title(text: "Settings.UpdateAccount.section.firstName".localized),
+            .textField(model: TextFieldModel(text: parametersModel.firstName, placeholder: "TextInput.placeholder.firstName" .localized, associatedKeyPath: \UpdateAccount.Details.firstName, keyboardType: .default)),
 
-            .title(text: "Прізвище:"),
-            .textField(model: TextFieldModel(text: parametersModel.lastName, placeholder: "Прізвище", associatedKeyPath: \UpdateAccount.Details.lastName, keyboardType: .default)),
+            .title(text: "Settings.UpdateAccount.section.lastName".localized),
+            .textField(model: TextFieldModel(text: parametersModel.lastName, placeholder: "TextInput.placeholder.lastName".localized, associatedKeyPath: \UpdateAccount.Details.lastName, keyboardType: .default)),
 
-            .title(text: "Пошта:"),
-            .textField(model: TextFieldModel(text: parametersModel.email, placeholder: "Пошта", associatedKeyPath: \UpdateAccount.Details.email, keyboardType: .default)),
+            .title(text:"Settings.UpdateAccount.section.email".localized),
+            .textField(model: TextFieldModel(text: parametersModel.email, placeholder: "TextInput.placeholder.email".localized, associatedKeyPath: \UpdateAccount.Details.email, keyboardType: .default)),
         ])
 
         viewDataSource?.sections = [photosSection, personalDataSection]

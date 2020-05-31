@@ -118,7 +118,7 @@ extension FilterViewController: UITableViewDataSource {
 private extension FilterViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Фільтри"
+        self.navigationItem.title = "Filter.title".localized
         tableView.register(FilterItemTableViewCell.nib, forCellReuseIdentifier: FilterItemTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
@@ -183,8 +183,8 @@ private extension FilterViewController {
 
             // setup sections
             strongSelf.sections = [
-                Section(accessoryIndex: SectionAccessoryIndex.interests.rawValue, title: "Інтереси", items: fetchedInterests),
-                Section(accessoryIndex: SectionAccessoryIndex.practicies.rawValue, title: "Вид діяльності", items: fetchedPracticies)
+                Section(accessoryIndex: SectionAccessoryIndex.interests.rawValue, title: "Filter.section.interests.title".localized, items: fetchedInterests),
+                Section(accessoryIndex: SectionAccessoryIndex.practicies.rawValue, title: "Filter.section.practicies.title".localized, items: fetchedPracticies)
             ]
 
             self?.tableView.reloadData()

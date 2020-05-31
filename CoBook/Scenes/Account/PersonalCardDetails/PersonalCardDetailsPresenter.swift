@@ -102,7 +102,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 
             /// Datasource configuration
             if strongSelf.isUserOwner {
-                items.insert(.add(title: "Ваш пост", imagePath: strongSelf.cardDetails?.avatar?.sourceUrl), at: 0)
+                items.insert(.add(title: "PersonalCard.createNewAlbum.text".localized, imagePath: strongSelf.cardDetails?.avatar?.sourceUrl), at: 0)
             }
             strongSelf.albumPreviewSection = PostPreview.Section(dataSourceID: PersonalCardDetails.DataSourceID.albumPreviews.rawValue, items: items)
             strongSelf.view?.setupLayout()
@@ -147,7 +147,9 @@ private extension PersonalCardDetailsPresenter {
 
         // album preview section
         var albumPreviewSection = Section<PersonalCardDetails.Cell>(items: [
-            .actionTitle(model: ActionTitleModel(title: isUserOwner ? "Мій щоденник:" : "Створені статті:", counter: self.albumPreviewSection?.items.count))
+            .actionTitle(model: ActionTitleModel(title: isUserOwner ?
+                "PersonalCard.section.ownerArticles.title".localized :
+                "PersonalCard.section.articles.title".localized, counter: self.albumPreviewSection?.items.count))
         ])
         if !(self.albumPreviewSection?.items.isEmpty ?? true) {
             albumPreviewSection.items.append(.postPreview(model: self.albumPreviewSection))
@@ -156,7 +158,7 @@ private extension PersonalCardDetailsPresenter {
         // get in touch section
         var getInTouchSection = Section<PersonalCardDetails.Cell>(items: [
             .sectionHeader,
-            .title(text: "Зв’язатись:")
+            .title(text: "PersonalCard.section.contacts.title".localized)
         ])
 
         let listListItems = (cardDetails?.socialNetworks ?? []).compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) }
@@ -199,7 +201,7 @@ extension PersonalCardDetailsPresenter: SocialsListTableViewCellDelegate {
             if let url = model.url, UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
-                view?.errorAlert(message: "Посилання соцмережі має нечитабельний формат")
+                view?.errorAlert(message: "Error.Social.unreadableFormat".localized)
             }
         default:
             break
@@ -244,7 +246,7 @@ extension PersonalCardDetailsPresenter: PersonalCardUserInfoTableViewCellDelegat
                     cell.saveButton.isSelected = true
                     self?.cardDetails?.isSaved = true
                     NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.personalCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
-                    self?.view?.stopLoading(success: true, succesText: "Збережено", failureText: nil, completion: nil)
+                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
                 case .failure:
                     self?.view?.stopLoading(success: false)
                 }
@@ -259,7 +261,7 @@ extension PersonalCardDetailsPresenter: PersonalCardUserInfoTableViewCellDelegat
                     cell.saveButton.isSelected = false
                     self?.cardDetails?.isSaved = false
                     NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.personalCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
-                    self?.view?.stopLoading(success: true, succesText: "Вилучено із збережених", failureText: nil, completion: nil)
+                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
                 case .failure:
                     self?.view?.stopLoading(success: false)
                 }
