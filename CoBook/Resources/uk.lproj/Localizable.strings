@@ -49,8 +49,11 @@
 "TextInput.placeholder.serviceName" = "Назва послуги";
 "TextInput.placeholder.priceEnter" = "Вкажіть вартість";
 "TextInput.placeholder.serviceHeader" = "Заголовок послуги";
-"TextInput.placeholder.serviceDescription" = "Опис товару";
-
+"TextInput.placeholder.serviceDescription" = "Опис послуги";
+"TextInput.placeholder.productName" = "Назва товару";
+"TextInput.placeholder.showRoom" = "Show room";
+"TextInput.placeholder.productHeader" = "Заголовок товару";
+"TextInput.placeholder.productDescription" = "Опис товару";
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
 
@@ -228,4 +231,14 @@
 "Service.checkbox.title" = "Використати контакти сторінки";
 
 // MARK: - Product
+"Product.create.title" = "Товар компанії";
+"Product.details.title" = "Товар компанії";
 "Product.add.text" = "Додати товар";
+"Product.saveButton.normalTitle" = "Зберегти товар";
+"Product.updateButton.normalTitle" = "Оновити товар";
+"Product.editButton.normalTitle" = "Редагувати товар";
+"Product.checkbox.negotiablePrice.title" = "Ціна договірна";
+"Product.checkbox.useCompanyContacts.title" = "Використати контакти сторінки";
+"Product.section.price.title" = "Вартість послуги:";
+"Product.section.showRoomNumber.title" = "Номер Show room:";
+"Product.section.contacts.title" = "Контактні дані:";

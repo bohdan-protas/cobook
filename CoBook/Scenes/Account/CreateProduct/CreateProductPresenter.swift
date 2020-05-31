@@ -103,7 +103,7 @@ extension CreateProductPresenter {
                                                showroom: Int(details.productShowRoom ?? ""))
 
         /// api create request
-        view?.startLoading(text: "Створення...")
+        view?.startLoading(text: "Loading.creating.title".localized)
         APIClient.default.createProduct(with: parameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -141,7 +141,7 @@ extension CreateProductPresenter {
                                                showroom: Int(details.productShowRoom ?? ""))
 
         /// api update request
-        view?.startLoading(text: "Оновлення...")
+        view?.startLoading(text: "Loading.updating.title".localized)
         APIClient.default.updateProduct(with: parameters) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -161,7 +161,7 @@ extension CreateProductPresenter {
 
     func uploadImage(image: UIImage?, completion: ((_ imagePath: String?, _ imageID: String?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 
@@ -221,16 +221,16 @@ private extension CreateProductPresenter {
         dataSource?[Service.CreationSectionAccessoryIndex.header].items = [
             .companyHeader(model: CompanyPreviewHeaderModel(title: details.companyName, image: details.companyAvatar)),
             .gallery,
-            .textField(model: TextFieldModel(text: details.productName, placeholder: "Назва товару", associatedKeyPath: \CreateProduct.DetailsModel.productName, keyboardType: .default)),
-            .title(text: "Номер Show room:"),
-            .actionField(model: ActionFieldModel(text: details.productShowRoom, placeholder: "Show room", actionTypeId: CreateProduct.ActionType.showroomNumber.rawValue)),
-            .title(text: "Вартість послуги:"),
+            .textField(model: TextFieldModel(text: details.productName, placeholder: "TextInput.placeholder.productName".localized, associatedKeyPath: \CreateProduct.DetailsModel.productName, keyboardType: .default)),
+            .title(text: "Product.section.showRoomNumber.title".localized),
+            .actionField(model: ActionFieldModel(text: details.productShowRoom, placeholder: "TextInput.placeholder.showRoom".localized, actionTypeId: CreateProduct.ActionType.showroomNumber.rawValue)),
+            .title(text: "Product.section.price.title".localized),
             .textField(model: TextFieldModel(isEnabled: !details.isContractPrice,
                                              text: details.price,
-                                             placeholder: "Вкажіть вартість",
+                                             placeholder: "TextInput.placeholder.priceEnter".localized,
                                              associatedKeyPath: \CreateProduct.DetailsModel.price,
                                              keyboardType: .default)),
-            .checkbox(model: CheckboxModel(title: "Ціна договірна", isSelected: details.isContractPrice, handler: { checkbox in
+            .checkbox(model: CheckboxModel(title: "Product.checkbox.negotiablePrice.title".localized, isSelected: details.isContractPrice, handler: { checkbox in
                 checkbox.isSelected.toggle()
                 self.details.isContractPrice = checkbox.isSelected
                 if checkbox.isSelected {
@@ -243,22 +243,22 @@ private extension CreateProductPresenter {
         // contacts section
         dataSource?[Service.CreationSectionAccessoryIndex.contacts].items = [
             .sectionSeparator,
-            .title(text: "Контактні дані:"),
+            .title(text: "Product.section.contacts.title".localized),
             .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
                                              text: details.telephoneNumber,
-                                             placeholder: "Телефон для звязку",
+                                             placeholder: "TextInput.placeholder.workingPhoneNumber".localized,
                                              associatedKeyPath: \CreateProduct.DetailsModel.telephoneNumber,
                                              keyboardType: .phonePad)),
 
             .textField(model: TextFieldModel(isEnabled: !details.isUseContactsFromSite,
                                              text: details.email,
-                                             placeholder: "Робочий емейл для звязку",
+                                             placeholder: "TextInput.placeholder.workingEmailNumber".localized,
                                              associatedKeyPath: \CreateProduct.DetailsModel.email,
                                              keyboardType: .emailAddress)),
         ]
         if !isEditing {
             dataSource?[.contacts].items.append(
-                .checkbox(model: CheckboxModel(title: "Використати контакти сторінки", isSelected: details.isUseContactsFromSite, handler: { checkbox in
+                .checkbox(model: CheckboxModel(title: "Product.checkbox.useCompanyContacts.title".localized, isSelected: details.isUseContactsFromSite, handler: { checkbox in
                     checkbox.isSelected.toggle()
                     if checkbox.isSelected {
                         self.details.telephoneNumber = AppStorage.User.Profile?.telephone.number
@@ -276,8 +276,8 @@ private extension CreateProductPresenter {
         // description section
         dataSource?[Service.CreationSectionAccessoryIndex.description].items = [
             .sectionSeparator,
-            .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "Заголовок товару", associatedKeyPath: \CreateProduct.DetailsModel.descriptionTitle, keyboardType: .default)),
-            .textView(model: TextFieldModel(text: details.desctiptionBody, placeholder: "Опис товару", associatedKeyPath: \CreateProduct.DetailsModel.desctiptionBody, keyboardType: .default))
+            .textField(model: TextFieldModel(text: details.descriptionTitle, placeholder: "TextInput.placeholder.productHeader".localized, associatedKeyPath: \CreateProduct.DetailsModel.descriptionTitle, keyboardType: .default)),
+            .textView(model: TextFieldModel(text: details.desctiptionBody, placeholder: "TextInput.placeholder.productDescription".localized, associatedKeyPath: \CreateProduct.DetailsModel.desctiptionBody, keyboardType: .default))
         ]
 
     }

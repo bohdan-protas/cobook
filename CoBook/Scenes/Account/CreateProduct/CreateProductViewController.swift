@@ -20,7 +20,7 @@ class CreateProductViewController: BaseViewController, CreateProductView {
     /// bottom save button
     private lazy var saveView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
-        view.saveButton.setTitle("Зберегти товар", for: .normal)
+        view.saveButton.setTitle("Product.saveButton.normalTitle".localized, for: .normal)
         view.onSaveTapped = { [weak self] in
             self?.presenter?.createProduct()
         }
@@ -30,7 +30,7 @@ class CreateProductViewController: BaseViewController, CreateProductView {
     /// bottom save button
     private lazy var updateView: CardSaveView = {
         let view = CardSaveView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Layout.footerHeight)))
-        view.saveButton.setTitle("Оновити товар", for: .normal)
+        view.saveButton.setTitle("Product.updateButton.normalTitle".localized, for: .normal)
         view.onSaveTapped = { [weak self] in
             self?.presenter?.updateProduct()
         }
@@ -101,7 +101,7 @@ class CreateProductViewController: BaseViewController, CreateProductView {
 private extension CreateProductViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Товар компанії"
+        self.navigationItem.title = "Product.create.title".localized
         tableView.delegate = self
     }
 
