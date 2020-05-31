@@ -171,6 +171,14 @@
 "Settings.UpdateAccount.section.email" = "Емейл:";
 
 // MARK: - Acticles
+
+"Article.create.title" = "Створити статтю";
+"Article.edit.title" = "Редагувати статтю";
+"Article.addPhotoButton.normalTitle" = "Додати фото";
+"Article.header.placeholder" = "Введіть заголовок";
+"Article.selectAlbum.text" = "Виберіть альбом";
+"Article.description.placeholder" = "Текст статті...";
+"Article.publicButton.normalTitle" = "Публікувати";
 "Article.Saved" = "Статтю збережено";
 "Article.Unsaved" = "Статтю видалено із збережених";
 

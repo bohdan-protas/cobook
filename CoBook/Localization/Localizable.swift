@@ -78,3 +78,11 @@ extension UIImageView: Localizable {
         image = UIImage(named: string)
     }
 }
+
+extension DesignableTextView: Localizable {
+
+    public func setLocalizedString(_ string: String, for state: UIControl.State) {
+        placeholder = string
+    }
+
+}
