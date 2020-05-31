@@ -28,6 +28,7 @@
 "TextInput.placeholder.lastName" = "Прізвище";
 "TextInput.placeholder.telephone" = "+380XXXXXXXX";
 "TextInput.placeholder.email" = "Емейл";
+"TextInput.placeholder.website" = "Веб сайт";
 "TextInput.placeholder.password" = "Пароль";
 "TextInput.placeholder.newPassword" = "Новий пароль";
 "TextInput.placeholder.oldPassword" = "Старий пароль";
@@ -35,11 +36,16 @@
 "TextInput.placeholder.occupiedPosition" = "Займана посада";
 "TextInput.placeholder.activityType" = "Вид діяльності";
 "TextInput.placeholder.cityOfResidence" = "Місто проживання";
+"TextInput.placeholder.cityLocation" = "Місто розташування";
+"TextInput.placeholder.activityLocation" = "Місто діяльності";
+"TextInput.placeholder.street" = "Вулиця";
+"TextInput.placeholder.workSchedule" = "Графік роботи (дні та години)";
 "TextInput.placeholder.activityRegion" = "Регіон діяльності";
 "TextInput.placeholder.activityDescription" = "Опис діяльності";
-
 "TextInput.placeholder.workingPhoneNumber" = "Робочий номер телефону";
 "TextInput.placeholder.workingEmailNumber" = "Робочий емайл для звязку";
+"TextInput.placeholder.companyName" = "Назва компанії";
+"TextInput.placeholder.detailDescription" = "Детальний опис";
 
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
@@ -66,6 +72,7 @@
 
 // MARK: -  Error
 "Error.connection" = "Не вдалося приєднатися до сервера";
+"Error.employAreadyAdded" = "Вибраний працівник вже доданий";
 "Error.photoLoading.message" = "Помилка завантаження фото";
 
 "Error.Social.unreadableFormat" = "Посилання соцмережі має нечитабельний формат";
@@ -180,6 +187,14 @@
 "BusinessCard.section.createdAlbums.title" = "Створені альбоми:";
 "BusinessCard.section.socials.title" = "Соціальні мережі:";
 "BusinessCard.createNewAlbum.text" = "Ваш пост";
+
+"BusinessCard.Creation.title" = "Створення бізнес візитки";
+"BusinessCard.section.mainData" = "Основні дані:";
+"BusinessCard.section.companyActivity" = "Діяльність компанії:";
+"BusinessCard.section.aboutCompany.title" = "Про компанію:";
+"BusinessCard.section.companyInSocials.title" = "Компанія у соцмережах:";
+"BusinessCard.section.companyEmployers.title" = "Працівники компанії:";
+"BusinessCard.section.interests.title" = "Інтереси(для рекомендацій):";
 
 // MARK: - Personal Card
 "PersonalCard.title" = "Персональна візитка";

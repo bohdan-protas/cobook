@@ -89,7 +89,7 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
 private extension CreateBusinessCardViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Створення бізнес візитки"
+        self.navigationItem.title = "BusinessCard.Creation.title".localized
 
         tableView.estimatedRowHeight = Layout.estimatedRowHeight
         tableView.delegate = self
