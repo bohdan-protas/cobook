@@ -20,7 +20,7 @@ class ProductDetailsViewController: BaseViewController, ProductDetailsView {
     /// edit footer view
     private lazy var editCardFooterView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.editCardViewHeight)))
-        view.editButton.setTitle("Редагувати товар", for: .normal)
+        view.editButton.setTitle("Product.editButton.normalTitle".localized, for: .normal)
         view.onEditTapped = { [weak self] in
             self?.presenter?.editProduct()
         }
@@ -80,7 +80,7 @@ class ProductDetailsViewController: BaseViewController, ProductDetailsView {
 private extension ProductDetailsViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Товар"
+        self.navigationItem.title = "Product.details.title".localized
 
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension

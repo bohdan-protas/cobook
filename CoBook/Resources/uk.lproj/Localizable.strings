@@ -231,8 +231,8 @@
 "Service.checkbox.title" = "Використати контакти сторінки";
 
 // MARK: - Product
-"Product.create.title" = "Товар компанії";
-"Product.details.title" = "Товар компанії";
+"Product.create.title" = "Товар";
+"Product.details.title" = "Товар";
 "Product.add.text" = "Додати товар";
 "Product.saveButton.normalTitle" = "Зберегти товар";
 "Product.updateButton.normalTitle" = "Оновити товар";
@@ -242,3 +242,4 @@
 "Product.section.price.title" = "Вартість послуги:";
 "Product.section.showRoomNumber.title" = "Номер Show room:";
 "Product.section.contacts.title" = "Контактні дані:";
+"Product.negotiablePrice.text" = "Ціна договірна";
