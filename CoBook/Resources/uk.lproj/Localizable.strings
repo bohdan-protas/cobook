@@ -107,3 +107,7 @@
 "Article.Saved" = "Статтю збережено";
 "Article.Unsaved" = "Статтю видалено із збережених";
 
+// MARK: - Filters
+"Filter.title" = "Фільтри";
+"Filter.section.interests.title" = "Інтереси";
+"Filter.section.practicies.title" = "Вид діяльності";
