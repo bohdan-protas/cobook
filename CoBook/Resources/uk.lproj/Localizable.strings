@@ -12,7 +12,7 @@
 "Successed" = "Успішно!";
 "Error" = "Помилка";
 
-"Tabbar.allCards" = "Всі візитки";
+"Tabbar.allCards.title" = "Всі візитки";
 "Tabbar.account.title" = "Аккаунт";
 "Tabbar.saved.title" = "Збережені";
 
