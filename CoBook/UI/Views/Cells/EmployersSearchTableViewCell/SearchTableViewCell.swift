@@ -22,6 +22,7 @@ class SearchTableViewCell: UITableViewCell {
     // MARK: Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        searchBar.placeholder = "SearchBar.placeholder.employers".localized
         searchBar.delegate = self
     }
     

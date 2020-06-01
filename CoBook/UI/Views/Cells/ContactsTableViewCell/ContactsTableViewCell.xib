@@ -26,7 +26,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зв’язок:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5J-bX-Nm4">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label.contacts.text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5J-bX-Nm4">
                         <rect key="frame" x="16" y="24" width="288" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="4j5-4l-LIM"/>
@@ -97,6 +97,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="emailLabel" destination="E17-iF-Cln" id="QY7-yp-mlj"/>
+                <outlet property="headerLabel" destination="n5J-bX-Nm4" id="Kyd-og-2rL"/>
                 <outlet property="telephoneNumberLabel" destination="0VJ-lt-K47" id="hYd-pA-vzg"/>
                 <outlet property="websiteButton" destination="guV-U8-592" id="7dx-2P-ql3"/>
             </connections>

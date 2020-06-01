@@ -56,7 +56,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Зберегти візитку">
+                    <state key="normal" title="Button.save.normalTitle">
                         <color key="titleColor" name="Theme_Black-Middle"/>
                     </state>
                     <state key="disabled">

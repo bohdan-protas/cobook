@@ -17,7 +17,12 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HideCardView" customModule="CoBook" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HideCardView" customModule="CoBook" customModuleProvider="target">
+            <connections>
+                <outlet property="hideButton" destination="Gdd-F5-t3w" id="fbd-AZ-D7u"/>
+                <outlet property="hideQuestionLabel" destination="IbT-Wj-iXk" id="Ihg-XW-80W"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="102"/>
@@ -51,16 +56,16 @@
                     <rect key="frame" x="16" y="34" width="382" height="44"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mat-7X-7d6">
-                            <rect key="frame" x="77.5" y="0.0" width="227" height="44"/>
+                            <rect key="frame" x="28.5" y="0.0" width="325.5" height="44"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не цікавить візитка?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-Wj-iXk">
-                                    <rect key="frame" x="0.0" y="13.5" width="145.5" height="17.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card.hideButton.normalTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-Wj-iXk">
+                                    <rect key="frame" x="0.0" y="13.5" width="189" height="17.5"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
                                     <color key="textColor" name="Theme_Green-Dark"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Приховати" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-F5-t3w">
-                                    <rect key="frame" x="150.5" y="13.5" width="76.5" height="17.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card.hideLabel.text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-F5-t3w">
+                                    <rect key="frame" x="194" y="13.5" width="131.5" height="17.5"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="15"/>
                                     <color key="textColor" name="Theme_Green-Dark"/>
                                     <nil key="highlightedColor"/>

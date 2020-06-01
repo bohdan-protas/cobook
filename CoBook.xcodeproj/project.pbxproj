@@ -566,6 +566,7 @@
 		B835FFC1245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostEditablePhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		B836DF29243351A800CB84D3 /* CreateBusinessCardDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B836DF2B2433792600CB84D3 /* CreateBusinessCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardPresenter.swift; sourceTree = "<group>"; };
+		B83ECDEA24851A75001C2408 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B83FD7D52423B3CE00ACA1D4 /* SocialsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsListTableViewCell.swift; sourceTree = "<group>"; };
 		B83FD7D62423B3CE00ACA1D4 /* SocialsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialsListTableViewCell.xib; sourceTree = "<group>"; };
 		B83FD7DA2423B65800ACA1D4 /* SocialListItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialListItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -2121,6 +2122,7 @@
 				en,
 				Base,
 				uk,
+				ru,
 			);
 			mainGroup = B870197823ED50EA00625D61;
 			productRefGroup = B870198223ED50EA00625D61 /* Products */;
@@ -2562,6 +2564,7 @@
 			children = (
 				B825742523F57E0600C8CBF8 /* en */,
 				B825742723F57E3B00C8CBF8 /* uk */,
+				B83ECDEA24851A75001C2408 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -20,7 +20,7 @@
 "AlertAction.Unsave" = "Видалити із збережених";
 "AlertAction.Delete" = "Видалити";
 "AlertAction.Change" = "Змінити";
-"AlertAction.Cancel" = "Змінити";
+"AlertAction.Cancel" = "Відмінити";
 "AlertAction.generalList.title" = "Загальний список";
 "AlertAction.createNewList.title" = "Створити новий список";
 "AlertAction.saveTo" = "Зберегти візитку до:";
@@ -58,6 +58,22 @@
 
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
+"Button.edit.normalTitle" = "Редагувати";
+"Button.email.normalTitle" = "Написати";
+"Button.telephone.normalTitle" = "Зателефонувати";
+"Button.mapDirectiron.normalTitle" = "Прокласти маршрут";
+
+"Button.changePhoto.normalTitle" = "Змінити фото";
+"Button.changeLogo.normalTitle" = "Змінити логотип компанії";
+"Button.addPhoto.normalTitle" = "Додати фото";
+"Button.addLogo.normalTitle" = "Додати логотип компанії";
+
+"Label.addPhoto.text" = "Додати фото";
+"Label.contacts.text" = "Зв’язок:";
+"Label.changeBgPhoto.text" = "Змінити фото обкладинки";
+"Label.addBgPhoto.text" = "Додати фото обкладинки";
+
+"SearchBar.placeholder.employers" = "Пошук працівників CoBook";
 
 // MARK: - Social
 "Social.metaTag.inviteFriends.title" = "CoBook";
@@ -112,6 +128,9 @@
 "CardOverview.search.placeholder" = "Пошук візитівки";
 "CardOverview.search.emptySearch" = "Немає результатів пошуку";
 "CardOverview.search.cardSearchResult" = "Знайдено %li візитку(и)";
+
+"Card.hideButton.normalTitle" = "Не цікавить візитка?";
+"Card.hideLabel.text" = "Приховати";
 
 // MARK: - SignUp
 "SignUp.title" = "Вітаємо в спільноті CoBook";

@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="387" height="76"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Пошук працівників CoBook" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnd-nM-SA1">
+                    <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" text="" placeholder="SearchBar.placeholder.employers" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnd-nM-SA1">
                         <rect key="frame" x="16" y="16" width="355" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="nWp-FK-TfU"/>
