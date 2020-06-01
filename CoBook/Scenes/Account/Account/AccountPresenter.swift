@@ -89,7 +89,10 @@ class AccountPresenter: BasePresenter {
 
             case .statictics: break
             case .generateQrCode: break
-            case .faq: break
+            case .faq:
+                if let url = URL(string: "https://cobook.app/#faq") {
+                    UIApplication.shared.open(url)
+                }
             case .startMakingMoney: break
             case .quitAccount:
                 logout()
@@ -210,17 +213,17 @@ private extension AccountPresenter {
                                                                                                actiontype: .createPersonalCard)))
         }
 
-        if !businessCardsList.isEmpty {
-            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
-            cardsPreviewSection.items.append(contentsOf: cards)
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        } else {
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        }
+//        if !businessCardsList.isEmpty {
+//            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
+//            cardsPreviewSection.items.append(contentsOf: cards)
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        } else {
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        }
 
         // menuItems Section
         let menuItemsSection = Section<Account.Item>(items: [

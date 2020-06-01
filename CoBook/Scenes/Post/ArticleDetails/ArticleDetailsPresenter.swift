@@ -246,7 +246,7 @@ extension ArticleDetailsPresenter: ArticleHeaderTableViewCellDelegate {
         // save action
         if let isSaved = self.articleDetails?.isSaved  {
             actions.append(
-                .init(title: isSaved ? "Unsave".localized : "Save".localized, style: .default, handler: { (_) in
+                .init(title: isSaved ? "AlertAction.Unsave".localized : "AlertAction.Save".localized, style: .default, handler: { (_) in
                     switch isSaved {
                     case true: self.unsaveArticle()
                     case false: self.saveArticle()
