@@ -19,6 +19,12 @@ class SettingsTableViewController: UITableViewController {
     @Localized("Settings.item.paymentMethods.title")
     @IBOutlet var paymentMethodsLabel: UILabel!
 
+    @Localized("Settings.item.rules.title")
+    @IBOutlet var rulesTitleLabel: UILabel!
+
+    @Localized("Settings.item.secureConditions.title")
+    @IBOutlet var secureConditionsTitleLabel: UILabel!
+
     @Localized("Settings.item.appVersion.title")
     @IBOutlet var appVersionTitleLabel: UILabel!
 
