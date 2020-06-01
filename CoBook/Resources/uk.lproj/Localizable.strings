@@ -160,6 +160,8 @@
 "Settings.item.changePassword.title" = "Зміна паролю";
 "Settings.item.paymentMethods.title" = "Методи оплати";
 "Settings.item.appVersion.title" = "Версія додатку";
+"Settings.item.rules.title" = "Правила користування";
+"Settings.item.secureConditions.title" = "Умови безпеки";
 
 "Settings.ChangePassword.title" = "Зміна паролю";
 "Settings.ChangePassword.passwordsDoNotMatch.title" = "Провірте вхідні дані";

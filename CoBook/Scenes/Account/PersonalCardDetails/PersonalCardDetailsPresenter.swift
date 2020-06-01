@@ -147,9 +147,7 @@ private extension PersonalCardDetailsPresenter {
 
         // album preview section
         var albumPreviewSection = Section<PersonalCardDetails.Cell>(items: [
-            .actionTitle(model: ActionTitleModel(title: isUserOwner ?
-                "PersonalCard.section.ownerArticles.title".localized :
-                "PersonalCard.section.articles.title".localized, counter: self.albumPreviewSection?.items.count))
+            .actionTitle(model: ActionTitleModel(title: "PersonalCard.section.ownerArticles.title".localized, counter: self.albumPreviewSection?.items.count))
         ])
         if !(self.albumPreviewSection?.items.isEmpty ?? true) {
             albumPreviewSection.items.append(.postPreview(model: self.albumPreviewSection))

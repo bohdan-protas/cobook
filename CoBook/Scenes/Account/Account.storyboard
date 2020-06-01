@@ -126,14 +126,31 @@
                             </tableViewSection>
                             <tableViewSection id="lep-w9-z0v">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="QIW-D5-SR0" style="IBUITableViewCellStyleDefault" id="mDV-R2-1vR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="dd7-JJ-8nr" style="IBUITableViewCellStyleDefault" id="QGR-Bd-WW0">
                                         <rect key="frame" x="0.0" y="125" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mDV-R2-1vR" id="MBY-DM-L29">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QGR-Bd-WW0" id="D5o-TA-Yto">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Settings.item.paymentMethods.title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QIW-D5-SR0">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Settings.item.rules.title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dd7-JJ-8nr">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ubX-Wg-NSO" style="IBUITableViewCellStyleDefault" id="IG1-KI-6vQ">
+                                        <rect key="frame" x="0.0" y="168.5" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IG1-KI-6vQ" id="MqJ-6O-vUx">
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Settings.item.secureConditions.title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ubX-Wg-NSO">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -148,7 +165,7 @@
                             <tableViewSection id="R0l-Fu-Pix">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="YlR-5W-fGy" detailTextLabel="c2m-gh-kOZ" style="IBUITableViewCellStyleValue1" id="06j-VW-KvN">
-                                        <rect key="frame" x="0.0" y="196.5" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="240" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="06j-VW-KvN" id="5l4-z8-NUK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -184,7 +201,8 @@
                         <outlet property="appVersionDetailLabel" destination="c2m-gh-kOZ" id="0Vw-5M-wHH"/>
                         <outlet property="appVersionTitleLabel" destination="YlR-5W-fGy" id="Aoe-S3-meT"/>
                         <outlet property="changePasswordLabel" destination="iRX-uN-6R3" id="et0-5s-2r6"/>
-                        <outlet property="paymentMethodsLabel" destination="QIW-D5-SR0" id="En2-Ju-N1M"/>
+                        <outlet property="rulesTitleLabel" destination="dd7-JJ-8nr" id="sj0-iJ-RbK"/>
+                        <outlet property="secureConditionsTitleLabel" destination="ubX-Wg-NSO" id="T1a-fD-cfv"/>
                         <outlet property="updateAccountTitleLabel" destination="AWY-aR-f3x" id="BLL-Ub-Khf"/>
                     </connections>
                 </tableViewController>
