@@ -10,9 +10,7 @@ import UIKit
 
 class AddPhotoListItemCollectionViewCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @Localized("Label.addPhoto.text")
+    @IBOutlet var addPhotoTItleLabel: UILabel!
 
 }

@@ -50,14 +50,14 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tl-uy-dNa" userLabel="Continue Button" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
-                    <rect key="frame" x="109.5" y="25" width="195" height="44"/>
+                    <rect key="frame" x="100.5" y="25" width="213" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="kry-Q4-o0c"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="15"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
-                    <state key="normal" title="Редагувати візитку">
+                    <state key="normal" title="Button.edit.normalTitle">
                         <color key="titleColor" name="Theme_Green-Dark"/>
                     </state>
                     <state key="disabled">

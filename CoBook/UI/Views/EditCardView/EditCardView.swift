@@ -10,7 +10,9 @@ import UIKit
 
 class EditCardView: BaseFromNibView {
 
+    @Localized("Button.edit.normalTitle")
     @IBOutlet var editButton: LoaderDesignableButton!
+    
     var onEditTapped: (() -> Void)?
 
     override func getNib() -> UINib {

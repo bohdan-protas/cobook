@@ -9,8 +9,6 @@
 import UIKit
 
 protocol AlertDisplayableView {
-    func defaultErrorAlert()
-
     func errorAlert(message: String?)
     func errorAlert(message: String?, handler: ((UIAlertAction) -> Void)?)
 
@@ -27,8 +25,8 @@ protocol AlertDisplayableView {
 extension AlertDisplayableView where Self: UIViewController {
 
     func openSettingsAlert() {
-        let alertController = UIAlertController (title: nil, message: "Перейти в налаштування?", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Налаштування", style: .default) { (_) -> Void in
+        let alertController = UIAlertController (title: nil, message: "Alert.title.goToSettings".localized, preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "AlertAction.settings".localized, style: .default) { (_) -> Void in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
@@ -38,7 +36,7 @@ extension AlertDisplayableView where Self: UIViewController {
         }
 
         alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "AlertAction.Cancel".localized, style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
 
         present(alertController, animated: true, completion: nil)
@@ -73,13 +71,6 @@ extension AlertDisplayableView where Self: UIViewController {
         errorAlert(message: message, handler: nil)
     }
 
-    func defaultErrorAlert() {
-        let alertController = UIAlertController(title: "Error".localized, message: "Some error occured. Try again later.", preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(OKAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-
     func actionSheetAlert(title: String?, message: String?, actions: [UIAlertAction]) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         for action in actions {
@@ -89,29 +80,29 @@ extension AlertDisplayableView where Self: UIViewController {
     }
 
     func newSocialAlert(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?) {
-        let ac = UIAlertController(title: "Нова соціальна мережа", message: "Будь ласка, введіть назву та посилання", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Alert.title.newSocial".localized, message: "Alert.message.newSocial".localized, preferredStyle: .alert)
 
         let isEditing = !(name ?? "").isEmpty || !(link ?? "").isEmpty
 
-        let submitAction = UIAlertAction(title: isEditing ? "Змінити": "Створити", style: .default) { [unowned ac] _ in
+        let submitAction = UIAlertAction(title: isEditing ? "AlertAction.Change".localized: "AlertAction.Create".localized, style: .default) { [unowned ac] _ in
             let name = ac.textFields![safe: 0]?.text
             let url = ac.textFields?[safe: 1]?.text
             completion?(name, url)
         }
         submitAction.isEnabled = false
-        let cancelAction = UIAlertAction(title: "Відмінити", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "AlertAction.Cancel".localized, style: .cancel, handler: nil)
 
         ac.addAction(submitAction)
         ac.addAction(cancelAction)
 
         ac.addTextField { (nameTextField) in
             nameTextField.text = name
-            nameTextField.placeholder = "Назва"
+            nameTextField.placeholder = "TextInput.placeholder.socialName".localized
         }
         ac.addTextField { (urlTextField) in
             urlTextField.text = link
             urlTextField.keyboardType = .URL
-            urlTextField.placeholder = "Посилання, https://link.com"
+            urlTextField.placeholder = "TextInput.placeholder.socialLink".localized
         }
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 1], queue: OperationQueue.main, using: { _ in
@@ -131,21 +122,21 @@ extension AlertDisplayableView where Self: UIViewController {
 
     func newFolderAlert(folderName: String?, completion: ((_ name: String) -> Void)?) {
         let isEditing = !(folderName ?? "").isEmpty
-        let ac = UIAlertController(title: isEditing ? "Редагувати список" : "Новий список", message: "Задайте назву новому списку", preferredStyle: .alert)
+        let ac = UIAlertController(title: isEditing ? "Alert.title.editList".localized : "Alert.title.newList".localized, message: "Alert.message.newList".localized, preferredStyle: .alert)
 
-        let submitAction = UIAlertAction(title: "Зберегти", style: .default) { [unowned ac] _ in
+        let submitAction = UIAlertAction(title: "AlertAction.Save".localized, style: .default) { [unowned ac] _ in
             let name = ac.textFields![safe: 0]?.text
             completion?(name!)
         }
         submitAction.isEnabled = false
-        let cancelAction = UIAlertAction(title: "Скасувати", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "AlertAction.Cancel".localized, style: .cancel, handler: nil)
 
         ac.addAction(submitAction)
         ac.addAction(cancelAction)
 
         ac.addTextField { (nameTextField) in
             nameTextField.text = folderName ?? ""
-            nameTextField.placeholder = "Назва"
+            nameTextField.placeholder = "TextInput.placeholder.listName".localized
         }
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ac.textFields?[safe: 0], queue: OperationQueue.main, using: { _ in

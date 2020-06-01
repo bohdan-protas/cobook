@@ -29,12 +29,12 @@ class CardBackgroundManagmentTableViewCell: UITableViewCell {
         didSet {
             switch currentState {
             case .filled:
-                photoStatusLabel.text = "Змінити фото обкладинки"
+                photoStatusLabel.text = "Label.changeBgPhoto.text".localized
                 photoStatusLabel.textColor = UIColor.white
                 photoSizeLabel.text = "(800x260)"
                 photoSizeLabel.textColor = UIColor.white
             case .empty:
-                photoStatusLabel.text = "Додати фото обкладинки"
+                photoStatusLabel.text = "Label.addBgPhoto.text".localized
                 photoStatusLabel.textColor = UIColor.Theme.greenDark
                 photoSizeLabel.text = "(800x260)"
                 photoSizeLabel.textColor = UIColor.Theme.greenDark

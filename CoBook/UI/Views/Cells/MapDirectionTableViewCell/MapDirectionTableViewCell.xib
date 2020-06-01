@@ -19,13 +19,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMA-2f-rma">
-                        <rect key="frame" x="57" y="26" width="206" height="20"/>
+                        <rect key="frame" x="8.5" y="26" width="303" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="wWz-uS-LLm"/>
                         </constraints>
                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="Прокласти маршрут" image="ic_right_arrow">
+                        <state key="normal" title="Button.mapDirectiron.normalTitle" image="ic_right_arrow">
                             <color key="titleColor" name="Theme_Green-Dark"/>
                         </state>
                         <connections>

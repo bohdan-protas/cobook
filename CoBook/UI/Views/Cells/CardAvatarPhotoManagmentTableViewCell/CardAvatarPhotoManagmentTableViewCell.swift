@@ -20,18 +20,18 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
         var selectedStateTitle: String {
             switch self {
             case .personalCard, .account:
-                return "Змінити фото"
+                return "Button.changePhoto.normalTitle".localized
             case .businessCard:
-                return "Змінити логотип компанії"
+                return "Button.changeLogo.normalTitle".localized
             }
         }
 
         var emptyStateTitle: String {
             switch self {
             case .personalCard, .account:
-                return "Додати фото"
+                return "Button.addPhoto.normalTitle".localized
             case .businessCard:
-                return "Добавити логотип компанії"
+                return "Button.addLogo.normalTitle".localized
             }
         }
 

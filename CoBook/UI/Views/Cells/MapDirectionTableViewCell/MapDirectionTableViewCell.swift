@@ -14,7 +14,9 @@ protocol MapDirectionTableViewCellDelegate: class {
 
 class MapDirectionTableViewCell: UITableViewCell {
 
+    @Localized("Button.mapDirectiron.normalTitle")
     @IBOutlet var mapDirectionButton: UIButton!
+    
     weak var delegate: MapDirectionTableViewCellDelegate?
 
     @IBAction func mapDirectionButtonTapped(_ sender: Any) {

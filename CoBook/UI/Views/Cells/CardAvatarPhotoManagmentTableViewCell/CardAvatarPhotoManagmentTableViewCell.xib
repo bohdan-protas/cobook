@@ -53,7 +53,7 @@
                         </constraints>
                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="13"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" title="Button">
+                        <state key="normal">
                             <color key="titleColor" name="Theme_Black-Middle"/>
                         </state>
                         <connections>
