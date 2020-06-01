@@ -80,10 +80,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection id="Noh-ms-kE0">
+                            <tableViewSection headerTitle="Налаштування додатку" id="Noh-ms-kE0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="AWY-aR-f3x" style="IBUITableViewCellStyleDefault" id="d8e-5Q-V9N">
-                                        <rect key="frame" x="0.0" y="10" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d8e-5Q-V9N" id="yj7-wI-QJe">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
@@ -103,7 +103,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="iRX-uN-6R3" style="IBUITableViewCellStyleDefault" id="e3z-vS-4aV">
-                                        <rect key="frame" x="0.0" y="53.5" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="99" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e3z-vS-4aV" id="XKg-AG-k03">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
@@ -124,10 +124,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="lep-w9-z0v">
+                            <tableViewSection headerTitle="Юридична інформація" id="lep-w9-z0v">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="dd7-JJ-8nr" style="IBUITableViewCellStyleDefault" id="QGR-Bd-WW0">
-                                        <rect key="frame" x="0.0" y="125" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="198.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QGR-Bd-WW0" id="D5o-TA-Yto">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
@@ -144,7 +144,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ubX-Wg-NSO" style="IBUITableViewCellStyleDefault" id="IG1-KI-6vQ">
-                                        <rect key="frame" x="0.0" y="168.5" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="242" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IG1-KI-6vQ" id="MqJ-6O-vUx">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
@@ -165,7 +165,7 @@
                             <tableViewSection id="R0l-Fu-Pix">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="YlR-5W-fGy" detailTextLabel="c2m-gh-kOZ" style="IBUITableViewCellStyleValue1" id="06j-VW-KvN">
-                                        <rect key="frame" x="0.0" y="240" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="313.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="06j-VW-KvN" id="5l4-z8-NUK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
