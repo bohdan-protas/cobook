@@ -17,7 +17,7 @@ protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, Contactabl
     func set(barItems: [BarItem])
     func createFolder()
 
-    //func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
+    func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
 }
@@ -73,8 +73,8 @@ class SavedContentPresenter: BasePresenter {
             self.barItems = [
                 BarItem(index: SavedContent.BarItemAccessoryIndex.allCards.rawValue, title: "BarItem.allCards".localized),
                 BarItem(index: SavedContent.BarItemAccessoryIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
-                //BarItem(index: SavedContent.BarItemAccessoryIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
-                //BarItem(index: SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized)
+                BarItem(index: SavedContent.BarItemAccessoryIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
+                BarItem(index: SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized)
             ]
 
             self.barItems.append(contentsOf: barItems)
@@ -308,9 +308,8 @@ private extension SavedContentPresenter {
                 view?.goToPersonalCardDetails(presenter: presenter)
 
             case .business:
-                break
-//                let presenter = BusinessCardDetailsPresenter(id: model.id)
-//                view?.goToBusinessCardDetails(presenter: presenter)
+                let presenter = BusinessCardDetailsPresenter(id: model.id)
+                view?.goToBusinessCardDetails(presenter: presenter)
             }
         default: break
         }

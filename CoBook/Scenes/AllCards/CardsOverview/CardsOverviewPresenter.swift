@@ -18,7 +18,7 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reloadSearch(resultText: String)
 
-    //func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
+    func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
     func goToArticleDetails(presenter: ArticleDetailsPresenter?)
 
@@ -62,8 +62,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         self.barItems = [
             BarItem(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "BarItem.allCards".localized),
             BarItem(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
-            //BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
-            //BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first
         super.init()
@@ -495,9 +495,8 @@ private extension CardsOverviewViewPresenter {
                 view?.goToPersonalCardDetails(presenter: presenter)
 
             case .business:
-                break
-//                let presenter = BusinessCardDetailsPresenter(id: model.id)
-//                view?.goToBusinessCardDetails(presenter: presenter)
+                let presenter = BusinessCardDetailsPresenter(id: model.id)
+                view?.goToBusinessCardDetails(presenter: presenter)
             }
         default:
             break
