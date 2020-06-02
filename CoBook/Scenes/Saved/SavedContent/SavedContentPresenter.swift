@@ -89,7 +89,7 @@ class SavedContentPresenter: BasePresenter {
             switch result {
             case .success(let response):
                 let items = response?.rows?
-                    .compactMap { PostPreview.Item.Model(albumID: nil,
+                    .compactMap { PostPreview.Item.Model(albumID: $0.albumID,
                                                           articleID: $0.id,
                                                           title: $0.title,
                                                           avatarPath: $0.avatar?.sourceUrl,

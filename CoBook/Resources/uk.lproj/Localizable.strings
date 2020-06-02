@@ -252,7 +252,7 @@
 "SavedContent.listDeleted.message" = "Список %@ видалено";
 "SavedContent.cardSaved.message" = "Візитку збережено";
 "SavedContent.cardUnsaved.message" = "Видалено із збережених";
-"SavedContent.section.articles.title" = "Збережені пости";
+"SavedContent.section.articles.title" = "Збережені статті";
 "SavedContent.section.cards.title" = "Збережені візитки";
 "SavedContent.addList.normalTitle" = "Додати список";
 
