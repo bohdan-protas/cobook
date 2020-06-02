@@ -9,7 +9,7 @@
 import Foundation
 
 struct ServiceModel {
-    var id: Int?
+    var id: Int
     var name: String?
     var price: String?
     var descriptionTitle: String?

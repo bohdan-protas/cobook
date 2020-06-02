@@ -14,7 +14,6 @@ struct ServiceDetailsDataSourceConfigurator: CellConfiguratorType {
     var sectionSeparatorConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
     var companyHeaderConfigurator: CellConfigurator<CompanyPreviewHeaderModel, CompanyPreviewHeaderTableViewCell>?
     var getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>?
-
     var descriptionConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
     var titleHeaderConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
 

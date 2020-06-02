@@ -29,21 +29,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QOr-Re-yBQ">
-                    <rect key="frame" x="54" y="115.5" width="306" height="74.5"/>
+                    <rect key="frame" x="44" y="123" width="326" height="59.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для перегляду карти, надайте додатку доступ до вашої локації" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOW-eN-bXu">
-                            <rect key="frame" x="0.0" y="0.0" width="306" height="30.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error.Map.accessDenied.title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOW-eN-bXu">
+                            <rect key="frame" x="0.0" y="0.0" width="326" height="15.5"/>
                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="13"/>
                             <color key="textColor" name="Theme_Black-Middle"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1s3-Kq-MWS">
-                            <rect key="frame" x="0.0" y="30.5" width="306" height="44"/>
+                            <rect key="frame" x="0.0" y="15.5" width="326" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="PTS-xO-CKh"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
-                            <state key="normal" title="Відкрити налаштування">
+                            <state key="normal" title="Error.Map.accessDeniedButton.normalTitle">
                                 <color key="titleColor" name="Theme_Green-Dark"/>
                             </state>
                             <connections>

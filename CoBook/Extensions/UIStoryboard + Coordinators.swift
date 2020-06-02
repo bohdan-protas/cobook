@@ -30,5 +30,9 @@ extension UIStoryboard {
         return UIStoryboard(name: "Post", bundle: nil)
     }
 
+    static var saved: UIStoryboard {
+        return UIStoryboard(name: "Saved", bundle: nil)
+    }
+
 
 }

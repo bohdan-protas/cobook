@@ -15,13 +15,19 @@ class ArticleDetailsViewController: BaseViewController {
 
     private lazy var placeholderView: UIView = {
         let placeholderView = DeniedAccessToLocationPlaceholderView(frame: tableView.bounds)
-        placeholderView.titleLabel.text = "В даному альбомі статті відсутні..."
-        placeholderView.actionButton.setTitle("Повернутися назад", for: .normal)
+        placeholderView.titleLabel.text = "Article.placeholder.emptyAlbumItems".localized
+        placeholderView.actionButton.setTitle("Article.placeholder.back".localized, for: .normal)
         placeholderView.onOpenSettingsHandler = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
         return placeholderView
     }()
+
+    // MARK: - Actions
+
+    @objc func shareTapped() {
+        presenter?.share()
+    }
 
     // MARK: - View Life Cycle
 
@@ -47,6 +53,8 @@ extension ArticleDetailsViewController {
 
     func setupLayout() {
         tableView.delegate = self
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
     }
 
 }

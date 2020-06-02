@@ -14,7 +14,7 @@ enum BusinessCardDetails {
         case title(text: String)
         case sectionHeader
         case companyDescription(model: TitleDescrModel?)
-        case userInfo(model: BusinessCardDetails.HeaderInfoModel?)
+        case userInfo(model: BusinessCardDetails.HeaderInfoModel)
         case getInTouch
         case socialList
         case addressInfo(model: AddressInfoCellModel)
@@ -25,7 +25,8 @@ enum BusinessCardDetails {
         case service(model: Service.PreviewListItem)
         case addProduct
         case productSection(model: ProductPreviewSectionModel)
-        case postPreview(model: AlbumPreview.Section?)
+        case postPreview(model: PostPreview.Section?)
+        case actionTitle(model: ActionTitleModel)
     }
 
     struct HeaderInfoModel {
@@ -35,6 +36,7 @@ enum BusinessCardDetails {
         var profession: String?
         var telephoneNumber: String?
         var websiteAddress: String?
+        var isSaved: Bool
     }
 
     enum SectionAccessoryIndex: Int {

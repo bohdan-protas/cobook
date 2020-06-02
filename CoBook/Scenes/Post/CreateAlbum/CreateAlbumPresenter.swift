@@ -57,7 +57,7 @@ class CreateAlbumPresenter: BasePresenter {
     // MARK: - Public
 
     func setup() {
-        view?.set(title: isEditing ? "Редагувати альбом" : "Створити альбом")
+        view?.set(title: isEditing ? "Album.editTitle".localized : "Album.createTitle".localized)
         view?.set(albumTitle: parameters.title)
         view?.set(avatarPath: parameters.avatarPath)
         validateInput()
@@ -73,7 +73,7 @@ class CreateAlbumPresenter: BasePresenter {
 
     func uploadAlbumAvatar(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 

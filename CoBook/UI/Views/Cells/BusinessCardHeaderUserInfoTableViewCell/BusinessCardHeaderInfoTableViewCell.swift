@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BusinessCardHeaderInfoTableViewCellDelegate: class {
+    func onSaveCard(cell: BusinessCardHeaderInfoTableViewCell)
+}
+
 class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
 
     @IBOutlet var bgImageView: UIImageView!
@@ -16,6 +20,11 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
     @IBOutlet var professionLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!
     @IBOutlet var websiteLabel: UILabel!
+    @IBOutlet var saveCardButton: DesignableButton!
+
+    weak var delegate: BusinessCardHeaderInfoTableViewCellDelegate?
+
+    // MARK: - Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,5 +52,10 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
         bgImageView.image = nil
         avatarImageView.image = nil
     }
-    
+
+    // MARK: - Actions
+    @IBAction func saveCardButtonTapped(_ sender: UIButton) {
+        delegate?.onSaveCard(cell: self)
+    }
+
 }

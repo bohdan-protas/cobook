@@ -84,8 +84,8 @@ class CreateArticlePresenter: BasePresenter {
 
     func setup() {
         isEditing ?
-            view?.set(title: "Редагувати статтю") :
-            view?.set(title: "Створити статтю")
+            view?.set(title: "Article.edit.title".localized) :
+            view?.set(title: "Article.create.title".localized)
         
         view?.set(articleTitle: parameters.title)
         view?.set(acticleBody: parameters.body)
@@ -105,14 +105,14 @@ class CreateArticlePresenter: BasePresenter {
     }
 
     func selectAlbumTapped() {
-        let presenter = SelectAlbumPresenter(cardID: self.cardID, selectedAlbumID: self.parameters.album?.id)
+        let presenter = SelectAlbumPresenter(cardID: self.cardID, selectedAlbumID: self.parameters.album?.albumID)
         presenter.delegate = self
         view?.goToSelectAlbum(presenter: presenter)
     }
 
     func uploadImage(image: UIImage?, completion: ((FileDataApiModel?) -> Void)?) {
         guard let imageData = image?.jpegData(compressionQuality: 0.1) else {
-            view?.errorAlert(message: "Помилка завантаження фото")
+            view?.errorAlert(message: "Error.photoLoading.message".localized)
             return
         }
 
@@ -159,7 +159,7 @@ private extension CreateArticlePresenter {
 
     func createArticle() {
         let parameters = CreateArticleApiModel(cardID: self.parameters.cardID,
-                                               albumID: self.parameters.album?.id,
+                                               albumID: self.parameters.album?.albumID,
                                                title: self.parameters.title,
                                                body: self.parameters.body,
                                                photos: self.parameters.photos.compactMap { $0.id })
@@ -184,7 +184,7 @@ private extension CreateArticlePresenter {
     func updateArticle() {
         let parameters = UpdateArticleApiModel(articleID: self.parameters.articleID,
                                                cardID: self.parameters.cardID,
-                                               albumID: self.parameters.album?.id,
+                                               albumID: self.parameters.album?.albumID,
                                                title: self.parameters.title,
                                                body: self.parameters.body,
                                                photos: self.parameters.photos.compactMap { $0.id })
@@ -213,7 +213,7 @@ private extension CreateArticlePresenter {
 
 extension CreateArticlePresenter: SelectAlbumDelegate {
 
-    func selectedAlbum(_ model: AlbumPreview.Item.Model?) {
+    func selectedAlbum(_ model: PostPreview.Item.Model?) {
         parameters.album = model
         view?.set(albumTitle: parameters.album?.title, albumImage: parameters.album?.avatarPath)
     }

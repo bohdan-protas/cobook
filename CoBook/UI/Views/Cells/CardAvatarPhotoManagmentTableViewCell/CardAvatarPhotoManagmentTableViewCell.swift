@@ -15,11 +15,11 @@ protocol CardAvatarPhotoManagmentTableViewCellDelegate: class {
 class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
 
     enum SourceType {
-        case personalCard, businessCard
+        case personalCard, businessCard, account
 
         var selectedStateTitle: String {
             switch self {
-            case .personalCard:
+            case .personalCard, .account:
                 return "Змінити фото"
             case .businessCard:
                 return "Змінити логотип компанії"
@@ -28,7 +28,7 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
 
         var emptyStateTitle: String {
             switch self {
-            case .personalCard:
+            case .personalCard, .account:
                 return "Додати фото"
             case .businessCard:
                 return "Добавити логотип компанії"
@@ -37,12 +37,10 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
 
         var titleColor: UIColor {
             switch self {
-
-            case .personalCard:
+            case .personalCard, .account:
                 return UIColor.Theme.blackMiddle
             case .businessCard:
                 return UIColor.Theme.greenDark
-
             }
         }
     }

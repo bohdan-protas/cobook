@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CardItemTableViewCellDelegate: class {
+    func onSaveCard(cell: CardItemTableViewCell)
+    func onSaveCardWithOptions(cell: CardItemTableViewCell)
+}
+
 class CardItemTableViewCell: UITableViewCell {
 
     @IBOutlet var avatarImageView: DesignableImageView!
@@ -17,6 +22,11 @@ class CardItemTableViewCell: UITableViewCell {
     @IBOutlet var cardTypeContainerView: UIView!
     @IBOutlet var cardTypeImageView: UIImageView!
     @IBOutlet var cardTypeLabel: UILabel!
+    @IBOutlet var saveButton: DesignableButton!
+
+    weak var delegate: CardItemTableViewCellDelegate?
+
+    // MARK: Stete type flag
 
     var type: CardType? {
         didSet {
@@ -42,11 +52,17 @@ class CardItemTableViewCell: UITableViewCell {
         }
     }
 
+    // MARK: - Life Cycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
         nameLabel.text = ""
         professionLabel.text = ""
         telNumberLabel.text = ""
+
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGestureRecognizer.minimumPressDuration = 0.5
+        saveButton.addGestureRecognizer(longPressGestureRecognizer)
     }
 
     override func prepareForReuse() {
@@ -58,5 +74,21 @@ class CardItemTableViewCell: UITableViewCell {
         telNumberLabel.text = ""
     }
 
-    
+    // MARK: - Actions
+
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer!) {
+        if gesture.state != .began {
+            return
+        }
+
+        if !saveButton.isSelected {
+            delegate?.onSaveCardWithOptions(cell: self)
+        }
+
+    }
+
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        delegate?.onSaveCard(cell: self)
+    }
+
 }

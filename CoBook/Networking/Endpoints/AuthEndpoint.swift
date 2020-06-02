@@ -10,32 +10,35 @@ import Alamofire
 
 enum AuthEndpoint: Endpoint {
 
-    /**
-     Request new credentials via login router
-
-     - parameters:
-        - telephone: The users telephone
-     */
     case forgotPassword(telephone: String)
-
-    /**
-     Request access token via refresh token router
-
-     - parameters:
-        - refreshToken: current users refresh token
-     */
     case refresh(refreshToken: String)
+    case changeCredengials(parameters: APIRequestParameters.Auth.Credentials)
+    case logout
 
     // MARK: - Auth token usage
     
     var useAuthirizationToken: Bool {
-        return false
+        switch self {
+        case .forgotPassword, .refresh:
+            return false
+        case .changeCredengials, .logout:
+            return true
+        }
     }
 
     // MARK: - HTTPMethod
 
     var method: HTTPMethod {
-        return .post
+        switch self {
+        case .forgotPassword:
+            return .post
+        case .refresh:
+            return .post
+        case .changeCredengials:
+            return .put
+        case .logout:
+            return .post
+        }
     }
 
     // MARK: - Path
@@ -46,6 +49,10 @@ enum AuthEndpoint: Endpoint {
             return "/forgot_password"
         case .refresh:
             return "/refresh"
+        case .changeCredengials:
+            return "/credentials"
+        case .logout:
+            return "/logout"
         }
     }
 
@@ -63,6 +70,12 @@ enum AuthEndpoint: Endpoint {
             return [
                 APIConstants.ParameterKey.refreshToken: token,
             ]
+
+        case .changeCredengials(let parameters):
+            return parameters.dictionary
+
+        default: return nil
+
         }
 
     }

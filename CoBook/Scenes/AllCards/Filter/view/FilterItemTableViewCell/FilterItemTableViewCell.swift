@@ -12,10 +12,5 @@ class FilterItemTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var checkmarkImageView: UIImageView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
 }

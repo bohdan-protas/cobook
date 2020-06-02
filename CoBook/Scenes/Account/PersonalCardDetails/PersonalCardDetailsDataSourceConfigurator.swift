@@ -16,6 +16,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
     let getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>
     let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
     let titleDescriptionCellConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>
+    let postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
+    let actionTitleConfigurator: CellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
 
     func reuseIdentifier(for item: PersonalCardDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -31,6 +33,10 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return socialListConfigurator.reuseIdentifier
         case .personDescription:
             return titleDescriptionCellConfigurator.reuseIdentifier
+        case .postPreview:
+            return postPreviewConfigurator.reuseIdentifier
+        case .actionTitle:
+            return actionTitleConfigurator.reuseIdentifier
         }
     }
 
@@ -48,6 +54,10 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return socialListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         case .personDescription(let model):
             return titleDescriptionCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .postPreview(let model):
+            return postPreviewConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+        case .actionTitle(let model):
+            return actionTitleConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -58,6 +68,8 @@ struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
         getInTouchCellConfigurator.registerCells(in: tableView)
         socialListConfigurator.registerCells(in: tableView)
         titleDescriptionCellConfigurator.registerCells(in: tableView)
+        postPreviewConfigurator.registerCells(in: tableView)
+        actionTitleConfigurator.registerCells(in: tableView)
     }
 }
 
@@ -76,16 +88,17 @@ extension PersonalCardDetailsPresenter {
             }
 
             let userInfoCellConfigurator = CellConfigurator { (cell, model: CardDetailsApiModel?, tableView, indexPath) -> PersonalCardUserInfoTableViewCell in
+                cell.delegate = self
+
                 let abbr = "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")"
                 let textImg = abbr.image(size: cell.avatarImageView.frame.size)
-
                 cell.avatarImageView.setImage(withPath: model?.avatar?.sourceUrl, placeholderImage: textImg)
                 cell.userNameLabel.text = "\(model?.cardCreator?.firstName ?? "") \(model?.cardCreator?.lastName ?? "")"
                 cell.practiceTypeLabel.text = model?.practiceType?.title
                 cell.positionLabel.text = model?.position
                 cell.telephoneNumberLabel.text = model?.city?.name
                 cell.detailInfoTextView.text = model?.description
-
+                cell.saveButton.isSelected = model?.isSaved ?? false
                 return cell
             }
 
@@ -108,12 +121,34 @@ extension PersonalCardDetailsPresenter {
                 return cell
             }
 
+            // postPreviewConfigurator
+            let postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.topConstaint.constant = 0
+                cell.separatorView.isHidden = true
+                cell.dataSourceID = model?.dataSourceID
+                cell.delegate = self
+                cell.dataSource = self
+                cell.collectionView.reloadData()
+                return cell
+            }
+
+            // actionTitleConfigurator
+            let actionTitleConfigurator = CellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
+                cell.titleLabel.text = model.title
+                cell.countLabel.text = "\( model.counter ?? 0)"
+                cell.actionButton.setTitle(model.actionTitle, for: .normal)
+                cell.actionHandler = model.actionHandler
+                return cell
+            }
+
             return PersonalCardDetailsDataSourceConfigurator(sectionTitleConfigurator: sectionTitleConfigurator,
                                                              sectionHeaderConfigurator: sectionHeaderConfigurator,
                                                              userInfoCellConfigurator: userInfoCellConfigurator,
                                                              getInTouchCellConfigurator: getInTouchCellConfigurator,
                                                              socialListConfigurator: socialListConfigurator,
-                                                             titleDescriptionCellConfigurator: titleDescriptionCellConfigurator)
+                                                             titleDescriptionCellConfigurator: titleDescriptionCellConfigurator,
+                                                             postPreviewConfigurator: postPreviewConfigurator,
+                                                             actionTitleConfigurator: actionTitleConfigurator)
 
         }
     }

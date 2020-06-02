@@ -13,13 +13,15 @@ protocol AlbumPreviewItemsViewDelegate: class {
 }
 
 protocol AlbumPreviewItemsViewDataSource: class {
-    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [AlbumPreview.Item]
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview.Item]
 }
 
 class AlbumPreviewItemsTableViewCell: UITableViewCell {
 
-    @IBOutlet var headerLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var separatorView: UIView!
+    @IBOutlet var topConstaint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
 
     weak var delegate: AlbumPreviewItemsViewDelegate?
     weak var dataSource: AlbumPreviewItemsViewDataSource?

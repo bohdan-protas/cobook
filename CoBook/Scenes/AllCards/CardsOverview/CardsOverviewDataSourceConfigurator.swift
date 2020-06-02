@@ -10,8 +10,9 @@ import UIKit
 
 class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
 
-    var cardItemCellConfigurator: CellConfigurator<CardItemViewModel?, CardItemTableViewCell>?
+    var cardItemCellConfigurator: CellConfigurator<CardItemViewModel, CardItemTableViewCell>?
     var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
+    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -21,21 +22,29 @@ class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
             return cardItemCellConfigurator?.reuseIdentifier ?? ""
         case .map:
             return mapCellConfigurator?.reuseIdentifier ?? ""
+        case .postPreview:
+            return postPreviewConfigurator?.reuseIdentifier ?? ""
         }
     }
 
     func configuredCell(for item: CardsOverview.Items, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         switch item {
+
         case .cardItem(let model):
             return cardItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
         case .map:
             return mapCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+
+        case .postPreview(let model):
+             return postPreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
     func registerCells(in tableView: UITableView) {
         cardItemCellConfigurator?.registerCells(in: tableView)
         mapCellConfigurator?.registerCells(in: tableView)
+        postPreviewConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -47,30 +56,24 @@ extension CardsOverviewViewPresenter {
 
     var dataSourceConfigurator: CardsOverviewViewDataSourceConfigurator {
         get {
-
             let dataSourceConfigurator = CardsOverviewViewDataSourceConfigurator()
 
             // cardItemCellConfigurator
-            dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel?, tableView, indexPath) -> CardItemTableViewCell in
-
-                let textPlaceholderImage = model?.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
-                cell.avatarImageView.setImage(withPath: model?.avatarPath, placeholderImage: textPlaceholderImage)
-                cell.type = model?.type
-
-                switch model?.type {
-                case .none:
-                    cell.nameLabel.text = ""
-                case .some(let value):
-                    switch value {
-                    case .personal:
-                        cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
-                    case .business:
-                        cell.nameLabel.text = model?.companyName
-                    }
+            dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> CardItemTableViewCell in
+                cell.delegate = self.view
+                cell.avatarImageView.setImage(withPath: model.avatarPath,
+                                              placeholderImage: model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size))
+                cell.type = model.type
+                switch model.type {
+                case .personal:
+                    cell.nameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+                case .business:
+                    cell.nameLabel.text = model.companyName
                 }
 
-                cell.professionLabel.text = model?.profession
-                cell.telNumberLabel.text = model?.telephoneNumber
+                cell.professionLabel.text = model.profession
+                cell.telNumberLabel.text = model.telephoneNumber
+                cell.saveButton.isSelected = model.isSaved
                 return cell
             }
 
@@ -79,7 +82,15 @@ extension CardsOverviewViewPresenter {
                 cell.heightConstraint.constant = tableView.frame.height - 58
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
+                cell.delegate = self.view
+                return cell
+            }
+
+            dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
+                cell.dataSource = self
+                cell.collectionView.reloadData()
                 return cell
             }
 

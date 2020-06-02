@@ -24,7 +24,7 @@ class SelectAlbumViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
-        self.navigationItem.title = "Вибрати альбом"
+        self.navigationItem.title = "Album.selectTitle".localized
     }
 
     override func viewWillAppear(_ animated: Bool) {

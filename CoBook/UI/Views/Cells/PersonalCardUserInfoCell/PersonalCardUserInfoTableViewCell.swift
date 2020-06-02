@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PersonalCardUserInfoTableViewCellDelegate: class {
+    func onSaveCard(cell: PersonalCardUserInfoTableViewCell)
+}
+
 class PersonalCardUserInfoTableViewCell: UITableViewCell {
 
     @IBOutlet var avatarImageView: UIImageView!
@@ -16,10 +20,26 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
     @IBOutlet var positionLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!
     @IBOutlet var detailInfoTextView: DesignableTextView!
+    @IBOutlet var saveButton: DesignableButton!
+    @IBOutlet var userInfoContainer: UIView!
+
+    weak var delegate: PersonalCardUserInfoTableViewCellDelegate?
+
+    // MARK: - Actions
+
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        delegate?.onSaveCard(cell: self)
+    }
+
+    // MARK: - Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
         clearLayout()
+
+        userInfoContainer.clipsToBounds = true
+        userInfoContainer.layer.cornerRadius = 10
+        userInfoContainer.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
 
     override func prepareForReuse() {
@@ -27,7 +47,14 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
         clearLayout()
     }
 
-    private func clearLayout() {
+
+}
+
+// MARK: - PersonalCardUserInfoTableViewCell
+
+private extension PersonalCardUserInfoTableViewCell {
+
+    func clearLayout() {
         avatarImageView.cancelImageRequest()
         userNameLabel.text = ""
         practiceTypeLabel.text = ""
@@ -35,5 +62,5 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
         telephoneNumberLabel.text = ""
     }
 
-    
+
 }

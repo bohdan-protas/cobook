@@ -20,8 +20,8 @@ final class AuthRequestInterceptor: RequestInterceptor {
         case 401:
             DispatchQueue.main.async {
                 AppStorage.Auth.deleteAllData()
-                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                 if let topController = UIApplication.topViewController() {
+                    let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
                     topController.present(signInNavigationController, animated: true, completion: nil)
                 }
                 completion(.doNotRetry)

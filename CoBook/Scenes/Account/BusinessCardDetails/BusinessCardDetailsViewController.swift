@@ -18,7 +18,6 @@ private enum Defaults {
 class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetailsView {
 
     @IBOutlet var tableView: UITableView!
-
     var presenter: BusinessCardDetailsPresenter?
 
     var cachedCellHeights = [IndexPath: CGFloat]()
@@ -53,8 +52,6 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         super.viewDidLoad()
 
         presenter?.attachView(self)
-        presenter?.onViewDidLoad()
-
         setupLayout()
     }
 
@@ -67,10 +64,18 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         presenter?.detachView()
     }
 
+    // MARK: - Actions
+
+    @objc func shareTapped() {
+        presenter?.share()
+    }
+
     // MARK: - BusinessCardDetailsView
 
     func setupLayout() {
-        self.navigationItem.title = "Бізнес візитка"
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationItem.title = "BusinessCard.title".localized
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
         self.tableView.delegate = self
     }
 
@@ -115,14 +120,14 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
             self.stopLoading()
 
             guard let routeURL = APIConstants.Google.googleMapsRouteURL(daddr: destination, directionMode: .driving) else {
-                self.errorAlert(message: "Не визначені адреси маршрутів")
+                self.errorAlert(message: "Error.Map.notDefinedRoute".localized)
                 return
             }
 
             if UIApplication.shared.canOpenURL(routeURL) {
                 UIApplication.shared.open(routeURL)
             } else {
-                self.errorAlert(message: "Не вдається відкрити карти")
+                self.errorAlert(message: "Error.Map.cantOpen.message".localized)
                 Log.error("Can't use comgooglemaps://")
             }
 

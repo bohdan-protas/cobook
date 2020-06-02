@@ -17,10 +17,15 @@ enum APIConstants {
         get {
             var components = URLComponents()
             components.scheme   = "https"
-            components.host     = "3.124.214.212"
+            components.host     = Host.dev.rawValue
             components.path     = Path.api.rawValue
             return components
         }
+    }
+
+    enum Host: String {
+        case prod = "api.cobook.app"
+        case dev = "dev.api.cobook.app"
     }
 
     enum Path: String {
@@ -87,10 +92,43 @@ enum APIConstants {
 
     // MARK: - Helpers
 
+    static let cobookLogoURL: URL = "https://static.tildacdn.com/tild3930-3864-4365-b137-343937626266/logofuter.png"
+
     static let additionalAcceptableImageContentTypes: Set<String> = [
         "image/*"
     ]
 
+
+}
+
+// MARK: - Dynamic link
+
+enum DynamicLinkConstants {
+
+    static var baseURLPath: URLComponents {
+        get {
+            var components = URLComponents()
+            components.scheme   = "https"
+            components.host     = "cobook.app"
+            return components
+        }
+    }
+
+    static let domainURIPrefix: URL = "https://dev.share.cobook.app/link"
+
+    enum Path: String {
+        case personalCard = "/personal_card"
+        case businessCard = "/business_card"
+        case article = "/article"
+        case download = "/download"
+    }
+
+    enum QueryName: String {
+        case id
+        case articleID = "article_id"
+        case albumID = "album_id"
+        case shareableUserID = "shareable_user_id"
+    }
 
 }
 

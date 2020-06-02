@@ -11,8 +11,9 @@ import Foundation
 enum CardsOverview {
 
     enum Items {
-        case cardItem(model: CardItemViewModel?)
+        case cardItem(model: CardItemViewModel)
         case map
+        case postPreview(model: PostPreview.Section?)
     }
 
     enum BarSectionsTypeIndex: Int {
@@ -20,13 +21,15 @@ enum CardsOverview {
     }
 
     enum SectionAccessoryIndex: Int {
-        case header
+        case posts
         case cards
     }
 
     enum SearchSectionAccessoryIndex: Int {
         case header, barSections
     }
+
+    static let postsDataSourceID: String = "postsDataSourceID"
 
 
 }

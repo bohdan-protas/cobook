@@ -13,12 +13,24 @@ class CreateArticleViewController: BaseViewController, UITextViewDelegate {
 
     @IBOutlet var photosCollectionView: UICollectionView!
     @IBOutlet var photosFlowLayout: UICollectionViewFlowLayout!
+
+    @Localized("Article.addPhotoButton.normalTitle")
+    @IBOutlet var addPhotoButton: UIButton!
+
+    @Localized("Article.header.placeholder")
     @IBOutlet var headerTextField: UITextField!
+
+    @Localized("Article.description.placeholder")
     @IBOutlet var descriptionTextView: DesignableTextView!
+
+    @Localized("Article.publicButton.normalTitle")
     @IBOutlet var publicButton: LoaderDesignableButton!
+
+    @Localized("Article.selectAlbum.text")
+    @IBOutlet var albumTitleLabel: UILabel!
+
     @IBOutlet var imageContainerView: UIView!
     @IBOutlet var albumImageView: DesignableImageView!
-    @IBOutlet var albumTitleLabel: UILabel!
 
     /// picker that manage fetching images from gallery
     private lazy var imagePicker: ImagePicker = {
@@ -121,7 +133,7 @@ extension CreateArticleViewController: CreateArticleView {
     }
 
     func set(articleTitle: String?) {
-        self.headerTextField.text = title
+        self.headerTextField.text = articleTitle
     }
 
     func set(acticleBody: String?) {

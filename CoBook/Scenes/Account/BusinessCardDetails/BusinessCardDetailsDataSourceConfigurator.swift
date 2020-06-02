@@ -11,7 +11,7 @@ import UIKit
 
 struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
 
-    var headerInfoCellConfigurator: CellConfigurator<BusinessCardDetails.HeaderInfoModel?, BusinessCardHeaderInfoTableViewCell>?
+    var headerInfoCellConfigurator: CellConfigurator<BusinessCardDetails.HeaderInfoModel, BusinessCardHeaderInfoTableViewCell>?
     var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
     var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
     var getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>?
@@ -25,7 +25,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
     var serviceItemCellConfigurator: CellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>?
     var addProductConfigurator: CellConfigurator<Void?, ServiceListItemTableViewCell>?
     var productSectionConfigurator: CellConfigurator<ProductPreviewSectionModel, ProductPreviewItemsHorizontalListTableViewCell>?
-    var postPreviewConfigurator: CellConfigurator<AlbumPreview.Section?, AlbumPreviewItemsTableViewCell>?
+    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
+    var actionTitleConfigurator: CellConfigurator<ActionTitleModel, ActionTitleTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -61,6 +62,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
             return productSectionConfigurator?.reuseIdentifier ?? ""
         case .postPreview:
             return postPreviewConfigurator?.reuseIdentifier ?? ""
+        case .actionTitle:
+            return actionTitleConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -111,6 +114,8 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         case .postPreview(let model):
             return postPreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
 
+        case .actionTitle(let model):
+            return actionTitleConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -130,6 +135,7 @@ struct BusinessCardDetailsDataSourceConfigurator: CellConfiguratorType {
         addProductConfigurator?.registerCells(in: tableView)
         productSectionConfigurator?.registerCells(in: tableView)
         postPreviewConfigurator?.registerCells(in: tableView)
+        actionTitleConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -159,13 +165,16 @@ extension BusinessCardDetailsPresenter {
             }
 
             // headerInfoCellConfigurator
-            configurator.headerInfoCellConfigurator = CellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel?, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
-                cell.bgImageView.setImage(withPath: model?.bgimagePath)
-                cell.avatarImageView.setImage(withPath: model?.avatartImagePath)
-                cell.nameLabel.text = model?.name
-                cell.professionLabel.text = model?.profession
-                cell.telephoneNumberLabel.text = model?.telephoneNumber
-                cell.websiteLabel.text = model?.websiteAddress
+            configurator.headerInfoCellConfigurator = CellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
+                cell.delegate = self
+                cell.bgImageView.setImage(withPath: model.bgimagePath)
+                cell.avatarImageView.setImage(withPath: model.avatartImagePath)
+                cell.nameLabel.text = model.name
+                cell.professionLabel.text = model.profession
+                cell.telephoneNumberLabel.text = model.telephoneNumber
+                cell.websiteLabel.text = model.websiteAddress
+                cell.saveCardButton.isSelected = model.isSaved
+
 
                 return cell
             }
@@ -251,7 +260,7 @@ extension BusinessCardDetailsPresenter {
                     cell.titleImageView.setImage(withPath: model.avatarPath)
                     cell.subtitleLabel.isHidden = false
                 case .add:
-                    cell.titleLabel.text = "Додати послугу"
+                    cell.titleLabel.text = "Service.add.text".localized
                     cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
                     cell.subtitleLabel.isHidden = true
                 }
@@ -261,7 +270,7 @@ extension BusinessCardDetailsPresenter {
 
             // addGoodsConfigurator
             configurator.addProductConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> ServiceListItemTableViewCell in
-                cell.titleLabel.text = "Додати товар"
+                cell.titleLabel.text = "Product.add.text".localized
                 cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
                 cell.subtitleLabel.isHidden = true
                 return cell
@@ -277,12 +286,21 @@ extension BusinessCardDetailsPresenter {
             }
 
             //
-            configurator.postPreviewConfigurator = CellConfigurator { (cell, model: AlbumPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+            configurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+                cell.topConstaint.constant = 0
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
                 cell.dataSource = self
-                cell.headerLabel?.text = model?.title
                 cell.collectionView.reloadData()
+                return cell
+            }
+
+            // actionTitleConfigurator
+            configurator.actionTitleConfigurator = CellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
+                cell.titleLabel.text = model.title
+                cell.countLabel.text = "\( model.counter ?? 0)"
+                cell.actionButton.setTitle(model.actionTitle, for: .normal)
+                cell.actionHandler = model.actionHandler
                 return cell
             }
 

@@ -38,6 +38,7 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
         presenter?.attachView(self)
     }
 
@@ -50,10 +51,17 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         presenter?.detachView()
     }
 
+    // MARK: - Actions
+    
+    @objc func shareTapped() {
+        presenter?.share()
+    }
+
     // MARK: - PersonalCardDetailsView
 
     func setupLayout() {
-        navigationItem.title = "Персональна візитка"
+        navigationItem.title = "PersonalCard.title".localized
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
         tableView.delegate = self
     }
 
@@ -71,6 +79,18 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
 
     func reload() {
         tableView.reloadData()
+    }
+
+    func goToArticleDetails(presenter: ArticleDetailsPresenter) {
+        let controller: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func goToCreatePost(cardID: Int) {
+        let controller: CreateArticleViewController = UIStoryboard.post.initiateViewControllerFromType()
+        controller.presenter = CreateArticlePresenter(cardID: cardID)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
 

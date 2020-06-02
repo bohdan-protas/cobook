@@ -9,7 +9,11 @@
 import Foundation
 import Alamofire
 import AlamofireImage
-import PromisedFuture
+
+public enum Result<T> {
+    case success(T)
+    case failure(Error)
+}
 
 class APIClient {
 
@@ -70,7 +74,7 @@ class APIClient {
                         completion(.failure(userError))
                     }
                 } else {
-                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Something bad happens, try anain later.")
+                    let error = NSError.instantiate(code: response.response?.statusCode ?? -1, localizedMessage: "Error.connection".localized)
                     completion(.failure(error))
                 }
             }
@@ -145,9 +149,11 @@ extension APIClient {
                                      telephone: String,
                                      firstName: String,
                                      lastName: String,
+                                     invitedBy: String?,
                                      completion: @escaping (Result<SignInAPIResponseData?>) -> Void) {
 
-        let endpoint = SignUpEndpoint.initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName)
+        let params = APIRequestParameters.SignUp.Initialize(email: email, telephone: telephone, firstName: firstName, lastName: lastName, invitedBy: invitedBy)
+        let endpoint = SignUpEndpoint.initialize(parameters: params)
         performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -248,6 +254,33 @@ extension APIClient {
 
         let endpoint = AuthEndpoint.forgotPassword(telephone: telephone)
         performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for change credentials
+
+     - parameters:
+        - parameters: credengials params
+        - completion: parsed response from server
+     */
+    @discardableResult
+    func changeCredentials(parameters: APIRequestParameters.Auth.Credentials,
+                           completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = AuthEndpoint.changeCredengials(parameters: parameters)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for logout
+
+     - parameters:
+        - completion: void result response
+     */
+    @discardableResult
+    func logout(completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = AuthEndpoint.logout
+        return performRequest(endpoint: endpoint, completion: completion)
     }
 
 }
@@ -353,11 +386,33 @@ extension APIClient {
                       interestIds: [Int]? = nil,
                       practiseTypeIds: [Int]? = nil,
                       search: String? = nil,
-                      limit: Int? = nil,
-                      offset: Int? = nil,
+                      limit: UInt? = nil,
+                      offset: UInt? = nil,
                       completion: @escaping (Result<[CardItemApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardsList(type: type, interestsIds: interestIds, practiseTypeIds: practiseTypeIds, search: search, limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for card items list
+
+     - parameters:
+        - tagID: folrer identifier
+        - type: card id
+        - limit: pagination page list limit (default 15)
+        - offset: pagination offset (default 0)
+        - completion: parsed  'CardItemApiModel'  list response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getSavedCardsList(tagID: Int?,
+                           type: String? = nil,
+                           limit: Int? = nil,
+                           offset: Int? = nil,
+                           completion: @escaping (Result<SavedCardsApiModel?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.getSavedCardList(tagID: tagID, type: type, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -377,6 +432,110 @@ extension APIClient {
                                   completion: @escaping (Result<[CardMapMarkerApiModel]?>) -> Void) -> DataRequest {
 
         let endpoint = CardsEndpoint.getCardLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for saved cards map markers list
+
+     - parameters:
+     - type: card id
+     - limit: pagination page list limit (default 15)
+     - offset: pagination offset (default 0)
+     - completion: parsed  'CardItemApiModel'  list response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getSavedCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel,
+                                       bottomRightRectCoordinate: CoordinateApiModel,
+                                       completion: @escaping (Result<[CardMapMarkerApiModel]?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.getSavedCardsLocationsInRegion(topLeftRectCoordinate: topLeftRectCoordinate, bottomRightRectCoordinate: bottomRightRectCoordinate)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for save card in saved list
+
+     - parameters:
+        - id: card id
+        - folderID: custom user folder id
+        - completion: void response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func addCardToFavourites(id: Int,
+                             folderID: Int? = nil,
+                             completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.addCardToFavourite(cardID: id, tagID: folderID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for deleted card from saved list
+
+     - parameters:
+        - id: card id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func deleteCardFromFavourites(id: Int,
+                                  completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = CardsEndpoint.deleteCardFromFavourite(cardID: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for deleted card from saved list
+
+     - parameters:
+        - id: card id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getFolderList(limit: Int? = nil, offset: Int? = nil, completion: @escaping (Result<[FolderApiModel]?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.getFolders(limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for create folder
+
+     - parameters:
+        - id: title
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func createFolder(title: String, completion: @escaping (Result<FolderApiResponse?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.createFolder(title: title)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for delete folder
+
+     - parameters:
+        - id: folder id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func deleteFolder(id: Int, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.deleteFolder(id: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for updating custom folder
+
+     - parameters:
+        - id: folder id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func updateFolder(id: Int, title: String, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.updateFolder(id: id, title: title)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -417,12 +576,24 @@ extension APIClient {
      Request get profile data
 
      - parameters:
-        - imageData: image data(JPEG preffered)
-        - completion: parsed  'FileAPIResponseData' response from server
+        - completion: parsed  'ProfileApiModel' response from server
      */
     @discardableResult
     func profileDetails(completion: @escaping (Result<ProfileApiModel?>) -> Void) -> DataRequest {
-        let endpoint = ProfileEndpoint.profile
+        let endpoint = ProfileEndpoint.details
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request updating profile data
+
+     - parameters:
+        - parameters:
+        - completion:
+     */
+    @discardableResult
+    func updateProfile(parameters: APIRequestParameters.Profile.Update, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = ProfileEndpoint.update(parameters: parameters)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -591,9 +762,11 @@ extension APIClient {
     }
 
     @discardableResult
-    func getArticlesList(albumID: Int,
+    func getArticlesList(albumID: Int?,
+                         limit: UInt? = 50,
+                         offset: UInt? = 0,
                          completion: @escaping (Result<[ArticlePreviewAPIModel]?>) -> Void) -> DataRequest {
-        let endpoint = ArticlesEndpoint.getArticlesList(albumID: albumID)
+        let endpoint = ArticlesEndpoint.getArticlesList(albumID: albumID, limit: limit, offset: offset)
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -601,13 +774,64 @@ extension APIClient {
     func getArticleDetails(articleID: Int,
                            completion: @escaping (Result<ArticleDetailsAPIModel?>) -> Void) -> DataRequest {
 
-        let decoder = JSONDecoder()
         let customFormatter = DateFormatter()
         customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+
+        let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(customFormatter)
+
         let endpoint = ArticlesEndpoint.getArticleDetails(id: articleID)
         return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
+
+    /**
+     Request for save article in saved list
+
+     - parameters:
+        - id: article id
+        - completion: void response
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func addArticleToFavourites(id: Int,
+                                completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.addToFavourite(articleID: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for deleted article from saved list
+
+     - parameters:
+        - id: aritcle id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func deleteArticleFromFavourites(id: Int,
+                                     completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.deleteFromFavourite(articleID: id)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+    /**
+     Request for saved user articles list
+
+     - parameters:
+        - id: aritcle id
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getUserFavouritedArticles(limit: Int?,
+                                   offset: Int?,
+                                   completion: @escaping (Result<SavedPostsApiModel?>) -> Void) -> DataRequest {
+
+        let endpoint = ArticlesEndpoint.getUserSavedList(limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+
+
 
 
 }

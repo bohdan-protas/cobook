@@ -31,28 +31,31 @@ class FilterViewController: BaseViewController {
     }
 
     @IBOutlet var tableView: UITableView!
-    
-    var sections: [Section<FilterItemModel>] = []
+    @IBOutlet var saveBarButtonItem: UIBarButtonItem!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
+    var sections: [Section<FilterItemModel>] = []
     weak var delegate: FilterViewControllerDelegate?
 
     // MARK: - Actions
 
-    @IBAction func closeButtonTapped(_ sender: Any) {
-
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         // save selected filters to storage
-        AppStorage.User.Filters?.interests = sections[safe: SectionAccessoryIndex.interests.rawValue]?
-            .items.filter { $0.isSelected }
+        AppStorage.User.Filters?.interests = sections[safe: SectionAccessoryIndex.interests.rawValue]?.items
+            .filter { $0.isSelected }
             .compactMap { $0.id } ?? []
 
         AppStorage.User.Filters?.practicies = sections[safe: SectionAccessoryIndex.practicies.rawValue]?.items
             .filter { $0.isSelected }
             .compactMap { $0.id } ?? []
 
-        // dismiss controller
-        dismiss(animated: true, completion: {
+        self.dismiss(animated: true, completion: {
             self.delegate?.didFilterChanged(self)
         })
+    }
+
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - View Lifecycle
@@ -115,16 +118,17 @@ extension FilterViewController: UITableViewDataSource {
 private extension FilterViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Фільтри"
-
+        self.navigationItem.title = "Filter.title".localized
         tableView.register(FilterItemTableViewCell.nib, forCellReuseIdentifier: FilterItemTableViewCell.identifier)
-
         tableView.dataSource = self
         tableView.delegate = self
+        saveBarButtonItem.setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 14),
+                                                  .foregroundColor: UIColor.Theme.greenDark], for: .normal)
     }
 
     func setupDataSource() {
         let group = DispatchGroup()
+        activityIndicator.startAnimating()
 
         var practicies: [FilterItemModel] = []
         var interests: [FilterItemModel] = []
@@ -159,6 +163,7 @@ private extension FilterViewController {
         // setup data source
         group.notify(queue: .main) { [weak self] in
             guard let strongSelf = self else { return }
+            strongSelf.activityIndicator.stopAnimating()
 
             // show errors if necessary
             if !errors.isEmpty {
@@ -178,12 +183,9 @@ private extension FilterViewController {
 
             // setup sections
             strongSelf.sections = [
-                Section(accessoryIndex: SectionAccessoryIndex.interests.rawValue, title: "Інтереси", items: fetchedInterests),
-                Section(accessoryIndex: SectionAccessoryIndex.practicies.rawValue, title: "Вид діяльності", items: fetchedPracticies)
+                Section(accessoryIndex: SectionAccessoryIndex.interests.rawValue, title: "Filter.section.interests.title".localized, items: fetchedInterests),
+                Section(accessoryIndex: SectionAccessoryIndex.practicies.rawValue, title: "Filter.section.practicies.title".localized, items: fetchedPracticies)
             ]
-
-            strongSelf.tableView.tableFooterView = CorneredEdgeView(frame: CGRect(origin: .zero,
-                                                                                  size: CGSize(width: strongSelf.tableView.frame.width, height: Defaults.footerHeight)))
 
             self?.tableView.reloadData()
         }

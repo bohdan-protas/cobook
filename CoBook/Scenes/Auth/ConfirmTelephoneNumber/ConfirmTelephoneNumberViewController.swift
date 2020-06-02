@@ -15,9 +15,18 @@ fileprivate enum Defaults {
 class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephoneNumberView {
 
     @IBOutlet var smsCodeTextFields: [UITextField]!
-    @IBOutlet var bottomContainerConstraint: NSLayoutConstraint!
-    @IBOutlet var continueButton: LoaderDesignableButton!
     @IBOutlet var timerLabel: UILabel!
+
+    @Localized("ConfirmTelephone.header")
+    @IBOutlet var headerLabel: UILabel!
+
+    @Localized("ConfirmTelephone.description")
+    @IBOutlet var descroptionLabel: UILabel!
+
+    @Localized("Button.continue.normalTitle")
+    @IBOutlet var continueButton: LoaderDesignableButton!
+
+    @Localized("ConfirmTelephone.smsNotArrivedQuestion.normalTitle")
     @IBOutlet var resendSmsButton: LoaderDesignableButton!
 
     var presenter: ConfirmTelephoneNumberPresenter? = ConfirmTelephoneNumberPresenter()

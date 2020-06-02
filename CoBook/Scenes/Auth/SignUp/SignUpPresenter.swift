@@ -40,8 +40,12 @@ class SignUpPresenter: BasePresenter {
             return
         }
 
+        let pendingURL = AppStorage.State.pendingDynamicLink
+        let dynamicURLParser = DynamicLinkParameterValueFetcher(dynamicLinkURL: pendingURL?.url)
+        let shareableUserID = dynamicURLParser.fetchValueBy(.shareableUserID)
+
         view?.startLoading()
-        APIClient.default.signUpInitializationRequest(email: email, telephone: telephone, firstName: firstName, lastName: lastName) { (result) in
+        APIClient.default.signUpInitializationRequest(email: email, telephone: telephone, firstName: firstName, lastName: lastName, invitedBy: shareableUserID) { (result) in
             self.view?.stopLoading()
 
             switch result {
@@ -49,9 +53,7 @@ class SignUpPresenter: BasePresenter {
                 AppStorage.User.isUserInitiatedRegistration = true
                 AppStorage.User.Profile?.telephone.number = self.telephone
                 AppStorage.User.Profile?.email.address = self.email
-
                 AppStorage.Auth.accessToken = response?.accessToken
-
                 self.view?.goToConfirmTelephoneNumber()
             case .failure(let error):
                 self.view?.errorAlert(message: error.localizedDescription)

@@ -14,9 +14,26 @@ fileprivate enum Defaults {
 
 class SignInViewController: BaseViewController, SignInView {
 
+    @Localized("SignIn.header")
+    @IBOutlet var signInLabel: UILabel!
+
+    @Localized("TextInput.placeholder.telephone")
     @IBOutlet var loginTextField: DesignableTextField!
+
+    @Localized("TextInput.placeholder.password")
     @IBOutlet var passwordTextField: DesignableTextField!
+
+    @Localized("SignIn.forgotPassword.normalTitle")
+    @IBOutlet var forgotPasswordButton: UIButton!
+
+    @Localized("Button.continue.normalTitle")
     @IBOutlet var signInButton: LoaderDesignableButton!
+
+    @Localized("SignIn.firstTimeInCobook")
+    @IBOutlet var bottomDescrLabel: UILabel!
+
+    @Localized("SignIn.register.normalTitle")
+    @IBOutlet var signUpButton: UIButton!
 
     var presenter: SignInPresenter = SignInPresenter()
 
@@ -36,8 +53,8 @@ class SignInViewController: BaseViewController, SignInView {
         })
         let cancelAction = UIAlertAction(title: "Cancel".localized, style: .destructive, handler: nil)
 
-        alertController.addAction(okAction)
         alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
 
         return alertController
     }()
@@ -65,7 +82,6 @@ class SignInViewController: BaseViewController, SignInView {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-
         loginTextField.text = AppStorage.User.Profile?.telephone.number
     }
 
@@ -99,13 +115,11 @@ class SignInViewController: BaseViewController, SignInView {
             performSegue(withIdentifier: SignUpNavigationController.unwindSegueId, sender: self)
         } else {
             let navigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-            navigationController.modalTransitionStyle = .flipHorizontal
+            navigationController.modalTransitionStyle = .coverVertical
             navigationController.modalPresentationStyle = .overFullScreen
             present(navigationController, animated: true, completion: nil)
         }
     }
-
-    //MainTabBarController()
 
     func goToMainTabbar() {
         let mainTabbar = MainTabBarController()

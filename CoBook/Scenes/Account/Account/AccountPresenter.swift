@@ -7,17 +7,19 @@
 //
 
 import UIKit
+import FirebaseDynamicLinks
 
-protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView {
-    var tableView: UITableView! { get set }
+protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView, ShareableView {
     func setupLayout()
     func configureDataSource(with configurator: AccountDataSourceConfigurator)
     func updateDataSource(sections: [Section<Account.Item>])
+    func stopRefreshing()
 }
 
 class AccountPresenter: BasePresenter {
 
     // MARK: Properties
+
     private weak var view: AccountView?
     private lazy var dataSourceConfigurator: AccountDataSourceConfigurator = {
         let dataSourceConfigurator = AccountDataSourceConfigurator(presenter: self)
@@ -33,13 +35,21 @@ class AccountPresenter: BasePresenter {
         }
     }
 
-    // MARK: Public
+    private var isRefreshing: Bool = false
+
+    // MARK: - Public
+
     func attachView(_ view: AccountView) {
         self.view = view
     }
 
     func detachView() {
         view = nil
+    }
+
+    func refresh() {
+        isRefreshing = true
+        fetchProfileData()
     }
 
     func onViewDidLoad() {
@@ -75,17 +85,17 @@ class AccountPresenter: BasePresenter {
                 view?.push(controller: createBusinessCardController, animated: true)
 
             case .inviteFriends:
-                break
-            case .statictics:
-                break
-            case .generateQrCode:
-                break
+                inviteFriends()
+
+            case .statictics: break
+            case .generateQrCode: break
             case .faq:
-                break
-            case .startMakingMoney:
-                break
+                if let url = URL(string: "https://cobook.app/#faq") {
+                    UIApplication.shared.open(url)
+                }
+            case .startMakingMoney: break
             case .quitAccount:
-                break
+                logout()
             }
 
         case .personalCardPreview(let model):
@@ -112,13 +122,38 @@ class AccountPresenter: BasePresenter {
 }
 
 // MARK: - Privates
+
 private extension AccountPresenter {
 
-    func fetchProfileData() {
+    func inviteFriends() {
+        let socialMetaTags = DynamicLinkSocialMetaTagParameters()
+        socialMetaTags.imageURL = APIConstants.cobookLogoURL
+        socialMetaTags.title = "Social.metaTag.inviteFriends.title".localized
+        socialMetaTags.descriptionText = "Social.metaTag.inviteFriends.description".localized
+        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+    }
+
+    func logout() {
         view?.startLoading()
+        APIClient.default.logout { [weak self] (result) in
+            switch result {
+            case .success:
+                AppStorage.Auth.deleteAllData()
+                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+                if let topController = UIApplication.topViewController() {
+                    topController.present(signInNavigationController, animated: true, completion: nil)
+                }
+            case .failure(let error):
+                self?.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchProfileData() {
+        if !isRefreshing { view?.startLoading() }
         APIClient.default.profileDetails { [weak self] (result) in
             guard let strongSelf = self else { return }
-
+            strongSelf.isRefreshing = false
             strongSelf.view?.stopLoading()
             switch result {
             case let .success(response):
@@ -141,7 +176,9 @@ private extension AccountPresenter {
                                                    profession: $0.practiceType?.title,
                                                    telephone: $0.telephone?.number) } ?? []
 
+                strongSelf.view?.stopRefreshing()
                 strongSelf.updateViewDataSource()
+
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
@@ -152,7 +189,7 @@ private extension AccountPresenter {
 
         // header Section
         let cardHeaderSection = Section<Account.Item>(items: [
-            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: personalCard?.image,
+            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: AppStorage.User.Profile?.avatar?.sourceUrl,
                                                                firstName: AppStorage.User.Profile?.firstName,
                                                                lastName: AppStorage.User.Profile?.lastName,
                                                                telephone: AppStorage.User.Profile?.telephone.number,
@@ -165,7 +202,7 @@ private extension AccountPresenter {
         ])
 
         if !personalCard.isNil || !businessCardsList.isEmpty {
-            cardsPreviewSection.items.append(.title(text: "Мої візитки:"))
+            cardsPreviewSection.items.append(.title(text: "Account.section.myCards.title".localized))
         }
 
         if let personalCard = personalCard {
@@ -176,31 +213,31 @@ private extension AccountPresenter {
                                                                                                actiontype: .createPersonalCard)))
         }
 
-        if !businessCardsList.isEmpty {
-            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
-            cardsPreviewSection.items.append(contentsOf: cards)
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Створити ще одну бізнес візитку",
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        } else {
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Створити бізнес візитку",
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        }
+//        if !businessCardsList.isEmpty {
+//            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
+//            cardsPreviewSection.items.append(contentsOf: cards)
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        } else {
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        }
 
         // menuItems Section
-        var menuItemsSection = Section<Account.Item>(items: [
+        let menuItemsSection = Section<Account.Item>(items: [
             .sectionHeader,
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized, image: UIImage(named: "ic_account_createparsonalcard"), actiontype: .inviteFriends)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized, image: UIImage(named: "ic_account_faq"), actiontype: .faq)),
         ])
-        if !personalCard.isNil {
-            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
-                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
-                                                                                        actiontype: .startMakingMoney)))
-        }
+//        if !personalCard.isNil {
+//            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+//                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
+//                                                                                        actiontype: .startMakingMoney)))
+//        }
 
         // Quit account section
         let quitAccountSectin = Section<Account.Item>(items: [
@@ -212,6 +249,16 @@ private extension AccountPresenter {
     }
 
 
+}
+
+// MARK: - AccountHeaderTableViewCellDelegate
+
+extension AccountPresenter: AccountHeaderTableViewCellDelegate {
+
+    func settingTapped(cell: AccountHeaderTableViewCell) {
+        let settingsController: SettingsTableViewController = UIStoryboard.account.initiateViewControllerFromType()
+        view?.push(controller: settingsController, animated: true)
+    }
 
 
 }

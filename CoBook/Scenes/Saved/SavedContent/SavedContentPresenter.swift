@@ -1,0 +1,498 @@
+//
+//  SavedContentPresenter.swift
+//  CoBook
+//
+//  Created by protas on 5/14/20.
+//  Copyright © 2020 CoBook. All rights reserved.
+//
+
+import Foundation
+import GoogleMaps
+
+protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, ContactableCardItemTableViewCellDelegate, MapTableViewCellDelegate {
+    func set(dataSource: DataSource<SavedContentCellConfigurator>?)
+    func reload(section: SavedContent.SectionAccessoryIndex)
+    func reloadItemAt(indexPath: IndexPath)
+    func reload()
+    func set(barItems: [BarItem])
+    func createFolder()
+
+    //func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
+    func goToArticleDetails(presenter: ArticleDetailsPresenter)
+}
+
+class SavedContentPresenter: BasePresenter {
+
+    // Managed view
+    weak var view: SavedContentView?
+    private var dataSource: DataSource<SavedContentCellConfigurator>?
+
+    // cards data source
+    private var cardsTotalCount: Int = 0
+    private var cards: [Int: [CardItemViewModel]] = [:]
+    private var albumPreviewSection: PostPreview.Section?
+    private var isInitialFetch: Bool = true
+
+    /// Current pin request work item
+    private var pendingCardMapMarkersRequestWorkItem: DispatchWorkItem?
+
+    /// bar items busienss logic
+    var barItems: [BarItem] = []
+    var selectedBarItem: BarItem?
+
+    // MARK: - Lifecycle
+
+    init() {
+        dataSource = DataSource()
+        dataSource?.sections = [Section<SavedContent.Cell>(accessoryIndex: SavedContent.SectionAccessoryIndex.post.rawValue, items: []),
+                                Section<SavedContent.Cell>(accessoryIndex: CardsOverview.SectionAccessoryIndex.cards.rawValue, items: [])]
+        dataSource?.configurator = dataSourceConfigurator
+    }
+
+    func attachView(_ view: SavedContentView) {
+        self.view = view
+        self.view?.set(dataSource: dataSource)
+    }
+
+    func detachView() {
+        self.view = nil
+    }
+
+    // MARK: - Public
+
+    func setup(useLoader: Bool) {
+        let group = DispatchGroup()
+
+        isInitialFetch = true
+        if useLoader { view?.startLoading() }
+
+        group.enter()
+        fetchUserFolders { [unowned self] (barItems) in
+
+            self.barItems = [
+                BarItem(index: SavedContent.BarItemAccessoryIndex.allCards.rawValue, title: "BarItem.allCards".localized),
+                BarItem(index: SavedContent.BarItemAccessoryIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
+                //BarItem(index: SavedContent.BarItemAccessoryIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
+                //BarItem(index: SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized)
+            ]
+
+            self.barItems.append(contentsOf: barItems)
+            self.selectedBarItem = self.barItems.first
+            group.leave()
+        }
+
+        // fetch albums list
+        group.enter()
+        APIClient.default.getUserFavouritedArticles(limit: 50, offset: 0) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let response):
+                let items = response?.rows?
+                    .compactMap { PostPreview.Item.Model(albumID: nil,
+                                                          articleID: $0.id,
+                                                          title: $0.title,
+                                                          avatarPath: $0.avatar?.sourceUrl,
+                                                          avatarID: $0.avatar?.id) }
+                strongSelf.albumPreviewSection = PostPreview.Section(dataSourceID: SavedContent.PostPreviewDataSourceID.albumPreviews.rawValue, items: items?.compactMap { PostPreview.Item.view($0) } ?? [])
+                group.leave()
+            case .failure(let error):
+                self?.view?.errorAlert(message: error.localizedDescription)
+                group.leave()
+            }
+        }
+
+        // setup data source
+        group.notify(queue: .main) { [unowned self] in
+            self.view?.stopLoading()
+
+            /// Datasource configuration
+            self.view?.set(barItems: self.barItems)
+            self.updateCards(useLoader: false)
+        }
+    }
+
+    func selectedBarItemAt(index: Int) {
+        self.selectedBarItem = barItems[safe: index]
+        self.updateCards(useLoader: true)
+    }
+
+    func selectedCellAt(indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[indexPath.item] else {
+            return
+        }
+        goToItem(item)
+    }
+
+    // MARK: Folder operations
+
+    func createFolder(title: String, completion: ((BarItem) -> Void)?) {
+        self.view?.startLoading()
+        APIClient.default.createFolder(title: title) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+            switch result {
+            case .success(let response):
+                if let id = response?.id {
+                    let item = BarItem(index: id, title: title)
+                    strongSelf.barItems.append(item)
+                    strongSelf.view?.showTextHud(String(format: "SavedContent.listCreated.message".localized, title))
+                    completion?(item)
+                }
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func updateFolder(at index: Int, withNewTitle title: String, completion: ((BarItem) -> Void)?) {
+        guard var item = barItems[safe: index] else {
+            return
+        }
+
+        self.view?.startLoading()
+        APIClient.default.updateFolder(id: item.index, title: title) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.view?.stopLoading()
+            switch result {
+            case .success:
+                item.title = title
+                strongSelf.barItems[safe: index] = item
+                strongSelf.view?.showTextHud(String(format: "SavedContent.listUpdated.message".localized, title))
+                completion?(item)
+            case .failure(let error):
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func deleteFolder(at index: Int, successCompletion: (() -> Void)?) {
+        if let folderID = barItems[safe: index]?.index {
+            self.view?.startLoading()
+            APIClient.default.deleteFolder(id: folderID) { [weak self] (result) in
+                guard let strongSelf = self else { return }
+                strongSelf.view?.stopLoading()
+                switch result {
+                case .success:
+                    successCompletion?()
+                    strongSelf.view?.showTextHud(String(format: "SavedContent.listDeleted.message".localized, self?.barItems[safe: index]?.title ?? ""))
+                case .failure(let error):
+                    strongSelf.view?.errorAlert(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    // MARK: Card saving operations
+
+    func unsaveCardAt(indexPath: IndexPath, successCompletion: (() -> Void)?) {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+
+            switch item {
+            case .cardItem(let model):
+
+                view?.startLoading()
+                APIClient.default.deleteCardFromFavourites(id: model.id) { [weak self] (result) in
+                    switch result {
+                    case .success:
+                        NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: model.id, Notification.Key.controllerID: SavedContentViewController.describing])
+
+                        self?.unsaveCardItemWith(id: model.id)
+                        self?.view?.stopLoading()
+                        self?.view?.showTextHud("SavedContent.cardUnsaved.message".localized)
+
+                        successCompletion?()
+                    case .failure:
+                        self?.view?.stopLoading(success: false)
+                    }
+                }
+
+            default: break
+            }
+        }
+    }
+
+    func unsaveCardItemWith(id: Int) {
+        cards.enumerated().forEach { (offset, item) in
+            if let index = item.value.firstIndex(where: { $0.id == id }) {
+                cards[item.key]?.remove(at: index)
+            }
+        }
+        updateViewDataSource()
+    }
+
+    func fetchMapMarkersInRegionFittedBy(topLeft: CoordinateApiModel, bottomRight: CoordinateApiModel, completion: (([GMSMarker]) -> Void)?) {
+        pendingCardMapMarkersRequestWorkItem?.cancel()
+        pendingCardMapMarkersRequestWorkItem = DispatchWorkItem { [weak self] in
+            APIClient.default.getSavedCardLocationsInRegion(topLeftRectCoordinate: topLeft, bottomRightRectCoordinate: bottomRight) { [weak self] (result) in
+                switch result {
+                case .success(let response):
+                    let markers: [GMSMarker] = (response ?? []).compactMap { apiModel in
+                        if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
+                            let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
+                            let marker = GMSMarker(position: position)
+                            switch apiModel.type {
+                                case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
+                                case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
+                            }
+                            return marker
+                        } else { return nil }
+                    }
+                    completion?(markers)
+                case .failure(let error):
+                     self?.view?.errorAlert(message: error.localizedDescription)
+                }
+            }
+        }
+
+        if pendingCardMapMarkersRequestWorkItem != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingCardMapMarkersRequestWorkItem!)
+        }
+    }
+
+    // MARK: Helpers
+
+    func isEditableBarItemAt(index: Int) -> Bool {
+        guard let item = barItems[safe: index] else {
+            return false
+        }
+        return item.index >= 0 && item.index != index
+    }
+
+    func telephoneNumberForItemAt(indexPath: IndexPath) -> String? {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+            switch item {
+            case .cardItem(let model):
+                return model.telephoneNumber
+            default: break
+            }
+        }
+        return nil
+    }
+
+    func emailAddressForItemAt(indexPath: IndexPath) -> String? {
+        if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
+            switch item {
+            case .cardItem:
+                // FIXME: Check api model for aviable email address
+                return nil
+            default: break
+            }
+        }
+        return nil
+    }
+
+    func reloadCardsSection() {
+        self.updateViewDataSource()
+        if self.isInitialFetch {
+            self.view?.reload()
+            self.isInitialFetch = false
+        } else {
+            self.view?.reload(section: .card)
+        }
+    }
+
+
+}
+
+// MARK: - Privates
+
+private extension SavedContentPresenter {
+
+    func goToItem(_ item: SavedContent.Cell) {
+        switch item {
+        case .cardItem(let model):
+            switch model.type {
+            case .personal:
+                let presenter = PersonalCardDetailsPresenter(id: model.id)
+                view?.goToPersonalCardDetails(presenter: presenter)
+
+            case .business:
+                break
+//                let presenter = BusinessCardDetailsPresenter(id: model.id)
+//                view?.goToBusinessCardDetails(presenter: presenter)
+            }
+        default: break
+        }
+    }
+
+    // MARK: Card updating
+
+    func updateCards(useLoader: Bool) {
+        switch selectedBarItem?.index {
+        case .none: break
+        case .some(let index):
+
+            switch index {
+            case SavedContent.BarItemAccessoryIndex.allCards.rawValue:
+                if self.cards[index]?.isEmpty ?? true || isInitialFetch {
+                    if useLoader { view?.startLoading() }
+                    fetchSavedCards { [unowned self] (cards) in
+                        self.view?.stopLoading()
+                        self.cards[index] = cards
+                        self.reloadCardsSection()
+                    }
+                } else {
+                    self.reloadCardsSection()
+                }
+
+            case SavedContent.BarItemAccessoryIndex.personalCards.rawValue:
+                if self.cards[index]?.isEmpty ?? true || isInitialFetch {
+                    if useLoader { view?.startLoading() }
+                    fetchSavedCards(type: .personal) { [unowned self] (cards) in
+                        self.view?.stopLoading()
+                        self.cards[index] = cards
+                        self.reloadCardsSection()
+                    }
+                } else {
+                    self.reloadCardsSection()
+                }
+
+            case SavedContent.BarItemAccessoryIndex.businessCards.rawValue:
+                if self.cards[index]?.isEmpty ?? true || isInitialFetch {
+                    if useLoader { view?.startLoading() }
+                    fetchSavedCards(type: .business) { [unowned self] (cards) in
+                        self.view?.stopLoading()
+                        self.cards[index] = cards
+                        self.reloadCardsSection()
+                    }
+                } else {
+                    self.reloadCardsSection()
+                }
+
+            case SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue:
+                self.reloadCardsSection()
+
+            // Another custom created lists
+            default:
+                if index >= 0 {
+                    if self.cards[index]?.isEmpty ?? true || isInitialFetch{
+                        if useLoader { view?.startLoading() }
+                        fetchSavedCards(tagID: index) { [unowned self] (cards) in
+                            self.view?.stopLoading()
+                            self.cards[index] = cards
+                            self.reloadCardsSection()
+                        }
+                    } else {
+                        self.reloadCardsSection()
+                    }
+                }
+                break
+            }
+        }
+    }
+
+    // MARK: Updating view data source
+
+    func updateViewDataSource() {
+        // Post preview section
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items = [
+            .title(model: ActionTitleModel(title: "SavedContent.section.articles.title".localized, counter: albumPreviewSection?.items.count ?? 0)),
+        ]
+        if !(albumPreviewSection?.items.isEmpty ?? true) {
+            dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.postPreview(model: albumPreviewSection))
+        }
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.sectionSeparator)
+        dataSource?.sections[SavedContent.SectionAccessoryIndex.post.rawValue].items.append(.title(model: ActionTitleModel(title: "SavedContent.section.cards.title".localized,
+                                                                                                                                  counter: cardsTotalCount,
+                                                                                                                                  actionTitle: "SavedContent.addList.normalTitle".localized,
+                                                                                                                                  actionHandler: { self.view?.createFolder() })))
+        if let index = selectedBarItem?.index {
+            switch index {
+            case SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue:
+                dataSource?.sections[SavedContent.SectionAccessoryIndex.card.rawValue].items = [.map]
+            default:
+                let cardsToShow = cards[index] ?? []
+                dataSource?.sections[SavedContent.SectionAccessoryIndex.card.rawValue].items = cardsToShow.compactMap { .cardItem(model: $0) }
+            }
+        }
+    }
+
+    func fetchUserFolders(completion: (([BarItem]) -> Void)?) {
+        APIClient.default.getFolderList { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let folders):
+                let items = folders?.compactMap { BarItem(index: $0.id, title: $0.title) }
+                completion?(items ?? [])
+            case .failure(let error):
+                completion?([])
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func fetchSavedCards(tagID: Int? = nil, type: CardType? = nil, limit: Int? = nil, offset: Int? = nil, completion: (([CardItemViewModel]) -> Void)?) {
+        APIClient.default.getSavedCardsList(tagID: tagID, type: type.map { $0.rawValue }, limit: limit, offset: offset) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let cardDetails):
+                strongSelf.cardsTotalCount = cardDetails?.totalCount ?? 0
+                let cards = cardDetails?.rows?.compactMap { CardItemViewModel(id: $0.id,
+                                                                              type: $0.type,
+                                                                              avatarPath: $0.avatar?.sourceUrl,
+                                                                              firstName: $0.cardCreator?.firstName,
+                                                                              lastName: $0.cardCreator?.lastName,
+                                                                              companyName: $0.company?.name,
+                                                                              profession: $0.practiceType?.title,
+                                                                              telephoneNumber: $0.contactTelephone?.number,
+                                                                              isSaved: true) } ?? []
+                completion?(cards)
+
+            case .failure(let error):
+                completion?([])
+                strongSelf.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+
+}
+
+// MARK: - AlbumPreviewItemsViewDelegate
+
+extension SavedContentPresenter: AlbumPreviewItemsViewDelegate {
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, didSelectedAt indexPath: IndexPath, dataSourceID: String?) {
+        guard let id = dataSourceID, let dataSource = SavedContent.PostPreviewDataSourceID(rawValue: id) else {
+            return
+        }
+
+        switch dataSource {
+        case .albumPreviews:
+            if let selectedItem = albumPreviewSection?.items[safe: indexPath.item] {
+                switch selectedItem {
+                case .view(let model):
+                    let presenter = ArticleDetailsPresenter(albumID: model.albumID, articleID: model.articleID)
+                    self.view?.goToArticleDetails(presenter: presenter)
+                default:
+                    break
+                }
+            }
+        }
+    }
+
+
+}
+
+// MARK: - AlbumPreviewItemsViewDataSource
+
+extension SavedContentPresenter: AlbumPreviewItemsViewDataSource {
+
+    func albumPreviewItemsView(_ view: AlbumPreviewItemsTableViewCell, dataSourceID: String?) -> [PostPreview.Item] {
+        guard let id = dataSourceID, let dataSource = SavedContent.PostPreviewDataSourceID(rawValue: id) else {
+            return []
+        }
+
+        switch dataSource {
+        case .albumPreviews:
+            return albumPreviewSection?.items ?? []
+        }
+    }
+
+
+}
+
+
+
+

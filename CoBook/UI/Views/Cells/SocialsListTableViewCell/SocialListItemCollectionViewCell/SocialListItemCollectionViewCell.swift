@@ -48,7 +48,7 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
                 borderView.backgroundColor = type.image.averageColor
             } else {
                 if let url = social.url {
-                    pendingRequestWorkItem = OpenGraphFetcher.fetchOpenGraphImage(from: url, completion: { [weak self] (result) in
+                    pendingRequestWorkItem = OpenGraphFetcher().fetchOpenGraphImage(from: url, completion: { [weak self] (result) in
                         switch result {
                         case .success(let imageUrl):
                             if let url = URL.init(string: imageUrl ?? "") {

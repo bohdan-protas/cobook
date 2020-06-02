@@ -15,10 +15,6 @@ protocol MapTableViewCellDelegate: class {
     func openSettingsAction(_ cell: MapTableViewCell)
 }
 
-extension MapTableViewCellDelegate {
-    func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {}
-}
-
 class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
 
     @IBOutlet var heightConstraint: NSLayoutConstraint!
@@ -52,7 +48,7 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
                     bounds = bounds.includingCoordinate(marker.position)
                 }
 
-                let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 50.0 , left: 50.0 ,bottom: 50.0 ,right: 50.0))
+                let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 150.0 , left: 150.0 ,bottom: 150.0 ,right: 150.0))
                 mapView.animate(with: cameraUpdate)
                 isCameraFitted = true
             }

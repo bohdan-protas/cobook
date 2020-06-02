@@ -38,8 +38,4 @@ extension CustomNavigationController: UINavigationControllerDelegate {
         proxyDelegate?.navigationController?(navigationController, willShow: viewController, animated: animated)
     }
 
-    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        proxyDelegate?.navigationController?(navigationController, didShow: viewController, animated: animated)
-    }
-
 }

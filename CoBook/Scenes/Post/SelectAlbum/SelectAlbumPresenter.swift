@@ -14,7 +14,7 @@ protocol SelectAlbumView: AlertDisplayableView, LoadDisplayableView, NavigableVi
 }
 
 protocol SelectAlbumDelegate: class {
-    func selectedAlbum(_ model: AlbumPreview.Item.Model?)
+    func selectedAlbum(_ model: PostPreview.Item.Model?)
 }
 
 class SelectAlbumPresenter: BasePresenter {
@@ -37,7 +37,7 @@ class SelectAlbumPresenter: BasePresenter {
         self.selectedAlbumID = selectedAlbumID
 
         var photosDataSourceConfigurator = SelectAlbumCellsConfigurator()
-        photosDataSourceConfigurator.selectAlbumCellConfigurator = CellConfigurator { [weak self] (cell, model: AlbumPreview.Item.Model, tableView, indexPath) -> SelectAlbumTableViewCell in
+        photosDataSourceConfigurator.selectAlbumCellConfigurator = CellConfigurator { [weak self] (cell, model: PostPreview.Item.Model, tableView, indexPath) -> SelectAlbumTableViewCell in
             cell.delegate = self?.view
             cell.editButton.isHidden = model.isSelected
             cell.isSelected = model.isSelected
@@ -73,7 +73,7 @@ class SelectAlbumPresenter: BasePresenter {
             strongSelf.view?.stopLoading()
             switch result {
             case .success(let apiItems):
-                let items: [AlbumPreview.Item.Model] = apiItems?.compactMap { AlbumPreview.Item.Model(id: $0.id,
+                let items: [PostPreview.Item.Model] = apiItems?.compactMap { PostPreview.Item.Model(albumID: $0.id,
                                                                                                       isSelected: $0.id == strongSelf.selectedAlbumID ?? -1,
                                                                                                       title: $0.title,
                                                                                                       avatarPath: $0.avatar?.sourceUrl,
@@ -94,7 +94,7 @@ class SelectAlbumPresenter: BasePresenter {
 
     func editAlbumAt(indexPath: IndexPath) {
         let model = albumsDataSource?.sections[indexPath.section].items[indexPath.item]
-        let parameters = CreateAlbumModel(cardID: cardID, albumID: model?.id, avatarID: model?.avatarID, avatarPath: model?.avatarPath, title: model?.title)
+        let parameters = CreateAlbumModel(cardID: cardID, albumID: model?.albumID, avatarID: model?.avatarID, avatarPath: model?.avatarPath, title: model?.title)
         let presenter = CreateAlbumPresenter(parameters: parameters)
         view?.goToCreateAlbum(presenter: presenter)
     }

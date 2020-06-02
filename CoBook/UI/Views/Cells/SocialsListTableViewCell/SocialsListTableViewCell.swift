@@ -9,9 +9,7 @@
 import UIKit
 
 protocol SocialsListTableViewCellDelegate: class {
-    /// Called when user selected social item
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didSelectedSocialItem item: Social.ListItem)
-    /// Called when user longpressed social item
     func socialsListTableViewCell(_ cell: SocialsListTableViewCell, didLongPresseddOnItem value: Social.Model, at indexPath: IndexPath)
 }
 

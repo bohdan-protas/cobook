@@ -21,7 +21,7 @@ class ServiceDetailsViewController: BaseViewController, ServiceDetailsView {
     /// edit footer view
     private lazy var editCardFooterView: EditCardView = {
         let view = EditCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.editCardViewHeight)))
-        view.editButton.setTitle("Редагувати послугу", for: .normal)
+        view.editButton.setTitle("Service.editButton.normalTitle".localized, for: .normal)
         view.onEditTapped = { [weak self] in
             self?.presenter?.editService()
         }
@@ -81,7 +81,7 @@ class ServiceDetailsViewController: BaseViewController, ServiceDetailsView {
 private extension ServiceDetailsViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Послуга компанії"
+        self.navigationItem.title = "Service.details.title".localized
 
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension

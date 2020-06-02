@@ -8,10 +8,9 @@
 
 import UIKit
 
-enum AlbumPreview {
+enum PostPreview {
 
     struct Section {
-        var title: String?
         var dataSourceID: String?
         var items: [Item] = []
     }
@@ -19,7 +18,8 @@ enum AlbumPreview {
     enum Item {
 
         struct Model {
-            var id: Int
+            var albumID: Int?
+            var articleID: Int?
             var isSelected = false
             var title: String?
             var avatarPath: String?
@@ -30,7 +30,6 @@ enum AlbumPreview {
         case view(_ model: Model)
         case showMore
     }
-
 
 
 }
