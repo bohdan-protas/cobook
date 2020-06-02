@@ -15,6 +15,7 @@ protocol ArticleDetailsView: LoadDisplayableView, AlertDisplayableView, Navigabl
     func set(title: String?)
     func setPlaceholderView(_ visible: Bool)
     func goToEditArticle(presenter: CreateArticlePresenter)
+    func openPhotoGallery(photos: [String], activedPhotoIndex: Int)
 }
 
 class ArticleDetailsPresenter: BasePresenter {
@@ -231,6 +232,18 @@ extension ArticleDetailsPresenter: PhotoCollageTableViewCellDataSource {
 
     func photoCollage(_ view: PhotoCollageTableViewCell) -> [String?] {
         return articleDetails?.photos?.compactMap { $0.sourceUrl } ?? []
+    }
+
+
+}
+
+// MARK: - PhotoCollageTableViewCellDelegate
+
+extension ArticleDetailsPresenter: PhotoCollageTableViewCellDelegate {
+
+    func photoCollage(_ view: PhotoCollageTableViewCell, selectedPhotoAt index: Int) {
+        let photos = articleDetails?.photos?.compactMap { $0.sourceUrl } ?? []
+        self.view?.openPhotoGallery(photos: photos, activedPhotoIndex: index)
     }
 
 

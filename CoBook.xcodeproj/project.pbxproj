@@ -231,6 +231,11 @@
 		B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F0240337390007EB60 /* BaseApiResponse.swift */; };
 		B84B94F524033B3E0007EB60 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F424033B3E0007EB60 /* APIClient.swift */; };
 		B84B94F7240351940007EB60 /* SignInAPIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */; };
+		B850DA1124866049002D8F99 /* PhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850DA0E24866048002D8F99 /* PhotoGalleryViewController.swift */; };
+		B850DA1224866049002D8F99 /* PhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B850DA0F24866048002D8F99 /* PhotoGalleryViewController.xib */; };
+		B850DA1624866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850DA1424866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift */; };
+		B850DA1724866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B850DA1524866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib */; };
+		B850DA1924867679002D8F99 /* Trimmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850DA1824867679002D8F99 /* Trimmed.swift */; };
 		B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */; };
 		B8559F57243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F55243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift */; };
 		B8559F58243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F56243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib */; };
@@ -583,6 +588,11 @@
 		B84B94F0240337390007EB60 /* BaseApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiResponse.swift; sourceTree = "<group>"; };
 		B84B94F424033B3E0007EB60 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B84B94F6240351940007EB60 /* SignInAPIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIResponseData.swift; sourceTree = "<group>"; };
+		B850DA0E24866048002D8F99 /* PhotoGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryViewController.swift; sourceTree = "<group>"; };
+		B850DA0F24866048002D8F99 /* PhotoGalleryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoGalleryViewController.xib; sourceTree = "<group>"; };
+		B850DA1424866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B850DA1524866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoGalleryItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		B850DA1824867679002D8F99 /* Trimmed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trimmed.swift; sourceTree = "<group>"; };
 		B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersSearchItemApiModel.swift; sourceTree = "<group>"; };
 		B8559F55243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersPreviewHorizontalListTableViewCell.swift; sourceTree = "<group>"; };
 		B8559F56243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployersPreviewHorizontalListTableViewCell.xib; sourceTree = "<group>"; };
@@ -826,6 +836,7 @@
 		B8212A63241BD32C0066700C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B850DA0C24866022002D8F99 /* PhotoGalleryCollectionViewController */,
 				B8212A64241BD3480066700C /* BaseViewController.swift */,
 			);
 			path = ViewControllers;
@@ -1449,9 +1460,8 @@
 			isa = PBXGroup;
 			children = (
 				B8307F1A2406C8C700AFE578 /* AppStorage.swift */,
-				B8307F222406FF9A00AFE578 /* KeychainStorageWrapper.swift */,
-				B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */,
-				B8CB0E7824053E6B00AF431B /* KeychainWrapper */,
+				B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */,
+				B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -1595,6 +1605,35 @@
 				B8D5F980246E81EF0032E885 /* FolderApiModel.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		B850DA0C24866022002D8F99 /* PhotoGalleryCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B850DA132486660F002D8F99 /* PhotoGalleryItemCollectionViewCell */,
+				B850DA0E24866048002D8F99 /* PhotoGalleryViewController.swift */,
+				B850DA0F24866048002D8F99 /* PhotoGalleryViewController.xib */,
+			);
+			path = PhotoGalleryCollectionViewController;
+			sourceTree = "<group>";
+		};
+		B850DA132486660F002D8F99 /* PhotoGalleryItemCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B850DA1424866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift */,
+				B850DA1524866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib */,
+			);
+			path = PhotoGalleryItemCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		B850DA1A2486768F002D8F99 /* Property Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				B850DA1824867679002D8F99 /* Trimmed.swift */,
+				B8307F222406FF9A00AFE578 /* KeychainStorageWrapper.swift */,
+				B8307F202406FF3200AFE578 /* UserDefaultsStorageWrapper.swift */,
+			);
+			path = "Property Wrappers";
 			sourceTree = "<group>";
 		};
 		B8559F54243A753100787349 /* EmployersPreviewHorizontalListTableViewCell */ = {
@@ -1744,6 +1783,7 @@
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
+				B850DA1A2486768F002D8F99 /* Property Wrappers */,
 				B826B0F023F45973009041DD /* Services */,
 				B8298805248159C000E6838B /* Localization */,
 				B8307F1F2406FED000AFE578 /* Persistance */,
@@ -1972,15 +2012,6 @@
 			path = ProductDetails;
 			sourceTree = "<group>";
 		};
-		B8CB0E7824053E6B00AF431B /* KeychainWrapper */ = {
-			isa = PBXGroup;
-			children = (
-				B8CB0E7A24053E6B00AF431B /* KeychainItemAccessibility.swift */,
-				B8CB0E7924053E6B00AF431B /* KeychainWrapper.swift */,
-			);
-			path = KeychainWrapper;
-			sourceTree = "<group>";
-		};
 		B8DD431724178F0200C7D940 /* CreatePersonalCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2158,6 +2189,7 @@
 				B8559F81243C809D00787349 /* MapTableViewCell.xib in Resources */,
 				B8559F90243C8B0900787349 /* CardItemTableViewCell.xib in Resources */,
 				B825742423F57E0600C8CBF8 /* Localizable.strings in Resources */,
+				B850DA1224866049002D8F99 /* PhotoGalleryViewController.xib in Resources */,
 				B8212A5E241B6A690066700C /* InterestItemCollectionViewCell.xib in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
 				B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */,
@@ -2169,6 +2201,7 @@
 				B8559F95243CC67E00787349 /* HideCardView.xib in Resources */,
 				B823B089242CD4F30012529D /* AccountHeaderTableViewCell.xib in Resources */,
 				B825741E23F5621500C8CBF8 /* HelveticaNeueCyr-Bold.ttf in Resources */,
+				B850DA1724866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib in Resources */,
 				B8DE5E4C2418E99900F4F60B /* SectionTitleTableViewCell.xib in Resources */,
 				B825741F23F5621500C8CBF8 /* HelveticaNeueCyr-HeavyItalic.ttf in Resources */,
 				B82573F623F545F100C8CBF8 /* OnboardingPageCollectionViewCell.xib in Resources */,
@@ -2433,8 +2466,10 @@
 				B83050AD247C391C0060D9BE /* URL + Extensions.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B8249252243E26A300A1AC39 /* CardsOverview.swift in Sources */,
+				B850DA1624866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
 				B82A211E2421700A00D0D9F5 /* AuthRequestInterceptor.swift in Sources */,
+				B850DA1924867679002D8F99 /* Trimmed.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
 				B8255A22243A26B400C4169D /* SearchTableViewController.swift in Sources */,
@@ -2480,6 +2515,7 @@
 				B8909F9A2464121A00AA56F7 /* ArticleDetailsViewController.swift in Sources */,
 				B834BD662483F8450037C623 /* LocalizedKeyProvided.swift in Sources */,
 				B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */,
+				B850DA1124866049002D8F99 /* PhotoGalleryViewController.swift in Sources */,
 				B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */,
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
 				B8D5F981246E81EF0032E885 /* FolderApiModel.swift in Sources */,

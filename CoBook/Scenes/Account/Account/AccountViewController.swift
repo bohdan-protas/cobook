@@ -119,3 +119,21 @@ extension AccountViewController: UITableViewDelegate {
 
 }
 
+// MARK: - AccountHeaderTableViewCellDelegate
+
+extension AccountViewController: AccountHeaderTableViewCellDelegate {
+
+    func userPhotoTapped(cell: AccountHeaderTableViewCell) {
+        let galeryViewController = PhotoGalleryViewController(photos: [AppStorage.User.Profile?.avatar?.sourceUrl])
+        let galleryNavigationController = CustomNavigationController(rootViewController: galeryViewController)
+        present(galleryNavigationController, animated: true, completion: nil)
+    }
+
+    func settingTapped(cell: AccountHeaderTableViewCell) {
+        let settingsController: SettingsTableViewController = UIStoryboard.account.initiateViewControllerFromType()
+        push(controller: settingsController, animated: true)
+    }
+
+
+}
+

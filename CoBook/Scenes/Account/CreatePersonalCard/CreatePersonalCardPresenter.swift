@@ -12,8 +12,8 @@ import Alamofire
 
 protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
-    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?)
 
+    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?)
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()

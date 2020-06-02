@@ -109,6 +109,7 @@ extension ArticleDetailsPresenter {
 
             configurator.photoCollageConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
                 cell.dataSource = self
+                cell.delegate = self
                 cell.prepareLayout()
                 return cell
             }

@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDynamicLinks
 
-protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView, ShareableView {
+protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView, ShareableView, AccountHeaderTableViewCellDelegate {
     func setupLayout()
     func configureDataSource(with configurator: AccountDataSourceConfigurator)
     func updateDataSource(sections: [Section<Account.Item>])
@@ -20,11 +20,7 @@ class AccountPresenter: BasePresenter {
 
     // MARK: Properties
 
-    private weak var view: AccountView?
-    private lazy var dataSourceConfigurator: AccountDataSourceConfigurator = {
-        let dataSourceConfigurator = AccountDataSourceConfigurator(presenter: self)
-        return dataSourceConfigurator
-    }()
+    weak var view: AccountView?
 
     private var personalCard: CardPreviewModel?
     private var businessCardsList = [CardPreviewModel]()
@@ -246,18 +242,6 @@ private extension AccountPresenter {
         ])
 
         sections = [cardHeaderSection, cardsPreviewSection, menuItemsSection, quitAccountSectin]
-    }
-
-
-}
-
-// MARK: - AccountHeaderTableViewCellDelegate
-
-extension AccountPresenter: AccountHeaderTableViewCellDelegate {
-
-    func settingTapped(cell: AccountHeaderTableViewCell) {
-        let settingsController: SettingsTableViewController = UIStoryboard.account.initiateViewControllerFromType()
-        view?.push(controller: settingsController, animated: true)
     }
 
 
