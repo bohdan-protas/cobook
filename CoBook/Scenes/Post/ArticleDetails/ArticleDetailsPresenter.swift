@@ -143,6 +143,7 @@ private extension ArticleDetailsPresenter {
                                                                        desctiption: articleDetails?.body,
                                                                        albumAvatarImage: articleDetails?.album?.avatar?.sourceUrl,
                                                                        albumAvatarTitle: articleDetails?.album?.title)),
+            .title(text: "Article.creatorSection.text".localized),
             .creator(model: CardPreviewModel(id: articleDetails?.userID ?? "",
                                              image: articleDetails?.cardInfo?.avatar?.sourceUrl,
                                              firstName: articleDetails?.cardInfo?.company?.name,
@@ -156,7 +157,11 @@ private extension ArticleDetailsPresenter {
             .compactMap { ArticlePreviewModel(id: $0.id, title: $0.title, image: $0.avatar?.sourceUrl) }
             .filter { $0.id != (self.articleDetails?.articleID ?? -1) } ?? []
 
-        dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items = items.map { ArticleDetails.Cell.articlePreview(model: $0) }
+        dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.removeAll()
+        if !items.isEmpty {
+            dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.append(.title(text: "Article.anotherArticlesSection.text".localized))
+        }
+        dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.append(contentsOf: items.map { ArticleDetails.Cell.articlePreview(model: $0) })
         view?.reload()
     }
 

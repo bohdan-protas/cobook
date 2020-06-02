@@ -236,6 +236,7 @@
 		B850DA1624866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850DA1424866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift */; };
 		B850DA1724866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B850DA1524866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib */; };
 		B850DA1924867679002D8F99 /* Trimmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850DA1824867679002D8F99 /* Trimmed.swift */; };
+		B850DA1F2486972B002D8F99 /* ArticleDetailsSectionTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850DA1E2486972B002D8F99 /* ArticleDetailsSectionTitleTableViewCell.swift */; };
 		B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */; };
 		B8559F57243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8559F55243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift */; };
 		B8559F58243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8559F56243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib */; };
@@ -593,6 +594,7 @@
 		B850DA1424866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B850DA1524866637002D8F99 /* PhotoGalleryItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoGalleryItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B850DA1824867679002D8F99 /* Trimmed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trimmed.swift; sourceTree = "<group>"; };
+		B850DA1E2486972B002D8F99 /* ArticleDetailsSectionTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsSectionTitleTableViewCell.swift; sourceTree = "<group>"; };
 		B8559F52243A5CB000787349 /* EmployersSearchItemApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersSearchItemApiModel.swift; sourceTree = "<group>"; };
 		B8559F55243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersPreviewHorizontalListTableViewCell.swift; sourceTree = "<group>"; };
 		B8559F56243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployersPreviewHorizontalListTableViewCell.xib; sourceTree = "<group>"; };
@@ -1636,6 +1638,14 @@
 			path = "Property Wrappers";
 			sourceTree = "<group>";
 		};
+		B850DA1D2486970C002D8F99 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B850DA1E2486972B002D8F99 /* ArticleDetailsSectionTitleTableViewCell.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		B8559F54243A753100787349 /* EmployersPreviewHorizontalListTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1858,6 +1868,7 @@
 		B8909F98246411E900AA56F7 /* ArticleDetails */ = {
 			isa = PBXGroup;
 			children = (
+				B850DA1D2486970C002D8F99 /* view */,
 				B8909F992464121A00AA56F7 /* ArticleDetailsViewController.swift */,
 				B8909F9B2464122C00AA56F7 /* ArticleDetailsPresenter.swift */,
 				B8909FB32464233700AA56F7 /* ArticleDetailsCellConfigutator.swift */,
@@ -2521,6 +2532,7 @@
 				B8D5F981246E81EF0032E885 /* FolderApiModel.swift in Sources */,
 				B823C6212431F585002CFB02 /* UIImage + AverageColor.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
+				B850DA1F2486972B002D8F99 /* ArticleDetailsSectionTitleTableViewCell.swift in Sources */,
 				B81F189F24603F71003CBC84 /* CreateAlbumApiModel.swift in Sources */,
 				B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */,
 				B828BCBE24366C670099D1A8 /* ApiModel.swift in Sources */,

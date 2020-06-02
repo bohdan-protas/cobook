@@ -221,6 +221,8 @@
 "Article.details.title" = "Стаття";
 "Article.create.title" = "Створити статтю";
 "Article.edit.title" = "Редагувати статтю";
+"Article.creatorSection.text" = "Статтю опубліковано:";
+"Article.anotherArticlesSection.text" = "Інші статті альбому:";
 "Article.addPhotoButton.normalTitle" = "Додати фото";
 "Article.header.placeholder" = "Введіть заголовок";
 "Article.selectAlbum.text" = "Виберіть альбом";
