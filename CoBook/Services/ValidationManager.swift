@@ -13,6 +13,8 @@ class ValidationManager {
     enum Defaults {
         static let userNameLengthRange  = 3..<12
         static let passwordRange        = 6..<24
+        static let professionTypeRange  = 3..<50
+        static let activityDescrRange   = 3..<500
     }
 
     static func validate(firstName: String) -> String? {
@@ -46,6 +48,20 @@ class ValidationManager {
     static func validate(password: String) -> String? {
         if !Defaults.passwordRange.contains(password.utf16.count) {
             return "Error.Validation.password".localized
+        }
+        return nil
+    }
+
+    static func validate(profession: String) -> String? {
+        if !Defaults.professionTypeRange.contains(profession.utf16.count) {
+            return "Error.Validation.profession".localized
+        }
+        return nil
+    }
+
+    static func validate(activityDescr: String) -> String? {
+        if !Defaults.activityDescrRange.contains(activityDescr.utf16.count) {
+            return "Error.Validation.activityDescr".localized
         }
         return nil
     }
