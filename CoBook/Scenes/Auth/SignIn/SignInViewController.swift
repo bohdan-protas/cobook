@@ -85,11 +85,6 @@ class SignInViewController: BaseViewController, SignInView {
         loginTextField.text = AppStorage.User.Profile?.telephone.number
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         setupLayout()
-     }
-
     deinit {
         presenter.detachView()
     }
@@ -126,17 +121,6 @@ class SignInViewController: BaseViewController, SignInView {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.window?.rootViewController = mainTabbar
         }
-
-    }
-
-
-}
-
-// MARK: - Private
-
-private extension SignInViewController {
-
-    func setupLayout() {
 
     }
 

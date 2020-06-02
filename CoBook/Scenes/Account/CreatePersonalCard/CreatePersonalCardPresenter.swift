@@ -73,6 +73,11 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     }
 
     func createPerconalCard() {
+        if let error = self.validateFields() {
+            view?.errorAlert(message: error)
+            return
+        }
+
         view?.startLoading(text: "Loading.creating.title".localized)
         let params = CreatePersonalCardParametersApiModel(model: personalCardDetailsModel)
         
@@ -357,6 +362,37 @@ extension CreatePersonalCardPresenter: SocialsListTableViewCellDelegate, Socials
 
         ]
         view?.actionSheetAlert(title: value.title, message: nil, actions: actions)
+    }
+
+
+}
+
+// MARK: - Privates
+
+private extension CreatePersonalCardPresenter {
+
+    /**
+     Validate inputed fields
+     - returns: First error of validation or nil (in second case validation successed).
+     */
+    func validateFields() -> String? {
+        if let error = ValidationManager.validate(activityDescr: personalCardDetailsModel.description ?? "") {
+            return error
+        }
+
+        if let error = ValidationManager.validate(email: personalCardDetailsModel.contactEmail ?? "") {
+            return error
+        }
+
+        if let error = ValidationManager.validate(telephone: personalCardDetailsModel.contactTelephone ?? "") {
+            return error
+        }
+
+        if let error = ValidationManager.validate(profession: personalCardDetailsModel.position ?? "") {
+            return error
+        }
+
+        return nil
     }
 
 
