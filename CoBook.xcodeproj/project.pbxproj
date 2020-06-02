@@ -1026,9 +1026,9 @@
 		B823AB6C23F156EE00DE13EA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B84B94F424033B3E0007EB60 /* APIClient.swift */,
 				B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */,
 				B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */,
-				B84B94F424033B3E0007EB60 /* APIClient.swift */,
 				B82206472463006400D49D16 /* RequestParameters.swift */,
 				B84B94EB24032A760007EB60 /* Endpoints */,
 				B8AB83F4242829060041B879 /* Mockup */,
@@ -2131,6 +2131,7 @@
 				B870197F23ED50EA00625D61 /* Resources */,
 				F43CCDA31D238B08D9A6B6B5 /* [CP] Embed Pods Frameworks */,
 				97F90E3F0D6B2631D15DE3A4 /* [CP] Copy Pods Resources */,
+				B83DD3BA2486CA400006D8EC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2313,6 +2314,25 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B83DD3BA2486CA400006D8EC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		F43CCDA31D238B08D9A6B6B5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2753,6 +2773,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 29;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CoBook/Resources/Info.plist;
@@ -2779,6 +2800,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 29;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CoBook/Resources/Info.plist;

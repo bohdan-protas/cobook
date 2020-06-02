@@ -11,6 +11,8 @@ target 'CoBook' do
   pod 'GoogleMaps'
   pod 'SwiftSoup'
   pod 'CropViewController'
+  
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
 

@@ -104,6 +104,7 @@ extension AppDelegate {
     }
 
     func setupDepencencies() {
+        
         // IQKeyboard manager
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
@@ -117,7 +118,8 @@ extension AppDelegate {
 
         // Firebase & Dynamic links
         FirebaseApp.configure()
-        DynamicLinks.performDiagnostics(completion: nil)
+        //FirebaseConfiguration.shared.setLoggerLevel(.debug)
+        //DynamicLinks.performDiagnostics(completion: nil)
     }
 
     func setupAppearence() {
