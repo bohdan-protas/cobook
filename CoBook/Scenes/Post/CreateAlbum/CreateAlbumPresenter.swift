@@ -15,10 +15,15 @@ protocol CreateAlbumView: LoadDisplayableView, AlertDisplayableView, NavigableVi
     func set(title: String?)
 }
 
+protocol CreateAlbumDelegate: class {
+    func albumEdited(with parameters: CreateAlbumModel)
+}
+
 class CreateAlbumPresenter: BasePresenter {
 
     // Managed view
     weak var view: CreateAlbumView?
+    weak var delegate: CreateAlbumDelegate?
 
     // Data source
     private var cardID: Int
@@ -135,13 +140,14 @@ private extension CreateAlbumPresenter {
         let updateParameters = UpdateAlbumApiModel(albumID: parameters.albumID, title: parameters.title, avatarID: parameters.avatarID)
         view?.startLoading()
         APIClient.default.updateAlbum(parameters: updateParameters) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            strongSelf.view?.stopLoading()
+            guard let self = self else { return }
+            self.view?.stopLoading()
             switch result {
             case .success:
-                strongSelf.view?.popController()
+                self.delegate?.albumEdited(with: self.parameters)
+                self.view?.popController()
             case .failure(let error):
-                strongSelf.view?.errorAlert(message: error.localizedDescription)
+                self.view?.errorAlert(message: error.localizedDescription)
             }
         }
     }

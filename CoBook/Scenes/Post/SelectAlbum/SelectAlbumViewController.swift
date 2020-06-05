@@ -40,12 +40,15 @@ class SelectAlbumViewController: BaseViewController {
 
 extension SelectAlbumViewController: SelectAlbumView {
 
+    func reload() {
+        tableView.reloadData()
+    }
+
     func editAction(_ cell: SelectAlbumTableViewCell) {
         if let indexPath = tableView.indexPath(for: cell) {
             presenter?.editAlbumAt(indexPath: indexPath)
         }
     }
-
 
     func set(albums: DataSource<SelectAlbumCellsConfigurator>?) {
         albums?.connect(to: tableView)
