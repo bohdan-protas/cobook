@@ -102,7 +102,7 @@
 "BarItem.personalCards" = "Персональные\nвизитки";
 "BarItem.businessCards" = "Бизнес\nвизитки";
 "BarItem.myRegion" = "В моем\nрегионе";
-"BarItem.generalInfo" = "Основная\n информация";
+"BarItem.generalInfo" = "Основная\nинформация";
 "BarItem.services" = "Услуги";
 "BarItem.shop" = "Магазин";
 "BarItem.team" = "Команда";
@@ -128,17 +128,17 @@
 "Error.Map.accessDeniedButton.normalTitle" = "Открыть настройки";
 "Error.Validation.email" = "Пожалуйста, введите правильный имейл";
 "Error.Validation.firstName" = "Имя должно состоять как минимум из 3 букв, но не больше 25";
-"Error.Validation.lastName" = " Фамилия должна состоять как минимум из 3 букв, но не больше 25";
+"Error.Validation.lastName" = "Фамилия должна состоять как минимум из 3 букв, но не больше 25";
 "Error.Validation.telephone" = "Пожалуйста, введите правильний номер телефона";
-"Error.Validation.password" = " Пароль должен состоять как минимум из 3 символов, но не больше 25";
+"Error.Validation.password" = "Пароль должен состоять как минимум из 3 символов, но не больше 25";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";
-"Onboarding.Subtitle01" = "Описаниеособенностей приложения\nфичи, преимущества, и прочие";
+"Onboarding.Subtitle01" = "Описание особенностей приложения\nфичи, преимущества, и прочие";
 "Onboarding.Title02" = "Заголовок 02";
-"Onboarding.Subtitle02" = " Описаниеособенностей приложения\ nфичи, преимущества, и прочие";
+"Onboarding.Subtitle02" = "Описание особенностей приложения\ nфичи, преимущества, и прочие";
 "Onboarding.Title03" = "Заголовок 03";
-"Onboarding.Subtitle03" = " Описаниеособенностей приложения\ nфичи, преимущества, и прочие;
+"Onboarding.Subtitle03" = "Описание особенностей приложения\ nфичи, преимущества, и прочие";
 "Onboarding.Next" = "Продолжить";
 "Onboarding.Start" = "Начать";
 
@@ -166,7 +166,7 @@
 "CreatePassword.description" = "Придумайте пароль";
 
 // MARK: - SighIn
-"SignIn.title" = " Добро пожаловать в сообщество CoBook ";
+"SignIn.title" = "Добро пожаловать в сообщество CoBook ";
 "SignIn.header" = "Вход";
 "SignIn.forgotPassword.normalTitle" = "Забыли пароль?";
 "SignIn.enterButton.normalTitle" = "Войдите";
@@ -219,11 +219,11 @@
 "Article.addPhotoButton.normalTitle" = "Добавить фото";
 "Article.header.placeholder" = "Введите заголовок";
 "Article.selectAlbum.text" = "Выберете альбом";
-"Article.description.placeholder" = "Текст статьи
+"Article.description.placeholder" = "Текст статьи";
 "Article.publicButton.normalTitle" = "Опубликовать";
 "Article.placeholder.emptyAlbumItems" = "В данном альбоме отсутствуют статьи...";
 "Article.placeholder.back" = "Вернуться назад";
-"Article.Saved" = "Статья сохранена ";
+"Article.Saved" = "Статья сохранена";
 "Article.Unsaved" = "Статтю удалена из сохраненных";
 
 // MARK: - Album
@@ -273,7 +273,7 @@
 "PersonalCard.Creation.title" = "Создание персональной визитки";
 "PersonalCard.Creation.section.activity" = "Деятельность:";
 "PersonalCard.Creation.section.companyActivity" = "Деятельность компании:";
-"PersonalCard.Creation.section.socials" = "Социальные сети
+"PersonalCard.Creation.section.socials" = "Социальные сети";
 "PersonalCard.Creation.section.interests" = " Интересы(для рекомендаций):";
 
 // MARK: - Services
