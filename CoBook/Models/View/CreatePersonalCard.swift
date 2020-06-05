@@ -22,7 +22,7 @@ enum CreatePersonalCard {
     }
 
     enum ActionType: String {
-        case activityType
+        case practiceType
         case placeOfLiving
         case activityRegion
     }

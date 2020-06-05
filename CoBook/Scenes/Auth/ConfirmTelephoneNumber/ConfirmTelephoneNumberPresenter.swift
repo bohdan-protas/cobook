@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - View protocol
 
-protocol ConfirmTelephoneNumberView: LoadDisplayableView, AlertDisplayableView {
+protocol ConfirmTelephoneNumberView: class, LoadDisplayableView, AlertDisplayableView {
     func goToCreatePasswordController()
     func setFormatedTimer(label: String)
     func setTimerLabel(isHidden: Bool)

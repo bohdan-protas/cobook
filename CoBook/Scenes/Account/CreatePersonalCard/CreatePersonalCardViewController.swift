@@ -14,7 +14,7 @@ fileprivate enum Layout {
     static let footerHeight: CGFloat = 124
 }
 
-class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
+class CreatePersonalCardViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
 
@@ -44,10 +44,32 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         presenter.onViewDidLoad()
     }
 
-    // MARK: - CreatePersonalCardView
+    deinit {
+        presenter.detachView()
+    }
 
-    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?) {
-        tableView.dataSource = dataSource
+
+}
+
+// MARK: - Privates
+
+private extension CreatePersonalCardViewController {
+
+    func setupLayout() {
+        self.navigationItem.title = "PersonalCard.Creation.title".localized
+        tableView.estimatedRowHeight = Layout.estimatedRowHeight
+        tableView.delegate = self
+    }
+
+
+}
+
+// MARK: - CreatePersonalCardView
+
+extension CreatePersonalCardViewController: CreatePersonalCardView {
+
+    func set(dataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?) {
+        dataSource?.connect(to: tableView)
     }
 
     func setupSaveCardView() {
@@ -73,19 +95,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 
 }
 
-// MARK: - Privates
-
-private extension CreatePersonalCardViewController {
-
-    func setupLayout() {
-        self.navigationItem.title = "PersonalCard.Creation.title".localized
-
-        tableView.estimatedRowHeight = Layout.estimatedRowHeight
-        tableView.delegate = self
-    }
-
-
-}
 
 // MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
 

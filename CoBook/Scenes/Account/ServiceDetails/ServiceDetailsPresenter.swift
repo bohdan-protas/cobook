@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol ServiceDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
+protocol ServiceDetailsView: class, AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
     func reload()
     func set(dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?)
     func setupEmptyCardView()

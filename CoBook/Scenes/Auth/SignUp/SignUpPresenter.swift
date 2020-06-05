@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: SignUpView
-protocol SignUpView: LoadDisplayableView, AlertDisplayableView {
+protocol SignUpView: class, LoadDisplayableView, AlertDisplayableView {
     func setContinueButton(actived: Bool)
     func goToConfirmTelephoneNumber()
 }

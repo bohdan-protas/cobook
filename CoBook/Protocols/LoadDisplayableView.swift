@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol LoadDisplayableView: class {
+public protocol LoadDisplayableView {
     func startLoading()
     func stopLoading()
 

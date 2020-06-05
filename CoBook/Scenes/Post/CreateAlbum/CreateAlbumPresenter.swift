@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CreateAlbumView: LoadDisplayableView, AlertDisplayableView, NavigableView {
+protocol CreateAlbumView: class, LoadDisplayableView, AlertDisplayableView, NavigableView {
     func setSaveButton(isEnabled: Bool)
     func set(avatarPath: String?)
     func set(albumTitle: String?)

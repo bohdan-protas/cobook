@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDynamicLinks
 
-protocol PersonalCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, ShareableView {
+protocol PersonalCardDetailsView: class, AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, ShareableView {
     func setupLayout()
     func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?)
     func reload()

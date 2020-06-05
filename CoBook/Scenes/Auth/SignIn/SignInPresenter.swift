@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - SignInView
-protocol SignInView: LoadDisplayableView, AlertDisplayableView {
+protocol SignInView: class, LoadDisplayableView, AlertDisplayableView {
     var presenter: SignInPresenter { get set }
     func setSignInButton(enabled: Bool)
     func goToMainTabbar()
