@@ -8,304 +8,297 @@
 
 // MARK: - Base
 "OK" = "OK";
-"Cancel" = "Відмінити";
-"Successed" = "Успішно!";
-"Error" = "Помилка";
+"Cancel" = "Cancel";
+"Successed" = "Success!";
+"Error" = "Error";
 
-"Tabbar.allCards.title" = "Всі візитки";
-"Tabbar.account.title" = "Аккаунт";
-"Tabbar.saved.title" = "Збережені";
+"Tabbar.allCards.title" = "All cards";
+"Tabbar.account.title" = "Account";
+"Tabbar.saved.title" = "Saved";
 
-"AlertAction.Save" = "Зберегти";
-"AlertAction.Unsave" = "Видалити із збережених";
-"AlertAction.Delete" = "Видалити";
-"AlertAction.Change" = "Змінити";
-"AlertAction.Edit" = "Редагувати";
-"AlertAction.Create" = "Створити";
-"AlertAction.Cancel" = "Відмінити";
-"AlertAction.generalList.title" = "Загальний список";
-"AlertAction.createNewList.title" = "Створити новий список";
-"AlertAction.saveTo" = "Зберегти візитку до:";
-"AlertAction.settings" = "Налаштування";
-"AlertAction.makePhoto" = "Зробити знімок";
-"AlertAction.photoGallery" = "Фотоальбом";
+"AlertAction.Save" = "Save";
+"AlertAction.Unsave" = "Delete from saved";
+"AlertAction.Delete" = "Delete";
+"AlertAction.Change" = "Change";
+"AlertAction.Edit" = "Edit";
+"AlertAction.Create" = "Create";
+"AlertAction.Cancel" = "Cancel";
+"AlertAction.generalList.title" = "General list";
+"AlertAction.createNewList.title" = "Create new list";
+"AlertAction.saveTo" = "Save card to:";
+"AlertAction.settings" = "Settings";
+"AlertAction.makePhoto" = "Make a photo";
+"AlertAction.photoGallery" = "Photo gallery";
 
-"Alert.title.goToSettings" = "Перейти в налаштування?";
-"Alert.title.newSocial" = "Нова соціальна мережа";
-"Alert.message.newSocial" = "Будь ласка, введіть назву та посилання";
-"Alert.title.newList" = "Новий список";
-"Alert.title.editList" = "Редагувати список";
-"Alert.message.newList" = "Задайте назву новому списку";
+"Alert.title.goToSettings" = "Go to settings?";
+"Alert.title.newSocial" = "New social network";
+"Alert.message.newSocial" = "Please enter the name and the link";
+"Alert.title.newList" = "New list";
+"Alert.title.editList" = "Edit the list";
+"Alert.message.newList" = "Name the new list";
 
-"TextInput.placeholder.firstName" = "Імя";
-"TextInput.placeholder.lastName" = "Прізвище";
+"TextInput.placeholder.firstName" = "Name";
+"TextInput.placeholder.lastName" = "Last name";
 "TextInput.placeholder.telephone" = "+380XXXXXXXX";
-"TextInput.placeholder.email" = "Емейл";
-"TextInput.placeholder.website" = "Веб сайт";
-"TextInput.placeholder.password" = "Пароль";
-"TextInput.placeholder.newPassword" = "Новий пароль";
-"TextInput.placeholder.oldPassword" = "Старий пароль";
-"TextInput.placeholder.repeatPassword" = "Підтвердіть новий пароль";
-"TextInput.placeholder.occupiedPosition" = "Займана посада";
-"TextInput.placeholder.activityType" = "Вид діяльності";
-"TextInput.placeholder.cityOfResidence" = "Місто проживання";
-"TextInput.placeholder.cityLocation" = "Місто розташування";
-"TextInput.placeholder.activityLocation" = "Місто діяльності";
-"TextInput.placeholder.street" = "Вулиця";
-"TextInput.placeholder.workSchedule" = "Графік роботи (дні та години)";
-"TextInput.placeholder.activityRegion" = "Регіон діяльності";
-"TextInput.placeholder.activityDescription" = "Опис діяльності";
-"TextInput.placeholder.workingPhoneNumber" = "Робочий номер телефону";
-"TextInput.placeholder.workingEmailNumber" = "Робочий емайл для звязку";
-"TextInput.placeholder.companyName" = "Назва компанії";
-"TextInput.placeholder.detailDescription" = "Детальний опис";
-"TextInput.placeholder.serviceName" = "Назва послуги";
-"TextInput.placeholder.priceEnter" = "Вкажіть вартість";
-"TextInput.placeholder.serviceHeader" = "Заголовок послуги";
-"TextInput.placeholder.serviceDescription" = "Опис послуги";
-"TextInput.placeholder.productName" = "Назва товару";
+"TextInput.placeholder.email" = "Email";
+"TextInput.placeholder.website" = "Website";
+"TextInput.placeholder.password" = "Password";
+"TextInput.placeholder.newPassword" = "New password";
+"TextInput.placeholder.oldPassword" = "Old password";
+"TextInput.placeholder.repeatPassword" = "Repeat new password";
+"TextInput.placeholder.occupiedPosition" = "Occupied position";
+"TextInput.placeholder.activityType" = "Activity type";
+"TextInput.placeholder.cityOfResidence" = "City of residence";
+"TextInput.placeholder.cityLocation" = "Location city";
+"TextInput.placeholder.activityLocation" = "City of  work";
+"TextInput.placeholder.street" = "Street";
+"TextInput.placeholder.workSchedule" = "Working schedule (days and hours)";
+"TextInput.placeholder.activityRegion" = "Region of activity";
+"TextInput.placeholder.activityDescription" = "Activity description";
+"TextInput.placeholder.workingPhoneNumber" = "Working phone number";
+"TextInput.placeholder.workingEmailNumber" = "Working email for connection";
+"TextInput.placeholder.companyName" = "Company name";
+"TextInput.placeholder.detailDescription" = "Detailed description";
+"TextInput.placeholder.serviceName" = "Name of the service";
+"TextInput.placeholder.priceEnter" = " Enter the price";
+"TextInput.placeholder.serviceHeader" = "Service header";
+"TextInput.placeholder.serviceDescription" = "Service description";
+"TextInput.placeholder.productName" = "Product name";
 "TextInput.placeholder.showRoom" = "Show room";
-"TextInput.placeholder.productHeader" = "Заголовок товару";
-"TextInput.placeholder.productDescription" = "Опис товару";
-"TextInput.placeholder.socialName" = "Назва";
-"TextInput.placeholder.socialLink" = "Посилання, https://link.com";
-"TextInput.placeholder.listName" = "Назва";
+"TextInput.placeholder.productHeader" = "Product header";
+"TextInput.placeholder.productDescription" = "Product description ";
+"TextInput.placeholder.socialName" = "The name";
+"TextInput.placeholder.socialLink" = "The link, https://link.com";
+"TextInput.placeholder.listName" = "The name";
 
-"Button.continue.normalTitle" = "Продовжити";
-"Button.save.normalTitle" = "Зберегти";
-"Button.edit.normalTitle" = "Редагувати";
-"Button.email.normalTitle" = "Написати";
-"Button.telephone.normalTitle" = "Зателефонувати";
-"Button.mapDirectiron.normalTitle" = "Прокласти маршрут";
+"Button.continue.normalTitle" = "Continue";
+"Button.save.normalTitle" = "Save";
+"Button.edit.normalTitle" = "Edit";
+"Button.email.normalTitle" = "Write";
+"Button.telephone.normalTitle" = "Call";
+"Button.mapDirectiron.normalTitle" = "Map a route";
 
-"Button.changePhoto.normalTitle" = "Змінити фото";
-"Button.changeLogo.normalTitle" = "Змінити логотип компанії";
-"Button.addPhoto.normalTitle" = "Додати фото";
-"Button.addLogo.normalTitle" = "Додати логотип компанії";
-"Button.done.normalTitle" = "Готово";
-"Button.cancel.normalTitle" = "Відмінити";
+"Button.changePhoto.normalTitle" = "Change photo";
+"Button.changeLogo.normalTitle" = "Change company logo";
+"Button.addPhoto.normalTitle" = "Add photo";
+"Button.addLogo.normalTitle" = " Add company logo";
+"Button.done.normalTitle" = "Done";
+"Button.cancel.normalTitle" = "Cancel";
 
-"Label.addPhoto.text" = "Додати фото";
-"Label.contacts.text" = "Зв’язок:";
-"Label.changeBgPhoto.text" = "Змінити фото обкладинки";
-"Label.addBgPhoto.text" = "Додати фото обкладинки";
-"Label.showAll.text" = "Показати всі";
+"Label.addPhoto.text" = " Add photo";
+"Label.contacts.text" = "Contacts:";
+"Label.changeBgPhoto.text" = " Change cover photo";
+"Label.addBgPhoto.text" = " Add cover photo ";
+"Label.showAll.text" = "Show all";
 
-"SearchBar.placeholder.employers" = "Пошук працівників CoBook";
+"SearchBar.placeholder.employers" = "Search CoBook employees";
 
 // MARK: - Social
 "Social.metaTag.inviteFriends.title" = "CoBook";
-"Social.metaTag.inviteFriends.description" = "Персональна візитниця в телефоні CoBook — завантажуй! ІННОВАЦІЙНИЙ український додаток спеціально для тебе! CoBook — це розумна візитниця у твоєму смартфоні, яка допоможе в роботі та бізнесі лише за допомогою кількох кліків.";
+"Social.metaTag.inviteFriends.description" = "Personal business card holder CoBook in your smartphone – download Innovative Ukrainian application specially for you! CoBook- is a smart business card holder in your smartphone, which will help you in work and business by a couple of clicks.";
 
 // MARK: - Bar Items
-"BarItem.allCards" = "Всі\nвізитки";
-"BarItem.personalCards" = "Персональні\nвізитки";
-"BarItem.businessCards" = "Бізнес\nвізитки";
-"BarItem.myRegion" = "В моєму\nрегіоні";
-"BarItem.generalInfo" = "Загальна\n інформація";
-"BarItem.services" = "Послуги";
-"BarItem.shop" = "Крамниця";
-"BarItem.team" = "Команда";
-"BarItem.contacts" = "Контакти";
+"BarItem.allCards" = "All\ncards";
+"BarItem.personalCards" = "Personal\ncards";
+"BarItem.businessCards" = "Business\ncards";
+"BarItem.myRegion" = "In my\nregion";
+"BarItem.generalInfo" = "General\n information";
+"BarItem.services" = "Services";
+"BarItem.shop" = "Shop";
+"BarItem.team" = "Team";
+"BarItem.contacts" = "Contacts";
 
 // MARK: - Loading
-"Loading.photoLoading.title" = "Триває оновлення фото...";
-"Loading.loading.title" = "Завантаження...";
-"Loading.creating.title" = "Створення...";
-"Loading.updating.title" = "Оновлення...";
+"Loading.photoLoading.title" = "Photo loading...";
+"Loading.loading.title" = "Loading...";
+"Loading.creating.title" = "Creating...";
+"Loading.updating.title" = "Updating...";
 
 // MARK: -  Error
-"Error.telephoneHaveUnexpectedFormat" = "Номер телефону має нечитабельний формат";
-"Error.deviceIsNotConfigureForMail" = "З данного девайсу неможливо відправити листа.";
-"Error.connection" = "Не вдалося приєднатися до сервера";
-"Error.employAreadyAdded" = "Вибраний працівник вже доданий";
-"Error.photoLoading.message" = "Помилка завантаження фото";
-
-"Error.Social.unreadableFormat" = "Будь-ласка введіть посилання в правильному форматі";
-"Error.Social.badLink.message" = "Посилання має хибний формат";
-
-"Error.Map.notDefinedRoute.message" = "Не визначені адреси маршрутів";
-"Error.Map.cantOpen.message" = "Не вдається відкрити карти";
-"Error.Map.accessDenied.title" = "Для перегляду карти, надайте додатку доступ до вашої локації";
-"Error.Map.accessDeniedButton.normalTitle" = "Відкрити налаштування";
-
-"Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
-"Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
-"Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
-"Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
-"Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
-"Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
-"Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";
+"Error.telephoneHaveUnexpectedFormat" = "Phone number has unexpected";
+"Error.deviceIsNotConfigureForMail" = " Unable to send data from this device.";
+"Error.connection" = "Unable to join server";
+"Error.employAreadyAdded" = "Selected employee already added";
+"Error.photoLoading.message" = "Photo loading error";
+"Error.Social.unreadableFormat" = "Link to the social network has unreadable format";
+"Error.Social.badLink.message" = " Link has unreadable format ";
+"Error.Map.notDefinedRoute.message" = "Route addresses are not defined";
+"Error.Map.cantOpen.message" = "Unable to open maps";
+"Error.Map.accessDenied.title" = "Allow application to use your location to open maps";
+"Error.Map.accessDeniedButton.normalTitle" = "Open settings";
+"Error.Validation.email" = "Please enter correct email";
+"Error.Validation.firstName" = "First name should contain at least 3 letters but not more than 25";
+"Error.Validation.lastName" = " Last name should contain at least 3 letters but not more than 25";
+"Error.Validation.telephone" = "Please enter correct phone number";
+"Error.Validation.password" = " Password should contain at least 3 letters but not more than 25";
 
 // MARK: - Onboarding
-"Onboarding.Title01" = "Заголовок 01";
-"Onboarding.Subtitle01" = "Описособливостей додатку\nфічі, переваги, тощо";
-"Onboarding.Title02" = "Заголовок 02";
-"Onboarding.Subtitle02" = "Описособливостей додатку\nфічі, переваги, тощо";
-"Onboarding.Title03" = "Заголовок 03";
-"Onboarding.Subtitle03" = "Описособливостей додатку\nфічі, переваги, тощо";
-"Onboarding.Next" = "Продовжити";
-"Onboarding.Start" = "Розпочати";
+"Onboarding.Title01" = "Title 01";
+"Onboarding.Subtitle01" = "Application features description\nfeatures, advantages, and other";
+"Onboarding.Title02" = "Title 02";
+"Onboarding.Subtitle02" = " Application features description\nfeatures, advantages, and other";
+"Onboarding.Title03" = "Title 03";
+"Onboarding.Subtitle03" = " Application features description\ nfeatures, advantages, and other;
+"Onboarding.Next" = "Continue";
+"Onboarding.Start" = "Start";
 
 // MARK: - Card overview
-"CardOverview.search.placeholder" = "Пошук візитівки";
-"CardOverview.search.emptySearch" = "Немає результатів пошуку";
-"CardOverview.search.cardSearchResult" = "Знайдено %li візитку(и)";
+"CardOverview.search.placeholder" = "Serach the card";
+"CardOverview.search.emptySearch" = "No results in serach";
+"CardOverview.search.cardSearchResult" = "Found %land card(и)";
 
-"Card.hideButton.normalTitle" = "Не цікавить візитка?";
-"Card.hideLabel.text" = "Приховати";
+"Card.hideButton.normalTitle" = "Not interested in card?";
+"Card.hideLabel.text" = "Hide";
 
 // MARK: - SignUp
-"SignUp.title" = "Вітаємо в спільноті CoBook";
-"SignUp.registration" = "Реєстрація";
-"SignUp.alreadyHaveAccountQuestion" = "Вже маєте аккаунт?";
-"SignUp.enterButton.normalTitle" = "Увійдіть";
+"SignUp.title" = "Welcome to CoBook community";
+"SignUp.registration" = "Registration";
+"SignUp.alreadyHaveAccountQuestion" = "Already have account?";
+"SignUp.enterButton.normalTitle" = "Sign in";
 
 // MARK: - Create Password
-"ConfirmTelephone.header" = "Підтвердьт номер телефону";
-"ConfirmTelephone.description" = "Введіть код із смс-повідомлення";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС?";
+"ConfirmTelephone.header" = "Confirm phone number";
+"ConfirmTelephone.description" = "Enter code from SMS";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Didn’t receive a SMS?";
 
 // MARK: - Confirm password
-"CreatePassword.header" = "Останній крок";
-"CreatePassword.description" = "Придумайте пароль";
+"CreatePassword.header" = "Last step";
+"CreatePassword.description" = "Create password";
 
 // MARK: - SighIn
-"SignIn.title" = "Вітаємо в спільноті CoBook";
-"SignIn.header" = "Вхід";
-"SignIn.forgotPassword.normalTitle" = "Забули пароль?";
-"SignIn.enterButton.normalTitle" = "Увійдіть";
-"SignIn.firstTimeInCobook" = "Вперше в CoBook?";
-"SignIn.register.normalTitle" = "Зареєструйтесь";
+"SignIn.title" = " Welcome to CoBook community ";
+"SignIn.header" = "Sign in";
+"SignIn.forgotPassword.normalTitle" = "Forget password?";
+"SignIn.enterButton.normalTitle" = "Sign in";
+"SignIn.firstTimeInCobook" = "First time in CoBook?";
+"SignIn.register.normalTitle" = "Register";
 
 // MARK: - Forgot Password
-"ForgotPassword.title" = "Забули пароль?";
-"ForgotPassword.subtitle" = "Введіть ваш телефон для відновлення";
-"ForgotPassword.successMessage" = "Запит на відновлення паролю успішно наліслано.";
+"ForgotPassword.title" = "Forget the password?";
+"ForgotPassword.subtitle" = "Enter your mobile number to update";
+"ForgotPassword.successMessage" = "Updating request was successfully sent.";
 
 // MARK: - Account
-"Account.updating.title" = "Оновлення данних...";
-"Account.item.createPersonalCard" = "Створити персональну візитку";
-"Account.item.createBusinessCard" = "Створити бізнес візитку";
-"Account.item.createAnotherOneBusinessCard" = "Створити ще одну бізнес візитку";
-"Account.item.inviteFriends" = "Запросити друзів";
-"Account.item.statictics" = "Статистика";
-"Account.item.generateQrCode" = "Згенерувати QR-code";
+"Account.updating.title" = "Updating data...";
+"Account.item.createPersonalCard" = "Create personal card";
+"Account.item.createBusinessCard" = " Create business card ";
+"Account.item.createAnotherOneBusinessCard" = " Create another business card";
+"Account.item.inviteFriends" = "Invite friends";
+"Account.item.statictics" = "Statistics";
+"Account.item.generateQrCode" = "GenerateQR-code";
 "Account.item.faq" = "FAQ";
-"Account.item.startMakingMoney" = "Почати заробляти з CoBook";
-"Account.item.quitAccount" = "Вийти з аккаунту";
-"Account.section.myCards.title" = "Мої візитки:";
+"Account.item.startMakingMoney" = "Start making money with CoBook";
+"Account.item.quitAccount" = "Sign out";
+"Account.section.myCards.title" = "My cards:";
 
 // MARK: - Settings
-"Settings.title" = "Налаштування";
-"Settings.item.updateAccount.title" = "Оновлення аккаунту";
-"Settings.item.changePassword.title" = "Зміна паролю";
-"Settings.item.paymentMethods.title" = "Методи оплати";
-"Settings.item.appVersion.title" = "Версія додатку";
-"Settings.item.rules.title" = "Правила користування";
-"Settings.item.secureConditions.title" = "Умови безпеки";
+"Settings.title" = "Настройки";
+"Settings.item.updateAccount.title" = "Updating account";
+"Settings.item.changePassword.title" = "Changing password";
+"Settings.item.paymentMethods.title" = "Payment methods";
+"Settings.item.appVersion.title" = "Application version";
+"Settings.item.rules.title" = "Rules of usage";
+"Settings.item.secureConditions.title" = "Secure conditions";
 
-"Settings.ChangePassword.title" = "Зміна паролю";
-"Settings.ChangePassword.passwordsDoNotMatch.title" = "Провірте вхідні дані";
-"Settings.ChangePassword.passwordsDoNotMatch.message" = "Старий і новий пароль не співпадають";
-"Settings.ChangePassword.section.oldPassword.title" = "Старий пароль:";
-"Settings.ChangePassword.section.newPassword.title" = "Новий пароль:";
-"Settings.ChangePassword.section.repeareNewPassword.title" = "Підтвердіть новий пароль:";
+"Settings.ChangePassword.title" = "Cnage password";
+"Settings.ChangePassword.passwordsDoNotMatch.title" = "Check incoming data";
+"Settings.ChangePassword.passwordsDoNotMatch.message" = "Current and new passwords do not match";
+"Settings.ChangePassword.section.oldPassword.title" = "Old password:";
+"Settings.ChangePassword.section.newPassword.title" = "New password:";
+"Settings.ChangePassword.section.repeareNewPassword.title" = "Confirm new password:";
 
-"Settings.UpdateAccount.title" = "Оновлення аккаунту";
-"Settings.UpdateAccount.section.firstName" = "Імя:";
-"Settings.UpdateAccount.section.lastName" = "Прізвище:";
-"Settings.UpdateAccount.section.email" = "Емейл:";
+"Settings.UpdateAccount.title" = "Updating account";
+"Settings.UpdateAccount.section.firstName" = "First name:";
+"Settings.UpdateAccount.section.lastName" = "Last name:";
+"Settings.UpdateAccount.section.email" = "Email:";
 
 // MARK: - Acticles
-"Article.details.title" = "Стаття";
-"Article.create.title" = "Створити статтю";
-"Article.edit.title" = "Редагувати статтю";
-"Article.creatorSection.text" = "Статтю опубліковано:";
-"Article.anotherArticlesSection.text" = "Інші статті альбому:";
-"Article.addPhotoButton.normalTitle" = "Додати фото";
-"Article.header.placeholder" = "Введіть заголовок";
-"Article.selectAlbum.text" = "Виберіть альбом";
-"Article.description.placeholder" = "Текст статті...";
-"Article.publicButton.normalTitle" = "Публікувати";
-"Article.placeholder.emptyAlbumItems" = "В даному альбомі статті відсутні...";
-"Article.placeholder.back" = "Повернутися назад";
-"Article.Saved" = "Статтю збережено";
-"Article.Unsaved" = "Статтю видалено із збережених";
+"Article.details.title" = "Article";
+"Article.create.title" = "Create article";
+"Article.edit.title" = "Edit article";
+"Article.addPhotoButton.normalTitle" = "Add photo";
+"Article.header.placeholder" = "Enter header";
+"Article.selectAlbum.text" = "Select album";
+"Article.description.placeholder" = "Article text";
+"Article.publicButton.normalTitle" = "Publish";
+"Article.placeholder.emptyAlbumItems" = "Current album do not contain any articles...";
+"Article.placeholder.back" = "Get back";
+"Article.Saved" = "Article saved";
+"Article.Unsaved" = "Article deleted from Saved";
 
 // MARK: - Album
-"Album.createTitle" = "Створити альбом";
-"Album.selectTitle" = "Вибрати альбом";
-"Album.editTitle" = "Редагувати альбом";
-"Album.addPhotoButton.normalTitle" = "Додати фото";
-"Album.name.placeholder" = "Назва альбому";
+"Album.createTitle" = "Create album";
+"Album.selectTitle" = "Select album";
+"Album.editTitle" = "Edit album";
+"Album.addPhotoButton.normalTitle" = "Add photo";
+"Album.name.placeholder" = "Album name";
 
 // MARK: - Filters
-"Filter.title" = "Фільтри";
-"Filter.section.interests.title" = "Інтереси";
-"Filter.section.practicies.title" = "Вид діяльності";
+"Filter.title" = "Filters";
+"Filter.section.interests.title" = "Interests";
+"Filter.section.practicies.title" = "Occupation";
 
 //MARK: - Saved content
-"SavedContent.title" = "Збережені";
-"SavedContent.listCreated.message" = "Список %@ створено";
-"SavedContent.listUpdated.message" = "Список %@ оновлено";
-"SavedContent.listDeleted.message" = "Список %@ видалено";
-"SavedContent.cardSaved.message" = "Візитку збережено";
-"SavedContent.cardUnsaved.message" = "Видалено із збережених";
-"SavedContent.section.articles.title" = "Збережені статті";
-"SavedContent.section.cards.title" = "Збережені візитки";
-"SavedContent.addList.normalTitle" = "Додати список";
+"SavedContent.title" = "Saved";
+"SavedContent.listCreated.message" = "List %@ created";
+"SavedContent.listUpdated.message" = "List %@ updated";
+"SavedContent.listDeleted.message" = "List %@ deleted";
+"SavedContent.cardSaved.message" = "Card saved";
+"SavedContent.cardUnsaved.message" = "Deleted from Saved";
+"SavedContent.section.articles.title" = "Saved posts";
+"SavedContent.section.cards.title" = "Saved cards";
+"SavedContent.addList.normalTitle" = "Add list";
 
 // MARK: - Business Card
-"BusinessCard.title" = "Бізнес візитка";
-"BusinessCard.section.createdAlbums.title" = "Створені альбоми:";
-"BusinessCard.section.socials.title" = "Соціальні мережі:";
-"BusinessCard.createNewAlbum.text" = "Ваш пост";
+"BusinessCard.title" = "Business card";
+"BusinessCard.section.createdAlbums.title" = "Created albums:";
+"BusinessCard.section.socials.title" = "Social networks:";
+"BusinessCard.createNewAlbum.text" = "Your post";
 
-"BusinessCard.Creation.title" = "Створення бізнес візитки";
-"BusinessCard.section.mainData" = "Основні дані:";
-"BusinessCard.section.companyActivity" = "Діяльність компанії:";
-"BusinessCard.section.aboutCompany.title" = "Про компанію:";
-"BusinessCard.section.companyInSocials.title" = "Компанія у соцмережах:";
-"BusinessCard.section.companyEmployers.title" = "Працівники компанії:";
-"BusinessCard.section.interests.title" = "Інтереси(для рекомендацій):";
+"BusinessCard.Creation.title" = "Creating business cards";
+"BusinessCard.section.mainData" = "Main data:";
+"BusinessCard.section.companyActivity" = "Company operations:";
+"BusinessCard.section.aboutCompany.title" = "About company:";
+"BusinessCard.section.companyInSocials.title" = "Company in social networks:";
+"BusinessCard.section.companyEmployers.title" = "Company employess:";
+"BusinessCard.section.interests.title" = "Interests(for recommendations):";
 
 // MARK: - Personal Card
-"PersonalCard.title" = "Персональна візитка";
-"PersonalCard.createNewAlbum.text" = "Ваш пост";
-"PersonalCard.section.contacts.title" = "Зв’язатись:";
-"PersonalCard.section.articles.title" = "Створені статті:";
-"PersonalCard.section.ownerArticles.title" = "Мій щоденник:";
+"PersonalCard.title" = "Personal card";
+"PersonalCard.createNewAlbum.text" = "your post";
+"PersonalCard.section.contacts.title" = "Contact:";
+"PersonalCard.section.articles.title" = "Created articles:";
+"PersonalCard.section.ownerArticles.title" = "My diary:";
 
-"PersonalCard.Creation.title" = "Створення персональної візитки";
-"PersonalCard.Creation.section.activity" = "Діяльність:";
-"PersonalCard.Creation.section.companyActivity" = "Діяльність компанії:";
-"PersonalCard.Creation.section.socials" = "Соціальні мережі:";
-"PersonalCard.Creation.section.interests" = "Інтереси(для рекомендацій):";
+"PersonalCard.Creation.title" = "Creating personal cards";
+"PersonalCard.Creation.section.activity" = "Business:";
+"PersonalCard.Creation.section.companyActivity" = "Company business:";
+"PersonalCard.Creation.section.socials" = "Social networks:";
+"PersonalCard.Creation.section.interests" = "Interests(for recommendations):";
 
 // MARK: - Services
-"Service.create.title" = "Послуга компанії";
-"Service.details.title" = "Послуга компанії";
-"Service.negotiablePrice.text" = "Ціна договірна";
+"Service.create.title" = "Company service";
+"Service.details.title" = " Company service";
+"Service.negotiablePrice.text" = "Conventional price";
 "Service.showRoom.title" = "Show room";
-"Service.add.text" = "Додати послугу";
-"Service.saveButton.normalTitle" = "Зберегти послугу";
-"Service.updateButton.normalTitle" = "Оновити послугу";
-"Service.editButton.normalTitle" = "Редагувати послугу";
-"Service.section.price.title" = "Вартість послуги:";
-"Service.section.contacts.title" = "Контактні дані:";
-"Service.checkbox.title" = "Використати контакти сторінки";
+"Service.add.text" = "Add service";
+"Service.saveButton.normalTitle" = "Save service";
+"Service.updateButton.normalTitle" = "Update service";
+"Service.editButton.normalTitle" = "Edit service";
+"Service.section.price.title" = "Service price:";
+"Service.section.contacts.title" = "Contact details:";
+"Service.checkbox.title" = "Use page contacts";
 
 // MARK: - Product
-"Product.create.title" = "Товар";
-"Product.details.title" = "Товар";
-"Product.add.text" = "Додати товар";
-"Product.saveButton.normalTitle" = "Зберегти товар";
-"Product.updateButton.normalTitle" = "Оновити товар";
-"Product.editButton.normalTitle" = "Редагувати товар";
-"Product.checkbox.negotiablePrice.title" = "Ціна договірна";
-"Product.checkbox.useCompanyContacts.title" = "Використати контакти сторінки";
-"Product.section.price.title" = "Вартість послуги:";
-"Product.section.showRoomNumber.title" = "Номер Show room:";
-"Product.section.contacts.title" = "Контактні дані:";
-"Product.negotiablePrice.text" = "Ціна договірна";
+"Product.create.title" = "Product";
+"Product.details.title" = "Product";
+"Product.add.text" = "Add product";
+"Product.saveButton.normalTitle" = "Save product";
+"Product.updateButton.normalTitle" = "Update product";
+"Product.editButton.normalTitle" = "Edit product";
+"Product.checkbox.negotiablePrice.title" = " Conventional price";
+"Product.checkbox.useCompanyContacts.title" = " Use page contacts";
+"Product.section.price.title" = "Service price:";
+"Product.section.showRoomNumber.title" = "Show room number:";
+"Product.section.contacts.title" = "Contact details:";
+"Product.negotiablePrice.text" = "Conventional price";
