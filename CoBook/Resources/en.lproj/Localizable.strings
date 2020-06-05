@@ -98,10 +98,10 @@
 "Social.metaTag.inviteFriends.description" = "Personal business card holder CoBook in your smartphone – download Innovative Ukrainian application specially for you! CoBook- is a smart business card holder in your smartphone, which will help you in work and business by a couple of clicks.";
 
 // MARK: - Bar Items
-"BarItem.allCards" = "All\ncards";
+"BarItem.allCards" = "All cards";
 "BarItem.personalCards" = "Personal\ncards";
 "BarItem.businessCards" = "Business\ncards";
-"BarItem.myRegion" = "In my\nregion";
+"BarItem.myRegion" = "In my region";
 "BarItem.generalInfo" = "General\n information";
 "BarItem.services" = "Services";
 "BarItem.shop" = "Shop";

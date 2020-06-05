@@ -26,7 +26,7 @@ class APIClient {
 
         let loggerMonitor = LoggerEventMonitor()
         let requestInterceptor = AuthRequestInterceptor()
-        let session = Session(interceptor: requestInterceptor, serverTrustManager: manager, eventMonitors: [])
+        let session = Session(interceptor: requestInterceptor, serverTrustManager: manager, eventMonitors: [loggerMonitor])
 
         let apiClient = APIClient(session: session)
         return apiClient

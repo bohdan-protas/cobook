@@ -279,6 +279,7 @@
 		B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */; };
 		B884AAE1245F720D00ACC0D7 /* PhotosPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */; };
 		B884AAE3245F722800ACC0D7 /* PhotosPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */; };
+		B884B699248A5B77000848A7 /* LocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884B698248A5B77000848A7 /* LocalizationKey.swift */; };
 		B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */; };
 		B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */; };
 		B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */; };
@@ -640,6 +641,7 @@
 		B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataManager.swift; sourceTree = "<group>"; };
 		B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosPlaceholderView.xib; sourceTree = "<group>"; };
 		B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPlaceholderView.swift; sourceTree = "<group>"; };
+		B884B698248A5B77000848A7 /* LocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKey.swift; sourceTree = "<group>"; };
 		B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItemTableViewCell.swift; sourceTree = "<group>"; };
 		B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemTableViewCell.xib; sourceTree = "<group>"; };
 		B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
@@ -1605,6 +1607,7 @@
 				B8909FB724646A5700AA56F7 /* ArticlePreviewAPIModel.swift */,
 				B8205C33246DA980003C39F4 /* SavedCardsApiModel.swift */,
 				B8D5F980246E81EF0032E885 /* FolderApiModel.swift */,
+				B884B698248A5B77000848A7 /* LocalizationKey.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2456,6 +2459,7 @@
 				B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */,
 				B836DF2C2433792600CB84D3 /* CreateBusinessCardPresenter.swift in Sources */,
 				B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */,
+				B884B699248A5B77000848A7 /* LocalizationKey.swift in Sources */,
 				B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */,
 				B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */,
 				B8559F66243AD0B900787349 /* BusinessCardDetailsPresenter.swift in Sources */,
