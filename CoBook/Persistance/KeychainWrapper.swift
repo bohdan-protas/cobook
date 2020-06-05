@@ -3,7 +3,8 @@
 //  KeychainWrapper
 //
 //  Created by Protas Bohdan on 11/02/20.
-//  Copyright © 2020 7MT Studio. All rights reserved.
+//  Copyright © 2020 CoBook. All rights reserved..
+//
 
 import Foundation
 
