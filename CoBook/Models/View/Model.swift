@@ -26,6 +26,7 @@ struct ActionFieldModel {
 struct PracticeModel {
     var id: Int?
     var title: String?
+    var isSelected: Bool = false
 }
 
 struct InterestModel {

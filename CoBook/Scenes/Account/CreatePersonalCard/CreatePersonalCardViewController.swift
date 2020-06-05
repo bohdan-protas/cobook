@@ -68,6 +68,12 @@ private extension CreatePersonalCardViewController {
 
 extension CreatePersonalCardViewController: CreatePersonalCardView {
 
+    func showSearchPracticies(presenter: SearchPracticiesPresenter) {
+        let searchViewController = SearchViewController(presenter: presenter)
+        let navigation = CustomNavigationController(rootViewController: searchViewController)
+        present(navigation, animated: true, completion: nil)
+    }
+
     func set(dataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }

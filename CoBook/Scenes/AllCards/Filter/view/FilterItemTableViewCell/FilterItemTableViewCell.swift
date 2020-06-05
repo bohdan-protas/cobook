@@ -11,6 +11,5 @@ import UIKit
 class FilterItemTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var checkmarkImageView: UIImageView!
-    
+
 }

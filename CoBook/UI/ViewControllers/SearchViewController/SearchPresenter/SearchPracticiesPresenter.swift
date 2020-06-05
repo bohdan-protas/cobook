@@ -12,17 +12,19 @@ class SearchPracticiesPresenter: SearchPresenter {
 
     weak var view: SearchView?
     private var viewDataSource: DataSource<SearchCellsConfigurator>?
+
     private var practicies: [PracticeModel] = []
+    private var filteredPracticies: [PracticeModel] = []
 
     /// Current search request
-    private var pendingRequestWorkItem: DispatchWorkItem?
 
     // MARK: - Search presenter
 
     init() {
         var configurator = SearchCellsConfigurator()
-        configurator.practiceConfigurator = CellConfigurator(configurator: { (cell, model: PracticeModel, tableView, index) -> UITableViewCell in
-            cell.textLabel?.text = model.title
+        configurator.practiceConfigurator = CellConfigurator(configurator: { (cell, model: PracticeModel, tableView, index) -> FilterItemTableViewCell in
+            cell.titleLabel?.text = model.title
+            cell.accessoryType = model.isSelected ? .checkmark : .none
             return cell
         })
         self.viewDataSource = DataSource(sections: [], configurator: configurator)
@@ -30,10 +32,13 @@ class SearchPracticiesPresenter: SearchPresenter {
 
     func setup() {
         fetchPracticies()
+        view?.set(dataSource: viewDataSource)
     }
 
     func searchBy(text: String?) {
-
+        filteredPracticies = practicies.filter { ($0.title ?? "").lowercased().contains((text ?? "").lowercased()) }
+        updateViewDataSource()
+        view?.reload()
     }
 
 
@@ -44,7 +49,11 @@ class SearchPracticiesPresenter: SearchPresenter {
 extension SearchPracticiesPresenter {
 
     func updateViewDataSource() {
-        let photosSection = Section<SearchContent.Item>(items: practicies.compactMap {  .practice(model: $0) })
+        let items: [SearchContent.Item] = view?.isSearching ?? false ?
+            filteredPracticies.compactMap { .practice(model: $0) } :
+            practicies.compactMap { .practice(model: $0) }
+
+        let photosSection = Section<SearchContent.Item>(items: items)
         viewDataSource?.sections = [photosSection]
     }
 
@@ -55,15 +64,17 @@ extension SearchPracticiesPresenter {
 private extension SearchPracticiesPresenter {
 
     func fetchPracticies() {
+        view?.startLoading()
         APIClient.default.practicesTypesListRequest { [weak self] (result) in
             guard let self = self else { return }
+            self.view?.stopLoading()
             switch result {
             case let .success(response):
                 self.practicies = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
                 self.updateViewDataSource()
                 self.view?.reload()
             case let .failure(error):
-                break
+                self.view?.errorAlert(message: error.localizedDescription)
             }
         }
     }

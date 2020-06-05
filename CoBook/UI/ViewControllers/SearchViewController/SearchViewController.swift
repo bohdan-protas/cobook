@@ -13,8 +13,15 @@ import UIKit
 class SearchViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     var presenter: SearchPresenter
+    var searchController: UISearchController!
+    var searchBar: UISearchBar!
+
+    var isSearching: Bool {
+        return searchController.isActive
+    }
 
     // MARK: - Initializers
 
@@ -31,6 +38,8 @@ class SearchViewController: BaseViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
+
         presenter.view = self
         presenter.setup()
     }
@@ -38,7 +47,23 @@ class SearchViewController: BaseViewController {
     deinit {
         presenter.view = nil
     }
-    
+
+    // MARK: Loader view
+
+    override func startLoading() {
+        activityIndicator.startAnimating()
+    }
+
+    override func stopLoading() {
+        activityIndicator.stopAnimating()
+    }
+
+    // MARK: Actions
+
+    @objc func closeAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
 
 }
 
@@ -47,8 +72,29 @@ class SearchViewController: BaseViewController {
 private extension SearchViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Пошук всякої лупини"
+        self.navigationItem.title = "Пошук виду діяльності"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_nav_close"), style: .plain, target: self, action: #selector(closeAction))
+
+        self.searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+
+        // Search bar setup
+        searchBar = searchController.searchBar
+        searchBar.sizeToFit()
+        searchBar.searchBarStyle = .default
+        searchBar.barTintColor = UIColor.Theme.grayBG
+        searchBar.tintColor = UIColor.Theme.blackMiddle
+        searchBar.setImage(UIImage(named: "ic_search"), for: .search, state: .normal)
+        searchBar.placeholder = "Пошук"
+        searchBar.autocapitalizationType = .none
+        searchBar.showsCancelButton = false
+
+        self.navigationItem.searchController = searchController
     }
+
 
 }
 
@@ -65,4 +111,32 @@ extension SearchViewController: SearchView {
     }
 
     
+}
+
+// MARK: - UISearchControllerDelegate
+
+extension SearchViewController: UISearchControllerDelegate {
+
+    func willPresentSearchController(_ searchController: UISearchController) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        self.navigationItem.rightBarButtonItem = nil
+    }
+
+    func willDismissSearchController(_ searchController: UISearchController) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+
+
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension SearchViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        let strippedString = searchController.searchBar.text!.trimmingCharacters(in: .whitespaces)
+        presenter.searchBy(text: strippedString)
+    }
+
+
 }

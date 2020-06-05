@@ -17,6 +17,8 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()
+
+    func showSearchPracticies(presenter: SearchPracticiesPresenter)
 }
 
 fileprivate enum Defaults {
@@ -269,7 +271,8 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextField
 
         switch action {
         case .practiceType:
-            Log.debug("activityType")
+            let presenter = SearchPracticiesPresenter()
+            self.view?.showSearchPracticies(presenter: presenter)
 
         case .placeOfLiving:
             let filter = GMSAutocompleteFilter()

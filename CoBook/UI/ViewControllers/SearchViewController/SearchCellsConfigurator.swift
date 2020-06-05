@@ -19,7 +19,7 @@ enum SearchContent {
 
 struct SearchCellsConfigurator: CellConfiguratorType {
 
-    var practiceConfigurator: CellConfigurator<PracticeModel, UITableViewCell>?
+    var practiceConfigurator: CellConfigurator<PracticeModel, FilterItemTableViewCell>?
 
     func reuseIdentifier(for item: SearchContent.Item, indexPath: IndexPath) -> String {
         switch item {
