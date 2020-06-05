@@ -15,7 +15,7 @@ fileprivate enum Layout {
     static let footerHeight: CGFloat = 124
 }
 
-class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardView {
+class CreateBusinessCardViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
 
@@ -49,10 +49,15 @@ class CreateBusinessCardViewController: BaseViewController, CreateBusinessCardVi
         presenter.detachView()
     }
 
-    // MARK: - CreateBusinessCardView
 
-    func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?) {
-        tableView.dataSource = dataSource
+}
+
+// MARK: - CreateBusinessCardView
+
+extension CreateBusinessCardViewController: CreateBusinessCardView {
+
+    func set(dataSource: DataSource<CreateBusinessCardDataSourceConfigurator>?) {
+        dataSource?.connect(to: tableView)
     }
 
     func setupSaveCardView() {

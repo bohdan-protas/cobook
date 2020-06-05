@@ -12,7 +12,7 @@ import GooglePlaces
 
 protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate, CardBackgroundManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
-    func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?)
+    func set(dataSource: DataSource<CreateBusinessCardDataSourceConfigurator>?)
 
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setupSaveCardView()
@@ -32,7 +32,7 @@ fileprivate enum Defaults {
 class CreateBusinessCardPresenter: NSObject, BasePresenter {
 
     var view: CreateBusinessCardView?
-    private var viewDataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?
+    private var viewDataSource: DataSource<CreateBusinessCardDataSourceConfigurator>?
 
     /// Flag for instantiate current state
     private let isEditing: Bool
@@ -78,8 +78,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: CreateBusinessCardView) {
         self.view = view
-
-        self.viewDataSource = TableDataSource(tableView: view.tableView, configurator: dataSourceConfigurator)
+        self.viewDataSource = DataSource(configurator: dataSourceConfigurator)
         view.set(dataSource: viewDataSource)
     }
 
@@ -176,25 +175,48 @@ extension CreateBusinessCardPresenter {
                                              placeholder: "TextInput.placeholder.companyName".localized,
                                              associatedKeyPath: \CreateBusinessCard.DetailsModel.companyName,
                                              keyboardType: .default)),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.practiseType?.title, placeholder: "TextInput.placeholder.activityType".localized, actionTypeId: CreateBusinessCard.ActionType.practice.rawValue)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.contactTelephone, placeholder: "TextInput.placeholder.workingPhoneNumber".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyWebSite, placeholder: "TextInput.placeholder.website".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.companyWebSite, keyboardType: .URL)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyEmail, placeholder: "TextInput.placeholder.email".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.companyEmail, keyboardType: .emailAddress))
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.practiseType?.title,
+                                                 placeholder: "TextInput.placeholder.activityType".localized,
+                                                 actionTypeId: CreateBusinessCard.ActionType.practice.rawValue)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.contactTelephone,
+                                             placeholder: "TextInput.placeholder.workingPhoneNumber".localized,
+                                             associatedKeyPath: \CreateBusinessCard.DetailsModel.contactTelephone,
+                                             keyboardType: .phonePad)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyWebSite,
+                                             placeholder: "TextInput.placeholder.website".localized,
+                                             associatedKeyPath: \CreateBusinessCard.DetailsModel.companyWebSite,
+                                             keyboardType: .URL)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.companyEmail,
+                                             placeholder: "TextInput.placeholder.email".localized,
+                                             associatedKeyPath: \CreateBusinessCard.DetailsModel.companyEmail,
+                                             keyboardType: .emailAddress))
         ])
 
         let companyActivitySection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "BusinessCard.section.companyActivity".localized),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.city?.name, placeholder: "TextInput.placeholder.cityLocation".localized, actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.region?.name, placeholder: "TextInput.placeholder.activityLocation".localized, actionTypeId: CreateBusinessCard.ActionType.region.rawValue)),
-            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.address?.name, placeholder: "TextInput.placeholder.street".localized, actionTypeId: CreateBusinessCard.ActionType.address.rawValue)),
-            .textField(model: TextFieldModel(text: businessCardDetailsModel.schedule, placeholder: "TextInput.placeholder.workSchedule".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.schedule, keyboardType: .default))
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.city?.name,
+                                                 placeholder: "TextInput.placeholder.cityLocation".localized,
+                                                 actionTypeId: CreateBusinessCard.ActionType.city.rawValue)),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.region?.name,
+                                                 placeholder: "TextInput.placeholder.activityLocation".localized,
+                                                 actionTypeId: CreateBusinessCard.ActionType.region.rawValue)),
+            .actionField(model: ActionFieldModel(text: businessCardDetailsModel.address?.name,
+                                                 placeholder: "TextInput.placeholder.street".localized,
+                                                 actionTypeId: CreateBusinessCard.ActionType.address.rawValue)),
+            .textField(model: TextFieldModel(text: businessCardDetailsModel.schedule,
+                                             placeholder: "TextInput.placeholder.workSchedule".localized,
+                                             associatedKeyPath: \CreateBusinessCard.DetailsModel.schedule,
+                                             keyboardType: .default))
         ])
 
         let aboutCompacySection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "BusinessCard.section.aboutCompany.title".localized),
-            .textView(model: TextFieldModel(text: businessCardDetailsModel.description, placeholder: "TextInput.placeholder.detailDescription".localized, associatedKeyPath: \CreateBusinessCard.DetailsModel.description, keyboardType: .default))
+            .textView(model: TextFieldModel(text: businessCardDetailsModel.description,
+                                            placeholder: "TextInput.placeholder.detailDescription".localized,
+                                            associatedKeyPath: \CreateBusinessCard.DetailsModel.description,
+                                            keyboardType: .default))
         ])
 
         let socialSection = Section<CreateBusinessCard.Cell>(items: [
