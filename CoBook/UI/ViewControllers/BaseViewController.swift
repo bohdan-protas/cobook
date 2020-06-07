@@ -10,8 +10,9 @@ import UIKit
 import JGProgressHUD
 import Alamofire
 import MessageUI
+import PanModal
 
-class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayableView {
+class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayableView, PanModalPresentable {
 
     // MARK: - Properties
 
@@ -39,6 +40,18 @@ class BaseViewController: UIViewController, LoadDisplayableView, AlertDisplayabl
 
     var currentHud: JGProgressHUD?
     var onFinishDownloadCompletion: (() -> Void)?
+
+    var panScrollable: UIScrollView? {
+        return nil
+    }
+
+    var longFormHeight: PanModalHeight {
+        return .maxHeight
+    }
+
+    var shortFormHeight: PanModalHeight {
+        return longFormHeight
+    }
 
     // MARK: - LoadDisplayableView
 
@@ -161,3 +174,5 @@ extension BaseViewController: MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true)
     }
 }
+
+

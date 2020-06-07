@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import PanModal
 
 class SearchViewController: BaseViewController {
 
@@ -140,3 +141,4 @@ extension SearchViewController: UISearchResultsUpdating {
 
 
 }
+

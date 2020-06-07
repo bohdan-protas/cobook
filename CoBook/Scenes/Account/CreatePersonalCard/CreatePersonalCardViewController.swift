@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PanModal
 import GooglePlaces
 
 fileprivate enum Layout {
@@ -71,7 +72,7 @@ extension CreatePersonalCardViewController: CreatePersonalCardView {
     func showSearchPracticies(presenter: SearchPracticiesPresenter) {
         let searchViewController = SearchViewController(presenter: presenter)
         let navigation = CustomNavigationController(rootViewController: searchViewController)
-        present(navigation, animated: true, completion: nil)
+        presentPanModal(navigation)
     }
 
     func set(dataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?) {
@@ -91,7 +92,7 @@ extension CreatePersonalCardViewController: CreatePersonalCardView {
         autocompleteViewController.autocompleteFilter = filter
         autocompleteViewController.delegate = self
 
-        present(autocompleteViewController, animated: true, completion: nil)
+        presentPanModal(autocompleteViewController)
     }
 
     func setSaveButtonEnabled(_ isEnabled: Bool) {
@@ -161,3 +162,21 @@ extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegat
 
 
 }
+
+extension GMSAutocompleteViewController: PanModalPresentable {
+
+    public var panScrollable: UIScrollView? {
+        return nil
+    }
+
+    public var longFormHeight: PanModalHeight {
+        return .maxHeight
+    }
+
+    public var shortFormHeight: PanModalHeight {
+        return longFormHeight
+    }
+
+}
+
+
