@@ -10,8 +10,7 @@ import Foundation
 
 // MARK: View -
 
-protocol SearchView: class, AlertDisplayableView, LoadDisplayableView {
-    var isSearching: Bool { get }
+protocol SearchView: class, AlertDisplayableView, LoadDisplayableView, NavigableView {
     func set(dataSource: DataSource<SearchCellsConfigurator>?)
     func reload()
 }
@@ -22,4 +21,6 @@ protocol SearchPresenter: class {
     var view: SearchView? { get set }
     func setup()
     func searchBy(text: String?)
+    func selectedAt(indexPath: IndexPath)
+    func deselectedAt(indexPath: IndexPath)
 }

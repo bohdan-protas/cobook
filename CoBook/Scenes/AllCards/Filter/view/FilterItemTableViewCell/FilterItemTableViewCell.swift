@@ -12,4 +12,15 @@ class FilterItemTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
 
+    override var isSelected: Bool {
+        didSet {
+            accessoryType = isSelected ? .checkmark : .none
+        }
+    }
+
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        accessoryType = isSelected ? .checkmark : .none
+//    }
+
 }
