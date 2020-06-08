@@ -171,7 +171,7 @@ private extension CreatePersonalCardPresenter {
             .interests
         ])
 
-        viewDataSource?.sections = [photosSection, activitySection, contactsSection, interestsSection]
+        viewDataSource?.sections = [photosSection, activitySection, contactsSection/*, interestsSection*/]
     }
 
     func setupDataSource() {
