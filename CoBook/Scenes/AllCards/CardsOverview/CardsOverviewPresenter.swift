@@ -379,11 +379,11 @@ private extension CardsOverviewViewPresenter {
     }
 
     func fetchCards(searchQuery: String? = nil, type: CardType? = nil, currentPaginationPage: PaginationPage<CardItemViewModel>? = nil, completion: (([CardItemViewModel]) -> Void)?) {
-        let interests = AppStorage.User.Filters?.interests
-        let practiceTypeIds = AppStorage.User.Filters?.practicies
+        //let interests = AppStorage.User.Filters?.interests
+        let practiceTypeIds = AppStorage.User.Filters?.practicies.compactMap { $0.id }
 
         APIClient.default.getCardsList(type: type?.rawValue,
-                                       interestIds: interests,
+                                       //interestIds: interests,
                                        practiseTypeIds: practiceTypeIds,
                                        search: searchQuery,
                                        limit:currentPaginationPage?.pageSize,

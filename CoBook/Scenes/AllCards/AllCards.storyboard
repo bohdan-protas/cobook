@@ -77,16 +77,16 @@
                         <viewLayoutGuide key="safeArea" id="PKx-cW-vQZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="Gz5-oh-u6U">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="29D-p5-S7I">
-                            <color key="tintColor" name="Theme_Green-Dark"/>
-                            <connections>
-                                <action selector="saveButtonTapped:" destination="ILx-Ge-kZz" id="TKG-20-fgO"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="ic_nav_close" id="j8G-Oe-ldM">
+                        <barButtonItem key="leftBarButtonItem" image="ic_nav_close" id="j8G-Oe-ldM">
                             <color key="tintColor" name="Theme_Black-Middle"/>
                             <connections>
                                 <action selector="closeButtonTapped:" destination="ILx-Ge-kZz" id="gaD-js-Sic"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="29D-p5-S7I">
+                            <color key="tintColor" name="Theme_Green-Dark"/>
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="ILx-Ge-kZz" id="TKG-20-fgO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

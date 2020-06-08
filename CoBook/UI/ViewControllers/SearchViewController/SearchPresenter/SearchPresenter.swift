@@ -23,6 +23,6 @@ protocol SearchPresenter: class {
     func setup()
     func prepareForDismiss()
     func searchBy(text: String?)
-    func selectedAt(indexPath: IndexPath)
-    func deselectedAt(indexPath: IndexPath)
+    func selectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?)
+    func deselectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?)
 }

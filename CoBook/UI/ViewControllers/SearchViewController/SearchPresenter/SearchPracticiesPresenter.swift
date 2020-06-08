@@ -57,24 +57,32 @@ class SearchPracticiesPresenter: SearchPresenter {
         view?.reload()
     }
 
-    func selectedAt(indexPath: IndexPath) {
+    func prepareForDismiss() {
+        let selected = practicies.filter { $0.isSelected }
+        delegate?.didSelectedPractices(selected)
+    }
+
+    func selectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?) {
+        let count = practicies.filter { $0.isSelected }.count
+        if count == 10 {
+            view?.errorAlert(message: String(format: "Error.maxSelectedElements".localized, 10))
+            return
+        }
+
         filteredPracticies[indexPath.item].isSelected = true
         if let index = practicies.firstIndex(where: { $0.id == filteredPracticies[safe: indexPath.item]?.id }) {
             practicies[safe: index]?.isSelected = true
             selectionCompletion?(practicies[safe: index])
+            completion?(true)
         }
     }
 
-    func deselectedAt(indexPath: IndexPath) {
+    func deselectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?) {
         filteredPracticies[indexPath.item].isSelected = false
         if let index = practicies.firstIndex(where: { $0.id == filteredPracticies[safe: indexPath.item]?.id }) {
             practicies[safe: index]?.isSelected = false
+            completion?(true)
         }
-    }
-
-    func prepareForDismiss() {
-        let selected = practicies.filter { $0.isSelected }
-        delegate?.didSelectedPractices(selected)
     }
 
 
@@ -104,6 +112,10 @@ private extension SearchPracticiesPresenter {
             switch result {
             case let .success(response):
                 self.practicies = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
+                self.practicies = self.practicies.compactMap { fetched in
+                    let isSelected: Bool = AppStorage.User.Filters?.practicies.compactMap{ $0.id }.contains(fetched.id ?? -1) ?? false
+                    return PracticeModel(id: fetched.id, title: fetched.title, isSelected: isSelected)
+                }
                 self.filteredPracticies = self.practicies
                 self.updateViewDataSource()
                 self.view?.reload()

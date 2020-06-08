@@ -28,6 +28,12 @@ class InterestsSelectionTableViewCell: UITableViewCell {
 
     weak var delegate: InterestsSelectionTableViewCellDelegate?
     weak var dataSource: InterestsSelectionTableViewCellDataSource?
+    
+    @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet var leftConftraint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet var rightConstraint: NSLayoutConstraint!
+    @IBOutlet var heightConstraint: NSLayoutConstraint!
 
     var dataSourceIdentifier: String?
 
@@ -40,6 +46,10 @@ class InterestsSelectionTableViewCell: UITableViewCell {
 
         interestsCollectionViewFlowLayout.estimatedItemSize = .init(width: 50, height: 24)
         interestsCollectionViewFlowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
+    }
+
+    func reload() {
+        self.interestsCollectionView.reloadData()
     }
 
     

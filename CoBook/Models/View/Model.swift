@@ -23,7 +23,7 @@ struct ActionFieldModel {
     var actionTypeId: String?
 }
 
-struct PracticeModel {
+struct PracticeModel: Codable {
     var id: Int?
     var title: String?
     var isSelected: Bool = false
@@ -119,8 +119,8 @@ struct FilterItemModel {
 }
 
 struct UserFilters: Codable {
-    var interests: [Int] = []
-    var practicies: [Int] = []
+    //var interests: [Int] = []
+    var practicies: [PracticeModel] = []
 }
 
 struct DynamicLinkContainer: Codable {

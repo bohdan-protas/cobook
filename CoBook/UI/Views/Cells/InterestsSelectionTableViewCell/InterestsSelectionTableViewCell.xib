@@ -41,8 +41,13 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bottomConstraint" destination="mba-lm-aXv" id="CCY-mt-q17"/>
+                <outlet property="heightConstraint" destination="pxF-yq-42y" id="dqW-ty-ma7"/>
                 <outlet property="interestsCollectionView" destination="qzO-QA-mqp" id="JKa-Fk-oGV"/>
                 <outlet property="interestsCollectionViewFlowLayout" destination="J4T-BN-ppU" id="B74-Hs-fT6"/>
+                <outlet property="leftConftraint" destination="Vws-MW-X1N" id="Taz-zX-syF"/>
+                <outlet property="rightConstraint" destination="pBT-IN-TIz" id="yhq-wd-UBp"/>
+                <outlet property="topConstraint" destination="pPZ-KA-gJD" id="AGr-ac-mSd"/>
             </connections>
             <point key="canvasLocation" x="177.536231884058" y="184.15178571428569"/>
         </tableViewCell>

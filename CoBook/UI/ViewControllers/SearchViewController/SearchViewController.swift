@@ -126,16 +126,22 @@ extension SearchViewController: SearchView {
 extension SearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.isSelected = true
-        presenter.selectedAt(indexPath: indexPath)
-        if !presenter.isMultiselectEnabled {
-            doneAction()
+        presenter.selectedAt(indexPath: indexPath) { (success) in
+            if success {
+                tableView.cellForRow(at: indexPath)?.isSelected = true
+                if !self.presenter.isMultiselectEnabled {
+                    self.doneAction()
+                }
+            }
         }
     }
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.isSelected = false
-        presenter.deselectedAt(indexPath: indexPath)
+        presenter.deselectedAt(indexPath: indexPath) { (success) in
+            if success {
+                tableView.cellForRow(at: indexPath)?.isSelected = false
+            }
+        }
     }
 
 
