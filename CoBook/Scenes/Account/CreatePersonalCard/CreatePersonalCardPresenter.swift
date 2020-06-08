@@ -13,10 +13,12 @@ import Alamofire
 protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
 
-    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?)
+    func set(dataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?)
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()
+
+    func showSearchPracticies(presenter: SearchPracticiesPresenter)
 }
 
 fileprivate enum Defaults {
@@ -28,7 +30,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     // MARK: - Properties
 
     weak var view: CreatePersonalCardView?
-    private var viewDataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?
+    private var viewDataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?
 
     var personalCardDetailsModel: CreatePersonalCard.DetailsModel {
         didSet {
@@ -58,8 +60,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: CreatePersonalCardView) {
         self.view = view
-
-        self.viewDataSource = TableDataSource(tableView: view.tableView, configurator: dataSourceConfigurator)
+        self.viewDataSource = DataSource(configurator: dataSourceConfigurator)
         view.set(dataSource: viewDataSource)
     }
 
@@ -130,23 +131,36 @@ private extension CreatePersonalCardPresenter {
         let activitySection = Section<CreatePersonalCard.Cell>(items: [
             .sectionHeader,
             .title(text: "PersonalCard.Creation.section.activity".localized),
-            .textField(model: TextFieldModel(text: personalCardDetailsModel.position, placeholder: "TextInput.placeholder.occupiedPosition".localized, associatedKeyPath: \CreatePersonalCard.DetailsModel.position, keyboardType: .default)),
+            .textField(model: TextFieldModel(text: personalCardDetailsModel.position,
+                                             placeholder: "TextInput.placeholder.occupiedPosition".localized,
+                                             associatedKeyPath: \CreatePersonalCard.DetailsModel.position,
+                                             keyboardType: .default)),
             .actionField(model: ActionFieldModel(text: personalCardDetailsModel.practiseType?.title,
-                                                 placeholder: "TextInput.placeholder.activityType".localized, actionTypeId: CreatePersonalCard.ActionType.activityType.rawValue)),
+                                                 placeholder: "TextInput.placeholder.activityType".localized,
+                                                 actionTypeId: CreatePersonalCard.ActionType.practiceType.rawValue)),
             .actionField(model: ActionFieldModel(text: personalCardDetailsModel.city?.name,
-                                                 placeholder: "TextInput.placeholder.cityOfResidence".localized, actionTypeId: CreatePersonalCard.ActionType.placeOfLiving.rawValue)),
+                                                 placeholder: "TextInput.placeholder.cityOfResidence".localized,
+                                                 actionTypeId: CreatePersonalCard.ActionType.placeOfLiving.rawValue)),
             .actionField(model: ActionFieldModel(text: personalCardDetailsModel.region?.name,
-                                                 placeholder: "TextInput.placeholder.activityRegion".localized, actionTypeId: CreatePersonalCard.ActionType.activityRegion.rawValue)),
-            .textView(model: TextFieldModel(text: personalCardDetailsModel.description, placeholder:
-                "TextInput.placeholder.activityDescription".localized,
-                                            associatedKeyPath: \CreatePersonalCard.DetailsModel.description, keyboardType: .default))
+                                                 placeholder: "TextInput.placeholder.activityRegion".localized,
+                                                 actionTypeId: CreatePersonalCard.ActionType.activityRegion.rawValue)),
+            .textView(model: TextFieldModel(text: personalCardDetailsModel.description,
+                                            placeholder:"TextInput.placeholder.activityDescription".localized,
+                                            associatedKeyPath: \CreatePersonalCard.DetailsModel.description,
+                                            keyboardType: .default))
         ])
 
         let contactsSection = Section<CreatePersonalCard.Cell>(items: [
             .sectionHeader,
             .title(text: "PersonalCard.Creation.section.companyActivity".localized),
-            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactTelephone, placeholder: "TextInput.placeholder.workingPhoneNumber".localized, associatedKeyPath: \CreatePersonalCard.DetailsModel.contactTelephone, keyboardType: .phonePad)),
-            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactEmail, placeholder: "TextInput.placeholder.workingEmailNumber".localized, associatedKeyPath: \CreatePersonalCard.DetailsModel.contactEmail, keyboardType: .emailAddress)),
+            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactTelephone,
+                                             placeholder: "TextInput.placeholder.workingPhoneNumber".localized,
+                                             associatedKeyPath: \CreatePersonalCard.DetailsModel.contactTelephone,
+                                             keyboardType: .phonePad)),
+            .textField(model: TextFieldModel(text: personalCardDetailsModel.contactEmail,
+                                             placeholder: "TextInput.placeholder.workingEmailNumber".localized,
+                                             associatedKeyPath: \CreatePersonalCard.DetailsModel.contactEmail,
+                                             keyboardType: .emailAddress)),
             .title(text: "PersonalCard.Creation.section.socials".localized),
             .socials,
         ])
@@ -157,32 +171,16 @@ private extension CreatePersonalCardPresenter {
             .interests
         ])
 
-        viewDataSource?.sections = [photosSection, activitySection, contactsSection, interestsSection]
+        viewDataSource?.sections = [photosSection, activitySection, contactsSection/*, interestsSection*/]
     }
 
     func setupDataSource() {
         let group = DispatchGroup()
 
-        var practicesTypesListRequestError: Error?
         var interestsListRequestError: Error?
-
-        var practicies: [PracticeModel] = []
         var interests: [InterestModel] = []
 
         view?.startLoading(text: "Loading.loading.title".localized)
-
-        // fetch practices
-        group.enter()
-        APIClient.default.practicesTypesListRequest { (result) in
-            switch result {
-            case let .success(response):
-                practicies = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
-                group.leave()
-            case let .failure(error):
-                practicesTypesListRequestError = error
-                group.leave()
-            }
-        }
 
         // fetch interests
         group.enter()
@@ -202,8 +200,6 @@ private extension CreatePersonalCardPresenter {
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
-            self?.personalCardDetailsModel.practices = practicies
-
             let fetchedInterests: [InterestModel] = interests.compactMap { fetched in
                 let isSelected = strongSelf.personalCardDetailsModel.interests.contains(where: { (selected) -> Bool in
                     return selected.id == fetched.id
@@ -211,11 +207,6 @@ private extension CreatePersonalCardPresenter {
                 return InterestModel(id: fetched.id, title: fetched.title, isSelected: isSelected )
             }
             self?.personalCardDetailsModel.interests = fetchedInterests
-
-            if practicesTypesListRequestError != nil {
-                strongSelf.view?.errorAlert(message: practicesTypesListRequestError?.localizedDescription)
-                return
-            }
 
             if interestsListRequestError != nil  {
                 strongSelf.view?.errorAlert(message: interestsListRequestError?.localizedDescription)
@@ -231,16 +222,20 @@ private extension CreatePersonalCardPresenter {
 
 // MARK: - InterestsSelectionTableViewCell Delegation
 
-extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource {
+extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource, InterestsSelectionTableViewCellDelegate {
 
-    var interests: [InterestModel] {
-        get {
-            return personalCardDetailsModel.interests
-        }
-        set {
-            personalCardDetailsModel.interests = newValue
-        }
+    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
+        personalCardDetailsModel.interests[safe: index]?.isSelected = true
     }
+
+    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+        personalCardDetailsModel.interests[safe: index]?.isSelected = false
+    }
+
+    func dataSourceWith(identifier: String?) -> [InterestModel] {
+        return personalCardDetailsModel.interests
+    }
+
 
 }
 
@@ -260,11 +255,7 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 
 // MARK: - TextFieldTableViewCell Delegation
 
-extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextFieldTableViewCellDataSource {
-
-    var pickerList: [String] {
-        return personalCardDetailsModel.practices.compactMap { $0.title }
-    }
+extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?) {
         guard let keyPath = keyPath as? WritableKeyPath<CreatePersonalCard.DetailsModel, String?> else {
@@ -277,12 +268,14 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextField
         guard let action = CreatePersonalCard.ActionType.init(rawValue: identifier ?? "") else {
             return
         }
-
         switch action {
-        case .activityType:
-            let selectedPracticeName = cell.textField.text
-            let selectedPractice = personalCardDetailsModel.practices.first(where: { $0.title == selectedPracticeName })
-            personalCardDetailsModel.practiseType = selectedPractice
+        case .practiceType:
+            let presenter = SearchPracticiesPresenter(isMultiselectEnabled: false)
+            presenter.selectionCompletion = { [weak self] (practice) in
+                cell.textField.text = practice?.title
+                self?.personalCardDetailsModel.practiseType = practice
+            }
+            self.view?.showSearchPracticies(presenter: presenter)
 
         case .placeOfLiving:
             let filter = GMSAutocompleteFilter()
@@ -304,7 +297,6 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextField
                 }
             })
         }
-
     }
 
 
@@ -397,3 +389,4 @@ private extension CreatePersonalCardPresenter {
 
 
 }
+

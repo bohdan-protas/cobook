@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDynamicLinks
 
-protocol ArticleDetailsView: LoadDisplayableView, AlertDisplayableView, NavigableView, ShareableView {
+protocol ArticleDetailsView: class, LoadDisplayableView, AlertDisplayableView, NavigableView, ShareableView {
     func reload()
     func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?)
     func set(title: String?)

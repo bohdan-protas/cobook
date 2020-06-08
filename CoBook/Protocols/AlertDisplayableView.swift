@@ -11,13 +11,10 @@ import UIKit
 protocol AlertDisplayableView {
     func errorAlert(message: String?)
     func errorAlert(message: String?, handler: ((UIAlertAction) -> Void)?)
-
     func infoAlert(title: String?, message: String?)
     func infoAlert(title: String?, message: String?, handler: ((UIAlertAction) -> Void)?)
-
     func actionSheetAlert(title: String?, message: String?, actions: [UIAlertAction])
     func newSocialAlert(name: String?, link: String?, completion: ((_ name: String?, _ url: String?) -> Void)?)
-
     func newFolderAlert(folderName: String?, completion: ((_ name: String) -> Void)?)
     func openSettingsAlert()
 }

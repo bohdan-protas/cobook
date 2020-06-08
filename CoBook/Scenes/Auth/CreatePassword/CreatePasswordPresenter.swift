@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - View protocol
-protocol CreatePasswordView: LoadDisplayableView, AlertDisplayableView {
+protocol CreatePasswordView: class, LoadDisplayableView, AlertDisplayableView {
     func setContinueButton(enabled: Bool)
     func goTo(viewController: UIViewController)
 }

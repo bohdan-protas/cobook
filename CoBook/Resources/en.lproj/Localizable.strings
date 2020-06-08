@@ -131,6 +131,7 @@
 "Error.Validation.lastName" = " Last name should contain at least 3 letters but not more than 25";
 "Error.Validation.telephone" = "Please enter correct phone number";
 "Error.Validation.password" = " Password should contain at least 3 letters but not more than 25";
+"Error.maxSelectedElements" = "Maximum allowed selected elements - %li";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Title 01";
@@ -145,8 +146,7 @@
 // MARK: - Card overview
 "CardOverview.search.placeholder" = "Serach the card";
 "CardOverview.search.emptySearch" = "No results in serach";
-"CardOverview.search.cardSearchResult" = "Found %land card(и)";
-
+"CardOverview.search.cardSearchResult" = "Found %li card(s)";
 "Card.hideButton.normalTitle" = "Not interested in card?";
 "Card.hideLabel.text" = "Hide";
 

@@ -131,6 +131,7 @@
 "Error.Validation.lastName" = "Фамилия должна состоять как минимум из 3 букв, но не больше 25";
 "Error.Validation.telephone" = "Пожалуйста, введите правильний номер телефона";
 "Error.Validation.password" = "Пароль должен состоять как минимум из 3 символов, но не больше 25";
+"Error.maxSelectedElements" = "Максимльное количество выбранных елементов - %li";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";

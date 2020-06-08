@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ChangePasswordView: LoadDisplayableView, AlertDisplayableView, NavigableView {
+protocol ChangePasswordView: class, LoadDisplayableView, AlertDisplayableView, NavigableView {
     func set(dataSource: DataSource<ChangePasswordCellsConfigutator>?)
     func reload()
     func setSaveButtonEnabled(_ isEnabled: Bool)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PanModal
 
 class CustomNavigationController: UINavigationController {
 
@@ -29,7 +30,26 @@ class CustomNavigationController: UINavigationController {
 
 }
 
+// MARK: - PanModalPresentable
+
+extension CustomNavigationController: PanModalPresentable {
+
+    var panScrollable: UIScrollView? {
+        return (topViewController as? PanModalPresentable)?.panScrollable
+    }
+
+    var longFormHeight: PanModalHeight {
+        return .maxHeight
+    }
+
+    var shortFormHeight: PanModalHeight {
+        return longFormHeight
+    }
+
+}
+
 // MARK: - UINavigationControllerDelegate
+
 extension CustomNavigationController: UINavigationControllerDelegate {
 
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {

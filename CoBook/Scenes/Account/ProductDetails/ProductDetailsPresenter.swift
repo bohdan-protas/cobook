@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ProductDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
+protocol ProductDetailsView: class, AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
     func reload()
     func set(dataSource: DataSource<ProductDetailsDataSourceConfigurator>?)
     func setupEmptyCardView()

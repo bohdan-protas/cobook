@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol CreateArticleView: LoadDisplayableView, AlertDisplayableView, NavigableView {
+protocol CreateArticleView: class, LoadDisplayableView, AlertDisplayableView, NavigableView {
     func setContinueButton(actived: Bool)
     func set(title: String?)
     func set(articleTitle: String?)

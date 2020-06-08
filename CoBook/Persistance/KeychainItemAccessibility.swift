@@ -2,8 +2,8 @@
 //  KeychainOptions.swift
 //  SwiftKeychainWrapper
 //
-//  Created by Jason Rendel on 9/23/14.
-//  Copyright (c) 2014 Jason Rendel. All rights reserved.
+//  Created by protas on 9/23/14.
+//  Copyright © 2020 CoBook. All rights reserved.
 //
 
 import Foundation

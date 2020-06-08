@@ -161,6 +161,7 @@ extension CreateBusinessCardPresenter {
             // interestsListConfigurator
             viewDataSourceConfigurator.interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> InterestsSelectionTableViewCell in
                 cell.dataSource = self
+                cell.delegate = self
                 return cell
             }
 

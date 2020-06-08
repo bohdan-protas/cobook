@@ -280,6 +280,11 @@
 		B884AAE1245F720D00ACC0D7 /* PhotosPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */; };
 		B884AAE3245F722800ACC0D7 /* PhotosPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */; };
 		B884B699248A5B77000848A7 /* LocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884B698248A5B77000848A7 /* LocalizationKey.swift */; };
+		B884B6A2248AA21D000848A7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884B69F248AA21D000848A7 /* SearchViewController.swift */; };
+		B884B6A3248AA21D000848A7 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B884B6A0248AA21D000848A7 /* SearchViewController.xib */; };
+		B884B6A6248AAD46000848A7 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884B6A5248AAD46000848A7 /* SearchPresenter.swift */; };
+		B884B6AA248AB0A5000848A7 /* SearchCellsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884B6A9248AB0A5000848A7 /* SearchCellsConfigurator.swift */; };
+		B884B6AD248AB4B7000848A7 /* SearchPracticiesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884B6AC248AB4B7000848A7 /* SearchPracticiesPresenter.swift */; };
 		B885887B240FE61E00158751 /* AccountItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */; };
 		B885887C240FE61E00158751 /* AccountItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */; };
 		B88906B423FFD2BA002E91F7 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */; };
@@ -314,6 +319,8 @@
 		B8A3B0B12450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0AF2450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift */; };
 		B8A3B0B22450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8A3B0B02450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib */; };
 		B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */; };
+		B8AB0B1A248DC7F300DACC3D /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB0B19248DC7F300DACC3D /* FilterPresenter.swift */; };
+		B8AB0B1C248DC82500DACC3D /* FilterDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB0B1B248DC82500DACC3D /* FilterDataSourceConfigurator.swift */; };
 		B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */; };
 		B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */; };
 		B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F022422B38300E06E53 /* Data + Extensions.swift */; };
@@ -642,6 +649,11 @@
 		B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosPlaceholderView.xib; sourceTree = "<group>"; };
 		B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPlaceholderView.swift; sourceTree = "<group>"; };
 		B884B698248A5B77000848A7 /* LocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKey.swift; sourceTree = "<group>"; };
+		B884B69F248AA21D000848A7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B884B6A0248AA21D000848A7 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		B884B6A5248AAD46000848A7 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		B884B6A9248AB0A5000848A7 /* SearchCellsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellsConfigurator.swift; sourceTree = "<group>"; };
+		B884B6AC248AB4B7000848A7 /* SearchPracticiesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPracticiesPresenter.swift; sourceTree = "<group>"; };
 		B8858879240FE61E00158751 /* AccountItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItemTableViewCell.swift; sourceTree = "<group>"; };
 		B885887A240FE61E00158751 /* AccountItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemTableViewCell.xib; sourceTree = "<group>"; };
 		B88906B323FFD2BA002E91F7 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
@@ -676,6 +688,8 @@
 		B8A3B0AF2450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPhotosListTableViewCell.swift; sourceTree = "<group>"; };
 		B8A3B0B02450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalPhotosListTableViewCell.xib; sourceTree = "<group>"; };
 		B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePhotoListItemModel.swift; sourceTree = "<group>"; };
+		B8AB0B19248DC7F300DACC3D /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
+		B8AB0B1B248DC82500DACC3D /* FilterDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
 		B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManagerEndpoint.swift; sourceTree = "<group>"; };
 		B8AB3F022422B38300E06E53 /* Data + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extensions.swift"; sourceTree = "<group>"; };
@@ -840,8 +854,9 @@
 		B8212A63241BD32C0066700C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B850DA0C24866022002D8F99 /* PhotoGalleryCollectionViewController */,
+				B884B69A248A8C42000848A7 /* SearchViewController */,
 				B8212A64241BD3480066700C /* BaseViewController.swift */,
+				B850DA0C24866022002D8F99 /* PhotoGalleryViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1133,6 +1148,8 @@
 			children = (
 				B82079302444635900FCCC17 /* view */,
 				B823DD8424439B6F00A74495 /* FilterViewController.swift */,
+				B8AB0B19248DC7F300DACC3D /* FilterPresenter.swift */,
+				B8AB0B1B248DC82500DACC3D /* FilterDataSourceConfigurator.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -1612,14 +1629,14 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		B850DA0C24866022002D8F99 /* PhotoGalleryCollectionViewController */ = {
+		B850DA0C24866022002D8F99 /* PhotoGalleryViewController */ = {
 			isa = PBXGroup;
 			children = (
 				B850DA132486660F002D8F99 /* PhotoGalleryItemCollectionViewCell */,
 				B850DA0E24866048002D8F99 /* PhotoGalleryViewController.swift */,
 				B850DA0F24866048002D8F99 /* PhotoGalleryViewController.xib */,
 			);
-			path = PhotoGalleryCollectionViewController;
+			path = PhotoGalleryViewController;
 			sourceTree = "<group>";
 		};
 		B850DA132486660F002D8F99 /* PhotoGalleryItemCollectionViewCell */ = {
@@ -1816,6 +1833,26 @@
 				B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */,
 			);
 			path = PhotosPlaceholderView;
+			sourceTree = "<group>";
+		};
+		B884B69A248A8C42000848A7 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B884B6AB248AB0DE000848A7 /* SearchPresenter */,
+				B884B69F248AA21D000848A7 /* SearchViewController.swift */,
+				B884B6A9248AB0A5000848A7 /* SearchCellsConfigurator.swift */,
+				B884B6A0248AA21D000848A7 /* SearchViewController.xib */,
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		B884B6AB248AB0DE000848A7 /* SearchPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B884B6A5248AAD46000848A7 /* SearchPresenter.swift */,
+				B884B6AC248AB4B7000848A7 /* SearchPracticiesPresenter.swift */,
+			);
+			path = SearchPresenter;
 			sourceTree = "<group>";
 		};
 		B8858878240FE58500158751 /* AccountItemTableViewCell */ = {
@@ -2257,6 +2294,7 @@
 				B825FC40247EA90600DB035D /* BottomLoaderView.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
+				B884B6A3248AA21D000848A7 /* SearchViewController.xib in Resources */,
 				B835FFC3245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib in Resources */,
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
 				B827B2A9247FE25D006E1A17 /* ActionTitleTableViewCell.xib in Resources */,
@@ -2410,6 +2448,7 @@
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B8DC630F2434FC3A00A2ED58 /* TableDataSource.swift in Sources */,
 				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
+				B8AB0B1C248DC82500DACC3D /* FilterDataSourceConfigurator.swift in Sources */,
 				B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */,
 				B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */,
 				B827B2A8247FE25D006E1A17 /* ActionTitleTableViewCell.swift in Sources */,
@@ -2553,6 +2592,7 @@
 				B850DA1124866049002D8F99 /* PhotoGalleryViewController.swift in Sources */,
 				B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */,
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
+				B884B6AA248AB0A5000848A7 /* SearchCellsConfigurator.swift in Sources */,
 				B8D5F981246E81EF0032E885 /* FolderApiModel.swift in Sources */,
 				B823C6212431F585002CFB02 /* UIImage + AverageColor.swift in Sources */,
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
@@ -2565,6 +2605,7 @@
 				B83FD7E02424002A00ACA1D4 /* SocialListItem.swift in Sources */,
 				B84A15E32410E50900C4DC11 /* Account.swift in Sources */,
 				B823A6BD23FDDACC007540D0 /* CreatePasswordPresenter.swift in Sources */,
+				B884B6AD248AB4B7000848A7 /* SearchPracticiesPresenter.swift in Sources */,
 				B8AB83F924282B890041B879 /* CardDetailsEndpointMockup.swift in Sources */,
 				B822D7092458B5EF00883BE8 /* Product.swift in Sources */,
 				B834BD682483FB620037C623 /* Localized.swift in Sources */,
@@ -2580,6 +2621,7 @@
 				B8909FC12464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B8205C32246D8FE0003C39F4 /* SavedContentCellConfigurator.swift in Sources */,
+				B8AB0B1A248DC7F300DACC3D /* FilterPresenter.swift in Sources */,
 				B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B823A1AB24617FF1004271AA /* CreateArticleApiModel.swift in Sources */,
@@ -2592,6 +2634,7 @@
 				B824D151246B127200911629 /* SavedContentViewController.swift in Sources */,
 				B825B22B244897E9007C70DF /* String + ImageGeneration.swift in Sources */,
 				B82573F823F5548100C8CBF8 /* UIColor + Extensions.swift in Sources */,
+				B884B6A2248AA21D000848A7 /* SearchViewController.swift in Sources */,
 				B8559F93243CC4FD00787349 /* HideCardView.swift in Sources */,
 				B8357DB3240C6372006AB78E /* SignInEndpoint.swift in Sources */,
 				B80B0A492471C9FB00C72607 /* Notifications + Extensions.swift in Sources */,
@@ -2619,6 +2662,7 @@
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
 				B835FFBE245F300900189406 /* CreateArticlePresenter.swift in Sources */,
 				B82206482463006400D49D16 /* RequestParameters.swift in Sources */,
+				B884B6A6248AAD46000848A7 /* SearchPresenter.swift in Sources */,
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
 				B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */,
 				B82B4D59245668420061A98B /* ServiceDetailsPresenter.swift in Sources */,

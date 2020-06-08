@@ -69,14 +69,9 @@ class CardsOverviewViewController: BaseViewController {
     @IBAction func filterBarButtonTapped(_ sender: UIBarButtonItem) {
         let filterViewController: FilterViewController = self.storyboard!.initiateViewControllerFromType()
         filterViewController.delegate = self
-
         let filterNavigation = CustomNavigationController(rootViewController: filterViewController)
-        filterNavigation.modalPresentationStyle = .popover
-        filterNavigation.popoverPresentationController?.delegate = self
-        filterNavigation.popoverPresentationController?.permittedArrowDirections = .up
-        filterNavigation.popoverPresentationController?.barButtonItem = sender
-
-        self.present(controller: filterNavigation, animated: true)
+        self.presentPanModal(filterNavigation)
+        //self.present(controller: filterNavigation, animated: true)
     }
 
     @objc private func refreshAllCardsData(_ sender: Any) {
@@ -214,20 +209,6 @@ extension CardsOverviewViewController: HorizontalItemsBarViewDelegate {
 
 }
 
-// MARK: - UIPopoverPresentationControllerDelegate
-
-extension CardsOverviewViewController: UIPopoverPresentationControllerDelegate {
-
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-
-    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-        return true
-    }
-
-
-}
 
 // MARK: - UITableViewDelegate
 

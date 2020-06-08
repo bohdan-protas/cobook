@@ -14,7 +14,7 @@ protocol InterestsSelectionTableViewCellDelegate: class {
 }
 
 protocol InterestsSelectionTableViewCellDataSource: class {
-    var interests: [InterestModel] { get set }
+    func dataSourceWith(identifier: String?) ->  [InterestModel]
 }
 
 class InterestsSelectionTableViewCell: UITableViewCell {
@@ -28,6 +28,14 @@ class InterestsSelectionTableViewCell: UITableViewCell {
 
     weak var delegate: InterestsSelectionTableViewCellDelegate?
     weak var dataSource: InterestsSelectionTableViewCellDataSource?
+    
+    @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet var leftConftraint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet var rightConstraint: NSLayoutConstraint!
+    @IBOutlet var heightConstraint: NSLayoutConstraint!
+
+    var dataSourceIdentifier: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,19 +48,24 @@ class InterestsSelectionTableViewCell: UITableViewCell {
         interestsCollectionViewFlowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
     }
 
+    func reload() {
+        self.interestsCollectionView.reloadData()
+    }
+
     
 }
 
 // MARK: - UICollectionViewDataSource
+
 extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.interests.count ?? 0
+        return dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier).count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InterestItemCollectionViewCell.identifier, for: indexPath) as! InterestItemCollectionViewCell
-        let interest = dataSource?.interests[safe: indexPath.row]
+        let interest = dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[safe: indexPath.row]
         cell.titleLabel.text = interest?.title
         cell.setSelected(interest?.isSelected ?? false)
         cell.maxWidth = self.interestsCollectionView.bounds.width
@@ -63,20 +76,19 @@ extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegate
+
 extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let interest = dataSource?.interests[safe: indexPath.row] {
+        if let interest = dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[safe: indexPath.row] {
             if interest.isSelected {
-                dataSource?.interests[safe: indexPath.item]?.isSelected = false
                 delegate?.interestsSelectionTableViewCell(self, didDeselectInterestAt: indexPath.item)
             } else {
-                dataSource?.interests[safe: indexPath.item]?.isSelected = true
                 delegate?.interestsSelectionTableViewCell(self, didSelectInterestAt: indexPath.item)
             }
 
             let cell = collectionView.cellForItem(at: indexPath) as? InterestItemCollectionViewCell
-            cell?.setSelected(dataSource?.interests[indexPath.item].isSelected ?? false)
+            cell?.setSelected(dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[indexPath.item].isSelected ?? false)
         }
 
     }

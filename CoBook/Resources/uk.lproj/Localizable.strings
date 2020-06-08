@@ -136,6 +136,7 @@
 "Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
 "Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
 "Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";
+"Error.maxSelectedElements" = "Максимальна кількість вирбраних елементів is %li";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";
