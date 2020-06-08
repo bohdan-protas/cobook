@@ -482,15 +482,18 @@ extension CreateBusinessCardPresenter: TextViewTableViewCellDelegate {
 
 // MARK: - InterestsSelectionTableViewCellDataSource
 
-extension CreateBusinessCardPresenter: InterestsSelectionTableViewCellDataSource {
+extension CreateBusinessCardPresenter: InterestsSelectionTableViewCellDataSource, InterestsSelectionTableViewCellDelegate {
 
-    var interests: [InterestModel] {
-        get {
-            return businessCardDetailsModel.interests
-        }
-        set {
-            businessCardDetailsModel.interests = newValue
-        }
+    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
+        businessCardDetailsModel.interests[safe: index]?.isSelected = true
+    }
+
+    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+        businessCardDetailsModel.interests[safe: index]?.isSelected = false
+    }
+
+    func dataSourceWith(identifier: String?) -> [InterestModel] {
+        return businessCardDetailsModel.interests
     }
 
 

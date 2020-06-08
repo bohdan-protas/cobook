@@ -222,16 +222,20 @@ private extension CreatePersonalCardPresenter {
 
 // MARK: - InterestsSelectionTableViewCell Delegation
 
-extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource {
+extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource, InterestsSelectionTableViewCellDelegate {
 
-    var interests: [InterestModel] {
-        get {
-            return personalCardDetailsModel.interests
-        }
-        set {
-            personalCardDetailsModel.interests = newValue
-        }
+    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
+        personalCardDetailsModel.interests[safe: index]?.isSelected = true
     }
+
+    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+        personalCardDetailsModel.interests[safe: index]?.isSelected = false
+    }
+
+    func dataSourceWith(identifier: String?) -> [InterestModel] {
+        return personalCardDetailsModel.interests
+    }
+
 
 }
 
