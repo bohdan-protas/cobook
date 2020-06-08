@@ -11,8 +11,8 @@ import Foundation
 class ValidationManager {
 
     enum Defaults {
-        static let userNameLengthRange  = 3..<12
-        static let passwordRange        = 6..<24
+        static let userNameLengthRange  = 3..<26
+        static let passwordRange        = 6..<26
         static let professionTypeRange  = 3..<50
         static let activityDescrRange   = 3..<500
     }

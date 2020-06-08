@@ -65,7 +65,7 @@ class SignUpPresenter: BasePresenter {
         self.firstName = firstName ?? ""
         self.lastName = lastName ?? ""
         self.telephone = telephone ?? ""
-        self.email = email ?? ""
+        self.email = email?.trimmingCharacters(in: .whitespaces) ?? ""
 
         let actived = !self.firstName.isEmpty && !self.lastName.isEmpty && !self.telephone.isEmpty && !self.email.isEmpty
         view?.setContinueButton(actived: actived)
