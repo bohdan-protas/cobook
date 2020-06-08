@@ -50,6 +50,7 @@ class SearchViewController: BaseViewController {
     // MARK: -  Actions
 
     @objc func doneAction() {
+        presenter.prepareForDismiss()
         searchController.isActive = false
         self.dismiss(animated: true, completion: nil)
     }
@@ -73,7 +74,7 @@ private extension SearchViewController {
 
     func setupLayout() {
         tableView.delegate = self
-        tableView.allowsMultipleSelection = true
+        tableView.allowsMultipleSelection = presenter.isMultiselectEnabled
 
         self.navigationItem.title = "Пошук виду діяльності"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
@@ -127,6 +128,9 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = true
         presenter.selectedAt(indexPath: indexPath)
+        if !presenter.isMultiselectEnabled {
+            doneAction()
+        }
     }
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -148,14 +152,10 @@ extension SearchViewController: UISearchControllerDelegate {
     func willPresentSearchController(_ searchController: UISearchController) {
         DispatchQueue.main.async {
             searchController.searchBar.showsCancelButton = false
-        }
-    }
-
-    func didPresentSearchController(_ searchController: UISearchController) {
-        DispatchQueue.main.async {
             searchController.searchBar.becomeFirstResponder()
         }
     }
+
 
 }
 

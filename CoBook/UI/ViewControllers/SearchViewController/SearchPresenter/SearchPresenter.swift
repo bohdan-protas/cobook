@@ -19,7 +19,9 @@ protocol SearchView: class, AlertDisplayableView, LoadDisplayableView, Navigable
 
 protocol SearchPresenter: class {
     var view: SearchView? { get set }
+    var isMultiselectEnabled: Bool { get }
     func setup()
+    func prepareForDismiss()
     func searchBy(text: String?)
     func selectedAt(indexPath: IndexPath)
     func deselectedAt(indexPath: IndexPath)

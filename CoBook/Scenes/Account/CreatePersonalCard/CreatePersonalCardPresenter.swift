@@ -251,11 +251,7 @@ extension CreatePersonalCardPresenter: TextViewTableViewCellDelegate {
 
 // MARK: - TextFieldTableViewCell Delegation
 
-extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextFieldTableViewCellDataSource {
-
-    var pickerList: [String] {
-        return personalCardDetailsModel.practices.compactMap { $0.title }
-    }
+extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
 
     func textFieldTableViewCell(_ cell: TextFieldTableViewCell, didUpdatedText text: String?, forKeyPath keyPath: AnyKeyPath?) {
         guard let keyPath = keyPath as? WritableKeyPath<CreatePersonalCard.DetailsModel, String?> else {
@@ -268,10 +264,13 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextField
         guard let action = CreatePersonalCard.ActionType.init(rawValue: identifier ?? "") else {
             return
         }
-
         switch action {
         case .practiceType:
-            let presenter = SearchPracticiesPresenter()
+            let presenter = SearchPracticiesPresenter(isMultiselectEnabled: false)
+            presenter.selectionCompletion = { [weak self] (practice) in
+                cell.textField.text = practice?.title
+                self?.personalCardDetailsModel.practiseType = practice
+            }
             self.view?.showSearchPracticies(presenter: presenter)
 
         case .placeOfLiving:
@@ -293,9 +292,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate, TextField
                     self?.personalCardDetailsModel.region = PlaceModel(googlePlaceId: regionId, name: fetchedRegion.name)
                 }
             })
-
         }
-
     }
 
 
@@ -388,3 +385,4 @@ private extension CreatePersonalCardPresenter {
 
 
 }
+

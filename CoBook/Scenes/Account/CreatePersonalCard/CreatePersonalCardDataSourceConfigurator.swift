@@ -111,7 +111,6 @@ extension CreatePersonalCardPresenter {
             // actionFieldConfigurator
             viewDataSourceConfigurator.actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
-                cell.dataSource = self
                 cell.textField.text = model.text
                 cell.textField.placeholder = model.placeholder
                 cell.actionIdentifier = model.actionTypeId

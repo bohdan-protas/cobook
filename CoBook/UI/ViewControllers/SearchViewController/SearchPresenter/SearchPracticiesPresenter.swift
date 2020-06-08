@@ -9,8 +9,8 @@
 import UIKit
 
 protocol SearchPracticiesDelegate: class {
-    func selectedPractice(_ model: PracticeModel)
-    func deselectedPractice(_ model: PracticeModel)
+    func didSelectedPractices(_ models: [PracticeModel])
+
 }
 
 class SearchPracticiesPresenter: SearchPresenter {
@@ -22,9 +22,14 @@ class SearchPracticiesPresenter: SearchPresenter {
     private var practicies: [PracticeModel] = []
     private var filteredPracticies: [PracticeModel] = []
 
+    var isMultiselectEnabled: Bool
+
+    var selectionCompletion: ((_ practice: PracticeModel?) -> Void)?
+
     // MARK: - Search presenter
 
-    init() {
+    init(isMultiselectEnabled: Bool) {
+        self.isMultiselectEnabled = isMultiselectEnabled
         var configurator = SearchCellsConfigurator()
         configurator.practiceConfigurator = CellConfigurator(configurator: { (cell, model: PracticeModel, tableView, index) -> FilterItemTableViewCell in
             cell.titleLabel?.text = model.title
@@ -56,6 +61,7 @@ class SearchPracticiesPresenter: SearchPresenter {
         filteredPracticies[indexPath.item].isSelected = true
         if let index = practicies.firstIndex(where: { $0.id == filteredPracticies[safe: indexPath.item]?.id }) {
             practicies[safe: index]?.isSelected = true
+            selectionCompletion?(practicies[safe: index])
         }
     }
 
@@ -65,6 +71,12 @@ class SearchPracticiesPresenter: SearchPresenter {
             practicies[safe: index]?.isSelected = false
         }
     }
+
+    func prepareForDismiss() {
+        let selected = practicies.filter { $0.isSelected }
+        delegate?.didSelectedPractices(selected)
+    }
+
 
 }
 
