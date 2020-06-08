@@ -319,6 +319,8 @@
 		B8A3B0B12450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0AF2450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift */; };
 		B8A3B0B22450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8A3B0B02450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib */; };
 		B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */; };
+		B8AB0B1A248DC7F300DACC3D /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB0B19248DC7F300DACC3D /* FilterPresenter.swift */; };
+		B8AB0B1C248DC82500DACC3D /* FilterDataSourceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB0B1B248DC82500DACC3D /* FilterDataSourceConfigurator.swift */; };
 		B8AB3EFF2422973C00E06E53 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */; };
 		B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */; };
 		B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB3F022422B38300E06E53 /* Data + Extensions.swift */; };
@@ -686,6 +688,8 @@
 		B8A3B0AF2450B07C007C4F05 /* HorizontalPhotosListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPhotosListTableViewCell.swift; sourceTree = "<group>"; };
 		B8A3B0B02450B07C007C4F05 /* HorizontalPhotosListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalPhotosListTableViewCell.xib; sourceTree = "<group>"; };
 		B8A3B0B32450B6ED007C4F05 /* EditablePhotoListItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePhotoListItemModel.swift; sourceTree = "<group>"; };
+		B8AB0B19248DC7F300DACC3D /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
+		B8AB0B1B248DC82500DACC3D /* FilterDataSourceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataSourceConfigurator.swift; sourceTree = "<group>"; };
 		B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
 		B8AB3F0024229A1A00E06E53 /* ContentManagerEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManagerEndpoint.swift; sourceTree = "<group>"; };
 		B8AB3F022422B38300E06E53 /* Data + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extensions.swift"; sourceTree = "<group>"; };
@@ -1144,6 +1148,8 @@
 			children = (
 				B82079302444635900FCCC17 /* view */,
 				B823DD8424439B6F00A74495 /* FilterViewController.swift */,
+				B8AB0B19248DC7F300DACC3D /* FilterPresenter.swift */,
+				B8AB0B1B248DC82500DACC3D /* FilterDataSourceConfigurator.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -2442,6 +2448,7 @@
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B8DC630F2434FC3A00A2ED58 /* TableDataSource.swift in Sources */,
 				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
+				B8AB0B1C248DC82500DACC3D /* FilterDataSourceConfigurator.swift in Sources */,
 				B828282E241A970D0003D056 /* InterestsSelectionTableViewCell.swift in Sources */,
 				B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */,
 				B827B2A8247FE25D006E1A17 /* ActionTitleTableViewCell.swift in Sources */,
@@ -2614,6 +2621,7 @@
 				B8909FC12464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift in Sources */,
 				B88906C82400515B002E91F7 /* OnboardingPresenter.swift in Sources */,
 				B8205C32246D8FE0003C39F4 /* SavedContentCellConfigurator.swift in Sources */,
+				B8AB0B1A248DC7F300DACC3D /* FilterPresenter.swift in Sources */,
 				B822D7012458B5A100883BE8 /* CreateProductViewController.swift in Sources */,
 				B8970B4D245058C2006676DF /* ServiceListItemTableViewCell.swift in Sources */,
 				B823A1AB24617FF1004271AA /* CreateArticleApiModel.swift in Sources */,
