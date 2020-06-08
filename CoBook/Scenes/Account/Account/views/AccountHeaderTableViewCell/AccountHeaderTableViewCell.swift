@@ -10,6 +10,7 @@ import UIKit
 
 protocol AccountHeaderTableViewCellDelegate: class {
     func settingTapped(cell: AccountHeaderTableViewCell)
+    func userPhotoTapped(cell: AccountHeaderTableViewCell)
 }
 
 class AccountHeaderTableViewCell: UITableViewCell {
@@ -39,12 +40,19 @@ class AccountHeaderTableViewCell: UITableViewCell {
         telephoneNumberLabel.text = ""
         emailLabel.text = ""
         avatarTextPlaceholderImageView.image = nil
+
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(userPhotoTapped))
+        avatarTextPlaceholderImageView.addGestureRecognizer(tapRecognizer)
     }
 
     // MARK: - Actions
 
     @IBAction func settingsButtonTapped(_ sender: Any) {
         delegate?.settingTapped(cell: self)
+    }
+
+    @IBAction func userPhotoTapped(_ sender: Any) {
+        delegate?.userPhotoTapped(cell: self)
     }
 
 

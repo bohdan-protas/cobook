@@ -12,18 +12,30 @@
 "Successed" = "Успішно!";
 "Error" = "Помилка";
 
-"Account" = "Аккаунт";
-"AllCards" = "Всі візитки";
-"Saved" = "Збережені";
+"Tabbar.allCards.title" = "Всі візитки";
+"Tabbar.account.title" = "Аккаунт";
+"Tabbar.saved.title" = "Збережені";
 
 "AlertAction.Save" = "Зберегти";
 "AlertAction.Unsave" = "Видалити із збережених";
 "AlertAction.Delete" = "Видалити";
 "AlertAction.Change" = "Змінити";
-"AlertAction.Cancel" = "Змінити";
+"AlertAction.Edit" = "Редагувати";
+"AlertAction.Create" = "Створити";
+"AlertAction.Cancel" = "Відмінити";
 "AlertAction.generalList.title" = "Загальний список";
 "AlertAction.createNewList.title" = "Створити новий список";
 "AlertAction.saveTo" = "Зберегти візитку до:";
+"AlertAction.settings" = "Налаштування";
+"AlertAction.makePhoto" = "Зробити знімок";
+"AlertAction.photoGallery" = "Фотоальбом";
+
+"Alert.title.goToSettings" = "Перейти в налаштування?";
+"Alert.title.newSocial" = "Нова соціальна мережа";
+"Alert.message.newSocial" = "Будь ласка, введіть назву та посилання";
+"Alert.title.newList" = "Новий список";
+"Alert.title.editList" = "Редагувати список";
+"Alert.message.newList" = "Задайте назву новому списку";
 
 "TextInput.placeholder.firstName" = "Імя";
 "TextInput.placeholder.lastName" = "Прізвище";
@@ -55,9 +67,31 @@
 "TextInput.placeholder.showRoom" = "Show room";
 "TextInput.placeholder.productHeader" = "Заголовок товару";
 "TextInput.placeholder.productDescription" = "Опис товару";
+"TextInput.placeholder.socialName" = "Назва";
+"TextInput.placeholder.socialLink" = "Посилання, https://link.com";
+"TextInput.placeholder.listName" = "Назва";
 
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
+"Button.edit.normalTitle" = "Редагувати";
+"Button.email.normalTitle" = "Написати";
+"Button.telephone.normalTitle" = "Зателефонувати";
+"Button.mapDirectiron.normalTitle" = "Прокласти маршрут";
+
+"Button.changePhoto.normalTitle" = "Змінити фото";
+"Button.changeLogo.normalTitle" = "Змінити логотип компанії";
+"Button.addPhoto.normalTitle" = "Додати фото";
+"Button.addLogo.normalTitle" = "Додати логотип компанії";
+"Button.done.normalTitle" = "Готово";
+"Button.cancel.normalTitle" = "Відмінити";
+
+"Label.addPhoto.text" = "Додати фото";
+"Label.contacts.text" = "Зв’язок:";
+"Label.changeBgPhoto.text" = "Змінити фото обкладинки";
+"Label.addBgPhoto.text" = "Додати фото обкладинки";
+"Label.showAll.text" = "Показати всі";
+
+"SearchBar.placeholder.employers" = "Пошук працівників CoBook";
 
 // MARK: - Social
 "Social.metaTag.inviteFriends.title" = "CoBook";
@@ -86,17 +120,23 @@
 "Error.connection" = "Не вдалося приєднатися до сервера";
 "Error.employAreadyAdded" = "Вибраний працівник вже доданий";
 "Error.photoLoading.message" = "Помилка завантаження фото";
-"Error.Social.unreadableFormat" = "Посилання соцмережі має нечитабельний формат";
+
+"Error.Social.unreadableFormat" = "Будь-ласка введіть посилання в правильному форматі";
 "Error.Social.badLink.message" = "Посилання має хибний формат";
+
 "Error.Map.notDefinedRoute.message" = "Не визначені адреси маршрутів";
 "Error.Map.cantOpen.message" = "Не вдається відкрити карти";
 "Error.Map.accessDenied.title" = "Для перегляду карти, надайте додатку доступ до вашої локації";
 "Error.Map.accessDeniedButton.normalTitle" = "Відкрити налаштування";
+
 "Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
 "Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
 "Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
 "Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
 "Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
+"Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
+"Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";
+"Error.maxSelectedElements" = "Максимальна кількість вирбраних елементів is %li";
 
 // MARK: - Onboarding
 "Onboarding.Title01" = "Заголовок 01";
@@ -112,6 +152,9 @@
 "CardOverview.search.placeholder" = "Пошук візитівки";
 "CardOverview.search.emptySearch" = "Немає результатів пошуку";
 "CardOverview.search.cardSearchResult" = "Знайдено %li візитку(и)";
+
+"Card.hideButton.normalTitle" = "Не цікавить візитка?";
+"Card.hideLabel.text" = "Приховати";
 
 // MARK: - SignUp
 "SignUp.title" = "Вітаємо в спільноті CoBook";
@@ -179,6 +222,8 @@
 "Article.details.title" = "Стаття";
 "Article.create.title" = "Створити статтю";
 "Article.edit.title" = "Редагувати статтю";
+"Article.creatorSection.text" = "Статтю опубліковано:";
+"Article.anotherArticlesSection.text" = "Інші статті альбому:";
 "Article.addPhotoButton.normalTitle" = "Додати фото";
 "Article.header.placeholder" = "Введіть заголовок";
 "Article.selectAlbum.text" = "Виберіть альбом";

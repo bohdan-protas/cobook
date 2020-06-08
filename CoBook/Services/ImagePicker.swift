@@ -61,14 +61,14 @@ open class ImagePicker: NSObject {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        if let action = self.action(for: .camera, title: "Зробити знімок") {
+        if let action = self.action(for: .camera, title: "AlertAction.makePhoto".localized) {
             alertController.addAction(action)
         }
-        if let action = self.action(for: .photoLibrary, title: "Фотоальбом") {
+        if let action = self.action(for: .photoLibrary, title: "AlertAction.photoGallery".localized) {
             alertController.addAction(action)
         }
 
-        alertController.addAction(UIAlertAction(title: "Відмінити", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "AlertAction.Cancel".localized, style: .cancel, handler: nil))
 
         self.presentationController?.present(alertController, animated: true)
     }
@@ -104,8 +104,8 @@ open class ImagePicker: NSObject {
             cropController.aspectRatioLockEnabled = true
             cropController.resetAspectRatioEnabled = false
             cropController.aspectRatioPickerButtonHidden = true
-            cropController.doneButtonTitle = "Готово"
-            cropController.cancelButtonTitle = "Відмінити"
+            cropController.doneButtonTitle = "Button.done.normalTitle".localized
+            cropController.cancelButtonTitle = "Button.cancel.normalTitle".localized
 
             controller.dismiss(animated: true, completion:  {
                 self.presentationController?.present(cropController, animated: true, completion: nil)

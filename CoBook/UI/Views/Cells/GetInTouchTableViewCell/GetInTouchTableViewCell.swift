@@ -16,7 +16,10 @@ protocol GetInTouchTableViewCellDelegate: class {
 class GetInTouchTableViewCell: UITableViewCell {
 
     // MARK: Properties
+    @Localized("Button.telephone.normalTitle")
     @IBOutlet var telephoneButton: DesignableButton!
+
+    @Localized("Button.email.normalTitle")
     @IBOutlet var emailButton: DesignableButton!
 
     weak var delegate: GetInTouchTableViewCellDelegate?

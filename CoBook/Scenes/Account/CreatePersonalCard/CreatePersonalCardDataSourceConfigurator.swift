@@ -111,20 +111,12 @@ extension CreatePersonalCardPresenter {
             // actionFieldConfigurator
             viewDataSourceConfigurator.actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
-                cell.dataSource = self
                 cell.textField.text = model.text
                 cell.textField.placeholder = model.placeholder
                 cell.actionIdentifier = model.actionTypeId
-
-                if let action = CreatePersonalCard.ActionType(rawValue: model.actionTypeId ?? "") {
-                    switch action {
-                    case .activityType:
-                        cell.textField.inputView = cell.pickerView
-                    default:
-                        cell.actionControlView.isUserInteractionEnabled = true
-                        cell.textField.isUserInteractionEnabled = false
-                    }
-                }
+                cell.actionControlView.isUserInteractionEnabled = true
+                cell.textField.isUserInteractionEnabled = false
+                
                 return cell
             }
 
@@ -139,6 +131,7 @@ extension CreatePersonalCardPresenter {
             // interestsListConfigurator
             viewDataSourceConfigurator.interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> InterestsSelectionTableViewCell in
                 cell.dataSource = self
+                cell.delegate = self
                 return cell
             }
 

@@ -106,15 +106,15 @@ extension HorizontalPhotosListTableViewCell: UICollectionViewDelegate {
         case .view:
             let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { action in
 
-                let edit = UIAction(title: "Змінити", image: UIImage(systemName: "arrow.clockwise"), identifier: nil, handler: { action in
+                let edit = UIAction(title: "AlertAction.Change".localized, image: UIImage(systemName: "arrow.clockwise"), identifier: nil, handler: { action in
                     self.delegate?.didUpdatePhoto(self, at: indexPath)
                 })
 
-                let delete = UIAction(title: "Видалити", image: UIImage(systemName: "trash.fill"), identifier: nil, discoverabilityTitle: nil, attributes: .destructive, handler: { action in
+                let delete = UIAction(title: "AlertAction.Delete".localized, image: UIImage(systemName: "trash.fill"), identifier: nil, discoverabilityTitle: nil, attributes: .destructive, handler: { action in
                     self.delegate?.didDeletePhoto(self, at: indexPath)
                 })
 
-                return UIMenu(title: "Редагування фото", children: [edit, delete])
+                return UIMenu(title: "AlertAction.Edit".localized, children: [edit, delete])
             }
             return configuration
 

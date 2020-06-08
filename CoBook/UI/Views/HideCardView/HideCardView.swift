@@ -10,6 +10,12 @@ import UIKit
 
 class HideCardView: BaseFromNibView {
 
+    @Localized("Card.hideButton.normalTitle")
+    @IBOutlet var hideQuestionLabel: UILabel!
+
+    @Localized("Card.hideLabel.text")
+    @IBOutlet var hideButton: UILabel!
+
     var onHideTapped: (() -> Void)?
 
     @IBAction func hideCardTapped(_ sender: Any) {

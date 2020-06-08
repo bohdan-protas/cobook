@@ -9,7 +9,6 @@
 import Foundation
 import FirebaseDynamicLinks
 
-// MARK: - AppStorage
 
 enum AppStorage {
 

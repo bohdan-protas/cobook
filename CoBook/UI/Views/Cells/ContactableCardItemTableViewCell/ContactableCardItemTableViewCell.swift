@@ -26,6 +26,12 @@ class ContactableCardItemTableViewCell: UITableViewCell {
     @IBOutlet var cardTypeLabel: UILabel!
     @IBOutlet var saveButton: DesignableButton!
 
+    @Localized("Button.telephone.normalTitle")
+    @IBOutlet var callButton: DesignableButton!
+
+    @Localized("Button.email.normalTitle")
+    @IBOutlet var emailButton: DesignableButton!
+    
     var type: CardType? {
         didSet {
             switch type {
@@ -38,12 +44,12 @@ class ContactableCardItemTableViewCell: UITableViewCell {
                 case .personal:
                     cardTypeContainerView.backgroundColor = #colorLiteral(red: 0.4823529412, green: 0.7333333333, blue: 0.368627451, alpha: 0.1026059503)
                     cardTypeImageView.image = #imageLiteral(resourceName: "ic_account_createparsonalcard")
-                    cardTypeLabel.text = "Персональна візитка"
+                    cardTypeLabel.text = "PersonalCard.title".localized
                     cardTypeLabel.textColor = UIColor.Theme.blackMiddle
                 case .business:
                     cardTypeContainerView.backgroundColor = #colorLiteral(red: 1, green: 0.8549019608, blue: 0.1019607843, alpha: 0.1026059503)
                     cardTypeImageView.image = #imageLiteral(resourceName: "ic_account_createbusinescard")
-                    cardTypeLabel.text = "Бізнес візитка"
+                    cardTypeLabel.text = "BusinessCard.title".localized
                     cardTypeLabel.textColor = UIColor.Theme.greenDark
                 }
             }

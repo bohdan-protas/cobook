@@ -63,6 +63,12 @@ extension ArticleDetailsViewController {
 
 extension ArticleDetailsViewController: ArticleDetailsView {
 
+    func openPhotoGallery(photos: [String], activedPhotoIndex: Int) {
+        let galleryController = PhotoGalleryViewController(photos: photos, selectedPhotoIndex: activedPhotoIndex)
+        let navController = CustomNavigationController(rootViewController: galleryController)
+        present(navController, animated: true, completion: nil)
+    }
+
     func setPlaceholderView(_ visible: Bool) {
         if visible {
             tableView.backgroundView = placeholderView

@@ -24,7 +24,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
     /// Search bar
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "Пошук працівників"
+        searchBar.placeholder = "SearchBar.placeholder.employers".localized
         searchBar.showsCancelButton = true
         searchBar.autocapitalizationType = .none
         searchBar.delegate = self

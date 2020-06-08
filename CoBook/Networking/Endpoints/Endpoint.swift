@@ -41,7 +41,10 @@ extension Endpoint {
 
         /// Common Headers
         urlRequest.headers.add(.contentType(APIConstants.ContentType.json.rawValue))
-        urlRequest.headers.add(.init(name: "locale", value: "UKR"))
+
+        let currentDeviceLanguage = NSLocale.current.languageCode
+        let apiLanguageCode = APILanguageCode.init(deviceLanguageCode: currentDeviceLanguage)
+        urlRequest.headers.add(.init(name: "locale", value: apiLanguageCode.rawValue))
 
         if useAuthirizationToken, let accessToken = AppStorage.Auth.accessToken, !accessToken.isEmpty  {
             urlRequest.headers.add(.authorization(bearerToken: accessToken))

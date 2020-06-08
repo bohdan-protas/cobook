@@ -12,6 +12,10 @@ protocol PhotoCollageTableViewCellDataSource: class {
     func photoCollage(_ view: PhotoCollageTableViewCell) -> [String?]
 }
 
+protocol PhotoCollageTableViewCellDelegate: class {
+    func photoCollage(_ view: PhotoCollageTableViewCell, selectedPhotoAt index: Int)
+}
+
 fileprivate enum Layout {
     static let minimumPhotoItemWidth: CGFloat = 100
     static let photoItemsInset: CGFloat = 4
@@ -24,6 +28,7 @@ class PhotoCollageTableViewCell: UITableViewCell {
     @IBOutlet var bottomContainerHeight: NSLayoutConstraint!
 
     weak var dataSource: PhotoCollageTableViewCellDataSource?
+    weak var delegate: PhotoCollageTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +36,10 @@ class PhotoCollageTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(PhotoCollageItemCollectionViewCell.nib, forCellWithReuseIdentifier: PhotoCollageItemCollectionViewCell.identifier)
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(titleImageSelected))
+        titlePhotoImageView.isUserInteractionEnabled = true
+        titlePhotoImageView.addGestureRecognizer(tapGesture)
     }
 
     func prepareLayout() {
@@ -48,12 +57,20 @@ class PhotoCollageTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
         collectionView.reloadData()
     }
+
+    @objc func titleImageSelected() {
+        delegate?.photoCollage(self, selectedPhotoAt: 0)
+    }
     
 }
 
 // MARK: - UICollectionViewDelegate
 
 extension PhotoCollageTableViewCell: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.photoCollage(self, selectedPhotoAt: indexPath.item + 1)
+    }
 
 }
 
@@ -79,7 +96,7 @@ extension PhotoCollageTableViewCell: UICollectionViewDataSource {
 
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDataSource
 
 extension PhotoCollageTableViewCell: UICollectionViewDelegateFlowLayout {
 
@@ -92,3 +109,4 @@ extension PhotoCollageTableViewCell: UICollectionViewDelegateFlowLayout {
     }
 
 }
+

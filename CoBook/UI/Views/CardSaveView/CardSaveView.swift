@@ -10,7 +10,9 @@ import UIKit
 
 class CardSaveView: BaseFromNibView {
 
+    @Localized("Button.save.normalTitle")
     @IBOutlet var saveButton: LoaderDesignableButton!
+
     @IBOutlet var topShadowView: UIView!
 
     var onSaveTapped: (() -> Void)?

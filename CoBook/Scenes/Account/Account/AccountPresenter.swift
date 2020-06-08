@@ -9,38 +9,30 @@
 import UIKit
 import FirebaseDynamicLinks
 
-protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView, ShareableView {
-    func setupLayout()
-    func configureDataSource(with configurator: AccountDataSourceConfigurator)
-    func updateDataSource(sections: [Section<Account.Item>])
-    func stopRefreshing()
+protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView, ShareableView, AccountHeaderTableViewCellDelegate {
+    func set(dataSource: DataSource<AccountDataSourceConfigurator>?)
+    func reload()
 }
 
 class AccountPresenter: BasePresenter {
 
-    // MARK: Properties
+    /// Managed view
+    weak var view: AccountView?
 
-    private weak var view: AccountView?
-    private lazy var dataSourceConfigurator: AccountDataSourceConfigurator = {
-        let dataSourceConfigurator = AccountDataSourceConfigurator(presenter: self)
-        return dataSourceConfigurator
-    }()
-
+    /// view table data source
+    private var dataSource: DataSource<AccountDataSourceConfigurator>?
     private var personalCard: CardPreviewModel?
     private var businessCardsList = [CardPreviewModel]()
 
-    private var sections: [Section<Account.Item>] = [] {
-        didSet {
-            view?.updateDataSource(sections: sections)
-        }
-    }
-
+    /// refreshing state flag
     private var isRefreshing: Bool = false
 
     // MARK: - Public
 
     func attachView(_ view: AccountView) {
         self.view = view
+        self.dataSource = DataSource(sections: [], configurator: dataSourceConfigurator)
+        view.set(dataSource: dataSource)
     }
 
     func detachView() {
@@ -53,22 +45,11 @@ class AccountPresenter: BasePresenter {
     }
 
     func onViewDidLoad() {
-        view?.setupLayout()
-        view?.configureDataSource(with: dataSourceConfigurator)
-
-        AppStorage.State.isNeedToUpdateAccountData = false
         fetchProfileData()
     }
 
-    func onDidAppear() {
-        if AppStorage.State.isNeedToUpdateAccountData {
-            fetchProfileData()
-            AppStorage.State.isNeedToUpdateAccountData = false
-        }
-    }
-
     func selectedRow(at indexPath: IndexPath) {
-        guard let item = sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
             debugPrint("Error occured when selected account action type")
             return
         }
@@ -121,6 +102,82 @@ class AccountPresenter: BasePresenter {
 
 }
 
+// MARK: - Data source configuration
+
+private extension AccountPresenter {
+
+    func updateViewDataSource() {
+
+        // header Section
+        let cardHeaderSection = Section<Account.Item>(items: [
+            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: AppStorage.User.Profile?.avatar?.sourceUrl,
+                                                               firstName: AppStorage.User.Profile?.firstName,
+                                                               lastName: AppStorage.User.Profile?.lastName,
+                                                               telephone: AppStorage.User.Profile?.telephone.number,
+                                                               email: AppStorage.User.Profile?.email.address))
+        ])
+
+        // cardsPreviews Section
+        var cardsPreviewSection = Section<Account.Item>(items: [
+            .sectionHeader
+        ])
+
+        if !personalCard.isNil || !businessCardsList.isEmpty {
+            cardsPreviewSection.items.append(.title(text: "Account.section.myCards.title".localized))
+        }
+
+        if let personalCard = personalCard {
+            cardsPreviewSection.items.append(.personalCardPreview(model: personalCard))
+        } else {
+            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createPersonalCard".localized,
+                                                                                           image: UIImage(named: "ic_account_createparsonalcard"),
+                                                                                           actiontype: .createPersonalCard)))
+        }
+
+//        if !businessCardsList.isEmpty {
+//            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
+//            cardsPreviewSection.items.append(contentsOf: cards)
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        } else {
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        }
+
+        // menuItems Section
+        let menuItemsSection = Section<Account.Item>(items: [
+            .sectionHeader,
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized,
+                                                          image: UIImage(named: "ic_account_createparsonalcard"),
+                                                          actiontype: .inviteFriends)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
+                                                          image: UIImage(named: "ic_account_faq"),
+                                                          actiontype: .faq)),
+        ])
+        //        if !personalCard.isNil {
+        //            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+        //                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
+        //                                                                                        actiontype: .startMakingMoney)))
+        //        }
+
+        // Quit account section
+        let quitAccountSectin = Section<Account.Item>(items: [
+            .sectionHeader,
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.quitAccount".localized,
+                                                          image: UIImage(named: "ic_account_logout"),
+                                                          actiontype: .quitAccount)),
+        ])
+
+        dataSource?.sections = [cardHeaderSection, cardsPreviewSection, menuItemsSection, quitAccountSectin]
+    }
+
+
+}
+
 // MARK: - Privates
 
 private extension AccountPresenter {
@@ -158,6 +215,7 @@ private extension AccountPresenter {
             switch result {
             case let .success(response):
                 AppStorage.User.Profile = response
+
                 strongSelf.personalCard = response?.cardsPreviews?
                     .filter { $0.type == CardType.personal }
                     .compactMap { CardPreviewModel(id: String($0.id),
@@ -176,88 +234,14 @@ private extension AccountPresenter {
                                                    profession: $0.practiceType?.title,
                                                    telephone: $0.telephone?.number) } ?? []
 
-                strongSelf.view?.stopRefreshing()
+
                 strongSelf.updateViewDataSource()
+                strongSelf.view?.reload()
 
             case let .failure(error):
                 strongSelf.view?.errorAlert(message: error.localizedDescription)
             }
         }
-    }
-
-    func updateViewDataSource() {
-
-        // header Section
-        let cardHeaderSection = Section<Account.Item>(items: [
-            .userInfoHeader(model: Account.UserInfoHeaderModel(avatarUrl: AppStorage.User.Profile?.avatar?.sourceUrl,
-                                                               firstName: AppStorage.User.Profile?.firstName,
-                                                               lastName: AppStorage.User.Profile?.lastName,
-                                                               telephone: AppStorage.User.Profile?.telephone.number,
-                                                               email: AppStorage.User.Profile?.email.address))
-        ])
-
-        // cardsPreviews Section
-        var cardsPreviewSection = Section<Account.Item>(items: [
-            .sectionHeader
-        ])
-
-        if !personalCard.isNil || !businessCardsList.isEmpty {
-            cardsPreviewSection.items.append(.title(text: "Account.section.myCards.title".localized))
-        }
-
-        if let personalCard = personalCard {
-            cardsPreviewSection.items.append(.personalCardPreview(model: personalCard))
-        } else {
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createPersonalCard".localized,
-                                                                                               image: UIImage(named: "ic_account_createparsonalcard"),
-                                                                                               actiontype: .createPersonalCard)))
-        }
-
-//        if !businessCardsList.isEmpty {
-//            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
-//            cardsPreviewSection.items.append(contentsOf: cards)
-//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
-//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-//                                                                                           actiontype: .createBusinessCard)))
-//        } else {
-//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
-//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-//                                                                                           actiontype: .createBusinessCard)))
-//        }
-
-        // menuItems Section
-        let menuItemsSection = Section<Account.Item>(items: [
-            .sectionHeader,
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized, image: UIImage(named: "ic_account_createparsonalcard"), actiontype: .inviteFriends)),
-            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized, image: UIImage(named: "ic_account_faq"), actiontype: .faq)),
-        ])
-//        if !personalCard.isNil {
-//            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
-//                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
-//                                                                                        actiontype: .startMakingMoney)))
-//        }
-
-        // Quit account section
-        let quitAccountSectin = Section<Account.Item>(items: [
-            .sectionHeader,
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.quitAccount".localized, image: UIImage(named: "ic_account_logout"), actiontype: .quitAccount)),
-        ])
-
-        sections = [cardHeaderSection, cardsPreviewSection, menuItemsSection, quitAccountSectin]
-    }
-
-
-}
-
-// MARK: - AccountHeaderTableViewCellDelegate
-
-extension AccountPresenter: AccountHeaderTableViewCellDelegate {
-
-    func settingTapped(cell: AccountHeaderTableViewCell) {
-        let settingsController: SettingsTableViewController = UIStoryboard.account.initiateViewControllerFromType()
-        view?.push(controller: settingsController, animated: true)
     }
 
 

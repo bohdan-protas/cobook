@@ -10,6 +10,9 @@ import UIKit
 
 class ContactsTableViewCell: UITableViewCell {
 
+    @Localized("Label.contacts.text")
+    @IBOutlet var headerLabel: UILabel!
+
     @IBOutlet var telephoneNumberLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var websiteButton: UIButton!

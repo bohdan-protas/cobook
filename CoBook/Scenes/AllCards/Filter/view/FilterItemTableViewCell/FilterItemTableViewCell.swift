@@ -11,6 +11,16 @@ import UIKit
 class FilterItemTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var checkmarkImageView: UIImageView!
-    
+
+    override var isSelected: Bool {
+        didSet {
+            accessoryType = isSelected ? .checkmark : .none
+        }
+    }
+
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        accessoryType = isSelected ? .checkmark : .none
+//    }
+
 }

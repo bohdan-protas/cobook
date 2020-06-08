@@ -1,0 +1,305 @@
+/*
+  Localizable.strings
+  CoBook
+
+  Created by protas on 2/13/20.
+  Copyright © 2020 CoBook. All rights reserved.
+*/
+
+// MARK: - Base
+"OK" = "OK";
+"Cancel" = "Отменить";
+"Successed" = "Успешно!";
+"Error" = "Ошибка";
+
+"Tabbar.allCards.title" = "Все визитки";
+"Tabbar.account.title" = "Аккаунт";
+"Tabbar.saved.title" = "Сохраненные";
+
+"AlertAction.Save" = "Сохранить";
+"AlertAction.Unsave" = "Удалить их сохраненных";
+"AlertAction.Delete" = "Удалить";
+"AlertAction.Change" = "Изменить";
+"AlertAction.Edit" = "Редактировать";
+"AlertAction.Create" = "Создать";
+"AlertAction.Cancel" = "Отменить";
+"AlertAction.generalList.title" = "Общий список";
+"AlertAction.createNewList.title" = "Создать новый список";
+"AlertAction.saveTo" = "Сохранить визитку в:";
+"AlertAction.settings" = "Настройки";
+"AlertAction.makePhoto" = "Сделать снимок";
+"AlertAction.photoGallery" = "Фотоальбом";
+
+"Alert.title.goToSettings" = "Перейти в настройки?";
+"Alert.title.newSocial" = "Новая социальная сеть";
+"Alert.message.newSocial" = "Пожалуйста, введите название и ссылку";
+"Alert.title.newList" = "Новий список";
+"Alert.title.editList" = "Редактировать список";
+"Alert.message.newList" = "Дайте название новому списку";
+
+"TextInput.placeholder.firstName" = "Имя";
+"TextInput.placeholder.lastName" = "Фамилия";
+"TextInput.placeholder.telephone" = "+380XXXXXXXX";
+"TextInput.placeholder.email" = "Имейл";
+"TextInput.placeholder.website" = "Веб сайт";
+"TextInput.placeholder.password" = "Пароль";
+"TextInput.placeholder.newPassword" = "Новый пароль";
+"TextInput.placeholder.oldPassword" = "Старый пароль";
+"TextInput.placeholder.repeatPassword" = "Подтвердите новый пароль";
+"TextInput.placeholder.occupiedPosition" = "Занимаемая должность";
+"TextInput.placeholder.activityType" = "Вид деятельности";
+"TextInput.placeholder.cityOfResidence" = "Город проживания";
+"TextInput.placeholder.cityLocation" = "Город проживания";
+"TextInput.placeholder.activityLocation" = "Город работы";
+"TextInput.placeholder.street" = "Улица";
+"TextInput.placeholder.workSchedule" = "График работи (дни и часы)";
+"TextInput.placeholder.activityRegion" = "Регион деятельности";
+"TextInput.placeholder.activityDescription" = "Описание деятельности";
+"TextInput.placeholder.workingPhoneNumber" = "Рабочий номер телефона";
+"TextInput.placeholder.workingEmailNumber" = "Рабочий имейл для связи";
+"TextInput.placeholder.companyName" = "Название компании";
+"TextInput.placeholder.detailDescription" = "Детальное описание";
+"TextInput.placeholder.serviceName" = "Название услуги";
+"TextInput.placeholder.priceEnter" = "Укажите стоимость";
+"TextInput.placeholder.serviceHeader" = "Заголовок услуги";
+"TextInput.placeholder.serviceDescription" = "Описание услуги";
+"TextInput.placeholder.productName" = "Название товара";
+"TextInput.placeholder.showRoom" = "Шоу-рум";
+"TextInput.placeholder.productHeader" = "Заголовок товара";
+"TextInput.placeholder.productDescription" = "Описание товара";
+"TextInput.placeholder.socialName" = "Название";
+"TextInput.placeholder.socialLink" = "Ссылка, https://link.com";
+"TextInput.placeholder.listName" = "Название";
+
+"Button.continue.normalTitle" = "Продолжить";
+"Button.save.normalTitle" = "Сохранить";
+"Button.edit.normalTitle" = "Редактиовать";
+"Button.email.normalTitle" = "Написать";
+"Button.telephone.normalTitle" = "Позвонить";
+"Button.mapDirectiron.normalTitle" = "Проложить маршрут";
+
+"Button.changePhoto.normalTitle" = "Изменить фото";
+"Button.changeLogo.normalTitle" = "Изменить логотип компании";
+"Button.addPhoto.normalTitle" = "Добавить фото";
+"Button.addLogo.normalTitle" = "Добавить логотип компании";
+"Button.done.normalTitle" = "Готово";
+"Button.cancel.normalTitle" = "Отменить";
+
+"Label.addPhoto.text" = "Добавить фото";
+"Label.contacts.text" = "Связь:";
+"Label.changeBgPhoto.text" = "Изменить фото обложки";
+"Label.addBgPhoto.text" = "Добавить фото обложки";
+"Label.showAll.text" = "Показать все";
+
+"SearchBar.placeholder.employers" = "Поиск работников CoBook";
+
+// MARK: - Social
+"Social.metaTag.inviteFriends.title" = "CoBook";
+"Social.metaTag.inviteFriends.description" = "Личная визитница в телефооне CoBook — загружай! ИННОВАЦИОННОЕ украиснкое приложение специально для тебя! CoBook — это умная визитница в твоем смартфоне, которая поможет в работе и бизнесе при помощи лишь нескольких кликов.";
+
+// MARK: - Bar Items
+"BarItem.allCards" = "Все\nвизитки";
+"BarItem.personalCards" = "Персональные\nвизитки";
+"BarItem.businessCards" = "Бизнес\nвизитки";
+"BarItem.myRegion" = "В моем\nрегионе";
+"BarItem.generalInfo" = "Основная\nинформация";
+"BarItem.services" = "Услуги";
+"BarItem.shop" = "Магазин";
+"BarItem.team" = "Команда";
+"BarItem.contacts" = "Контакты";
+
+// MARK: - Loading
+"Loading.photoLoading.title" = "Продолжается загрузка фото...";
+"Loading.loading.title" = "Загрузка...";
+"Loading.creating.title" = "Создание...";
+"Loading.updating.title" = "Обновление...";
+
+// MARK: -  Error
+"Error.telephoneHaveUnexpectedFormat" = "Номер телефона имеет нечитабельный формат";
+"Error.deviceIsNotConfigureForMail" = "С данного девайса невозможно отправить письмо.";
+"Error.connection" = "Не удалось присоединиться к серверу";
+"Error.employAreadyAdded" = "Выбранный работник уже добавлен";
+"Error.photoLoading.message" = "Ошибка загрузки фото";
+"Error.Social.unreadableFormat" = "Формат ссылки на социальную сеть не читабелен";
+"Error.Social.badLink.message" = "Ссылка имеет неверный формат";
+"Error.Map.notDefinedRoute.message" = "Не обозначены адреса маршрутов";
+"Error.Map.cantOpen.message" = "Не удается открыть карты";
+"Error.Map.accessDenied.title" = "Для просмотра карты, разрешите приложению доступ к вашей локации";
+"Error.Map.accessDeniedButton.normalTitle" = "Открыть настройки";
+"Error.Validation.email" = "Пожалуйста, введите правильный имейл";
+"Error.Validation.firstName" = "Имя должно состоять как минимум из 3 букв, но не больше 25";
+"Error.Validation.lastName" = "Фамилия должна состоять как минимум из 3 букв, но не больше 25";
+"Error.Validation.telephone" = "Пожалуйста, введите правильний номер телефона";
+"Error.Validation.password" = "Пароль должен состоять как минимум из 3 символов, но не больше 25";
+"Error.maxSelectedElements" = "Максимльное количество выбранных елементов - %li";
+
+// MARK: - Onboarding
+"Onboarding.Title01" = "Заголовок 01";
+"Onboarding.Subtitle01" = "Описание особенностей приложения\nфичи, преимущества, и прочие";
+"Onboarding.Title02" = "Заголовок 02";
+"Onboarding.Subtitle02" = "Описание особенностей приложения\ nфичи, преимущества, и прочие";
+"Onboarding.Title03" = "Заголовок 03";
+"Onboarding.Subtitle03" = "Описание особенностей приложения\ nфичи, преимущества, и прочие";
+"Onboarding.Next" = "Продолжить";
+"Onboarding.Start" = "Начать";
+
+// MARK: - Card overview
+"CardOverview.search.placeholder" = "Поиск визитки";
+"CardOverview.search.emptySearch" = "Нет результатов поиска";
+"CardOverview.search.cardSearchResult" = "Найдено %lи визитку(и)";
+
+"Card.hideButton.normalTitle" = "Не интересует визитка?";
+"Card.hideLabel.text" = "Скрыть";
+
+// MARK: - SignUp
+"SignUp.title" = "Добро пожаловать в сообщество CoBook";
+"SignUp.registration" = "Регистрация";
+"SignUp.alreadyHaveAccountQuestion" = "Уже есть аккаунт?";
+"SignUp.enterButton.normalTitle" = "Войдите";
+
+// MARK: - Create Password
+"ConfirmTelephone.header" = "Подтвердите номер телефона";
+"ConfirmTelephone.description" = "Введите код из смс-сообщения";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не пришла СМС?";
+
+// MARK: - Confirm password
+"CreatePassword.header" = "Последний шаг";
+"CreatePassword.description" = "Придумайте пароль";
+
+// MARK: - SighIn
+"SignIn.title" = "Добро пожаловать в сообщество CoBook ";
+"SignIn.header" = "Вход";
+"SignIn.forgotPassword.normalTitle" = "Забыли пароль?";
+"SignIn.enterButton.normalTitle" = "Войдите";
+"SignIn.firstTimeInCobook" = "Впервые в CoBook?";
+"SignIn.register.normalTitle" = "Зарегистрируйтесь";
+
+// MARK: - Forgot Password
+"ForgotPassword.title" = "Забыли пароль?";
+"ForgotPassword.subtitle" = "Введите ваш номер телефона для обновления";
+"ForgotPassword.successMessage" = "Запрос на обновление пароля успешно отправлен.";
+
+// MARK: - Account
+"Account.updating.title" = "Обновление данных...";
+"Account.item.createPersonalCard" = "Создать персональную визитку";
+"Account.item.createBusinessCard" = " Создать бизнес визитку";
+"Account.item.createAnotherOneBusinessCard" = " Создать еще одну бизнес визитку ";
+"Account.item.inviteFriends" = "Пригласить друзей";
+"Account.item.statictics" = "Статистика";
+"Account.item.generateQrCode" = "Сгенерировать QR-code";
+"Account.item.faq" = "FAQ";
+"Account.item.startMakingMoney" = "Начать зарабатывать с CoBook";
+"Account.item.quitAccount" = "Выйти из аккаунта";
+"Account.section.myCards.title" = "Мои визитки:";
+
+// MARK: - Settings
+"Settings.title" = "Настройки";
+"Settings.item.updateAccount.title" = "Обновление аккаунта";
+"Settings.item.changePassword.title" = "Смена пароля";
+"Settings.item.paymentMethods.title" = "Методы оплаты";
+"Settings.item.appVersion.title" = "Версия приложения";
+"Settings.item.rules.title" = "Правила пользования";
+"Settings.item.secureConditions.title" = "Условия безопасности";
+
+"Settings.ChangePassword.title" = "Смена пароля";
+"Settings.ChangePassword.passwordsDoNotMatch.title" = "Проверьте входящие данные";
+"Settings.ChangePassword.passwordsDoNotMatch.message" = "Старый и новый пароли не совпадают";
+"Settings.ChangePassword.section.oldPassword.title" = "Старый пароль:";
+"Settings.ChangePassword.section.newPassword.title" = "Новый пароль:";
+"Settings.ChangePassword.section.repeareNewPassword.title" = "Подтвердите новый пароль:";
+
+"Settings.UpdateAccount.title" = "Обновление аккаунта";
+"Settings.UpdateAccount.section.firstName" = "Имя:";
+"Settings.UpdateAccount.section.lastName" = "Фамилия:";
+"Settings.UpdateAccount.section.email" = "Имейл:";
+
+// MARK: - Acticles
+"Article.details.title" = "Статья";
+"Article.create.title" = "Создать статью";
+"Article.edit.title" = "Редактировать статью";
+"Article.addPhotoButton.normalTitle" = "Добавить фото";
+"Article.header.placeholder" = "Введите заголовок";
+"Article.selectAlbum.text" = "Выберете альбом";
+"Article.description.placeholder" = "Текст статьи";
+"Article.publicButton.normalTitle" = "Опубликовать";
+"Article.placeholder.emptyAlbumItems" = "В данном альбоме отсутствуют статьи...";
+"Article.placeholder.back" = "Вернуться назад";
+"Article.Saved" = "Статья сохранена";
+"Article.Unsaved" = "Статтю удалена из сохраненных";
+
+// MARK: - Album
+"Album.createTitle" = "Создать альбом";
+"Album.selectTitle" = "Выбрать альбом";
+"Album.editTitle" = "Редактировать альбом";
+"Album.addPhotoButton.normalTitle" = "Добавить фото";
+"Album.name.placeholder" = "Название альбома";
+
+// MARK: - Filters
+"Filter.title" = "Фильтры";
+"Filter.section.interests.title" = "Интересы";
+"Filter.section.practicies.title" = "Вид деятельности";
+
+//MARK: - Saved content
+"SavedContent.title" = "Сохраненные";
+"SavedContent.listCreated.message" = "Список %@ создано";
+"SavedContent.listUpdated.message" = "Список %@ обновлено";
+"SavedContent.listDeleted.message" = "Список %@ удалено";
+"SavedContent.cardSaved.message" = "Визитка сохранена";
+"SavedContent.cardUnsaved.message" = "Удалено из сохраненных";
+"SavedContent.section.articles.title" = "Сохраненные посты";
+"SavedContent.section.cards.title" = "Сохраненные визитки";
+"SavedContent.addList.normalTitle" = "Добавить список";
+
+// MARK: - Business Card
+"BusinessCard.title" = "Бизнес визитка";
+"BusinessCard.section.createdAlbums.title" = "Созданные альбомы:";
+"BusinessCard.section.socials.title" = "Социальные сети:";
+"BusinessCard.createNewAlbum.text" = "Ваш пост";
+
+"BusinessCard.Creation.title" = "Создание бизнес визитки";
+"BusinessCard.section.mainData" = "Основные данные:";
+"BusinessCard.section.companyActivity" = "Деятельность компании:";
+"BusinessCard.section.aboutCompany.title" = "О компании:";
+"BusinessCard.section.companyInSocials.title" = "Компания в соцсетях:";
+"BusinessCard.section.companyEmployers.title" = "Работники компании:";
+"BusinessCard.section.interests.title" = "Интересы(для рекомендаций):";
+
+// MARK: - Personal Card
+"PersonalCard.title" = "Личная визитка";
+"PersonalCard.createNewAlbum.text" = "Ваш пост";
+"PersonalCard.section.contacts.title" = "Связаться:";
+"PersonalCard.section.articles.title" = "Созданные статьи:";
+"PersonalCard.section.ownerArticles.title" = "Мой дневник:";
+
+"PersonalCard.Creation.title" = "Создание персональной визитки";
+"PersonalCard.Creation.section.activity" = "Деятельность:";
+"PersonalCard.Creation.section.companyActivity" = "Деятельность компании:";
+"PersonalCard.Creation.section.socials" = "Социальные сети";
+"PersonalCard.Creation.section.interests" = " Интересы(для рекомендаций):";
+
+// MARK: - Services
+"Service.create.title" = "Услуга компании";
+"Service.details.title" = "Услуга компании";
+"Service.negotiablePrice.text" = "Цена договорная";
+"Service.showRoom.title" = "Шоу-рум";
+"Service.add.text" = "Добавить услугу";
+"Service.saveButton.normalTitle" = "Сохранить услугу";
+"Service.updateButton.normalTitle" = "Обновить услугу";
+"Service.editButton.normalTitle" = "Редактировать услугу";
+"Service.section.price.title" = "Стоимость услуги:";
+"Service.section.contacts.title" = "Контактные данные:";
+"Service.checkbox.title" = "Использовать контакты страницы";
+
+// MARK: - Product
+"Product.create.title" = "Товар";
+"Product.details.title" = "Товар";
+"Product.add.text" = "Добавить товар";
+"Product.saveButton.normalTitle" = "Сохранить товар";
+"Product.updateButton.normalTitle" = "Обновить товар";
+"Product.editButton.normalTitle" = "Редактировать товар";
+"Product.checkbox.negotiablePrice.title" = "Цена договорная";
+"Product.checkbox.useCompanyContacts.title" = " Использовать контакты страницы";
+"Product.section.price.title" = " Стоимость услуги:";
+"Product.section.showRoomNumber.title" = "Номер Шоу-рума:";
+"Product.section.contacts.title" = "Контактные данные:";
+"Product.negotiablePrice.text" = "Цена договорная";

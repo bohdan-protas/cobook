@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PanModal
 import GooglePlaces
 
 fileprivate enum Layout {
@@ -14,7 +15,7 @@ fileprivate enum Layout {
     static let footerHeight: CGFloat = 124
 }
 
-class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardView {
+class CreatePersonalCardViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
 
@@ -44,10 +45,38 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         presenter.onViewDidLoad()
     }
 
-    // MARK: - CreatePersonalCardView
+    deinit {
+        presenter.detachView()
+    }
 
-    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?) {
-        tableView.dataSource = dataSource
+
+}
+
+// MARK: - Privates
+
+private extension CreatePersonalCardViewController {
+
+    func setupLayout() {
+        self.navigationItem.title = "PersonalCard.Creation.title".localized
+        tableView.estimatedRowHeight = Layout.estimatedRowHeight
+        tableView.delegate = self
+    }
+
+
+}
+
+// MARK: - CreatePersonalCardView
+
+extension CreatePersonalCardViewController: CreatePersonalCardView {
+
+    func showSearchPracticies(presenter: SearchPracticiesPresenter) {
+        let searchViewController = SearchViewController(presenter: presenter)
+        let navigation = CustomNavigationController(rootViewController: searchViewController)
+        presentPanModal(navigation)
+    }
+
+    func set(dataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?) {
+        dataSource?.connect(to: tableView)
     }
 
     func setupSaveCardView() {
@@ -63,7 +92,7 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
         autocompleteViewController.autocompleteFilter = filter
         autocompleteViewController.delegate = self
 
-        present(autocompleteViewController, animated: true, completion: nil)
+        presentPanModal(autocompleteViewController)
     }
 
     func setSaveButtonEnabled(_ isEnabled: Bool) {
@@ -73,19 +102,6 @@ class CreatePersonalCardViewController: BaseViewController, CreatePersonalCardVi
 
 }
 
-// MARK: - Privates
-
-private extension CreatePersonalCardViewController {
-
-    func setupLayout() {
-        self.navigationItem.title = "PersonalCard.Creation.title".localized
-
-        tableView.estimatedRowHeight = Layout.estimatedRowHeight
-        tableView.delegate = self
-    }
-
-
-}
 
 // MARK: - CardAvatarPhotoManagmentTableViewCellDelegate
 
@@ -146,3 +162,21 @@ extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegat
 
 
 }
+
+extension GMSAutocompleteViewController: PanModalPresentable {
+
+    public var panScrollable: UIScrollView? {
+        return nil
+    }
+
+    public var longFormHeight: PanModalHeight {
+        return .maxHeight
+    }
+
+    public var shortFormHeight: PanModalHeight {
+        return longFormHeight
+    }
+
+}
+
+

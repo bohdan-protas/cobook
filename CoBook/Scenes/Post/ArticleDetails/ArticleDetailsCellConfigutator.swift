@@ -37,6 +37,7 @@ enum ArticleDetails {
         case creator(model: CardPreviewModel)
         case photoCollage
         case articlePreview(model: ArticlePreviewModel)
+        case title(text: String)
     }
 
 }
@@ -50,6 +51,7 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
     var creatorCellConfigurator: CellConfigurator<CardPreviewModel, CardPreviewTableViewCell>?
     var photoCollageConfigurator: CellConfigurator<Void?, PhotoCollageTableViewCell>?
     var articlePreviewConfigurator: CellConfigurator<ArticlePreviewModel, ArticlePreviewTableViewCell>?
+    var titleCellConfigurator: CellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
 
     func reuseIdentifier(for item: ArticleDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -63,6 +65,8 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
             return photoCollageConfigurator?.reuseIdentifier ?? ""
         case .articlePreview:
             return articlePreviewConfigurator?.reuseIdentifier ?? ""
+        case .title:
+            return titleCellConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -78,6 +82,8 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
             return photoCollageConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .articlePreview(let model):
             return articlePreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .title(let text):
+            return titleCellConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -109,6 +115,7 @@ extension ArticleDetailsPresenter {
 
             configurator.photoCollageConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
                 cell.dataSource = self
+                cell.delegate = self
                 cell.prepareLayout()
                 return cell
             }
@@ -153,6 +160,11 @@ extension ArticleDetailsPresenter {
 
                 cell.selectionStyle = .none
                 cell.accessoryView = nil
+                return cell
+            }
+
+            configurator.titleCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ArticleDetailsSectionTitleTableViewCell in
+                cell.titleLabel.text = model
                 return cell
             }
 

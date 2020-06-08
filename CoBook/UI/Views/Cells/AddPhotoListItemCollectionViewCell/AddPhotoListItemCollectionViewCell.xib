@@ -27,18 +27,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="208" height="208"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ENy-5p-gcH">
-                                <rect key="frame" x="58" y="82" width="92.5" height="44"/>
+                                <rect key="frame" x="32.5" y="82" width="143" height="44"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_interests_plus" translatesAutoresizingMaskIntoConstraints="NO" id="ygY-Li-e1e">
-                                        <rect key="frame" x="38" y="0.0" width="16" height="16"/>
+                                        <rect key="frame" x="63.5" y="0.0" width="16" height="16"/>
                                         <color key="tintColor" name="Theme_Green-Dark"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="DhV-Wr-FyO"/>
                                             <constraint firstAttribute="width" constant="16" id="kLP-oo-n5u"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Додати фото" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmo-f1-2bM">
-                                        <rect key="frame" x="0.0" y="28" width="92.5" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Label.addPhoto.text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmo-f1-2bM">
+                                        <rect key="frame" x="0.0" y="28" width="143" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="SmD-Mz-dUb"/>
                                         </constraints>
@@ -72,6 +72,9 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="208" height="208"/>
+            <connections>
+                <outlet property="addPhotoTItleLabel" destination="nmo-f1-2bM" id="PZ4-ko-H0l"/>
+            </connections>
             <point key="canvasLocation" x="252.17391304347828" y="206.25"/>
         </collectionViewCell>
     </objects>

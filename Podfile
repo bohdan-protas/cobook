@@ -6,11 +6,13 @@ target 'CoBook' do
   pod 'Alamofire', '~> 5.0'
   pod 'AlamofireImage', '~> 4.0'
   pod 'IQKeyboardManagerSwift'
+  pod 'PanModal'
   pod 'JGProgressHUD'
   pod 'GooglePlaces'
   pod 'GoogleMaps'
   pod 'SwiftSoup'
   pod 'CropViewController'
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
 

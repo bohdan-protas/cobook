@@ -11,6 +11,7 @@ import UIKit
 protocol SelectAlbumView: AlertDisplayableView, LoadDisplayableView, NavigableView, SelectAlbumTableViewCellDelegate {
     func set(albums: DataSource<SelectAlbumCellsConfigurator>?)
     func goToCreateAlbum(presenter: CreateAlbumPresenter)
+    func reload()
 }
 
 protocol SelectAlbumDelegate: class {
@@ -39,7 +40,6 @@ class SelectAlbumPresenter: BasePresenter {
         var photosDataSourceConfigurator = SelectAlbumCellsConfigurator()
         photosDataSourceConfigurator.selectAlbumCellConfigurator = CellConfigurator { [weak self] (cell, model: PostPreview.Item.Model, tableView, indexPath) -> SelectAlbumTableViewCell in
             cell.delegate = self?.view
-            cell.editButton.isHidden = model.isSelected
             cell.isSelected = model.isSelected
             cell.albumTitleLabel.text = model.title
             cell.albumImageView.setImage(withPath: model.avatarPath)
@@ -96,8 +96,39 @@ class SelectAlbumPresenter: BasePresenter {
         let model = albumsDataSource?.sections[indexPath.section].items[indexPath.item]
         let parameters = CreateAlbumModel(cardID: cardID, albumID: model?.albumID, avatarID: model?.avatarID, avatarPath: model?.avatarPath, title: model?.title)
         let presenter = CreateAlbumPresenter(parameters: parameters)
+        presenter.delegate = self
         view?.goToCreateAlbum(presenter: presenter)
     }
     
+
+}
+
+// MARK: - CreateAlbumDelegate
+
+extension SelectAlbumPresenter: CreateAlbumDelegate {
+
+    func albumEdited(with parameters: CreateAlbumModel) {
+        guard let itemIndexToUpdate = albumsDataSource?.sections[safe: 0]?.items.firstIndex(where: { (model) -> Bool in
+            model.albumID == parameters.albumID
+        }) else {
+            return
+        }
+
+        let updatedModel = PostPreview.Item.Model(albumID: parameters.albumID,
+                                                  isSelected: parameters.albumID == selectedAlbumID ?? -1,
+                                                  title: parameters.title,
+                                                  avatarPath: parameters.avatarPath,
+                                                  avatarID: parameters.avatarID)
+
+        albumsDataSource?.sections[safe: 0]?.items[itemIndexToUpdate] = updatedModel
+        self.view?.reload()
+
+        // update if selected article creation form
+        if parameters.albumID == selectedAlbumID ?? -1 {
+            delegate?.selectedAlbum(updatedModel)
+        }
+
+    }
+
 
 }

@@ -14,11 +14,5 @@ class ArticleDescriptionTableViewCell: UITableViewCell {
     @IBOutlet var albumImageView: DesignableImageView!
     @IBOutlet var albumNameLabel: UILabel!
     @IBOutlet var descriptionTextView: DesignableTextView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     
 }

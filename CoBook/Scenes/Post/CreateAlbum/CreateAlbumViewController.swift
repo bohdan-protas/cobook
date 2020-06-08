@@ -59,7 +59,6 @@ class CreateAlbumViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoPlaceholderView.bringSubviewToFront(addImageButton)
-
     }
 
     override func viewWillAppear(_ animated: Bool) {

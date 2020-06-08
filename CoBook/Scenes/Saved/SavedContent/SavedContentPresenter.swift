@@ -17,7 +17,7 @@ protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, Contactabl
     func set(barItems: [BarItem])
     func createFolder()
 
-    //func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
+    func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
 }
@@ -89,7 +89,7 @@ class SavedContentPresenter: BasePresenter {
             switch result {
             case .success(let response):
                 let items = response?.rows?
-                    .compactMap { PostPreview.Item.Model(albumID: nil,
+                    .compactMap { PostPreview.Item.Model(albumID: $0.albumID,
                                                           articleID: $0.id,
                                                           title: $0.title,
                                                           avatarPath: $0.avatar?.sourceUrl,
@@ -308,9 +308,8 @@ private extension SavedContentPresenter {
                 view?.goToPersonalCardDetails(presenter: presenter)
 
             case .business:
-                break
-//                let presenter = BusinessCardDetailsPresenter(id: model.id)
-//                view?.goToBusinessCardDetails(presenter: presenter)
+                let presenter = BusinessCardDetailsPresenter(id: model.id)
+                view?.goToBusinessCardDetails(presenter: presenter)
             }
         default: break
         }
