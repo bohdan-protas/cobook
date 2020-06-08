@@ -64,7 +64,8 @@ private extension FilterPresenter {
                                            counter: fetchedPracticies.count,
                                            actionTitle: "Button.edit.normalTitle".localized, actionHandler: {
 
-                                            let presenter = SearchPracticiesPresenter(isMultiselectEnabled: true)
+                                            let presenter = SearchPracticiesPresenter(isMultiselectEnabled: true,
+                                                                                      selectedPracticies: self.fetchedPracticies.filter {$0.isSelected})
                                             presenter.delegate = self
                                             self.view?.showSearchPracticies(presenter: presenter)
 

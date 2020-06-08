@@ -21,15 +21,16 @@ class SearchPracticiesPresenter: SearchPresenter {
 
     private var practicies: [PracticeModel] = []
     private var filteredPracticies: [PracticeModel] = []
+    private var selectedPracticies: [PracticeModel] = []
 
     var isMultiselectEnabled: Bool
-
     var selectionCompletion: ((_ practice: PracticeModel?) -> Void)?
 
     // MARK: - Search presenter
 
-    init(isMultiselectEnabled: Bool) {
+    init(isMultiselectEnabled: Bool, selectedPracticies: [PracticeModel] = []) {
         self.isMultiselectEnabled = isMultiselectEnabled
+        self.selectedPracticies = selectedPracticies
         var configurator = SearchCellsConfigurator()
         configurator.practiceConfigurator = CellConfigurator(configurator: { (cell, model: PracticeModel, tableView, index) -> FilterItemTableViewCell in
             cell.titleLabel?.text = model.title
@@ -113,7 +114,7 @@ private extension SearchPracticiesPresenter {
             case let .success(response):
                 self.practicies = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
                 self.practicies = self.practicies.compactMap { fetched in
-                    let isSelected: Bool = AppStorage.User.Filters?.practicies.compactMap{ $0.id }.contains(fetched.id ?? -1) ?? false
+                    let isSelected: Bool = self.selectedPracticies.compactMap{ $0.id }.contains(fetched.id ?? -1)
                     return PracticeModel(id: fetched.id, title: fetched.title, isSelected: isSelected)
                 }
                 self.filteredPracticies = self.practicies
