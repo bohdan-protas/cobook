@@ -56,23 +56,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o1l-PW-a0F">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="b4D-hi-UsD">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CRG-Eq-C8G">
+                                <rect key="frame" x="8" y="0.0" width="359" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="meK-gq-UzB" customClass="LeftAlignedCollectionViewFlowLayout" customModule="CoBook" customModuleProvider="target">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="b4D-hi-UsD">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                                 <color key="color" name="Theme_Black-Middle"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="o1l-PW-a0F" firstAttribute="top" secondItem="PKx-cW-vQZ" secondAttribute="top" id="6Lu-qr-r3X"/>
-                            <constraint firstItem="o1l-PW-a0F" firstAttribute="bottom" secondItem="PKx-cW-vQZ" secondAttribute="bottom" id="NaZ-mG-DbY"/>
+                            <constraint firstItem="CRG-Eq-C8G" firstAttribute="bottom" secondItem="PKx-cW-vQZ" secondAttribute="bottom" id="EZl-Wh-eDz"/>
                             <constraint firstItem="b4D-hi-UsD" firstAttribute="centerX" secondItem="2PR-Np-hIy" secondAttribute="centerX" id="P26-GL-FLt"/>
                             <constraint firstItem="b4D-hi-UsD" firstAttribute="centerY" secondItem="2PR-Np-hIy" secondAttribute="centerY" id="UhF-cz-NF7"/>
-                            <constraint firstItem="o1l-PW-a0F" firstAttribute="leading" secondItem="PKx-cW-vQZ" secondAttribute="leading" id="Z4B-tS-Yaf"/>
-                            <constraint firstItem="o1l-PW-a0F" firstAttribute="trailing" secondItem="PKx-cW-vQZ" secondAttribute="trailing" id="dkW-AS-gpi"/>
+                            <constraint firstItem="CRG-Eq-C8G" firstAttribute="leading" secondItem="PKx-cW-vQZ" secondAttribute="leading" constant="8" id="VTH-Bd-q3c"/>
+                            <constraint firstItem="PKx-cW-vQZ" firstAttribute="trailing" secondItem="CRG-Eq-C8G" secondAttribute="trailing" constant="8" id="cSN-GT-aRO"/>
+                            <constraint firstItem="CRG-Eq-C8G" firstAttribute="top" secondItem="PKx-cW-vQZ" secondAttribute="top" id="t2B-2Z-SAw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PKx-cW-vQZ"/>
                     </view>
@@ -92,8 +99,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="b4D-hi-UsD" id="mEe-kw-Xgh"/>
+                        <outlet property="collectionView" destination="CRG-Eq-C8G" id="AHM-2i-Uoz"/>
+                        <outlet property="collectionViewFlowLayout" destination="meK-gq-UzB" id="TmR-Pb-BDB"/>
                         <outlet property="saveBarButtonItem" destination="29D-p5-S7I" id="o3B-IA-gwE"/>
-                        <outlet property="tableView" destination="o1l-PW-a0F" id="VYA-De-heB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BW2-Uo-QuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -108,10 +116,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="pF9-Hx-kqh" id="qRM-3h-1r5"/>
-                            <outlet property="delegate" destination="pF9-Hx-kqh" id="Dkn-o5-voz"/>
-                        </connections>
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLi-YB-2Ea" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

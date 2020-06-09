@@ -25,7 +25,9 @@ protocol FilterViewControllerDelegate: class {
 
 class FilterViewController: BaseViewController {
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var collectionViewFlowLayout: LeftAlignedCollectionViewFlowLayout!
+
     @IBOutlet var saveBarButtonItem: UIBarButtonItem!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
@@ -66,18 +68,18 @@ class FilterViewController: BaseViewController {
 
 extension FilterViewController: FilterView {
 
+    func set(collectionDataSource: CollectionDataSource<FilterCellsConfigurator>?) {
+        collectionDataSource?.connect(to: collectionView)
+    }
+
     func showSearchPracticies(presenter: SearchPracticiesPresenter) {
         let searchViewController = SearchViewController(presenter: presenter)
         let navigation = CustomNavigationController(rootViewController: searchViewController)
         presentPanModal(navigation)
     }
 
-    func set(tableDataSource: DataSource<FilterCellsConfigurator>?) {
-        tableDataSource?.connect(to: tableView)
-    }
-
     func reload() {
-        tableView.reloadData()
+        collectionView.reloadData()
     }
 
 
@@ -85,7 +87,23 @@ extension FilterViewController: FilterView {
 
 // MARK: - TableViewDelegate
 
-extension FilterViewController: UITableViewDelegate {
+extension FilterViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            presenter.selectedItem(cell: cell, at: indexPath)
+        }
+    }
+
+
+}
+
+extension FilterViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return presenter.sizeForItemAt(indexPath: indexPath, for: collectionView.bounds)
+    }
+
 
 }
 
@@ -95,9 +113,8 @@ private extension FilterViewController {
 
     func setupLayout() {
         self.navigationItem.title = "Filter.title".localized
-        tableView.delegate = self
-        saveBarButtonItem.setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15),
-                                                  .foregroundColor: UIColor.Theme.greenDark], for: .normal)
+        collectionView.delegate = self
+        saveBarButtonItem.setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15), .foregroundColor: UIColor.Theme.greenDark], for: .normal)
     }
 
 

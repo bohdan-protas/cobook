@@ -314,13 +314,13 @@ private extension CreateBusinessCardPresenter {
             switch result {
             case let .success(response):
 
-                let interests = (response ?? []).compactMap { InterestModel(id: $0.id, title: $0.title) }
+                let interests = (response ?? []).compactMap { TagModel(id: $0.id, title: $0.title) }
 
-                let fetchedInterests: [InterestModel] = interests.compactMap { fetched in
+                let fetchedInterests: [TagModel] = interests.compactMap { fetched in
                     let isSelected = strongSelf.businessCardDetailsModel.interests.contains(where: { (selected) -> Bool in
                         return selected.id == fetched.id
                     })
-                    return InterestModel(id: fetched.id, title: fetched.title, isSelected: isSelected )
+                    return TagModel(id: fetched.id, title: fetched.title, isSelected: isSelected )
                 }
                 strongSelf.businessCardDetailsModel.interests = fetchedInterests
                 group.leave()
@@ -492,7 +492,7 @@ extension CreateBusinessCardPresenter: InterestsSelectionTableViewCellDataSource
         businessCardDetailsModel.interests[safe: index]?.isSelected = false
     }
 
-    func dataSourceWith(identifier: String?) -> [InterestModel] {
+    func dataSourceWith(identifier: String?) -> [TagModel] {
         return businessCardDetailsModel.interests
     }
 

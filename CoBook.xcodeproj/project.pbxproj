@@ -369,6 +369,9 @@
 		B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E5924192BD300F4F60B /* DesignableTextView.swift */; };
 		B8DFB746248FBC5F00924838 /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DFB745248FBC5F00924838 /* CollectionDataSource.swift */; };
 		B8DFB74A248FC2E100924838 /* CollectionCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DFB749248FC2E100924838 /* CollectionCellConfigurator.swift */; };
+		B8DFB74C248FCC0600924838 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DFB74B248FCC0600924838 /* Filter.swift */; };
+		B8DFB752248FE1D500924838 /* ActionTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DFB750248FE1D500924838 /* ActionTitleCollectionViewCell.swift */; };
+		B8DFB753248FE1D500924838 /* ActionTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DFB751248FE1D500924838 /* ActionTitleCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -741,6 +744,9 @@
 		B8DE5E5924192BD300F4F60B /* DesignableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextView.swift; sourceTree = "<group>"; };
 		B8DFB745248FBC5F00924838 /* CollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
 		B8DFB749248FC2E100924838 /* CollectionCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellConfigurator.swift; sourceTree = "<group>"; };
+		B8DFB74B248FCC0600924838 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		B8DFB750248FE1D500924838 /* ActionTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8DFB751248FE1D500924838 /* ActionTitleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActionTitleCollectionViewCell.xib; sourceTree = "<group>"; };
 		C93E9765F0DA3748E1CC0BAA /* Pods-CoBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.release.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.release.xcconfig"; sourceTree = "<group>"; };
 		D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1173,6 +1179,7 @@
 			isa = PBXGroup;
 			children = (
 				B824924D243DE73E00A1AC39 /* AllCards.storyboard */,
+				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 				B824924C243DE72500A1AC39 /* CardsOverview */,
 				B823DD8224439B4500A74495 /* Filter */,
 			);
@@ -1182,7 +1189,6 @@
 		B824924C243DE72500A1AC39 /* CardsOverview */ = {
 			isa = PBXGroup;
 			children = (
-				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 				B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */,
 				B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */,
 				B8249246243DE64A00A1AC39 /* CardsOverviewPresenter.swift */,
@@ -1516,6 +1522,7 @@
 				B81F18A424608130003CBC84 /* AlbumPreviewModel.swift */,
 				B823A1AC2461B561004271AA /* CreateAlbumModel.swift */,
 				B823A1AE2461F1F2004271AA /* CreateArticleModel.swift */,
+				B8DFB74B248FCC0600924838 /* Filter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2077,46 +2084,8 @@
 		B8DE5E3A2418E1C600F4F60B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				B827B2A5247FE23E006E1A17 /* ActionTitleTableViewCell */,
-				B8205C2A246D88F2003C39F4 /* ContactableCardItemTableViewCell */,
-				B8909FB9246499CF00AA56F7 /* ArticlePreviewTableViewCell */,
-				B8909FA9246418E900AA56F7 /* PhotoCollage */,
-				B8909FAE24641C1500AA56F7 /* ArticleHeaderTableViewCell */,
-				B8909FA42464164A00AA56F7 /* ArticleDescriptionTableViewCell */,
-				B81F189424602EB6003CBC84 /* SelectAlbumTableViewCell */,
-				B835FFBF245F3A6A00189406 /* PostEditablePhotoCollectionViewCell */,
-				B824DA71245B073800700319 /* AlbumPreviewItemCollectionViewCell */,
-				B824DA68245B030E00700319 /* AlbumPreviewItemsHorizontalListTableViewCell */,
-				B822F5222459BD8100F207CD /* ProductPreviewItemCollectionViewCell */,
-				B822F51D2459BD4700F207CD /* ProductPreviewItemsHorizontalListTableViewCell */,
-				B82B4D4B245656A70061A98B /* CompanyPreviewHeaderTableViewCell */,
-				B82B4D3C245605790061A98B /* CheckboxTableViewCell */,
-				B8263C70245345010075A499 /* StaticMapTableViewCell */,
-				B82B4D372455FD440061A98B /* AddPhotoListItemCollectionViewCell */,
-				B8A3B0AA2450A547007C4F05 /* PhotoListItemCollectionViewCell */,
-				B8A3B0A52450A3FD007C4F05 /* HorizontalPhotosListTableViewCell */,
-				B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */,
-				B8237F35244740CE0006E8D1 /* ContactsTableViewCell */,
-				B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */,
-				B8559F87243C841100787349 /* ExpandableTextDescriptionTableViewCell */,
-				B8559F82243C817E00787349 /* MapDirectionTableViewCell */,
-				B8559F7D243C808B00787349 /* MapTableViewCell */,
-				B8559F78243C7D7F00787349 /* AddressInfoTableViewCell */,
-				B8559F72243B781600787349 /* BusinessCardHeaderUserInfoTableViewCell */,
-				B8559F8C243C8A9700787349 /* PersonalCardItemTableViewCell */,
-				B8559F54243A753100787349 /* EmployersPreviewHorizontalListTableViewCell */,
-				B825B6F724391427002A27EC /* EmployersSearchTableViewCell */,
-				B824E1AC243766C60091C491 /* CardBackgroundManagmentTableViewCell */,
-				B823B08C242D1ADF0012529D /* CardAvatarPhotoManagmentTableViewCell */,
-				B82248E0242C104A00392D10 /* SectionHeaderTableViewCell */,
-				B8AB8406242840F80041B879 /* GetInTouchTableViewCell */,
-				B84A15E62410F63100C4DC11 /* CardPreviewTableViewCell */,
-				B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */,
-				B8212A5A241B6A400066700C /* TagItemCollectionViewCell */,
-				B828282B241A96BA0003D056 /* TagsListTableViewCell */,
-				B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */,
-				B8DE5E3B2418E1D900F4F60B /* TextFieldTableViewCell */,
-				B8DE5E52241925E900F4F60B /* TextViewTableViewCell */,
+				B8DFB74E248FE01B00924838 /* Collection */,
+				B8DFB74D248FDFE600924838 /* Table */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2170,6 +2139,70 @@
 				B8DFB745248FBC5F00924838 /* CollectionDataSource.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		B8DFB74D248FDFE600924838 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				B827B2A5247FE23E006E1A17 /* ActionTitleTableViewCell */,
+				B8205C2A246D88F2003C39F4 /* ContactableCardItemTableViewCell */,
+				B8909FB9246499CF00AA56F7 /* ArticlePreviewTableViewCell */,
+				B8909FA9246418E900AA56F7 /* PhotoCollage */,
+				B8909FAE24641C1500AA56F7 /* ArticleHeaderTableViewCell */,
+				B8909FA42464164A00AA56F7 /* ArticleDescriptionTableViewCell */,
+				B81F189424602EB6003CBC84 /* SelectAlbumTableViewCell */,
+				B835FFBF245F3A6A00189406 /* PostEditablePhotoCollectionViewCell */,
+				B824DA71245B073800700319 /* AlbumPreviewItemCollectionViewCell */,
+				B824DA68245B030E00700319 /* AlbumPreviewItemsHorizontalListTableViewCell */,
+				B822F5222459BD8100F207CD /* ProductPreviewItemCollectionViewCell */,
+				B822F51D2459BD4700F207CD /* ProductPreviewItemsHorizontalListTableViewCell */,
+				B82B4D4B245656A70061A98B /* CompanyPreviewHeaderTableViewCell */,
+				B82B4D3C245605790061A98B /* CheckboxTableViewCell */,
+				B8263C70245345010075A499 /* StaticMapTableViewCell */,
+				B82B4D372455FD440061A98B /* AddPhotoListItemCollectionViewCell */,
+				B8A3B0AA2450A547007C4F05 /* PhotoListItemCollectionViewCell */,
+				B8A3B0A52450A3FD007C4F05 /* HorizontalPhotosListTableViewCell */,
+				B8970B4A2450589C006676DF /* ServiceListItemTableViewCell */,
+				B8237F35244740CE0006E8D1 /* ContactsTableViewCell */,
+				B8AB83FC242831760041B879 /* PersonalCardUserInfoCell */,
+				B8559F87243C841100787349 /* ExpandableTextDescriptionTableViewCell */,
+				B8559F82243C817E00787349 /* MapDirectionTableViewCell */,
+				B8559F7D243C808B00787349 /* MapTableViewCell */,
+				B8559F78243C7D7F00787349 /* AddressInfoTableViewCell */,
+				B8559F72243B781600787349 /* BusinessCardHeaderUserInfoTableViewCell */,
+				B8559F8C243C8A9700787349 /* PersonalCardItemTableViewCell */,
+				B8559F54243A753100787349 /* EmployersPreviewHorizontalListTableViewCell */,
+				B825B6F724391427002A27EC /* EmployersSearchTableViewCell */,
+				B824E1AC243766C60091C491 /* CardBackgroundManagmentTableViewCell */,
+				B823B08C242D1ADF0012529D /* CardAvatarPhotoManagmentTableViewCell */,
+				B82248E0242C104A00392D10 /* SectionHeaderTableViewCell */,
+				B8AB8406242840F80041B879 /* GetInTouchTableViewCell */,
+				B84A15E62410F63100C4DC11 /* CardPreviewTableViewCell */,
+				B83FD7D4242328D500ACA1D4 /* SocialsListTableViewCell */,
+				B8212A5A241B6A400066700C /* TagItemCollectionViewCell */,
+				B828282B241A96BA0003D056 /* TagsListTableViewCell */,
+				B8DE5E482418E96F00F4F60B /* SectionTitleTableViewCell */,
+				B8DE5E3B2418E1D900F4F60B /* TextFieldTableViewCell */,
+				B8DE5E52241925E900F4F60B /* TextViewTableViewCell */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		B8DFB74E248FE01B00924838 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				B8DFB74F248FE02700924838 /* ActionTitleCollectionViewCell */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		B8DFB74F248FE02700924838 /* ActionTitleCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8DFB750248FE1D500924838 /* ActionTitleCollectionViewCell.swift */,
+				B8DFB751248FE1D500924838 /* ActionTitleCollectionViewCell.xib */,
+			);
+			path = ActionTitleCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2305,6 +2338,7 @@
 				B820793D2444727F00FCCC17 /* CorneredEdgeView.xib in Resources */,
 				B825741123F5621500C8CBF8 /* HelveticaNeueCyr-Light.ttf in Resources */,
 				B884AAE1245F720D00ACC0D7 /* PhotosPlaceholderView.xib in Resources */,
+				B8DFB753248FE1D500924838 /* ActionTitleCollectionViewCell.xib in Resources */,
 				B825FC40247EA90600DB035D /* BottomLoaderView.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
@@ -2462,6 +2496,7 @@
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B8DC630F2434FC3A00A2ED58 /* TableDataSource.swift in Sources */,
 				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
+				B8DFB74C248FCC0600924838 /* Filter.swift in Sources */,
 				B8AB0B1C248DC82500DACC3D /* FilterDataSourceConfigurator.swift in Sources */,
 				B828282E241A970D0003D056 /* TagsListTableViewCell.swift in Sources */,
 				B82A211C242165A100D0D9F5 /* LoggerEventMonitor.swift in Sources */,
@@ -2569,6 +2604,7 @@
 				B825742923F5808400C8CBF8 /* String + Extensions.swift in Sources */,
 				B8B8B90D2459F51400162224 /* ProductDetailsApiModel.swift in Sources */,
 				B82A211A2421657800D0D9F5 /* Encodable + Extensions.swift in Sources */,
+				B8DFB752248FE1D500924838 /* ActionTitleCollectionViewCell.swift in Sources */,
 				B83050AB247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift in Sources */,
 				B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,

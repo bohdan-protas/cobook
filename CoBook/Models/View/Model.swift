@@ -29,7 +29,7 @@ struct PracticeModel: Codable {
     var isSelected: Bool = false
 }
 
-struct InterestModel {
+struct TagModel {
     var id: Int?
     var title: String?
     var isSelected: Bool = false

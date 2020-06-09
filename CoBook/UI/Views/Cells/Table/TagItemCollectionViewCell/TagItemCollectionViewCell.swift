@@ -23,33 +23,10 @@ class TagItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var actionButton: UIButton!
 
-    @IBOutlet private var maxWidthConstraint: NSLayoutConstraint! {
-        didSet {
-            maxWidthConstraint.isActive = false
-        }
-    }
-
-    var maxWidth: CGFloat? = nil {
-        didSet {
-            guard let maxWidth = maxWidth else {
-                return
-            }
-            maxWidthConstraint.isActive = true
-            maxWidthConstraint.constant = maxWidth
-        }
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            contentView.leftAnchor.constraint(equalTo: leftAnchor),
-            contentView.rightAnchor.constraint(equalTo: rightAnchor),
-            contentView.topAnchor.constraint(equalTo: topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-
+    @IBOutlet var labelWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var maxWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var labelHeightConstraint: NSLayoutConstraint!
+    
     func setSelected(_ isSelected: Bool) {
         containerView.backgroundColor = isSelected ? Layout.selectedBgColor : Layout.deselectedBgColor
         titleLabel.textColor = isSelected ? Layout.selectedTextColor : Layout.deselectedTextColor
