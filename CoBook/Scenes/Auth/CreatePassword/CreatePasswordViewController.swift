@@ -65,10 +65,11 @@ class CreatePasswordViewController: BaseViewController, CreatePasswordView {
         continueButton.isLoading = false
     }
 
-    func goTo(viewController: UIViewController) {
-        viewController.modalPresentationStyle = .overFullScreen
-        viewController.modalTransitionStyle = .crossDissolve
-        self.present(viewController, animated: true, completion: nil)
+    func goToMainTabbar() {
+        let mainTabbar = MainTabBarController()
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.window?.rootViewController = mainTabbar
+        }
     }
 
 

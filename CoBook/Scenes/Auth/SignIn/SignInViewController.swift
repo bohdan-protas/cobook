@@ -121,7 +121,6 @@ class SignInViewController: BaseViewController, SignInView {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.window?.rootViewController = mainTabbar
         }
-
     }
 
 

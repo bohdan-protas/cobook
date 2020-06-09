@@ -11,7 +11,7 @@ import UIKit
 // MARK: - View protocol
 protocol CreatePasswordView: class, LoadDisplayableView, AlertDisplayableView {
     func setContinueButton(enabled: Bool)
-    func goTo(viewController: UIViewController)
+    func goToMainTabbar()
 }
 
 // MARK: - ConfirmTelephoneNumberPresenter
@@ -56,7 +56,7 @@ class CreatePasswordPresenter: BasePresenter {
                 AppStorage.User.isUserInitiatedRegistration = false
                 AppStorage.User.Profile = response?.profile
 
-                self.view?.goTo(viewController: MainTabBarController())
+                self.view?.goToMainTabbar()
             case let .failure(error):
                 self.view?.errorAlert(message: error.localizedDescription.description, handler: nil)
             }
