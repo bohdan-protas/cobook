@@ -41,3 +41,5 @@ struct CellConfigurator<Item, Cell: UITableViewCell>: CellConfiguratorType {
         return self.configure(cell: cell, item: item, tableView: tableView, indexPath: indexPath)
     }
 }
+
+

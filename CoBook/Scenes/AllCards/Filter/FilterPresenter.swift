@@ -85,11 +85,11 @@ extension FilterPresenter: InterestsSelectionTableViewCellDataSource, InterestsS
         return fetchedPracticies.compactMap { InterestModel(id: $0.id, title: $0.title, isSelected: $0.isSelected) }
     }
 
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didSelectInterestAt index: Int) {
         fetchedPracticies[safe: index]?.isSelected = true
     }
 
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didDeselectInterestAt index: Int) {
         fetchedPracticies[safe: index]?.isSelected = false
     }
 

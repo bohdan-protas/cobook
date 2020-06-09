@@ -484,11 +484,11 @@ extension CreateBusinessCardPresenter: TextViewTableViewCellDelegate {
 
 extension CreateBusinessCardPresenter: InterestsSelectionTableViewCellDataSource, InterestsSelectionTableViewCellDelegate {
 
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didSelectInterestAt index: Int) {
         businessCardDetailsModel.interests[safe: index]?.isSelected = true
     }
 
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didDeselectInterestAt index: Int) {
         businessCardDetailsModel.interests[safe: index]?.isSelected = false
     }
 

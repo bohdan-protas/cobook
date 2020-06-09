@@ -224,11 +224,11 @@ private extension CreatePersonalCardPresenter {
 
 extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource, InterestsSelectionTableViewCellDelegate {
 
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int) {
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didSelectInterestAt index: Int) {
         personalCardDetailsModel.interests[safe: index]?.isSelected = true
     }
 
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int) {
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didDeselectInterestAt index: Int) {
         personalCardDetailsModel.interests[safe: index]?.isSelected = false
     }
 
