@@ -75,6 +75,19 @@ extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
 
 }
 
+//// MARK: - UICollectionViewDelegateFlowLayout
+//
+//extension InterestsSelectionTableViewCell: UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        //self.sizingCell?.setMaximumCellWidth(collectionView.frame.width)
+//        //self.configureCell(self.sizingCell!, forIndexPath: indexPath)
+//        return self.sizingCell!.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+//    }
+//
+//
+//}
+
 // MARK: - UICollectionViewDelegate
 
 extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
@@ -95,6 +108,3 @@ extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
 
 
 }
-
-
-
