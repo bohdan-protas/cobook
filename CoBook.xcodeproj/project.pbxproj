@@ -355,7 +355,7 @@
 		B8D5F981246E81EF0032E885 /* FolderApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F980246E81EF0032E885 /* FolderApiModel.swift */; };
 		B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC63082434E27700A2ED58 /* CreateBusinessCard.swift */; };
 		B8DC630B2434FBED00A2ED58 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC630A2434FBED00A2ED58 /* Section.swift */; };
-		B8DC630D2434FC1000A2ED58 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */; };
+		B8DC630D2434FC1000A2ED58 /* TableCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC630C2434FC1000A2ED58 /* TableCellConfigurator.swift */; };
 		B8DC630F2434FC3A00A2ED58 /* TableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */; };
 		B8DD431924178F2C00C7D940 /* CreatePersonalCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */; };
 		B8DD431B24178F3900C7D940 /* CreatePersonalCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */; };
@@ -367,6 +367,8 @@
 		B8DE5E552419262600F4F60B /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E532419262600F4F60B /* TextViewTableViewCell.swift */; };
 		B8DE5E562419262600F4F60B /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DE5E542419262600F4F60B /* TextViewTableViewCell.xib */; };
 		B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE5E5924192BD300F4F60B /* DesignableTextView.swift */; };
+		B8DFB746248FBC5F00924838 /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DFB745248FBC5F00924838 /* CollectionDataSource.swift */; };
+		B8DFB74A248FC2E100924838 /* CollectionCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DFB749248FC2E100924838 /* CollectionCellConfigurator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -725,7 +727,7 @@
 		B8D5F980246E81EF0032E885 /* FolderApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderApiModel.swift; sourceTree = "<group>"; };
 		B8DC63082434E27700A2ED58 /* CreateBusinessCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCard.swift; sourceTree = "<group>"; };
 		B8DC630A2434FBED00A2ED58 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
+		B8DC630C2434FC1000A2ED58 /* TableCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellConfigurator.swift; sourceTree = "<group>"; };
 		B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataSource.swift; sourceTree = "<group>"; };
 		B8DD431824178F2C00C7D940 /* CreatePersonalCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardViewController.swift; sourceTree = "<group>"; };
 		B8DD431A24178F3900C7D940 /* CreatePersonalCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePersonalCardPresenter.swift; sourceTree = "<group>"; };
@@ -737,6 +739,8 @@
 		B8DE5E532419262600F4F60B /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		B8DE5E542419262600F4F60B /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
 		B8DE5E5924192BD300F4F60B /* DesignableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextView.swift; sourceTree = "<group>"; };
+		B8DFB745248FBC5F00924838 /* CollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
+		B8DFB749248FC2E100924838 /* CollectionCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellConfigurator.swift; sourceTree = "<group>"; };
 		C93E9765F0DA3748E1CC0BAA /* Pods-CoBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.release.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.release.xcconfig"; sourceTree = "<group>"; };
 		D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -873,6 +877,7 @@
 			isa = PBXGroup;
 			children = (
 				B82200B9240FB8A400A17D2C /* Account.storyboard */,
+				B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */,
 				B82200BD240FBBF700A17D2C /* Account */,
 				B828E33C2473C0CE00032C88 /* Settings */,
 				B8559F62243AD05900787349 /* BusinessCardDetails */,
@@ -1100,6 +1105,7 @@
 		B823AB7923F15E8400DE13EA /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */,
 				B825742A23F592F600C8CBF8 /* SignUpPresenter.swift */,
 				B825742B23F592F600C8CBF8 /* SignUpViewController.swift */,
 			);
@@ -1176,6 +1182,7 @@
 		B824924C243DE72500A1AC39 /* CardsOverview */ = {
 			isa = PBXGroup;
 			children = (
+				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 				B8249244243DE63B00A1AC39 /* CardsOverviewViewController.swift */,
 				B831C55A24406F320058F825 /* CardsOverviewSearchResultTableViewController.swift */,
 				B8249246243DE64A00A1AC39 /* CardsOverviewPresenter.swift */,
@@ -1809,7 +1816,6 @@
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
 				B8DFB744248FB90400924838 /* Core */,
-				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B850DA1A2486768F002D8F99 /* Property Wrappers */,
 				B826B0F023F45973009041DD /* Services */,
@@ -1879,9 +1885,6 @@
 			isa = PBXGroup;
 			children = (
 				B823A6B323FD7DD2007540D0 /* CustomNavigationController.swift */,
-				B88906BB240002D5002E91F7 /* SignUpNavigationController.swift */,
-				B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */,
-				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 			);
 			path = NavigationControllers;
 			sourceTree = "<group>";
@@ -2160,8 +2163,11 @@
 		B8DFB744248FB90400924838 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B88906B523FFD4EA002E91F7 /* Protocols */,
+				B8DFB749248FC2E100924838 /* CollectionCellConfigurator.swift */,
+				B8DC630C2434FC1000A2ED58 /* TableCellConfigurator.swift */,
 				B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */,
-				B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */,
+				B8DFB745248FBC5F00924838 /* CollectionDataSource.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2507,6 +2513,7 @@
 				B836DF2C2433792600CB84D3 /* CreateBusinessCardPresenter.swift in Sources */,
 				B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */,
 				B884B699248A5B77000848A7 /* LocalizationKey.swift in Sources */,
+				B8DFB74A248FC2E100924838 /* CollectionCellConfigurator.swift in Sources */,
 				B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */,
 				B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */,
 				B8559F66243AD0B900787349 /* BusinessCardDetailsPresenter.swift in Sources */,
@@ -2551,6 +2558,7 @@
 				B850DA1624866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
 				B82A211E2421700A00D0D9F5 /* AuthRequestInterceptor.swift in Sources */,
+				B8DFB746248FBC5F00924838 /* CollectionDataSource.swift in Sources */,
 				B850DA1924867679002D8F99 /* Trimmed.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */,
 				B8CB0E7B24053E6B00AF431B /* KeychainWrapper.swift in Sources */,
@@ -2653,7 +2661,7 @@
 				B824DA66245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift in Sources */,
 				B83050AF247C3F6F0060D9BE /* ShareableView.swift in Sources */,
 				B84B94E82403299F0007EB60 /* Endpoint.swift in Sources */,
-				B8DC630D2434FC1000A2ED58 /* CellConfigurator.swift in Sources */,
+				B8DC630D2434FC1000A2ED58 /* TableCellConfigurator.swift in Sources */,
 				B823E8A7243F753D00EE1830 /* CardMapMarkerApiModel.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
 				B8AB3F092422FBE800E06E53 /* ProfileEndpoint.swift in Sources */,

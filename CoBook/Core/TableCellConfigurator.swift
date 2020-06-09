@@ -43,3 +43,4 @@ struct CellConfigurator<Item, Cell: UITableViewCell>: CellConfiguratorType {
 }
 
 
+
