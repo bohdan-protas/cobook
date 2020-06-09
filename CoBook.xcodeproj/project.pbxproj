@@ -901,6 +901,7 @@
 		B82206462463004200D49D16 /* RequestParameters */ = {
 			isa = PBXGroup;
 			children = (
+				B82206472463006400D49D16 /* RequestParameters.swift */,
 			);
 			path = RequestParameters;
 			sourceTree = "<group>";
@@ -1046,7 +1047,6 @@
 				B84B94F424033B3E0007EB60 /* APIClient.swift */,
 				B82A211D2421700A00D0D9F5 /* AuthRequestInterceptor.swift */,
 				B82A211B242165A100D0D9F5 /* LoggerEventMonitor.swift */,
-				B82206472463006400D49D16 /* RequestParameters.swift */,
 				B84B94EB24032A760007EB60 /* Endpoints */,
 				B8AB83F4242829060041B879 /* Mockup */,
 			);
