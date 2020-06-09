@@ -62,9 +62,9 @@ class SignUpPresenter: BasePresenter {
     }
 
     func set(firstName: String?,lastName: String?, telephone: String?, email: String?) {
-        self.firstName = firstName ?? ""
-        self.lastName = lastName ?? ""
-        self.telephone = telephone ?? ""
+        self.firstName = firstName?.trimmingCharacters(in: .whitespaces) ?? ""
+        self.lastName = lastName?.trimmingCharacters(in: .whitespaces) ?? ""
+        self.telephone = telephone?.trimmingCharacters(in: .whitespaces) ?? ""
         self.email = email?.trimmingCharacters(in: .whitespaces) ?? ""
 
         let actived = !self.firstName.isEmpty && !self.lastName.isEmpty && !self.telephone.isEmpty && !self.email.isEmpty
