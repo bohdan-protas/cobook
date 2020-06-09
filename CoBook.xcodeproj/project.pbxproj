@@ -854,8 +854,8 @@
 		B8212A63241BD32C0066700C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B884B69A248A8C42000848A7 /* SearchViewController */,
 				B8212A64241BD3480066700C /* BaseViewController.swift */,
+				B884B69A248A8C42000848A7 /* SearchViewController */,
 				B850DA0C24866022002D8F99 /* PhotoGalleryViewController */,
 			);
 			path = ViewControllers;
@@ -1056,8 +1056,8 @@
 		B823AB6D23F1570F00DE13EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */,
 				B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */,
+				B822D6FD245832B800883BE8 /* SelfSizingTextView.swift */,
 				B825FC3C247EA8C700DB035D /* BottomLoaderView */,
 				B884AADF245F71F400ACC0D7 /* PhotosPlaceholderView */,
 				B820793B2444725A00FCCC17 /* CorneredEndgeView */,
@@ -1418,8 +1418,6 @@
 		B82A2118242135C200D0D9F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */,
-				B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */,
 				B82200B5240FB84B00A17D2C /* TabBarControllers */,
 				B8255A1C243A264E00C4169D /* Search */,
 				B88906C9240053DE002E91F7 /* NavigationBars */,
@@ -1810,6 +1808,7 @@
 				B8B7FB992476B1A300D19C5E /* CoBook.entitlements */,
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B84B94E9240329D50007EB60 /* APIConstants.swift */,
+				B8DFB744248FB90400924838 /* Core */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B850DA1A2486768F002D8F99 /* Property Wrappers */,
@@ -2156,6 +2155,15 @@
 				B8DE5E5924192BD300F4F60B /* DesignableTextView.swift */,
 			);
 			path = Designable;
+			sourceTree = "<group>";
+		};
+		B8DFB744248FB90400924838 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */,
+				B8DC630C2434FC1000A2ED58 /* CellConfigurator.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
