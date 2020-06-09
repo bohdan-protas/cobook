@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIApplication {
+
     class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
@@ -23,4 +24,6 @@ extension UIApplication {
         }
         return controller
     }
+
+    
 }

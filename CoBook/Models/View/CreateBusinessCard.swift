@@ -54,7 +54,7 @@ enum CreateBusinessCard {
         var description: String?
 
         var employers = [EmployeeModel]()
-        var interests: [InterestModel] = []
+        var interests: [TagModel] = []
         var socials: [Social.ListItem] = []
         var practices: [PracticeModel] = []
 
@@ -80,7 +80,7 @@ enum CreateBusinessCard {
             self.description = apiModel.description
 
 
-            self.interests = apiModel.interests?.compactMap { InterestModel(id: $0.id, title: $0.title, isSelected: true) } ?? []
+            self.interests = apiModel.interests?.compactMap { TagModel(id: $0.id, title: $0.title, isSelected: true) } ?? []
             self.socials = apiModel.socialNetworks?.compactMap { Social.ListItem.view(model: .init(title: $0.title, url: $0.link)) } ?? []
         }
 

@@ -14,7 +14,7 @@ protocol InterestsSelectionTableViewCellDelegate: class {
 }
 
 protocol InterestsSelectionTableViewCellDataSource: class {
-    func dataSourceWith(identifier: String?) ->  [InterestModel]
+    func dataSourceWith(identifier: String?) ->  [TagModel]
 }
 
 class TagsListTableViewCell: UITableViewCell {
@@ -68,7 +68,6 @@ extension TagsListTableViewCell: UICollectionViewDataSource {
         let interest = dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[safe: indexPath.row]
         cell.titleLabel.text = interest?.title
         cell.setSelected(interest?.isSelected ?? false)
-        cell.maxWidth = self.interestsCollectionView.bounds.width
         return cell
     }
 

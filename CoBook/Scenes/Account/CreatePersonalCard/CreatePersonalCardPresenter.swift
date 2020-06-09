@@ -178,7 +178,7 @@ private extension CreatePersonalCardPresenter {
         let group = DispatchGroup()
 
         var interestsListRequestError: Error?
-        var interests: [InterestModel] = []
+        var interests: [TagModel] = []
 
         view?.startLoading(text: "Loading.loading.title".localized)
 
@@ -187,7 +187,7 @@ private extension CreatePersonalCardPresenter {
         APIClient.default.interestsListRequest { (result) in
             switch result {
             case let .success(response):
-                interests = (response ?? []).compactMap { InterestModel(id: $0.id, title: $0.title, isSelected: false) }
+                interests = (response ?? []).compactMap { TagModel(id: $0.id, title: $0.title, isSelected: false) }
                 group.leave()
             case let .failure(error):
                 interestsListRequestError = error
@@ -200,11 +200,11 @@ private extension CreatePersonalCardPresenter {
             guard let strongSelf = self else { return }
             strongSelf.view?.stopLoading()
 
-            let fetchedInterests: [InterestModel] = interests.compactMap { fetched in
+            let fetchedInterests: [TagModel] = interests.compactMap { fetched in
                 let isSelected = strongSelf.personalCardDetailsModel.interests.contains(where: { (selected) -> Bool in
                     return selected.id == fetched.id
                 })
-                return InterestModel(id: fetched.id, title: fetched.title, isSelected: isSelected )
+                return TagModel(id: fetched.id, title: fetched.title, isSelected: isSelected )
             }
             self?.personalCardDetailsModel.interests = fetchedInterests
 
@@ -232,7 +232,7 @@ extension CreatePersonalCardPresenter: InterestsSelectionTableViewCellDataSource
         personalCardDetailsModel.interests[safe: index]?.isSelected = false
     }
 
-    func dataSourceWith(identifier: String?) -> [InterestModel] {
+    func dataSourceWith(identifier: String?) -> [TagModel] {
         return personalCardDetailsModel.interests
     }
 
