@@ -17,7 +17,7 @@ fileprivate enum Layout {
     static let deselectedTextColor: UIColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
 }
 
-class InterestItemCollectionViewCell: UICollectionViewCell {
+class TagItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var containerView: DesignableView!
     @IBOutlet var titleLabel: UILabel!

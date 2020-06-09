@@ -29,7 +29,7 @@ struct FilterCellsConfigurator: CellConfiguratorType {
 
     var titleConfigurator: CellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
     var sectionSeparatorConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>
-    var itemsPreviewListConfigurator: CellConfigurator<String?, InterestsSelectionTableViewCell>
+    var itemsPreviewListConfigurator: CellConfigurator<String?, TagsListTableViewCell>
 
     func reuseIdentifier(for item: Filter.Items, indexPath: IndexPath) -> String {
         switch item {
@@ -82,7 +82,7 @@ extension FilterPresenter {
             }
 
             // sectionHeaderConfigurator
-            let itemsConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> InterestsSelectionTableViewCell in
+            let itemsConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> TagsListTableViewCell in
                 cell.dataSourceIdentifier = model
                 cell.dataSource = self
                 cell.delegate = self
