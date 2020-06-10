@@ -18,6 +18,7 @@ struct CardItemApiModel: Decodable {
         case avatar
         case practiceType = "practice_type"
         case contactTelephone = "contact_telephone"
+        case contactEmail = "contact_email"
         case isSaved = "is_saved"
     }
 
@@ -28,5 +29,6 @@ struct CardItemApiModel: Decodable {
     var avatar: FileDataApiModel?
     var practiceType: PracticeTypeApiModel?
     var contactTelephone: TelephoneApiModel?
+    var contactEmail: EmailApiModel?
     var isSaved: Bool?
 }

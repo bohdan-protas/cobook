@@ -17,6 +17,7 @@ struct CardItemViewModel {
     var companyName: String?
     var profession: String?
     var telephoneNumber: String?
+    var email: String?
     var isSaved: Bool
 
     var nameAbbreviation: String? {
