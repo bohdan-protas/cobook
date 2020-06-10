@@ -119,7 +119,7 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         presenter?.getRouteDestination(callback: { [unowned self] (destination) in
             self.stopLoading()
 
-            guard let routeURL = APIConstants.Google.googleMapsRouteURL(daddr: destination, directionMode: .driving) else {
+            guard let routeURL = Constants.Google.googleMapsRouteURL(daddr: destination, directionMode: .driving) else {
                 self.errorAlert(message: "Error.Map.notDefinedRoute".localized)
                 return
             }

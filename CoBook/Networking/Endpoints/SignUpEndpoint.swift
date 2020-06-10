@@ -55,19 +55,19 @@ enum SignUpEndpoint: Endpoint {
 
         case .verify(let smsCode, let accessToken):
             return [
-                APIConstants.ParameterKey.code: smsCode,
-                APIConstants.ParameterKey.token: accessToken
+                Constants.API.ParameterKey.code: smsCode,
+                Constants.API.ParameterKey.token: accessToken
             ]
 
         case .finish(let accessToken, let password):
             return [
-                APIConstants.ParameterKey.token: accessToken,
-                APIConstants.ParameterKey.password: password
+                Constants.API.ParameterKey.token: accessToken,
+                Constants.API.ParameterKey.password: password
             ]
 
         case .resend(let accessToken):
             return [
-                APIConstants.ParameterKey.token: accessToken,
+                Constants.API.ParameterKey.token: accessToken,
             ]
 
 

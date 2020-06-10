@@ -184,7 +184,7 @@ private extension AccountPresenter {
 
     func inviteFriends() {
         let socialMetaTags = DynamicLinkSocialMetaTagParameters()
-        socialMetaTags.imageURL = APIConstants.cobookLogoURL
+        socialMetaTags.imageURL = Constants.CoBook.logoURL
         socialMetaTags.title = "Social.metaTag.inviteFriends.title".localized
         socialMetaTags.descriptionText = "Social.metaTag.inviteFriends.description".localized
         view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags)
