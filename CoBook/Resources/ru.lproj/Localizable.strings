@@ -71,6 +71,7 @@
 "TextInput.placeholder.socialLink" = "Ссылка, https://link.com";
 "TextInput.placeholder.listName" = "Название";
 
+"Button.addFilter.normalTitle" = "Добавить фильтр";
 "Button.continue.normalTitle" = "Продолжить";
 "Button.save.normalTitle" = "Сохранить";
 "Button.edit.normalTitle" = "Редактиовать";
@@ -92,6 +93,7 @@
 "Label.showAll.text" = "Показать все";
 
 "SearchBar.placeholder.employers" = "Поиск работников CoBook";
+"SearchBar.placeholder.search" = "Поиск";
 
 // MARK: - Social
 "Social.metaTag.inviteFriends.title" = "CoBook";
@@ -217,6 +219,8 @@
 "Article.details.title" = "Статья";
 "Article.create.title" = "Создать статью";
 "Article.edit.title" = "Редактировать статью";
+"Article.creatorSection.text" = "Статью создано:";
+"Article.anotherArticlesSection.text" = "Другие статьи альбома:";
 "Article.addPhotoButton.normalTitle" = "Добавить фото";
 "Article.header.placeholder" = "Введите заголовок";
 "Article.selectAlbum.text" = "Выберете альбом";
@@ -303,3 +307,6 @@
 "Product.section.showRoomNumber.title" = "Номер Шоу-рума:";
 "Product.section.contacts.title" = "Контактные данные:";
 "Product.negotiablePrice.text" = "Цена договорная";
+
+// MARK: - Search content
+"SearchContent.title" = "Поиск";

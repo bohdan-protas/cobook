@@ -71,6 +71,7 @@
 "TextInput.placeholder.socialLink" = "Посилання, https://link.com";
 "TextInput.placeholder.listName" = "Назва";
 
+"Button.addFilter.normalTitle" = "Додати фільтр";
 "Button.continue.normalTitle" = "Продовжити";
 "Button.save.normalTitle" = "Зберегти";
 "Button.edit.normalTitle" = "Редагувати";
@@ -92,6 +93,7 @@
 "Label.showAll.text" = "Показати всі";
 
 "SearchBar.placeholder.employers" = "Пошук працівників CoBook";
+"SearchBar.placeholder.search" = "Пошук";
 
 // MARK: - Social
 "Social.metaTag.inviteFriends.title" = "CoBook";
@@ -163,7 +165,7 @@
 "SignUp.enterButton.normalTitle" = "Увійдіть";
 
 // MARK: - Create Password
-"ConfirmTelephone.header" = "Підтвердьт номер телефону";
+"ConfirmTelephone.header" = "Підтвердьте номер телефону";
 "ConfirmTelephone.description" = "Введіть код із смс-повідомлення";
 "ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС?";
 
@@ -310,3 +312,6 @@
 "Product.section.showRoomNumber.title" = "Номер Show room:";
 "Product.section.contacts.title" = "Контактні дані:";
 "Product.negotiablePrice.text" = "Ціна договірна";
+
+// MARK: - Search content
+"SearchContent.title" = "Пошук";
