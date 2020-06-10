@@ -113,8 +113,8 @@ extension AppDelegate {
         IQKeyboardManager.shared.disabledToolbarClasses.append(ConfirmTelephoneNumberViewController.self)
 
         // Google services
-        GMSServices.provideAPIKey(APIConstants.Google.placesApiKey)
-        GMSPlacesClient.provideAPIKey(APIConstants.Google.placesApiKey)
+        GMSServices.provideAPIKey(Constants.Google.placesApiKey)
+        GMSPlacesClient.provideAPIKey(Constants.Google.placesApiKey)
 
         // Firebase & Dynamic links
         FirebaseApp.configure()

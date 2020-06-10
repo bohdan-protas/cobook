@@ -30,7 +30,7 @@ struct DynamicLinkParameterValueFetcher {
 
     // MARK: Public
 
-    func fetchValueBy(_ parameterName: DynamicLinkConstants.QueryName) -> String? {
+    func fetchValueBy(_ parameterName: Constants.DynamicLinks.QueryName) -> String? {
         return dynamicLinkQueryItems?.first(where: {  $0.name == parameterName.rawValue })?.value
     }
 
@@ -61,7 +61,7 @@ struct DynamicLinkCoordinatorService {
     private func recognize(dynamicLinkComponents: URLComponents, matchType: DLMatchType) -> UIViewController? {
         switch matchType {
         case .unique, .default:
-            switch DynamicLinkConstants.Path.init(rawValue: dynamicLinkComponents.path) {
+            switch Constants.DynamicLinks.Path.init(rawValue: dynamicLinkComponents.path) {
             case .some(let value):
 
                 let parser = DynamicLinkParameterValueFetcher(dynamicLinkQueryItems: dynamicLinkComponents.queryItems)

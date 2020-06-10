@@ -21,7 +21,7 @@ class APIClient {
 
     /// Default session configuraton
     public static var `default`: APIClient = {
-        let evaluators = [APIConstants.baseURLPath.host ?? "": DisabledEvaluator()]
+        let evaluators = [Constants.API.baseURLPath.host ?? "": DisabledEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
 
         let loggerMonitor = LoggerEventMonitor()
@@ -38,7 +38,7 @@ class APIClient {
     // MARK: - Initializer
 
     private init(session: Session) {
-        ImageResponseSerializer.addAcceptableImageContentTypes(APIConstants.additionalAcceptableImageContentTypes)
+        ImageResponseSerializer.addAcceptableImageContentTypes(Constants.API.additionalAcceptableImageContentTypes)
         self.session = session
     }
 

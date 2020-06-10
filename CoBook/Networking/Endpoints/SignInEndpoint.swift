@@ -43,8 +43,8 @@ enum SignInEndpoint: Endpoint {
 
         case let .login(login, password):
             return [
-                APIConstants.ParameterKey.login: login,
-                APIConstants.ParameterKey.password: password,
+                Constants.API.ParameterKey.login: login,
+                Constants.API.ParameterKey.password: password,
             ]
 
 
