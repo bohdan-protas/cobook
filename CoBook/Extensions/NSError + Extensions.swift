@@ -14,4 +14,6 @@ extension NSError {
         let error = NSError(domain: domain, code: code, userInfo: [NSLocalizedDescriptionKey: localizedMessage])
         return error
     }
+
+    
 }

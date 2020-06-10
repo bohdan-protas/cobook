@@ -151,9 +151,10 @@ extension CardsOverviewViewController: CardsOverviewView {
     }
 
     func goToArticleDetails(presenter: ArticleDetailsPresenter?) {
-        let articleDetailsController: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
-        articleDetailsController.presenter = presenter
-        self.navigationController?.pushViewController(articleDetailsController, animated: true)
+        let controller: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
+        controller.presenter = presenter
+        let navigation = CustomNavigationController(rootViewController: controller)
+        self.presentPanModal(navigation)
     }
 
 }

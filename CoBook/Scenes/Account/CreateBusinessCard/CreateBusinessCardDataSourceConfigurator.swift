@@ -16,7 +16,7 @@ struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
     var actionFieldConfigurator: CellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
     var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
     var socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>?
-    var interestsListConfigurator: CellConfigurator<Void?, InterestsSelectionTableViewCell>?
+    var interestsListConfigurator: CellConfigurator<Void?, TagsListTableViewCell>?
     var avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
     var backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>?
     var employersSearchCellConfigurator: CellConfigurator<Void?, SearchTableViewCell>?
@@ -159,7 +159,7 @@ extension CreateBusinessCardPresenter {
             }
 
             // interestsListConfigurator
-            viewDataSourceConfigurator.interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> InterestsSelectionTableViewCell in
+            viewDataSourceConfigurator.interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> TagsListTableViewCell in
                 cell.dataSource = self
                 cell.delegate = self
                 return cell

@@ -71,6 +71,7 @@
 "TextInput.placeholder.socialLink" = "The link, https://link.com";
 "TextInput.placeholder.listName" = "The name";
 
+"Button.addFilter.normalTitle" = "Add filter";
 "Button.continue.normalTitle" = "Continue";
 "Button.save.normalTitle" = "Save";
 "Button.edit.normalTitle" = "Edit";
@@ -92,6 +93,7 @@
 "Label.showAll.text" = "Show all";
 
 "SearchBar.placeholder.employers" = "Search CoBook employees";
+"SearchBar.placeholder.search" = "Search";
 
 // MARK: - Social
 "Social.metaTag.inviteFriends.title" = "CoBook";
@@ -216,6 +218,8 @@
 "Article.details.title" = "Article";
 "Article.create.title" = "Create article";
 "Article.edit.title" = "Edit article";
+"Article.creatorSection.text" = "Published by:";
+"Article.anotherArticlesSection.text" = "Other album articles:";
 "Article.addPhotoButton.normalTitle" = "Add photo";
 "Article.header.placeholder" = "Enter header";
 "Article.selectAlbum.text" = "Select album";
@@ -302,3 +306,6 @@
 "Product.section.showRoomNumber.title" = "Show room number:";
 "Product.section.contacts.title" = "Contact details:";
 "Product.negotiablePrice.text" = "Conventional price";
+
+// MARK: - Search content
+"SearchContent.title" = "Search";

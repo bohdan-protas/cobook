@@ -38,6 +38,7 @@ enum ArticleDetails {
         case photoCollage
         case articlePreview(model: ArticlePreviewModel)
         case title(text: String)
+        case creatorTitle(text: String)
     }
 
 }
@@ -46,12 +47,13 @@ enum ArticleDetails {
 
 struct ArticleDetailsCellConfigutator: CellConfiguratorType {
 
+    var titleCellConfigurator: CellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
+    var creatorTitleCellConfigurator: CellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
     var headerConfigurator: CellConfigurator<ArticleDetails.HeaderModel, ArticleHeaderTableViewCell>?
     var descriptionCellConfigurator: CellConfigurator<ArticleDetails.DescriptionModel, ArticleDescriptionTableViewCell>?
     var creatorCellConfigurator: CellConfigurator<CardPreviewModel, CardPreviewTableViewCell>?
     var photoCollageConfigurator: CellConfigurator<Void?, PhotoCollageTableViewCell>?
     var articlePreviewConfigurator: CellConfigurator<ArticlePreviewModel, ArticlePreviewTableViewCell>?
-    var titleCellConfigurator: CellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
 
     func reuseIdentifier(for item: ArticleDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -67,6 +69,8 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
             return articlePreviewConfigurator?.reuseIdentifier ?? ""
         case .title:
             return titleCellConfigurator?.reuseIdentifier ?? ""
+        case .creatorTitle:
+            return creatorTitleCellConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -84,6 +88,8 @@ struct ArticleDetailsCellConfigutator: CellConfiguratorType {
             return articlePreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .title(let text):
             return titleCellConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .creatorTitle(let text):
+            return creatorTitleCellConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -157,14 +163,21 @@ extension ArticleDetailsPresenter {
                 cell.proffesionLabel.text = model.profession
                 cell.telephoneNumberLabel.text = model.telephone
                 cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-
-                cell.selectionStyle = .none
-                cell.accessoryView = nil
+                cell.separatorView.isHidden = true                
                 return cell
             }
 
             configurator.titleCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ArticleDetailsSectionTitleTableViewCell in
                 cell.titleLabel.text = model
+                cell.dropShadowView.isHidden = true
+                cell.contentView.backgroundColor = .white
+                return cell
+            }
+
+            configurator.creatorTitleCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ArticleDetailsSectionTitleTableViewCell in
+                cell.titleLabel.text = model
+                cell.dropShadowView.isHidden = false
+                cell.contentView.backgroundColor = UIColor.Theme.grayBG
                 return cell
             }
 

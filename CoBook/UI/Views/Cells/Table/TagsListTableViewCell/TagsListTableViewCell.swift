@@ -9,15 +9,15 @@
 import UIKit
 
 protocol InterestsSelectionTableViewCellDelegate: class {
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didSelectInterestAt index: Int)
-    func interestsSelectionTableViewCell(_ cell: InterestsSelectionTableViewCell, didDeselectInterestAt index: Int)
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didSelectInterestAt index: Int)
+    func interestsSelectionTableViewCell(_ cell: TagsListTableViewCell, didDeselectInterestAt index: Int)
 }
 
 protocol InterestsSelectionTableViewCellDataSource: class {
-    func dataSourceWith(identifier: String?) ->  [InterestModel]
+    func dataSourceWith(identifier: String?) ->  [TagModel]
 }
 
-class InterestsSelectionTableViewCell: UITableViewCell {
+class TagsListTableViewCell: UITableViewCell {
 
     enum Constants {
         static let spacing: CGFloat = 16
@@ -40,7 +40,7 @@ class InterestsSelectionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        interestsCollectionView.register(InterestItemCollectionViewCell.nib, forCellWithReuseIdentifier: InterestItemCollectionViewCell.identifier)
+        interestsCollectionView.register(TagItemCollectionViewCell.nib, forCellWithReuseIdentifier: TagItemCollectionViewCell.identifier)
         interestsCollectionView.delegate = self
         interestsCollectionView.dataSource = self
 
@@ -57,18 +57,17 @@ class InterestsSelectionTableViewCell: UITableViewCell {
 
 // MARK: - UICollectionViewDataSource
 
-extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
+extension TagsListTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier).count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InterestItemCollectionViewCell.identifier, for: indexPath) as! InterestItemCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagItemCollectionViewCell.identifier, for: indexPath) as! TagItemCollectionViewCell
         let interest = dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[safe: indexPath.row]
         cell.titleLabel.text = interest?.title
         cell.setSelected(interest?.isSelected ?? false)
-        cell.maxWidth = self.interestsCollectionView.bounds.width
         return cell
     }
 
@@ -77,7 +76,7 @@ extension InterestsSelectionTableViewCell: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 
-extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
+extension TagsListTableViewCell: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let interest = dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[safe: indexPath.row] {
@@ -87,7 +86,7 @@ extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
                 delegate?.interestsSelectionTableViewCell(self, didSelectInterestAt: indexPath.item)
             }
 
-            let cell = collectionView.cellForItem(at: indexPath) as? InterestItemCollectionViewCell
+            let cell = collectionView.cellForItem(at: indexPath) as? TagItemCollectionViewCell
             cell?.setSelected(dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[indexPath.item].isSelected ?? false)
         }
 
@@ -95,6 +94,3 @@ extension InterestsSelectionTableViewCell: UICollectionViewDelegate {
 
 
 }
-
-
-

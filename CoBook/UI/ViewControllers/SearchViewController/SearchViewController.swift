@@ -76,7 +76,7 @@ private extension SearchViewController {
         tableView.delegate = self
         tableView.allowsMultipleSelection = presenter.isMultiselectEnabled
 
-        self.navigationItem.title = "Пошук виду діяльності"
+        self.navigationItem.title = "SearchContent.title".localized
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: UIFont.SFProDisplay_Medium(size: 15),
                                                                         .foregroundColor: UIColor.Theme.greenDark], for: .normal)
@@ -85,7 +85,7 @@ private extension SearchViewController {
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.obscuresBackgroundDuringPresentation = false
         if #available(iOS 13.0, *) {
             self.searchController.automaticallyShowsCancelButton = false
         }
@@ -94,7 +94,7 @@ private extension SearchViewController {
         self.searchController.searchBar.barTintColor = UIColor.Theme.grayBG
         self.searchController.searchBar.tintColor = UIColor.Theme.blackMiddle
         self.searchController.searchBar.setImage(UIImage(named: "ic_search"), for: .search, state: .normal)
-        self.searchController.searchBar.placeholder = "Пошук"
+        self.searchController.searchBar.placeholder = "SearchBar.placeholder.search".localized
         self.searchController.searchBar.autocapitalizationType = .none
         self.searchController.searchBar.showsCancelButton = false
         self.searchController.searchBar.sizeToFit()

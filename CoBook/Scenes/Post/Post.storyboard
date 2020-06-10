@@ -370,6 +370,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UU-77-PAG" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="pTT-UG-r7Q"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                            <color key="value" name="Theme_Black-Middle"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                            <size key="value" width="0.0" height="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                            <real key="value" value="0.5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                            <real key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mK8-iX-fbM">
                                                     <rect key="frame" x="16" y="0.0" width="343" height="50"/>
                                                     <constraints>
@@ -382,13 +403,17 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="6UU-77-PAG" firstAttribute="leading" secondItem="eiC-ta-ec9" secondAttribute="leading" id="0Ty-IS-XLo"/>
                                                 <constraint firstItem="mK8-iX-fbM" firstAttribute="top" secondItem="eiC-ta-ec9" secondAttribute="top" id="2gW-mH-EM7"/>
                                                 <constraint firstAttribute="bottom" secondItem="mK8-iX-fbM" secondAttribute="bottom" id="JPp-aL-2y4"/>
                                                 <constraint firstItem="mK8-iX-fbM" firstAttribute="leading" secondItem="eiC-ta-ec9" secondAttribute="leading" constant="16" id="gJz-aS-hjF"/>
+                                                <constraint firstItem="6UU-77-PAG" firstAttribute="top" secondItem="eiC-ta-ec9" secondAttribute="top" id="oaE-q5-U8W"/>
                                                 <constraint firstAttribute="trailing" secondItem="mK8-iX-fbM" secondAttribute="trailing" constant="16" id="p4E-P8-FxN"/>
+                                                <constraint firstAttribute="trailing" secondItem="6UU-77-PAG" secondAttribute="trailing" id="ppC-1K-cMZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dropShadowView" destination="6UU-77-PAG" id="Tqc-FR-gRn"/>
                                             <outlet property="titleLabel" destination="mK8-iX-fbM" id="zFw-bg-WG1"/>
                                         </connections>
                                     </tableViewCell>

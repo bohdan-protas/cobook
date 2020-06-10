@@ -108,6 +108,7 @@
             <connections>
                 <outlet property="companyNameLabel" destination="ZtE-hR-fD4" id="QWU-U0-Sco"/>
                 <outlet property="proffesionLabel" destination="5Tu-Am-nAk" id="ajK-PX-k6q"/>
+                <outlet property="separatorView" destination="4XQ-Si-uDl" id="tGv-bX-lrF"/>
                 <outlet property="telephoneNumberLabel" destination="T2y-ll-lbw" id="2Dy-sL-8NO"/>
                 <outlet property="titleImageView" destination="5Y5-RH-F2P" id="c8x-aS-tKa"/>
             </connections>
