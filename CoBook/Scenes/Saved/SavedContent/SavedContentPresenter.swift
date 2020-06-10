@@ -273,9 +273,8 @@ class SavedContentPresenter: BasePresenter {
     func emailAddressForItemAt(indexPath: IndexPath) -> String? {
         if let item = dataSource?.sections[indexPath.section].items[indexPath.row] {
             switch item {
-            case .cardItem:
-                // FIXME: Check api model for aviable email address
-                return nil
+            case .cardItem(let model):
+                return model.email
             default: break
             }
         }
@@ -435,6 +434,7 @@ private extension SavedContentPresenter {
                                                                               companyName: $0.company?.name,
                                                                               profession: $0.practiceType?.title,
                                                                               telephoneNumber: $0.contactTelephone?.number,
+                                                                              email: $0.contactEmail?.address,
                                                                               isSaved: true) } ?? []
                 completion?(cards)
 
