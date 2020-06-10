@@ -178,7 +178,7 @@ private extension CardsOverviewViewController {
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = true
 
         // Search bar setup
         searchBar = searchController.searchBar
