@@ -84,7 +84,8 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
     func goToArticleDetails(presenter: ArticleDetailsPresenter) {
         let controller: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
         controller.presenter = presenter
-        self.navigationController?.pushViewController(controller, animated: true)
+        let navigation = CustomNavigationController(rootViewController: controller)
+        self.presentPanModal(navigation)
     }
 
     func goToCreatePost(cardID: Int) {

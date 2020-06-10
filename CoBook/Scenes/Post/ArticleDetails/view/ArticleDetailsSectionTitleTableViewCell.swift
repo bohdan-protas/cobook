@@ -13,10 +13,5 @@ class ArticleDetailsSectionTitleTableViewCell: UITableViewCell {
     @IBOutlet var dropShadowView: UIView!
     @IBOutlet var titleLabel: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
 
 }

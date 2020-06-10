@@ -44,7 +44,7 @@ class SignInViewController: BaseViewController, SignInView {
 
         alertController.addTextField { (textField: UITextField) -> Void in
             textField.keyboardType = .phonePad
-            textField.placeholder = "Login.placeholder".localized
+            textField.placeholder = "TextInput.placeholder.telephone".localized
         }
 
         let okAction = UIAlertAction(title: "OK".localized, style: .default, handler: { alert -> Void in

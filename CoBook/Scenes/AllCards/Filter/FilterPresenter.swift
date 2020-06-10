@@ -29,7 +29,6 @@ class FilterPresenter: BasePresenter {
                 cell.countLabel.text = "\( model.counter ?? 0)"
                 cell.actionButton.setTitle(model.actionTitle, for: .normal)
                 cell.actionHandler = model.actionHandler
-                cell.widthConstraint.constant = collectionView.frame.width - 32
                 return cell
             }
 
@@ -99,9 +98,9 @@ class FilterPresenter: BasePresenter {
         case .some(let item):
             switch item {
             case .title:
-                return CGSize(width: viewRect.width, height: 66)
+                return CGSize(width: viewRect.width, height: 50)
             case .practiceItem:
-                return CGSize(width: viewRect.width, height: 66)
+                return CGSize(width: viewRect.width, height: 24)
             }
         }
     }
@@ -118,7 +117,7 @@ private extension FilterPresenter {
         let interestsSection = Section<Filter.Items>(accessoryIndex: Filter.SectionAccessoryIndex.interests.rawValue, items: [])
         var practiceSection = Section<Filter.Items>(accessoryIndex: Filter.SectionAccessoryIndex.practicies.rawValue, items: [])
 
-        practiceSection.items.append(.title(model: ActionTitleModel(title: "Filter.section.practicies.title".localized, counter: fetchedPracticies.count, actionTitle: "Button.edit.normalTitle".localized, actionHandler: {
+        practiceSection.items.append(.title(model: ActionTitleModel(title: "Filter.section.practicies.title".localized, counter: fetchedPracticies.count, actionTitle: "Button.addFilter.normalTitle".localized, actionHandler: {
             let presenter = SearchPracticiesPresenter(isMultiselectEnabled: true, selectedPracticies: self.fetchedPracticies.filter {$0.isSelected})
             presenter.delegate = self
             self.view?.showSearchPracticies(presenter: presenter)

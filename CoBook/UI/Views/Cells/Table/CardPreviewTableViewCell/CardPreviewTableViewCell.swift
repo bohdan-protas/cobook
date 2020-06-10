@@ -14,6 +14,7 @@ class CardPreviewTableViewCell: UITableViewCell {
     @IBOutlet var companyNameLabel: UILabel!
     @IBOutlet var proffesionLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!
+    @IBOutlet var separatorView: UIView!
 
     override func prepareForReuse() {
         titleImageView.cancelImageRequest()

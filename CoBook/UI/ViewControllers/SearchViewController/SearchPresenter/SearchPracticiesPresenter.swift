@@ -117,6 +117,12 @@ private extension SearchPracticiesPresenter {
                     let isSelected: Bool = self.selectedPracticies.compactMap{ $0.id }.contains(fetched.id ?? -1)
                     return PracticeModel(id: fetched.id, title: fetched.title, isSelected: isSelected)
                 }
+                self.practicies.sort { (a, b) -> Bool in
+                    let titleOne = a.title ?? ""
+                    let titleTwo = b.title ?? ""
+                    return titleOne.localizedCaseInsensitiveCompare(titleTwo) == .orderedAscending
+                    //return a.title ?? "" > b.title ?? ""
+                }
                 self.filteredPracticies = self.practicies
                 self.updateViewDataSource()
                 self.view?.reload()

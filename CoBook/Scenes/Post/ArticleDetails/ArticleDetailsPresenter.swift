@@ -106,13 +106,32 @@ class ArticleDetailsPresenter: BasePresenter {
         }
 
         switch item {
+        case .creator(let model):
+            switch articleDetails?.cardInfo?.type {
+            case .none: break
+            case .some(let type):
+                switch type {
+                case .personal:
+                    let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                    if let strid = model.id, let id = Int(strid) {
+                        personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
+                        view?.push(controller: personalCardDetailsViewController, animated: true)
+                    }
+                case .business:
+                    let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                    if let strid = model.id, let id = Int(strid) {
+                        businessCardDetailsViewController.presenter = BusinessCardDetailsPresenter(id: id)
+                        view?.push(controller: businessCardDetailsViewController, animated: true)
+                    }
+                }
+            }
         case .articlePreview(let model):
             refresh()
+            view?.startLoading()
             fetchArticleDetails(articleID: model.id)
         default:
             break
         }
-
     }
 
     func share() {
@@ -144,10 +163,10 @@ private extension ArticleDetailsPresenter {
                                                                        albumAvatarImage: articleDetails?.album?.avatar?.sourceUrl,
                                                                        albumAvatarTitle: articleDetails?.album?.title)),
             .title(text: "Article.creatorSection.text".localized),
-            .creator(model: CardPreviewModel(id: articleDetails?.userID ?? "",
+            .creator(model: CardPreviewModel(id: "\(articleDetails?.cardInfo?.id ?? -1)",
                                              image: articleDetails?.cardInfo?.avatar?.sourceUrl,
-                                             firstName: articleDetails?.cardInfo?.company?.name,
-                                             lastName: nil,
+                                             firstName: "\(articleDetails?.cardInfo?.cardCreator?.firstName ?? "")",
+                                             lastName: "\(articleDetails?.cardInfo?.cardCreator?.lastName ?? "")",
                                              profession: articleDetails?.cardInfo?.practiceType?.title,
                                              telephone: articleDetails?.cardInfo?.telephone?.number))
         ]
@@ -159,7 +178,7 @@ private extension ArticleDetailsPresenter {
 
         dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.removeAll()
         if !items.isEmpty {
-            dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.append(.title(text: "Article.anotherArticlesSection.text".localized))
+            dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.append(.creatorTitle(text: "Article.anotherArticlesSection.text".localized))
         }
         dataSource?.sections[ArticleDetails.SectionAccessory.list.rawValue].items.append(contentsOf: items.map { ArticleDetails.Cell.articlePreview(model: $0) })
         view?.reload()
