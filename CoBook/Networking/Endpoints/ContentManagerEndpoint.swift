@@ -17,8 +17,8 @@ enum ContentManagerEndpoint: Endpoint {
     }
 
     var baseUrlPath: URLComponents {
-        var components = APIConstants.baseURLPath
-        components.path = APIConstants.Path.contentManager.rawValue
+        var components = Constants.API.baseURLPath
+        components.path = Constants.API.Path.contentManager.rawValue
         return components
     }
 

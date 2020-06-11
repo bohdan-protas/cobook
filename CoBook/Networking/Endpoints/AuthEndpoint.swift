@@ -63,12 +63,12 @@ enum AuthEndpoint: Endpoint {
 
         case let .forgotPassword(telephone):
             return [
-                APIConstants.ParameterKey.telephone: telephone,
+                Constants.API.ParameterKey.telephone: telephone,
             ]
 
         case let .refresh(token):
             return [
-                APIConstants.ParameterKey.refreshToken: token,
+                Constants.API.ParameterKey.refreshToken: token,
             ]
 
         case .changeCredengials(let parameters):

@@ -163,6 +163,8 @@
 "SignUp.registration" = "Реєстрація";
 "SignUp.alreadyHaveAccountQuestion" = "Вже маєте аккаунт?";
 "SignUp.enterButton.normalTitle" = "Увійдіть";
+"SignUp.termsAndConditions.text" = "Реєструючись, Ви погоджуєтеся із Правилами користування додатком";
+"SignUp.termsAndConditions.linkText" = "Правилами користування";
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Підтвердьте номер телефону";

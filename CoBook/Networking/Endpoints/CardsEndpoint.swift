@@ -127,7 +127,7 @@ enum CardsEndpoint: Endpoint {
 
         case .getCardInfo(let id):
             return [
-                APIConstants.ParameterKey.id: id,
+                Constants.API.ParameterKey.id: id,
             ]
 
         case .createPersonalCard(let parameters):

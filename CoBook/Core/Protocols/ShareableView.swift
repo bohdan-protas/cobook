@@ -10,15 +10,20 @@ import UIKit
 import FirebaseDynamicLinks
 
 protocol ShareableView {
-    func showShareSheet(path: DynamicLinkConstants.Path, parameters: [DynamicLinkConstants.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?)
+    func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?)
+}
+
+fileprivate enum Layout {
+    static let maxSocialTitleCount: Int = 64
+    static let maxSocialDescrCount: Int = 256
 }
 
 extension ShareableView where Self: UIViewController {
 
-    func showShareSheet(path: DynamicLinkConstants.Path, parameters: [DynamicLinkConstants.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?) {
-        var dynamicLink = DynamicLinkConstants.baseURLPath
+    func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?) {
+        var dynamicLink = Constants.DynamicLinks.baseURLPath
         dynamicLink.path = path.rawValue
-        dynamicLink.queryItems = [URLQueryItem(name: DynamicLinkConstants.QueryName.shareableUserID.rawValue, value: AppStorage.User.Profile?.userId)]
+        dynamicLink.queryItems = [URLQueryItem(name: Constants.DynamicLinks.QueryName.shareableUserID.rawValue, value: AppStorage.User.Profile?.userId)]
         let queryItems: [URLQueryItem] = parameters.enumerated().compactMap { URLQueryItem(name: $0.element.key.rawValue, value: $0.element.value) }
         dynamicLink.queryItems?.append(contentsOf: queryItems)
 
@@ -27,7 +32,7 @@ extension ShareableView where Self: UIViewController {
             return
         }
 
-        guard let shareLink = DynamicLinkComponents(link: dynamicLinkURL, domainURIPrefix: DynamicLinkConstants.domainURIPrefix.absoluteString) else {
+        guard let shareLink = DynamicLinkComponents(link: dynamicLinkURL, domainURIPrefix: Constants.DynamicLinks.domainURIPrefix.absoluteString) else {
             Log.error("Couldn create FDL components")
             return
         }
@@ -41,9 +46,12 @@ extension ShareableView where Self: UIViewController {
         shareLink.iOSParameters?.appStoreID = "962194608"
 
         // Android parameters
-        shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.cobook.cobook")
+        shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: Constants.Android.packageName)
 
         // Social metatag parameters
+        let dynamicLinkSocialMetaTagParameters = dynamicLinkSocialMetaTagParameters
+        dynamicLinkSocialMetaTagParameters?.title = dynamicLinkSocialMetaTagParameters?.descriptionText?[0..<Layout.maxSocialTitleCount]
+        dynamicLinkSocialMetaTagParameters?.descriptionText = dynamicLinkSocialMetaTagParameters?.descriptionText?[0..<Layout.maxSocialDescrCount]
         shareLink.socialMetaTagParameters = dynamicLinkSocialMetaTagParameters
 
         // Shorted links

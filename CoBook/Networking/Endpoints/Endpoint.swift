@@ -19,7 +19,7 @@ protocol Endpoint: URLRequestConvertible {
 
 extension Endpoint {
     var baseUrlPath: URLComponents {
-        return APIConstants.baseURLPath
+        return Constants.API.baseURLPath
     }
 
     var urlParameters: [String: String]? { return nil }
@@ -40,7 +40,7 @@ extension Endpoint {
         urlRequest.httpMethod = method.rawValue
 
         /// Common Headers
-        urlRequest.headers.add(.contentType(APIConstants.ContentType.json.rawValue))
+        urlRequest.headers.add(.contentType(Constants.API.ContentType.json.rawValue))
 
         let currentDeviceLanguage = NSLocale.current.languageCode
         let apiLanguageCode = APILanguageCode.init(deviceLanguageCode: currentDeviceLanguage)

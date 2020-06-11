@@ -1,0 +1,14 @@
+/* 
+  InfoPlist.strings
+  CoBook
+
+  Created by protas on 6/11/20.
+  Copyright © 2020 CoBook. All rights reserved.
+*/
+
+NSCameraUsageDescription = "Enable access to your camera roll to upload your photos and display you and your articles in a better way in the app";
+NSPhotoLibraryUsageDescription = "Enable access to your gallery to upload your photos and display you and your articles in a better way in the app";
+NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to find the near cards";
+NSLocationAlwaysUsageDescription = "We need your location to find the near cards";
+NSLocationWhenInUseUsageDescription = "We need your location to find the near cards";
+

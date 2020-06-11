@@ -30,14 +30,14 @@ class StaticMapConfiguratorService {
     static func constructStaticMapURL(mapSize: CGSize,
                                center coordinates: (latitude: Double?, longitude: Double?)) -> URL? {
 
-        var mapUrl = APIConstants.StaticMap.baseURL
+        var mapUrl = Constants.StaticMap.baseURL
 
         mapUrl.append("&size=\(Int(mapSize.width))x\(Int(mapSize.height))")
         mapUrl.append("&scale=\(2)")
         mapUrl.append("&format=png")
 
         let marker: String = {
-            var marker = "&markers=scale:\(1)%7Cicon:\(APIConstants.StaticMap.personalCardMarkerURL)"
+            var marker = "&markers=scale:\(1)%7Cicon:\(Constants.StaticMap.personalCardMarkerURL)"
             if let lt = coordinates.latitude, let ln = coordinates.longitude {
                 marker.append("%7C\(lt),\(ln)")
             }
@@ -47,7 +47,7 @@ class StaticMapConfiguratorService {
         mapUrl.append(marker)
 
         /// apiKey
-        mapUrl.append("&key=\(APIConstants.Google.placesApiKey)")
+        mapUrl.append("&key=\(Constants.Google.placesApiKey)")
 
         return URL.init(string: mapUrl)
     }

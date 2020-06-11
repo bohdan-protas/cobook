@@ -158,6 +158,8 @@
 "SignUp.registration" = "Регистрация";
 "SignUp.alreadyHaveAccountQuestion" = "Уже есть аккаунт?";
 "SignUp.enterButton.normalTitle" = "Войдите";
+"SignUp.termsAndConditions.text" = "Регистрируясь, Вы подтверждаете согласие с Правилами использования";
+"SignUp.termsAndConditions.linkText" = "Правилами использования";
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Подтвердите номер телефона";

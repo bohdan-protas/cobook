@@ -38,6 +38,8 @@ class SignUpViewController: BaseViewController, SignUpView {
     @Localized("SignUp.enterButton.normalTitle")
     @IBOutlet var enterButton: UIButton!
 
+    @IBOutlet var termsAndConditionsLabel: UILabel!
+
     var presenter = SignUpPresenter()
 
     // MARK: -  Actions
@@ -55,11 +57,34 @@ class SignUpViewController: BaseViewController, SignUpView {
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
     }
 
+    @objc func handleTermTapped(gesture: UITapGestureRecognizer) {
+        let tapLocation = gesture.location(in: termsAndConditionsLabel)
+        let index = termsAndConditionsLabel.indexOfAttributedTextCharacterAtPoint(point: tapLocation)
+
+        let termString = "SignUp.termsAndConditions.text".localized as NSString
+        let termRange = termString.range(of: "SignUp.termsAndConditions.linkText".localized)
+
+        if checkRange(termRange, contain: index) {
+            UIApplication.shared.open(Constants.CoBook.termsAndConditionsURL)
+        }
+
+    }
+
     // MARK: - Lifecycle
 
 	override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+
+        let formattedText = String.format(strings: ["SignUp.termsAndConditions.linkText".localized],
+                                          boldFont: UIFont.HelveticaNeueCyr_Bold(size: 13),
+                                          boldColor: UIColor.Theme.green,
+                                          inString: "SignUp.termsAndConditions.text".localized,
+                                          font: UIFont.HelveticaNeueCyr_Medium(size: 13),
+                                          color: UIColor.Theme.green)
+        termsAndConditionsLabel.attributedText = formattedText
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTermTapped))
+        termsAndConditionsLabel.addGestureRecognizer(tap)
     }
 
     deinit {
@@ -86,6 +111,12 @@ class SignUpViewController: BaseViewController, SignUpView {
         self.performSegue(withIdentifier: ConfirmTelephoneNumberViewController.segueId, sender: nil)
     }
 
+    // MARK: - Helpers
+
+    func checkRange(_ range: NSRange, contain index: Int) -> Bool {
+        return index > range.location && index < range.location + range.length
+    }
+
 
 }
 
@@ -106,6 +137,49 @@ extension SignUpViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+
+
+}
+
+extension UILabel {
+
+    func indexOfAttributedTextCharacterAtPoint(point: CGPoint) -> Int {
+        assert(self.attributedText != nil, "This method is developed for attributed string")
+        let textStorage = NSTextStorage(attributedString: self.attributedText!)
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        let textContainer = NSTextContainer(size: self.frame.size)
+        textContainer.lineFragmentPadding = 0
+        textContainer.maximumNumberOfLines = self.numberOfLines
+        textContainer.lineBreakMode = self.lineBreakMode
+        layoutManager.addTextContainer(textContainer)
+
+        let index = layoutManager.characterIndex(for: point, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        return index
+    }
+
+
+}
+
+extension String {
+
+    static func format(strings: [String],
+                       boldFont: UIFont = UIFont.boldSystemFont(ofSize: 14),
+                       boldColor: UIColor = UIColor.blue,
+                       inString string: String,
+                       font: UIFont = UIFont.systemFont(ofSize: 14),
+                       color: UIColor = UIColor.black) -> NSAttributedString {
+        let attributedString =
+            NSMutableAttributedString(string: string,
+                                      attributes: [
+                                        .font: font,
+                                        .foregroundColor: color])
+        let boldFontAttribute = [NSAttributedString.Key.font: boldFont, NSAttributedString.Key.foregroundColor: boldColor]
+        for bold in strings {
+            attributedString.addAttributes(boldFontAttribute, range: (string as NSString).range(of: bold))
+        }
+        return attributedString
     }
 
 

@@ -157,6 +157,8 @@
 "SignUp.registration" = "Registration";
 "SignUp.alreadyHaveAccountQuestion" = "Already have account?";
 "SignUp.enterButton.normalTitle" = "Sign in";
+"SignUp.termsAndConditions.text" = "By signing up you agree to our Terms of use";
+"SignUp.termsAndConditions.linkText" = "Terms of use";
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Confirm phone number";

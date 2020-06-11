@@ -19,53 +19,43 @@ final class AuthRequestInterceptor: RequestInterceptor {
         switch response.statusCode {
         case 401:
             DispatchQueue.main.async {
-                AppStorage.Auth.deleteAllData()
-                if let topController = UIApplication.topViewController() {
-                    let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                    topController.present(signInNavigationController, animated: true, completion: nil)
-                }
-                completion(.doNotRetry)
+                self.showSignInController()
             }
-
+            completion(.doNotRetry)
         case 403:
-
             if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
                 AppStorage.Auth.accessToken = nil
                 APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
                     switch result {
-
                     case let .success(response):
                         AppStorage.Auth.accessToken = response?.accessToken
                         completion(.retry)
-
                     case .failure:
+                        completion(.doNotRetry)
                         DispatchQueue.main.async {
-                            AppStorage.Auth.deleteAllData()
-                            let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                            if let topController = UIApplication.topViewController() {
-                                topController.present(signInNavigationController, animated: true, completion: nil)
-                            }
-                            completion(.doNotRetry)
+                            self.showSignInController()
                         }
-
                     }
                 }
             } else {
-                AppStorage.Auth.deleteAllData()
-                let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
-                if let topController = UIApplication.topViewController() {
-                    topController.present(signInNavigationController, animated: true, completion: nil)
-                }
                 completion(.doNotRetry)
+                DispatchQueue.main.async {
+                    self.showSignInController()
+                }
             }
 
 
         default:
             return completion(.doNotRetryWithError(error))
         }
+    }
 
-
-
+    func showSignInController() {
+        AppStorage.Auth.deleteAllData()
+        let signInNavigationController: SignInNavigationController = UIStoryboard.auth.initiateViewControllerFromType()
+        if let topController = UIApplication.topViewController(), !(topController is SignInViewController) {
+            topController.present(signInNavigationController, animated: true, completion: nil)
+        }
     }
 
 }

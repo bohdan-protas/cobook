@@ -25,7 +25,7 @@ extension EndpointMockup {
         urlRequest.httpMethod = HTTPMethod.get.rawValue
 
         /// Common Headers
-        urlRequest.headers.add(.contentType(APIConstants.ContentType.json.rawValue))
+        urlRequest.headers.add(.contentType(Constants.API.ContentType.json.rawValue))
 
         return urlRequest
     }

@@ -42,5 +42,15 @@ class SettingsTableViewController: UITableViewController {
         appVersionDetailLabel.text = "\(appVersion ?? "0")(\(builsNumber ?? "0"))"
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 2:
+            UIApplication.shared.open(Constants.CoBook.licenseURL)
+        case 3:
+            UIApplication.shared.open(Constants.CoBook.privacyPolicyURL)
+        default:
+            break
+        }
+    }
 
 }
