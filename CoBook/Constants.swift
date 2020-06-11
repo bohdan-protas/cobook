@@ -61,8 +61,9 @@ enum Constants {
 
     enum CoBook {
         static let faqURL: URL = "https://cobook.app/#faq"
-        static let termsAndConditionsURL: URL = "https://cobook.app"
-        static let rulesURL: URL = "https://cobook.app"
+        static let termsAndConditionsURL: URL = "https://cobook.app/website_terms_of_use"
+        static let licenseURL: URL = "https://cobook.app/license"
+        static let privacyPolicyURL: URL = "https://cobook.app/privacy_policy"
         static let logoURL: URL = "https://static.tildacdn.com/tild3930-3864-4365-b137-343937626266/logofuter.png"
     }
 
