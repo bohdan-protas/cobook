@@ -68,6 +68,8 @@ extension TagsListTableViewCell: UICollectionViewDataSource {
         let interest = dataSource?.dataSourceWith(identifier: self.dataSourceIdentifier)[safe: indexPath.row]
         cell.titleLabel.text = interest?.title
         cell.setSelected(interest?.isSelected ?? false)
+        cell.maxWidthConstraint.constant = collectionView.frame.width
+        cell.labelWidthConstraint.constant = interest?.title?.width(withConstrainedHeight: 24, font: UIFont.SFProDisplay_Regular(size: 14)) ?? 0
         return cell
     }
 

@@ -65,7 +65,7 @@ class SignUpViewController: BaseViewController, SignUpView {
         let termRange = termString.range(of: "SignUp.termsAndConditions.linkText".localized)
 
         if checkRange(termRange, contain: index) {
-            UIApplication.shared.open(Constants.CoBook.termsAndConditions)
+            UIApplication.shared.open(Constants.CoBook.termsAndConditionsURL)
         }
 
     }

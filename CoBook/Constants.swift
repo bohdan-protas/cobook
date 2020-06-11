@@ -12,6 +12,7 @@ import CoreLocation
 enum Constants {
 
     enum API {
+
         static var baseURLPath: URLComponents {
             get {
                 var components = URLComponents()
@@ -53,14 +54,15 @@ enum Constants {
         static let additionalAcceptableImageContentTypes: Set<String> = [
             "image/*"
         ]
+
     }
 
     // MARK: - CoBook
 
     enum CoBook {
-        static let faq: URL = "https://cobook.app/#faq"
-        static let termsAndConditions: URL = "https://cobook.app"
-        static let rules: URL = "https://cobook.app"
+        static let faqURL: URL = "https://cobook.app/#faq"
+        static let termsAndConditionsURL: URL = "https://cobook.app"
+        static let rulesURL: URL = "https://cobook.app"
         static let logoURL: URL = "https://static.tildacdn.com/tild3930-3864-4365-b137-343937626266/logofuter.png"
     }
 
@@ -101,6 +103,7 @@ enum Constants {
             routeURLPath.append("&travelmode=\(directionMode.rawValue)")
             return URL.init(string: routeURLPath)
         }
+
     }
 
     // MARK: - Dynamic link
