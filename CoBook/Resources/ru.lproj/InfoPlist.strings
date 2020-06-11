@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  CoBook
+
+  Created by protas on 6/11/20.
+  Copyright © 2020 CoBook. All rights reserved.
+*/
+
+NSCameraUsageDescription = "Включите доступ к камере вашей камеры, чтобы загружать фотографии и лучше отражать вас и ваши статьи в приложении";
+NSPhotoLibraryUsageDescription = "Включите доступ к камере галлерее, чтобы загружать фотографии и лучше отражать вас и ваши статьи в приложении";
+NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to find the near cards";
+NSLocationAlwaysUsageDescription = "We need your location to find the near cards";
+NSLocationWhenInUseUsageDescription = "We need your location to find the near cards";
