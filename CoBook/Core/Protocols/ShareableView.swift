@@ -13,6 +13,11 @@ protocol ShareableView {
     func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?)
 }
 
+fileprivate enum Layout {
+    static let maxSocialTitleCount: Int = 64
+    static let maxSocialDescrCount: Int = 256
+}
+
 extension ShareableView where Self: UIViewController {
 
     func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?) {
@@ -41,9 +46,12 @@ extension ShareableView where Self: UIViewController {
         shareLink.iOSParameters?.appStoreID = "962194608"
 
         // Android parameters
-        shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.cobook.cobook")
+        shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: Constants.Android.packageName)
 
         // Social metatag parameters
+        let dynamicLinkSocialMetaTagParameters = dynamicLinkSocialMetaTagParameters
+        dynamicLinkSocialMetaTagParameters?.title = dynamicLinkSocialMetaTagParameters?.descriptionText?[0..<Layout.maxSocialTitleCount]
+        dynamicLinkSocialMetaTagParameters?.descriptionText = dynamicLinkSocialMetaTagParameters?.descriptionText?[0..<Layout.maxSocialDescrCount]
         shareLink.socialMetaTagParameters = dynamicLinkSocialMetaTagParameters
 
         // Shorted links
