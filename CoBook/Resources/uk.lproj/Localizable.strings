@@ -141,12 +141,9 @@
 "Error.maxSelectedElements" = "Максимальна кількість вирбраних елементів is %li";
 
 // MARK: - Onboarding
-"Onboarding.Title01" = "Заголовок 01";
-"Onboarding.Subtitle01" = "Описособливостей додатку\nфічі, переваги, тощо";
-"Onboarding.Title02" = "Заголовок 02";
-"Onboarding.Subtitle02" = "Описособливостей додатку\nфічі, переваги, тощо";
-"Onboarding.Title03" = "Заголовок 03";
-"Onboarding.Subtitle03" = "Описособливостей додатку\nфічі, переваги, тощо";
+"Onboarding.Subtitle01" = "Створи свою Персональну візитку за 5 хвилин";
+"Onboarding.Subtitle02" = "Всі Ваші контактні дані за одним посиланням";
+"Onboarding.Subtitle03" = "Шукай потрібні тобі візитки, зберігай, групуй по інтересам, ділись своєю візиткою";
 "Onboarding.Next" = "Продовжити";
 "Onboarding.Start" = "Розпочати";
 

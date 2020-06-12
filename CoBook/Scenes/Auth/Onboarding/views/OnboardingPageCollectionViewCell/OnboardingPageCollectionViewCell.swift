@@ -18,6 +18,8 @@ class OnboardingPageCollectionViewCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var actionButton: UIButton!
+    @IBOutlet var titleView: UIView!
+    @IBOutlet var descriptionView: UIView!
 
     var action: Onboarding.ButtonActionType?
     weak var delegate: OnboardingPageCollectionViewCellDelegate?
@@ -35,8 +37,23 @@ class OnboardingPageCollectionViewCell: UICollectionViewCell {
 
     func fill(_ model: Onboarding.PageModel) {
         self.titleImageView.image = model.image
-        self.titleLabel.text = model.title
-        self.descriptionLabel.text = model.subtitle
+
+        if let title = model.title {
+            self.titleLabel.text = title
+            self.descriptionView.isHidden = true
+        } else {
+            self.titleView.isHidden = false
+        }
+
+        if let title = descriptionLabel.text {
+            self.descriptionLabel.text = title
+            self.descriptionView.isHidden = true
+        } else {
+            self.descriptionView.isHidden = false
+        }
+
+
+
         self.actionButton.setTitle(model.actionTitle, for: .normal)
         self.action = model.action
     }
