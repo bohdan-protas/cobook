@@ -80,7 +80,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <sections>
-                            <tableViewSection id="Noh-ms-kE0">
+                            <tableViewSection headerTitle="Налаштування додатку" id="Noh-ms-kE0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="AWY-aR-f3x" style="IBUITableViewCellStyleDefault" id="d8e-5Q-V9N">
                                         <rect key="frame" x="16" y="18" width="343" height="43.5"/>

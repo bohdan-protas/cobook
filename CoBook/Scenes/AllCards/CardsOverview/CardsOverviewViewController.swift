@@ -71,7 +71,6 @@ class CardsOverviewViewController: BaseViewController {
         filterViewController.delegate = self
         let filterNavigation = CustomNavigationController(rootViewController: filterViewController)
         self.presentPanModal(filterNavigation)
-        //self.present(controller: filterNavigation, animated: true)
     }
 
     @objc private func refreshAllCardsData(_ sender: Any) {
