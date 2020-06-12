@@ -130,32 +130,53 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             }
             switch currentBarIndex {
             case .allCards:
-                if let cardsCount = cards[.allCards]?.items.count, cardsCount - 1 == indexPath.row, cards[.allCards]?.isNeedToLoadNextPage ?? false {
+                guard let cards = cards[.allCards] else {
+                    return
+                }
+
+                if cards.items.count - 1 == indexPath.row && cards.isNeedToLoadNextPage && !cards.isFetching {
                     self.view?.showBottomLoaderView()
-                    fetchCards(type: nil, currentPaginationPage: cards[.allCards]) { (cards) in
+                    self.cards[.allCards]?.isFetching = true
+                    fetchCards(type: nil, currentPaginationPage: cards) { [weak self] (cards) in
+                        guard let self = self else { return }
                         self.cards[.allCards]?.items.append(contentsOf: cards)
                         self.view?.hideBottomLoaderView()
                         self.update(section: .cards)
+                        self.cards[.allCards]?.isFetching = false
                     }
                 }
 
             case .personalCards:
-                if let cardsCount = cards[.personalCards]?.items.count, cardsCount - 1 == indexPath.row, cards[.personalCards]?.isNeedToLoadNextPage ?? false {
+                guard let cards = cards[.personalCards] else {
+                    return
+                }
+
+                if cards.items.count - 1 == indexPath.row && cards.isNeedToLoadNextPage && !cards.isFetching {
                     self.view?.showBottomLoaderView()
-                    fetchCards(type: .personal, currentPaginationPage: cards[.personalCards]) { (cards) in
+                    self.cards[.personalCards]?.isFetching = true
+                    fetchCards(type: .personal, currentPaginationPage: self.cards[.personalCards]) { [weak self] (cards) in
+                        guard let self = self else { return }
                         self.cards[.personalCards]?.items.append(contentsOf: cards)
                         self.view?.hideBottomLoaderView()
                         self.update(section: .cards)
+                        self.cards[.personalCards]?.isFetching = false
                     }
                 }
 
             case .businessCards:
-                if let cardsCount = cards[.businessCards]?.items.count, cardsCount - 1 == indexPath.row, cards[.businessCards]?.isNeedToLoadNextPage ?? false {
+                guard let cards = cards[.businessCards] else {
+                    return
+                }
+
+                if cards.items.count - 1 == indexPath.row && cards.isNeedToLoadNextPage && !cards.isFetching {
                     self.view?.showBottomLoaderView()
-                    fetchCards(type: .business, currentPaginationPage: cards[.businessCards]) { (cards) in
+                    self.cards[.businessCards]?.isFetching = true
+                    fetchCards(type: .business, currentPaginationPage: self.cards[.businessCards]) { [weak self] (cards) in
+                        guard let self = self else { return }
                         self.cards[.personalCards]?.items.append(contentsOf: cards)
                         self.view?.hideBottomLoaderView()
                         self.update(section: .cards)
+                        self.cards[.businessCards]?.isFetching = false
                     }
                 }
 
@@ -231,8 +252,8 @@ extension CardsOverviewViewPresenter {
                             let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
                             let marker = GMSMarker(position: position)
                             switch apiModel.type {
-                            case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
-                            case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
+                                case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
+                                case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
                             }
                             return marker
                         } else { return nil }
@@ -243,7 +264,6 @@ extension CardsOverviewViewPresenter {
                 }
             }
         }
-
         if pendingCardMapMarkersRequestWorkItem != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: pendingCardMapMarkersRequestWorkItem!)
         }
@@ -325,7 +345,6 @@ private extension CardsOverviewViewPresenter {
                     if useLoader { view?.startLoading() }
                     fetchCards { [weak self] (cards) in
                         self?.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
-                        self?.cards[barIndex]?.isNeedToLoadNextPage = true
                         self?.reload(section: .cards)
                     }
                 } else {
