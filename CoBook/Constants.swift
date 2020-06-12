@@ -17,7 +17,7 @@ enum Constants {
             get {
                 var components = URLComponents()
                 components.scheme   = "https"
-                components.host     = Host.prod.rawValue
+                components.host     = Host.dev.rawValue
                 components.path     = Path.api.rawValue
                 return components
             }

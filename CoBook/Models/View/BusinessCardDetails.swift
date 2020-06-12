@@ -44,7 +44,7 @@ enum BusinessCardDetails {
     }
 
     enum BarSectionsTypeIndex: Int {
-        case general, services, products, team, contacts
+        case general, services, products, team, responds, contacts
     }
 
     enum PostPreviewDataSourceID: String {

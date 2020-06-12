@@ -61,6 +61,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "BarItem.shop".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "BarItem.team".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "Відгуки"),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "BarItem.contacts".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
@@ -363,6 +364,9 @@ private extension BusinessCardDetailsPresenter {
                 }
                 let previews: [BusinessCardDetails.Cell] = products.compactMap { BusinessCardDetails.Cell.productSection(model: $0) }
                 dataSource?[.cardDetails].items.append(contentsOf: previews)
+
+            case .responds:
+                break
             }
         }
     }
