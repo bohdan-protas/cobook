@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -43,24 +42,33 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lih-SN-k16">
                         <rect key="frame" x="96" y="28" width="208" height="64"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DWr-kl-slk">
-                                <rect key="frame" x="0.0" y="4" width="164" height="56"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DWr-kl-slk">
+                                <rect key="frame" x="0.0" y="2" width="164" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yna-cX-gBx">
-                                        <rect key="frame" x="0.0" y="0.0" width="164" height="13.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="164" height="18"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="tk8-HQ-jeW"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                         <color key="textColor" name="Theme_Black-Middle"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4N-3o-Vex">
-                                        <rect key="frame" x="0.0" y="21.5" width="164" height="13"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4N-3o-Vex">
+                                        <rect key="frame" x="0.0" y="23" width="164" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="GDn-eL-NTj"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71z-4F-5Ur">
-                                        <rect key="frame" x="0.0" y="42.5" width="164" height="13.5"/>
+                                        <rect key="frame" x="0.0" y="44" width="164" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="zMG-c5-fGj"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <color key="textColor" name="Theme_TextField-text"/>
                                         <nil key="highlightedColor"/>
@@ -68,7 +76,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxq-Hp-cj4" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="164" y="-11.5" width="44" height="44"/>
+                                <rect key="frame" x="164" y="-11" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="9ih-Wa-gdD"/>
                                     <constraint firstAttribute="width" constant="44" id="Bkd-Fa-eOS"/>
@@ -86,11 +94,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zxq-Hp-cj4" secondAttribute="trailing" id="6tP-d8-VNs"/>
                             <constraint firstItem="DWr-kl-slk" firstAttribute="leading" secondItem="lih-SN-k16" secondAttribute="leading" id="9b9-ya-CHS"/>
-                            <constraint firstAttribute="bottom" secondItem="DWr-kl-slk" secondAttribute="bottom" constant="4" id="dVu-Y3-l44"/>
-                            <constraint firstItem="DWr-kl-slk" firstAttribute="top" secondItem="lih-SN-k16" secondAttribute="top" constant="4" id="mr2-a0-vrj"/>
+                            <constraint firstAttribute="bottom" secondItem="DWr-kl-slk" secondAttribute="bottom" constant="2" id="dVu-Y3-l44"/>
+                            <constraint firstItem="DWr-kl-slk" firstAttribute="top" secondItem="lih-SN-k16" secondAttribute="top" constant="2" id="mr2-a0-vrj"/>
                             <constraint firstItem="zxq-Hp-cj4" firstAttribute="leading" secondItem="DWr-kl-slk" secondAttribute="trailing" id="sdx-2D-usb"/>
                             <constraint firstItem="zxq-Hp-cj4" firstAttribute="centerY" secondItem="Yna-cX-gBx" secondAttribute="centerY" id="xU6-un-DHM"/>
-                            <constraint firstAttribute="height" constant="64" id="zew-Hn-XHu"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="zew-Hn-XHu"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2St-iw-VD5">

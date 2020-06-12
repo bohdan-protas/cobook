@@ -24,9 +24,11 @@ struct PaginationPage<T> {
     }
 
     var isNeedToLoadNextPage = false
+    var isFetching = false
 
     init(pageSize: UInt, items: [T] = []) {
         self.pageSize = pageSize
         self.items = items
+        self.isNeedToLoadNextPage = (items.count == pageSize)
     }
 }
