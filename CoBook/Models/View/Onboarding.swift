@@ -16,8 +16,8 @@ enum Onboarding {
     }
 
     struct PageModel {
-        var title: String
-        var subtitle: String
+        var title: String?
+        var subtitle: String?
         var image: UIImage?
         var actionTitle: String
         var action: ButtonActionType

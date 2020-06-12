@@ -136,12 +136,9 @@
 "Error.maxSelectedElements" = "Maximum allowed selected elements - %li";
 
 // MARK: - Onboarding
-"Onboarding.Title01" = "Title 01";
-"Onboarding.Subtitle01" = "Application features description\nfeatures, advantages, and other";
-"Onboarding.Title02" = "Title 02";
-"Onboarding.Subtitle02" = " Application features description\nfeatures, advantages, and other";
-"Onboarding.Title03" = "Title 03";
-"Onboarding.Subtitle03" = "Application features description\ nfeatures, advantages, and other";
+"Onboarding.Subtitle01" = "Create your Personal Business Card in 5 minutes";
+"Onboarding.Subtitle02" = "All your contact details in one link";
+"Onboarding.Subtitle03" = "Search for the contacts you need, save, group by interests, share your business card";
 "Onboarding.Next" = "Continue";
 "Onboarding.Start" = "Start";
 

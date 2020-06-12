@@ -18,29 +18,31 @@ protocol OnboardingView: UIViewController {
 class OnboardingPresenter: BasePresenter {
 
     // MARK: Properties
+
     private weak var view: OnboardingView?
     private var dataManager: OnboardingDataManager
 
     // MARK: Public
+    
     init(dataManager: OnboardingDataManager) {
         self.dataManager = dataManager
         self.dataManager.delegate = self
 
         dataManager.dataSource = [
-            Onboarding.PageModel(title: "Onboarding.Title01".localized,
-                                 subtitle: "Onboarding.Subtitle01".localized,
+            Onboarding.PageModel(title: "Onboarding.Subtitle01".localized,
+                                 subtitle: nil,
                                  image: UIImage(named: "ic_businessman"),
                                  actionTitle: "Onboarding.Next".localized,
                                  action: Onboarding.ButtonActionType.next),
 
-            Onboarding.PageModel(title: "Onboarding.Title02".localized,
-                                 subtitle: "Onboarding.Subtitle02".localized,
+            Onboarding.PageModel(title: "Onboarding.Subtitle02".localized,
+                                 subtitle: nil,
                                  image: UIImage(named: "ic_business_plan"),
                                  actionTitle: "Onboarding.Next".localized,
                                  action: Onboarding.ButtonActionType.next),
 
-            Onboarding.PageModel(title: "Onboarding.Title03".localized,
-                                 subtitle: "Onboarding.Subtitle03".localized,
+            Onboarding.PageModel(title: "Onboarding.Subtitle03".localized,
+                                 subtitle: nil,
                                  image: UIImage(named: "ic_business_deal"),
                                  actionTitle: "Onboarding.Start".localized,
                                  action: Onboarding.ButtonActionType.finish)
@@ -53,6 +55,7 @@ class OnboardingPresenter: BasePresenter {
 }
 
 // MARK: - OnboardingPageCollectionViewCellDelegate
+
 extension OnboardingPresenter: OnboardingPageCollectionViewCellDelegate {
 
     func actionButtonDidTapped(_ cell: OnboardingPageCollectionViewCell, actionType: Onboarding.ButtonActionType?) {

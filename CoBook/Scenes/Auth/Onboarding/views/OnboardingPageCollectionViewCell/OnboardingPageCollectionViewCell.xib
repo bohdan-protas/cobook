@@ -36,17 +36,17 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ZPQ-Ej-zFk">
-                        <rect key="frame" x="0.0" y="421" width="375" height="122"/>
+                        <rect key="frame" x="16" y="421" width="343" height="122"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7as-mN-53T">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHU-WP-N2l">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHU-WP-N2l">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="pgz-Ex-fOO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="22"/>
                                         <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -60,10 +60,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLW-Xd-U8e">
-                                <rect key="frame" x="0.0" y="74" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="72" width="343" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvZ-80-2ou">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="0.0" width="311" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="bm9-FS-Hqg"/>
                                         </constraints>
@@ -120,20 +120,22 @@
                 <constraint firstItem="oIj-9M-Bkm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="1af-6C-DTl"/>
                 <constraint firstItem="b3E-J6-kb9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZPQ-Ej-zFk" secondAttribute="bottom" constant="50" id="2B4-cU-0os"/>
                 <constraint firstAttribute="bottom" secondItem="b3E-J6-kb9" secondAttribute="bottom" constant="24" id="3I8-ZD-8IB"/>
-                <constraint firstItem="ZPQ-Ej-zFk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5O3-rr-inS"/>
+                <constraint firstItem="ZPQ-Ej-zFk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="5O3-rr-inS"/>
                 <constraint firstAttribute="trailing" secondItem="oIj-9M-Bkm" secondAttribute="trailing" constant="30" id="8E8-EE-aEq"/>
                 <constraint firstItem="ZPQ-Ej-zFk" firstAttribute="top" secondItem="oIj-9M-Bkm" secondAttribute="bottom" constant="53" id="Jm0-kK-6Ja"/>
                 <constraint firstItem="oIj-9M-Bkm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="53" id="aRt-i9-SSH"/>
                 <constraint firstItem="b3E-J6-kb9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="40" id="s22-Ut-QzR"/>
-                <constraint firstAttribute="trailing" secondItem="ZPQ-Ej-zFk" secondAttribute="trailing" id="yhu-Ch-pc8"/>
+                <constraint firstAttribute="trailing" secondItem="ZPQ-Ej-zFk" secondAttribute="trailing" constant="16" id="yhu-Ch-pc8"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="315" height="509"/>
             <connections>
                 <outlet property="actionButton" destination="b3E-J6-kb9" id="uEx-NF-Pvg"/>
                 <outlet property="descriptionLabel" destination="lvZ-80-2ou" id="JoN-GK-4C4"/>
+                <outlet property="descriptionView" destination="OLW-Xd-U8e" id="K2L-sX-OMF"/>
                 <outlet property="titleImageView" destination="oIj-9M-Bkm" id="VqR-go-K3N"/>
                 <outlet property="titleLabel" destination="gHU-WP-N2l" id="hKT-6j-Qlv"/>
+                <outlet property="titleView" destination="7as-mN-53T" id="vBz-HW-GqZ"/>
             </connections>
             <point key="canvasLocation" x="328.26086956521743" y="306.36160714285711"/>
         </collectionViewCell>
@@ -143,19 +145,19 @@
             <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-bg-disabled">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-bg-enabled">
-            <color red="1" green="0.85490196078431369" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-bg-selected">
-            <color red="1" green="0.85490196078431369" blue="0.10196078431372549" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-text-disabled">
             <color red="0.74099999666213989" green="0.74099999666213989" blue="0.74099999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Button-main-text-enabled">
-            <color red="0.14901960784313725" green="0.18431372549019609" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
