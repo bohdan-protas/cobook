@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct SelectAlbumCellsConfigurator: CellConfiguratorType {
+struct SelectAlbumCellsConfigurator: TableCellConfiguratorType {
 
-    var selectAlbumCellConfigurator: CellConfigurator<PostPreview.Item.Model, SelectAlbumTableViewCell>?
+    var selectAlbumCellConfigurator: TableCellConfigurator<PostPreview.Item.Model, SelectAlbumTableViewCell>?
 
     func reuseIdentifier(for item: PostPreview.Item.Model, indexPath: IndexPath) -> String {
         return selectAlbumCellConfigurator?.reuseIdentifier ?? ""

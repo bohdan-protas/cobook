@@ -12,7 +12,7 @@ import GooglePlaces
 
 protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate, CardBackgroundManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
-    func set(dataSource: DataSource<CreateBusinessCardDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?)
 
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setupSaveCardView()
@@ -32,7 +32,7 @@ fileprivate enum Defaults {
 class CreateBusinessCardPresenter: NSObject, BasePresenter {
 
     var view: CreateBusinessCardView?
-    private var viewDataSource: DataSource<CreateBusinessCardDataSourceConfigurator>?
+    private var viewDataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?
 
     /// Flag for instantiate current state
     private let isEditing: Bool
@@ -78,7 +78,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: CreateBusinessCardView) {
         self.view = view
-        self.viewDataSource = DataSource(configurator: dataSourceConfigurator)
+        self.viewDataSource = TableDataSource(configurator: dataSourceConfigurator)
         view.set(dataSource: viewDataSource)
     }
 

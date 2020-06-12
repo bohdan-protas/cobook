@@ -10,7 +10,7 @@ import UIKit
 
 protocol CreateServiceView: AlertDisplayableView, HorizontalPhotosListDelegate, LoadDisplayableView, NavigableView {
     func reload()
-    func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<CreateServiceDataSourceConfigurator>?)
     func setupSaveView()
     func setupUpdateView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
@@ -27,7 +27,7 @@ class CreateServicePresenter: NSObject, BasePresenter {
     weak var delegate: CreateServicePresenterDelegate?
 
     /// View data source
-    private var dataSource: DataSource<CreateServiceDataSourceConfigurator>?
+    private var dataSource: TableDataSource<CreateServiceDataSourceConfigurator>?
 
     private var details: Service.CreationDetailsModel {
         didSet {
@@ -175,7 +175,7 @@ extension CreateServicePresenter {
 private extension CreateServicePresenter {
 
     func setupDataSource() {
-        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource = TableDataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.header.rawValue, items: []),
                                      Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.contacts.rawValue, items: []),
                                      Section<Service.CreationCell>(accessoryIndex: Service.CreationSectionAccessoryIndex.description.rawValue, items: [])]

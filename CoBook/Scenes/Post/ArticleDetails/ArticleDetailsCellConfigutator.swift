@@ -45,15 +45,15 @@ enum ArticleDetails {
 
 // MARK: - ArticleDetailsCellConfigutator
 
-struct ArticleDetailsCellConfigutator: CellConfiguratorType {
+struct ArticleDetailsCellConfigutator: TableCellConfiguratorType {
 
-    var titleCellConfigurator: CellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
-    var creatorTitleCellConfigurator: CellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
-    var headerConfigurator: CellConfigurator<ArticleDetails.HeaderModel, ArticleHeaderTableViewCell>?
-    var descriptionCellConfigurator: CellConfigurator<ArticleDetails.DescriptionModel, ArticleDescriptionTableViewCell>?
-    var creatorCellConfigurator: CellConfigurator<CardPreviewModel, CardPreviewTableViewCell>?
-    var photoCollageConfigurator: CellConfigurator<Void?, PhotoCollageTableViewCell>?
-    var articlePreviewConfigurator: CellConfigurator<ArticlePreviewModel, ArticlePreviewTableViewCell>?
+    var titleCellConfigurator: TableCellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
+    var creatorTitleCellConfigurator: TableCellConfigurator<String?, ArticleDetailsSectionTitleTableViewCell>?
+    var headerConfigurator: TableCellConfigurator<ArticleDetails.HeaderModel, ArticleHeaderTableViewCell>?
+    var descriptionCellConfigurator: TableCellConfigurator<ArticleDetails.DescriptionModel, ArticleDescriptionTableViewCell>?
+    var creatorCellConfigurator: TableCellConfigurator<CardPreviewModel, CardPreviewTableViewCell>?
+    var photoCollageConfigurator: TableCellConfigurator<Void?, PhotoCollageTableViewCell>?
+    var articlePreviewConfigurator: TableCellConfigurator<ArticlePreviewModel, ArticlePreviewTableViewCell>?
 
     func reuseIdentifier(for item: ArticleDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -113,20 +113,20 @@ extension ArticleDetailsPresenter {
 
             var configurator = ArticleDetailsCellConfigutator()
 
-            configurator.articlePreviewConfigurator = CellConfigurator { (cell, model: ArticlePreviewModel, tableView, indexPath) -> ArticlePreviewTableViewCell in
+            configurator.articlePreviewConfigurator = TableCellConfigurator { (cell, model: ArticlePreviewModel, tableView, indexPath) -> ArticlePreviewTableViewCell in
                 cell.articleTitle.text = model.title
                 cell.articleImageView.setImage(withPath: model.image)
                 return cell
             }
 
-            configurator.photoCollageConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
+            configurator.photoCollageConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
                 cell.dataSource = self
                 cell.delegate = self
                 cell.prepareLayout()
                 return cell
             }
 
-            configurator.headerConfigurator = CellConfigurator { (cell, model: ArticleDetails.HeaderModel, tableView, indexPath) -> ArticleHeaderTableViewCell in
+            configurator.headerConfigurator = TableCellConfigurator { (cell, model: ArticleDetails.HeaderModel, tableView, indexPath) -> ArticleHeaderTableViewCell in
                 cell.delegate = self
 
                 let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
@@ -147,7 +147,7 @@ extension ArticleDetailsPresenter {
                 return cell
             }
 
-            configurator.descriptionCellConfigurator = CellConfigurator { (cell, model: ArticleDetails.DescriptionModel, tableView, indexPath) -> ArticleDescriptionTableViewCell in
+            configurator.descriptionCellConfigurator = TableCellConfigurator { (cell, model: ArticleDetails.DescriptionModel, tableView, indexPath) -> ArticleDescriptionTableViewCell in
                 cell.albumNameLabel.text = model.albumAvatarTitle
                 cell.albumImageView.setImage(withPath: model.albumAvatarImage)
                 cell.titleLabel.text = model.title
@@ -155,7 +155,7 @@ extension ArticleDetailsPresenter {
                 return cell
             }
 
-            configurator.creatorCellConfigurator = CellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
+            configurator.creatorCellConfigurator = TableCellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
                 let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
                 let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
 
@@ -167,14 +167,14 @@ extension ArticleDetailsPresenter {
                 return cell
             }
 
-            configurator.titleCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ArticleDetailsSectionTitleTableViewCell in
+            configurator.titleCellConfigurator = TableCellConfigurator { (cell, model: String?, tableView, indexPath) -> ArticleDetailsSectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 cell.dropShadowView.isHidden = true
                 cell.contentView.backgroundColor = .white
                 return cell
             }
 
-            configurator.creatorTitleCellConfigurator = CellConfigurator { (cell, model: String?, tableView, indexPath) -> ArticleDetailsSectionTitleTableViewCell in
+            configurator.creatorTitleCellConfigurator = TableCellConfigurator { (cell, model: String?, tableView, indexPath) -> ArticleDetailsSectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 cell.dropShadowView.isHidden = false
                 cell.contentView.backgroundColor = UIColor.Theme.grayBG

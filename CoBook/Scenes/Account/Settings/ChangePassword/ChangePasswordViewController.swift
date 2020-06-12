@@ -48,7 +48,7 @@ class ChangePasswordViewController: BaseViewController {
 
 extension ChangePasswordViewController: ChangePasswordView {
 
-    func set(dataSource: DataSource<ChangePasswordCellsConfigutator>?) {
+    func set(dataSource: TableDataSource<ChangePasswordCellsConfigutator>?) {
         dataSource?.connect(to: tableView)
     }
 

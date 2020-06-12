@@ -146,7 +146,7 @@ extension SavedContentViewController: SavedContentView {
         self.tableView.reloadData()
     }
 
-    func set(dataSource: DataSource<SavedContentCellConfigurator>?) {
+    func set(dataSource: TableDataSource<SavedContentCellConfigurator>?) {
         dataSource?.connect(to: self.tableView)
     }
 

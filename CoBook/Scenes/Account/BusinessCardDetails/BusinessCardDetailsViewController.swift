@@ -87,7 +87,7 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         tableView.tableFooterView = hideCardView
     }
 
-    func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

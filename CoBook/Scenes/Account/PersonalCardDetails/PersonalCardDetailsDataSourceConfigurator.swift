@@ -8,16 +8,16 @@
 
 import UIKit
 
-struct PersonalCardDetailsDataSourceConfigurator: CellConfiguratorType {
+struct PersonalCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
 
-    let sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>
-    let sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>
-    let userInfoCellConfigurator: CellConfigurator<CardDetailsApiModel?, PersonalCardUserInfoTableViewCell>
-    let getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>
-    let socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>
-    let titleDescriptionCellConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>
-    let postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
-    let actionTitleConfigurator: CellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
+    let sectionTitleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>
+    let sectionHeaderConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>
+    let userInfoCellConfigurator: TableCellConfigurator<CardDetailsApiModel?, PersonalCardUserInfoTableViewCell>
+    let getInTouchCellConfigurator: TableCellConfigurator<Void?, GetInTouchTableViewCell>
+    let socialListConfigurator: TableCellConfigurator<Void?, SocialsListTableViewCell>
+    let titleDescriptionCellConfigurator: TableCellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>
+    let postPreviewConfigurator: TableCellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
+    let actionTitleConfigurator: TableCellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
 
     func reuseIdentifier(for item: PersonalCardDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -78,16 +78,16 @@ extension PersonalCardDetailsPresenter {
     var dataSourceConfigurator: PersonalCardDetailsDataSourceConfigurator {
         get {
 
-            let sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            let sectionTitleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
-            let sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            let sectionHeaderConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
-            let userInfoCellConfigurator = CellConfigurator { (cell, model: CardDetailsApiModel?, tableView, indexPath) -> PersonalCardUserInfoTableViewCell in
+            let userInfoCellConfigurator = TableCellConfigurator { (cell, model: CardDetailsApiModel?, tableView, indexPath) -> PersonalCardUserInfoTableViewCell in
                 cell.delegate = self
 
                 let abbr = "\(model?.cardCreator?.firstName?.first?.uppercased() ?? "") \(model?.cardCreator?.lastName?.first?.uppercased() ?? "")"
@@ -102,12 +102,12 @@ extension PersonalCardDetailsPresenter {
                 return cell
             }
 
-            let getInTouchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
+            let getInTouchCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
                 cell.delegate = self
                 return cell
             }
 
-            let socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
+            let socialListConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
                 cell.delegate = self
                 cell.dataSource = self
                 cell.isEditable = false
@@ -115,14 +115,14 @@ extension PersonalCardDetailsPresenter {
             }
 
             // expandableDescriptionCellConfigurator
-            let titleDescriptionCellConfigurator = CellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+            let titleDescriptionCellConfigurator = TableCellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
                 cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 15)])
                 cell.desctiptionTextView.text = model?.descr
                 return cell
             }
 
             // postPreviewConfigurator
-            let postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+            let postPreviewConfigurator = TableCellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
                 cell.topConstaint.constant = 0
                 cell.separatorView.isHidden = true
                 cell.dataSourceID = model?.dataSourceID
@@ -133,7 +133,7 @@ extension PersonalCardDetailsPresenter {
             }
 
             // actionTitleConfigurator
-            let actionTitleConfigurator = CellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
+            let actionTitleConfigurator = TableCellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
                 cell.titleLabel.text = model.title
                 cell.countLabel.text = "\( model.counter ?? 0)"
                 cell.actionButton.setTitle(model.actionTitle, for: .normal)

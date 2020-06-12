@@ -12,7 +12,7 @@ import GooglePlaces
 import FirebaseDynamicLinks
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView {
-    func set(dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation)
     func reload()
     func setupEditCardView()
@@ -45,7 +45,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var albumPreviewSection: PostPreview.Section?
 
     /// View datasource
-    private var dataSource: DataSource<BusinessCardDetailsDataSourceConfigurator>?
+    private var dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?
 
     /// Flag for owner identifire
     private var isUserOwner: Bool {
@@ -67,7 +67,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
         super.init()
         
-        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource = TableDataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [
             Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
             Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.postPreview.rawValue, items: []),

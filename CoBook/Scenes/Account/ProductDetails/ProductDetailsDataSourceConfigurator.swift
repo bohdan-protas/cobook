@@ -9,14 +9,14 @@
 import UIKit
 
 
-struct ProductDetailsDataSourceConfigurator: CellConfiguratorType {
+struct ProductDetailsDataSourceConfigurator: TableCellConfiguratorType {
 
-    var galleryConfigurator: CellConfigurator<Void?, HorizontalPhotosListTableViewCell>?
-    var sectionSeparatorConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var companyHeaderConfigurator: CellConfigurator<CompanyPreviewHeaderModel, CompanyPreviewHeaderTableViewCell>?
-    var getInTouchCellConfigurator: CellConfigurator<Void?, GetInTouchTableViewCell>?
-    var descriptionConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
-    var titleHeaderConfigurator: CellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
+    var galleryConfigurator: TableCellConfigurator<Void?, HorizontalPhotosListTableViewCell>?
+    var sectionSeparatorConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var companyHeaderConfigurator: TableCellConfigurator<CompanyPreviewHeaderModel, CompanyPreviewHeaderTableViewCell>?
+    var getInTouchCellConfigurator: TableCellConfigurator<Void?, GetInTouchTableViewCell>?
+    var descriptionConfigurator: TableCellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
+    var titleHeaderConfigurator: TableCellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
 
     func reuseIdentifier(for item:  ProductDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -75,39 +75,39 @@ extension ProductDetailsPresenter {
             var configurator = ProductDetailsDataSourceConfigurator()
 
             // galleryConfigurator
-            configurator.galleryConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> HorizontalPhotosListTableViewCell in
+            configurator.galleryConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> HorizontalPhotosListTableViewCell in
                 cell.dataSource = self
                 cell.isEditable = false
                 return cell
             }
 
             // sectionHeaderConfigurator
-            configurator.sectionSeparatorConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            configurator.sectionSeparatorConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
             // companyHeaderConfigurator
-            configurator.companyHeaderConfigurator = CellConfigurator { (cell, model: CompanyPreviewHeaderModel, tableView, indexPath) -> CompanyPreviewHeaderTableViewCell in
+            configurator.companyHeaderConfigurator = TableCellConfigurator { (cell, model: CompanyPreviewHeaderModel, tableView, indexPath) -> CompanyPreviewHeaderTableViewCell in
                 cell.avatarImageView.setImage(withPath: model.image)
                 cell.nameLabel.text = model.title
                 return cell
             }
 
             // getInTouchCellConfigurator
-            configurator.getInTouchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
+            configurator.getInTouchCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
                 cell.delegate = self
                 return cell
             }
 
             // expandableDescriptionCellConfigurator
-            configurator.descriptionConfigurator = CellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+            configurator.descriptionConfigurator = TableCellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
                 cell.titleLabel.text = model?.title
                 cell.desctiptionTextView.text = model?.descr
                 return cell
             }
 
             // expandableDescriptionCellConfigurator
-            configurator.titleHeaderConfigurator = CellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+            configurator.titleHeaderConfigurator = TableCellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
                 cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 20)])
                 cell.desctiptionTextView.attributedText = NSAttributedString(string: model?.descr ?? "", attributes: [.foregroundColor: UIColor.Theme.greenDark, .font: UIFont.SFProDisplay_Regular(size: 14)])
                 cell.desctiptionTextView.isUserInteractionEnabled = false

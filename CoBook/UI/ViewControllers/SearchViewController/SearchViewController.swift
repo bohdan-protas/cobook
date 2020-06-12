@@ -114,7 +114,7 @@ extension SearchViewController: SearchView {
         tableView.reloadData()
     }
 
-    func set(dataSource: DataSource<SearchCellsConfigurator>?) {
+    func set(dataSource: TableDataSource<SearchCellsConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

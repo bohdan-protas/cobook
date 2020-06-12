@@ -43,13 +43,13 @@ enum SavedContent {
 
 }
 
-class SavedContentCellConfigurator: CellConfiguratorType {
+class SavedContentCellConfigurator: TableCellConfiguratorType {
 
-    var cardItemCellConfigurator: CellConfigurator<CardItemViewModel, ContactableCardItemTableViewCell>?
-    var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
-    var titleConfigurator: CellConfigurator<ActionTitleModel, SavedContentTitleTableViewCell>?
-    var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
+    var cardItemCellConfigurator: TableCellConfigurator<CardItemViewModel, ContactableCardItemTableViewCell>?
+    var mapCellConfigurator: TableCellConfigurator<Void?, MapTableViewCell>?
+    var titleConfigurator: TableCellConfigurator<ActionTitleModel, SavedContentTitleTableViewCell>?
+    var sectionHeaderConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var postPreviewConfigurator: TableCellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -107,7 +107,7 @@ extension SavedContentPresenter {
             let dataSourceConfigurator = SavedContentCellConfigurator()
 
             // titleConfigurator
-            dataSourceConfigurator.titleConfigurator = CellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> SavedContentTitleTableViewCell in
+            dataSourceConfigurator.titleConfigurator = TableCellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> SavedContentTitleTableViewCell in
                 cell.titleLabel.text = model.title
                 cell.counterLabel.text = "\( model.counter ?? 0)"
                 cell.actionButton.setTitle(model.actionTitle, for: .normal)
@@ -116,12 +116,12 @@ extension SavedContentPresenter {
             }
 
             // sectionHeaderConfigurator
-            dataSourceConfigurator.sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            dataSourceConfigurator.sectionHeaderConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
             // cardItemCellConfigurator
-            dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> ContactableCardItemTableViewCell in
+            dataSourceConfigurator.cardItemCellConfigurator = TableCellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> ContactableCardItemTableViewCell in
                 cell.delegate = self.view
                 let textPlaceholderImage = model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
                 cell.avatarImageView.setImage(withPath: model.avatarPath, placeholderImage: textPlaceholderImage)
@@ -141,7 +141,7 @@ extension SavedContentPresenter {
             }
 
             // mapCellConfigurator
-            dataSourceConfigurator.mapCellConfigurator = CellConfigurator { [unowned self] (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
+            dataSourceConfigurator.mapCellConfigurator = TableCellConfigurator { [unowned self] (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
                 cell.heightConstraint.constant = tableView.frame.height - 58
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
@@ -150,7 +150,7 @@ extension SavedContentPresenter {
             }
 
             //
-            dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+            dataSourceConfigurator.postPreviewConfigurator = TableCellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
                 cell.topConstaint.constant = 0
                 cell.separatorView.isHidden = true
                 cell.dataSourceID = model?.dataSourceID

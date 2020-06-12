@@ -8,16 +8,16 @@
 
 import UIKit
 
-struct CreatePersonalCardDataSourceConfigurator: CellConfiguratorType {
+struct CreatePersonalCardDataSourceConfigurator: TableCellConfiguratorType {
 
-    var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
-    var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
-    var actionFieldConfigurator: CellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
-    var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
-    var socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>?
-    var interestsListConfigurator: CellConfigurator<Void?, TagsListTableViewCell>?
-    var avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
+    var sectionTitleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>?
+    var sectionHeaderConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var textFieldConfigurator: TableCellConfigurator<TextFieldModel, TextFieldTableViewCell>?
+    var actionFieldConfigurator: TableCellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
+    var textViewConfigurator: TableCellConfigurator<TextFieldModel, TextViewTableViewCell>?
+    var socialListConfigurator: TableCellConfigurator<Void?, SocialsListTableViewCell>?
+    var interestsListConfigurator: TableCellConfigurator<Void?, TagsListTableViewCell>?
+    var avatarManagmentConfigurator: TableCellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
 
     func reuseIdentifier(for item: CreatePersonalCard.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -79,18 +79,18 @@ extension CreatePersonalCardPresenter {
             var viewDataSourceConfigurator = CreatePersonalCardDataSourceConfigurator()
 
             // sectionTitleConfigurator
-            viewDataSourceConfigurator.sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            viewDataSourceConfigurator.sectionTitleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
             // sectionHeaderConfigurator
-            viewDataSourceConfigurator.sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            viewDataSourceConfigurator.sectionHeaderConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
             // textFieldConfigurator
-            viewDataSourceConfigurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            viewDataSourceConfigurator.textFieldConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.textField.text = model.text
                 cell.textKeyPath = model.associatedKeyPath
@@ -100,7 +100,7 @@ extension CreatePersonalCardPresenter {
             }
 
             // textViewConfigurator
-            viewDataSourceConfigurator.textViewConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
+            viewDataSourceConfigurator.textViewConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
                 cell.delegate = self
                 cell.textView.text = model.text
                 cell.textView.placeholder = model.placeholder
@@ -109,7 +109,7 @@ extension CreatePersonalCardPresenter {
             }
 
             // actionFieldConfigurator
-            viewDataSourceConfigurator.actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            viewDataSourceConfigurator.actionFieldConfigurator = TableCellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.textField.text = model.text
                 cell.textField.placeholder = model.placeholder
@@ -121,7 +121,7 @@ extension CreatePersonalCardPresenter {
             }
 
             // socialListConfigurator
-            viewDataSourceConfigurator.socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
+            viewDataSourceConfigurator.socialListConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
                 cell.delegate = self
                 cell.dataSource = self
                 cell.isEditable = true
@@ -129,14 +129,14 @@ extension CreatePersonalCardPresenter {
             }
 
             // interestsListConfigurator
-            viewDataSourceConfigurator.interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> TagsListTableViewCell in
+            viewDataSourceConfigurator.interestsListConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> TagsListTableViewCell in
                 cell.dataSource = self
                 cell.delegate = self
                 return cell
             }
 
             // avatarManagmentConfigurator
-            viewDataSourceConfigurator.avatarManagmentConfigurator = CellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
+            viewDataSourceConfigurator.avatarManagmentConfigurator = TableCellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
                 cell.delegate = self.view
                 cell.set(sourceType: .personalCard)
                 if let imageData = model.imageData, let image = UIImage(data: imageData) {

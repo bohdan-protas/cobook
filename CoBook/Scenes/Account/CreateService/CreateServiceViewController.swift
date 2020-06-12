@@ -70,7 +70,7 @@ class CreateServiceViewController: BaseViewController, CreateServiceView {
 
     // MARK: - CreateServiceView
 
-    func set(dataSource: DataSource<CreateServiceDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<CreateServiceDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

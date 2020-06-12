@@ -11,7 +11,7 @@ import FirebaseDynamicLinks
 
 protocol PersonalCardDetailsView: class, AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, ShareableView {
     func setupLayout()
-    func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<PersonalCardDetailsDataSourceConfigurator>?)
     func reload()
     func setupEditView()
     func setupEmptyBottomView()
@@ -27,7 +27,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
 
     private var personalCardId: Int
     private var cardDetails: CardDetailsApiModel?
-    private var dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?
+    private var dataSource: TableDataSource<PersonalCardDetailsDataSourceConfigurator>?
     private var albumPreviewSection: PostPreview.Section?
 
     /// Flag for owner identifire
@@ -40,7 +40,7 @@ class PersonalCardDetailsPresenter: NSObject, BasePresenter {
     init(id: Int) {
         self.personalCardId = id
         super.init()
-        self.dataSource = DataSource(configurator: self.dataSourceConfigurator)
+        self.dataSource = TableDataSource(configurator: self.dataSourceConfigurator)
     }
 
     // MARK: - Public

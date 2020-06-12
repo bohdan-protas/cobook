@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectAlbumView: AlertDisplayableView, LoadDisplayableView, NavigableView, SelectAlbumTableViewCellDelegate {
-    func set(albums: DataSource<SelectAlbumCellsConfigurator>?)
+    func set(albums: TableDataSource<SelectAlbumCellsConfigurator>?)
     func goToCreateAlbum(presenter: CreateAlbumPresenter)
     func reload()
 }
@@ -26,7 +26,7 @@ class SelectAlbumPresenter: BasePresenter {
     // View data source
     private var cardID: Int
     private var selectedAlbumID: Int?
-    private var albumsDataSource: DataSource<SelectAlbumCellsConfigurator>?
+    private var albumsDataSource: TableDataSource<SelectAlbumCellsConfigurator>?
 
     // delegation object
     weak var delegate: SelectAlbumDelegate?
@@ -38,7 +38,7 @@ class SelectAlbumPresenter: BasePresenter {
         self.selectedAlbumID = selectedAlbumID
 
         var photosDataSourceConfigurator = SelectAlbumCellsConfigurator()
-        photosDataSourceConfigurator.selectAlbumCellConfigurator = CellConfigurator { [weak self] (cell, model: PostPreview.Item.Model, tableView, indexPath) -> SelectAlbumTableViewCell in
+        photosDataSourceConfigurator.selectAlbumCellConfigurator = TableCellConfigurator { [weak self] (cell, model: PostPreview.Item.Model, tableView, indexPath) -> SelectAlbumTableViewCell in
             cell.delegate = self?.view
             cell.isSelected = model.isSelected
             cell.albumTitleLabel.text = model.title
@@ -46,7 +46,7 @@ class SelectAlbumPresenter: BasePresenter {
             return cell
         }
 
-        self.albumsDataSource = DataSource(configurator: photosDataSourceConfigurator)
+        self.albumsDataSource = TableDataSource(configurator: photosDataSourceConfigurator)
     }
 
     // MARK: - BasePresenter

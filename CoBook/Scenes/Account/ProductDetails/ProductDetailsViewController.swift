@@ -60,7 +60,7 @@ class ProductDetailsViewController: BaseViewController, ProductDetailsView {
         tableView.reloadData()
     }
 
-    func set(dataSource: DataSource<ProductDetailsDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<ProductDetailsDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

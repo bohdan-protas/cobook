@@ -9,13 +9,13 @@
 import UIKit
 
 
-struct AccountDataSourceConfigurator: CellConfiguratorType {
+struct AccountDataSourceConfigurator: TableCellConfiguratorType {
     
-    let sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>
-    let sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>
-    let accountItemCellConfigurator: CellConfigurator<Account.AccountMenuItemModel, AccountItemTableViewCell>
-    let accountHeaderCellConfigurator: CellConfigurator<Account.UserInfoHeaderModel?, AccountHeaderTableViewCell>
-    let cardPreviewConfigurator: CellConfigurator<CardPreviewModel, CardPreviewTableViewCell>
+    let sectionTitleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>
+    let sectionHeaderConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>
+    let accountItemCellConfigurator: TableCellConfigurator<Account.AccountMenuItemModel, AccountItemTableViewCell>
+    let accountHeaderCellConfigurator: TableCellConfigurator<Account.UserInfoHeaderModel?, AccountHeaderTableViewCell>
+    let cardPreviewConfigurator: TableCellConfigurator<CardPreviewModel, CardPreviewTableViewCell>
 
     func reuseIdentifier(for item: Account.Item, indexPath: IndexPath) -> String {
         switch item {
@@ -64,22 +64,22 @@ extension AccountPresenter {
     var dataSourceConfigurator: AccountDataSourceConfigurator {
 
         get {
-            let sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            let sectionTitleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
-            let sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            let sectionHeaderConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
-            let  accountItemCellConfigurator = CellConfigurator { (cell, model: Account.AccountMenuItemModel, tableView, indexPath) -> AccountItemTableViewCell in
+            let  accountItemCellConfigurator = TableCellConfigurator { (cell, model: Account.AccountMenuItemModel, tableView, indexPath) -> AccountItemTableViewCell in
                 cell.titleLabel.text = model.title
                 cell.typeImageView.image = model.image
                 return cell
             }
 
-            let accountHeaderCellConfigurator = CellConfigurator { (cell, model: Account.UserInfoHeaderModel?, tableView, indexPath) -> AccountHeaderTableViewCell in
+            let accountHeaderCellConfigurator = TableCellConfigurator { (cell, model: Account.UserInfoHeaderModel?, tableView, indexPath) -> AccountHeaderTableViewCell in
                 cell.delegate = self.view
                 let nameAbbr = "\(model?.firstName?.first?.uppercased() ?? "") \(model?.lastName?.first?.uppercased() ?? "")"
                 let textPlaceholderImage = nameAbbr.image(size: cell.avatarTextPlaceholderImageView.frame.size)
@@ -90,7 +90,7 @@ extension AccountPresenter {
                 return cell
             }
 
-            let cardPreviewConfigurator = CellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
+            let cardPreviewConfigurator = TableCellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
                 let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
                 let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
 

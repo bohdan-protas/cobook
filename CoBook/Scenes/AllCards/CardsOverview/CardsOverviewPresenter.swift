@@ -12,10 +12,10 @@ import GoogleMaps
 
 protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardItemTableViewCellDelegate, MapTableViewCellDelegate {
     var isSearchActived: Bool { get }
-    func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reload(section: CardsOverview.SectionAccessoryIndex)
     func reload()
-    func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?)
+    func set(searchDataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reloadSearch(resultText: String)
 
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
@@ -39,8 +39,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     var barItems: [BarItem]
     var selectedBarItem: BarItem?
 
-    private var dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
-    private var searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?
+    private var dataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?
+    private var searchDataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?
 
     /// cards data source
     private var searchCards: [CardItemViewModel] = []
@@ -69,13 +69,13 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         super.init()
 
         // setup feed datasource
-        dataSource = DataSource()
+        dataSource = TableDataSource()
         dataSource?.sections = [Section<CardsOverview.Items>(accessoryIndex: CardsOverview.SectionAccessoryIndex.posts.rawValue, items: []),
                                 Section<CardsOverview.Items>(accessoryIndex: CardsOverview.SectionAccessoryIndex.cards.rawValue, items: [])]
         dataSource?.configurator = dataSourceConfigurator
 
         // setup search datasource
-        searchDataSource = DataSource(configurator: dataSourceConfigurator)
+        searchDataSource = TableDataSource(configurator: dataSourceConfigurator)
         searchDataSource?.sections = [Section<CardsOverview.Items>(accessoryIndex: CardsOverview.SectionAccessoryIndex.posts.rawValue, items: [])]
     }
 

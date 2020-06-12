@@ -25,12 +25,12 @@ enum UpdateAccount {
     }
 }
 
-struct UpdateAccountCellsConfigutator: CellConfiguratorType {
+struct UpdateAccountCellsConfigutator: TableCellConfiguratorType {
 
-    var titleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
-    var sectionSeparatorConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
-    var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
+    var titleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>?
+    var sectionSeparatorConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var avatarManagmentConfigurator: TableCellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
+    var textFieldConfigurator: TableCellConfigurator<TextFieldModel, TextFieldTableViewCell>?
 
     func reuseIdentifier(for item: UpdateAccount.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -80,18 +80,18 @@ extension UpdateAccountPresenter {
             var configurator = UpdateAccountCellsConfigutator()
 
             // sectionTitleConfigurator
-            configurator.titleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            configurator.titleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
             // sectionHeaderConfigurator
-            configurator.sectionSeparatorConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            configurator.sectionSeparatorConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
             // textFieldConfigurator
-            configurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            configurator.textFieldConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.textField.text = model.text
                 cell.textKeyPath = model.associatedKeyPath
@@ -101,7 +101,7 @@ extension UpdateAccountPresenter {
             }
 
             // avatarManagmentConfigurator
-            configurator.avatarManagmentConfigurator = CellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
+            configurator.avatarManagmentConfigurator = TableCellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
                 cell.delegate = self.view
                 cell.set(sourceType: .personalCard)
                 if let imageData = model.imageData, let image = UIImage(data: imageData) {

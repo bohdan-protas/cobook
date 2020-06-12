@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDynamicLinks
 
 protocol AccountView: AlertDisplayableView, LoadDisplayableView, NavigableView, ShareableView, AccountHeaderTableViewCellDelegate {
-    func set(dataSource: DataSource<AccountDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<AccountDataSourceConfigurator>?)
     func reload()
 }
 
@@ -20,7 +20,7 @@ class AccountPresenter: BasePresenter {
     weak var view: AccountView?
 
     /// view table data source
-    private var dataSource: DataSource<AccountDataSourceConfigurator>?
+    private var dataSource: TableDataSource<AccountDataSourceConfigurator>?
     private var personalCard: CardPreviewModel?
     private var businessCardsList = [CardPreviewModel]()
 
@@ -31,7 +31,7 @@ class AccountPresenter: BasePresenter {
 
     func attachView(_ view: AccountView) {
         self.view = view
-        self.dataSource = DataSource(sections: [], configurator: dataSourceConfigurator)
+        self.dataSource = TableDataSource(sections: [], configurator: dataSourceConfigurator)
         view.set(dataSource: dataSource)
     }
 

@@ -17,7 +17,7 @@ class SearchPracticiesPresenter: SearchPresenter {
 
     weak var view: SearchView?
     weak var delegate: SearchPracticiesDelegate?
-    private var viewDataSource: DataSource<SearchCellsConfigurator>?
+    private var viewDataSource: TableDataSource<SearchCellsConfigurator>?
 
     private var practicies: [PracticeModel] = []
     private var filteredPracticies: [PracticeModel] = []
@@ -32,12 +32,12 @@ class SearchPracticiesPresenter: SearchPresenter {
         self.isMultiselectEnabled = isMultiselectEnabled
         self.selectedPracticies = selectedPracticies
         var configurator = SearchCellsConfigurator()
-        configurator.practiceConfigurator = CellConfigurator(configurator: { (cell, model: PracticeModel, tableView, index) -> FilterItemTableViewCell in
+        configurator.practiceConfigurator = TableCellConfigurator(configurator: { (cell, model: PracticeModel, tableView, index) -> FilterItemTableViewCell in
             cell.titleLabel?.text = model.title
             cell.isSelected = model.isSelected
             return cell
         })
-        self.viewDataSource = DataSource(sections: [], configurator: configurator)
+        self.viewDataSource = TableDataSource(sections: [], configurator: configurator)
     }
 
     func setup() {

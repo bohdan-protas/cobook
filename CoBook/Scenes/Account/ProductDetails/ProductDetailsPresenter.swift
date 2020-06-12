@@ -10,7 +10,7 @@ import Foundation
 
 protocol ProductDetailsView: class, AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
     func reload()
-    func set(dataSource: DataSource<ProductDetailsDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<ProductDetailsDataSourceConfigurator>?)
     func setupEmptyCardView()
     func setupEditCardView()
 
@@ -30,7 +30,7 @@ class ProductDetailsPresenter: NSObject, BasePresenter {
     private var isUserOwner: Bool
 
     private var details: ProductDetails.DetailsModel
-    private var dataSource: DataSource<ProductDetailsDataSourceConfigurator>?
+    private var dataSource: TableDataSource<ProductDetailsDataSourceConfigurator>?
 
     // MARK: - Object Life Cycle
 
@@ -43,7 +43,7 @@ class ProductDetailsPresenter: NSObject, BasePresenter {
         self.details = ProductDetails.DetailsModel()
 
         super.init()
-        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource = TableDataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [Section<ProductDetails.Cell>(accessoryIndex: ProductDetails.SectionAccessoryIndex.header.rawValue, items: []),
                                      Section<ProductDetails.Cell>(accessoryIndex: ProductDetails.SectionAccessoryIndex.description.rawValue, items: [])]
     }

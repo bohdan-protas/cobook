@@ -19,7 +19,7 @@ class AccountViewController: BaseViewController {
 
     // MARK: Properties
     var presenter = AccountPresenter()
-    var dataSource: DataSource<AccountDataSourceConfigurator>?
+    var dataSource: TableDataSource<AccountDataSourceConfigurator>?
 
     /// pull refresh controll
     lazy var refreshControl: UIRefreshControl = {
@@ -84,7 +84,7 @@ extension AccountViewController: AccountView {
         refreshControl.endRefreshing()
     }
 
-    func set(dataSource: DataSource<AccountDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<AccountDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

@@ -53,7 +53,7 @@ class UpdateAccountViewController: BaseViewController {
 
 extension UpdateAccountViewController: UpdateAccountView {
 
-    func set(dataSource: DataSource<UpdateAccountCellsConfigutator>?) {
+    func set(dataSource: TableDataSource<UpdateAccountCellsConfigutator>?) {
         dataSource?.connect(to: tableView)
     }
 
