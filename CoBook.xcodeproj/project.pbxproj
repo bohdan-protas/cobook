@@ -1361,7 +1361,6 @@
 				B823E8A2243F590200EE1830 /* PermissionService.swift */,
 				B824AD7F2445FAE700410C23 /* ImagePicker.swift */,
 				B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */,
-				B825FC41247ED02E00DB035D /* PaginationPage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1369,6 +1368,7 @@
 		B826B0F323F45ED8009041DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B825FC41247ED02E00DB035D /* PaginationPage.swift */,
 				B84B94F224033B030007EB60 /* Api */,
 				B8359CD7241ECE570080263E /* View */,
 			);
