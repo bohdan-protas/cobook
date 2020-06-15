@@ -87,7 +87,7 @@ extension ArticleDetailsViewController: ArticleDetailsView {
         self.navigationItem.title = title
     }
 
-    func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?) {
+    func set(dataSource: TableDataSource<ArticleDetailsCellConfigutator>?) {
         dataSource?.connect(to: tableView)
     }
 

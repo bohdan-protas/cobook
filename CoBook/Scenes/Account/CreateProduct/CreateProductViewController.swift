@@ -75,7 +75,7 @@ class CreateProductViewController: BaseViewController, CreateProductView {
         tableView.reloadData()
     }
 
-    func set(dataSource: DataSource<CreateProductDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<CreateProductDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

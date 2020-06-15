@@ -28,11 +28,13 @@ enum SignUpEndpoint: Endpoint {
     }
 
     // MARK: - HTTPMethod
+
     var method: HTTPMethod {
         return .post
     }
 
     // MARK: - Path
+
     var path: String {
         switch self {
         case .initialize:
@@ -47,6 +49,7 @@ enum SignUpEndpoint: Endpoint {
     }
 
     // MARK: - Parameters
+
     var bodyParameters: Parameters? {
         switch self {
 
@@ -69,8 +72,6 @@ enum SignUpEndpoint: Endpoint {
             return [
                 Constants.API.ParameterKey.token: accessToken,
             ]
-
-
         }
     }
 

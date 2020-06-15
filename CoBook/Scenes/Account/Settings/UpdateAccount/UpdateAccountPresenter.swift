@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol UpdateAccountView: LoadDisplayableView, AlertDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate {
-    func set(dataSource: DataSource<UpdateAccountCellsConfigutator>?)
+    func set(dataSource: TableDataSource<UpdateAccountCellsConfigutator>?)
     func reload()
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()
@@ -26,7 +26,7 @@ class UpdateAccountPresenter: BasePresenter {
 
     /// Managed view
     weak var view: UpdateAccountView?
-    private var viewDataSource: DataSource<UpdateAccountCellsConfigutator>?
+    private var viewDataSource: TableDataSource<UpdateAccountCellsConfigutator>?
 
     var parametersModel: UpdateAccount.Details {
         didSet {
@@ -49,7 +49,7 @@ class UpdateAccountPresenter: BasePresenter {
             avatar: AppStorage.User.Profile?.avatar,
             email: AppStorage.User.Profile?.email.address
         )
-        viewDataSource = DataSource(sections: [], configurator: self.dataSourceConfigurator)
+        viewDataSource = TableDataSource(sections: [], configurator: self.dataSourceConfigurator)
     }
 
     // MARK: - Public

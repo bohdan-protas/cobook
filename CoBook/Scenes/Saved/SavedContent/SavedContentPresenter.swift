@@ -10,7 +10,7 @@ import Foundation
 import GoogleMaps
 
 protocol SavedContentView: LoadDisplayableView, AlertDisplayableView, ContactableCardItemTableViewCellDelegate, MapTableViewCellDelegate {
-    func set(dataSource: DataSource<SavedContentCellConfigurator>?)
+    func set(dataSource: TableDataSource<SavedContentCellConfigurator>?)
     func reload(section: SavedContent.SectionAccessoryIndex)
     func reloadItemAt(indexPath: IndexPath)
     func reload()
@@ -26,7 +26,7 @@ class SavedContentPresenter: BasePresenter {
 
     // Managed view
     weak var view: SavedContentView?
-    private var dataSource: DataSource<SavedContentCellConfigurator>?
+    private var dataSource: TableDataSource<SavedContentCellConfigurator>?
 
     // cards data source
     private var cardsTotalCount: Int = 0
@@ -44,7 +44,7 @@ class SavedContentPresenter: BasePresenter {
     // MARK: - Lifecycle
 
     init() {
-        dataSource = DataSource()
+        dataSource = TableDataSource()
         dataSource?.sections = [Section<SavedContent.Cell>(accessoryIndex: SavedContent.SectionAccessoryIndex.post.rawValue, items: []),
                                 Section<SavedContent.Cell>(accessoryIndex: CardsOverview.SectionAccessoryIndex.cards.rawValue, items: [])]
         dataSource?.configurator = dataSourceConfigurator

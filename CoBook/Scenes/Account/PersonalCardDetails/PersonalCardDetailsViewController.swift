@@ -73,7 +73,7 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         tableView.tableFooterView = empeyBottomCardView
     }
 
-    func set(dataSource: DataSource<PersonalCardDetailsDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<PersonalCardDetailsDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

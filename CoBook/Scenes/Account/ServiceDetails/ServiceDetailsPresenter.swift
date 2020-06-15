@@ -11,7 +11,7 @@ import Foundation
 
 protocol ServiceDetailsView: class, AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView {
     func reload()
-    func set(dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<ServiceDetailsDataSourceConfigurator>?)
     func setupEmptyCardView()
     func setupEditCardView()
 
@@ -31,7 +31,7 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
     private var isUserOwner: Bool
 
     private var details: Service.DetailsViewModel
-    private var dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?
+    private var dataSource: TableDataSource<ServiceDetailsDataSourceConfigurator>?
 
     // MARK: - Object Life Cycle
 
@@ -44,7 +44,7 @@ class ServiceDetailsPresenter: NSObject, BasePresenter {
         self.details = Service.DetailsViewModel()
 
         super.init()
-        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource = TableDataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [Section<Service.DetailsCell>(accessoryIndex: Service.DetailsSectionAccessoryIndex.header.rawValue, items: []),
                                      Section<Service.DetailsCell>(accessoryIndex: Service.DetailsSectionAccessoryIndex.description.rawValue, items: [])]
     }

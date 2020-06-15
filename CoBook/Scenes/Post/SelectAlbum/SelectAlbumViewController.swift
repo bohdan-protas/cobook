@@ -50,7 +50,7 @@ extension SelectAlbumViewController: SelectAlbumView {
         }
     }
 
-    func set(albums: DataSource<SelectAlbumCellsConfigurator>?) {
+    func set(albums: TableDataSource<SelectAlbumCellsConfigurator>?) {
         albums?.connect(to: tableView)
         tableView.reloadData()
     }

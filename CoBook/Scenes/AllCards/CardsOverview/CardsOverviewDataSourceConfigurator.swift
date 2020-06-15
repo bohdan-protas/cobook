@@ -8,11 +8,11 @@
 
 import UIKit
 
-class CardsOverviewViewDataSourceConfigurator: CellConfiguratorType {
+class CardsOverviewViewDataSourceConfigurator: TableCellConfiguratorType {
 
-    var cardItemCellConfigurator: CellConfigurator<CardItemViewModel, CardItemTableViewCell>?
-    var mapCellConfigurator: CellConfigurator<Void?, MapTableViewCell>?
-    var postPreviewConfigurator: CellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
+    var cardItemCellConfigurator: TableCellConfigurator<CardItemViewModel, CardItemTableViewCell>?
+    var mapCellConfigurator: TableCellConfigurator<Void?, MapTableViewCell>?
+    var postPreviewConfigurator: TableCellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
 
@@ -59,7 +59,7 @@ extension CardsOverviewViewPresenter {
             let dataSourceConfigurator = CardsOverviewViewDataSourceConfigurator()
 
             // cardItemCellConfigurator
-            dataSourceConfigurator.cardItemCellConfigurator = CellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> CardItemTableViewCell in
+            dataSourceConfigurator.cardItemCellConfigurator = TableCellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> CardItemTableViewCell in
                 cell.delegate = self.view
                 cell.avatarImageView.setImage(withPath: model.avatarPath,
                                               placeholderImage: model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size))
@@ -78,7 +78,7 @@ extension CardsOverviewViewPresenter {
             }
 
             // mapCellConfigurator
-            dataSourceConfigurator.mapCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
+            dataSourceConfigurator.mapCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
                 cell.heightConstraint.constant = tableView.frame.height - 58
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
@@ -86,7 +86,7 @@ extension CardsOverviewViewPresenter {
                 return cell
             }
 
-            dataSourceConfigurator.postPreviewConfigurator = CellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+            dataSourceConfigurator.postPreviewConfigurator = TableCellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
                 cell.dataSource = self

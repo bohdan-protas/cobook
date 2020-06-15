@@ -61,7 +61,7 @@ class ServiceDetailsViewController: BaseViewController, ServiceDetailsView {
         tableView.reloadData()
     }
 
-    func set(dataSource: DataSource<ServiceDetailsDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<ServiceDetailsDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

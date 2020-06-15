@@ -10,7 +10,7 @@ import UIKit
 
 protocol CreateProductView: AlertDisplayableView, HorizontalPhotosListDelegate, LoadDisplayableView, NavigableView {
     func reload()
-    func set(dataSource: DataSource<CreateProductDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<CreateProductDataSourceConfigurator>?)
     func setupSaveView()
     func setupUpdateView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
@@ -28,7 +28,7 @@ class CreateProductPresenter: NSObject, BasePresenter {
     weak var delegate: CreateProductPresenterDelegate?
 
     /// data source
-    private var dataSource: DataSource<CreateProductDataSourceConfigurator>?
+    private var dataSource: TableDataSource<CreateProductDataSourceConfigurator>?
     private var showRoomNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
     private var details: CreateProduct.DetailsModel {
         didSet {
@@ -185,7 +185,7 @@ extension CreateProductPresenter {
 private extension CreateProductPresenter {
 
     func setupDataSource() {
-        self.dataSource = DataSource(configurator: dataSouceConfigurator)
+        self.dataSource = TableDataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [Section<CreateProduct.Cell>(accessoryIndex: CreateProduct.SectionAccessoryIndex.header.rawValue, items: []),
                                      Section<CreateProduct.Cell>(accessoryIndex: CreateProduct.SectionAccessoryIndex.contacts.rawValue, items: []),
                                      Section<CreateProduct.Cell>(accessoryIndex: CreateProduct.SectionAccessoryIndex.description.rawValue, items: [])]

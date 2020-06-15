@@ -9,7 +9,7 @@
 import UIKit
 
 
-class DataSource<Configurator: CellConfiguratorType>: NSObject, UITableViewDataSource {
+class TableDataSource<Configurator: TableCellConfiguratorType>: NSObject, UITableViewDataSource {
 
     var sections: [Section<Configurator.Item>] = []
     var configurator: Configurator?
@@ -44,7 +44,7 @@ class DataSource<Configurator: CellConfiguratorType>: NSObject, UITableViewDataS
 
 }
 
-extension DataSource {
+extension TableDataSource {
     subscript(cardsOverviewIndex: CardsOverview.SectionAccessoryIndex) -> Section<Configurator.Item> {
         get {
             return sections[cardsOverviewIndex.rawValue]
@@ -56,7 +56,7 @@ extension DataSource {
     }
 }
 
-extension DataSource {
+extension TableDataSource {
     subscript(businessCardDetailsIndex: BusinessCardDetails.SectionAccessoryIndex) -> Section<Configurator.Item> {
         get {
             return sections[businessCardDetailsIndex.rawValue]
@@ -68,7 +68,7 @@ extension DataSource {
     }
 }
 
-extension DataSource {
+extension TableDataSource {
     subscript(createServiceIndex: Service.CreationSectionAccessoryIndex) -> Section<Configurator.Item> {
          get {
              return sections[createServiceIndex.rawValue]
@@ -80,7 +80,7 @@ extension DataSource {
      }
 }
 
-extension DataSource {
+extension TableDataSource {
     subscript(serviceDetailsIndex: Service.DetailsSectionAccessoryIndex) -> Section<Configurator.Item> {
          get {
              return sections[serviceDetailsIndex.rawValue]

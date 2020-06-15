@@ -8,19 +8,19 @@
 
 import UIKit
 
-struct CreateBusinessCardDataSourceConfigurator: CellConfiguratorType {
+struct CreateBusinessCardDataSourceConfigurator: TableCellConfiguratorType {
 
-    var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
-    var sectionHeaderConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
-    var actionFieldConfigurator: CellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
-    var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
-    var socialListConfigurator: CellConfigurator<Void?, SocialsListTableViewCell>?
-    var interestsListConfigurator: CellConfigurator<Void?, TagsListTableViewCell>?
-    var avatarManagmentConfigurator: CellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
-    var backgroundImageManagmentConfigurator: CellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>?
-    var employersSearchCellConfigurator: CellConfigurator<Void?, SearchTableViewCell>?
-    var employersListCellConfigurator: CellConfigurator<Void?, EmployersPreviewHorizontalListTableViewCell>?
+    var sectionTitleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>?
+    var sectionHeaderConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var textFieldConfigurator: TableCellConfigurator<TextFieldModel, TextFieldTableViewCell>?
+    var actionFieldConfigurator: TableCellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
+    var textViewConfigurator: TableCellConfigurator<TextFieldModel, TextViewTableViewCell>?
+    var socialListConfigurator: TableCellConfigurator<Void?, SocialsListTableViewCell>?
+    var interestsListConfigurator: TableCellConfigurator<Void?, TagsListTableViewCell>?
+    var avatarManagmentConfigurator: TableCellConfigurator<CardAvatarManagmentCellModel, CardAvatarPhotoManagmentTableViewCell>?
+    var backgroundImageManagmentConfigurator: TableCellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>?
+    var employersSearchCellConfigurator: TableCellConfigurator<Void?, SearchTableViewCell>?
+    var employersListCellConfigurator: TableCellConfigurator<Void?, EmployersPreviewHorizontalListTableViewCell>?
 
     // MARK: - CellConfiguratorType
 
@@ -101,18 +101,18 @@ extension CreateBusinessCardPresenter {
             var viewDataSourceConfigurator = CreateBusinessCardDataSourceConfigurator()
 
             // sectionTitleConfigurator
-            viewDataSourceConfigurator.sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            viewDataSourceConfigurator.sectionTitleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
             // sectionHeaderConfigurator
-            viewDataSourceConfigurator.sectionHeaderConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            viewDataSourceConfigurator.sectionHeaderConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
             // textFieldConfigurator
-            viewDataSourceConfigurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            viewDataSourceConfigurator.textFieldConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.textField.text = model.text
                 cell.textKeyPath = model.associatedKeyPath
@@ -122,7 +122,7 @@ extension CreateBusinessCardPresenter {
             }
 
             // textViewConfigurator
-            viewDataSourceConfigurator.textViewConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
+            viewDataSourceConfigurator.textViewConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
                 cell.delegate = self
                 cell.textView.text = model.text
                 cell.textView.placeholder = model.placeholder
@@ -131,7 +131,7 @@ extension CreateBusinessCardPresenter {
             }
 
             // actionFieldConfigurator
-            viewDataSourceConfigurator.actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            viewDataSourceConfigurator.actionFieldConfigurator = TableCellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.dataSource = self
                 cell.textField.text = model.text
@@ -151,7 +151,7 @@ extension CreateBusinessCardPresenter {
             }
 
             // socialListConfigurator
-            viewDataSourceConfigurator.socialListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
+            viewDataSourceConfigurator.socialListConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
                 cell.delegate = self
                 cell.dataSource = self
                 cell.isEditable = true
@@ -159,14 +159,14 @@ extension CreateBusinessCardPresenter {
             }
 
             // interestsListConfigurator
-            viewDataSourceConfigurator.interestsListConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> TagsListTableViewCell in
+            viewDataSourceConfigurator.interestsListConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> TagsListTableViewCell in
                 cell.dataSource = self
                 cell.delegate = self
                 return cell
             }
 
             // avatarManagmentConfigurator
-            viewDataSourceConfigurator.avatarManagmentConfigurator = CellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
+            viewDataSourceConfigurator.avatarManagmentConfigurator = TableCellConfigurator { (cell, model: CardAvatarManagmentCellModel, tableView, indexPath) -> CardAvatarPhotoManagmentTableViewCell in
                 cell.delegate = self.view
                 cell.set(sourceType: .businessCard)
                 if let imageData = model.imageData, let image = UIImage(data: imageData) {
@@ -179,7 +179,7 @@ extension CreateBusinessCardPresenter {
             }
 
             // backgroundImageManagmentConfigurator
-            viewDataSourceConfigurator.backgroundImageManagmentConfigurator = CellConfigurator { (cell, model: BackgroundManagmentImageCellModel, tableView, indexPath) -> CardBackgroundManagmentTableViewCell in
+            viewDataSourceConfigurator.backgroundImageManagmentConfigurator = TableCellConfigurator { (cell, model: BackgroundManagmentImageCellModel, tableView, indexPath) -> CardBackgroundManagmentTableViewCell in
                 cell.delegate = self.view
                 if let imageData = model.imageData, let image = UIImage(data: imageData) {
                     cell.set(image: image)
@@ -190,13 +190,13 @@ extension CreateBusinessCardPresenter {
             }
 
             // employersSearchCellConfigurator
-            viewDataSourceConfigurator.employersSearchCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SearchTableViewCell in
+            viewDataSourceConfigurator.employersSearchCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SearchTableViewCell in
                 cell.delegate = self
                 return cell
             }
 
             // employersListCellConfigurator
-            viewDataSourceConfigurator.employersListCellConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> EmployersPreviewHorizontalListTableViewCell in
+            viewDataSourceConfigurator.employersListCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> EmployersPreviewHorizontalListTableViewCell in
                 cell.dataSource = self
                 cell.delegate = self
                 cell.collectionView.reloadData()

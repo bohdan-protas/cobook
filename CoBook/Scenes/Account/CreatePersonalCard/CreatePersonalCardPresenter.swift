@@ -13,7 +13,7 @@ import Alamofire
 protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
 
-    func set(dataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?)
+    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?)
     func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()
@@ -30,7 +30,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
     // MARK: - Properties
 
     weak var view: CreatePersonalCardView?
-    private var viewDataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?
+    private var viewDataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?
 
     var personalCardDetailsModel: CreatePersonalCard.DetailsModel {
         didSet {
@@ -60,7 +60,7 @@ class CreatePersonalCardPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: CreatePersonalCardView) {
         self.view = view
-        self.viewDataSource = DataSource(configurator: dataSourceConfigurator)
+        self.viewDataSource = TableDataSource(configurator: dataSourceConfigurator)
         view.set(dataSource: viewDataSource)
     }
 

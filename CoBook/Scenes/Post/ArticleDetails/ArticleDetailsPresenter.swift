@@ -11,7 +11,7 @@ import FirebaseDynamicLinks
 
 protocol ArticleDetailsView: class, LoadDisplayableView, AlertDisplayableView, NavigableView, ShareableView {
     func reload()
-    func set(dataSource: DataSource<ArticleDetailsCellConfigutator>?)
+    func set(dataSource: TableDataSource<ArticleDetailsCellConfigutator>?)
     func set(title: String?)
     func setPlaceholderView(_ visible: Bool)
     func goToEditArticle(presenter: CreateArticlePresenter)
@@ -27,7 +27,7 @@ class ArticleDetailsPresenter: BasePresenter {
     private var articleDetails: ArticleDetailsAPIModel?
     private var articles: [ArticlePreviewAPIModel]?
 
-    private var dataSource: DataSource<ArticleDetailsCellConfigutator>?
+    private var dataSource: TableDataSource<ArticleDetailsCellConfigutator>?
     private var albumID: Int?
     private var articleID: Int?
 
@@ -46,7 +46,7 @@ class ArticleDetailsPresenter: BasePresenter {
     init(albumID: Int?, articleID: Int?) {
         self.albumID = albumID
         self.articleID = articleID
-        self.dataSource = DataSource(configurator: dataSourceConfigurator)
+        self.dataSource = TableDataSource(configurator: dataSourceConfigurator)
         self.dataSource?.sections = [
             Section<ArticleDetails.Cell>(accessoryIndex: ArticleDetails.SectionAccessory.details.rawValue, items: []),
             Section<ArticleDetails.Cell>(accessoryIndex: ArticleDetails.SectionAccessory.list.rawValue, items: [])

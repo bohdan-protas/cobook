@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CellConfiguratorType {
+protocol TableCellConfiguratorType {
     associatedtype Item
     associatedtype Cell: UITableViewCell
 
@@ -17,7 +17,7 @@ protocol CellConfiguratorType {
     func registerCells(in tableView: UITableView)
 }
 
-struct CellConfigurator<Item, Cell: UITableViewCell>: CellConfiguratorType {
+struct TableCellConfigurator<Item, Cell: UITableViewCell>: TableCellConfiguratorType {
     typealias Configurator = (Cell, Item, UITableView, IndexPath) -> Cell
 
     let configurator: Configurator

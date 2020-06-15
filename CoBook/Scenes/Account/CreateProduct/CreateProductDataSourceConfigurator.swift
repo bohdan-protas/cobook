@@ -8,16 +8,16 @@
 
 import UIKit
 
-struct CreateProductDataSourceConfigurator: CellConfiguratorType {
+struct CreateProductDataSourceConfigurator: TableCellConfiguratorType {
 
-    var galleryConfigurator: CellConfigurator<Void?, HorizontalPhotosListTableViewCell>?
-    var sectionSeparatorConfigurator: CellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var sectionTitleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
-    var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
-    var textViewConfigurator: CellConfigurator<TextFieldModel, TextViewTableViewCell>?
-    var checkboxConfigurator: CellConfigurator<CheckboxModel, CheckboxTableViewCell>?
-    var companyHeaderConfigurator: CellConfigurator<CompanyPreviewHeaderModel, CompanyPreviewHeaderTableViewCell>?
-    var actionFieldConfigurator: CellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
+    var galleryConfigurator: TableCellConfigurator<Void?, HorizontalPhotosListTableViewCell>?
+    var sectionSeparatorConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>?
+    var sectionTitleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>?
+    var textFieldConfigurator: TableCellConfigurator<TextFieldModel, TextFieldTableViewCell>?
+    var textViewConfigurator: TableCellConfigurator<TextFieldModel, TextViewTableViewCell>?
+    var checkboxConfigurator: TableCellConfigurator<CheckboxModel, CheckboxTableViewCell>?
+    var companyHeaderConfigurator: TableCellConfigurator<CompanyPreviewHeaderModel, CompanyPreviewHeaderTableViewCell>?
+    var actionFieldConfigurator: TableCellConfigurator<ActionFieldModel, TextFieldTableViewCell>?
 
     func reuseIdentifier(for item: CreateProduct.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -86,7 +86,7 @@ extension CreateProductPresenter {
             var configurator = CreateProductDataSourceConfigurator()
 
             // galleryConfigurator
-            configurator.galleryConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> HorizontalPhotosListTableViewCell in
+            configurator.galleryConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> HorizontalPhotosListTableViewCell in
                 cell.dataSource = self
                 cell.delegate = self.view
                 cell.isEditable = true
@@ -94,18 +94,18 @@ extension CreateProductPresenter {
             }
 
             // sectionTitleConfigurator
-            configurator.sectionTitleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            configurator.sectionTitleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
             // sectionHeaderConfigurator
-            configurator.sectionSeparatorConfigurator = CellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            configurator.sectionSeparatorConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
             // textFieldConfigurator
-            configurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            configurator.textFieldConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.textField.isEnabled = model.isEnabled
                 cell.textField.alpha = model.isEnabled ? 1 : 0.5
@@ -117,7 +117,7 @@ extension CreateProductPresenter {
             }
 
             // textViewConfigurator
-            configurator.textViewConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
+            configurator.textViewConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextViewTableViewCell in
                 cell.delegate = self
                 cell.textView.text = model.text
                 cell.textView.placeholder = model.placeholder
@@ -126,7 +126,7 @@ extension CreateProductPresenter {
             }
 
             // checkboxConfigurator
-            configurator.checkboxConfigurator = CellConfigurator { (cell, model: CheckboxModel, tableView, indexPath) -> CheckboxTableViewCell in
+            configurator.checkboxConfigurator = TableCellConfigurator { (cell, model: CheckboxModel, tableView, indexPath) -> CheckboxTableViewCell in
                 cell.checkboxButton.setTitle(model.title, for: .normal)
                 cell.checkboxButton.setTitle(model.title, for: .selected)
                 cell.checkboxButton.isSelected = model.isSelected
@@ -135,14 +135,14 @@ extension CreateProductPresenter {
             }
 
             // companyHeaderConfigurator
-            configurator.companyHeaderConfigurator = CellConfigurator { (cell, model: CompanyPreviewHeaderModel, tableView, indexPath) -> CompanyPreviewHeaderTableViewCell in
+            configurator.companyHeaderConfigurator = TableCellConfigurator { (cell, model: CompanyPreviewHeaderModel, tableView, indexPath) -> CompanyPreviewHeaderTableViewCell in
                 cell.avatarImageView.setImage(withPath: model.image)
                 cell.nameLabel.text = model.title
                 return cell
             }
 
             // actionFieldConfigurator
-            configurator.actionFieldConfigurator = CellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            configurator.actionFieldConfigurator = TableCellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.dataSource = self
                 cell.textField.text = model.text

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ChangePasswordView: class, LoadDisplayableView, AlertDisplayableView, NavigableView {
-    func set(dataSource: DataSource<ChangePasswordCellsConfigutator>?)
+    func set(dataSource: TableDataSource<ChangePasswordCellsConfigutator>?)
     func reload()
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveView()
@@ -20,7 +20,7 @@ class ChangePasswordPresenter: BasePresenter {
     // MARK: - Properties
 
     weak var view: ChangePasswordView?
-    private var viewDataSource: DataSource<ChangePasswordCellsConfigutator>?
+    private var viewDataSource: TableDataSource<ChangePasswordCellsConfigutator>?
 
     var parametersModel: ChangePassword.Details {
         didSet {
@@ -41,7 +41,7 @@ class ChangePasswordPresenter: BasePresenter {
                                                  newPassword: nil,
                                                  repeatPassword: nil)
 
-        viewDataSource = DataSource(sections: [], configurator: self.dataSourceConfigurator)
+        viewDataSource = TableDataSource(sections: [], configurator: self.dataSourceConfigurator)
     }
 
     // MARK: - Public

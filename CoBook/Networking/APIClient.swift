@@ -21,7 +21,7 @@ class APIClient {
 
     /// Default session configuraton
     public static var `default`: APIClient = {
-        let evaluators = [Constants.API.baseURLPath.host ?? "": DisabledEvaluator()]
+        let evaluators = [Constants.API.baseURLPath.host ?? "": DisabledTrustEvaluator()]
         let manager = ServerTrustManager(evaluators: evaluators)
 
         let loggerMonitor = LoggerEventMonitor()

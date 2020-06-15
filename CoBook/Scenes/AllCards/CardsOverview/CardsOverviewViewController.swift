@@ -110,11 +110,11 @@ extension CardsOverviewViewController: CardsOverviewView {
         tableView.tableFooterView = nil
     }
 
-    func set(dataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?) {
         dataSource?.connect(to: self.tableView)
     }
 
-    func set(searchDataSource: DataSource<CardsOverviewViewDataSourceConfigurator>?) {
+    func set(searchDataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?) {
         searchDataSource?.connect(to: searchResultsTableController.tableView)
     }
 

@@ -75,7 +75,7 @@ extension CreatePersonalCardViewController: CreatePersonalCardView {
         presentPanModal(navigation)
     }
 
-    func set(dataSource: DataSource<CreatePersonalCardDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 

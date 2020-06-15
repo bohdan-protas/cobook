@@ -11,7 +11,7 @@ import Foundation
 // MARK: View -
 
 protocol SearchView: class, AlertDisplayableView, LoadDisplayableView, NavigableView {
-    func set(dataSource: DataSource<SearchCellsConfigurator>?)
+    func set(dataSource: TableDataSource<SearchCellsConfigurator>?)
     func reload()
 }
 

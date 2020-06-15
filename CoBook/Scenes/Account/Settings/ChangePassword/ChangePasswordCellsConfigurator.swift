@@ -23,10 +23,10 @@ enum ChangePassword {
 
 }
 
-struct ChangePasswordCellsConfigutator: CellConfiguratorType {
+struct ChangePasswordCellsConfigutator: TableCellConfiguratorType {
 
-    var titleConfigurator: CellConfigurator<String, SectionTitleTableViewCell>?
-    var textFieldConfigurator: CellConfigurator<TextFieldModel, TextFieldTableViewCell>?
+    var titleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>?
+    var textFieldConfigurator: TableCellConfigurator<TextFieldModel, TextFieldTableViewCell>?
 
     func reuseIdentifier(for item: ChangePassword.Cell, indexPath: IndexPath) -> String {
         switch item {
@@ -63,13 +63,13 @@ extension ChangePasswordPresenter {
             var configurator = ChangePasswordCellsConfigutator()
 
             // sectionTitleConfigurator
-            configurator.titleConfigurator = CellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            configurator.titleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
             // textFieldConfigurator
-            configurator.textFieldConfigurator = CellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
+            configurator.textFieldConfigurator = TableCellConfigurator { (cell, model: TextFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
                 cell.textField.text = model.text
                 cell.textField.isSecureTextEntry = true

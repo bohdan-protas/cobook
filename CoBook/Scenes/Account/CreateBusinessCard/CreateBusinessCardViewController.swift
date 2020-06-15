@@ -56,7 +56,7 @@ class CreateBusinessCardViewController: BaseViewController {
 
 extension CreateBusinessCardViewController: CreateBusinessCardView {
 
-    func set(dataSource: DataSource<CreateBusinessCardDataSourceConfigurator>?) {
+    func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
 
