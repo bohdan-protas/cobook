@@ -55,6 +55,8 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
                                 self?.socialImageView.af.setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "ic_social_default")) { [weak self] (response) in
                                     self?.borderView.backgroundColor = response.value?.averageColor
                                 }
+                            } else {
+                                self?.borderView.backgroundColor = UIColor.Theme.accent
                             }
                         case .failure(let error):
                             Log.error(error.localizedDescription)

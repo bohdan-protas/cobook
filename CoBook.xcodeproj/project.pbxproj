@@ -1361,7 +1361,6 @@
 				B823E8A2243F590200EE1830 /* PermissionService.swift */,
 				B824AD7F2445FAE700410C23 /* ImagePicker.swift */,
 				B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */,
-				B825FC41247ED02E00DB035D /* PaginationPage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1369,6 +1368,7 @@
 		B826B0F323F45ED8009041DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B825FC41247ED02E00DB035D /* PaginationPage.swift */,
 				B84B94F224033B030007EB60 /* Api */,
 				B8359CD7241ECE570080263E /* View */,
 			);
@@ -2888,7 +2888,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -2898,7 +2898,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2915,7 +2915,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -2925,7 +2925,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
