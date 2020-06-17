@@ -1,4 +1,4 @@
-platform :ios, '11.4'
+platform :ios, '12.0'
 
 target 'CoBook' do
   use_frameworks!
@@ -15,5 +15,6 @@ target 'CoBook' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
-
+  pod 'PortmoneSDKEcom'
+  
 end

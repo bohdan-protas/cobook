@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -71,7 +71,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGx-af-SyC">
-                                        <rect key="frame" x="0.0" y="22" width="347" height="18"/>
+                                        <rect key="frame" x="0.0" y="22" width="347" height="15.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="fvb-AN-G33"/>
                                         </constraints>
@@ -80,7 +80,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iN-zX-aUt">
-                                        <rect key="frame" x="0.0" y="44" width="347" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="41.5" width="347" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="QC3-qR-pBl"/>
                                         </constraints>
@@ -102,6 +102,31 @@
                                     <action selector="saveCardButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MwF-Q4-fI3"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJS-X5-P19">
+                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cow-wU-cXh">
+                                        <rect key="frame" x="16" y="0.0" width="79" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="OtM-Jd-eaw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="tintColor" name="Theme_Green-Dark"/>
+                                        <state key="normal" title="Публікувати"/>
+                                        <connections>
+                                            <action selector="publishButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ukN-ze-leV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cow-wU-cXh" secondAttribute="trailing" id="9GM-SN-MvI"/>
+                                    <constraint firstAttribute="bottom" secondItem="cow-wU-cXh" secondAttribute="bottom" id="L6m-4k-iKQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="QY1-mj-IgO"/>
+                                    <constraint firstItem="cow-wU-cXh" firstAttribute="leading" secondItem="FJS-X5-P19" secondAttribute="leading" constant="16" id="XzG-6I-r5O"/>
+                                    <constraint firstItem="cow-wU-cXh" firstAttribute="top" secondItem="FJS-X5-P19" secondAttribute="top" id="bs8-SA-EA8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -112,10 +137,13 @@
                             <constraint firstItem="ANa-Ju-NEn" firstAttribute="top" secondItem="mv0-nt-aeu" secondAttribute="bottom" constant="8" id="QeK-QS-mOM"/>
                             <constraint firstAttribute="trailing" secondItem="ANa-Ju-NEn" secondAttribute="trailing" constant="16" id="SSW-Au-dHM"/>
                             <constraint firstItem="ANa-Ju-NEn" firstAttribute="leading" secondItem="BBE-6H-pie" secondAttribute="leading" constant="16" id="Wfi-S5-cbB"/>
+                            <constraint firstItem="FJS-X5-P19" firstAttribute="leading" secondItem="BBE-6H-pie" secondAttribute="leading" id="Xtn-0K-8L9"/>
                             <constraint firstItem="LFG-RI-UX0" firstAttribute="width" secondItem="LFG-RI-UX0" secondAttribute="height" multiplier="1:1" id="Zo3-ft-e9D"/>
                             <constraint firstAttribute="trailing" secondItem="LFG-RI-UX0" secondAttribute="trailing" constant="8" id="abH-9t-F0B"/>
+                            <constraint firstItem="FJS-X5-P19" firstAttribute="top" secondItem="BBE-6H-pie" secondAttribute="top" id="gj2-je-USk"/>
                             <constraint firstAttribute="bottom" secondItem="A6X-xq-Y2q" secondAttribute="bottom" constant="10" id="hPb-2L-PPW"/>
                             <constraint firstItem="A6X-xq-Y2q" firstAttribute="leading" secondItem="BBE-6H-pie" secondAttribute="leading" constant="16" id="sJn-yM-ZbH"/>
+                            <constraint firstItem="mv0-nt-aeu" firstAttribute="leading" secondItem="FJS-X5-P19" secondAttribute="trailing" id="skK-sH-jvC"/>
                             <constraint firstAttribute="trailing" secondItem="A6X-xq-Y2q" secondAttribute="trailing" constant="16" id="wBu-fs-JBI"/>
                         </constraints>
                     </view>
@@ -149,6 +177,7 @@
                 <outlet property="bgImageView" destination="QZa-ec-721" id="9Ye-LQ-iK6"/>
                 <outlet property="nameLabel" destination="ANa-Ju-NEn" id="Wz4-X2-UwU"/>
                 <outlet property="professionLabel" destination="cQh-Cn-edJ" id="gsA-85-uF5"/>
+                <outlet property="publishButton" destination="cow-wU-cXh" id="fem-oa-aVJ"/>
                 <outlet property="saveCardButton" destination="LFG-RI-UX0" id="ELj-kt-ddK"/>
                 <outlet property="telephoneNumberLabel" destination="bGx-af-SyC" id="eV7-Eu-ZIl"/>
                 <outlet property="websiteLabel" destination="6iN-zX-aUt" id="7aH-Oz-vwE"/>
@@ -161,6 +190,9 @@
         <image name="ic_save_unactive" width="16" height="20"/>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green-Dark">
+            <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Separator">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

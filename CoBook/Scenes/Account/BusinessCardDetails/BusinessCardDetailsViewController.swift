@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import PortmoneSDKEcom
 
 private enum Defaults {
     static let estimatedRowHeight: CGFloat = 44
@@ -171,6 +172,10 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         let controller: ArticleDetailsViewController = UIStoryboard.post.initiateViewControllerFromType()
         controller.presenter = presenter
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams) {
+         presenter.presentPaymentByCard(on: self, params: params, showReceiptScreen: true)
     }
 
 

@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import FirebaseDynamicLinks
+import PortmoneSDKEcom
 
 protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView {
     func set(dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?)
@@ -18,12 +19,14 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func setupEditCardView()
     func setupHideCardView()
     func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
+    
     func goToCreateService(presenter: CreateServicePresenter?)
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
     func goToCreateProduct(presenter: CreateProductPresenter?)
     func goToProductDetails(presenter: ProductDetailsPresenter?)
     func goToCreatePost(cardID: Int)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
+    func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -66,7 +69,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.selectedBarItem = barItems.first!
 
         super.init()
-        
         self.dataSource = TableDataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [
             Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
@@ -510,10 +512,51 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
 
 }
 
+// MARK: - PaymentPresenterDelegate
+
+extension BusinessCardDetailsPresenter: PaymentPresenterDelegate {
+    
+    func didFinishPayment(bill: Bill?, error: Error?) {
+        if error != nil {
+            self.view?.errorAlert(message: error?.localizedDescription)
+        }
+
+        if bill != nil {
+            let mask = bill?.cardMask ?? ""
+            let token = bill?.token ?? ""
+            self.view?.infoAlert(title: "Payment Success", message: "Card mask: \n\(mask), \nToken: \n\(token)")
+        }
+    }
+    
+    
+}
+
 // MARK: - BusinessCardHeaderInfoTableViewCellDelegate
 
 extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDelegate {
 
+    func onPublishCard(cell: BusinessCardHeaderInfoTableViewCell) {
+        let paymentPresenter = PaymentPresenter(delegate: self, styleSource: nil, language: .ukrainian, biometricAuth: false, customUid: Constants.Payment.customUid)
+        
+        let billNumb = "SD\(Int(Date().timeIntervalSince1970))"
+        let flowType = PaymentFlowType(payWithCard: true, payWithApplePay: false, withoutCVV: false)
+        
+        let params = PaymentParams(description: "Оплата бізнес візитки",
+                                   attribute1: Constants.Payment.ContentType.card.rawValue,
+                                   attribute2: AppStorage.User.Profile?.userId ?? "",
+                                   attribute3: "\(cardDetails?.id ?? -1)",
+                                   billNumber: billNumb,
+                                   //contractNumber: "",
+                                   preauthFlag: true,
+                                   billCurrency: .usd,
+                                   billAmount: 100,
+                                   billAmountWcvv: 100,
+                                   payeeId: Constants.Payment.payeeID,
+                                   type: .payment,
+                                   paymentFlowType: flowType)
+        view?.showPaymentCard(presenter: paymentPresenter, params: params)
+    }
+    
     func onSaveCard(cell: BusinessCardHeaderInfoTableViewCell) {
         let state = cardDetails?.isSaved ?? false
 
