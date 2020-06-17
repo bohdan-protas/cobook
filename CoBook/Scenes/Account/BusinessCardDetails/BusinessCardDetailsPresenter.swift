@@ -149,7 +149,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     func share() {
         let socialMetaTags = DynamicLinkSocialMetaTagParameters()
         socialMetaTags.imageURL = URL.init(string: cardDetails?.avatar?.sourceUrl ?? "")
-        socialMetaTags.title = "\(cardDetails?.cardCreator?.firstName ?? "") \(cardDetails?.cardCreator?.lastName ?? "")"
+        socialMetaTags.title = cardDetails?.company?.name
         socialMetaTags.descriptionText = cardDetails?.description
         view?.showShareSheet(path: .businessCard, parameters: [.id: "\(businessCardId)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
     }
