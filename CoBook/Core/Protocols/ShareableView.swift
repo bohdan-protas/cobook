@@ -42,10 +42,8 @@ extension ShareableView where Self: UIViewController {
             shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
         }
 
-        // FIXME: - Change it to real appstore id
-        shareLink.iOSParameters?.appStoreID = "962194608"
-
-        // Android parameters
+        
+        shareLink.iOSParameters?.appStoreID = Constants.CoBook.appstoreID
         shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: Constants.Android.packageName)
 
         // Social metatag parameters

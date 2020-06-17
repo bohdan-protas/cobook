@@ -60,6 +60,7 @@ enum Constants {
     // MARK: - CoBook
 
     enum CoBook {
+        static let appstoreID: String = "1509531412"
         static let faqURL: URL = "https://cobook.app/#faq"
         static let termsAndConditionsURL: URL = "https://cobook.app/website_terms_of_use"
         static let licenseURL: URL = "https://cobook.app/license"
