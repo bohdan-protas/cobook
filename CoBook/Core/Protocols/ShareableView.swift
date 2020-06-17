@@ -50,7 +50,7 @@ extension ShareableView where Self: UIViewController {
 
         // Social metatag parameters
         let dynamicLinkSocialMetaTagParameters = dynamicLinkSocialMetaTagParameters
-        dynamicLinkSocialMetaTagParameters?.title = dynamicLinkSocialMetaTagParameters?.descriptionText?[0..<Layout.maxSocialTitleCount]
+        dynamicLinkSocialMetaTagParameters?.title = dynamicLinkSocialMetaTagParameters?.title?[0..<Layout.maxSocialTitleCount]
         dynamicLinkSocialMetaTagParameters?.descriptionText = dynamicLinkSocialMetaTagParameters?.descriptionText?[0..<Layout.maxSocialDescrCount]
         shareLink.socialMetaTagParameters = dynamicLinkSocialMetaTagParameters
 
