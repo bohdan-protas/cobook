@@ -29,6 +29,7 @@ enum BusinessCardDetails {
         case actionTitle(model: ActionTitleModel)
         case commentPlaceholder(model: PlaceholderCellModel)
         case button(model: ButtonCellModel)
+        case comment(model: FeedbackItemApiModel)
     }
 
     struct HeaderInfoModel {

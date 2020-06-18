@@ -29,6 +29,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
     var actionTitleConfigurator: TableCellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
     var commentPlaceholderCellConfigurator: TableCellConfigurator<PlaceholderCellModel, PlaceholderTableViewCell>
     var buttonCellConfigurator: TableCellConfigurator<ButtonCellModel, AccentButtonTableViewCell>
+    var commentCellConfigurator: TableCellConfigurator<FeedbackItemApiModel, CommentTableViewCell>
     
     // MARK: - Cell configurator
 
@@ -70,6 +71,8 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
             return commentPlaceholderCellConfigurator.reuseIdentifier
         case .button:
             return buttonCellConfigurator.reuseIdentifier
+        case .comment:
+            return commentCellConfigurator.reuseIdentifier
         }
     }
 
@@ -128,6 +131,9 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
             
         case .button(let model):
             return buttonCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            
+        case .comment(let model):
+            return commentCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -150,6 +156,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
         actionTitleConfigurator.registerCells(in: tableView)
         commentPlaceholderCellConfigurator.registerCells(in: tableView)
         buttonCellConfigurator.registerCells(in: tableView)
+        commentCellConfigurator.registerCells(in: tableView)
     }
 
 
@@ -325,12 +332,24 @@ extension BusinessCardDetailsPresenter {
                 return cell
             }
             
+            // buttonCellConfigurator
             let buttonCellConfigurator = TableCellConfigurator { (cell, model: ButtonCellModel, tableView, indexPath) -> AccentButtonTableViewCell in
                 cell.accentButton.setTitle(model.title, for: .normal)
                 cell.buttonActionHandler = model.action
                 return cell
             }
 
+            // commentCellConfigurator
+            let commentCellConfigurator = TableCellConfigurator { (cell, model: FeedbackItemApiModel, tableView, indexPath) -> CommentTableViewCell in
+                let nameAbbr = "\(String(describing: model.creator?.firstName?.first)) \(String(describing: model.creator?.lastName?.first))"
+                let textImg = nameAbbr.image(size: cell.avatarImageView.frame.size)
+            
+                cell.avatarImageView.setImage(withPath: model.creator?.avatar?.sourceUrl, placeholderImage: textImg)
+                cell.titleLabel.text = "\(model.creator?.firstName ?? "") \(model.creator?.lastName ?? "")"
+                cell.descriptionLabel.text = model.body
+                return cell
+            }
+            
             let configurator = BusinessCardDetailsDataSourceConfigurator(headerInfoCellConfigurator: headerInfoCellConfigurator,
                                                                          sectionTitleConfigurator: sectionTitleConfigurator,
                                                                          sectionHeaderConfigurator: sectionHeaderConfigurator,
@@ -348,7 +367,8 @@ extension BusinessCardDetailsPresenter {
                                                                          postPreviewConfigurator: postPreviewConfigurator,
                                                                          actionTitleConfigurator: actionTitleConfigurator,
                                                                          commentPlaceholderCellConfigurator: commentPlaceholderCellConfigurator,
-                                                                         buttonCellConfigurator: buttonCellConfigurator)
+                                                                         buttonCellConfigurator: buttonCellConfigurator,
+                                                                         commentCellConfigurator: commentCellConfigurator)
             
             return configurator
         }

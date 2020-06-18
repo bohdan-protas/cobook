@@ -43,7 +43,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
     private var products: [ProductPreviewSectionModel] = []
-    private var feedbacks: [FeedbackItemApiModel] = []
+    private var comments: [FeedbackItemApiModel] = []
     private var albumPreviewItems: [PostPreview.Item.Model] = []
     private var albumPreviewSection: PostPreview.Section?
     
@@ -277,7 +277,7 @@ private extension BusinessCardDetailsPresenter {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                self.feedbacks = response ?? []
+                self.comments = response ?? []
                 group.leave()
             case .failure(let error):
                 errors.append(error)
@@ -383,14 +383,23 @@ private extension BusinessCardDetailsPresenter {
                 dataSource?[.cardDetails].items.append(contentsOf: previews)
                 
             case .responds:
-                dataSource?[.cardDetails].items = [
-                    .commentPlaceholder(model: PlaceholderCellModel(image: UIImage(named: "ic_placeholder_comments"),
-                                                                    title: "Відгуків ще немає",
-                                                                    subtitle: "Будьте першим, хто залишит відгук про компанію")),
+                switch comments.isEmpty {
+                case true:
+                    dataSource?[.cardDetails].items = [
+                        .commentPlaceholder(model: PlaceholderCellModel(image: UIImage(named: "ic_placeholder_comments"),
+                                                                        title: "Відгуків ще немає",
+                                                                        subtitle: "Будьте першим, хто залишит відгук про компанію")),
+                    ]
+                case false:
+                    dataSource?[.cardDetails].items = comments.compactMap {
+                        BusinessCardDetails.Cell.comment(model: $0)
+                    }
+                }
+                dataSource?[.cardDetails].items.append(
                     .button(model: ButtonCellModel(title: "Залишити відгук", action: { [unowned self] in
-                        self.view?.goToCreateFeedback(presenter: AddFeedbackPresenter(cardID: self.cardDetails?.id)) }
-                    )),
-                ]
+                        self.view?.goToCreateFeedback(presenter: AddFeedbackPresenter(cardID: self.cardDetails?.id))
+                    }
+                )))
             }
         }
     }

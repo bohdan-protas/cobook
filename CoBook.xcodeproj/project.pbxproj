@@ -15,6 +15,8 @@
 		6DE35FF3249BEBDF00DC08C5 /* AddFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF2249BEBDF00DC08C5 /* AddFeedbackViewController.swift */; };
 		6DE35FF5249BF64C00DC08C5 /* AddFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF4249BF64C00DC08C5 /* AddFeedbackPresenter.swift */; };
 		6DE35FF7249C07C700DC08C5 /* FeedbackApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */; };
+		6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */; };
+		6DE35FFC249C0FB200DC08C5 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */; };
 		9D8EE06CDCE7F5D068B3EBFF /* Pods_CoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */; };
 		B80B0A492471C9FB00C72607 /* Notifications + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */; };
 		B81F189324602CFF003CBC84 /* SelectAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */; };
@@ -393,6 +395,8 @@
 		6DE35FF2249BEBDF00DC08C5 /* AddFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackViewController.swift; sourceTree = "<group>"; };
 		6DE35FF4249BF64C00DC08C5 /* AddFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackPresenter.swift; sourceTree = "<group>"; };
 		6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackApiModel.swift; sourceTree = "<group>"; };
+		6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notifications + Extensions.swift"; sourceTree = "<group>"; };
 		B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumViewController.swift; sourceTree = "<group>"; };
 		B81F189524602ECF003CBC84 /* SelectAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumTableViewCell.swift; sourceTree = "<group>"; };
@@ -808,6 +812,15 @@
 				6DE35FF4249BF64C00DC08C5 /* AddFeedbackPresenter.swift */,
 			);
 			path = AddFeedback;
+			sourceTree = "<group>";
+		};
+		6DE35FF8249C0F9700DC08C5 /* CommentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */,
+				6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */,
+			);
+			path = CommentTableViewCell;
 			sourceTree = "<group>";
 		};
 		8F6D0CF0811B96725FC47846 /* Pods */ = {
@@ -2195,6 +2208,7 @@
 		B8DFB74D248FDFE600924838 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				6DE35FF8249C0F9700DC08C5 /* CommentTableViewCell */,
 				6DBE367C249B9CB7005383C5 /* PlaceholderTableViewCell */,
 				B827B2A5247FE23E006E1A17 /* ActionTitleTableViewCell */,
 				B8205C2A246D88F2003C39F4 /* ContactableCardItemTableViewCell */,
@@ -2345,6 +2359,7 @@
 				B850DA1224866049002D8F99 /* PhotoGalleryViewController.xib in Resources */,
 				B8212A5E241B6A690066700C /* TagItemCollectionViewCell.xib in Resources */,
 				B825741323F5621500C8CBF8 /* HelveticaNeueCyr-Roman.ttf in Resources */,
+				6DE35FFC249C0FB200DC08C5 /* CommentTableViewCell.xib in Resources */,
 				B82248DF242C0CD700392D10 /* CardSaveView.xib in Resources */,
 				B83FD7DD2423B65800ACA1D4 /* SocialListItemCollectionViewCell.xib in Resources */,
 				B82B4D3B2455FD6F0061A98B /* AddPhotoListItemCollectionViewCell.xib in Resources */,
@@ -2770,6 +2785,7 @@
 				B8559F85243C81D500787349 /* MapDirectionTableViewCell.swift in Sources */,
 				B82A211724212CB600D0D9F5 /* Logger.swift in Sources */,
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
+				6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */,
 				B825FC42247ED02E00DB035D /* PaginationPage.swift in Sources */,
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
 				B835FFBE245F300900189406 /* CreateArticlePresenter.swift in Sources */,
