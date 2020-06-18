@@ -27,6 +27,7 @@ enum BusinessCardDetails {
         case productSection(model: ProductPreviewSectionModel)
         case postPreview(model: PostPreview.Section?)
         case actionTitle(model: ActionTitleModel)
+        case commentPlaceholder(model: PlaceholderCellModel)
     }
 
     struct HeaderInfoModel {

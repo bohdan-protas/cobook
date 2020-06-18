@@ -11,131 +11,138 @@ import UIKit
 
 struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
 
-    var headerInfoCellConfigurator: TableCellConfigurator<BusinessCardDetails.HeaderInfoModel, BusinessCardHeaderInfoTableViewCell>?
-    var sectionTitleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>?
-    var sectionHeaderConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>?
-    var getInTouchCellConfigurator: TableCellConfigurator<Void?, GetInTouchTableViewCell>?
-    var socialListConfigurator: TableCellConfigurator<Void?, SocialsListTableViewCell>?
-    var expandableDescriptionCellConfigurator: TableCellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>?
-    var mapDirectionCellConfigurator: TableCellConfigurator<Void?, MapDirectionTableViewCell>?
-    var mapCellConfigurator: TableCellConfigurator<String, StaticMapTableViewCell>?
-    var addressInfoCellConfigurator: TableCellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>?
-    var employeeCellConfigurator: TableCellConfigurator<EmployeeModel?, CardItemTableViewCell>?
-    var contactsCellConfigurator: TableCellConfigurator<ContactsModel?, ContactsTableViewCell>?
-    var serviceItemCellConfigurator: TableCellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>?
-    var addProductConfigurator: TableCellConfigurator<Void?, ServiceListItemTableViewCell>?
-    var productSectionConfigurator: TableCellConfigurator<ProductPreviewSectionModel, ProductPreviewItemsHorizontalListTableViewCell>?
-    var postPreviewConfigurator: TableCellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
-    var actionTitleConfigurator: TableCellConfigurator<ActionTitleModel, ActionTitleTableViewCell>?
-
+    var headerInfoCellConfigurator: TableCellConfigurator<BusinessCardDetails.HeaderInfoModel, BusinessCardHeaderInfoTableViewCell>
+    var sectionTitleConfigurator: TableCellConfigurator<String, SectionTitleTableViewCell>
+    var sectionHeaderConfigurator: TableCellConfigurator<Void?, SectionHeaderTableViewCell>
+    var getInTouchCellConfigurator: TableCellConfigurator<Void?, GetInTouchTableViewCell>
+    var socialListConfigurator: TableCellConfigurator<Void?, SocialsListTableViewCell>
+    var expandableDescriptionCellConfigurator: TableCellConfigurator<TitleDescrModel?, ExpandableDescriptionTableViewCell>
+    var mapDirectionCellConfigurator: TableCellConfigurator<Void?, MapDirectionTableViewCell>
+    var mapCellConfigurator: TableCellConfigurator<String, StaticMapTableViewCell>
+    var addressInfoCellConfigurator: TableCellConfigurator<AddressInfoCellModel, AddressInfoTableViewCell>
+    var employeeCellConfigurator: TableCellConfigurator<EmployeeModel?, CardItemTableViewCell>
+    var contactsCellConfigurator: TableCellConfigurator<ContactsModel?, ContactsTableViewCell>
+    var serviceItemCellConfigurator: TableCellConfigurator<Service.PreviewListItem, ServiceListItemTableViewCell>
+    var addProductConfigurator: TableCellConfigurator<Void?, ServiceListItemTableViewCell>
+    var productSectionConfigurator: TableCellConfigurator<ProductPreviewSectionModel, ProductPreviewItemsHorizontalListTableViewCell>
+    var postPreviewConfigurator: TableCellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
+    var actionTitleConfigurator: TableCellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
+    var commentPlaceholderCellConfigurator: TableCellConfigurator<PlaceholderCellModel, PlaceholderTableViewCell>
+    
     // MARK: - Cell configurator
 
     func reuseIdentifier(for item: BusinessCardDetails.Cell, indexPath: IndexPath) -> String {
         switch item {
         case .sectionHeader:
-            return sectionHeaderConfigurator?.reuseIdentifier ?? ""
+            return sectionHeaderConfigurator.reuseIdentifier
         case .userInfo:
-            return self.headerInfoCellConfigurator?.reuseIdentifier ?? ""
+            return self.headerInfoCellConfigurator.reuseIdentifier
         case .getInTouch:
-            return self.getInTouchCellConfigurator?.reuseIdentifier ?? ""
+            return self.getInTouchCellConfigurator.reuseIdentifier
         case .socialList:
-            return socialListConfigurator?.reuseIdentifier ?? ""
+            return socialListConfigurator.reuseIdentifier
         case .addressInfo:
-            return addressInfoCellConfigurator?.reuseIdentifier ?? ""
+            return addressInfoCellConfigurator.reuseIdentifier
         case .map:
-            return mapCellConfigurator?.reuseIdentifier ?? ""
+            return mapCellConfigurator.reuseIdentifier
         case .mapDirection:
-            return mapDirectionCellConfigurator?.reuseIdentifier ?? ""
+            return mapDirectionCellConfigurator.reuseIdentifier
         case .companyDescription:
-            return expandableDescriptionCellConfigurator?.reuseIdentifier ?? ""
+            return expandableDescriptionCellConfigurator.reuseIdentifier
         case .title:
-            return sectionTitleConfigurator?.reuseIdentifier ?? ""
+            return sectionTitleConfigurator.reuseIdentifier
         case .employee:
-            return employeeCellConfigurator?.reuseIdentifier ?? ""
+            return employeeCellConfigurator.reuseIdentifier
         case .contacts:
-            return contactsCellConfigurator?.reuseIdentifier ?? ""
+            return contactsCellConfigurator.reuseIdentifier
         case .service:
-            return serviceItemCellConfigurator?.reuseIdentifier ?? ""
+            return serviceItemCellConfigurator.reuseIdentifier
         case .addProduct:
-            return addProductConfigurator?.reuseIdentifier ?? ""
+            return addProductConfigurator.reuseIdentifier
         case .productSection:
-            return productSectionConfigurator?.reuseIdentifier ?? ""
+            return productSectionConfigurator.reuseIdentifier
         case .postPreview:
-            return postPreviewConfigurator?.reuseIdentifier ?? ""
+            return postPreviewConfigurator.reuseIdentifier
         case .actionTitle:
-            return actionTitleConfigurator?.reuseIdentifier ?? ""
+            return actionTitleConfigurator.reuseIdentifier
+        case .commentPlaceholder:
+            return commentPlaceholderCellConfigurator.reuseIdentifier
         }
     }
 
     func configuredCell(for item: BusinessCardDetails.Cell, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         switch item {
         case .sectionHeader:
-            return sectionHeaderConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return sectionHeaderConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
 
         case .userInfo(let model):
-            return headerInfoCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return headerInfoCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .getInTouch:
-            return getInTouchCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return getInTouchCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
 
         case .socialList:
-            return socialListConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return socialListConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
 
         case .addressInfo(let model):
-            return addressInfoCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return addressInfoCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .map(let path):
-            return mapCellConfigurator?.configuredCell(for: path, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return mapCellConfigurator.configuredCell(for: path, tableView: tableView, indexPath: indexPath)
 
         case .mapDirection:
-            return mapDirectionCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return mapDirectionCellConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
 
         case .companyDescription(let model):
-            return expandableDescriptionCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return expandableDescriptionCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .title(let text):
-            return sectionTitleConfigurator?.configuredCell(for: text, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return sectionTitleConfigurator.configuredCell(for: text, tableView: tableView, indexPath: indexPath)
 
         case .employee(let model):
-            return employeeCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return employeeCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .contacts(let model):
-            return contactsCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return contactsCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .service(let model):
-            return serviceItemCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return serviceItemCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .addProduct:
-            return addProductConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return addProductConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
 
         case .productSection(let model):
-            return productSectionConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return productSectionConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .postPreview(let model):
-            return postPreviewConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return postPreviewConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
 
         case .actionTitle(let model):
-            return actionTitleConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+            return actionTitleConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            
+        case .commentPlaceholder(model: let model):
+            return commentPlaceholderCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
     func registerCells(in tableView: UITableView) {
-        headerInfoCellConfigurator?.registerCells(in: tableView)
-        sectionTitleConfigurator?.registerCells(in: tableView)
-        sectionHeaderConfigurator?.registerCells(in: tableView)
-        getInTouchCellConfigurator?.registerCells(in: tableView)
-        socialListConfigurator?.registerCells(in: tableView)
-        expandableDescriptionCellConfigurator?.registerCells(in: tableView)
-        mapDirectionCellConfigurator?.registerCells(in: tableView)
-        mapCellConfigurator?.registerCells(in: tableView)
-        addressInfoCellConfigurator?.registerCells(in: tableView)
-        employeeCellConfigurator?.registerCells(in: tableView)
-        contactsCellConfigurator?.registerCells(in: tableView)
-        serviceItemCellConfigurator?.registerCells(in: tableView)
-        addProductConfigurator?.registerCells(in: tableView)
-        productSectionConfigurator?.registerCells(in: tableView)
-        postPreviewConfigurator?.registerCells(in: tableView)
-        actionTitleConfigurator?.registerCells(in: tableView)
+        headerInfoCellConfigurator.registerCells(in: tableView)
+        sectionTitleConfigurator.registerCells(in: tableView)
+        sectionHeaderConfigurator.registerCells(in: tableView)
+        getInTouchCellConfigurator.registerCells(in: tableView)
+        socialListConfigurator.registerCells(in: tableView)
+        expandableDescriptionCellConfigurator.registerCells(in: tableView)
+        mapDirectionCellConfigurator.registerCells(in: tableView)
+        mapCellConfigurator.registerCells(in: tableView)
+        addressInfoCellConfigurator.registerCells(in: tableView)
+        employeeCellConfigurator.registerCells(in: tableView)
+        contactsCellConfigurator.registerCells(in: tableView)
+        serviceItemCellConfigurator.registerCells(in: tableView)
+        addProductConfigurator.registerCells(in: tableView)
+        productSectionConfigurator.registerCells(in: tableView)
+        postPreviewConfigurator.registerCells(in: tableView)
+        actionTitleConfigurator.registerCells(in: tableView)
+        commentPlaceholderCellConfigurator.registerCells(in: tableView)
     }
 
 
@@ -148,10 +155,9 @@ extension BusinessCardDetailsPresenter {
     /// Dependency injection to BusinessCardDetailsPresenter
     var dataSouceConfigurator: BusinessCardDetailsDataSourceConfigurator {
         get {
-            var configurator = BusinessCardDetailsDataSourceConfigurator()
-
+            
             // EmployeCellConfigurator
-            configurator.employeeCellConfigurator = TableCellConfigurator { (cell, model: EmployeeModel?, tableView, indexPath) -> CardItemTableViewCell in
+            let employeeCellConfigurator = TableCellConfigurator { (cell, model: EmployeeModel?, tableView, indexPath) -> CardItemTableViewCell in
 
                 let textImg = model?.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
 
@@ -165,7 +171,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // headerInfoCellConfigurator
-            configurator.headerInfoCellConfigurator = TableCellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
+            let headerInfoCellConfigurator = TableCellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
                 cell.delegate = self
                 cell.bgImageView.setImage(withPath: model.bgimagePath)
                 cell.avatarImageView.setImage(withPath: model.avatartImagePath)
@@ -180,23 +186,23 @@ extension BusinessCardDetailsPresenter {
             }
 
             // sectionTitleConfigurator
-            configurator.sectionTitleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
+            let sectionTitleConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> SectionTitleTableViewCell in
                 cell.titleLabel.text = model
                 return cell
             }
 
             // getInTouchCellConfigurator
-            configurator.sectionHeaderConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
+            let sectionHeaderConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SectionHeaderTableViewCell in
                 return cell
             }
 
-            configurator.getInTouchCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
+            let getInTouchCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> GetInTouchTableViewCell in
                 cell.delegate = self
                 return cell
             }
 
             // socialListConfigurator
-            configurator.socialListConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
+            let socialListConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> SocialsListTableViewCell in
                 cell.delegate = self
                 cell.dataSource = self
                 cell.isEditable = false
@@ -204,7 +210,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // expandableDescriptionCellConfigurator
-            configurator.expandableDescriptionCellConfigurator = TableCellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
+            let expandableDescriptionCellConfigurator = TableCellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
                 cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 20)])
                 cell.desctiptionTextView.text = model?.descr
 
@@ -212,13 +218,13 @@ extension BusinessCardDetailsPresenter {
             }
 
             // mapDirectionCellConfigurator
-            configurator.mapDirectionCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapDirectionTableViewCell in
+            let mapDirectionCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapDirectionTableViewCell in
                 cell.delegate = self.view
                 return cell
             }
 
             // mapCellConfigurator
-            configurator.mapCellConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> StaticMapTableViewCell in
+            let mapCellConfigurator = TableCellConfigurator { (cell, model: String, tableView, indexPath) -> StaticMapTableViewCell in
                 cell.activityIndicator.startAnimating()
                 StaticMapConfiguratorService.constructStaticMapURL(mapSize: .init(width: cell.frame.width, height: cell.frame.height), center: model) { (url) in
                     cell.mapImageView?.setImage(withPath: url?.absoluteString)
@@ -228,7 +234,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // addressInfoCellConfigurator
-            configurator.addressInfoCellConfigurator = TableCellConfigurator { (cell, model: AddressInfoCellModel, tableView, indexPath) -> AddressInfoTableViewCell in
+            let addressInfoCellConfigurator = TableCellConfigurator { (cell, model: AddressInfoCellModel, tableView, indexPath) -> AddressInfoTableViewCell in
                 cell.mainAddressLabel.text = model.mainAddress
                 cell.subadressLabel.text = model.subAdress
                 cell.scheduleLabel.text = model.schedule
@@ -236,7 +242,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // contactsCellConfigurator
-            configurator.contactsCellConfigurator = TableCellConfigurator { (cell, model: ContactsModel?, tableView, indexPath) -> ContactsTableViewCell in
+            let contactsCellConfigurator = TableCellConfigurator { (cell, model: ContactsModel?, tableView, indexPath) -> ContactsTableViewCell in
                 cell.telephoneNumberLabel.text = model?.telNumber
 
                 let websiteLabelAttributes: [NSAttributedString.Key: Any] = [
@@ -252,7 +258,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // serviceItemCellConfigurator
-            configurator.serviceItemCellConfigurator = TableCellConfigurator { (cell, model: Service.PreviewListItem, tableView, indexPath) -> ServiceListItemTableViewCell in
+            let serviceItemCellConfigurator = TableCellConfigurator { (cell, model: Service.PreviewListItem, tableView, indexPath) -> ServiceListItemTableViewCell in
                 switch model {
                 case .view(let model):
                     cell.titleLabel.text = model.name
@@ -269,7 +275,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // addGoodsConfigurator
-            configurator.addProductConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> ServiceListItemTableViewCell in
+            let addProductConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> ServiceListItemTableViewCell in
                 cell.titleLabel.text = "Product.add.text".localized
                 cell.titleImageView.image = #imageLiteral(resourceName: "ic_add_item")
                 cell.subtitleLabel.isHidden = true
@@ -277,7 +283,7 @@ extension BusinessCardDetailsPresenter {
             }
 
             // productSectionConfigurator
-            configurator.productSectionConfigurator = TableCellConfigurator { (cell, model: ProductPreviewSectionModel, tableView, indexPath) -> ProductPreviewItemsHorizontalListTableViewCell in
+            let productSectionConfigurator = TableCellConfigurator { (cell, model: ProductPreviewSectionModel, tableView, indexPath) -> ProductPreviewItemsHorizontalListTableViewCell in
                 cell.delegate = self
                 cell.headerLabel.text = model.headerTitle
                 cell.dataSource = model.productPreviewItems
@@ -285,8 +291,8 @@ extension BusinessCardDetailsPresenter {
                 return cell
             }
 
-            //
-            configurator.postPreviewConfigurator = TableCellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
+            // postPreviewConfigurator
+            let postPreviewConfigurator = TableCellConfigurator { (cell, model: PostPreview.Section?, tableView, indexPath) -> AlbumPreviewItemsTableViewCell in
                 cell.topConstaint.constant = 0
                 cell.dataSourceID = model?.dataSourceID
                 cell.delegate = self
@@ -296,14 +302,40 @@ extension BusinessCardDetailsPresenter {
             }
 
             // actionTitleConfigurator
-            configurator.actionTitleConfigurator = TableCellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
+            let actionTitleConfigurator = TableCellConfigurator { (cell, model: ActionTitleModel, tableView, indexPath) -> ActionTitleTableViewCell in
                 cell.titleLabel.text = model.title
                 cell.countLabel.text = "\( model.counter ?? 0)"
                 cell.actionButton.setTitle(model.actionTitle, for: .normal)
                 cell.actionHandler = model.actionHandler
                 return cell
             }
+            
+            // commentPlaceholderCellConfigurator
+            let commentPlaceholderCellConfigurator = TableCellConfigurator { (cell, model: PlaceholderCellModel, tableView, indexPath) -> PlaceholderTableViewCell in
+                cell.titleImageView.image =  model.image
+                cell.titleLabel.text = model.title
+                cell.subtitleLabel.text = model.subtitle
+                return cell
+            }
 
+            let configurator = BusinessCardDetailsDataSourceConfigurator(headerInfoCellConfigurator: headerInfoCellConfigurator,
+                                                                         sectionTitleConfigurator: sectionTitleConfigurator,
+                                                                         sectionHeaderConfigurator: sectionHeaderConfigurator,
+                                                                         getInTouchCellConfigurator: getInTouchCellConfigurator,
+                                                                         socialListConfigurator: socialListConfigurator,
+                                                                         expandableDescriptionCellConfigurator: expandableDescriptionCellConfigurator,
+                                                                         mapDirectionCellConfigurator: mapDirectionCellConfigurator,
+                                                                         mapCellConfigurator: mapCellConfigurator,
+                                                                         addressInfoCellConfigurator: addressInfoCellConfigurator,
+                                                                         employeeCellConfigurator: employeeCellConfigurator,
+                                                                         contactsCellConfigurator: contactsCellConfigurator,
+                                                                         serviceItemCellConfigurator: serviceItemCellConfigurator,
+                                                                         addProductConfigurator: addProductConfigurator,
+                                                                         productSectionConfigurator: productSectionConfigurator,
+                                                                         postPreviewConfigurator: postPreviewConfigurator,
+                                                                         actionTitleConfigurator: actionTitleConfigurator,
+                                                                         commentPlaceholderCellConfigurator: commentPlaceholderCellConfigurator)
+            
             return configurator
         }
     }
