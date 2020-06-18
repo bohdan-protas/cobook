@@ -11,10 +11,16 @@ import IQKeyboardManagerSwift
 
 class AddFeedbackViewController: BaseViewController {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var messageTextView: DesignableTextView!
-    @IBOutlet weak var addButton: LoaderDesignableButton!
-    @IBOutlet weak var bottomConstaint: NSLayoutConstraint!
+    @Localized("Feedback.title")
+    @IBOutlet var titleLabel: UILabel!
+    
+    @Localized("Feedback.placeholder.message")
+    @IBOutlet var messageTextView: DesignableTextView!
+    
+    @Localized("Feedback.placeholder.leaveComment.normalTitle")
+    @IBOutlet var addButton: LoaderDesignableButton!
+    
+    @IBOutlet var bottomConstaint: NSLayoutConstraint!
     
     var presenter: AddFeedbackPresenter?
     
@@ -98,9 +104,9 @@ extension AddFeedbackViewController: AddFeedbackView {
 extension AddFeedbackViewController {
     
     func setupLayout() {
-        self.navigationItem.title = "Новий відгук"
+        self.navigationItem.title = "Feedback.title".localized
         self.messageTextView.delegate = self
-        self.messageTextView.placeholder = "Напишіть відгук..."
+        self.messageTextView.placeholder = "Feedback.placeholder.textInput".localized
     }
     
     

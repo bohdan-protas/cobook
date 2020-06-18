@@ -64,7 +64,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "BarItem.shop".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "BarItem.team".localized),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "Відгуки"),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "BarItem.contacts".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
@@ -387,8 +387,8 @@ private extension BusinessCardDetailsPresenter {
                 case true:
                     dataSource?[.cardDetails].items = [
                         .commentPlaceholder(model: PlaceholderCellModel(image: UIImage(named: "ic_placeholder_comments"),
-                                                                        title: "Відгуків ще немає",
-                                                                        subtitle: "Будьте першим, хто залишит відгук про компанію")),
+                                                                        title: "Feedback.placeholder.title".localized,
+                                                                        subtitle: "Feedback.placeholder.subtitle".localized)),
                     ]
                 case false:
                     dataSource?[.cardDetails].items = comments.compactMap {
@@ -396,7 +396,7 @@ private extension BusinessCardDetailsPresenter {
                     }
                 }
                 dataSource?[.cardDetails].items.append(
-                    .button(model: ButtonCellModel(title: "Залишити відгук", action: { [unowned self] in
+                    .button(model: ButtonCellModel(title: "Feedback.placeholder.leaveComment.normalTitle".localized, action: { [unowned self] in
                         self.view?.goToCreateFeedback(presenter: AddFeedbackPresenter(cardID: self.cardDetails?.id))
                     }
                 )))
