@@ -18,12 +18,14 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func setupEditCardView()
     func setupHideCardView()
     func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
+    
     func goToCreateService(presenter: CreateServicePresenter?)
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
     func goToCreateProduct(presenter: CreateProductPresenter?)
     func goToProductDetails(presenter: ProductDetailsPresenter?)
     func goToCreatePost(cardID: Int)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
+    func goToCreateFeedback(presenter: AddFeedbackPresenter)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -370,15 +372,16 @@ private extension BusinessCardDetailsPresenter {
                     .commentPlaceholder(model: PlaceholderCellModel(image: UIImage(named: "ic_placeholder_comments"),
                                                                     title: "Відгуків ще немає",
                                                                     subtitle: "Будьте першим, хто залишит відгук про компанію")),
-                    .button(model: ButtonCellModel(title: "Залишити відгук", action: { Log.debug("azaza") })),]
+                    .button(model: ButtonCellModel(title: "Залишити відгук", action: { [unowned self] in
+                        self.view?.goToCreateFeedback(presenter: AddFeedbackPresenter(cardID: self.cardDetails?.id)) }
+                    )),
+                ]
             }
         }
     }
 
-
+    
 }
-
-
 
 // MARK: - HorizontalItemsBarViewDelegate
 

@@ -12,6 +12,8 @@
 		6DBE3684249BC272005383C5 /* AccentButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE3682249BC272005383C5 /* AccentButtonTableViewCell.swift */; };
 		6DBE3685249BC272005383C5 /* AccentButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE3683249BC272005383C5 /* AccentButtonTableViewCell.xib */; };
 		6DBE3687249BE2E5005383C5 /* FeedbackEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE3686249BE2E4005383C5 /* FeedbackEndpoint.swift */; };
+		6DE35FF3249BEBDF00DC08C5 /* AddFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF2249BEBDF00DC08C5 /* AddFeedbackViewController.swift */; };
+		6DE35FF5249BF64C00DC08C5 /* AddFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF4249BF64C00DC08C5 /* AddFeedbackPresenter.swift */; };
 		9D8EE06CDCE7F5D068B3EBFF /* Pods_CoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */; };
 		B80B0A492471C9FB00C72607 /* Notifications + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */; };
 		B81F189324602CFF003CBC84 /* SelectAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */; };
@@ -387,6 +389,8 @@
 		6DBE3682249BC272005383C5 /* AccentButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButtonTableViewCell.swift; sourceTree = "<group>"; };
 		6DBE3683249BC272005383C5 /* AccentButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccentButtonTableViewCell.xib; sourceTree = "<group>"; };
 		6DBE3686249BE2E4005383C5 /* FeedbackEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackEndpoint.swift; sourceTree = "<group>"; };
+		6DE35FF2249BEBDF00DC08C5 /* AddFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackViewController.swift; sourceTree = "<group>"; };
+		6DE35FF4249BF64C00DC08C5 /* AddFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackPresenter.swift; sourceTree = "<group>"; };
 		B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notifications + Extensions.swift"; sourceTree = "<group>"; };
 		B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumViewController.swift; sourceTree = "<group>"; };
 		B81F189524602ECF003CBC84 /* SelectAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumTableViewCell.swift; sourceTree = "<group>"; };
@@ -795,6 +799,15 @@
 			path = AccentButtonTableViewCell;
 			sourceTree = "<group>";
 		};
+		6DE35FF1249BEBB600DC08C5 /* AddFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				6DE35FF2249BEBDF00DC08C5 /* AddFeedbackViewController.swift */,
+				6DE35FF4249BF64C00DC08C5 /* AddFeedbackPresenter.swift */,
+			);
+			path = AddFeedback;
+			sourceTree = "<group>";
+		};
 		8F6D0CF0811B96725FC47846 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -915,7 +928,7 @@
 			isa = PBXGroup;
 			children = (
 				B82200B9240FB8A400A17D2C /* Account.storyboard */,
-				B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */,
+				6DE35FF1249BEBB600DC08C5 /* AddFeedback */,
 				B82200BD240FBBF700A17D2C /* Account */,
 				B828E33C2473C0CE00032C88 /* Settings */,
 				B8559F62243AD05900787349 /* BusinessCardDetails */,
@@ -1212,7 +1225,6 @@
 			isa = PBXGroup;
 			children = (
 				B824924D243DE73E00A1AC39 /* AllCards.storyboard */,
-				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 				B824924C243DE72500A1AC39 /* CardsOverview */,
 				B823DD8224439B4500A74495 /* Filter */,
 			);
@@ -1234,7 +1246,6 @@
 			isa = PBXGroup;
 			children = (
 				B824D14D246B120C00911629 /* Saved.storyboard */,
-				B824D152246B134300911629 /* SavedContentNavigationController.swift */,
 				B824D14F246B123800911629 /* SavedContent */,
 			);
 			path = Saved;
@@ -1464,6 +1475,9 @@
 		B82A2118242135C200D0D9F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */,
+				B824D152246B134300911629 /* SavedContentNavigationController.swift */,
+				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 				B82200B5240FB84B00A17D2C /* TabBarControllers */,
 				B8255A1C243A264E00C4169D /* Search */,
 				B88906C9240053DE002E91F7 /* NavigationBars */,
@@ -2587,6 +2601,7 @@
 				B836DF2C2433792600CB84D3 /* CreateBusinessCardPresenter.swift in Sources */,
 				B8249240243DE28E00A1AC39 /* CardItemViewModel.swift in Sources */,
 				B884B699248A5B77000848A7 /* LocalizationKey.swift in Sources */,
+				6DE35FF5249BF64C00DC08C5 /* AddFeedbackPresenter.swift in Sources */,
 				B8DFB74A248FC2E100924838 /* CollectionCellConfigurator.swift in Sources */,
 				B8A3B0A024507D55007C4F05 /* CreateServiceViewController.swift in Sources */,
 				B82079432444B49F00FCCC17 /* EmployModel.swift in Sources */,
@@ -2673,6 +2688,7 @@
 				B8DE5E412418E25000F4F60B /* TextFieldTableViewCell.swift in Sources */,
 				B823A1AF2461F1F2004271AA /* CreateArticleModel.swift in Sources */,
 				B82079342444638200FCCC17 /* FilterItemTableViewCell.swift in Sources */,
+				6DE35FF3249BEBDF00DC08C5 /* AddFeedbackViewController.swift in Sources */,
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B824DA6F245B073200700319 /* AlbumPreviewItemCollectionViewCell.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
