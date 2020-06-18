@@ -43,9 +43,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
     private var products: [ProductPreviewSectionModel] = []
+    private var feedbacks: [FeedbackItemApiModel] = []
     private var albumPreviewItems: [PostPreview.Item.Model] = []
     private var albumPreviewSection: PostPreview.Section?
-
+    
     /// View datasource
     private var dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?
 
@@ -263,6 +264,20 @@ private extension BusinessCardDetailsPresenter {
                 strongSelf.products.sort {
                     $0.showroom < $1.showroom
                 }
+                group.leave()
+            case .failure(let error):
+                errors.append(error)
+                group.leave()
+            }
+        }
+        
+        // fetch feedbacks
+        group.enter()
+        APIClient.default.getFeedbackList(cardID: businessCardId, limit: 100, offset: 0) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                self.feedbacks = response ?? []
                 group.leave()
             case .failure(let error):
                 errors.append(error)
