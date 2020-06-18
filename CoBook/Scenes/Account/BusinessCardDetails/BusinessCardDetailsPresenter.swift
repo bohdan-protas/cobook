@@ -18,12 +18,14 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func setupEditCardView()
     func setupHideCardView()
     func updateRows(insertion: [IndexPath], deletion: [IndexPath], insertionAnimation: UITableView.RowAnimation, deletionAnimation: UITableView.RowAnimation)
+    
     func goToCreateService(presenter: CreateServicePresenter?)
     func goToServiceDetails(presenter: ServiceDetailsPresenter?)
     func goToCreateProduct(presenter: CreateProductPresenter?)
     func goToProductDetails(presenter: ProductDetailsPresenter?)
     func goToCreatePost(cardID: Int)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
+    func goToCreateFeedback(presenter: AddFeedbackPresenter)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -41,9 +43,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
     private var products: [ProductPreviewSectionModel] = []
+    private var comments: [FeedbackItemApiModel] = []
     private var albumPreviewItems: [PostPreview.Item.Model] = []
     private var albumPreviewSection: PostPreview.Section?
-
+    
     /// View datasource
     private var dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?
 
@@ -61,6 +64,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "BarItem.shop".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "BarItem.team".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "BarItem.contacts".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
@@ -266,6 +270,20 @@ private extension BusinessCardDetailsPresenter {
                 group.leave()
             }
         }
+        
+        // fetch feedbacks
+        group.enter()
+        APIClient.default.getFeedbackList(cardID: businessCardId, limit: 100, offset: 0) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                self.comments = response ?? []
+                group.leave()
+            case .failure(let error):
+                errors.append(error)
+                group.leave()
+            }
+        }
 
         // setup data source
         group.notify(queue: .main) { [weak self] in
@@ -363,14 +381,31 @@ private extension BusinessCardDetailsPresenter {
                 }
                 let previews: [BusinessCardDetails.Cell] = products.compactMap { BusinessCardDetails.Cell.productSection(model: $0) }
                 dataSource?[.cardDetails].items.append(contentsOf: previews)
+                
+            case .responds:
+                switch comments.isEmpty {
+                case true:
+                    dataSource?[.cardDetails].items = [
+                        .commentPlaceholder(model: PlaceholderCellModel(image: UIImage(named: "ic_placeholder_comments"),
+                                                                        title: "Feedback.placeholder.title".localized,
+                                                                        subtitle: "Feedback.placeholder.subtitle".localized)),
+                    ]
+                case false:
+                    dataSource?[.cardDetails].items = comments.compactMap {
+                        BusinessCardDetails.Cell.comment(model: $0)
+                    }
+                }
+                dataSource?[.cardDetails].items.append(
+                    .button(model: ButtonCellModel(title: "Feedback.placeholder.leaveComment.normalTitle".localized, action: { [unowned self] in
+                        self.view?.goToCreateFeedback(presenter: AddFeedbackPresenter(cardID: self.cardDetails?.id))
+                    }
+                )))
             }
         }
     }
 
-
+    
 }
-
-
 
 // MARK: - HorizontalItemsBarViewDelegate
 

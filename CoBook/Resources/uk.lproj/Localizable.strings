@@ -109,6 +109,7 @@
 "BarItem.shop" = "Крамниця";
 "BarItem.team" = "Команда";
 "BarItem.contacts" = "Контакти";
+"BarItem.feedbacks" = "Відгуки";
 
 // MARK: - Loading
 "Loading.photoLoading.title" = "Триває оновлення фото...";
@@ -314,3 +315,10 @@
 
 // MARK: - Search content
 "SearchContent.title" = "Пошук";
+
+// MARK: - Feedback
+"Feedback.title" = "Новий відгук";
+"Feedback.placeholder.message" = "Напишіть відгук...";
+"Feedback.placeholder.title" = "Відгуків ще немає";
+"Feedback.placeholder.subtitle" = "Будьте першим, хто залишит відгук про компанію";
+"Feedback.placeholder.leaveComment.normalTitle" = "Залишити відгук";

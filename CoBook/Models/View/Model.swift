@@ -133,3 +133,14 @@ struct DynamicLinkContainer: Codable {
     }
 
 }
+
+struct PlaceholderCellModel {
+    var image: UIImage?
+    var title: String?
+    var subtitle: String?
+}
+
+struct ButtonCellModel {
+    var title: String?
+    var action: (() -> Void)?
+}
