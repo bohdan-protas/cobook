@@ -139,3 +139,8 @@ struct PlaceholderCellModel {
     var title: String?
     var subtitle: String?
 }
+
+struct ButtonCellModel {
+    var title: String?
+    var action: (() -> Void)?
+}

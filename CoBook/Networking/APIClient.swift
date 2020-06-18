@@ -832,6 +832,16 @@ extension APIClient {
     }
 
 
+}
 
+// MARK: - Feedback requests
 
+extension APIClient {
+    
+    func createFeedback(cardID: Int?, message: String?, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = FeedbackEndpoint.createFeedback(parameters: APIRequestParameters.Feedback.Create(id: cardID, body: message))
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+        
 }

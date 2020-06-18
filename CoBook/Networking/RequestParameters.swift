@@ -109,6 +109,22 @@ enum APIRequestParameters {
         }
 
     }
+    
+    // MARK: - Feedback
+    
+    enum Feedback {
+        
+        struct Create: Encodable {
+            var id: Int?
+            var body: String?
+            
+            enum CodingKeys: String, CodingKey {
+                case id = "card_id"
+                case body
+            }
+        }
+        
+    }
 
 
 

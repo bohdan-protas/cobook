@@ -28,6 +28,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
     var postPreviewConfigurator: TableCellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>
     var actionTitleConfigurator: TableCellConfigurator<ActionTitleModel, ActionTitleTableViewCell>
     var commentPlaceholderCellConfigurator: TableCellConfigurator<PlaceholderCellModel, PlaceholderTableViewCell>
+    var buttonCellConfigurator: TableCellConfigurator<ButtonCellModel, AccentButtonTableViewCell>
     
     // MARK: - Cell configurator
 
@@ -67,6 +68,8 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
             return actionTitleConfigurator.reuseIdentifier
         case .commentPlaceholder:
             return commentPlaceholderCellConfigurator.reuseIdentifier
+        case .button:
+            return buttonCellConfigurator.reuseIdentifier
         }
     }
 
@@ -120,8 +123,11 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
         case .actionTitle(let model):
             return actionTitleConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
             
-        case .commentPlaceholder(model: let model):
+        case .commentPlaceholder(let model):
             return commentPlaceholderCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            
+        case .button(let model):
+            return buttonCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -143,6 +149,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
         postPreviewConfigurator.registerCells(in: tableView)
         actionTitleConfigurator.registerCells(in: tableView)
         commentPlaceholderCellConfigurator.registerCells(in: tableView)
+        buttonCellConfigurator.registerCells(in: tableView)
     }
 
 
@@ -317,6 +324,12 @@ extension BusinessCardDetailsPresenter {
                 cell.subtitleLabel.text = model.subtitle
                 return cell
             }
+            
+            let buttonCellConfigurator = TableCellConfigurator { (cell, model: ButtonCellModel, tableView, indexPath) -> AccentButtonTableViewCell in
+                cell.accentButton.setTitle(model.title, for: .normal)
+                cell.buttonActionHandler = model.action
+                return cell
+            }
 
             let configurator = BusinessCardDetailsDataSourceConfigurator(headerInfoCellConfigurator: headerInfoCellConfigurator,
                                                                          sectionTitleConfigurator: sectionTitleConfigurator,
@@ -334,7 +347,8 @@ extension BusinessCardDetailsPresenter {
                                                                          productSectionConfigurator: productSectionConfigurator,
                                                                          postPreviewConfigurator: postPreviewConfigurator,
                                                                          actionTitleConfigurator: actionTitleConfigurator,
-                                                                         commentPlaceholderCellConfigurator: commentPlaceholderCellConfigurator)
+                                                                         commentPlaceholderCellConfigurator: commentPlaceholderCellConfigurator,
+                                                                         buttonCellConfigurator: buttonCellConfigurator)
             
             return configurator
         }

@@ -364,9 +364,13 @@ private extension BusinessCardDetailsPresenter {
                 }
                 let previews: [BusinessCardDetails.Cell] = products.compactMap { BusinessCardDetails.Cell.productSection(model: $0) }
                 dataSource?[.cardDetails].items.append(contentsOf: previews)
-
+                
             case .responds:
-                break
+                dataSource?[.cardDetails].items = [
+                    .commentPlaceholder(model: PlaceholderCellModel(image: UIImage(named: "ic_placeholder_comments"),
+                                                                    title: "Відгуків ще немає",
+                                                                    subtitle: "Будьте першим, хто залишит відгук про компанію")),
+                    .button(model: ButtonCellModel(title: "Залишити відгук", action: { Log.debug("azaza") })),]
             }
         }
     }
