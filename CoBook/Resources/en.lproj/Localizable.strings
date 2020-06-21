@@ -144,8 +144,8 @@
 "Onboarding.Start" = "Start";
 
 // MARK: - Card overview
-"CardOverview.search.placeholder" = "Serach the card";
-"CardOverview.search.emptySearch" = "No results in serach";
+"CardOverview.search.placeholder" = "Search the card";
+"CardOverview.search.emptySearch" = "No results in search";
 "CardOverview.search.cardSearchResult" = "Found %li card(s)";
 "Card.hideButton.normalTitle" = "Not interested in card?";
 "Card.hideLabel.text" = "Hide";
