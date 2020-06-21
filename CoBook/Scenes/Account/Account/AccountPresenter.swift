@@ -68,7 +68,10 @@ class AccountPresenter: BasePresenter {
             case .inviteFriends:
                 inviteFriends()
 
-            case .statictics: break
+            case .statictics:
+                let statisticsController: CardStatisticsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: statisticsController, animated: true)
+                
             case .generateQrCode: break
             case .faq:
                  UIApplication.shared.open(Constants.CoBook.faqURL)
@@ -150,7 +153,7 @@ private extension AccountPresenter {
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized,
                                                           image: UIImage(named: "ic_account_createparsonalcard"),
                                                           actiontype: .inviteFriends)),
-            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
             //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
                                                           image: UIImage(named: "ic_account_faq"),
@@ -185,7 +188,7 @@ private extension AccountPresenter {
         socialMetaTags.imageURL = Constants.CoBook.logoURL
         socialMetaTags.title = "Social.metaTag.inviteFriends.title".localized
         socialMetaTags.descriptionText = "Social.metaTag.inviteFriends.description".localized
-        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags, successCompletion: nil)
     }
 
     func logout() {

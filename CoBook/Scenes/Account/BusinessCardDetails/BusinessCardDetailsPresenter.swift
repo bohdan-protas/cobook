@@ -155,7 +155,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         socialMetaTags.imageURL = URL.init(string: cardDetails?.avatar?.sourceUrl ?? "")
         socialMetaTags.title = cardDetails?.company?.name
         socialMetaTags.descriptionText = cardDetails?.description
-        view?.showShareSheet(path: .businessCard, parameters: [.id: "\(businessCardId)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+        view?.showShareSheet(path: .businessCard, parameters: [.id: "\(businessCardId)"], dynamicLinkSocialMetaTagParameters: socialMetaTags, successCompletion: { [weak self] in
+            guard let self = self else { return }
+            APIClient.default.incrementStatisticCount(cardID: self.businessCardId) { _ in }
+        })
     }
 
 

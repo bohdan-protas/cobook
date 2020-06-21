@@ -322,3 +322,9 @@
 "Feedback.placeholder.title" = "Відгуків ще немає";
 "Feedback.placeholder.subtitle" = "Будьте першим, хто залишит відгук про компанію";
 "Feedback.placeholder.leaveComment.normalTitle" = "Залишити відгук";
+
+// MARK: - Card statistics
+"Statistic.title" = "Статистика візиток";
+"Statistic.viewsCount.title" = "Кількість переглядів:";
+"Statistic.savedCount.title" = "Кількість збережень:";
+"Statistic.shareCount.title" = "Кількість поширень:";

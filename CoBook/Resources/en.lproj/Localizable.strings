@@ -316,3 +316,9 @@
 "Feedback.placeholder.title" = "There are no reviews yet";
 "Feedback.placeholder.subtitle" = "Be the first to review this company";
 "Feedback.placeholder.leaveComment.normalTitle" = "Leave a review";
+
+// MARK: - Card statistics
+"Statistic.title" = "Cards statistics";
+"Statistic.viewsCount.title" = "Number of views:";
+"Statistic.savedCount.title" = "Number of saves:";
+"Statistic.shareCount.title" = "Number of shares:";

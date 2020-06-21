@@ -400,6 +400,36 @@
             </objects>
             <point key="canvasLocation" x="3833" y="939"/>
         </scene>
+        <!--Card Statistics View Controller-->
+        <scene sceneID="q28-5y-gSf">
+            <objects>
+                <viewController storyboardIdentifier="CardStatisticsViewController" hidesBottomBarWhenPushed="YES" id="Q6W-VA-KQi" customClass="CardStatisticsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="efX-U6-GCw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="goa-IF-4fl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstItem="goa-IF-4fl" firstAttribute="leading" secondItem="QYS-hC-Zrf" secondAttribute="leading" id="6jG-mb-IJM"/>
+                            <constraint firstItem="goa-IF-4fl" firstAttribute="trailing" secondItem="QYS-hC-Zrf" secondAttribute="trailing" id="hso-C4-23y"/>
+                            <constraint firstItem="goa-IF-4fl" firstAttribute="bottom" secondItem="QYS-hC-Zrf" secondAttribute="bottom" id="sEM-b0-SD7"/>
+                            <constraint firstItem="goa-IF-4fl" firstAttribute="top" secondItem="QYS-hC-Zrf" secondAttribute="top" id="tF4-tZ-jed"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QYS-hC-Zrf"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="goa-IF-4fl" id="EcY-jS-o81"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mwW-yg-GiL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4604" y="938.68065967016503"/>
+        </scene>
         <!--Change Password View Controller-->
         <scene sceneID="XFg-mV-zWT">
             <objects>

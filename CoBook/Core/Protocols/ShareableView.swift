@@ -10,7 +10,10 @@ import UIKit
 import FirebaseDynamicLinks
 
 protocol ShareableView {
-    func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?)
+    func showShareSheet(path: Constants.DynamicLinks.Path,
+                        parameters: [Constants.DynamicLinks.QueryName: String?],
+                        dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?,
+                        successCompletion: (() -> Void)?)
 }
 
 fileprivate enum Layout {
@@ -20,7 +23,11 @@ fileprivate enum Layout {
 
 extension ShareableView where Self: UIViewController {
 
-    func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?) {
+    func showShareSheet(path: Constants.DynamicLinks.Path,
+                        parameters: [Constants.DynamicLinks.QueryName: String?],
+                        dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?,
+                        successCompletion: (() -> Void)?) {
+        
         var dynamicLink = Constants.DynamicLinks.baseURLPath
         dynamicLink.path = path.rawValue
         dynamicLink.queryItems = [URLQueryItem(name: Constants.DynamicLinks.QueryName.shareableUserID.rawValue, value: AppStorage.User.Profile?.userId)]
@@ -41,7 +48,6 @@ extension ShareableView where Self: UIViewController {
         if let bundleID = Bundle.main.bundleIdentifier {
             shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
         }
-
         
         shareLink.iOSParameters?.appStoreID = Constants.CoBook.appstoreID
         shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: Constants.Android.packageName)
@@ -63,7 +69,7 @@ extension ShareableView where Self: UIViewController {
             }
             guard let url = url else { return }
             let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
+            self.present(activityVC, animated: true, completion: successCompletion)
         }
     }
 
