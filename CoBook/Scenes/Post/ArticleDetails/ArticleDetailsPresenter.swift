@@ -139,7 +139,7 @@ class ArticleDetailsPresenter: BasePresenter {
         socialMetaTags.imageURL = URL.init(string: articleDetails?.photos?.first?.sourceUrl ?? "")
         socialMetaTags.title = articleDetails?.title
         socialMetaTags.descriptionText = articleDetails?.body
-        view?.showShareSheet(path: .article, parameters: [.articleID: "\(articleID ?? -1)", .albumID: "\(albumID ?? -1)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+        view?.showShareSheet(path: .article, parameters: [.articleID: "\(articleID ?? -1)", .albumID: "\(albumID ?? -1)"], dynamicLinkSocialMetaTagParameters: socialMetaTags, successCompletion: nil)
     }
 
 

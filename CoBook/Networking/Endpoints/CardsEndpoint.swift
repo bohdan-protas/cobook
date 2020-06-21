@@ -29,6 +29,7 @@ enum CardsEndpoint: Endpoint {
     case updateFolder(id: Int, title: String)
     
     case statistics
+    case incrementStatisticCount(cardID: Int)
 
     var useAuthirizationToken: Bool {
         return true
@@ -66,6 +67,8 @@ enum CardsEndpoint: Endpoint {
             return .post
         case .statistics:
             return .post
+        case .incrementStatisticCount:
+            return .post
         }
     }
 
@@ -91,6 +94,8 @@ enum CardsEndpoint: Endpoint {
             return "/cards/favourites/area-list"
         case .statistics:
             return "/cards/statistics"
+        case .incrementStatisticCount:
+            return "/cards/share/increment"
         }
     }
 
@@ -204,6 +209,9 @@ enum CardsEndpoint: Endpoint {
             
         case .statistics:
             return ["type": ""]
+            
+        case .incrementStatisticCount(let cardID):
+            return ["card_id": cardID]
             
         default: return nil
         }

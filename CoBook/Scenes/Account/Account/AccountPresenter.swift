@@ -188,7 +188,7 @@ private extension AccountPresenter {
         socialMetaTags.imageURL = Constants.CoBook.logoURL
         socialMetaTags.title = "Social.metaTag.inviteFriends.title".localized
         socialMetaTags.descriptionText = "Social.metaTag.inviteFriends.description".localized
-        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags, successCompletion: nil)
     }
 
     func logout() {
