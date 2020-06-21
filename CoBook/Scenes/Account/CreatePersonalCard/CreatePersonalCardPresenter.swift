@@ -165,11 +165,11 @@ private extension CreatePersonalCardPresenter {
             .socials,
         ])
 
-        let interestsSection = Section<CreatePersonalCard.Cell>(items: [
-            .sectionHeader,
-            .title(text: "PersonalCard.Creation.section.interests".localized),
-            .interests
-        ])
+//        let interestsSection = Section<CreatePersonalCard.Cell>(items: [
+//            .sectionHeader,
+//            .title(text: "PersonalCard.Creation.section.interests".localized),
+//            .interests
+//        ])
 
         viewDataSource?.sections = [photosSection, activitySection, contactsSection/*, interestsSection*/]
     }
