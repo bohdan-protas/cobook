@@ -27,6 +27,8 @@ enum CardsEndpoint: Endpoint {
     case createFolder(title: String)
     case deleteFolder(id: Int)
     case updateFolder(id: Int, title: String)
+    
+    case statistics
 
     var useAuthirizationToken: Bool {
         return true
@@ -62,6 +64,8 @@ enum CardsEndpoint: Endpoint {
             return .put
         case .getSavedCardsLocationsInRegion:
             return .post
+        case .statistics:
+            return .post
         }
     }
 
@@ -85,6 +89,8 @@ enum CardsEndpoint: Endpoint {
             return "/cards/favourites/tags"
         case .getSavedCardsLocationsInRegion:
             return "/cards/favourites/area-list"
+        case .statistics:
+            return "/cards/statistics"
         }
     }
 
@@ -195,7 +201,10 @@ enum CardsEndpoint: Endpoint {
 
         case .updateFolder(let id, let title):
             return ["id": id, "title": title]
-
+            
+        case .statistics:
+            return ["type": ""]
+            
         default: return nil
         }
     }

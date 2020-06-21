@@ -538,6 +538,18 @@ extension APIClient {
         let endpoint = CardsEndpoint.updateFolder(id: id, title: title)
         return performRequest(endpoint: endpoint, completion: completion)
     }
+    
+    /**
+     Request for fetching user cards statistics
+
+     - parameters:
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func cardStatisticsInfo(completion: @escaping (Result<[CardStatisticInfoApiModel]?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.statistics
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
 
 
 }
