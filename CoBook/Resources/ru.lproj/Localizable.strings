@@ -317,3 +317,9 @@
 "Feedback.placeholder.title" = "Отзывов пока нет";
 "Feedback.placeholder.subtitle" = "Будьте первым, кто оставить отзыв о компании";
 "Feedback.placeholder.leaveComment.normalTitle" = "Оставить отзыв";
+
+// MARK: - Card statistics
+"Statistic.title" = "Статистика визиток";
+"Statistic.viewsCount.title" = "Количество просмотров:";
+"Statistic.savedCount.title" = "Количество сбережений:";
+"Statistic.shareCount.title" = "Количество распространений:";

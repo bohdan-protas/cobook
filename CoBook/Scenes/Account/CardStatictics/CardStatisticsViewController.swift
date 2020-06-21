@@ -20,12 +20,25 @@ class CardStatisticsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupLayout()
-        presenter.view = self
+        
+        presenter.attachView(self)
         presenter.setup()
     }
     
     private func setupLayout() {
-        self.navigationItem.title = "Статистика візиток"
+        self.navigationItem.title = "Statistic.title".localized
+        tableView.delegate = self
+    }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension CardStatisticsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter.selectedItemAt(indexPath: indexPath)
     }
     
 }

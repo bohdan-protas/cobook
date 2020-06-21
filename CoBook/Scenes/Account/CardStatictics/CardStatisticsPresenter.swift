@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol CardStatisticsView: class, AlertDisplayableView, LoadDisplayableView {
+protocol CardStatisticsView: class, AlertDisplayableView, LoadDisplayableView, NavigableView {
     func set(dataSource: TableDataSource<CardStatisticsCellsConfigurator>?)
     func reload()
 }
@@ -46,10 +46,12 @@ class CardStaticticsPresenter: BasePresenter {
         }
         
         self.configurator = CardStatisticsCellsConfigurator(cardStatisticConfigurator: sectionTitleConfigurator)
+        self.dataSource = TableDataSource(sections: [], configurator: configurator)
     }
     
     func attachView(_ view: CardStatisticsView) {
         self.view = view
+        self.view?.set(dataSource: dataSource)
     }
     
     func detachView() {
@@ -76,7 +78,36 @@ class CardStaticticsPresenter: BasePresenter {
         }
     }
     
-    func updateViewDataSource() {
+    func selectedItemAt(indexPath: IndexPath) {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+            debugPrint("Error occured when selected account action type")
+            return
+        }
+
+        switch item {
+        case .card(let model):
+            switch model.cardType {
+            case .none: break
+            case .some(let value):
+                switch value {
+                case .personal:
+                    let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                    if let id = model.id {
+                        personalCardDetailsViewController.presenter = PersonalCardDetailsPresenter(id: id)
+                        view?.push(controller: personalCardDetailsViewController, animated: true)
+                    }
+                case .business:
+                    let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                    if let id = model.id {
+                        businessCardDetailsViewController.presenter = BusinessCardDetailsPresenter(id: id)
+                        view?.push(controller: businessCardDetailsViewController, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func updateViewDataSource() {
         var cardHeaderSection = Section<CardStatistics.Item>(items: [])
         cardHeaderSection.items = cardsStatistics.compactMap { .card(model: $0) }
         dataSource?.sections = [cardHeaderSection]

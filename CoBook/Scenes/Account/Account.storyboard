@@ -403,12 +403,12 @@
         <!--Card Statistics View Controller-->
         <scene sceneID="q28-5y-gSf">
             <objects>
-                <viewController storyboardIdentifier="CardStatisticsViewController" id="Q6W-VA-KQi" customClass="CardStatisticsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardStatisticsViewController" hidesBottomBarWhenPushed="YES" id="Q6W-VA-KQi" customClass="CardStatisticsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="efX-U6-GCw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="goa-IF-4fl">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="goa-IF-4fl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
