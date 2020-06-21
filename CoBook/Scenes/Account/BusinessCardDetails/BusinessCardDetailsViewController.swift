@@ -15,7 +15,7 @@ private enum Defaults {
     static let editCardViewHeight: CGFloat = 84
 }
 
-class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetailsView {
+class BusinessCardDetailsViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
     var presenter: BusinessCardDetailsPresenter?
@@ -78,6 +78,13 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
         self.tableView.delegate = self
     }
+
+    
+}
+ 
+// MARK: - BusinessCardDetailsView
+
+extension BusinessCardDetailsViewController: BusinessCardDetailsView {
 
     func setupEditCardView() {
         tableView.tableFooterView = editCardView
@@ -172,8 +179,14 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         controller.presenter = presenter
         self.navigationController?.pushViewController(controller, animated: true)
     }
-
-
+    
+    func goToCreateFeedback(presenter: AddFeedbackPresenter) {
+        let controller: AddFeedbackViewController = UIStoryboard.account.initiateViewControllerFromType()
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
 }
 
 // MARK: - UITableViewDelegate

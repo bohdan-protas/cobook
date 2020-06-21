@@ -109,6 +109,7 @@
 "BarItem.shop" = "Shop";
 "BarItem.team" = "Team";
 "BarItem.contacts" = "Contacts";
+"BarItem.feedbacks" = "Feedbacks";
 
 // MARK: - Loading
 "Loading.photoLoading.title" = "Photo loading...";
@@ -308,3 +309,10 @@
 
 // MARK: - Search content
 "SearchContent.title" = "Search";
+
+// MARK: - Feedback
+"Feedback.title" = "New review";
+"Feedback.placeholder.message" = "Write a review ...";
+"Feedback.placeholder.title" = "There are no reviews yet";
+"Feedback.placeholder.subtitle" = "Be the first to review this company";
+"Feedback.placeholder.leaveComment.normalTitle" = "Leave a review";

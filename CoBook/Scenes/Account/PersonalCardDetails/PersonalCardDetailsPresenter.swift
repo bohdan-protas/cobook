@@ -15,7 +15,6 @@ protocol PersonalCardDetailsView: class, AlertDisplayableView, LoadDisplayableVi
     func reload()
     func setupEditView()
     func setupEmptyBottomView()
-
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
     func goToCreatePost(cardID: Int)
 }

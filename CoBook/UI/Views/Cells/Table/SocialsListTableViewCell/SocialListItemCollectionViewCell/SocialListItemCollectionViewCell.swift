@@ -21,9 +21,10 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        socialTitleLabel.text = ""
-        socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
-        borderView.backgroundColor = .clear
+        self.socialTitleLabel.text = ""
+        self.socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
+        self.borderView.backgroundColor = UIColor.Theme.accent
+
     }
 
     override func prepareForReuse() {
@@ -49,19 +50,26 @@ class SocialListItemCollectionViewCell: UICollectionViewCell {
             } else {
                 if let url = social.url {
                     pendingRequestWorkItem = OpenGraphFetcher().fetchOpenGraphImage(from: url, completion: { [weak self] (result) in
+                        guard let self = self else { return }
                         switch result {
                         case .success(let imageUrl):
                             if let url = URL.init(string: imageUrl ?? "") {
-                                self?.socialImageView.af.setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "ic_social_default")) { [weak self] (response) in
+                                self.socialImageView.af.setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "ic_social_default")) { [weak self] (response) in
                                     self?.borderView.backgroundColor = response.value?.averageColor
                                 }
                             } else {
-                                self?.borderView.backgroundColor = UIColor.Theme.accent
+                                self.socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
+                                self.borderView.backgroundColor = UIColor.Theme.accent
                             }
                         case .failure(let error):
+                            self.socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
+                            self.borderView.backgroundColor = UIColor.Theme.accent
                             Log.error(error.localizedDescription)
                         }
                     })
+                } else {
+                    self.socialImageView.image = #imageLiteral(resourceName: "ic_social_default")
+                    self.borderView.backgroundColor = UIColor.Theme.accent
                 }
             }
         case .add:

@@ -47,7 +47,6 @@ enum CreatePersonalCard {
 
         init(apiModel: CardDetailsApiModel) {
             self.avatarImage = apiModel.avatar
-
             self.position = apiModel.position
             self.practiseType = PracticeModel(id: apiModel.practiceType?.id, title: apiModel.practiceType?.title)
             self.city = PlaceModel(googlePlaceId: apiModel.city?.googlePlaceId, name: apiModel.city?.name)
@@ -56,6 +55,7 @@ enum CreatePersonalCard {
             self.contactTelephone = apiModel.contactTelephone?.number
             self.contactEmail = apiModel.contactEmail?.address
             self.interests = apiModel.interests?.compactMap { TagModel(id: $0.id, title: $0.title, isSelected: true) } ?? []
+            self.socials = apiModel.socialNetworks?.compactMap { Social.ListItem.view(model: Social.Model(title: $0.title, url: $0.link)) } ?? []
         }
     }
 

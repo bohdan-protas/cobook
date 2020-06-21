@@ -27,6 +27,9 @@ enum BusinessCardDetails {
         case productSection(model: ProductPreviewSectionModel)
         case postPreview(model: PostPreview.Section?)
         case actionTitle(model: ActionTitleModel)
+        case commentPlaceholder(model: PlaceholderCellModel)
+        case button(model: ButtonCellModel)
+        case comment(model: FeedbackItemApiModel)
     }
 
     struct HeaderInfoModel {
@@ -44,7 +47,7 @@ enum BusinessCardDetails {
     }
 
     enum BarSectionsTypeIndex: Int {
-        case general, services, products, team, contacts
+        case general, services, products, team, responds, contacts
     }
 
     enum PostPreviewDataSourceID: String {

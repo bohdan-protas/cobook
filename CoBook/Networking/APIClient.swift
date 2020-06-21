@@ -832,6 +832,30 @@ extension APIClient {
     }
 
 
+}
 
+// MARK: - Feedback requests
 
+extension APIClient {
+    
+    @discardableResult
+    func createFeedback(cardID: Int?,
+                        message: String?,
+                        completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        
+        let endpoint = FeedbackEndpoint.createFeedback(parameters: APIRequestParameters.Feedback.Create(id: cardID, body: message))
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    @discardableResult
+    func getFeedbackList(cardID: Int?,
+                         limit: Int?,
+                         offset: Int?,
+                         completion: @escaping (Result<[FeedbackItemApiModel]?>) -> Void) -> DataRequest {
+        
+        let endpoint = FeedbackEndpoint.list(parameters: APIRequestParameters.Feedback.List(id: cardID, limit: limit, offset: offset))
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    
 }

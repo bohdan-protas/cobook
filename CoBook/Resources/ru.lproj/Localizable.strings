@@ -109,6 +109,7 @@
 "BarItem.shop" = "Магазин";
 "BarItem.team" = "Команда";
 "BarItem.contacts" = "Контакты";
+"BarItem.feedbacks" = "Отзывы";
 
 // MARK: - Loading
 "Loading.photoLoading.title" = "Продолжается загрузка фото...";
@@ -309,3 +310,10 @@
 
 // MARK: - Search content
 "SearchContent.title" = "Поиск";
+
+// MARK: - Feedback
+"Feedback.title" = "Новый отзыв";
+"Feedback.placeholder.message" = "Напишите отзыв...";
+"Feedback.placeholder.title" = "Отзывов пока нет";
+"Feedback.placeholder.subtitle" = "Будьте первым, кто оставить отзыв о компании";
+"Feedback.placeholder.leaveComment.normalTitle" = "Оставить отзыв";
