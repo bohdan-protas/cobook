@@ -62,8 +62,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         self.barItems = [
             BarItem(index: CardsOverview.BarSectionsTypeIndex.allCards.rawValue, title: "BarItem.allCards".localized),
             BarItem(index: CardsOverview.BarSectionsTypeIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
-            //BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
-            //BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
+            BarItem(index: CardsOverview.BarSectionsTypeIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first
         super.init()

@@ -73,8 +73,8 @@ class SavedContentPresenter: BasePresenter {
             self.barItems = [
                 BarItem(index: SavedContent.BarItemAccessoryIndex.allCards.rawValue, title: "BarItem.allCards".localized),
                 BarItem(index: SavedContent.BarItemAccessoryIndex.personalCards.rawValue, title: "BarItem.personalCards".localized),
-                //BarItem(index: SavedContent.BarItemAccessoryIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
-                //BarItem(index: SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized)
+                BarItem(index: SavedContent.BarItemAccessoryIndex.businessCards.rawValue, title: "BarItem.businessCards".localized),
+                BarItem(index: SavedContent.BarItemAccessoryIndex.inMyRegionCards.rawValue, title: "BarItem.myRegion".localized)
             ]
 
             self.barItems.append(contentsOf: barItems)

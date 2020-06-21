@@ -317,6 +317,7 @@
 "Feedback.placeholder.title" = "Отзывов пока нет";
 "Feedback.placeholder.subtitle" = "Будьте первым, кто оставить отзыв о компании";
 "Feedback.placeholder.leaveComment.normalTitle" = "Оставить отзыв";
+"Feedback.validationError.maxCount" = "Максимальна кількість символів для відгуку складає %l символів";
 
 // MARK: - Card statistics
 "Statistic.title" = "Статистика визиток";

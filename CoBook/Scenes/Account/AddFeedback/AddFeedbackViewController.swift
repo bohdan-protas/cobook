@@ -106,7 +106,6 @@ extension AddFeedbackViewController {
     func setupLayout() {
         self.navigationItem.title = "Feedback.title".localized
         self.messageTextView.delegate = self
-        self.messageTextView.placeholder = "Feedback.placeholder.textInput".localized
     }
     
     
