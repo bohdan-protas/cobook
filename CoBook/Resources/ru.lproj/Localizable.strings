@@ -324,3 +324,10 @@
 "Statistic.viewsCount.title" = "Количество просмотров:";
 "Statistic.savedCount.title" = "Количество сбережений:";
 "Statistic.shareCount.title" = "Количество распространений:";
+
+// MARK: - QR code
+"QRCode.title" = "Реферальные ссылки";
+"QRCode.qrInfo.title" = "Ваш QR код";
+"QRCode.qrInfo.body" = "Просканируйте или распечатайте этот код чтобы подключить партнера к сети CoBook по вашему реферальной ссылке";
+"QRCode.referalInfo.title" = "Ваша реферальная ссылка";
+"QRCode.referalInfo.body" = "Скопируйте и отправьте эту ссылку вашему партнеру чтобы подключить партнера к сети CoBook по вашему реферальной ссылке";

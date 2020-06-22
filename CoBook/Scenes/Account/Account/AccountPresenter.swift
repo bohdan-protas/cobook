@@ -72,10 +72,16 @@ class AccountPresenter: BasePresenter {
                 let statisticsController: CardStatisticsViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: statisticsController, animated: true)
                 
-            case .generateQrCode: break
+            case .generateQrCode:
+                let qrCodeController: QRCodeViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: qrCodeController, animated: true)
+                
             case .faq:
                  UIApplication.shared.open(Constants.CoBook.faqURL)
-            case .startMakingMoney: break
+                
+            case .startMakingMoney:
+                break
+                
             case .quitAccount:
                 logout()
             }
@@ -154,7 +160,7 @@ private extension AccountPresenter {
                                                           image: UIImage(named: "ic_account_createparsonalcard"),
                                                           actiontype: .inviteFriends)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
                                                           image: UIImage(named: "ic_account_faq"),
                                                           actiontype: .faq)),
