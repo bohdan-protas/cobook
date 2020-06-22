@@ -160,8 +160,8 @@
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Confirm phone number";
-"ConfirmTelephone.description" = "Enter code from SMS";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Didn’t receive a SMS?";
+"ConfirmTelephone.description" = "Enter code from SMS, which was melted down to the number specified during registration.";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Didn’t receive a SMS? Resend";
 
 // MARK: - Confirm password
 "CreatePassword.header" = "Last step";

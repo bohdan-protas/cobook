@@ -161,8 +161,8 @@
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Подтвердите номер телефона";
-"ConfirmTelephone.description" = "Введите код из смс-сообщения";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не пришла СМС?";
+"ConfirmTelephone.description" = "Введите код из смс-сообщения, которую было отплавлено на номер указанный при реестрации.";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не пришла СМС? Переслать.";
 
 // MARK: - Confirm password
 "CreatePassword.header" = "Последний шаг";
