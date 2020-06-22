@@ -73,7 +73,8 @@ class AccountPresenter: BasePresenter {
                 view?.push(controller: statisticsController, animated: true)
                 
             case .generateQrCode:
-                Log.debug("qr!")
+                let qrCodeController: QRCodeViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: qrCodeController, animated: true)
                 
             case .faq:
                  UIApplication.shared.open(Constants.CoBook.faqURL)
