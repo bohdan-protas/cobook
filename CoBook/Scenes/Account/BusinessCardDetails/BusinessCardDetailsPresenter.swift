@@ -26,6 +26,7 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToCreatePost(cardID: Int)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
     func goToCreateFeedback(presenter: AddFeedbackPresenter)
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -128,6 +129,13 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             let presenter = CreateProductPresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
             view?.goToCreateProduct(presenter: presenter)
 
+            
+        case .employee(let model):
+            if let id = model?.cardId {
+                let presenter = PersonalCardDetailsPresenter(id: id)
+                view?.goToPersonalCardDetails(presenter: presenter)
+            }
+            
         default:
             break
         }
