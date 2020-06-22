@@ -180,6 +180,7 @@ extension BusinessCardDetailsPresenter {
                 cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
                 cell.professionLabel.text = model?.practiceType?.title
                 cell.telNumberLabel.text = model?.telephone
+                cell.saveButton.isHidden = true
 
                 return cell
             }
