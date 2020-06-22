@@ -68,7 +68,7 @@ enum CardsEndpoint: Endpoint {
         case .statistics:
             return .post
         case .incrementStatisticCount:
-            return .post
+            return .get
         }
     }
 
@@ -127,12 +127,15 @@ enum CardsEndpoint: Endpoint {
                 params["offset"] = "\(offset)"
             }
             return params
-
+            
+        case .incrementStatisticCount(let cardID):
+            return ["card_id": "\(cardID)"]
+            
         default:
             return nil
         }
     }
-
+    
     var bodyParameters: Parameters? {
         switch self {
 
@@ -209,9 +212,6 @@ enum CardsEndpoint: Endpoint {
             
         case .statistics:
             return ["type": ""]
-            
-        case .incrementStatisticCount(let cardID):
-            return ["card_id": cardID]
             
         default: return nil
         }
