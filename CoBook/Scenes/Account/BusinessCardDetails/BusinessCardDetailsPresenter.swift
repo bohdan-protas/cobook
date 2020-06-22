@@ -62,10 +62,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.businessCardId = id
         self.barItems = [
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "BarItem.generalInfo".localized),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
+            //BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "BarItem.shop".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "BarItem.team".localized),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
+            //BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "BarItem.contacts".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
