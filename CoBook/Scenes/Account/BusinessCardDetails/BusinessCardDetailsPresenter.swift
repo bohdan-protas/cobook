@@ -423,13 +423,13 @@ private extension BusinessCardDetailsPresenter {
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        if index == selectedBarItem.index {
+        if barItems[index].index == selectedBarItem.index {
             return
         }
+        selectedBarItem = barItems[index]
         let insertionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
         let deletionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .right : .left
-        selectedBarItem = barItems[index]
-
+        
         var deletionIndexPaths = [IndexPath]()
         for row in 0..<dataSource![.cardDetails].items.count {
             deletionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))
