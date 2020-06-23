@@ -12,6 +12,10 @@ protocol AddFeedbackView: class, AlertDisplayableView, LoadDisplayableView, Navi
     func setButton(actived: Bool)
 }
 
+fileprivate enum Defaults {
+    static let maxFeedbackCount: Int = 500
+}
+
 class AddFeedbackPresenter {
 
     weak var view: AddFeedbackView?
@@ -33,6 +37,12 @@ class AddFeedbackPresenter {
     }
     
     func createFeedback() {
+        
+        if self.message.count > Defaults.maxFeedbackCount {
+            self.view?.errorAlert(message: String(format: "Feedback.validationError.maxCount".localized, Defaults.maxFeedbackCount))
+            return
+        }
+        
         view?.startLoading()
         APIClient.default.createFeedback(cardID: cardID, message: self.message) { [weak self] (result) in
             guard let self = self else { return }

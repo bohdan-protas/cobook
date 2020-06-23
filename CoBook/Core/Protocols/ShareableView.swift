@@ -10,7 +10,14 @@ import UIKit
 import FirebaseDynamicLinks
 
 protocol ShareableView {
-    func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?)
+    func showShareSheet(path: Constants.DynamicLinks.Path,
+                        parameters: [Constants.DynamicLinks.QueryName: String?],
+                        dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?,
+                        successCompletion: (() -> Void)?)
+    
+    func generateLink(path: Constants.DynamicLinks.Path,
+                      dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?,
+                      parameters: [Constants.DynamicLinks.QueryName: String?]) -> (link: DynamicLinkComponents?, error: Error?)
 }
 
 fileprivate enum Layout {
@@ -20,7 +27,46 @@ fileprivate enum Layout {
 
 extension ShareableView where Self: UIViewController {
 
-    func showShareSheet(path: Constants.DynamicLinks.Path, parameters: [Constants.DynamicLinks.QueryName: String?], dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?) {
+    func generateLink(path: Constants.DynamicLinks.Path,
+                      dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?,
+                      parameters: [Constants.DynamicLinks.QueryName: String?]) -> (link: DynamicLinkComponents?, error: Error?) {
+        
+        var dynamicLink = Constants.DynamicLinks.baseURLPath
+        dynamicLink.path = path.rawValue
+        dynamicLink.queryItems = [URLQueryItem(name: Constants.DynamicLinks.QueryName.shareableUserID.rawValue, value: AppStorage.User.Profile?.userId)]
+        let queryItems: [URLQueryItem] = parameters.enumerated().compactMap { URLQueryItem(name: $0.element.key.rawValue, value: $0.element.value) }
+        dynamicLink.queryItems?.append(contentsOf: queryItems)
+
+        guard let dynamicLinkURL = dynamicLink.url else {
+            return (nil, NSError.instantiate(code: -1, localizedMessage: "Couldnt create share link URL"))
+        }
+
+        guard let shareLink = DynamicLinkComponents(link: dynamicLinkURL, domainURIPrefix: Constants.DynamicLinks.domainURIPrefix.absoluteString) else {
+            return (nil, NSError.instantiate(code: -1, localizedMessage: "Couldn create FDL components"))
+        }
+
+        // iOS parameters
+        if let bundleID = Bundle.main.bundleIdentifier {
+            shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
+        }
+        
+        shareLink.iOSParameters?.appStoreID = Constants.CoBook.appstoreID
+        shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: Constants.Android.packageName)
+
+        // Social metatag parameters
+        let dynamicLinkSocialMetaTagParameters = dynamicLinkSocialMetaTagParameters
+        dynamicLinkSocialMetaTagParameters?.title = dynamicLinkSocialMetaTagParameters?.title?[0..<Layout.maxSocialTitleCount]
+        dynamicLinkSocialMetaTagParameters?.descriptionText = dynamicLinkSocialMetaTagParameters?.descriptionText?[0..<Layout.maxSocialDescrCount]
+        shareLink.socialMetaTagParameters = dynamicLinkSocialMetaTagParameters
+        
+        return (shareLink, nil)
+    }
+    
+    func showShareSheet(path: Constants.DynamicLinks.Path,
+                        parameters: [Constants.DynamicLinks.QueryName: String?],
+                        dynamicLinkSocialMetaTagParameters: DynamicLinkSocialMetaTagParameters?,
+                        successCompletion: (() -> Void)?) {
+        
         var dynamicLink = Constants.DynamicLinks.baseURLPath
         dynamicLink.path = path.rawValue
         dynamicLink.queryItems = [URLQueryItem(name: Constants.DynamicLinks.QueryName.shareableUserID.rawValue, value: AppStorage.User.Profile?.userId)]
@@ -41,7 +87,6 @@ extension ShareableView where Self: UIViewController {
         if let bundleID = Bundle.main.bundleIdentifier {
             shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
         }
-
         
         shareLink.iOSParameters?.appStoreID = Constants.CoBook.appstoreID
         shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: Constants.Android.packageName)
@@ -63,7 +108,7 @@ extension ShareableView where Self: UIViewController {
             }
             guard let url = url else { return }
             let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
+            self.present(activityVC, animated: true, completion: successCompletion)
         }
     }
 

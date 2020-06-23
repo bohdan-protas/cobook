@@ -123,19 +123,16 @@
 "Error.connection" = "Не вдалося приєднатися до сервера";
 "Error.employAreadyAdded" = "Вибраний працівник вже доданий";
 "Error.photoLoading.message" = "Помилка завантаження фото";
-
 "Error.Social.unreadableFormat" = "Будь-ласка введіть посилання в правильному форматі";
 "Error.Social.badLink.message" = "Посилання має хибний формат";
-
 "Error.Map.notDefinedRoute.message" = "Не визначені адреси маршрутів";
 "Error.Map.cantOpen.message" = "Не вдається відкрити карти";
 "Error.Map.accessDenied.title" = "Для перегляду карти, надайте додатку доступ до вашої локації";
 "Error.Map.accessDeniedButton.normalTitle" = "Відкрити налаштування";
-
 "Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
 "Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
 "Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
-"Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
+"Error.Validation.telephone" = "Номер телефону повинен бути у форматі +380XXXXXXXXX";
 "Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
 "Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
 "Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";
@@ -166,8 +163,8 @@
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Підтвердьте номер телефону";
-"ConfirmTelephone.description" = "Введіть код із смс-повідомлення";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС?";
+"ConfirmTelephone.description" = "Введіть код із смс-повідомлення, яку було відправлено на номер вказаний при реєстрації.";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС? Переслати";
 
 // MARK: - Confirm password
 "CreatePassword.header" = "Останній крок";
@@ -322,3 +319,17 @@
 "Feedback.placeholder.title" = "Відгуків ще немає";
 "Feedback.placeholder.subtitle" = "Будьте першим, хто залишит відгук про компанію";
 "Feedback.placeholder.leaveComment.normalTitle" = "Залишити відгук";
+"Feedback.validationError.maxCount" = "Максимальна кількість символів для відгуку складає %l символів";
+
+// MARK: - Card statistics
+"Statistic.title" = "Статистика візиток";
+"Statistic.viewsCount.title" = "Кількість переглядів:";
+"Statistic.savedCount.title" = "Кількість збережень:";
+"Statistic.shareCount.title" = "Кількість поширень:";
+
+// MARK: - QR code
+"QRCode.title" = "Реферальні посилання";
+"QRCode.qrInfo.title" = "Ваш QR код";
+"QRCode.qrInfo.body" = "Проскануйте або роздрукуйте цей код щоб підключити партнера до мережі CoBook за вашим реферальним посиланням";
+"QRCode.referalInfo.title" = "Ваше реферальне посилання";
+"QRCode.referalInfo.body" = "Скопіюйте і відправте це посилання вашому партнеру щоб підключити партнера до мережі CoBook за вашим реферальним посиланням";

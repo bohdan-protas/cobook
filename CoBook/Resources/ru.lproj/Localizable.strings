@@ -132,7 +132,7 @@
 "Error.Validation.email" = "Пожалуйста, введите правильный имейл";
 "Error.Validation.firstName" = "Имя должно состоять как минимум из 3 букв, но не больше 25";
 "Error.Validation.lastName" = "Фамилия должна состоять как минимум из 3 букв, но не больше 25";
-"Error.Validation.telephone" = "Пожалуйста, введите правильний номер телефона";
+"Error.Validation.telephone" = "Номер телефона должен быть в формате +380XXXXXXXXX";
 "Error.Validation.password" = "Пароль должен состоять как минимум из 3 символов, но не больше 25";
 "Error.maxSelectedElements" = "Максимльное количество выбранных елементов - %li";
 
@@ -161,8 +161,8 @@
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Подтвердите номер телефона";
-"ConfirmTelephone.description" = "Введите код из смс-сообщения";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не пришла СМС?";
+"ConfirmTelephone.description" = "Введите код из смс-сообщения, которую было отплавлено на номер указанный при реестрации.";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не пришла СМС? Переслать.";
 
 // MARK: - Confirm password
 "CreatePassword.header" = "Последний шаг";
@@ -317,3 +317,17 @@
 "Feedback.placeholder.title" = "Отзывов пока нет";
 "Feedback.placeholder.subtitle" = "Будьте первым, кто оставить отзыв о компании";
 "Feedback.placeholder.leaveComment.normalTitle" = "Оставить отзыв";
+"Feedback.validationError.maxCount" = "Максимальна кількість символів для відгуку складає %l символів";
+
+// MARK: - Card statistics
+"Statistic.title" = "Статистика визиток";
+"Statistic.viewsCount.title" = "Количество просмотров:";
+"Statistic.savedCount.title" = "Количество сбережений:";
+"Statistic.shareCount.title" = "Количество распространений:";
+
+// MARK: - QR code
+"QRCode.title" = "Реферальные ссылки";
+"QRCode.qrInfo.title" = "Ваш QR код";
+"QRCode.qrInfo.body" = "Просканируйте или распечатайте этот код чтобы подключить партнера к сети CoBook по вашему реферальной ссылке";
+"QRCode.referalInfo.title" = "Ваша реферальная ссылка";
+"QRCode.referalInfo.body" = "Скопируйте и отправьте эту ссылку вашему партнеру чтобы подключить партнера к сети CoBook по вашему реферальной ссылке";

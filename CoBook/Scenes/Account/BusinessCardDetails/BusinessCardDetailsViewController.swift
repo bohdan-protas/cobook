@@ -85,7 +85,7 @@ class BusinessCardDetailsViewController: BaseViewController {
 // MARK: - BusinessCardDetailsView
 
 extension BusinessCardDetailsViewController: BusinessCardDetailsView {
-
+    
     func setupEditCardView() {
         tableView.tableFooterView = editCardView
     }
@@ -184,6 +184,13 @@ extension BusinessCardDetailsViewController: BusinessCardDetailsView {
         let controller: AddFeedbackViewController = UIStoryboard.account.initiateViewControllerFromType()
         controller.presenter = presenter
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter) {
+        let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+        personalCardDetailsViewController.presenter = presenter
+        let navigationController = CustomNavigationController(rootViewController: personalCardDetailsViewController)
+        self.presentPanModal(navigationController)
     }
     
     

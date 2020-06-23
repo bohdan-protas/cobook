@@ -26,6 +26,7 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToCreatePost(cardID: Int)
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
     func goToCreateFeedback(presenter: AddFeedbackPresenter)
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -61,10 +62,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.businessCardId = id
         self.barItems = [
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "BarItem.generalInfo".localized),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
+            //BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "BarItem.shop".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "BarItem.team".localized),
-            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
+            //BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "BarItem.contacts".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
@@ -128,6 +129,13 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             let presenter = CreateProductPresenter(businessCardID: businessCardId, companyName: cardDetails?.company?.name, companyAvatar: cardDetails?.avatar?.sourceUrl)
             view?.goToCreateProduct(presenter: presenter)
 
+            
+        case .employee(let model):
+            if let id = model?.cardId {
+                let presenter = PersonalCardDetailsPresenter(id: id)
+                view?.goToPersonalCardDetails(presenter: presenter)
+            }
+            
         default:
             break
         }
@@ -155,7 +163,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         socialMetaTags.imageURL = URL.init(string: cardDetails?.avatar?.sourceUrl ?? "")
         socialMetaTags.title = cardDetails?.company?.name
         socialMetaTags.descriptionText = cardDetails?.description
-        view?.showShareSheet(path: .businessCard, parameters: [.id: "\(businessCardId)"], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+        view?.showShareSheet(path: .businessCard, parameters: [.id: "\(businessCardId)"], dynamicLinkSocialMetaTagParameters: socialMetaTags, successCompletion: { [weak self] in
+            guard let self = self else { return }
+            APIClient.default.incrementStatisticCount(cardID: self.businessCardId) { _ in }
+        })
     }
 
 
@@ -412,13 +423,13 @@ private extension BusinessCardDetailsPresenter {
 extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
 
     func horizontalItemsBarView(_ view: HorizontalItemsBarView, didSelectedItemAt index: Int) {
-        if index == selectedBarItem.index {
+        if barItems[index].index == selectedBarItem.index {
             return
         }
+        selectedBarItem = barItems[index]
         let insertionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
         let deletionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .right : .left
-        selectedBarItem = barItems[index]
-
+        
         var deletionIndexPaths = [IndexPath]()
         for row in 0..<dataSource![.cardDetails].items.count {
             deletionIndexPaths.append(IndexPath(row: row, section: BusinessCardDetails.SectionAccessoryIndex.cardDetails.rawValue))

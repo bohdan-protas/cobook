@@ -132,7 +132,7 @@
 "Error.Validation.email" = "Please enter correct email";
 "Error.Validation.firstName" = "First name should contain at least 3 letters but not more than 25";
 "Error.Validation.lastName" = " Last name should contain at least 3 letters but not more than 25";
-"Error.Validation.telephone" = "Please enter correct phone number";
+"Error.Validation.telephone" = "Phone number must be in the format +380XXXXXXXXX";
 "Error.Validation.password" = " Password should contain at least 3 letters but not more than 25";
 "Error.maxSelectedElements" = "Maximum allowed selected elements - %li";
 
@@ -144,8 +144,8 @@
 "Onboarding.Start" = "Start";
 
 // MARK: - Card overview
-"CardOverview.search.placeholder" = "Serach the card";
-"CardOverview.search.emptySearch" = "No results in serach";
+"CardOverview.search.placeholder" = "Search the card";
+"CardOverview.search.emptySearch" = "No results in search";
 "CardOverview.search.cardSearchResult" = "Found %li card(s)";
 "Card.hideButton.normalTitle" = "Not interested in card?";
 "Card.hideLabel.text" = "Hide";
@@ -160,8 +160,8 @@
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Confirm phone number";
-"ConfirmTelephone.description" = "Enter code from SMS";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Didn’t receive a SMS?";
+"ConfirmTelephone.description" = "Enter code from SMS, which was melted down to the number specified during registration.";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Didn’t receive a SMS? Resend";
 
 // MARK: - Confirm password
 "CreatePassword.header" = "Last step";
@@ -316,3 +316,17 @@
 "Feedback.placeholder.title" = "There are no reviews yet";
 "Feedback.placeholder.subtitle" = "Be the first to review this company";
 "Feedback.placeholder.leaveComment.normalTitle" = "Leave a review";
+"Feedback.validationError.maxCount" = "Максимальна кількість символів для відгуку складає %l символів";
+
+// MARK: - Card statistics
+"Statistic.title" = "Cards statistics";
+"Statistic.viewsCount.title" = "Number of views:";
+"Statistic.savedCount.title" = "Number of saves:";
+"Statistic.shareCount.title" = "Number of shares:";
+
+// MARK: - QR code
+"QRCode.title" = "Referral links";
+"QRCode.qrInfo.title" = "Your QR code";
+"QRCode.qrInfo.body" = "Scan or print this code to connect your CoBook partner to your referral link";
+"QRCode.referalInfo.title" = "Your referral link";
+"QRCode.referalInfo.body" = "Copy and send this link to your partner to connect the partner to the CoBook network at your referral link";

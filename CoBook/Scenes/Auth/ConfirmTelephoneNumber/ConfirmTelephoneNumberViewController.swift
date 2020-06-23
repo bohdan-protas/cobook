@@ -23,6 +23,8 @@ class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephone
     @Localized("ConfirmTelephone.description")
     @IBOutlet var descroptionLabel: UILabel!
 
+    @IBOutlet weak var telephoneLabel: UILabel!
+    
     @Localized("Button.continue.normalTitle")
     @IBOutlet var continueButton: LoaderDesignableButton!
 
@@ -42,6 +44,9 @@ class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephone
             smsCodeTextFields[safe: index-1]?.becomeFirstResponder()
         } else {
             smsCodeTextFields[safe: index+1]?.becomeFirstResponder()
+            if sender == smsCodeTextFields.last {
+                view.endEditing(true)
+            }
         }
 
         /// if each text field is no empty
@@ -62,6 +67,7 @@ class ConfirmTelephoneNumberViewController: BaseViewController, ConfirmTelephone
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        telephoneLabel.text = AppStorage.User.Profile?.telephone.number
         presenter?.attachView(self)
     }
 
