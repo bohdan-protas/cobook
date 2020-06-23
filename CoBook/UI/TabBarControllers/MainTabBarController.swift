@@ -26,7 +26,7 @@ class MainTabBarController: UITabBarController {
         accountController.tabBarItem = UITabBarItem(title: "Tabbar.account.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_account_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_account_active"))
 
         self.viewControllers = [allCardsController, savedContentController, accountController]
-        self.selectedViewController = accountController
+        self.selectedViewController = allCardsController
 
         // If pending dynamic link exists - its time to show it
         if let pendingDynamicLink = AppStorage.State.pendingDynamicLink {
