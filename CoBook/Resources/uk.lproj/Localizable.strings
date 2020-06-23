@@ -166,8 +166,8 @@
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Підтвердьте номер телефону";
-"ConfirmTelephone.description" = "Введіть код із смс-повідомлення";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС?";
+"ConfirmTelephone.description" = "Введіть код із смс-повідомлення, яку було відправлено на номер вказаний при реєстрації.";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Не надійшла СМС? Переслати";
 
 // MARK: - Confirm password
 "CreatePassword.header" = "Останній крок";
@@ -329,3 +329,10 @@
 "Statistic.viewsCount.title" = "Кількість переглядів:";
 "Statistic.savedCount.title" = "Кількість збережень:";
 "Statistic.shareCount.title" = "Кількість поширень:";
+
+// MARK: - QR code
+"QRCode.title" = "Реферальні посилання";
+"QRCode.qrInfo.title" = "Ваш QR код";
+"QRCode.qrInfo.body" = "Проскануйте або роздрукуйте цей код щоб підключити партнера до мережі CoBook за вашим реферальним посиланням";
+"QRCode.referalInfo.title" = "Ваше реферальне посилання";
+"QRCode.referalInfo.body" = "Скопіюйте і відправте це посилання вашому партнеру щоб підключити партнера до мережі CoBook за вашим реферальним посиланням";

@@ -160,8 +160,8 @@
 
 // MARK: - Create Password
 "ConfirmTelephone.header" = "Confirm phone number";
-"ConfirmTelephone.description" = "Enter code from SMS";
-"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Didn’t receive a SMS?";
+"ConfirmTelephone.description" = "Enter code from SMS, which was melted down to the number specified during registration.";
+"ConfirmTelephone.smsNotArrivedQuestion.normalTitle" = "Didn’t receive a SMS? Resend";
 
 // MARK: - Confirm password
 "CreatePassword.header" = "Last step";
@@ -323,3 +323,10 @@
 "Statistic.viewsCount.title" = "Number of views:";
 "Statistic.savedCount.title" = "Number of saves:";
 "Statistic.shareCount.title" = "Number of shares:";
+
+// MARK: - QR code
+"QRCode.title" = "Referral links";
+"QRCode.qrInfo.title" = "Your QR code";
+"QRCode.qrInfo.body" = "Scan or print this code to connect your CoBook partner to your referral link";
+"QRCode.referalInfo.title" = "Your referral link";
+"QRCode.referalInfo.body" = "Copy and send this link to your partner to connect the partner to the CoBook network at your referral link";

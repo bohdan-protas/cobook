@@ -109,8 +109,8 @@ extension AppDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
-        IQKeyboardManager.shared.disabledToolbarClasses.append(ConfirmTelephoneNumberViewController.self)
+        //IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
+        //IQKeyboardManager.shared.disabledToolbarClasses.append(ConfirmTelephoneNumberViewController.self)
 
         // Google services
         GMSServices.provideAPIKey(Constants.Google.placesApiKey)
