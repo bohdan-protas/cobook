@@ -258,6 +258,7 @@ private extension CreateBusinessCardPresenter {
             guard let strongSelf = self else { return }
             switch result {
             case .success:
+                NotificationCenter.default.post(name: .profideDataUpdated, object: nil, userInfo: nil)
                 strongSelf.view?.stopLoading(success: true, completion: {
                     AppStorage.State.isNeedToUpdateAccountData = true
                     strongSelf.view?.popController()
@@ -277,6 +278,7 @@ private extension CreateBusinessCardPresenter {
             guard let strongSelf = self else { return }
             switch result {
             case .success:
+                NotificationCenter.default.post(name: .profideDataUpdated, object: nil, userInfo: nil)
                 strongSelf.view?.stopLoading(success: true, completion: {
                     AppStorage.State.isNeedToUpdateAccountData = true
                     strongSelf.view?.popController()
