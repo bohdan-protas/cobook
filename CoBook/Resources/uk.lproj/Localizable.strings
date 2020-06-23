@@ -123,19 +123,16 @@
 "Error.connection" = "Не вдалося приєднатися до сервера";
 "Error.employAreadyAdded" = "Вибраний працівник вже доданий";
 "Error.photoLoading.message" = "Помилка завантаження фото";
-
 "Error.Social.unreadableFormat" = "Будь-ласка введіть посилання в правильному форматі";
 "Error.Social.badLink.message" = "Посилання має хибний формат";
-
 "Error.Map.notDefinedRoute.message" = "Не визначені адреси маршрутів";
 "Error.Map.cantOpen.message" = "Не вдається відкрити карти";
 "Error.Map.accessDenied.title" = "Для перегляду карти, надайте додатку доступ до вашої локації";
 "Error.Map.accessDeniedButton.normalTitle" = "Відкрити налаштування";
-
 "Error.Validation.email" = "Будь-ласка введіть правильний Емайл";
 "Error.Validation.firstName" = "Імя повинно бути мінімум 3 літери, але не більше 25";
 "Error.Validation.lastName" = "Прізвище повинно бути мінімум 3 літери, але не більше 25";
-"Error.Validation.telephone" = "Будь-ласка введіть правильний номер телефону";
+"Error.Validation.telephone" = "Номер телефону повинен бути у форматі +380XXXXXXXXX";
 "Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
 "Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
 "Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";

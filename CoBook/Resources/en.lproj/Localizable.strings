@@ -132,7 +132,7 @@
 "Error.Validation.email" = "Please enter correct email";
 "Error.Validation.firstName" = "First name should contain at least 3 letters but not more than 25";
 "Error.Validation.lastName" = " Last name should contain at least 3 letters but not more than 25";
-"Error.Validation.telephone" = "Please enter correct phone number";
+"Error.Validation.telephone" = "Phone number must be in the format +380XXXXXXXXX";
 "Error.Validation.password" = " Password should contain at least 3 letters but not more than 25";
 "Error.maxSelectedElements" = "Maximum allowed selected elements - %li";
 

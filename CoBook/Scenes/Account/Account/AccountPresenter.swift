@@ -141,17 +141,17 @@ private extension AccountPresenter {
                                                                                            actiontype: .createPersonalCard)))
         }
 
-        if !businessCardsList.isEmpty {
-            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
-            cardsPreviewSection.items.append(contentsOf: cards)
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        } else {
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        }
+//        if !businessCardsList.isEmpty {
+//            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
+//            cardsPreviewSection.items.append(contentsOf: cards)
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        } else {
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        }
 
         // menuItems Section
         let menuItemsSection = Section<Account.Item>(items: [
@@ -159,8 +159,8 @@ private extension AccountPresenter {
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized,
                                                           image: UIImage(named: "ic_account_createparsonalcard"),
                                                           actiontype: .inviteFriends)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
+            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
                                                           image: UIImage(named: "ic_account_faq"),
                                                           actiontype: .faq)),
