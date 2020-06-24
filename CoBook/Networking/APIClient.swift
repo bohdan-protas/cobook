@@ -538,6 +538,31 @@ extension APIClient {
         let endpoint = CardsEndpoint.updateFolder(id: id, title: title)
         return performRequest(endpoint: endpoint, completion: completion)
     }
+    
+    /**
+     Request for fetching user cards statistics
+
+     - parameters:
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func cardStatisticsInfo(completion: @escaping (Result<[CardStatisticInfoApiModel]?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.statistics
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    /**
+     Request for increment card statistic count
+
+     - parameters:
+        - cardID: id of card
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func incrementStatisticCount(cardID: Int, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.incrementStatisticCount(cardID: cardID)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
 
 
 }
@@ -832,6 +857,30 @@ extension APIClient {
     }
 
 
+}
 
+// MARK: - Feedback requests
 
+extension APIClient {
+    
+    @discardableResult
+    func createFeedback(cardID: Int?,
+                        message: String?,
+                        completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        
+        let endpoint = FeedbackEndpoint.createFeedback(parameters: APIRequestParameters.Feedback.Create(id: cardID, body: message))
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    @discardableResult
+    func getFeedbackList(cardID: Int?,
+                         limit: Int?,
+                         offset: Int?,
+                         completion: @escaping (Result<[FeedbackItemApiModel]?>) -> Void) -> DataRequest {
+        
+        let endpoint = FeedbackEndpoint.list(parameters: APIRequestParameters.Feedback.List(id: cardID, limit: limit, offset: offset))
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    
 }

@@ -68,11 +68,20 @@ class AccountPresenter: BasePresenter {
             case .inviteFriends:
                 inviteFriends()
 
-            case .statictics: break
-            case .generateQrCode: break
+            case .statictics:
+                let statisticsController: CardStatisticsViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: statisticsController, animated: true)
+                
+            case .generateQrCode:
+                let qrCodeController: QRCodeViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: qrCodeController, animated: true)
+                
             case .faq:
                  UIApplication.shared.open(Constants.CoBook.faqURL)
-            case .startMakingMoney: break
+                
+            case .startMakingMoney:
+                break
+                
             case .quitAccount:
                 logout()
             }
@@ -185,7 +194,7 @@ private extension AccountPresenter {
         socialMetaTags.imageURL = Constants.CoBook.logoURL
         socialMetaTags.title = "Social.metaTag.inviteFriends.title".localized
         socialMetaTags.descriptionText = "Social.metaTag.inviteFriends.description".localized
-        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags)
+        view?.showShareSheet(path: .download, parameters: [:], dynamicLinkSocialMetaTagParameters: socialMetaTags, successCompletion: nil)
     }
 
     func logout() {

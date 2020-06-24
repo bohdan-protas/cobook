@@ -16,7 +16,7 @@ private enum Defaults {
     static let editCardViewHeight: CGFloat = 84
 }
 
-class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetailsView {
+class BusinessCardDetailsViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
     var presenter: BusinessCardDetailsPresenter?
@@ -80,6 +80,13 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         self.tableView.delegate = self
     }
 
+    
+}
+ 
+// MARK: - BusinessCardDetailsView
+
+extension BusinessCardDetailsViewController: BusinessCardDetailsView {
+    
     func setupEditCardView() {
         tableView.tableFooterView = editCardView
     }
@@ -174,10 +181,22 @@ class BusinessCardDetailsViewController: BaseViewController, BusinessCardDetails
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    func goToCreateFeedback(presenter: AddFeedbackPresenter) {
+        let controller: AddFeedbackViewController = UIStoryboard.account.initiateViewControllerFromType()
+        controller.presenter = presenter
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter) {
+        let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+        personalCardDetailsViewController.presenter = presenter
+        let navigationController = CustomNavigationController(rootViewController: personalCardDetailsViewController)
+        self.presentPanModal(navigationController)
+    }
+    
     func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams) {
          presenter.presentPaymentByCard(on: self, params: params, showReceiptScreen: true)
     }
-
 
 }
 

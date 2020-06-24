@@ -46,9 +46,9 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 
     func verify(with smsCode: String) {
         view?.startLoading()
-        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: AppStorage.Auth.accessToken ?? "") { (result) in
+        APIClient.default.verifyRequest(smsCode: Int(smsCode) ?? 0, accessToken: AppStorage.Auth.accessToken ?? "") { [weak self] (result) in
+            guard let self = self else { return }
             self.view?.stopLoading()
-
             switch result {
             case .success:
                 self.view?.goToCreatePasswordController()
@@ -61,7 +61,8 @@ class ConfirmTelephoneNumberPresenter: BasePresenter {
 
     func resendSms() {
         view?.setResendButton(isLoading: true)
-        APIClient.default.resendSmsRequest(accessToken: AppStorage.Auth.accessToken ?? "") { (result) in
+        APIClient.default.resendSmsRequest(accessToken: AppStorage.Auth.accessToken ?? "") { [weak self] (result) in
+            guard let self = self else { return }
             self.view?.setResendButton(isLoading: false)
             switch result {
             case let .success(response):
@@ -103,7 +104,7 @@ private extension ConfirmTelephoneNumberPresenter {
         formatter.allowedUnits = [.minute, .second]
 
         self.view?.setFormatedTimer(label: formatter.string(from: smsResendLeftInSec) ?? "00:00")
-        if self.smsResendLeftInSec == 0 {
+        if self.smsResendLeftInSec <= 0 {
             self.view?.setTimerLabel(isHidden: true)
             resendSmsTimer?.invalidate()
             resendSmsTimer = nil

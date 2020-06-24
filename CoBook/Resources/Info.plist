@@ -37,6 +37,8 @@
 	<array>
 		<string>https://dev.share.cobook.app/link</string>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
