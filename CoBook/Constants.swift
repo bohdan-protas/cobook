@@ -153,7 +153,7 @@ enum Constants {
         
         static let payeeID: String = "25206"
         static let iban: String = "UA453005280000026008455065616"
-        static let customUid: String = "UA453005280000026008455065616"
+        static let customUid: String = ""
     }
 
 }

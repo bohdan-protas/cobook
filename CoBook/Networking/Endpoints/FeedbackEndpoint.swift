@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum FeedbackEndpoint: Endpoint {
+enum FeedbackEndpoint: EndpointConfigurable {
      
     case createFeedback(parameters: APIRequestParameters.Feedback.Create)
     case list(parameters: APIRequestParameters.Feedback.List)

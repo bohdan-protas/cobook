@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum ServicesEndpoint: Endpoint {
+enum ServicesEndpoint: EndpointConfigurable {
 
     case create(parameters: CreateServiceApiModel)
     case update(parameters: UpdateServiceApiModel)

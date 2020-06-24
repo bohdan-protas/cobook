@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum CardsEndpoint: Endpoint {
+enum CardsEndpoint: EndpointConfigurable {
 
     case updateBusinessCard(parameters: CreateBusinessCardParametersApiModel)
     case createBusinessCard(parameters: CreateBusinessCardParametersApiModel)

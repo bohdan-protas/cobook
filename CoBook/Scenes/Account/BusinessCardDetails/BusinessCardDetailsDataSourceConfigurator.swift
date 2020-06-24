@@ -187,7 +187,7 @@ extension BusinessCardDetailsPresenter {
 
             // headerInfoCellConfigurator
             let headerInfoCellConfigurator = TableCellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
-                cell.delegate = self
+                cell.delegate = self.view
                 cell.bgImageView.setImage(withPath: model.bgimagePath)
                 cell.avatarImageView.setImage(withPath: model.avatartImagePath)
                 cell.nameLabel.text = model.name

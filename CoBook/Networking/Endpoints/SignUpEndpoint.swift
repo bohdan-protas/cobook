@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum SignUpEndpoint: Endpoint {
+enum SignUpEndpoint: EndpointConfigurable {
 
     /// Initialize registration session
     case initialize(parameters: APIRequestParameters.SignUp.Initialize)

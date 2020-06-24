@@ -12,7 +12,7 @@ import GooglePlaces
 import FirebaseDynamicLinks
 import PortmoneSDKEcom
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView, BusinessCardHeaderInfoTableViewCellDelegate {
     func set(dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation)
     func reload()
@@ -169,6 +169,20 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             APIClient.default.incrementStatisticCount(cardID: self.businessCardId) { _ in }
         })
     }
+    
+    func save(completion: ((_ saved: Bool) -> Void)?) {
+        switch cardDetails?.isSaved {
+        case .none:
+            break
+        case .some(let value):
+            switch value {
+            case true:
+                unsaveCard(completion: completion)
+            case false:
+                saveCard(completion: completion)
+            }
+        }
+    }
 
 
 }
@@ -177,6 +191,45 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
 private extension BusinessCardDetailsPresenter {
 
+    func saveCard(completion: ((_ saved: Bool) -> Void)?) {
+        view?.startLoading()
+        APIClient.default.addCardToFavourites(id: businessCardId) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.cardDetails?.isSaved = true
+                self.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
+                NotificationCenter.default.post(name: .cardSaved,
+                                                object: nil,
+                                                userInfo: [Notification.Key.cardID: self.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
+                completion?(true)
+            case .failure:
+                self.view?.stopLoading(success: false)
+                completion?(false)
+            }
+        }
+    }
+    
+    func unsaveCard(completion: ((_ saved: Bool) -> Void)?)  {
+        view?.startLoading()
+        APIClient.default.deleteCardFromFavourites(id: businessCardId) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                //cell.saveCardButton.isSelected = false
+                self.cardDetails?.isSaved = false
+                self.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
+                NotificationCenter.default.post(name: .cardUnsaved,
+                                                object: nil,
+                                                userInfo: [Notification.Key.cardID: self.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
+                completion?(false)
+            case .failure:
+                self.view?.stopLoading(success: false)
+                completion?(true)
+            }
+        }
+    }
+    
     func fetchDataSource() {
         let group = DispatchGroup()
         var errors = [Error]()
@@ -552,90 +605,6 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
         case .albumPreviews:
             return albumPreviewSection?.items ?? []
         }
-    }
-
-
-}
-
-// MARK: - PaymentPresenterDelegate
-
-extension BusinessCardDetailsPresenter: PaymentPresenterDelegate {
-    
-    func didFinishPayment(bill: Bill?, error: Error?) {
-        if error != nil {
-            self.view?.errorAlert(message: error?.localizedDescription)
-        }
-
-        if bill != nil {
-            let mask = bill?.cardMask ?? ""
-            let token = bill?.token ?? ""
-            self.view?.infoAlert(title: "Payment Success", message: "Card mask: \n\(mask), \nToken: \n\(token)")
-        }
-    }
-    
-    
-}
-
-// MARK: - BusinessCardHeaderInfoTableViewCellDelegate
-
-extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDelegate {
-
-    func onPublishCard(cell: BusinessCardHeaderInfoTableViewCell) {
-        let paymentPresenter = PaymentPresenter(delegate: self, styleSource: nil, language: .ukrainian, biometricAuth: false, customUid: Constants.Payment.customUid)
-        
-        let billNumb = "SD\(Int(Date().timeIntervalSince1970))"
-        let flowType = PaymentFlowType(payWithCard: true, payWithApplePay: false, withoutCVV: false)
-        
-        let params = PaymentParams(description: "Оплата бізнес візитки",
-                                   attribute1: Constants.Payment.ContentType.card.rawValue,
-                                   attribute2: AppStorage.User.Profile?.userId ?? "",
-                                   attribute3: "\(cardDetails?.id ?? -1)",
-                                   billNumber: billNumb,
-                                   //contractNumber: "",
-                                   preauthFlag: true,
-                                   billCurrency: .usd,
-                                   billAmount: 100,
-                                   billAmountWcvv: 100,
-                                   payeeId: Constants.Payment.payeeID,
-                                   type: .payment,
-                                   paymentFlowType: flowType)
-        view?.showPaymentCard(presenter: paymentPresenter, params: params)
-    }
-    
-    func onSaveCard(cell: BusinessCardHeaderInfoTableViewCell) {
-        let state = cardDetails?.isSaved ?? false
-
-        switch state {
-        case false:
-            view?.startLoading()
-            APIClient.default.addCardToFavourites(id: businessCardId) { [weak self] (result) in
-                guard let strongSelf = self else { return }
-                switch result {
-                case .success:
-                    cell.saveCardButton.isSelected = true
-                    self?.cardDetails?.isSaved = true
-                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
-                    NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
-                case .failure:
-                    self?.view?.stopLoading(success: false)
-                }
-            }
-
-        case true:
-            view?.startLoading()
-            APIClient.default.deleteCardFromFavourites(id: businessCardId) { [weak self] (result) in
-                guard let strongSelf = self else { return }
-                switch result {
-                case .success:
-                    cell.saveCardButton.isSelected = false
-                    self?.cardDetails?.isSaved = false
-                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
-                    NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
-                case .failure:
-                    self?.view?.stopLoading(success: false)
-                }
-            }
-        } // end state switching
     }
 
 

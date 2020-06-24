@@ -244,3 +244,38 @@ extension BusinessCardDetailsViewController: MapDirectionTableViewCellDelegate {
 
 }
 
+// MARK: - BusinessCardHeaderInfoTableViewCellDelegate
+
+extension BusinessCardDetailsViewController: BusinessCardHeaderInfoTableViewCellDelegate {
+    
+    func onSaveCard(cell: BusinessCardHeaderInfoTableViewCell) {
+        presenter?.save { (saved) in
+            cell.saveCardButton.isSelected = saved
+        }
+    }
+    
+    func onPublishCard(cell: BusinessCardHeaderInfoTableViewCell) {
+
+    }
+    
+    
+}
+
+// MARK: - PaymentPresenterDelegate
+
+extension BusinessCardDetailsViewController: PaymentPresenterDelegate {
+    
+    func didFinishPayment(bill: Bill?, error: Error?) {
+        if error != nil {
+            self.errorAlert(message: error?.localizedDescription)
+        }
+
+        if bill != nil {
+            let mask = bill?.cardMask ?? ""
+            let token = bill?.token ?? ""
+            self.infoAlert(title: "Payment Success", message: "Card mask: \n\(mask), \nToken: \n\(token)")
+        }
+    }
+    
+    
+}
