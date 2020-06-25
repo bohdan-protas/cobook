@@ -464,10 +464,14 @@ private extension CardsOverviewViewPresenter {
 
     func updateViewDataSource() {
         // Posts section
-        dataSource?[CardsOverview.SectionAccessoryIndex.posts].items = [
-            .postPreview(model: albumPreviewSection)
-        ]
-
+        
+        if albumPreviewSection?.items.isEmpty ?? true {
+            dataSource?[CardsOverview.SectionAccessoryIndex.posts].items = []
+        } else {
+            dataSource?[CardsOverview.SectionAccessoryIndex.posts].items = [
+                .postPreview(model: albumPreviewSection)
+            ]
+        }
         // Cards section
         let barItemIndex = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1)
         switch barItemIndex {

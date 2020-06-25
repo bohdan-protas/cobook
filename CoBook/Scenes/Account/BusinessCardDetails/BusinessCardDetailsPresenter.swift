@@ -29,6 +29,7 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToCreateFeedback(presenter: AddFeedbackPresenter)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter)
     func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams)
+    func businessCardPayment(cardID: Int)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -41,7 +42,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     var selectedBarItem: BarItem
 
     /// Datasource
-    private var businessCardId: Int
+    var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
@@ -216,7 +217,6 @@ private extension BusinessCardDetailsPresenter {
             guard let self = self else { return }
             switch result {
             case .success:
-                //cell.saveCardButton.isSelected = false
                 self.cardDetails?.isSaved = false
                 self.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
                 NotificationCenter.default.post(name: .cardUnsaved,
@@ -384,21 +384,52 @@ private extension BusinessCardDetailsPresenter {
 private extension BusinessCardDetailsPresenter {
     
     func updateViewDataSource() {
-
-        // User header section
-        dataSource?[.userHeader].items = [
-                    .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
-                                                                         avatartImagePath: cardDetails?.avatar?.sourceUrl,
-                                                                         bgimagePath: cardDetails?.background?.sourceUrl,
-                                                                         profession: cardDetails?.practiceType?.title,
-                                                                         telephoneNumber: cardDetails?.contactTelephone?.number,
-                                                                         websiteAddress: cardDetails?.companyWebSite,
-                                                                         isSaved: cardDetails?.isSaved ?? false))
-        ]
-
+        dataSource?[.userHeader].items = []
+        if isUserOwner {
+            switch cardDetails?.subscriptionEndDate {
+            case .none:
+                dataSource?[.userHeader].items.append(
+                    .publish(model: PublishCellModel(titleText: "Payment.status.notPublishedYet.title".localized,
+                                                     subtitleText: "Payment.status.notPublishedYet.descr".localized,
+                                                     actionTitle: "Payment.status.notPublishedYet.actionTitle".localized, action: { [weak self] in
+                        guard let self = self else { return }
+                        self.view?.businessCardPayment(cardID: self.businessCardId)
+                    }))
+                )
+            case .some(let endDate):
+                let currentDate = Date()
+                if currentDate >= endDate {
+                    dataSource?[.userHeader].items.append(
+                        .publish(model: PublishCellModel(titleText: "Payment.status.expired.title".localized,
+                                                         subtitleText: "Payment.status.expired.descr".localized,
+                                                         actionTitle: "Payment.status.expired.actionTitle".localized, action: { [weak self] in
+                                                            guard let self = self else { return }
+                                                            self.view?.businessCardPayment(cardID: self.businessCardId)
+                        }))
+                    )
+                } else {
+                    let diffInDays = Calendar.current.dateComponents([.day], from: currentDate, to: endDate).day ?? 0
+                    dataSource?[.userHeader].items.append(
+                        .publish(model: PublishCellModel(titleText: "Payment.status.published.title".localized,
+                                                         subtitleText: String(format: "Payment.status.published.descr".localized, diffInDays),
+                                                         actionTitle: "Payment.status.published.actionTitle".localized, action: { [weak self] in
+                            guard let self = self else { return }
+                            self.view?.businessCardPayment(cardID: self.businessCardId)
+                        }))
+                    )
+                }
+            }
+        }
+        dataSource?[.userHeader].items.append(.userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
+                                                                                                   avatartImagePath: cardDetails?.avatar?.sourceUrl,
+                                                                                                   bgimagePath: cardDetails?.background?.sourceUrl,
+                                                                                                   profession: cardDetails?.practiceType?.title,
+                                                                                                   telephoneNumber: cardDetails?.contactTelephone?.number,
+                                                                                                   websiteAddress: cardDetails?.companyWebSite,
+                                                                                                   isSaved: cardDetails?.isSaved ?? false)))
         // Post preview section
         albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
-
+        
         dataSource?[.postPreview].items.removeAll()
         dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "BusinessCard.section.createdAlbums.title".localized, counter: self.albumPreviewItems.count)))
         if isUserOwner {

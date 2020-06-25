@@ -10,7 +10,6 @@ import UIKit
 
 protocol BusinessCardHeaderInfoTableViewCellDelegate: class {
     func onSaveCard(cell: BusinessCardHeaderInfoTableViewCell)
-    func onPublishCard(cell: BusinessCardHeaderInfoTableViewCell)
 }
 
 class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
@@ -22,7 +21,6 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
     @IBOutlet var telephoneNumberLabel: UILabel!
     @IBOutlet var websiteLabel: UILabel!
     @IBOutlet var saveCardButton: DesignableButton!
-    @IBOutlet var publishButton: UIButton!
     
     weak var delegate: BusinessCardHeaderInfoTableViewCellDelegate?
 
@@ -59,10 +57,6 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
     
     @IBAction func saveCardButtonTapped(_ sender: UIButton) {
         delegate?.onSaveCard(cell: self)
-    }
-    
-    @IBAction func publishButtonTapped(_ sender: Any) {
-        delegate?.onPublishCard(cell: self)
     }
     
 

@@ -22,7 +22,9 @@ class BusinessCardDetailsViewController: BaseViewController {
     var presenter: BusinessCardDetailsPresenter?
 
     var cachedCellHeights = [IndexPath: CGFloat]()
-
+    let paymentService = PaymentService()
+    var pendingPaymentStatus: (bill: Bill?, error: Error?)?
+    
     /// hideCardView
     private lazy var hideCardView: HideCardView = {
         let view = HideCardView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: Defaults.hideCardViewHeight)))
@@ -86,6 +88,10 @@ class BusinessCardDetailsViewController: BaseViewController {
 // MARK: - BusinessCardDetailsView
 
 extension BusinessCardDetailsViewController: BusinessCardDetailsView {
+    
+    func businessCardPayment(cardID: Int) {
+        paymentService.businessCardPayment(cardID: "\(cardID)", presentingView: self, delegate: self)
+    }
     
     func setupEditCardView() {
         tableView.tableFooterView = editCardView
@@ -253,11 +259,7 @@ extension BusinessCardDetailsViewController: BusinessCardHeaderInfoTableViewCell
             cell.saveCardButton.isSelected = saved
         }
     }
-    
-    func onPublishCard(cell: BusinessCardHeaderInfoTableViewCell) {
-
-    }
-    
+        
     
 }
 
@@ -266,15 +268,20 @@ extension BusinessCardDetailsViewController: BusinessCardHeaderInfoTableViewCell
 extension BusinessCardDetailsViewController: PaymentPresenterDelegate {
     
     func didFinishPayment(bill: Bill?, error: Error?) {
-        if error != nil {
-            self.errorAlert(message: error?.localizedDescription)
+        self.pendingPaymentStatus = (bill, error)
+    }
+    
+    func dismissedSDK() {
+        if let error = pendingPaymentStatus?.error {
+            self.errorAlert(message: error.localizedDescription)
         }
-
-        if bill != nil {
-            let mask = bill?.cardMask ?? ""
-            let token = bill?.token ?? ""
-            self.infoAlert(title: "Payment Success", message: "Card mask: \n\(mask), \nToken: \n\(token)")
+        
+        if let bill = pendingPaymentStatus?.bill {
+            Log.debug(bill)
+            self.infoAlert(title: "Payment.success.title".localized, message: "Payment.success.description".localized)
         }
+        self.pendingPaymentStatus = nil
+        self.presenter?.onViewWillAppear()
     }
     
     

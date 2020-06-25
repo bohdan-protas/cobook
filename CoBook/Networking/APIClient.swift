@@ -364,8 +364,13 @@ extension APIClient {
     func getCardInfo(id: Int,
                      completion: @escaping (Result<CardDetailsApiModel?>) -> Void) -> DataRequest {
 
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
+        
         let endpoint = CardsEndpoint.getCardInfo(id: id)
-        return performRequest(endpoint: endpoint, completion: completion)
+        return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 
     /**
