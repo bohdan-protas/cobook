@@ -137,6 +137,7 @@
 "Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
 "Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";
 "Error.maxSelectedElements" = "Максимальна кількість вирбраних елементів %li";
+"Error.startMakingMoney.message" = "Для початку створіть персональну візитку";
 
 // MARK: - Onboarding
 "Onboarding.Subtitle01" = "Створи свою Персональну візитку за 5 хвилин";
@@ -194,7 +195,10 @@
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Почати заробляти з CoBook";
 "Account.item.quitAccount" = "Вийти з аккаунту";
-"Account.section.myCards.title" = "Мої візитки:";
+"Account.item.study" = "Навчання";
+"Account.item.referal" = "Реферальне посилання";
+"Account.item.financies" = "Фінанси";
+"Account.item.statisticsPartnership" = "Статистика партнерства";
 
 // MARK: - Settings
 "Settings.title" = "Налаштування";
@@ -336,6 +340,7 @@
 
 // MARK: - Payment
 "Payment.description.businessCard" = "Оплата бізнес візитки";
+"Payment.description.franchise" = "Оплата франчайзі";
 "Payment.status.notPublishedYet.title" = "Ще не опубліковано";
 "Payment.status.notPublishedYet.descr" = "Публікуйте візитку, щоб її могли переглянути інші користувачі";
 "Payment.status.notPublishedYet.actionTitle" = "Публікувати";
@@ -346,4 +351,11 @@
 "Payment.status.expired.descr" = "Будь ласка, подовжіть термін дії публікації для відображення візитки для інших користувачів";
 "Payment.status.expired.actionTitle" = "Поновити публікацію";
 "Payment.success.title" = "Вітаємо! Успішна оплата";
+"Payment.success.description.franchise" = "Ваш статус активується на протязі 2-3 хв";
 "Payment.success.description" = "Ваша візитка опублікується на протязі 2-3 хв";
+"Payment.startInfo.title" = "Умови співпраці";
+"Payment.startInfo.body" = "Описуємо умови справпраці максимально доступним способом, зацікавлюємо людину прийняти участь у співпраці";
+"Payment.startInfo.actionTitle" = "Розпочати";
+"Payment.finishInfo.title" = "Вітаємо!";
+"Payment.finishInfo.body" = "Тепер ви партнер нашої мережі. Ваш статус активується на протязі деякого часу.";
+"Payment.finishInfo.actionTitle" = "Повернутись до аккаунту";

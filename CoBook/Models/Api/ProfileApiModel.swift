@@ -19,6 +19,7 @@ struct ProfileApiModel: Codable {
         case telephone
         case email
         case cardsPreviews = "cards_previews"
+        case franchiseEndDate = "franchise_end_date"
     }
 
     var userId: String?
@@ -28,4 +29,5 @@ struct ProfileApiModel: Codable {
     var telephone: TelephoneApiModel = TelephoneApiModel()
     var email: EmailApiModel = EmailApiModel()
     var cardsPreviews: [CardPreviewApiModel]?
+    var franchiseEndDate: Date?
 }

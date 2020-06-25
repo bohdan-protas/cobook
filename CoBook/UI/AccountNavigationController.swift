@@ -19,7 +19,7 @@ class AccountNavigationController: CustomNavigationController {
     override func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         super.navigationController(navigationController, willShow: viewController, animated: animated)
 
-        viewController.navigationController?.setNavigationBarHidden(viewController is AccountViewController, animated: true)
+        viewController.navigationController?.setNavigationBarHidden(viewController is AccountViewController || viewController is PartnershipInfoViewController, animated: true)
     }
     
 

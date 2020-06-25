@@ -610,8 +610,14 @@ extension APIClient {
      */
     @discardableResult
     func profileDetails(completion: @escaping (Result<ProfileApiModel?>) -> Void) -> DataRequest {
+        
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
+        
         let endpoint = ProfileEndpoint.details
-        return performRequest(endpoint: endpoint, completion: completion)
+        return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 
     /**
