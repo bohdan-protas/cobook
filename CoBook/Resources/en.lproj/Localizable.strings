@@ -330,3 +330,17 @@
 "QRCode.qrInfo.body" = "Scan or print this code to connect your CoBook partner to your referral link";
 "QRCode.referalInfo.title" = "Your referral link";
 "QRCode.referalInfo.body" = "Copy and send this link to your partner to connect the partner to the CoBook network at your referral link";
+
+// MARK: - Payment
+"Payment.description.businessCard" = "Business card payment";
+"Payment.status.notPublishedYet.title" = "Ще не опубліковано";
+"Payment.status.notPublishedYet.descr" = "Публікуйте візитку, щоб її могли переглянути інші користувачі";
+"Payment.status.notPublishedYet.actionTitle" = "Публікувати";
+"Payment.status.published.title" = "Опубліковано";
+"Payment.status.published.descr" = "Залишилось %li днів";
+"Payment.status.published.actionTitle" = "Поновити публікацію";
+"Payment.status.expired.title" = "Термін дії публікації вийшов";
+"Payment.status.expired.descr" = "Будь ласка, подовжіть термін дії публікації для відображення візитки для інших користувачів";
+"Payment.status.expired.actionTitle" = "Поновити публікацію";
+"Payment.success.title" = "Вітаємо! Успішна оплата";
+"Payment.success.description" = "Ваша візитка опублікується на протязі 2-3 хв";

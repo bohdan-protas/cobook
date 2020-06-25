@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum ContentManagerEndpoint: Endpoint {
+enum ContentManagerEndpoint: EndpointConfigurable {
 
     case singleFileUpload
 

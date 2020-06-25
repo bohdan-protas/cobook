@@ -331,3 +331,18 @@
 "QRCode.qrInfo.body" = "Просканируйте или распечатайте этот код чтобы подключить партнера к сети CoBook по вашему реферальной ссылке";
 "QRCode.referalInfo.title" = "Ваша реферальная ссылка";
 "QRCode.referalInfo.body" = "Скопируйте и отправьте эту ссылку вашему партнеру чтобы подключить партнера к сети CoBook по вашему реферальной ссылке";
+
+// MARK: - Payment
+"Payment.description.businessCard" = "Оплата бізнес візитки";
+"Payment.status.notPublishedYet.title" = "Ще не опубліковано";
+"Payment.status.notPublishedYet.descr" = "Публікуйте візитку, щоб її могли переглянути інші користувачі";
+"Payment.status.notPublishedYet.actionTitle" = "Публікувати";
+"Payment.status.published.title" = "Опубліковано";
+"Payment.status.published.descr" = "Залишилось %li днів";
+"Payment.status.published.actionTitle" = "Поновити публікацію";
+"Payment.status.expired.title" = "Термін дії публікації вийшов";
+"Payment.status.expired.descr" = "Будь ласка, подовжіть термін дії публікації для відображення візитки для інших користувачів";
+"Payment.status.expired.actionTitle" = "Поновити публікацію";
+"Payment.success.title" = "Вітаємо! Успішна оплата";
+"Payment.success.description" = "Ваша візитка опублікується на протязі 2-3 хв";
+

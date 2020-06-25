@@ -8,7 +8,7 @@
 
 import Alamofire
 
-protocol Endpoint: URLRequestConvertible {
+protocol EndpointConfigurable: URLRequestConvertible {
     var useAuthirizationToken: Bool { get }
     var method: HTTPMethod { get }
     var baseUrlPath: URLComponents { get }
@@ -17,7 +17,7 @@ protocol Endpoint: URLRequestConvertible {
     var bodyParameters: Parameters? { get }
 }
 
-extension Endpoint {
+extension EndpointConfigurable {
     var baseUrlPath: URLComponents {
         return Constants.API.baseURLPath
     }
@@ -28,7 +28,7 @@ extension Endpoint {
 
 // MARK: - Base configuration
 
-extension Endpoint {
+extension EndpointConfigurable {
 
     func asURLRequest() throws -> URLRequest {
 

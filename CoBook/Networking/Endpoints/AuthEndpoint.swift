@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum AuthEndpoint: Endpoint {
+enum AuthEndpoint: EndpointConfigurable {
 
     case forgotPassword(telephone: String)
     case refresh(refreshToken: String)

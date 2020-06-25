@@ -30,6 +30,7 @@ enum BusinessCardDetails {
         case commentPlaceholder(model: PlaceholderCellModel)
         case button(model: ButtonCellModel)
         case comment(model: FeedbackItemApiModel)
+        case publish(model: PublishCellModel)
     }
 
     struct HeaderInfoModel {

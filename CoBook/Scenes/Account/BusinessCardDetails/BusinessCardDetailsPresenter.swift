@@ -10,8 +10,9 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import FirebaseDynamicLinks
+import PortmoneSDKEcom
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView, BusinessCardHeaderInfoTableViewCellDelegate {
     func set(dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation)
     func reload()
@@ -27,6 +28,8 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToArticleDetails(presenter: ArticleDetailsPresenter)
     func goToCreateFeedback(presenter: AddFeedbackPresenter)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter)
+    func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams)
+    func businessCardPayment(cardID: Int)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -39,7 +42,7 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     var selectedBarItem: BarItem
 
     /// Datasource
-    private var businessCardId: Int
+    var businessCardId: Int
     private var cardDetails: CardDetailsApiModel?
     private var employee: [EmployeeModel] = []
     private var services: [Service.PreviewModel] = []
@@ -71,7 +74,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.selectedBarItem = barItems.first!
 
         super.init()
-        
         self.dataSource = TableDataSource(configurator: dataSouceConfigurator)
         self.dataSource?.sections = [
             Section<BusinessCardDetails.Cell>(accessoryIndex: BusinessCardDetails.SectionAccessoryIndex.userHeader.rawValue, items: []),
@@ -168,6 +170,20 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             APIClient.default.incrementStatisticCount(cardID: self.businessCardId) { _ in }
         })
     }
+    
+    func save(completion: ((_ saved: Bool) -> Void)?) {
+        switch cardDetails?.isSaved {
+        case .none:
+            break
+        case .some(let value):
+            switch value {
+            case true:
+                unsaveCard(completion: completion)
+            case false:
+                saveCard(completion: completion)
+            }
+        }
+    }
 
 
 }
@@ -176,6 +192,44 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
 private extension BusinessCardDetailsPresenter {
 
+    func saveCard(completion: ((_ saved: Bool) -> Void)?) {
+        view?.startLoading()
+        APIClient.default.addCardToFavourites(id: businessCardId) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.cardDetails?.isSaved = true
+                self.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
+                NotificationCenter.default.post(name: .cardSaved,
+                                                object: nil,
+                                                userInfo: [Notification.Key.cardID: self.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
+                completion?(true)
+            case .failure:
+                self.view?.stopLoading(success: false)
+                completion?(false)
+            }
+        }
+    }
+    
+    func unsaveCard(completion: ((_ saved: Bool) -> Void)?)  {
+        view?.startLoading()
+        APIClient.default.deleteCardFromFavourites(id: businessCardId) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.cardDetails?.isSaved = false
+                self.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
+                NotificationCenter.default.post(name: .cardUnsaved,
+                                                object: nil,
+                                                userInfo: [Notification.Key.cardID: self.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
+                completion?(false)
+            case .failure:
+                self.view?.stopLoading(success: false)
+                completion?(true)
+            }
+        }
+    }
+    
     func fetchDataSource() {
         let group = DispatchGroup()
         var errors = [Error]()
@@ -330,21 +384,52 @@ private extension BusinessCardDetailsPresenter {
 private extension BusinessCardDetailsPresenter {
     
     func updateViewDataSource() {
-
-        // User header section
-        dataSource?[.userHeader].items = [
-                    .userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
-                                                                         avatartImagePath: cardDetails?.avatar?.sourceUrl,
-                                                                         bgimagePath: cardDetails?.background?.sourceUrl,
-                                                                         profession: cardDetails?.practiceType?.title,
-                                                                         telephoneNumber: cardDetails?.contactTelephone?.number,
-                                                                         websiteAddress: cardDetails?.companyWebSite,
-                                                                         isSaved: cardDetails?.isSaved ?? false))
-        ]
-
+        dataSource?[.userHeader].items = []
+        if isUserOwner {
+            switch cardDetails?.subscriptionEndDate {
+            case .none:
+                dataSource?[.userHeader].items.append(
+                    .publish(model: PublishCellModel(titleText: "Payment.status.notPublishedYet.title".localized,
+                                                     subtitleText: "Payment.status.notPublishedYet.descr".localized,
+                                                     actionTitle: "Payment.status.notPublishedYet.actionTitle".localized, action: { [weak self] in
+                        guard let self = self else { return }
+                        self.view?.businessCardPayment(cardID: self.businessCardId)
+                    }))
+                )
+            case .some(let endDate):
+                let currentDate = Date()
+                if currentDate >= endDate {
+                    dataSource?[.userHeader].items.append(
+                        .publish(model: PublishCellModel(titleText: "Payment.status.expired.title".localized,
+                                                         subtitleText: "Payment.status.expired.descr".localized,
+                                                         actionTitle: "Payment.status.expired.actionTitle".localized, action: { [weak self] in
+                                                            guard let self = self else { return }
+                                                            self.view?.businessCardPayment(cardID: self.businessCardId)
+                        }))
+                    )
+                } else {
+                    let diffInDays = Calendar.current.dateComponents([.day], from: currentDate, to: endDate).day ?? 0
+                    dataSource?[.userHeader].items.append(
+                        .publish(model: PublishCellModel(titleText: "Payment.status.published.title".localized,
+                                                         subtitleText: String(format: "Payment.status.published.descr".localized, diffInDays),
+                                                         actionTitle: "Payment.status.published.actionTitle".localized, action: { [weak self] in
+                            guard let self = self else { return }
+                            self.view?.businessCardPayment(cardID: self.businessCardId)
+                        }))
+                    )
+                }
+            }
+        }
+        dataSource?[.userHeader].items.append(.userInfo(model: BusinessCardDetails.HeaderInfoModel(name: cardDetails?.company?.name,
+                                                                                                   avatartImagePath: cardDetails?.avatar?.sourceUrl,
+                                                                                                   bgimagePath: cardDetails?.background?.sourceUrl,
+                                                                                                   profession: cardDetails?.practiceType?.title,
+                                                                                                   telephoneNumber: cardDetails?.contactTelephone?.number,
+                                                                                                   websiteAddress: cardDetails?.companyWebSite,
+                                                                                                   isSaved: cardDetails?.isSaved ?? false)))
         // Post preview section
         albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
-
+        
         dataSource?[.postPreview].items.removeAll()
         dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "BusinessCard.section.createdAlbums.title".localized, counter: self.albumPreviewItems.count)))
         if isUserOwner {
@@ -551,49 +636,6 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
         case .albumPreviews:
             return albumPreviewSection?.items ?? []
         }
-    }
-
-
-}
-
-// MARK: - BusinessCardHeaderInfoTableViewCellDelegate
-
-extension BusinessCardDetailsPresenter: BusinessCardHeaderInfoTableViewCellDelegate {
-
-    func onSaveCard(cell: BusinessCardHeaderInfoTableViewCell) {
-        let state = cardDetails?.isSaved ?? false
-
-        switch state {
-        case false:
-            view?.startLoading()
-            APIClient.default.addCardToFavourites(id: businessCardId) { [weak self] (result) in
-                guard let strongSelf = self else { return }
-                switch result {
-                case .success:
-                    cell.saveCardButton.isSelected = true
-                    self?.cardDetails?.isSaved = true
-                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardSaved.message".localized, failureText: nil, completion: nil)
-                    NotificationCenter.default.post(name: .cardSaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
-                case .failure:
-                    self?.view?.stopLoading(success: false)
-                }
-            }
-
-        case true:
-            view?.startLoading()
-            APIClient.default.deleteCardFromFavourites(id: businessCardId) { [weak self] (result) in
-                guard let strongSelf = self else { return }
-                switch result {
-                case .success:
-                    cell.saveCardButton.isSelected = false
-                    self?.cardDetails?.isSaved = false
-                    self?.view?.stopLoading(success: true, succesText: "SavedContent.cardUnsaved.message".localized, failureText: nil, completion: nil)
-                    NotificationCenter.default.post(name: .cardUnsaved, object: nil, userInfo: [Notification.Key.cardID: strongSelf.businessCardId, Notification.Key.controllerID: BusinessCardDetailsViewController.describing])
-                case .failure:
-                    self?.view?.stopLoading(success: false)
-                }
-            }
-        } // end state switching
     }
 
 

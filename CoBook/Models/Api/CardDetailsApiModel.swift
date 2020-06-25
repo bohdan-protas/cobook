@@ -32,6 +32,7 @@ struct CardDetailsApiModel: Decodable {
         case updatedAt = "updated_at"
         case interests
         case isSaved = "is_saved"
+        case subscriptionEndDate = "subscription_end_date"
     }
 
     var id: Int
@@ -55,4 +56,5 @@ struct CardDetailsApiModel: Decodable {
     var updatedAt: String?
     var interests: [InterestApiModel]?
     var isSaved: Bool?
+    var subscriptionEndDate: Date?
 }

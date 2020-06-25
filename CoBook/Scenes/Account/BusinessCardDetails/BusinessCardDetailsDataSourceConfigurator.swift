@@ -30,6 +30,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
     var commentPlaceholderCellConfigurator: TableCellConfigurator<PlaceholderCellModel, PlaceholderTableViewCell>
     var buttonCellConfigurator: TableCellConfigurator<ButtonCellModel, AccentButtonTableViewCell>
     var commentCellConfigurator: TableCellConfigurator<FeedbackItemApiModel, CommentTableViewCell>
+    var publishCellConfigurator: TableCellConfigurator<PublishCellModel, PublishTableViewCell>
     
     // MARK: - Cell configurator
 
@@ -73,6 +74,8 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
             return buttonCellConfigurator.reuseIdentifier
         case .comment:
             return commentCellConfigurator.reuseIdentifier
+        case .publish:
+            return publishCellConfigurator.reuseIdentifier
         }
     }
 
@@ -134,6 +137,9 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
             
         case .comment(let model):
             return commentCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            
+        case .publish(let model):
+            return publishCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -157,6 +163,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
         commentPlaceholderCellConfigurator.registerCells(in: tableView)
         buttonCellConfigurator.registerCells(in: tableView)
         commentCellConfigurator.registerCells(in: tableView)
+        publishCellConfigurator.registerCells(in: tableView)
     }
 
 
@@ -172,9 +179,7 @@ extension BusinessCardDetailsPresenter {
             
             // EmployeCellConfigurator
             let employeeCellConfigurator = TableCellConfigurator { (cell, model: EmployeeModel?, tableView, indexPath) -> CardItemTableViewCell in
-
                 let textImg = model?.nameAbbreviation?.image(size: cell.avatarImageView.frame.size)
-
                 cell.avatarImageView.setImage(withPath: model?.avatar, placeholderImage: textImg)
                 cell.type = .personal
                 cell.nameLabel.text = "\(model?.firstName ?? "") \(model?.lastName ?? "")"
@@ -187,7 +192,7 @@ extension BusinessCardDetailsPresenter {
 
             // headerInfoCellConfigurator
             let headerInfoCellConfigurator = TableCellConfigurator { (cell, model: BusinessCardDetails.HeaderInfoModel, tableView, indexPath) -> BusinessCardHeaderInfoTableViewCell in
-                cell.delegate = self
+                cell.delegate = self.view
                 cell.bgImageView.setImage(withPath: model.bgimagePath)
                 cell.avatarImageView.setImage(withPath: model.avatartImagePath)
                 cell.nameLabel.text = model.name
@@ -195,8 +200,6 @@ extension BusinessCardDetailsPresenter {
                 cell.telephoneNumberLabel.text = model.telephoneNumber
                 cell.websiteLabel.text = model.websiteAddress
                 cell.saveCardButton.isSelected = model.isSaved
-
-
                 return cell
             }
 
@@ -351,6 +354,15 @@ extension BusinessCardDetailsPresenter {
                 return cell
             }
             
+            // sectionTitleConfigurator
+            let publishCellConfigurator = TableCellConfigurator { (cell, model: PublishCellModel, tableView, indexPath) -> PublishTableViewCell in
+                cell.publishTitleLabel.text = model.titleText
+                cell.publishSubtitleLabel.text = model.subtitleText
+                cell.publishButton.setTitle(model.actionTitle, for: .normal)
+                cell.actionHandler = model.action
+                return cell
+            }
+            
             let configurator = BusinessCardDetailsDataSourceConfigurator(headerInfoCellConfigurator: headerInfoCellConfigurator,
                                                                          sectionTitleConfigurator: sectionTitleConfigurator,
                                                                          sectionHeaderConfigurator: sectionHeaderConfigurator,
@@ -369,7 +381,8 @@ extension BusinessCardDetailsPresenter {
                                                                          actionTitleConfigurator: actionTitleConfigurator,
                                                                          commentPlaceholderCellConfigurator: commentPlaceholderCellConfigurator,
                                                                          buttonCellConfigurator: buttonCellConfigurator,
-                                                                         commentCellConfigurator: commentCellConfigurator)
+                                                                         commentCellConfigurator: commentCellConfigurator,
+                                                                         publishCellConfigurator: publishCellConfigurator)
             
             return configurator
         }

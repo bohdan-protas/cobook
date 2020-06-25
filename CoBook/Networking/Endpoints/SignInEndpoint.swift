@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum SignInEndpoint: Endpoint {
+enum SignInEndpoint: EndpointConfigurable {
 
     /**
      Login route

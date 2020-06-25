@@ -144,3 +144,10 @@ struct ButtonCellModel {
     var title: String?
     var action: (() -> Void)?
 }
+
+struct PublishCellModel {
+    var titleText: String?
+    var subtitleText: String?
+    var actionTitle: String?
+    var action: (() -> Void)?
+}

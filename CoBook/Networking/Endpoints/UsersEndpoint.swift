@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum UsersEndpoint: Endpoint {
+enum UsersEndpoint: EndpointConfigurable {
 
     case searchEmployee(searchQuery: String?, limit: Int?, offset: Int?)
     case employeeList(cardId: Int, limit: Int?, offset: Int?)
