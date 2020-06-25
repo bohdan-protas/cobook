@@ -83,6 +83,18 @@ class PaymentService: StyleSourceModel {
         return UIColor.Theme.blackMiddle
     }
     
+    override func headersFont() -> UIFont {
+        return UIFont.SFProDisplay_Regular(size: 14)
+    }
+    
+    override func textsFont() -> UIFont {
+        return UIFont.SFProDisplay_Regular(size: 14)
+    }
+    
+    override func placeholdersFont() -> UIFont {
+        return UIFont.SFProDisplay_Regular(size: 14)
+    }
+    
     override func buttonTitleFont() -> UIFont {
         return UIFont.SFProDisplay_Medium(size: 17)
     }
@@ -100,6 +112,10 @@ class PaymentService: StyleSourceModel {
     }
     
     override func backgroundColor() -> UIColor {
+        return UIColor.white
+    }
+    
+    override func headersBackgroundColor() -> UIColor {
         return UIColor.Theme.grayBG
     }
     

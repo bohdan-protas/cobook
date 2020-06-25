@@ -27,7 +27,7 @@
 		6DE35FF7249C07C700DC08C5 /* FeedbackApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */; };
 		6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */; };
 		6DE35FFC249C0FB200DC08C5 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */; };
-		6DF6606724A376CC00E078DF /* PaymentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606624A376CC00E078DF /* PaymentFactory.swift */; };
+		6DF6606724A376CC00E078DF /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606624A376CC00E078DF /* PaymentService.swift */; };
 		6DF6606B24A3F22000E078DF /* PublishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606924A3F22000E078DF /* PublishTableViewCell.swift */; };
 		6DF6606C24A3F22000E078DF /* PublishTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */; };
 		9D8EE06CDCE7F5D068B3EBFF /* Pods_CoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */; };
@@ -420,7 +420,7 @@
 		6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackApiModel.swift; sourceTree = "<group>"; };
 		6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
-		6DF6606624A376CC00E078DF /* PaymentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFactory.swift; sourceTree = "<group>"; };
+		6DF6606624A376CC00E078DF /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
 		6DF6606924A3F22000E078DF /* PublishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishTableViewCell.swift; sourceTree = "<group>"; };
 		6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishTableViewCell.xib; sourceTree = "<group>"; };
 		B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notifications + Extensions.swift"; sourceTree = "<group>"; };
@@ -1489,7 +1489,7 @@
 				B823E8A2243F590200EE1830 /* PermissionService.swift */,
 				B824AD7F2445FAE700410C23 /* ImagePicker.swift */,
 				B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */,
-				6DF6606624A376CC00E078DF /* PaymentFactory.swift */,
+				6DF6606624A376CC00E078DF /* PaymentService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2751,7 +2751,7 @@
 				B850DA1624866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
 				B82A211E2421700A00D0D9F5 /* AuthRequestInterceptor.swift in Sources */,
-				6DF6606724A376CC00E078DF /* PaymentFactory.swift in Sources */,
+				6DF6606724A376CC00E078DF /* PaymentService.swift in Sources */,
 				B8DFB746248FBC5F00924838 /* CollectionDataSource.swift in Sources */,
 				B850DA1924867679002D8F99 /* Trimmed.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */,

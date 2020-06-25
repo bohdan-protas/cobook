@@ -337,7 +337,7 @@
 
 // MARK: - Payment
 "Payment.description.businessCard" = "Business card payment";
-"Payment.description.franchise" = "Оплата франчайзі";
+"Payment.description.franchise" = "Franchise payment";
 "Payment.status.notPublishedYet.title" = "Ще не опубліковано";
 "Payment.status.notPublishedYet.descr" = "Публікуйте візитку, щоб її могли переглянути інші користувачі";
 "Payment.status.notPublishedYet.actionTitle" = "Публікувати";
