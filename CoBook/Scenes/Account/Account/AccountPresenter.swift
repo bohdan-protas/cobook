@@ -84,14 +84,18 @@ class AccountPresenter: BasePresenter {
                 case true:
                     self.view?.infoAlert(title: "Cobook", message: "Error.startMakingMoney.message".localized, handler: nil)
                 case false:
-                    Log.debug("пушло")
+                    let presenter = PartnershipInfoPresenter(type: .start)
+                    let controller: PartnershipInfoViewController = UIStoryboard.account.initiateViewControllerFromType()
+                    controller.presenter = presenter
+                    self.view?.push(controller: controller, animated: true)
                 }
                 
             case .study:
-                break
+                UIApplication.shared.open(Constants.CoBook.faqURL)
                 
             case .referalLink:
-                break
+                let qrCodeController: QRCodeViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: qrCodeController, animated: true)
                 
             case .financies:
                 break
@@ -204,14 +208,12 @@ private extension AccountPresenter {
                 menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.referal".localized,
                                                                                             image: UIImage(named: "ic_account_faq"),
                                                                                             actiontype: .referalLink)))
-                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
-                                                                                            image: UIImage(named: "ic_account_faq"),
-                                                                                            actiontype: .financies)))
-                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
-                                                                                            image: UIImage(named: "ic_account_faq"),
-                                                                                            actiontype: .staticticsOfPartnership)))
-
-                break
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .financies)))
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .staticticsOfPartnership)))
             }
         }
         

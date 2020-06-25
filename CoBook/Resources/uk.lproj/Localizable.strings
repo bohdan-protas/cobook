@@ -340,6 +340,7 @@
 
 // MARK: - Payment
 "Payment.description.businessCard" = "Оплата бізнес візитки";
+"Payment.description.franchise" = "Оплата франчайзі";
 "Payment.status.notPublishedYet.title" = "Ще не опубліковано";
 "Payment.status.notPublishedYet.descr" = "Публікуйте візитку, щоб її могли переглянути інші користувачі";
 "Payment.status.notPublishedYet.actionTitle" = "Публікувати";
@@ -350,4 +351,11 @@
 "Payment.status.expired.descr" = "Будь ласка, подовжіть термін дії публікації для відображення візитки для інших користувачів";
 "Payment.status.expired.actionTitle" = "Поновити публікацію";
 "Payment.success.title" = "Вітаємо! Успішна оплата";
+"Payment.success.description.franchise" = "Ваш статус активується на протязі 2-3 хв";
 "Payment.success.description" = "Ваша візитка опублікується на протязі 2-3 хв";
+"Payment.startInfo.title" = "Умови співпраці";
+"Payment.startInfo.body" = "Описуємо умови справпраці максимально доступним способом, зацікавлюємо людину прийняти участь у співпраці";
+"Payment.startInfo.actionTitle" = "Розпочати";
+"Payment.finishInfo.title" = "Вітаємо!";
+"Payment.finishInfo.body" = "Тепер ви партнер нашої мережі. Ваш статус активується на протязі деякого часу.";
+"Payment.finishInfo.actionTitle" = "Повернутись до аккаунту";

@@ -13,7 +13,8 @@ import PortmoneSDKEcom
 class PaymentService: StyleSourceModel {
     
     enum Pricing {
-        static let businessCardInUSD: Double = 100
+        static let businessCardInUSD: Double = 20
+        static let franchiseInUSD: Double = 100
     }
         
     func businessCardPayment(cardID: String, presentingView: UIViewController, delegate: PaymentPresenterDelegate) {
@@ -29,6 +30,34 @@ class PaymentService: StyleSourceModel {
                                    preauthFlag: false,
                                    billCurrency: .usd,
                                    billAmount: Pricing.businessCardInUSD,
+                                   billAmountWcvv: 0,
+                                   payeeId: Constants.Payment.payeeID,
+                                   type: .payment,
+                                   paymentFlowType: flowType)
+        
+        
+        let paymentPresenter = PaymentPresenter(delegate: delegate,
+                                                styleSource: self,
+                                                language: language,
+                                                biometricAuth: false,
+                                                customUid: Constants.Payment.customUid)
+        
+        paymentPresenter.presentPaymentByCard(on: presentingView, params: params, showReceiptScreen: true)
+    }
+    
+    func franchisePayment(presentingView: UIViewController, delegate: PaymentPresenterDelegate) {
+        let billNumb = "FR\(Int(Date().timeIntervalSince1970))"
+        let flowType = PaymentFlowType(payWithCard: false, payWithApplePay: false, withoutCVV: false)
+        let language = PortmoneSDKEcom.Language(rawValue: NSLocale.current.languageCode ?? "") ?? .english
+
+        let params = PaymentParams(description: "Payment.description.franchise".localized,
+                                   attribute1: Constants.Payment.ContentType.franchise.rawValue,
+                                   attribute2: AppStorage.User.Profile?.userId ?? "",
+                                   attribute3: "",
+                                   billNumber: billNumb,
+                                   preauthFlag: false,
+                                   billCurrency: .usd,
+                                   billAmount: Pricing.franchiseInUSD,
                                    billAmountWcvv: 0,
                                    payeeId: Constants.Payment.payeeID,
                                    type: .payment,
