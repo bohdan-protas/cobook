@@ -68,7 +68,7 @@ class AccountPresenter: BasePresenter {
             case .inviteFriends:
                 inviteFriends()
 
-            case .statictics:
+            case .staticticsOfCards:
                 let statisticsController: CardStatisticsViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: statisticsController, animated: true)
                 
@@ -80,12 +80,29 @@ class AccountPresenter: BasePresenter {
                  UIApplication.shared.open(Constants.CoBook.faqURL)
                 
             case .startMakingMoney:
+                switch personalCard.isNil {
+                case true:
+                    self.view?.infoAlert(title: "Cobook", message: "Error.startMakingMoney.message".localized, handler: nil)
+                case false:
+                    Log.debug("пушло")
+                }
+                
+            case .study:
+                break
+                
+            case .referalLink:
+                break
+                
+            case .financies:
+                break
+                
+            case .staticticsOfPartnership:
                 break
                 
             case .quitAccount:
                 logout()
             }
-
+            
         case .personalCardPreview(let model):
             let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
             if let strid = model.id, let id = Int(strid) {
@@ -154,23 +171,50 @@ private extension AccountPresenter {
         }
 
         // menuItems Section
-        let menuItemsSection = Section<Account.Item>(items: [
+        var menuItemsSection = Section<Account.Item>(items: [
             .sectionHeader,
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized,
                                                           image: UIImage(named: "ic_account_createparsonalcard"),
                                                           actiontype: .inviteFriends)),
             //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized,
+                                                          image: UIImage(named: "ic_account_qrcode"),
+                                                          actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
                                                           image: UIImage(named: "ic_account_faq"),
                                                           actiontype: .faq)),
         ])
-        //        if !personalCard.isNil {
-        //            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
-        //                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
-        //                                                                                        actiontype: .startMakingMoney)))
-        //        }
+        
+        switch AppStorage.User.Profile?.franchiseEndDate {
+        case .none:
+            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
+                                                                                        actiontype: .startMakingMoney)))
+        case .some(let endDate):
+            let currentDate = Date()
+            if currentDate >= endDate {
+                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+                                                                                            image: UIImage(named: "ic_account_startmakingmoney"),
+                                                                                            actiontype: .startMakingMoney)))
+            } else {
+                menuItemsSection.items.append(.sectionHeader)
+                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.study".localized,
+                                                                                            image: UIImage(named: "ic_account_faq"),
+                                                                                            actiontype: .study)))
+                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.referal".localized,
+                                                                                            image: UIImage(named: "ic_account_faq"),
+                                                                                            actiontype: .referalLink)))
+                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
+                                                                                            image: UIImage(named: "ic_account_faq"),
+                                                                                            actiontype: .financies)))
+                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
+                                                                                            image: UIImage(named: "ic_account_faq"),
+                                                                                            actiontype: .staticticsOfPartnership)))
 
+                break
+            }
+        }
+        
         // Quit account section
         let quitAccountSectin = Section<Account.Item>(items: [
             .sectionHeader,

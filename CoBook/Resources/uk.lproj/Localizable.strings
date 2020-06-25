@@ -137,6 +137,7 @@
 "Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
 "Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";
 "Error.maxSelectedElements" = "Максимальна кількість вирбраних елементів %li";
+"Error.startMakingMoney.message" = "Для початку створіть персональну візитку";
 
 // MARK: - Onboarding
 "Onboarding.Subtitle01" = "Створи свою Персональну візитку за 5 хвилин";
@@ -194,7 +195,10 @@
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Почати заробляти з CoBook";
 "Account.item.quitAccount" = "Вийти з аккаунту";
-"Account.section.myCards.title" = "Мої візитки:";
+"Account.item.study" = "Навчання";
+"Account.item.referal" = "Реферальне посилання";
+"Account.item.financies" = "Фінанси";
+"Account.item.statisticsPartnership" = "Статистика партнерства";
 
 // MARK: - Settings
 "Settings.title" = "Налаштування";
