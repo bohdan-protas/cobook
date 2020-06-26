@@ -85,7 +85,7 @@ class AccountPresenter: BasePresenter {
                     self.view?.infoAlert(title: "Cobook", message: "Error.startMakingMoney.message".localized, handler: nil)
                 case false:
                     let presenter = PartnershipInfoPresenter(type: .start)
-                    let controller: PartnershipInfoViewController = UIStoryboard.account.initiateViewControllerFromType()
+                    let controller: PartnershipInfoViewController = UIStoryboard.financies.initiateViewControllerFromType()
                     controller.presenter = presenter
                     self.view?.push(controller: controller, animated: true)
                 }
@@ -98,7 +98,10 @@ class AccountPresenter: BasePresenter {
                 view?.push(controller: qrCodeController, animated: true)
                 
             case .financies:
-                break
+                let financiesViewController: FinanciesViewController = UIStoryboard.financies.initiateViewControllerFromType()
+                let presenter = FinanciesPresenter()
+                financiesViewController.presenter = presenter
+                view?.push(controller: financiesViewController, animated: true)
                 
             case .staticticsOfPartnership:
                 break
@@ -208,9 +211,9 @@ private extension AccountPresenter {
                 menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.referal".localized,
                                                                                             image: UIImage(named: "ic_account_faq"),
                                                                                             actiontype: .referalLink)))
-//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
-//                                                                                            image: UIImage(named: "ic_account_faq"),
-//                                                                                            actiontype: .financies)))
+                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
+                                                                                            image: UIImage(named: "ic_account_faq"),
+                                                                                            actiontype: .financies)))
 //                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
 //                                                                                            image: UIImage(named: "ic_account_faq"),
 //                                                                                            actiontype: .staticticsOfPartnership)))

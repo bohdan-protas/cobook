@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeueCyr-Roman.ttf">
+            <string>HelveticaNeueCyr-Roman</string>
+        </array>
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FinanceIncomsHeaderView" customModule="CoBook" customModuleProvider="target">
+            <connections>
+                <outlet property="averageSumOfExportsLabel" destination="JFa-Tw-aoZ" id="Yhc-en-AuX"/>
+                <outlet property="currentBallanceInfoLabel" destination="rWp-oI-39M" id="7a9-fc-ZZ3"/>
+                <outlet property="currentBallanceValueLabel" destination="kzd-I4-jEk" id="69O-mQ-hfv"/>
+                <outlet property="exportIncomsButton" destination="2Tb-0v-jOT" id="ROR-Sc-1hL"/>
+                <outlet property="maxSumForExportLabel" destination="m1L-7W-80D" id="voD-SU-lZj"/>
+                <outlet property="topCorneredView" destination="BRw-Yo-4Ca" id="IJ2-kK-m8d"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdo-Jk-E6v" userLabel="Header View">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="244"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="udM-9F-0WX">
+                    <rect key="frame" x="0.0" y="12" width="414" height="54"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Поточний баланс рахунку" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWp-oI-39M">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="g7M-7U-VJr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="800" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzd-I4-jEk">
+                            <rect key="frame" x="0.0" y="28" width="414" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="8ON-Zx-K9L"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
+                            <color key="textColor" name="Theme_Green-Dark"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Tb-0v-jOT" userLabel="Continue Button" customClass="LoaderDesignableButton" customModule="CoBook" customModuleProvider="target">
+                    <rect key="frame" x="40" y="90" width="334" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Wge-xe-5Ju"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Вивести на карту">
+                        <color key="titleColor" name="Theme_Black-Middle"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="defaultColor">
+                            <color key="value" name="Theme_Button-main-bg-enabled"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                            <color key="value" name="Theme_Button-main-bg-selected"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="disabledColor">
+                            <color key="value" name="Theme_Button-main-bg-disabled"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="roU-X8-Set">
+                    <rect key="frame" x="16" y="156" width="382" height="56"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Максимальна сума для виведення" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1L-7W-80D">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="Qf6-5k-wHa"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="aNj-f8-Jjg"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="13"/>
+                            <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Всього було виведено" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFa-Tw-aoZ">
+                            <rect key="frame" x="0.0" y="30" width="382" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="JXr-2t-hkm"/>
+                                <constraint firstAttribute="height" constant="26" id="w9G-KM-IVQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="13"/>
+                            <color key="textColor" name="Theme_Black-Middle"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BRw-Yo-4Ca">
+                    <rect key="frame" x="0.0" y="234" width="414" height="10"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="zjK-5l-eOX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" name="Theme_Gray-Background"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="roU-X8-Set" secondAttribute="trailing" constant="16" id="2Wr-so-aBL"/>
+                <constraint firstAttribute="trailing" secondItem="BRw-Yo-4Ca" secondAttribute="trailing" id="4IM-C6-Bzx"/>
+                <constraint firstItem="roU-X8-Set" firstAttribute="top" secondItem="2Tb-0v-jOT" secondAttribute="bottom" constant="16" id="75q-1F-voN"/>
+                <constraint firstAttribute="bottom" secondItem="BRw-Yo-4Ca" secondAttribute="bottom" id="7Xx-xe-ofj"/>
+                <constraint firstItem="BRw-Yo-4Ca" firstAttribute="top" secondItem="roU-X8-Set" secondAttribute="bottom" constant="22" id="BSq-lS-KWA"/>
+                <constraint firstAttribute="trailing" secondItem="udM-9F-0WX" secondAttribute="trailing" id="IeT-Sl-Dhe"/>
+                <constraint firstItem="2Tb-0v-jOT" firstAttribute="centerX" secondItem="Gdo-Jk-E6v" secondAttribute="centerX" id="T1j-FZ-ieA"/>
+                <constraint firstItem="2Tb-0v-jOT" firstAttribute="top" secondItem="udM-9F-0WX" secondAttribute="bottom" constant="24" id="T5n-6I-g7y"/>
+                <constraint firstAttribute="trailing" secondItem="2Tb-0v-jOT" secondAttribute="trailing" constant="40" id="UXA-WH-r8I"/>
+                <constraint firstItem="2Tb-0v-jOT" firstAttribute="leading" secondItem="Gdo-Jk-E6v" secondAttribute="leading" constant="40" id="YmN-ew-VaU"/>
+                <constraint firstItem="BRw-Yo-4Ca" firstAttribute="leading" secondItem="Gdo-Jk-E6v" secondAttribute="leading" id="ddM-mM-elk"/>
+                <constraint firstItem="udM-9F-0WX" firstAttribute="top" secondItem="Gdo-Jk-E6v" secondAttribute="top" constant="12" id="f8W-GJ-lEh"/>
+                <constraint firstAttribute="height" constant="244" id="nUM-b8-yxB"/>
+                <constraint firstItem="udM-9F-0WX" firstAttribute="leading" secondItem="Gdo-Jk-E6v" secondAttribute="leading" id="nvk-fR-10K"/>
+                <constraint firstItem="roU-X8-Set" firstAttribute="leading" secondItem="Gdo-Jk-E6v" secondAttribute="leading" constant="16" id="rhB-S5-Ah7"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="BJx-3z-LuF"/>
+            <point key="canvasLocation" x="234.78260869565219" y="49.553571428571423"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Button-main-bg-disabled">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Button-main-bg-enabled">
+            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Button-main-bg-selected">
+            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green-Dark">
+            <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

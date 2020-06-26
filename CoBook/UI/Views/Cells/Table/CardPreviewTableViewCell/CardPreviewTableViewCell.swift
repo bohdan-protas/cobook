@@ -11,7 +11,8 @@ import UIKit
 class CardPreviewTableViewCell: UITableViewCell {
 
     @IBOutlet var titleImageView: DesignableImageView!
-    @IBOutlet var companyNameLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var detailLabel: UILabel!
     @IBOutlet var proffesionLabel: UILabel!
     @IBOutlet var telephoneNumberLabel: UILabel!
     @IBOutlet var separatorView: UIView!
@@ -19,7 +20,9 @@ class CardPreviewTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         titleImageView.cancelImageRequest()
         titleImageView.image = nil
-        companyNameLabel.text = ""
+        titleLabel.text = ""
+        detailLabel.isHidden = true
+        detailLabel.text = ""
         proffesionLabel.text = ""
         telephoneNumberLabel.text = ""
     }

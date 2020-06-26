@@ -357,3 +357,11 @@
 "Payment.finishInfo.title" = "Вітаємо!";
 "Payment.finishInfo.body" = "Тепер ви партнер нашої мережі. Ваш статус активується на протязі деякого часу.";
 "Payment.finishInfo.actionTitle" = "Повернутись до аккаунту";
+
+// MARK: - Financies
+"Financies.title" = "Фінанси";
+"Financies.loadingTitle" = "Збір інформації про фінанси...";
+"Financies.header.currentBallance" = "Поточний Баланс рахунку";
+"Financies.header.exportOnCard" = "Вивести на карту";
+"Financies.header.mininumExportSum" = "Мінімальна сума для виведення, %li";
+"Financies.header.exportedAverage" = "Всього було виведено %li";

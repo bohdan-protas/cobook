@@ -8,12 +8,12 @@
 
 import Alamofire
 
-protocol EndpointMockup: URLRequestConvertible {
+protocol EndpointMockupConfigurable: URLRequestConvertible {
     var mockupFileName: String? { get }
     var mockupFileExtension: String? { get }
 }
 
-extension EndpointMockup {
+extension EndpointMockupConfigurable {
 
     func asURLRequest() throws -> URLRequest {
         // Base URL
