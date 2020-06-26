@@ -221,8 +221,13 @@ extension APIClient {
                        password: String,
                        completion: @escaping (Result<RegisterAPIResponseData?>) -> Void) {
 
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
+        
         let endpoint = SignInEndpoint.login(login: login, password: password)
-        performRequest(endpoint: endpoint, completion: completion)
+        performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 }
 
