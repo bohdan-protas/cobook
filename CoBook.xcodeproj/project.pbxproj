@@ -871,6 +871,7 @@
 			isa = PBXGroup;
 			children = (
 				6D86CBB524A5D66100B29761 /* Financies.storyboard */,
+				6D86CBCE24A6588600B29761 /* FinanceSettings */,
 				6D86CBB724A5DA6300B29761 /* Financies */,
 				6D513BA524A5024C00FD89C2 /* PartnershipInfo */,
 			);
@@ -894,6 +895,13 @@
 				6D86CBCB24A6495700B29761 /* FinanceIncomsHeaderView.xib */,
 			);
 			path = FInanceIncomsHeaderView;
+			sourceTree = "<group>";
+		};
+		6D86CBCE24A6588600B29761 /* FinanceSettings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FinanceSettings;
 			sourceTree = "<group>";
 		};
 		6DBE367C249B9CB7005383C5 /* PlaceholderTableViewCell */ = {

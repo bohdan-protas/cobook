@@ -28,6 +28,12 @@ class FinanciesViewController: BaseViewController {
         presenter.setup()
     }
     
+    // MARK - Action
+    
+    @objc func settingsAction() {
+        Log.debug("settings")
+    }
+    
     
 }
 
@@ -38,6 +44,7 @@ private extension FinanciesViewController {
     func setupLayout() {
         self.navigationItem.title = "Financies.title".localized
         self.tableView.delegate = self
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_account_settings"), style: .plain, target: self, action: #selector(settingsAction))
     }
     
     

@@ -12,6 +12,9 @@
         <array key="HelveticaNeueCyr-Bold.ttf">
             <string>HelveticaNeueCyr-Bold</string>
         </array>
+        <array key="HelveticaNeueCyr-Medium.ttf">
+            <string>HelveticaNeueCyr-Medium</string>
+        </array>
         <array key="HelveticaNeueCyr-Roman.ttf">
             <string>HelveticaNeueCyr-Roman</string>
         </array>
@@ -169,6 +172,93 @@
             </objects>
             <point key="canvasLocation" x="4603" y="1584"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="LQt-IW-Ntz">
+            <objects>
+                <viewController id="G0O-KF-SE0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ayd-uX-Mdd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jvv-3v-63Z" userLabel="Shadow container" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                                <rect key="frame" x="8" y="52" width="359" height="642"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.080000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b3d-sg-RBa" userLabel="Bottom Container">
+                                <rect key="frame" x="0.0" y="694" width="375" height="84"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="DAO-yt-V6X" userLabel="someQuestionStackView">
+                                        <rect key="frame" x="10" y="32" width="355" height="20"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-qZ-hVl">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                            </view>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="alreadyHaveAccountQuestion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cC2-mu-PxY">
+                                                <rect key="frame" x="3" y="0.0" width="178.66666666666666" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Medium" family="HelveticaNeueCyr" pointSize="13"/>
+                                                <color key="textColor" name="Theme_Green"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRk-vw-25m">
+                                                <rect key="frame" x="184.66666666666663" y="0.0" width="167.33333333333337" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="13"/>
+                                                <state key="normal" title="SignUp.enterButton.normalTitle">
+                                                    <color key="titleColor" name="Theme_Green"/>
+                                                </state>
+                                            </button>
+                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="YTP-1Z-25x">
+                                                <rect key="frame" x="355" y="0.0" width="0.0" height="20"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="1cf-qZ-hVl" firstAttribute="width" secondItem="YTP-1Z-25x" secondAttribute="width" id="n8u-qz-Ga3"/>
+                                            <constraint firstAttribute="height" constant="20" id="uYR-r7-6q0"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="DAO-yt-V6X" firstAttribute="centerY" secondItem="b3d-sg-RBa" secondAttribute="centerY" id="AZr-9T-9Zw"/>
+                                    <constraint firstAttribute="height" constant="84" id="PbK-AR-FOn"/>
+                                    <constraint firstItem="DAO-yt-V6X" firstAttribute="leading" secondItem="b3d-sg-RBa" secondAttribute="leading" constant="10" id="dL9-bV-xn5"/>
+                                    <constraint firstAttribute="trailing" secondItem="DAO-yt-V6X" secondAttribute="trailing" constant="10" id="lcS-o8-CCz"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
+                        <constraints>
+                            <constraint firstItem="Jvv-3v-63Z" firstAttribute="top" secondItem="G3s-9Q-Fgt" secondAttribute="top" constant="8" id="2t6-ob-j4U"/>
+                            <constraint firstItem="G3s-9Q-Fgt" firstAttribute="trailing" secondItem="Jvv-3v-63Z" secondAttribute="trailing" constant="8" id="4U2-Fb-362"/>
+                            <constraint firstItem="b3d-sg-RBa" firstAttribute="top" secondItem="Jvv-3v-63Z" secondAttribute="bottom" id="54d-BB-wTX"/>
+                            <constraint firstItem="G3s-9Q-Fgt" firstAttribute="bottom" secondItem="b3d-sg-RBa" secondAttribute="bottom" id="GuN-oM-gSn"/>
+                            <constraint firstItem="G3s-9Q-Fgt" firstAttribute="trailing" secondItem="b3d-sg-RBa" secondAttribute="trailing" id="YgI-ep-XpW"/>
+                            <constraint firstItem="Jvv-3v-63Z" firstAttribute="leading" secondItem="Ayd-uX-Mdd" secondAttribute="leading" constant="8" id="oop-Yz-BnG"/>
+                            <constraint firstItem="b3d-sg-RBa" firstAttribute="leading" secondItem="Ayd-uX-Mdd" secondAttribute="leading" id="uah-Ip-dMH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="G3s-9Q-Fgt"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jmh-QO-DuB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5348" y="1583"/>
+        </scene>
     </scenes>
     <resources>
         <namedColor name="Theme_Accent">
@@ -191,6 +281,9 @@
         </namedColor>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Green">
+            <color red="0.48199999332427979" green="0.73299998044967651" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
