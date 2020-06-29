@@ -31,14 +31,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTt-Qz-nkp">
+                                <rect key="frame" x="0.0" y="44" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Sih-tX-gkc"/>
+                                    <constraint firstAttribute="width" constant="44" id="z1o-2c-iN0"/>
+                                </constraints>
+                                <state key="normal" image="ic_nav_close"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="4WX-YE-QBX" eventType="touchUpInside" id="aOA-TH-TrE"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VVl-dv-8LQ">
-                                <rect key="frame" x="30" y="84" width="315" height="315"/>
+                                <rect key="frame" x="30" y="96" width="315" height="315"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VVl-dv-8LQ" secondAttribute="height" multiplier="1:1" priority="999" id="szS-HO-TQY"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Nj4-uF-6XM">
-                                <rect key="frame" x="16" y="452.00000000000006" width="343" height="126.66666666666669"/>
+                                <rect key="frame" x="16" y="464.00000000000006" width="343" height="126.66666666666669"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NrW-Ql-eOJ">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -119,15 +130,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Nj4-uF-6XM" firstAttribute="top" secondItem="VVl-dv-8LQ" secondAttribute="bottom" constant="53" id="2IV-gg-pWt"/>
+                            <constraint firstItem="LTt-Qz-nkp" firstAttribute="leading" secondItem="Xwe-eO-bA8" secondAttribute="leading" id="4W3-A8-ARO"/>
                             <constraint firstItem="Xwe-eO-bA8" firstAttribute="trailing" secondItem="AD0-1j-9kx" secondAttribute="trailing" constant="40" id="Cow-kf-UoK"/>
                             <constraint firstItem="AD0-1j-9kx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Nj4-uF-6XM" secondAttribute="bottom" constant="50" id="LtL-gq-qIt"/>
                             <constraint firstItem="VVl-dv-8LQ" firstAttribute="leading" secondItem="Xwe-eO-bA8" secondAttribute="leading" constant="30" id="Mbr-kT-gBn"/>
                             <constraint firstItem="AD0-1j-9kx" firstAttribute="leading" secondItem="Xwe-eO-bA8" secondAttribute="leading" constant="40" id="QkH-gd-h53"/>
                             <constraint firstItem="Xwe-eO-bA8" firstAttribute="trailing" secondItem="VVl-dv-8LQ" secondAttribute="trailing" constant="30" id="Tb8-hP-bUl"/>
                             <constraint firstItem="Xwe-eO-bA8" firstAttribute="bottom" secondItem="AD0-1j-9kx" secondAttribute="bottom" constant="24" id="YRb-pT-LhP"/>
-                            <constraint firstItem="VVl-dv-8LQ" firstAttribute="top" secondItem="Xwe-eO-bA8" secondAttribute="top" constant="40" id="eIw-vL-MYo"/>
+                            <constraint firstItem="LTt-Qz-nkp" firstAttribute="top" secondItem="Xwe-eO-bA8" secondAttribute="top" id="e5o-CY-SMH"/>
                             <constraint firstItem="Nj4-uF-6XM" firstAttribute="leading" secondItem="Xwe-eO-bA8" secondAttribute="leading" constant="16" id="k0G-sO-Q34"/>
                             <constraint firstItem="Xwe-eO-bA8" firstAttribute="trailing" secondItem="Nj4-uF-6XM" secondAttribute="trailing" constant="16" id="qQH-mC-XIn"/>
+                            <constraint firstItem="VVl-dv-8LQ" firstAttribute="top" secondItem="LTt-Qz-nkp" secondAttribute="bottom" constant="8" id="zxy-0N-IEL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xwe-eO-bA8"/>
                     </view>
@@ -187,7 +200,7 @@
                                         <rect key="frame" x="0.0" y="10" width="375" height="506"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fBZ-e3-0aV" userLabel="Info Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="316"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="312"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-rk-M0U" userLabel="Intro Stack View">
                                                         <rect key="frame" x="20" y="20" width="335" height="106"/>
@@ -217,17 +230,17 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7sk-Kg-N2S" userLabel="Incomes Info Stack View">
-                                                        <rect key="frame" x="20" y="158" width="335" height="38"/>
+                                                        <rect key="frame" x="20" y="158" width="335" height="36.666666666666657"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результати співпраці" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zve-Im-lFo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="16.333333333333332"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                 <color key="textColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результати співпраці" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pm9-HO-ilh">
-                                                                <rect key="frame" x="0.0" y="21" width="335" height="17"/>
+                                                                <rect key="frame" x="0.0" y="20.333333333333343" width="335" height="16.333333333333329"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                 <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -236,17 +249,17 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hzX-ED-Slw" userLabel="Exported Info Stack View">
-                                                        <rect key="frame" x="20" y="208" width="335" height="38"/>
+                                                        <rect key="frame" x="20" y="206.66666666666669" width="335" height="36.666666666666657"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результати співпраці" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzg-8A-LOC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="16.333333333333332"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                 <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результати співпраці" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gs2-gL-Vsk">
-                                                                <rect key="frame" x="0.0" y="21" width="335" height="17"/>
+                                                                <rect key="frame" x="0.0" y="20.333333333333314" width="335" height="16.333333333333329"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                 <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -255,17 +268,17 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="6hY-AL-4PD" userLabel="Expired Date Stack View">
-                                                        <rect key="frame" x="20" y="258" width="335" height="38"/>
+                                                        <rect key="frame" x="20" y="255.33333333333329" width="335" height="36.666666666666657"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результати співпраці" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-2b-2Cy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="16.333333333333332"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                 <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результати співпраці" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbC-2M-yFG">
-                                                                <rect key="frame" x="0.0" y="21" width="335" height="17"/>
+                                                                <rect key="frame" x="0.0" y="20.333333333333371" width="335" height="16.333333333333329"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                 <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -366,7 +379,7 @@
                                 <rect key="frame" x="0.0" y="694" width="375" height="84"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WF-as-9x6">
-                                        <rect key="frame" x="165" y="29.666666666666629" width="45" height="25"/>
+                                        <rect key="frame" x="166" y="27.666666666666629" width="43" height="29"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="14"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" name="Theme_Green"/>
@@ -416,6 +429,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_nav_close" width="24" height="24"/>
         <namedColor name="Theme_Accent">
             <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

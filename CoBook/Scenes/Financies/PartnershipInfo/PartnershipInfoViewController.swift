@@ -18,7 +18,9 @@ class PartnershipInfoViewController: BaseViewController {
     @IBOutlet weak var bodyLabel: UILabel!
     @IBOutlet weak var actionButton: DesignableButton!
     
-    let paymentService = PaymentService()
+    private let paymentService = PaymentService()
+    private var pendingPaymentResult: (bill: Bill?, error: Error?)?
+    
     var presenter: PartnershipInfoPresenter?
     
     // MARK: - Lifecycle
@@ -34,9 +36,13 @@ class PartnershipInfoViewController: BaseViewController {
     
     @IBAction func actionButtonTapped(_ sender: Any) {
         presenter?.actionButton()
+        pendingPaymentResult = nil
     }
     
-
+    @IBAction func closeAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
 }
 
 // MARK: - PartnershipInfoView
@@ -74,11 +80,22 @@ extension PartnershipInfoViewController: PartnershipInfoView {
 
 extension PartnershipInfoViewController: PaymentPresenterDelegate {
     
+    func dismissedSDK() {
+        if let error = pendingPaymentResult?.error {
+            self.errorAlert(message: error.localizedDescription)
+        }
+        
+        if (pendingPaymentResult?.bill) != nil {
+            let presenter = PartnershipInfoPresenter(type: .finish)
+            let controller: PartnershipInfoViewController = UIStoryboard.financies.initiateViewControllerFromType()
+            controller.presenter = presenter
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        self.pendingPaymentResult = nil
+    }
+    
     func didFinishPayment(bill: Bill?, error: Error?) {
-        let presenter = PartnershipInfoPresenter(type: .finish)
-        let controller: PartnershipInfoViewController = UIStoryboard.financies.initiateViewControllerFromType()
-        controller.presenter = presenter
-        self.navigationController?.pushViewController(controller, animated: true)
+        pendingPaymentResult = (bill, error)
     }
     
     
