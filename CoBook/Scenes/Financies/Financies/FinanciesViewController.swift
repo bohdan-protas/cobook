@@ -31,7 +31,7 @@ class FinanciesViewController: BaseViewController {
     // MARK - Action
     
     @objc func settingsAction() {
-        Log.debug("settings")
+        goToFinanceSettings()
     }
     
     
@@ -72,6 +72,11 @@ extension FinanciesViewController: FinanciesView {
     
     func reload() {
         tableView.reloadData()
+    }
+    
+    func goToFinanceSettings() {
+        let controller: FinanceSettingsViewController = UIStoryboard.financies.initiateViewControllerFromType()
+        push(controller: controller, animated: true)
     }
     
     
