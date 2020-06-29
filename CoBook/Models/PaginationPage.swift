@@ -10,25 +10,27 @@ import Foundation
 
 struct PaginationPage<T> {
 
-    var pageSize: UInt
-    var offset: UInt {
+    public let pageSize: UInt
+    public var offset: UInt {
         get {
             return UInt(items.count)
         }
     }
 
-    var items: [T] {
-        willSet {
-            isNeedToLoadNextPage = (newValue.count == pageSize)
-        }
-    }
-
-    var isNeedToLoadNextPage = false
-    var isFetching = false
+    public var items: [T]
+    public var isNeedToLoadNextPage = false
+    public var isFetching = false
 
     init(pageSize: UInt, items: [T] = []) {
         self.pageSize = pageSize
         self.items = items
         self.isNeedToLoadNextPage = (items.count == pageSize)
     }
+    
+    mutating func append(items: [T]) {
+        self.items.append(contentsOf: items)
+        self.isNeedToLoadNextPage = (items.count == pageSize)
+    }
+    
+    
 }
