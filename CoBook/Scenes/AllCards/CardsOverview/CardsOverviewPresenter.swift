@@ -17,11 +17,9 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func reload()
     func set(searchDataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reloadSearch(resultText: String)
-
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
     func goToArticleDetails(presenter: ArticleDetailsPresenter?)
-
     func showBottomLoaderView()
     func hideBottomLoaderView()
 }
@@ -128,21 +126,21 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
             guard let currentBarIndex = CardsOverview.BarSectionsTypeIndex(rawValue: index) else {
                 return
             }
+            
             switch currentBarIndex {
             case .allCards:
                 guard let cards = cards[.allCards] else {
                     return
                 }
-
                 if cards.items.count - 1 == indexPath.row && cards.isNeedToLoadNextPage && !cards.isFetching {
                     self.view?.showBottomLoaderView()
                     self.cards[.allCards]?.isFetching = true
                     fetchCards(type: nil, currentPaginationPage: cards) { [weak self] (cards) in
                         guard let self = self else { return }
-                        self.cards[.allCards]?.items.append(contentsOf: cards)
+                        self.cards[.allCards]?.append(items: cards)
+                        self.cards[.allCards]?.isFetching = false
                         self.view?.hideBottomLoaderView()
                         self.update(section: .cards)
-                        self.cards[.allCards]?.isFetching = false
                     }
                 }
 
@@ -156,7 +154,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                     self.cards[.personalCards]?.isFetching = true
                     fetchCards(type: .personal, currentPaginationPage: self.cards[.personalCards]) { [weak self] (cards) in
                         guard let self = self else { return }
-                        self.cards[.personalCards]?.items.append(contentsOf: cards)
+                        self.cards[.personalCards]?.append(items: cards)
                         self.view?.hideBottomLoaderView()
                         self.update(section: .cards)
                         self.cards[.personalCards]?.isFetching = false
@@ -173,7 +171,7 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
                     self.cards[.businessCards]?.isFetching = true
                     fetchCards(type: .business, currentPaginationPage: self.cards[.businessCards]) { [weak self] (cards) in
                         guard let self = self else { return }
-                        self.cards[.personalCards]?.items.append(contentsOf: cards)
+                        self.cards[.personalCards]?.append(items: cards)
                         self.view?.hideBottomLoaderView()
                         self.update(section: .cards)
                         self.cards[.businessCards]?.isFetching = false
@@ -310,7 +308,7 @@ extension CardsOverviewViewPresenter {
         }
 
         pendingSearchResultWorkItem = DispatchWorkItem { [weak self] in
-            self?.fetchCards(searchQuery: query) { [weak self] (searchCards) in
+            self?.fetchCards(searchQuery: query, type: nil, currentPaginationPage: nil) { [weak self] (searchCards) in
                 self?.searchCards = searchCards
                 self?.updateViewDataSource()
                 self?.view?.reloadSearch(resultText: searchCards.isEmpty ?
@@ -341,9 +339,9 @@ private extension CardsOverviewViewPresenter {
             }
             switch barIndex {
             case .allCards:
-                if cards[barIndex]?.items.isEmpty ?? true || isInitialFetch {
+                if cards[.allCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
-                    fetchCards { [weak self] (cards) in
+                    fetchCards(type: nil, currentPaginationPage: cards[.allCards]) { [weak self] (cards) in
                         self?.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self?.reload(section: .cards)
                     }
@@ -352,9 +350,9 @@ private extension CardsOverviewViewPresenter {
                 }
 
             case .personalCards:
-                if cards[barIndex]?.items.isEmpty ?? true || isInitialFetch {
+                if cards[.personalCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
-                    fetchCards(type: .personal) { [unowned self] (cards) in
+                    fetchCards(type: .personal, currentPaginationPage: cards[.personalCards]) { [unowned self] (cards) in
                         self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
                     }
@@ -363,9 +361,9 @@ private extension CardsOverviewViewPresenter {
                 }
 
             case .businessCards:
-                if cards[barIndex]?.items.isEmpty ?? true || isInitialFetch {
+                if cards[.businessCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
-                    fetchCards(type: .business) { [unowned self] (cards) in
+                    fetchCards(type: .business, currentPaginationPage: cards[.businessCards]) { [unowned self] (cards) in
                         self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
                     }
@@ -397,16 +395,17 @@ private extension CardsOverviewViewPresenter {
         }
     }
 
-    func fetchCards(searchQuery: String? = nil, type: CardType? = nil, currentPaginationPage: PaginationPage<CardItemViewModel>? = nil, completion: (([CardItemViewModel]) -> Void)?) {
-        //let interests = AppStorage.User.Filters?.interests
+    func fetchCards(searchQuery: String? = nil,
+                    type: CardType?,
+                    currentPaginationPage: PaginationPage<CardItemViewModel>?,
+                    completion: (([CardItemViewModel]) -> Void)?) {
+        
         let practiceTypeIds = AppStorage.User.Filters?.practicies.compactMap { $0.id }
-
         APIClient.default.getCardsList(type: type?.rawValue,
-                                       //interestIds: interests,
                                        practiseTypeIds: practiceTypeIds,
                                        search: searchQuery,
-                                       limit:currentPaginationPage?.pageSize,
-                                       offset: currentPaginationPage?.offset) { [weak self] (result) in
+                                       limit: currentPaginationPage?.pageSize ?? Defaults.pageSize,
+                                       offset: currentPaginationPage?.offset ?? 0) { [weak self] (result) in
 
             guard let strongSelf = self else { return }
             switch result {
