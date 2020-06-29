@@ -76,7 +76,7 @@ extension PartnershipInfoViewController: PaymentPresenterDelegate {
     
     func didFinishPayment(bill: Bill?, error: Error?) {
         let presenter = PartnershipInfoPresenter(type: .finish)
-        let controller: PartnershipInfoViewController = UIStoryboard.account.initiateViewControllerFromType()
+        let controller: PartnershipInfoViewController = UIStoryboard.financies.initiateViewControllerFromType()
         controller.presenter = presenter
         self.navigationController?.pushViewController(controller, animated: true)
     }

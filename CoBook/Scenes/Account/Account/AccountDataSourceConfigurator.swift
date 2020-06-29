@@ -97,7 +97,7 @@ extension AccountPresenter {
                 cell.titleImageView.setImage(withPath: model.image, placeholderImage: textPlaceholderImage)
                 cell.proffesionLabel.text = model.profession
                 cell.telephoneNumberLabel.text = model.telephone
-                cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+                cell.titleLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
 
                 return cell
             }

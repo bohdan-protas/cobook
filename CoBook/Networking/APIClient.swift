@@ -900,3 +900,17 @@ extension APIClient {
     
     
 }
+
+// MARK: - Bonuses endpoint requests
+
+extension APIClient {
+    
+    @discardableResult
+    func getCardBonusesStats(completion: @escaping (Result<[CardBonusApiModel]?>) -> Void) -> DataRequest {
+        
+        let endpoint = BonusesEndpointMockup.getCardBonusesIncoms//BonusesEndpoint.getCardBonusesStats
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    
+}

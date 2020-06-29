@@ -12,9 +12,6 @@
         <array key="HelveticaNeueCyr-Bold.ttf">
             <string>HelveticaNeueCyr-Bold</string>
         </array>
-        <array key="HelveticaNeueCyr-Roman.ttf">
-            <string>HelveticaNeueCyr-Roman</string>
-        </array>
         <array key="SFProDisplay-Medium.ttf">
             <string>SFProDisplay-Medium</string>
         </array>
@@ -605,125 +602,6 @@
             </objects>
             <point key="canvasLocation" x="2869.5999999999999" y="1561.169415292354"/>
         </scene>
-        <!--Partnership Info View Controller-->
-        <scene sceneID="pjw-2f-RDn">
-            <objects>
-                <viewController storyboardIdentifier="PartnershipInfoViewController" hidesBottomBarWhenPushed="YES" id="hgf-T5-Oo0" customClass="PartnershipInfoViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="p3J-Bh-HGV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o36-Tq-SBH">
-                                <rect key="frame" x="30" y="40" width="315" height="315"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="o36-Tq-SBH" secondAttribute="height" multiplier="1:1" priority="999" id="Ahg-uB-QWw"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="b6A-e8-HuF">
-                                <rect key="frame" x="16" y="408" width="343" height="126.5"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNu-Pi-Z47">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyR-Bc-c4r">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="0vJ-5n-bHG"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Bold" family="HelveticaNeueCyr" pointSize="22"/>
-                                                <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstItem="hyR-Bc-c4r" firstAttribute="top" secondItem="eNu-Pi-Z47" secondAttribute="top" id="TMV-zf-jJf"/>
-                                            <constraint firstItem="hyR-Bc-c4r" firstAttribute="leading" secondItem="eNu-Pi-Z47" secondAttribute="leading" id="dIN-tO-o4P"/>
-                                            <constraint firstAttribute="trailing" secondItem="hyR-Bc-c4r" secondAttribute="trailing" id="iYX-Rt-HeH"/>
-                                            <constraint firstAttribute="bottom" secondItem="hyR-Bc-c4r" secondAttribute="bottom" id="xQC-u0-8kT"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4A-WS-TwH">
-                                        <rect key="frame" x="0.0" y="74" width="343" height="52.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="лівао лфівао лдфілва фліовалфіова лфі фіваор іфолваррр офірваол рфіолвар лофівва" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyh-Rq-cRi">
-                                                <rect key="frame" x="16" y="0.0" width="311" height="52.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="mNS-dP-crd"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="15"/>
-                                                <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="dyh-Rq-cRi" secondAttribute="trailing" constant="16" id="FQh-xd-NF9"/>
-                                            <constraint firstItem="dyh-Rq-cRi" firstAttribute="leading" secondItem="r4A-WS-TwH" secondAttribute="leading" constant="16" id="G9r-2O-ikq"/>
-                                            <constraint firstItem="dyh-Rq-cRi" firstAttribute="top" secondItem="r4A-WS-TwH" secondAttribute="top" id="ZpJ-wX-H3e"/>
-                                            <constraint firstAttribute="bottom" secondItem="dyh-Rq-cRi" secondAttribute="bottom" id="md3-DC-mis"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ccp-f0-iZd" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="40" y="593" width="295" height="50"/>
-                                <color key="backgroundColor" name="Theme_Accent"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="5O7-1X-MMa"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="17"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" name="Theme_Button-main-text-enabled"/>
-                                </state>
-                                <state key="disabled">
-                                    <color key="titleColor" name="Theme_Button-main-text-disabled"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="defaultColor">
-                                        <color key="value" name="Theme_Button-main-bg-enabled"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
-                                        <color key="value" name="Theme_Button-main-bg-selected"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledColor">
-                                        <color key="value" name="Theme_Button-main-bg-disabled"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="actionButtonTapped:" destination="hgf-T5-Oo0" eventType="touchUpInside" id="COn-q8-pph"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="1mU-sA-du3" firstAttribute="trailing" secondItem="b6A-e8-HuF" secondAttribute="trailing" constant="16" id="6ib-qL-iu7"/>
-                            <constraint firstItem="1mU-sA-du3" firstAttribute="trailing" secondItem="Ccp-f0-iZd" secondAttribute="trailing" constant="40" id="CJQ-lx-TPG"/>
-                            <constraint firstItem="1mU-sA-du3" firstAttribute="bottom" secondItem="Ccp-f0-iZd" secondAttribute="bottom" constant="24" id="I42-HH-Px6"/>
-                            <constraint firstItem="1mU-sA-du3" firstAttribute="trailing" secondItem="o36-Tq-SBH" secondAttribute="trailing" constant="30" id="IIp-D7-iQ3"/>
-                            <constraint firstItem="b6A-e8-HuF" firstAttribute="top" secondItem="o36-Tq-SBH" secondAttribute="bottom" constant="53" id="Jz1-Pm-gty"/>
-                            <constraint firstItem="o36-Tq-SBH" firstAttribute="top" secondItem="1mU-sA-du3" secondAttribute="top" constant="40" id="QTO-iW-cXz"/>
-                            <constraint firstItem="o36-Tq-SBH" firstAttribute="leading" secondItem="1mU-sA-du3" secondAttribute="leading" constant="30" id="amr-Sf-bfJ"/>
-                            <constraint firstItem="b6A-e8-HuF" firstAttribute="leading" secondItem="1mU-sA-du3" secondAttribute="leading" constant="16" id="emD-mh-lo5"/>
-                            <constraint firstItem="Ccp-f0-iZd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="b6A-e8-HuF" secondAttribute="bottom" constant="50" id="nVL-q8-t3d"/>
-                            <constraint firstItem="Ccp-f0-iZd" firstAttribute="leading" secondItem="1mU-sA-du3" secondAttribute="leading" constant="40" id="u6p-FJ-wmM"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="1mU-sA-du3"/>
-                    </view>
-                    <connections>
-                        <outlet property="actionButton" destination="Ccp-f0-iZd" id="cN7-LE-TJn"/>
-                        <outlet property="bodyLabel" destination="dyh-Rq-cRi" id="hKg-3I-TQM"/>
-                        <outlet property="titleImageView" destination="o36-Tq-SBH" id="Pm5-5Z-rm3"/>
-                        <outlet property="titleLabel" destination="hyR-Bc-c4r" id="Tub-eW-9zS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Eq-1J-rTS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3820" y="1581"/>
-        </scene>
         <!--Business Card Details View Controller-->
         <scene sceneID="3zZ-He-5vo">
             <objects>
@@ -974,9 +852,6 @@
     </scenes>
     <resources>
         <image name="ic_copy" width="15" height="18"/>
-        <namedColor name="Theme_Accent">
-            <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Theme_Black-Middle">
             <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -988,12 +863,6 @@
         </namedColor>
         <namedColor name="Theme_Button-main-bg-selected">
             <color red="1" green="0.85500001907348633" blue="0.10199999809265137" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Theme_Button-main-text-disabled">
-            <color red="0.74099999666213989" green="0.74099999666213989" blue="0.74099999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Theme_Button-main-text-enabled">
-            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Theme_Gray-Background">
             <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

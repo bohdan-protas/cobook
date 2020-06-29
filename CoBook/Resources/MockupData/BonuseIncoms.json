@@ -1,0 +1,290 @@
+{
+    "status" : "ok",
+    "error_localized_message" : null,
+    "data" : [
+        {
+            "created_by" : {
+                "id" : "3ffec2ea-7e73-4eda-b0b7-0305f55c5f30",
+                "first_name" : "Иван",
+                "last_name" : "Биз"
+            },
+            "avatar" : {
+                "storage_key" : "general\/aec641-zpgPRbQsci56A5hGOZ5x-image.jpg",
+                "id" : "257b3394-81bb-4393-b4c2-c16baf86935e",
+                "created_at" : "2020-06-26T07:43:24.49728+00:00",
+                "subtype" : "jpeg",
+                "type" : "image",
+                "owner_id" : "3ffec2ea-7e73-4eda-b0b7-0305f55c5f30",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/aec641-zpgPRbQsci56A5hGOZ5x-image.jpg"
+            },
+            "id" : 403,
+            "practice_type" : {
+                "id" : 1,
+                "title" : "IT дизайн"
+            },
+            "company" : {
+                "id" : 309,
+                "name" : "Rose"
+            },
+            "is_saved" : false,
+            "contact_telephone" : {
+                "id" : 13,
+                "number" : "+380505490651"
+            },
+            "type" : "business",
+            "contact_email" : {
+                "id" : 13,
+                "address" : "vanabi81@gmail.com"
+            },
+            "value": 125
+        },
+        {
+            "created_by" : {
+                "id" : "3ffec2ea-7e73-4eda-b0b7-0305f55c5f30",
+                "first_name" : "Иван",
+                "last_name" : "Биз"
+            },
+            "avatar" : {
+                "storage_key" : "general\/78ec7a-LgV2IR1oD9G9dk75IowD-image.jpg",
+                "id" : "50c213ee-707d-446f-be89-7574a46f19cd",
+                "created_at" : "2020-06-26T07:41:17.873174+00:00",
+                "subtype" : "jpeg",
+                "type" : "image",
+                "owner_id" : "3ffec2ea-7e73-4eda-b0b7-0305f55c5f30",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/78ec7a-LgV2IR1oD9G9dk75IowD-image.jpg"
+            },
+            "id" : 402,
+            "practice_type" : {
+                "id" : 3031,
+                "title" : "Институт программирования"
+            },
+            "company" : null,
+            "is_saved" : false,
+            "contact_telephone" : {
+                "id" : 13,
+                "number" : "+380505490651"
+            },
+            "type" : "personal",
+            "contact_email" : {
+                "id" : 13,
+                "address" : "vanabi81@gmail.com"
+            },
+            "value": 126
+        },
+        {
+            "created_by" : {
+                "id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "first_name" : "Bohdan",
+                "last_name" : "Protas"
+            },
+            "avatar" : {
+                "storage_key" : "general\/f728a9-UX7ggVbhwVOB66Yn7tjL-image.jpg",
+                "id" : "8aaca87f-947d-4d5b-8a11-93bdcb6cae12",
+                "created_at" : "2020-06-25T13:01:08.205954+00:00",
+                "subtype" : "jpeg",
+                "type" : "image",
+                "owner_id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/f728a9-UX7ggVbhwVOB66Yn7tjL-image.jpg"
+            },
+            "id" : 401,
+            "practice_type" : {
+                "id" : 2,
+                "title" : "IT менеджмент"
+            },
+            "company" : {
+                "id" : 308,
+                "name" : "not published 2"
+            },
+            "is_saved" : false,
+            "contact_telephone" : {
+                "id" : 1,
+                "number" : "+380975305496"
+            },
+            "type" : "business",
+            "contact_email" : {
+                "id" : 1,
+                "address" : "bo7pro@gmail.com"
+            },
+            "value": 127
+        },
+        {
+            "created_by" : {
+                "id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "first_name" : "Bohdan",
+                "last_name" : "Protas"
+            },
+            "avatar" : {
+                "storage_key" : "general\/7e6b9a-o5VbX5T97eNdsyN3xspd-image.jpg",
+                "id" : "24b9b9b8-2104-4f54-ba0c-aa8f3d1c6464",
+                "created_at" : "2020-06-25T12:23:16.713321+00:00",
+                "subtype" : "jpeg",
+                "type" : "image",
+                "owner_id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/7e6b9a-o5VbX5T97eNdsyN3xspd-image.jpg"
+            },
+            "id" : 400,
+            "practice_type" : {
+                "id" : 2,
+                "title" : "IT менеджмент"
+            },
+            "company" : {
+                "id" : 307,
+                "name" : "not published company"
+            },
+            "is_saved" : false,
+            "contact_telephone" : {
+                "id" : 1,
+                "number" : "+380975305496"
+            },
+            "type" : "business",
+            "contact_email" : {
+                "id" : 1,
+                "address" : "bo7pro@gmail.com"
+            },
+            "value": 125
+        },
+        {
+            "created_by" : {
+                "id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "first_name" : "Bohdan",
+                "last_name" : "Protas"
+            },
+            "avatar" : {
+                "storage_key" : "general\/9b7882-BUZGghOrZSQaHA36QYvM-image.jpg",
+                "id" : "dd5a62c8-440e-4f53-8d11-1b6639fde5b0",
+                "created_at" : "2020-06-23T10:45:27.620948+00:00",
+                "subtype" : "jpeg",
+                "type" : "image",
+                "owner_id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/9b7882-BUZGghOrZSQaHA36QYvM-image.jpg"
+            },
+            "id" : 390,
+            "practice_type" : {
+                "id" : 647,
+                "title" : "3D-печать"
+            },
+            "company" : null,
+            "is_saved" : false,
+            "contact_telephone" : {
+                "id" : 1,
+                "number" : "+380975305496"
+            },
+            "type" : "personal",
+            "contact_email" : {
+                "id" : 878,
+                "address" : "bo@gmail.com"
+            },
+            "value": 125
+        },
+        {
+            "created_by" : {
+                "id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "first_name" : "Bohdan",
+                "last_name" : "Protas"
+            },
+            "avatar" : {
+                "storage_key" : "general\/ab950c-C0Cg5kVIejAphievd7W6-image.jpg",
+                "id" : "ae878a1d-d4af-4d28-99fe-4bbe2355410e",
+                "created_at" : "2020-06-23T09:39:56.079943+00:00",
+                "subtype" : "jpeg",
+                "type" : "image",
+                "owner_id" : "b2b3b483-954c-4b80-86b2-d2fbeff269bb",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/ab950c-C0Cg5kVIejAphievd7W6-image.jpg"
+            },
+            "id" : 388,
+            "practice_type" : {
+                "id" : 1,
+                "title" : "IT дизайн"
+            },
+            "company" : {
+                "id" : 303,
+                "name" : "My company edited"
+            },
+            "is_saved" : true,
+            "contact_telephone" : {
+                "id" : 1,
+                "number" : "+380975305496"
+            },
+            "type" : "business",
+            "contact_email" : {
+                "id" : 1,
+                "address" : "bo7pro@gmail.com"
+            },
+            "value": 125
+        },
+        {
+            "created_by" : {
+                "id" : "185927fe-8963-480a-aa6a-3a88e99c06b0",
+                "first_name" : "Олег",
+                "last_name" : "Зелез"
+            },
+            "avatar" : {
+                "storage_key" : "general\/d79067-tiny-917-2020-05-07-17-06-28.jpg",
+                "id" : "7fcbadde-7699-450f-a29a-d87a469c0357",
+                "created_at" : "2020-05-07T14:23:02.042409+00:00",
+                "subtype" : "*",
+                "type" : "image",
+                "owner_id" : "185927fe-8963-480a-aa6a-3a88e99c06b0",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/d79067-tiny-917-2020-05-07-17-06-28.jpg"
+            },
+            "id" : 334,
+            "practice_type" : {
+                "id" : 1,
+                "title" : "IT дизайн"
+            },
+            "company" : {
+                "id" : 250,
+                "name" : "СoBook - smart contact book"
+            },
+            "is_saved" : false,
+            "contact_telephone" : {
+                "id" : 462,
+                "number" : "+380955296494"
+            },
+            "type" : "business",
+            "contact_email" : {
+                "id" : 624,
+                "address" : "cobook.mail@gmail.com"
+            },
+            "value": 125
+        },
+        {
+            "created_by" : {
+                "id" : "185927fe-8963-480a-aa6a-3a88e99c06b0",
+                "first_name" : "Олег",
+                "last_name" : "Зелез"
+            },
+            "avatar" : {
+                "storage_key" : "general\/aed938-tiny-947-2020-04-28-20-35-23.jpg",
+                "id" : "8d57d342-53e4-453e-bd71-eab7f6e29e2d",
+                "created_at" : "2020-04-28T17:39:24.133784+00:00",
+                "subtype" : "*",
+                "type" : "image",
+                "owner_id" : "185927fe-8963-480a-aa6a-3a88e99c06b0",
+                "source_url" : "https:\/\/s3.eu-central-1.amazonaws.com\/cobook.attachments\/general\/aed938-tiny-947-2020-04-28-20-35-23.jpg"
+            },
+            "id" : 310,
+            "practice_type" : {
+                "id" : 1,
+                "title" : "IT дизайн"
+            },
+            "company" : null,
+            "is_saved" : false,
+            "contact_telephone" : {
+                "id" : 462,
+                "number" : "+380955296494"
+            },
+            "type" : "personal",
+            "contact_email" : {
+                "id" : 462,
+                "address" : "olegzelez1981@gmail.com"
+            },
+            "value": 125
+        }
+    ],
+    "error_description" : null,
+    "request_context" : {
+        
+    },
+    "error_id" : null
+}
