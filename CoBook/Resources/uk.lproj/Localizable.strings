@@ -340,8 +340,9 @@
 
 // MARK: - Payment
 "Payment.description.businessCard" = "Оплата бізнес візитки";
-"Payment.description.franchise" = "Оплата франчайзі";
+"Payment.description.franchise" = "Оплата франчайзи";
 "Payment.status.notPublishedYet.title" = "Ще не опубліковано";
+"Payment.status.notPublished.title" = "Не опубліковано";
 "Payment.status.notPublishedYet.descr" = "Публікуйте візитку, щоб її могли переглянути інші користувачі";
 "Payment.status.notPublishedYet.actionTitle" = "Публікувати";
 "Payment.status.published.title" = "Опубліковано";
@@ -362,6 +363,7 @@
 
 // MARK: - Financies
 "Financies.title" = "Фінанси";
+"Financies.loadingTitle" = "Збір інформації про фінанси...";
 "Financies.header.currentBallance" = "Поточний Баланс рахунку";
 "Financies.header.exportOnCard" = "Вивести на карту";
 "Financies.header.mininumExportSum" = "Мінімальна сума для виведення, %li";

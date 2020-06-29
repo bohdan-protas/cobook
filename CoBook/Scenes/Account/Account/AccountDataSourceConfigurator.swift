@@ -99,6 +99,16 @@ extension AccountPresenter {
                 cell.telephoneNumberLabel.text = model.telephone
                 cell.titleLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
 
+                switch model.publishStatus {
+                case .none:
+                    cell.detailLabel.text = ""
+                    cell.detailLabel.isHidden = true
+                case .some(let value):
+                    cell.detailLabel.text = value.description
+                    cell.detailLabel.textColor = value.color
+                    cell.detailLabel.isHidden = false
+                }
+                
                 return cell
             }
 

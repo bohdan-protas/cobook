@@ -288,9 +288,11 @@ private extension AccountPresenter {
                                                    firstName: $0.company?.name,
                                                    lastName: nil,
                                                    profession: $0.practiceType?.title,
-                                                   telephone: $0.telephone?.number) } ?? []
-
-
+                                                   telephone: $0.telephone?.number,
+                                                   publishStatus: $0.subscriptionEndDate ?? Date() > Date() ? .actived : .expired
+                        ) } ?? []
+                
+                
                 strongSelf.updateViewDataSource()
                 strongSelf.view?.reload()
 

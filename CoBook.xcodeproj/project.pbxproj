@@ -41,6 +41,7 @@
 		6DF6606C24A3F22000E078DF /* PublishTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */; };
 		6DFDF10F24AA55E4001F358F /* FinanceSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDF10E24AA55E3001F358F /* FinanceSettingsViewController.swift */; };
 		6DFDF11124AA5E6F001F358F /* FinanceSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDF11024AA5E6F001F358F /* FinanceSettingsPresenter.swift */; };
+		6DFDF11324AA7395001F358F /* PaymentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDF11224AA7395001F358F /* PaymentStatus.swift */; };
 		9D8EE06CDCE7F5D068B3EBFF /* Pods_CoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */; };
 		B80B0A492471C9FB00C72607 /* Notifications + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */; };
 		B81F189324602CFF003CBC84 /* SelectAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */; };
@@ -445,6 +446,7 @@
 		6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishTableViewCell.xib; sourceTree = "<group>"; };
 		6DFDF10E24AA55E3001F358F /* FinanceSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSettingsViewController.swift; sourceTree = "<group>"; };
 		6DFDF11024AA5E6F001F358F /* FinanceSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSettingsPresenter.swift; sourceTree = "<group>"; };
+		6DFDF11224AA7395001F358F /* PaymentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatus.swift; sourceTree = "<group>"; };
 		B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notifications + Extensions.swift"; sourceTree = "<group>"; };
 		B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumViewController.swift; sourceTree = "<group>"; };
 		B81F189524602ECF003CBC84 /* SelectAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumTableViewCell.swift; sourceTree = "<group>"; };
@@ -1723,6 +1725,7 @@
 				B823A1AE2461F1F2004271AA /* CreateArticleModel.swift */,
 				B8DFB74B248FCC0600924838 /* Filter.swift */,
 				6D725371249F6CA400EFDC32 /* CardStatistics.swift */,
+				6DFDF11224AA7395001F358F /* PaymentStatus.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2843,6 +2846,7 @@
 				6D725372249F6CA400EFDC32 /* CardStatistics.swift in Sources */,
 				B83050AB247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift in Sources */,
 				B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */,
+				6DFDF11324AA7395001F358F /* PaymentStatus.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				6DF6606B24A3F22000E078DF /* PublishTableViewCell.swift in Sources */,
 				B82A62A324753C520052D6B2 /* ChangePasswordCellsConfigurator.swift in Sources */,

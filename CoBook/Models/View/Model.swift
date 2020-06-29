@@ -58,6 +58,7 @@ struct CardPreviewModel: Equatable {
     var lastName: String?
     var profession: String?
     var telephone: String?
+    var publishStatus: CardPublishStatus?
 }
 
 struct AddressInfoCellModel {
