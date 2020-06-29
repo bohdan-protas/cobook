@@ -341,6 +341,7 @@ private extension CardsOverviewViewPresenter {
             case .allCards:
                 if cards[.allCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
+                    cards[.allCards]?.items.removeAll()
                     fetchCards(type: nil, currentPaginationPage: cards[.allCards]) { [weak self] (cards) in
                         self?.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self?.reload(section: .cards)
@@ -352,6 +353,7 @@ private extension CardsOverviewViewPresenter {
             case .personalCards:
                 if cards[.personalCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
+                    cards[.personalCards]?.items.removeAll()
                     fetchCards(type: .personal, currentPaginationPage: cards[.personalCards]) { [unowned self] (cards) in
                         self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
@@ -363,6 +365,7 @@ private extension CardsOverviewViewPresenter {
             case .businessCards:
                 if cards[.businessCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
+                    cards[.businessCards]?.items.removeAll()
                     fetchCards(type: .business, currentPaginationPage: cards[.businessCards]) { [unowned self] (cards) in
                         self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
