@@ -375,3 +375,10 @@
 "Financies.Settings.continueCooperation.hint" = "Оплатити акаунт франчайзі ще на рік";
 "Financies.Settings.continueCooperation.title" = "Продовжити співпрацю";
 "Financies.Settings.cancelCooperation.title" = "Припинити співпрацю";
+
+// MARK: - Finance statistics
+"Finance.Statistics.title" = "Статистика";
+"Finance.Statistics.appDownloaded.title" = "Додаток завантажили";
+"Finance.Statistics.appDownloaded.value" = "%li користувач(-ів)";
+"Finance.Statistics.businessAccountCreated.title" = "Створили бізнес аккаунти";
+"Finance.Statistics.businessAccountCreated.value" = "%li користувач(-ів)";
