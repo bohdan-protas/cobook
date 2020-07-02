@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D3E467624AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467524AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift */; };
+		6D3E467824AE16AC005FF2CF /* FinanceStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */; };
+		6D3E467A24AE16CE005FF2CF /* FinanceHistoryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */; };
 		6D48C6F424A0F57100594632 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D48C6F324A0F57100594632 /* QRCodeViewController.swift */; };
 		6D513BA724A502A500FD89C2 /* PartnershipInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */; };
 		6D513BA924A5038500FD89C2 /* PartnershipInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */; };
@@ -418,6 +421,9 @@
 
 /* Begin PBXFileReference section */
 		5EAA0B323D42D9D8EC7633F5 /* Pods-CoBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.debug.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.debug.xcconfig"; sourceTree = "<group>"; };
+		6D3E467524AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatisticsConfigurator.swift; sourceTree = "<group>"; };
+		6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatistics.swift; sourceTree = "<group>"; };
+		6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceHistoryItemModel.swift; sourceTree = "<group>"; };
 		6D48C6F324A0F57100594632 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoViewController.swift; sourceTree = "<group>"; };
 		6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoPresenter.swift; sourceTree = "<group>"; };
@@ -871,6 +877,7 @@
 			children = (
 				6D6EF0C824ABACB900E6E776 /* FinanceStatisticsViewController.swift */,
 				6D6EF0CA24ABACD400E6E776 /* FinanceStatisticsPresenter.swift */,
+				6D3E467524AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift */,
 			);
 			path = FinanceStatistics;
 			sourceTree = "<group>";
@@ -1768,6 +1775,8 @@
 				B8DFB74B248FCC0600924838 /* Filter.swift */,
 				6D725371249F6CA400EFDC32 /* CardStatistics.swift */,
 				6DFDF11224AA7395001F358F /* PaymentStatus.swift */,
+				6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */,
+				6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2784,6 +2793,7 @@
 				B81F18992460317D003CBC84 /* CreateAlbumViewController.swift in Sources */,
 				B8AB3F0B2422FF1B00E06E53 /* NavigableView.swift in Sources */,
 				B8559F5F243A994D00787349 /* CreateBusinessCardParametersApiModel.swift in Sources */,
+				6D3E467824AE16AC005FF2CF /* FinanceStatistics.swift in Sources */,
 				B8AB84092428411F0041B879 /* GetInTouchTableViewCell.swift in Sources */,
 				B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */,
 				B822F51024599C7700F207CD /* CreateProductApiModel.swift in Sources */,
@@ -2870,6 +2880,7 @@
 				B8249247243DE64A00A1AC39 /* CardsOverviewPresenter.swift in Sources */,
 				B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */,
 				B83050AD247C391C0060D9BE /* URL + Extensions.swift in Sources */,
+				6D3E467624AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
 				B8249252243E26A300A1AC39 /* CardsOverview.swift in Sources */,
 				B850DA1624866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift in Sources */,
@@ -3006,6 +3017,7 @@
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
 				6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */,
 				B825FC42247ED02E00DB035D /* PaginationPage.swift in Sources */,
+				6D3E467A24AE16CE005FF2CF /* FinanceHistoryItemModel.swift in Sources */,
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,
 				B835FFBE245F300900189406 /* CreateArticlePresenter.swift in Sources */,
 				B82206482463006400D49D16 /* RequestParameters.swift in Sources */,

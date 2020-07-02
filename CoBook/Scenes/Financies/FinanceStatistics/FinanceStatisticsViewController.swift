@@ -8,17 +8,45 @@
 
 import UIKit
 
-class FinanceStatisticsViewController: UIViewController {
+class FinanceStatisticsViewController: BaseViewController {
 
+    /// managed table view
     @IBOutlet weak var tableView: UITableView!
+    
+    /// switcherHeaderView
+    private lazy var switcherHeaderView: SwitcherHeaderView = {
+        let view = SwitcherHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 146)))
+        return view
+    }()
+    
+    /// headerInfoView
+    private lazy var headerInfoView: FinanceStatisticsHeaderView = {
+        let view = FinanceStatisticsHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 143)))
+        return view
+    }()
+    
     var presenter = FinanceStatisticsPresenter()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
+        presenter.attachView(self)
+        presenter.setup()
+    }
+    
+    
+}
 
-        // Do any additional setup after loading the view.
+// MARK: - FinanceStatisticsViewController
+
+private extension FinanceStatisticsViewController {
+    
+    func setupLayout() {
+        navigationItem.title = "Finance.Statistics.title".localized
+        tableView.delegate = self
+        tableView.tableHeaderView = headerInfoView
     }
     
     
@@ -27,5 +55,61 @@ class FinanceStatisticsViewController: UIViewController {
 // MARK: - FinanceStatisticsView
 
 extension FinanceStatisticsViewController: FinanceStatisticsView {
+    
+    func reload() {
+        tableView.reloadData()
+    }
+    
+    func set(appDownloaderCount: Int) {
+        self.headerInfoView.appDownloadedValueLabel.text = String(format: "Finance.Statistics.appDownloaded.value".localized, appDownloaderCount)
+    }
+    
+    func set(businessAccountCreatedCount: Int) {
+        self.headerInfoView.businessAccountValueLabel.text = String(format: "Finance.Statistics.businessAccountCreated.value".localized, businessAccountCreatedCount)
+    }
+    
+    func set(dataSource: TableDataSource<FinanceStatisticsConfigurator>?) {
+        dataSource?.connect(to: tableView)
+    }
+    
+    func reload(section: FinanceStatistics.Section) {
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
+        tableView.endUpdates()
+    }
+    
+    
+}
+
+// MARK: - UITableView delegate
+
+extension FinanceStatisticsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let financeStatisticsSection = FinanceStatistics.Section(rawValue: section)
+        switch financeStatisticsSection {
+        case .none:
+            return nil
+        case .some(let section):
+            switch section {
+            case .rating:
+                return switcherHeaderView
+            }
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let financeStatisticsSection = FinanceStatistics.Section(rawValue: section)
+        switch financeStatisticsSection {
+        case .none:
+            return CGFloat.zero
+        case .some(let section):
+            switch section {
+            case .rating:
+                return switcherHeaderView.frame.height
+            }
+        }
+    }
+    
     
 }

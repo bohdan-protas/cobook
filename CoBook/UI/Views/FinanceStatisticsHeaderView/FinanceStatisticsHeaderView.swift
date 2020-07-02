@@ -8,11 +8,19 @@
 
 import UIKit
 
-class FinanceStatisticsHeaderView: UIView {
+class FinanceStatisticsHeaderView: BaseFromNibView {
 
+    @Localized("Finance.Statistics.appDownloaded.title")
     @IBOutlet var appDownloadedTitleLabel: UILabel!
     @IBOutlet var appDownloadedValueLabel: UILabel!
+    
+    @Localized("Finance.Statistics.businessAccountCreated.title")
     @IBOutlet var businessAccountCreatedTitleLabel: UILabel!
     @IBOutlet var businessAccountValueLabel: UILabel!
+    
+    override func getNib() -> UINib {
+        return FinanceStatisticsHeaderView.nib
+    }
+    
     
 }

@@ -429,12 +429,12 @@
         <!--Finance Statistics View Controller-->
         <scene sceneID="0Gz-D5-p1s">
             <objects>
-                <viewController id="9BH-iJ-6Vp" customClass="FinanceStatisticsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FinanceStatisticsViewController" hidesBottomBarWhenPushed="YES" id="9BH-iJ-6Vp" customClass="FinanceStatisticsViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7yI-Aa-bfn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6pM-sP-gGB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6pM-sP-gGB">
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>

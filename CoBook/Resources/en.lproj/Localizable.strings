@@ -382,3 +382,6 @@
 "Finance.Statistics.appDownloaded.value" = "%li користувач(-ів)";
 "Finance.Statistics.businessAccountCreated.title" = "Створили бізнес аккаунти";
 "Finance.Statistics.businessAccountCreated.value" = "%li користувач(-ів)";
+"Finance.Statistics.ratingOfUserBonuses.title" = "Рейтинг бонусів користувачів";
+"Finance.Statistics.ratingOfUserBonuses.action.inRegion" = "В регіоні";
+"Finance.Statistics.ratingOfUserBonuses.action.avarage" = "Усього";

@@ -20,14 +20,14 @@ class FinanciesPresenter: BasePresenter {
     
     weak var view: FinanciesView?
     
-    private var cardBonuseItems: [Financies.Model.BonusHistoryItem] = []
+    private var cardBonuseItems: [FinanceHistoryItemModel] = []
     private var dataSource: TableDataSource<FinanciesCellsConfigurator>?
     private var configurator: FinanciesCellsConfigurator
     
     // MARK: - Lifecycle
     
     init() {
-        let bonusHistoryItemCellConfigurator = TableCellConfigurator { (cell, model: Financies.Model.BonusHistoryItem, tableView, indexPath) -> CardPreviewTableViewCell in
+        let bonusHistoryItemCellConfigurator = TableCellConfigurator { (cell, model: FinanceHistoryItemModel, tableView, indexPath) -> CardPreviewTableViewCell in
             switch model.type {
             case .none:
                  cell.titleImageView.image = nil
@@ -77,13 +77,13 @@ class FinanciesPresenter: BasePresenter {
             switch result {
             case .success(let response):
                 let APICardBonuses = response ?? []
-                self.cardBonuseItems = APICardBonuses.compactMap { Financies.Model.BonusHistoryItem(id: $0.id,
-                                                                                                    type: $0.type,
-                                                                                                    cardCreator: $0.cardCreator,
-                                                                                                    companyName: $0.company?.name,
-                                                                                                    avatarURL: $0.avatar?.sourceUrl,
-                                                                                                    practiceType: $0.practiceType?.title,
-                                                                                                    moneyIncome: $0.moneyIncome) }
+                self.cardBonuseItems = APICardBonuses.compactMap { FinanceHistoryItemModel(id: $0.id,
+                                                                                           type: $0.type,
+                                                                                           cardCreator: $0.cardCreator,
+                                                                                           companyName: $0.company?.name,
+                                                                                           avatarURL: $0.avatar?.sourceUrl,
+                                                                                           practiceType: $0.practiceType?.title,
+                                                                                           moneyIncome: $0.moneyIncome) }
                 
                 self.updateViewLayout()
                 self.view?.reload()
