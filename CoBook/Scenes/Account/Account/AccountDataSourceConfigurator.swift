@@ -97,8 +97,18 @@ extension AccountPresenter {
                 cell.titleImageView.setImage(withPath: model.image, placeholderImage: textPlaceholderImage)
                 cell.proffesionLabel.text = model.profession
                 cell.telephoneNumberLabel.text = model.telephone
-                cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+                cell.titleLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
 
+                switch model.publishStatus {
+                case .none:
+                    cell.detailLabel.text = ""
+                    cell.detailLabel.isHidden = true
+                case .some(let value):
+                    cell.detailLabel.text = value.description
+                    cell.detailLabel.textColor = value.color
+                    cell.detailLabel.isHidden = false
+                }
+                
                 return cell
             }
 

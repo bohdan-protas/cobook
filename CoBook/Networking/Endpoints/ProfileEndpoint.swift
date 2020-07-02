@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum ProfileEndpoint: Endpoint {
+enum ProfileEndpoint: EndpointConfigurable {
 
     case details
     case update(parameters: APIRequestParameters.Profile.Update)

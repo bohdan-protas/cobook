@@ -21,7 +21,7 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
     @IBOutlet var telephoneNumberLabel: UILabel!
     @IBOutlet var websiteLabel: UILabel!
     @IBOutlet var saveCardButton: DesignableButton!
-
+    
     weak var delegate: BusinessCardHeaderInfoTableViewCellDelegate?
 
     // MARK: - Lifecycle
@@ -54,8 +54,10 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
     }
 
     // MARK: - Actions
+    
     @IBAction func saveCardButtonTapped(_ sender: UIButton) {
         delegate?.onSaveCard(cell: self)
     }
+    
 
 }

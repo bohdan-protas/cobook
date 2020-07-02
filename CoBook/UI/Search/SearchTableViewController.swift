@@ -63,7 +63,7 @@ class SearchTableViewController: UITableViewController, AlertDisplayableView {
 
         cell.proffesionLabel.text = model.practiceType?.title
         cell.telephoneNumberLabel.text = model.telephone
-        cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+        cell.titleLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
 
         let nameAbbr = model.nameAbbreviation
         let textPlaceholderImage = nameAbbr?.image(size: cell.titleImageView.frame.size)

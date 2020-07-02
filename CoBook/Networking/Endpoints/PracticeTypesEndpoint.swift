@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum PracticeTypesEndpoint: Endpoint {
+enum PracticeTypesEndpoint: EndpointConfigurable {
 
     /// Request localized list of practice types
     case list

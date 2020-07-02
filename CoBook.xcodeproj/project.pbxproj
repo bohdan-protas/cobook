@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6D48C6F424A0F57100594632 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D48C6F324A0F57100594632 /* QRCodeViewController.swift */; };
+		6D513BA724A502A500FD89C2 /* PartnershipInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */; };
+		6D513BA924A5038500FD89C2 /* PartnershipInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */; };
 		6D72536A249F60D300EFDC32 /* CardStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D725369249F60D300EFDC32 /* CardStatisticsViewController.swift */; };
 		6D72536C249F60F100EFDC32 /* CardStatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D72536B249F60F000EFDC32 /* CardStatisticsPresenter.swift */; };
 		6D72536E249F66F600EFDC32 /* CardStatisticInfoApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D72536D249F66F600EFDC32 /* CardStatisticInfoApiModel.swift */; };
@@ -15,6 +17,15 @@
 		6D725372249F6CA400EFDC32 /* CardStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D725371249F6CA400EFDC32 /* CardStatistics.swift */; };
 		6D725376249F6DB500EFDC32 /* CardStatisticItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D725374249F6DB500EFDC32 /* CardStatisticItemTableViewCell.swift */; };
 		6D725377249F6DB500EFDC32 /* CardStatisticItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D725375249F6DB500EFDC32 /* CardStatisticItemTableViewCell.xib */; };
+		6D86CBB624A5D66100B29761 /* Financies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D86CBB524A5D66100B29761 /* Financies.storyboard */; };
+		6D86CBB924A5DA7900B29761 /* FinanciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBB824A5DA7900B29761 /* FinanciesViewController.swift */; };
+		6D86CBBB24A5DA8A00B29761 /* FinanciesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBBA24A5DA8A00B29761 /* FinanciesPresenter.swift */; };
+		6D86CBBD24A5E87B00B29761 /* FinanciesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBBC24A5E87B00B29761 /* FinanciesConfigurator.swift */; };
+		6D86CBBF24A621CD00B29761 /* BonusesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBBE24A621CD00B29761 /* BonusesEndpoint.swift */; };
+		6D86CBC124A622E300B29761 /* CardBonusApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBC024A622E300B29761 /* CardBonusApiModel.swift */; };
+		6D86CBC324A63DC200B29761 /* BonuseIncoms.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D86CBC224A63DC100B29761 /* BonuseIncoms.json */; };
+		6D86CBC624A648B600B29761 /* FinanceIncomsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBC524A648B600B29761 /* FinanceIncomsHeaderView.swift */; };
+		6D86CBCC24A6495700B29761 /* FinanceIncomsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D86CBCB24A6495700B29761 /* FinanceIncomsHeaderView.xib */; };
 		6DBE367F249B9D0F005383C5 /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE367D249B9D0F005383C5 /* PlaceholderTableViewCell.swift */; };
 		6DBE3680249B9D0F005383C5 /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE367E249B9D0F005383C5 /* PlaceholderTableViewCell.xib */; };
 		6DBE3684249BC272005383C5 /* AccentButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE3682249BC272005383C5 /* AccentButtonTableViewCell.swift */; };
@@ -25,6 +36,12 @@
 		6DE35FF7249C07C700DC08C5 /* FeedbackApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */; };
 		6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */; };
 		6DE35FFC249C0FB200DC08C5 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */; };
+		6DF6606724A376CC00E078DF /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606624A376CC00E078DF /* PaymentService.swift */; };
+		6DF6606B24A3F22000E078DF /* PublishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606924A3F22000E078DF /* PublishTableViewCell.swift */; };
+		6DF6606C24A3F22000E078DF /* PublishTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */; };
+		6DFDF10F24AA55E4001F358F /* FinanceSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDF10E24AA55E3001F358F /* FinanceSettingsViewController.swift */; };
+		6DFDF11124AA5E6F001F358F /* FinanceSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDF11024AA5E6F001F358F /* FinanceSettingsPresenter.swift */; };
+		6DFDF11324AA7395001F358F /* PaymentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDF11224AA7395001F358F /* PaymentStatus.swift */; };
 		9D8EE06CDCE7F5D068B3EBFF /* Pods_CoBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99FEB252E331070F403B7F2 /* Pods_CoBook.framework */; };
 		B80B0A492471C9FB00C72607 /* Notifications + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */; };
 		B81F189324602CFF003CBC84 /* SelectAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */; };
@@ -243,7 +260,7 @@
 		B84A15E92410F65500C4DC11 /* CardPreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15E72410F65500C4DC11 /* CardPreviewTableViewCell.swift */; };
 		B84A15EA2410F65500C4DC11 /* CardPreviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84A15E82410F65500C4DC11 /* CardPreviewTableViewCell.xib */; };
 		B84A15F2241114BE00C4DC11 /* BaseFromNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */; };
-		B84B94E82403299F0007EB60 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E72403299F0007EB60 /* Endpoint.swift */; };
+		B84B94E82403299F0007EB60 /* EndpointConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E72403299F0007EB60 /* EndpointConfigurable.swift */; };
 		B84B94EA240329D50007EB60 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94E9240329D50007EB60 /* Constants.swift */; };
 		B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94EC24032ADE0007EB60 /* SignUpEndpoint.swift */; };
 		B84B94F1240337390007EB60 /* BaseApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B94F0240337390007EB60 /* BaseApiResponse.swift */; };
@@ -396,6 +413,8 @@
 /* Begin PBXFileReference section */
 		5EAA0B323D42D9D8EC7633F5 /* Pods-CoBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.debug.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.debug.xcconfig"; sourceTree = "<group>"; };
 		6D48C6F324A0F57100594632 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoViewController.swift; sourceTree = "<group>"; };
+		6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoPresenter.swift; sourceTree = "<group>"; };
 		6D725369249F60D300EFDC32 /* CardStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatisticsViewController.swift; sourceTree = "<group>"; };
 		6D72536B249F60F000EFDC32 /* CardStatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatisticsPresenter.swift; sourceTree = "<group>"; };
 		6D72536D249F66F600EFDC32 /* CardStatisticInfoApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatisticInfoApiModel.swift; sourceTree = "<group>"; };
@@ -403,6 +422,15 @@
 		6D725371249F6CA400EFDC32 /* CardStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatistics.swift; sourceTree = "<group>"; };
 		6D725374249F6DB500EFDC32 /* CardStatisticItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatisticItemTableViewCell.swift; sourceTree = "<group>"; };
 		6D725375249F6DB500EFDC32 /* CardStatisticItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardStatisticItemTableViewCell.xib; sourceTree = "<group>"; };
+		6D86CBB524A5D66100B29761 /* Financies.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Financies.storyboard; sourceTree = "<group>"; };
+		6D86CBB824A5DA7900B29761 /* FinanciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanciesViewController.swift; sourceTree = "<group>"; };
+		6D86CBBA24A5DA8A00B29761 /* FinanciesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanciesPresenter.swift; sourceTree = "<group>"; };
+		6D86CBBC24A5E87B00B29761 /* FinanciesConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanciesConfigurator.swift; sourceTree = "<group>"; };
+		6D86CBBE24A621CD00B29761 /* BonusesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusesEndpoint.swift; sourceTree = "<group>"; };
+		6D86CBC024A622E300B29761 /* CardBonusApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBonusApiModel.swift; sourceTree = "<group>"; };
+		6D86CBC224A63DC100B29761 /* BonuseIncoms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BonuseIncoms.json; sourceTree = "<group>"; };
+		6D86CBC524A648B600B29761 /* FinanceIncomsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceIncomsHeaderView.swift; sourceTree = "<group>"; };
+		6D86CBCB24A6495700B29761 /* FinanceIncomsHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceIncomsHeaderView.xib; sourceTree = "<group>"; };
 		6DBE367D249B9D0F005383C5 /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		6DBE367E249B9D0F005383C5 /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		6DBE3682249BC272005383C5 /* AccentButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButtonTableViewCell.swift; sourceTree = "<group>"; };
@@ -413,6 +441,12 @@
 		6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackApiModel.swift; sourceTree = "<group>"; };
 		6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		6DF6606624A376CC00E078DF /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
+		6DF6606924A3F22000E078DF /* PublishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishTableViewCell.swift; sourceTree = "<group>"; };
+		6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishTableViewCell.xib; sourceTree = "<group>"; };
+		6DFDF10E24AA55E3001F358F /* FinanceSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSettingsViewController.swift; sourceTree = "<group>"; };
+		6DFDF11024AA5E6F001F358F /* FinanceSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSettingsPresenter.swift; sourceTree = "<group>"; };
+		6DFDF11224AA7395001F358F /* PaymentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatus.swift; sourceTree = "<group>"; };
 		B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notifications + Extensions.swift"; sourceTree = "<group>"; };
 		B81F189224602CFF003CBC84 /* SelectAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumViewController.swift; sourceTree = "<group>"; };
 		B81F189524602ECF003CBC84 /* SelectAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlbumTableViewCell.swift; sourceTree = "<group>"; };
@@ -633,7 +667,7 @@
 		B84A15E82410F65500C4DC11 /* CardPreviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardPreviewTableViewCell.xib; sourceTree = "<group>"; };
 		B84A15F1241114BE00C4DC11 /* BaseFromNibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFromNibView.swift; sourceTree = "<group>"; };
 		B84B94E2240323ED0007EB60 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		B84B94E72403299F0007EB60 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		B84B94E72403299F0007EB60 /* EndpointConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointConfigurable.swift; sourceTree = "<group>"; };
 		B84B94E9240329D50007EB60 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B84B94EC24032ADE0007EB60 /* SignUpEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEndpoint.swift; sourceTree = "<group>"; };
 		B84B94F0240337390007EB60 /* BaseApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiResponse.swift; sourceTree = "<group>"; };
@@ -811,6 +845,15 @@
 			path = QRCode;
 			sourceTree = "<group>";
 		};
+		6D513BA524A5024C00FD89C2 /* PartnershipInfo */ = {
+			isa = PBXGroup;
+			children = (
+				6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */,
+				6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */,
+			);
+			path = PartnershipInfo;
+			sourceTree = "<group>";
+		};
 		6D725368249F606000EFDC32 /* CardStatictics */ = {
 			isa = PBXGroup;
 			children = (
@@ -828,6 +871,45 @@
 				6D725375249F6DB500EFDC32 /* CardStatisticItemTableViewCell.xib */,
 			);
 			path = CardStatisticItemTableViewCell;
+			sourceTree = "<group>";
+		};
+		6D86CBB424A5D63900B29761 /* Financies */ = {
+			isa = PBXGroup;
+			children = (
+				6D86CBB524A5D66100B29761 /* Financies.storyboard */,
+				6D86CBCE24A6588600B29761 /* FinanceSettings */,
+				6D86CBB724A5DA6300B29761 /* Financies */,
+				6D513BA524A5024C00FD89C2 /* PartnershipInfo */,
+			);
+			path = Financies;
+			sourceTree = "<group>";
+		};
+		6D86CBB724A5DA6300B29761 /* Financies */ = {
+			isa = PBXGroup;
+			children = (
+				6D86CBB824A5DA7900B29761 /* FinanciesViewController.swift */,
+				6D86CBBA24A5DA8A00B29761 /* FinanciesPresenter.swift */,
+				6D86CBBC24A5E87B00B29761 /* FinanciesConfigurator.swift */,
+			);
+			path = Financies;
+			sourceTree = "<group>";
+		};
+		6D86CBC424A6488E00B29761 /* FInanceIncomsHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				6D86CBC524A648B600B29761 /* FinanceIncomsHeaderView.swift */,
+				6D86CBCB24A6495700B29761 /* FinanceIncomsHeaderView.xib */,
+			);
+			path = FInanceIncomsHeaderView;
+			sourceTree = "<group>";
+		};
+		6D86CBCE24A6588600B29761 /* FinanceSettings */ = {
+			isa = PBXGroup;
+			children = (
+				6DFDF10E24AA55E3001F358F /* FinanceSettingsViewController.swift */,
+				6DFDF11024AA5E6F001F358F /* FinanceSettingsPresenter.swift */,
+			);
+			path = FinanceSettings;
 			sourceTree = "<group>";
 		};
 		6DBE367C249B9CB7005383C5 /* PlaceholderTableViewCell */ = {
@@ -864,6 +946,15 @@
 				6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */,
 			);
 			path = CommentTableViewCell;
+			sourceTree = "<group>";
+		};
+		6DF6606824A3F1C900E078DF /* PublishTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6DF6606924A3F22000E078DF /* PublishTableViewCell.swift */,
+				6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */,
+			);
+			path = PublishTableViewCell;
 			sourceTree = "<group>";
 		};
 		8F6D0CF0811B96725FC47846 /* Pods */ = {
@@ -1121,6 +1212,7 @@
 			isa = PBXGroup;
 			children = (
 				B826B0EB23F442AC009041DD /* Launch */,
+				6D86CBB424A5D63900B29761 /* Financies */,
 				B823AB7423F15D5F00DE13EA /* Auth */,
 				B8249243243DE62600A1AC39 /* AllCards */,
 				B824D14C246B11CB00911629 /* Saved */,
@@ -1182,6 +1274,7 @@
 				B823E8A8243F9AAB00EE1830 /* DeniedAccessToLocationPlaceholderView */,
 				B8559F96243CD62700787349 /* HorizintalItemsBarView */,
 				B8DE5E5724192ADC00F4F60B /* Designable */,
+				6D86CBC424A6488E00B29761 /* FInanceIncomsHeaderView */,
 				B8559F91243CC4B200787349 /* HideCardView */,
 				B82248DB242C0CD700392D10 /* CardSaveView */,
 				B8AB840124283C440041B879 /* EditCardView */,
@@ -1460,6 +1553,7 @@
 				B823E8A2243F590200EE1830 /* PermissionService.swift */,
 				B824AD7F2445FAE700410C23 /* ImagePicker.swift */,
 				B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */,
+				6DF6606624A376CC00E078DF /* PaymentService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1631,6 +1725,7 @@
 				B823A1AE2461F1F2004271AA /* CreateArticleModel.swift */,
 				B8DFB74B248FCC0600924838 /* Filter.swift */,
 				6D725371249F6CA400EFDC32 /* CardStatistics.swift */,
+				6DFDF11224AA7395001F358F /* PaymentStatus.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1692,7 +1787,7 @@
 		B84B94EB24032A760007EB60 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				B84B94E72403299F0007EB60 /* Endpoint.swift */,
+				B84B94E72403299F0007EB60 /* EndpointConfigurable.swift */,
 				B84B94EC24032ADE0007EB60 /* SignUpEndpoint.swift */,
 				B8357DB2240C6372006AB78E /* SignInEndpoint.swift */,
 				B828C34A240CE0A800F8C371 /* AuthEndpoint.swift */,
@@ -1706,6 +1801,7 @@
 				B822F51124599D4800F207CD /* ProductEndpoint.swift */,
 				B824DA74245B3B0300700319 /* ArticlesEndpoint.swift */,
 				6DBE3686249BE2E4005383C5 /* FeedbackEndpoint.swift */,
+				6D86CBBE24A621CD00B29761 /* BonusesEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -1747,6 +1843,7 @@
 				B884B698248A5B77000848A7 /* LocalizationKey.swift */,
 				6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */,
 				6D72536D249F66F600EFDC32 /* CardStatisticInfoApiModel.swift */,
+				6D86CBC024A622E300B29761 /* CardBonusApiModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2132,6 +2229,7 @@
 			isa = PBXGroup;
 			children = (
 				B8AB83F2242828470041B879 /* CardDetails.json */,
+				6D86CBC224A63DC100B29761 /* BonuseIncoms.json */,
 			);
 			path = MockupData;
 			sourceTree = "<group>";
@@ -2255,6 +2353,7 @@
 		B8DFB74D248FDFE600924838 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				6DF6606824A3F1C900E078DF /* PublishTableViewCell */,
 				6D725373249F6D9400EFDC32 /* CardStatisticItemTableViewCell */,
 				6DE35FF8249C0F9700DC08C5 /* CommentTableViewCell */,
 				6DBE367C249B9CB7005383C5 /* PlaceholderTableViewCell */,
@@ -2440,6 +2539,7 @@
 				B824DA6C245B071500700319 /* AlbumPreviewItemsTableViewCell.xib in Resources */,
 				B825741223F5621500C8CBF8 /* HelveticaNeueCyr-Medium.ttf in Resources */,
 				B823E8AC243F9C5900EE1830 /* DeniedAccessToLocationPlaceholderView.xib in Resources */,
+				6D86CBB624A5D66100B29761 /* Financies.storyboard in Resources */,
 				B8AB83F3242828470041B879 /* CardDetails.json in Resources */,
 				B8559F86243C81D500787349 /* MapDirectionTableViewCell.xib in Resources */,
 				B825742123F5621500C8CBF8 /* HelveticaNeueCyr-Italic.ttf in Resources */,
@@ -2451,6 +2551,7 @@
 				B82B4D4F245656CA0061A98B /* CompanyPreviewHeaderTableViewCell.xib in Resources */,
 				B825741623F5621500C8CBF8 /* HelveticaNeueCyr-ThinItalic.ttf in Resources */,
 				B870199123ED50EC00625D61 /* LaunchScreen.storyboard in Resources */,
+				6DF6606C24A3F22000E078DF /* PublishTableViewCell.xib in Resources */,
 				B825742023F5621500C8CBF8 /* HelveticaNeueCyr-BlackItalic.ttf in Resources */,
 				B8559F9A243CD6C600787349 /* HorizontalItemsBarView.xib in Resources */,
 				B870198E23ED50EC00625D61 /* Assets.xcassets in Resources */,
@@ -2461,6 +2562,7 @@
 				B825FC40247EA90600DB035D /* BottomLoaderView.xib in Resources */,
 				B8DE5E422418E25000F4F60B /* TextFieldTableViewCell.xib in Resources */,
 				B825741523F5621500C8CBF8 /* HelveticaNeueCyr-Thin.ttf in Resources */,
+				6D86CBC324A63DC200B29761 /* BonuseIncoms.json in Resources */,
 				B884B6A3248AA21D000848A7 /* SearchViewController.xib in Resources */,
 				B835FFC3245F3AA700189406 /* PostEditablePhotoCollectionViewCell.xib in Resources */,
 				B82200BA240FB8A400A17D2C /* Account.storyboard in Resources */,
@@ -2473,6 +2575,7 @@
 				B84A15EA2410F65500C4DC11 /* CardPreviewTableViewCell.xib in Resources */,
 				B82248E4242C106D00392D10 /* SectionHeaderTableViewCell.xib in Resources */,
 				B825741C23F5621500C8CBF8 /* SFProDisplay-Regular.ttf in Resources */,
+				6D86CBCC24A6495700B29761 /* FinanceIncomsHeaderView.xib in Resources */,
 				B825741A23F5621500C8CBF8 /* SFProDisplay-Medium.ttf in Resources */,
 				B82079352444638200FCCC17 /* FilterItemTableViewCell.xib in Resources */,
 				B8AB840A2428411F0041B879 /* GetInTouchTableViewCell.xib in Resources */,
@@ -2579,8 +2682,10 @@
 				B8DC63092434E27700A2ED58 /* CreateBusinessCard.swift in Sources */,
 				B8559F53243A5CB000787349 /* EmployersSearchItemApiModel.swift in Sources */,
 				B8909FB124641C3900AA56F7 /* ArticleHeaderTableViewCell.swift in Sources */,
+				6D86CBBD24A5E87B00B29761 /* FinanciesConfigurator.swift in Sources */,
 				B82A62A124753C250052D6B2 /* ChangePasswordPresenter.swift in Sources */,
 				B8A3B0B42450B6ED007C4F05 /* EditablePhotoListItemModel.swift in Sources */,
+				6D86CBC624A648B600B29761 /* FinanceIncomsHeaderView.swift in Sources */,
 				B81F18A3246080E4003CBC84 /* AlbumPreviewApiModel.swift in Sources */,
 				B8249242243DE2CC00A1AC39 /* CardItemApiModel.swift in Sources */,
 				B822F5162459B29E00F207CD /* ProductPreviewApiModel.swift in Sources */,
@@ -2617,6 +2722,7 @@
 				B823A1AD2461B561004271AA /* CreateAlbumModel.swift in Sources */,
 				B88906C024000858002E91F7 /* SignInPresenter.swift in Sources */,
 				B8DC630F2434FC3A00A2ED58 /* TableDataSource.swift in Sources */,
+				6D86CBB924A5DA7900B29761 /* FinanciesViewController.swift in Sources */,
 				B823E8AA243F9AFF00EE1830 /* DeniedAccessToLocationPlaceholderView.swift in Sources */,
 				B8DFB74C248FCC0600924838 /* Filter.swift in Sources */,
 				B8AB0B1C248DC82500DACC3D /* FilterDataSourceConfigurator.swift in Sources */,
@@ -2653,7 +2759,9 @@
 				B81F189324602CFF003CBC84 /* SelectAlbumViewController.swift in Sources */,
 				B823AB6F23F157A900DE13EA /* UIStoryboard + Coordinators.swift in Sources */,
 				B823DD7C244348F100A74495 /* SearchResultHeaderView.swift in Sources */,
+				6D86CBBB24A5DA8A00B29761 /* FinanciesPresenter.swift in Sources */,
 				B8359CD3241EA9BF0080263E /* CardDetailsApiModel.swift in Sources */,
+				6D86CBC124A622E300B29761 /* CardBonusApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
 				B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */,
 				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,
@@ -2700,6 +2808,7 @@
 				B8559F75243B785800787349 /* BusinessCardHeaderInfoTableViewCell.swift in Sources */,
 				B8559F80243C809D00787349 /* MapTableViewCell.swift in Sources */,
 				B8559F57243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift in Sources */,
+				6D86CBBF24A621CD00B29761 /* BonusesEndpoint.swift in Sources */,
 				B823A6A823FD34A0007540D0 /* Array + Extensions.swift in Sources */,
 				B8B8B9092459DA9F00162224 /* ProductDetailsDataSourceConfigurator.swift in Sources */,
 				B8909FB62464321800AA56F7 /* ArticleDetailsAPIModel.swift in Sources */,
@@ -2719,6 +2828,7 @@
 				B850DA1624866637002D8F99 /* PhotoGalleryItemCollectionViewCell.swift in Sources */,
 				B8307F252406FFD200AFE578 /* Optional + Extensions.swift in Sources */,
 				B82A211E2421700A00D0D9F5 /* AuthRequestInterceptor.swift in Sources */,
+				6DF6606724A376CC00E078DF /* PaymentService.swift in Sources */,
 				B8DFB746248FBC5F00924838 /* CollectionDataSource.swift in Sources */,
 				B850DA1924867679002D8F99 /* Trimmed.swift in Sources */,
 				B84B94ED24032ADE0007EB60 /* SignUpEndpoint.swift in Sources */,
@@ -2736,7 +2846,9 @@
 				6D725372249F6CA400EFDC32 /* CardStatistics.swift in Sources */,
 				B83050AB247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift in Sources */,
 				B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */,
+				6DFDF11324AA7395001F358F /* PaymentStatus.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
+				6DF6606B24A3F22000E078DF /* PublishTableViewCell.swift in Sources */,
 				B82A62A324753C520052D6B2 /* ChangePasswordCellsConfigurator.swift in Sources */,
 				B8307F212406FF3200AFE578 /* UserDefaultsStorageWrapper.swift in Sources */,
 				B81F18A72460A3E4003CBC84 /* SelectAlbumCellsConfigurator.swift in Sources */,
@@ -2766,12 +2878,14 @@
 				6DE35FF3249BEBDF00DC08C5 /* AddFeedbackViewController.swift in Sources */,
 				B881A47D2400590400D0C9EA /* OnboardingDataManager.swift in Sources */,
 				B824DA6F245B073200700319 /* AlbumPreviewItemCollectionViewCell.swift in Sources */,
+				6D513BA724A502A500FD89C2 /* PartnershipInfoViewController.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
 				B823B08B242CEFDF0012529D /* UIImageView + AFImageWrappers.swift in Sources */,
 				B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */,
 				B8909F9A2464121A00AA56F7 /* ArticleDetailsViewController.swift in Sources */,
 				B834BD662483F8450037C623 /* LocalizedKeyProvided.swift in Sources */,
 				B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */,
+				6DFDF11124AA5E6F001F358F /* FinanceSettingsPresenter.swift in Sources */,
 				B850DA1124866049002D8F99 /* PhotoGalleryViewController.swift in Sources */,
 				B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */,
 				B8559F64243AD09C00787349 /* BusinessCardDetailsViewController.swift in Sources */,
@@ -2781,6 +2895,7 @@
 				B8307F232406FF9A00AFE578 /* KeychainStorageWrapper.swift in Sources */,
 				B850DA1F2486972B002D8F99 /* ArticleDetailsSectionTitleTableViewCell.swift in Sources */,
 				B81F189F24603F71003CBC84 /* CreateAlbumApiModel.swift in Sources */,
+				6D513BA924A5038500FD89C2 /* PartnershipInfoPresenter.swift in Sources */,
 				B8AB3F032422B38300E06E53 /* Data + Extensions.swift in Sources */,
 				B828BCBE24366C670099D1A8 /* ApiModel.swift in Sources */,
 				B85F8B5D241FA8F0003C41D2 /* CardsEndpoint.swift in Sources */,
@@ -2827,7 +2942,7 @@
 				B8559F8F243C8B0900787349 /* CardItemTableViewCell.swift in Sources */,
 				B824DA66245AEC8700700319 /* UIStoryboard + ControllerInitiate.swift in Sources */,
 				B83050AF247C3F6F0060D9BE /* ShareableView.swift in Sources */,
-				B84B94E82403299F0007EB60 /* Endpoint.swift in Sources */,
+				B84B94E82403299F0007EB60 /* EndpointConfigurable.swift in Sources */,
 				B8DC630D2434FC1000A2ED58 /* TableCellConfigurator.swift in Sources */,
 				B823E8A7243F753D00EE1830 /* CardMapMarkerApiModel.swift in Sources */,
 				B823AB7123F15A5600DE13EA /* UIViewController + Extensions.swift in Sources */,
@@ -2850,6 +2965,7 @@
 				B8DE5E5A24192BD300F4F60B /* DesignableTextView.swift in Sources */,
 				B8AB3F0124229A1A00E06E53 /* ContentManagerEndpoint.swift in Sources */,
 				B82B4D59245668420061A98B /* ServiceDetailsPresenter.swift in Sources */,
+				6DFDF10F24AA55E4001F358F /* FinanceSettingsViewController.swift in Sources */,
 				6DBE3684249BC272005383C5 /* AccentButtonTableViewCell.swift in Sources */,
 				B824E1AF243767130091C491 /* CardBackgroundManagmentTableViewCell.swift in Sources */,
 				B8DE5E552419262600F4F60B /* TextViewTableViewCell.swift in Sources */,
@@ -3016,7 +3132,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3026,7 +3142,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3043,7 +3159,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3053,7 +3169,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cobook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

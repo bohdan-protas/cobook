@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum InterestsEndpoint: Endpoint {
+enum InterestsEndpoint: EndpointConfigurable {
 
     /// Request localized list of interests
     case list

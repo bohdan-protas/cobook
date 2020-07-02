@@ -68,7 +68,7 @@ class AccountPresenter: BasePresenter {
             case .inviteFriends:
                 inviteFriends()
 
-            case .statictics:
+            case .staticticsOfCards:
                 let statisticsController: CardStatisticsViewController = UIStoryboard.account.initiateViewControllerFromType()
                 view?.push(controller: statisticsController, animated: true)
                 
@@ -80,12 +80,36 @@ class AccountPresenter: BasePresenter {
                  UIApplication.shared.open(Constants.CoBook.faqURL)
                 
             case .startMakingMoney:
+                switch personalCard.isNil {
+                case true:
+                    self.view?.infoAlert(title: "Cobook", message: "Error.startMakingMoney.message".localized, handler: nil)
+                case false:
+                    let presenter = PartnershipInfoPresenter(type: .start)
+                    let controller: PartnershipInfoViewController = UIStoryboard.financies.initiateViewControllerFromType()
+                    controller.presenter = presenter
+                    self.view?.push(controller: controller, animated: true)
+                }
+                
+            case .study:
+                UIApplication.shared.open(Constants.CoBook.faqURL)
+                
+            case .referalLink:
+                let qrCodeController: QRCodeViewController = UIStoryboard.account.initiateViewControllerFromType()
+                view?.push(controller: qrCodeController, animated: true)
+                
+            case .financies:
+                let financiesViewController: FinanciesViewController = UIStoryboard.financies.initiateViewControllerFromType()
+                let presenter = FinanciesPresenter()
+                financiesViewController.presenter = presenter
+                view?.push(controller: financiesViewController, animated: true)
+                
+            case .staticticsOfPartnership:
                 break
                 
             case .quitAccount:
                 logout()
             }
-
+            
         case .personalCardPreview(let model):
             let personalCardDetailsViewController: PersonalCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
             if let strid = model.id, let id = Int(strid) {
@@ -133,6 +157,7 @@ private extension AccountPresenter {
             cardsPreviewSection.items.append(.title(text: "Account.section.myCards.title".localized))
         }
 
+        // Business cards items
         if let personalCard = personalCard {
             cardsPreviewSection.items.append(.personalCardPreview(model: personalCard))
         } else {
@@ -141,6 +166,7 @@ private extension AccountPresenter {
                                                                                            actiontype: .createPersonalCard)))
         }
 
+        // Business cards items
 //        if !businessCardsList.isEmpty {
 //            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
 //            cardsPreviewSection.items.append(contentsOf: cards)
@@ -154,23 +180,49 @@ private extension AccountPresenter {
 //        }
 
         // menuItems Section
-        let menuItemsSection = Section<Account.Item>(items: [
+        var menuItemsSection = Section<Account.Item>(items: [
             .sectionHeader,
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized,
                                                           image: UIImage(named: "ic_account_createparsonalcard"),
                                                           actiontype: .inviteFriends)),
             //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized, image: UIImage(named: "ic_account_qrcode"), actiontype: .generateQrCode)),
+//            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized,
+//                                                          image: UIImage(named: "ic_account_qrcode"),
+//                                                          actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
                                                           image: UIImage(named: "ic_account_faq"),
                                                           actiontype: .faq)),
         ])
-        //        if !personalCard.isNil {
-        //            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
-        //                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
-        //                                                                                        actiontype: .startMakingMoney)))
-        //        }
-
+        
+        // Franchise-only aviable section
+//        switch AppStorage.User.Profile?.franchiseEndDate {
+//        case .none:
+//            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+//                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
+//                                                                                        actiontype: .startMakingMoney)))
+//        case .some(let endDate):
+//            let currentDate = Date()
+//            if currentDate >= endDate {
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+//                                                                                            image: UIImage(named: "ic_account_startmakingmoney"),
+//                                                                                            actiontype: .startMakingMoney)))
+//            } else {
+//                menuItemsSection.items.append(.sectionHeader)
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.study".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .study)))
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.referal".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .referalLink)))
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .financies)))
+////                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
+////                                                                                            image: UIImage(named: "ic_account_faq"),
+////                                                                                            actiontype: .staticticsOfPartnership)))
+//            }
+//        }
+        
         // Quit account section
         let quitAccountSectin = Section<Account.Item>(items: [
             .sectionHeader,
@@ -239,9 +291,11 @@ private extension AccountPresenter {
                                                    firstName: $0.company?.name,
                                                    lastName: nil,
                                                    profession: $0.practiceType?.title,
-                                                   telephone: $0.telephone?.number) } ?? []
-
-
+                                                   telephone: $0.telephone?.number,
+                                                   publishStatus: $0.subscriptionEndDate ?? Date() > Date() ? .actived : .expired
+                        ) } ?? []
+                
+                
                 strongSelf.updateViewDataSource()
                 strongSelf.view?.reload()
 

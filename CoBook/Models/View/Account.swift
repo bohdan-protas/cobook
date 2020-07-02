@@ -36,11 +36,18 @@ enum Account {
     enum ActionType {
         case createPersonalCard
         case createBusinessCard
+        
         case inviteFriends
-        case statictics
+        case staticticsOfCards
         case generateQrCode
         case faq
         case startMakingMoney
+        
+        case study
+        case referalLink
+        case financies
+        case staticticsOfPartnership
+        
         case quitAccount
     }
 

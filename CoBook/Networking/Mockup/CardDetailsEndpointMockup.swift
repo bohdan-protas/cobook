@@ -8,12 +8,27 @@
 
 import Foundation
 
-enum CardEndpointMockup: EndpointMockup {
+enum CardEndpointMockup: EndpointMockupConfigurable {
 
     case details
 
     var mockupFileName: String? {
         return "CardDetails"
+    }
+
+    var mockupFileExtension: String? {
+        return "json"
+    }
+
+
+}
+
+enum BonusesEndpointMockup: EndpointMockupConfigurable {
+
+    case getCardBonusesIncoms
+
+    var mockupFileName: String? {
+        return "BonuseIncoms"
     }
 
     var mockupFileExtension: String? {

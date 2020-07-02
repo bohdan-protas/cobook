@@ -21,6 +21,7 @@ struct CardPreviewApiModel: Codable {
         case practiceType = "practice_type"
         case company
         case isSaved = "is_saved"
+        case subscriptionEndDate = "subscription_end_date"
     }
 
     var id: Int
@@ -32,5 +33,6 @@ struct CardPreviewApiModel: Codable {
     var practiceType: PracticeTypeApiModel?
     var company: CompanyApiModel?
     var isSaved: Bool?
+    var subscriptionEndDate: Date?
 }
 

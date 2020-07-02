@@ -341,6 +341,7 @@ private extension CardsOverviewViewPresenter {
             case .allCards:
                 if cards[.allCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
+                    cards[.allCards]?.items.removeAll()
                     fetchCards(type: nil, currentPaginationPage: cards[.allCards]) { [weak self] (cards) in
                         self?.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self?.reload(section: .cards)
@@ -352,6 +353,7 @@ private extension CardsOverviewViewPresenter {
             case .personalCards:
                 if cards[.personalCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
+                    cards[.personalCards]?.items.removeAll()
                     fetchCards(type: .personal, currentPaginationPage: cards[.personalCards]) { [unowned self] (cards) in
                         self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
@@ -363,6 +365,7 @@ private extension CardsOverviewViewPresenter {
             case .businessCards:
                 if cards[.businessCards]?.items.isEmpty ?? true || isInitialFetch {
                     if useLoader { view?.startLoading() }
+                    cards[.businessCards]?.items.removeAll()
                     fetchCards(type: .business, currentPaginationPage: cards[.businessCards]) { [unowned self] (cards) in
                         self.cards[barIndex] = PaginationPage(pageSize: Defaults.pageSize, items: cards)
                         self.reload(section: .cards)
@@ -463,10 +466,14 @@ private extension CardsOverviewViewPresenter {
 
     func updateViewDataSource() {
         // Posts section
-        dataSource?[CardsOverview.SectionAccessoryIndex.posts].items = [
-            .postPreview(model: albumPreviewSection)
-        ]
-
+        
+        if albumPreviewSection?.items.isEmpty ?? true {
+            dataSource?[CardsOverview.SectionAccessoryIndex.posts].items = []
+        } else {
+            dataSource?[CardsOverview.SectionAccessoryIndex.posts].items = [
+                .postPreview(model: albumPreviewSection)
+            ]
+        }
         // Cards section
         let barItemIndex = CardsOverview.BarSectionsTypeIndex(rawValue: selectedBarItem?.index ?? -1)
         switch barItemIndex {

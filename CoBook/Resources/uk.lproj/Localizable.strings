@@ -136,7 +136,8 @@
 "Error.Validation.password" = "Пароль повиннен бути мінімум 6 симіолів, але не більше 25";
 "Error.Validation.profession" = "Займана посада повинна бути мінімум 3 літери, але не більше 50";
 "Error.Validation.activityDescr" = "Опис діяльності повинен бути мінімум 3 літери, але не більше 500";
-"Error.maxSelectedElements" = "Максимальна кількість вирбраних елементів is %li";
+"Error.maxSelectedElements" = "Максимальна кількість вирбраних елементів %li";
+"Error.startMakingMoney.message" = "Для початку створіть персональну візитку";
 
 // MARK: - Onboarding
 "Onboarding.Subtitle01" = "Створи свою Персональну візитку за 5 хвилин";
@@ -194,7 +195,10 @@
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Почати заробляти з CoBook";
 "Account.item.quitAccount" = "Вийти з аккаунту";
-"Account.section.myCards.title" = "Мої візитки:";
+"Account.item.study" = "Навчання";
+"Account.item.referal" = "Реферальне посилання";
+"Account.item.financies" = "Фінанси";
+"Account.item.statisticsPartnership" = "Статистика партнерства";
 
 // MARK: - Settings
 "Settings.title" = "Налаштування";
@@ -333,3 +337,44 @@
 "QRCode.qrInfo.body" = "Проскануйте або роздрукуйте цей код щоб підключити партнера до мережі CoBook за вашим реферальним посиланням";
 "QRCode.referalInfo.title" = "Ваше реферальне посилання";
 "QRCode.referalInfo.body" = "Скопіюйте і відправте це посилання вашому партнеру щоб підключити партнера до мережі CoBook за вашим реферальним посиланням";
+
+// MARK: - Payment
+"Payment.description.businessCard" = "Оплата бізнес візитки";
+"Payment.description.franchise" = "Оплата франчайзи";
+"Payment.status.notPublishedYet.title" = "Ще не опубліковано";
+"Payment.status.notPublished.title" = "Не опубліковано";
+"Payment.status.notPublishedYet.descr" = "Публікуйте візитку, щоб її могли переглянути інші користувачі";
+"Payment.status.notPublishedYet.actionTitle" = "Публікувати";
+"Payment.status.published.title" = "Опубліковано";
+"Payment.status.published.descr" = "Залишилось %li день(-ів)";
+"Payment.status.published.actionTitle" = "Поновити публікацію";
+"Payment.status.expired.title" = "Термін дії публікації вийшов";
+"Payment.status.expired.descr" = "Будь ласка, подовжіть термін дії публікації для відображення візитки для інших користувачів";
+"Payment.status.expired.actionTitle" = "Поновити публікацію";
+"Payment.success.title" = "Вітаємо!";
+"Payment.success.description.franchise" = "Тепер ви партнер нашої мережі. Ваш статус оновиться на протязі деякого часу.";
+"Payment.success.description" = "Ваша візитка опублікується на протязі 2-3 хв";
+"Payment.startInfo.title" = "Умови співпраці";
+"Payment.startInfo.body" = "Описуємо умови справпраці максимально доступним способом, зацікавлюємо людину прийняти участь у співпраці";
+"Payment.startInfo.actionTitle" = "Розпочати";
+"Payment.finishInfo.title" = "Вітаємо!";
+"Payment.finishInfo.body" = "Тепер ви партнер нашої мережі. Ваш статус оновиться на протязі деякого часу.";
+"Payment.finishInfo.actionTitle" = "Повернутись до аккаунту";
+
+// MARK: - Financies
+"Financies.title" = "Фінанси";
+"Financies.loadingTitle" = "Збір інформації про фінанси...";
+"Financies.header.currentBallance" = "Поточний Баланс рахунку";
+"Financies.header.exportOnCard" = "Вивести на карту";
+"Financies.header.mininumExportSum" = "Мінімальна сума для виведення, %li";
+"Financies.header.exportedAverage" = "Всього було виведено %li";
+"Financies.Settings.title" = "Фінанси / Налаштування ";
+"Financies.Settings.resultOfCooperation.title" = "Результати співпраці";
+"Financies.Settings.resultOfCooperation.body" = "За час сумісної роботи в якості франчайзі вами було здійснено ряд фінансових досягнень та здобуто навички в підключенні нових користувачі до мережі а також:";
+"Financies.Settings.moneyIncomes.title" = "Всього було зароблено у співпраці";
+"Financies.Settings.moneyExported.title" = "Всього було виведено";
+"Financies.Settings.expiredFranchiseCount.title" = "До закінчення  терміну акаунту";
+"Financies.Settings.expiredFranchiseCount.value" = "%li день(-ів)";
+"Financies.Settings.continueCooperation.hint" = "Оплатити акаунт франчайзі ще на рік";
+"Financies.Settings.continueCooperation.title" = "Продовжити співпрацю";
+"Financies.Settings.cancelCooperation.title" = "Припинити співпрацю";

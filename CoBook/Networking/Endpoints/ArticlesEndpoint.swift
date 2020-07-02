@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum ArticlesEndpoint: Endpoint {
+enum ArticlesEndpoint: EndpointConfigurable {
 
     case getAlbums(cardID: Int?)
     case createAlbum(parameters: CreateAlbumApiModel)

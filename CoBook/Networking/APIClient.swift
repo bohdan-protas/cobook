@@ -221,8 +221,13 @@ extension APIClient {
                        password: String,
                        completion: @escaping (Result<RegisterAPIResponseData?>) -> Void) {
 
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
+        
         let endpoint = SignInEndpoint.login(login: login, password: password)
-        performRequest(endpoint: endpoint, completion: completion)
+        performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 }
 
@@ -364,8 +369,13 @@ extension APIClient {
     func getCardInfo(id: Int,
                      completion: @escaping (Result<CardDetailsApiModel?>) -> Void) -> DataRequest {
 
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
+        
         let endpoint = CardsEndpoint.getCardInfo(id: id)
-        return performRequest(endpoint: endpoint, completion: completion)
+        return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 
     /**
@@ -605,8 +615,14 @@ extension APIClient {
      */
     @discardableResult
     func profileDetails(completion: @escaping (Result<ProfileApiModel?>) -> Void) -> DataRequest {
+        
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
+        
         let endpoint = ProfileEndpoint.details
-        return performRequest(endpoint: endpoint, completion: completion)
+        return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 
     /**
@@ -879,6 +895,20 @@ extension APIClient {
                          completion: @escaping (Result<[FeedbackItemApiModel]?>) -> Void) -> DataRequest {
         
         let endpoint = FeedbackEndpoint.list(parameters: APIRequestParameters.Feedback.List(id: cardID, limit: limit, offset: offset))
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    
+}
+
+// MARK: - Bonuses endpoint requests
+
+extension APIClient {
+    
+    @discardableResult
+    func getCardBonusesStats(completion: @escaping (Result<[CardBonusApiModel]?>) -> Void) -> DataRequest {
+        
+        let endpoint = BonusesEndpointMockup.getCardBonusesIncoms//BonusesEndpoint.getCardBonusesStats
         return performRequest(endpoint: endpoint, completion: completion)
     }
     

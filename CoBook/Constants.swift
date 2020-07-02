@@ -144,6 +144,17 @@ enum Constants {
     enum Android {
         static let packageName: String = "com.cobook.cobook"
     }
+    
+    enum Payment {
+        
+        enum ContentType: String {
+            case card, franchise, leader
+        }
+        
+        static let payeeID: String = "25206"
+        static let iban: String = "UA453005280000026008455065616"
+        static let customUid: String = ""
+    }
 
 }
 

@@ -398,7 +398,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJu-AB-gXR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3833" y="939"/>
+            <point key="canvasLocation" x="3833" y="901"/>
         </scene>
         <!--Card Statistics View Controller-->
         <scene sceneID="q28-5y-gSf">
@@ -428,7 +428,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mwW-yg-GiL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4604" y="938.68065967016503"/>
+            <point key="canvasLocation" x="4604" y="901"/>
         </scene>
         <!--Code View Controller-->
         <scene sceneID="Vju-s5-EQn">
@@ -569,7 +569,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TYQ-Ib-MHA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5365.6000000000004" y="938.68065967016503"/>
+            <point key="canvasLocation" x="5366" y="901"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="XFg-mV-zWT">

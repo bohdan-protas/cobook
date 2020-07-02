@@ -158,11 +158,10 @@ extension ArticleDetailsPresenter {
             configurator.creatorCellConfigurator = TableCellConfigurator { (cell, model: CardPreviewModel, tableView, indexPath) -> CardPreviewTableViewCell in
                 let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
                 let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
-
                 cell.titleImageView.setImage(withPath: model.image, placeholderImage: textPlaceholderImage)
                 cell.proffesionLabel.text = model.profession
                 cell.telephoneNumberLabel.text = model.telephone
-                cell.companyNameLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
+                cell.titleLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
                 cell.separatorView.isHidden = true                
                 return cell
             }
