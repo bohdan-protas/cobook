@@ -11,6 +11,8 @@ import Alamofire
 enum BonusesEndpoint: EndpointConfigurable {
     
     case getCardBonusesStats
+    case getLeaderbordStats(params: APIRequestParameters.Bonuses.LeaderbordStats)
+    case getReferalStats
     
     var useAuthirizationToken: Bool {
         return true
@@ -18,8 +20,11 @@ enum BonusesEndpoint: EndpointConfigurable {
     
     var method: HTTPMethod {
         switch self {
-            
         case .getCardBonusesStats:
+            return .post
+        case .getLeaderbordStats:
+            return .post
+        case .getReferalStats:
             return .post
         }
     }
@@ -28,11 +33,17 @@ enum BonusesEndpoint: EndpointConfigurable {
         switch self {
         case .getCardBonusesStats:
             return "/bonuses/card_bonuses"
+        case .getLeaderbordStats:
+            return "/bonuses/leaderboard"
+        case .getReferalStats:
+            return "bonuses/referral_stats"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
+        case .getLeaderbordStats(let params):
+            return params.dictionary
         default: return nil
         }
     }

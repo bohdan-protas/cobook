@@ -10,8 +10,11 @@ import UIKit
 
 class FinanceIncomsHeaderView: BaseFromNibView {
 
-    @Localized("Financies.header.currentBallance") @IBOutlet var currentBallanceInfoLabel: UILabel!
-    @Localized("Financies.header.exportOnCard") @IBOutlet var exportIncomsButton: LoaderDesignableButton!
+    @Localized("Financies.header.currentBallance")
+    @IBOutlet var currentBallanceInfoLabel: UILabel!
+    
+    @Localized("Financies.header.exportOnCard")
+    @IBOutlet var exportIncomsButton: LoaderDesignableButton!
     
     @IBOutlet var currentBallanceValueLabel: UILabel!
     @IBOutlet var maxSumForExportLabel: UILabel!

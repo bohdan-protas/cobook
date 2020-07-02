@@ -8,32 +8,11 @@
 
 import UIKit
 
-enum Financies {
-    
-    enum Item {
-        case bonusHistoryItem(model: Model.BonusHistoryItem)
-    }
-    
-    enum Model {
-        
-        struct BonusHistoryItem {
-            var id: Int?
-            var type: CardType?
-            var telephone: String?
-            var cardCreator: CardCreatorApiModel?
-            var companyName: String?
-            var avatarURL: String?
-            var practiceType: String?
-            var moneyIncome: Int?
-        }
-        
-    }
 
-}
 
 struct FinanciesCellsConfigurator: TableCellConfiguratorType {
     
-    let bonusHistoryItemCellConfigurator: TableCellConfigurator<Financies.Model.BonusHistoryItem, CardPreviewTableViewCell>
+    let bonusHistoryItemCellConfigurator: TableCellConfigurator<FinanceHistoryItemModel, CardPreviewTableViewCell>
     
     func reuseIdentifier(for item: Financies.Item, indexPath: IndexPath) -> String {
         switch item {

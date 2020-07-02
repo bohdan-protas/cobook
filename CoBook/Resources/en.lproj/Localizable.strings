@@ -193,7 +193,7 @@
 "Account.item.study" = "Study";
 "Account.item.referal" = "Referal link";
 "Account.item.financies" = "Financies";
-"Account.item.statisticsPartnership" = "Partnership sattistics";
+"Account.item.statisticsPartnership" = "Partnership staistics";
 "Account.item.quitAccount" = "Sign out";
 "Account.section.myCards.title" = "My cards:";
 
@@ -375,3 +375,13 @@
 "Financies.Settings.continueCooperation.hint" = "Оплатити акаунт франчайзі ще на рік";
 "Financies.Settings.continueCooperation.title" = "Продовжити співпрацю";
 "Financies.Settings.cancelCooperation.title" = "Припинити співпрацю";
+
+// MARK: - Finance statistics
+"Finance.Statistics.title" = "Статистика";
+"Finance.Statistics.appDownloaded.title" = "Додаток завантажили";
+"Finance.Statistics.appDownloaded.value" = "%li користувач(-ів)";
+"Finance.Statistics.businessAccountCreated.title" = "Створили бізнес аккаунти";
+"Finance.Statistics.businessAccountCreated.value" = "%li користувач(-ів)";
+"Finance.Statistics.ratingOfUserBonuses.title" = "Рейтинг бонусів користувачів";
+"Finance.Statistics.ratingOfUserBonuses.action.inRegion" = "В регіоні";
+"Finance.Statistics.ratingOfUserBonuses.action.avarage" = "Усього";

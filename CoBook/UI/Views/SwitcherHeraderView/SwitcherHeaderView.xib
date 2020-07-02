@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeueCyr-Roman.ttf">
+            <string>HelveticaNeueCyr-Roman</string>
+        </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SwitcherHeaderView" customModule="CoBook" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="6m9-NP-8PY" id="h2G-ro-SI8"/>
+                <outlet property="firstActionButton" destination="K5X-4w-IS9" id="lvd-DW-zfY"/>
+                <outlet property="secondActionButton" destination="fdy-07-uK6" id="SEF-zC-4Zu"/>
+                <outlet property="titleLabel" destination="y6r-oo-ca7" id="Uzb-tM-bsa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="146"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6m9-NP-8PY" customClass="DesignableView" customModule="CoBook" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="16" width="414" height="130"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6r-oo-ca7">
+                            <rect key="frame" x="16" y="16" width="382" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="alV-mo-jf9"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                            <color key="textColor" name="Theme_Black-Middle"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="tiV-WL-1JR">
+                            <rect key="frame" x="16" y="52" width="382" height="42"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5X-4w-IS9" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="42"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="14"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                            <color key="value" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="firstActionButtonTapped:" destination="-1" eventType="touchUpInside" id="iI4-ap-Lqn"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdy-07-uK6" customClass="DesignableButton" customModule="CoBook" customModuleProvider="target">
+                                    <rect key="frame" x="194.66666666666663" y="0.0" width="187.33333333333337" height="42"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeueCyr-Roman" family="HelveticaNeueCyr" pointSize="14"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                            <color key="value" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="secondActionButtonTapped:" destination="-1" eventType="touchUpInside" id="D6E-n0-TMB"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="ggN-6Q-HyN"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="tiV-WL-1JR" firstAttribute="top" secondItem="y6r-oo-ca7" secondAttribute="bottom" constant="16" id="N8J-xC-PGA"/>
+                        <constraint firstItem="y6r-oo-ca7" firstAttribute="leading" secondItem="6m9-NP-8PY" secondAttribute="leading" constant="16" id="TKu-AY-deb"/>
+                        <constraint firstAttribute="trailing" secondItem="tiV-WL-1JR" secondAttribute="trailing" constant="16" id="VUU-Vd-mqO"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tiV-WL-1JR" secondAttribute="bottom" constant="16" id="XRE-Xi-KAf"/>
+                        <constraint firstAttribute="trailing" secondItem="y6r-oo-ca7" secondAttribute="trailing" constant="16" id="aFR-N6-aEb"/>
+                        <constraint firstItem="y6r-oo-ca7" firstAttribute="top" secondItem="6m9-NP-8PY" secondAttribute="top" constant="16" id="hYf-58-313"/>
+                        <constraint firstItem="tiV-WL-1JR" firstAttribute="leading" secondItem="6m9-NP-8PY" secondAttribute="leading" constant="16" id="ntC-gH-neC"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                            <real key="value" value="0.080000000000000002"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                            <size key="value" width="0.0" height="-4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" name="Theme_Gray-Background"/>
+            <constraints>
+                <constraint firstItem="6m9-NP-8PY" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="6AC-MT-6uP"/>
+                <constraint firstItem="6m9-NP-8PY" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="d1s-lX-a4Z"/>
+                <constraint firstItem="6m9-NP-8PY" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="w2k-hc-Ctv"/>
+                <constraint firstItem="6m9-NP-8PY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="zod-tL-rgh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="140.57971014492756" y="-152.44565217391306"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Theme_Black-Middle">
+            <color red="0.14900000393390656" green="0.18400000035762787" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
