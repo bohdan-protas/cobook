@@ -16,6 +16,14 @@ class FinanceStatisticsViewController: BaseViewController {
     /// switcherHeaderView
     private lazy var switcherHeaderView: SwitcherHeaderView = {
         let view = SwitcherHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 146)))
+        view.firstActionButton.isSelected = true
+        view.secondActionButton.isSelected = false
+        view.firstActionHandler = { [weak self] in
+            self?.presenter.fetchInRegionRating()
+        }
+        view.secondActionHandler = { [weak self] in
+            self?.presenter.fetchAverageRating()
+        }
         return view
     }()
     
@@ -74,6 +82,7 @@ extension FinanceStatisticsViewController: FinanceStatisticsView {
     
     func reload(section: FinanceStatistics.Section) {
         tableView.beginUpdates()
+        tableView.setContentOffset(.zero, animated: false)
         tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
         tableView.endUpdates()
     }

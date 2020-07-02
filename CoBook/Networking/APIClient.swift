@@ -908,7 +908,19 @@ extension APIClient {
     @discardableResult
     func getCardBonusesStats(completion: @escaping (Result<[CardBonusApiModel]?>) -> Void) -> DataRequest {
         
-        let endpoint = BonusesEndpointMockup.getCardBonusesIncoms//BonusesEndpoint.getCardBonusesStats
+        let endpoint = BonusesEndpoint.getCardBonusesStats
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    @discardableResult
+    func getBonusesRatings(params: APIRequestParameters.Bonuses.LeaderbordStats, completion: @escaping (Result<[CardBonusApiModel]?>) -> Void) -> DataRequest {
+        let endpoint = BonusesEndpoint.getLeaderbordStats(params: params)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    @discardableResult
+    func getReferalStats(completion: @escaping (Result<ReferalStatsAPIModel?>) -> Void) -> DataRequest {
+        let endpoint = BonusesEndpoint.getReferalStats
         return performRequest(endpoint: endpoint, completion: completion)
     }
     

@@ -436,10 +436,10 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6pM-sP-gGB">
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Theme_Gray-Background"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="6pM-sP-gGB" firstAttribute="leading" secondItem="1xc-u4-rfM" secondAttribute="leading" id="9CR-PG-0Ml"/>
                             <constraint firstItem="6pM-sP-gGB" firstAttribute="top" secondItem="1xc-u4-rfM" secondAttribute="top" id="T3I-dc-hWH"/>

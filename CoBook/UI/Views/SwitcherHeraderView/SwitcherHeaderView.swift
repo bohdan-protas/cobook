@@ -25,9 +25,9 @@ class SwitcherHeaderView: BaseFromNibView {
     var secondActionHandler: (() -> Void)?
     
     override func setupLayout() {
-        containerView.clipsToBounds = true
+        //containerView.clipsToBounds = true
         containerView.layer.cornerRadius = 10
-        containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMinYCorner]
+        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     override func getNib() -> UINib {

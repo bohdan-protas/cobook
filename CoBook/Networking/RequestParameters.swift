@@ -137,9 +137,25 @@ enum APIRequestParameters {
         }
         
     }
+    
+    // MARK: - Bonuses
+    
+    enum Bonuses {
+        
+        struct LeaderbordStats: Encodable {
+            var regionID: Int?
+            var limit: Int?
+            var offset: Int?
+            
+            enum CodingKeys: String, CodingKey {
+                case regionID = "region_id"
+                case limit
+                case offset
+            }
+        }
+    }
 
-
-
+    
 }
 
 
