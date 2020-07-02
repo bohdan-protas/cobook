@@ -157,6 +157,7 @@ private extension AccountPresenter {
             cardsPreviewSection.items.append(.title(text: "Account.section.myCards.title".localized))
         }
 
+        // Business cards items
         if let personalCard = personalCard {
             cardsPreviewSection.items.append(.personalCardPreview(model: personalCard))
         } else {
@@ -165,17 +166,18 @@ private extension AccountPresenter {
                                                                                            actiontype: .createPersonalCard)))
         }
 
-        if !businessCardsList.isEmpty {
-            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
-            cardsPreviewSection.items.append(contentsOf: cards)
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        } else {
-            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
-                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
-                                                                                           actiontype: .createBusinessCard)))
-        }
+        // Business cards items
+//        if !businessCardsList.isEmpty {
+//            let cards: [Account.Item] = businessCardsList.map { Account.Item.businessCardPreview(model: $0) }
+//            cardsPreviewSection.items.append(contentsOf: cards)
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createAnotherOneBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        } else {
+//            cardsPreviewSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.createBusinessCard".localized,
+//                                                                                           image: UIImage(named: "ic_account_createbusinescard"),
+//                                                                                           actiontype: .createBusinessCard)))
+//        }
 
         // menuItems Section
         var menuItemsSection = Section<Account.Item>(items: [
@@ -184,41 +186,42 @@ private extension AccountPresenter {
                                                           image: UIImage(named: "ic_account_createparsonalcard"),
                                                           actiontype: .inviteFriends)),
             //.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .statictics)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized,
-                                                          image: UIImage(named: "ic_account_qrcode"),
-                                                          actiontype: .generateQrCode)),
+//            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized,
+//                                                          image: UIImage(named: "ic_account_qrcode"),
+//                                                          actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
                                                           image: UIImage(named: "ic_account_faq"),
                                                           actiontype: .faq)),
         ])
         
-        switch AppStorage.User.Profile?.franchiseEndDate {
-        case .none:
-            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
-                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
-                                                                                        actiontype: .startMakingMoney)))
-        case .some(let endDate):
-            let currentDate = Date()
-            if currentDate >= endDate {
-                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
-                                                                                            image: UIImage(named: "ic_account_startmakingmoney"),
-                                                                                            actiontype: .startMakingMoney)))
-            } else {
-                menuItemsSection.items.append(.sectionHeader)
-                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.study".localized,
-                                                                                            image: UIImage(named: "ic_account_faq"),
-                                                                                            actiontype: .study)))
-                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.referal".localized,
-                                                                                            image: UIImage(named: "ic_account_faq"),
-                                                                                            actiontype: .referalLink)))
-                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
-                                                                                            image: UIImage(named: "ic_account_faq"),
-                                                                                            actiontype: .financies)))
-//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
+        // Franchise-only aviable section
+//        switch AppStorage.User.Profile?.franchiseEndDate {
+//        case .none:
+//            menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+//                                                                                        image: UIImage(named: "ic_account_startmakingmoney"),
+//                                                                                        actiontype: .startMakingMoney)))
+//        case .some(let endDate):
+//            let currentDate = Date()
+//            if currentDate >= endDate {
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.startMakingMoney".localized,
+//                                                                                            image: UIImage(named: "ic_account_startmakingmoney"),
+//                                                                                            actiontype: .startMakingMoney)))
+//            } else {
+//                menuItemsSection.items.append(.sectionHeader)
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.study".localized,
 //                                                                                            image: UIImage(named: "ic_account_faq"),
-//                                                                                            actiontype: .staticticsOfPartnership)))
-            }
-        }
+//                                                                                            actiontype: .study)))
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.referal".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .referalLink)))
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .financies)))
+////                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
+////                                                                                            image: UIImage(named: "ic_account_faq"),
+////                                                                                            actiontype: .staticticsOfPartnership)))
+//            }
+//        }
         
         // Quit account section
         let quitAccountSectin = Section<Account.Item>(items: [
