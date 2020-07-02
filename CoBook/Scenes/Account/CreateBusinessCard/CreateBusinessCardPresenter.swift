@@ -18,6 +18,7 @@ protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func setupSaveCardView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func showSearchEmployersControlelr()
+    func showSearchPracticies(presenter: SearchPracticiesPresenter)
 }
 
 // MARK: - Defaults
@@ -234,13 +235,13 @@ extension CreateBusinessCardPresenter {
             employersSection.items.append(.employersList)
         }
 
-        let interestsSection = Section<CreateBusinessCard.Cell>(items: [
-            .sectionHeader,
-            .title(text: "BusinessCard.section.interests.title".localized),
-            .interests
-        ])
+//        let interestsSection = Section<CreateBusinessCard.Cell>(items: [
+//            .sectionHeader,
+//            .title(text: "BusinessCard.section.interests.title".localized),
+//            .interests
+//        ])
 
-        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, employersSection, interestsSection]
+        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, employersSection, /*interestsSection*/]
     }
 
 
@@ -295,19 +296,6 @@ private extension CreateBusinessCardPresenter {
         var errors = [Error]()
 
         view?.startLoading(text: "Loading.loading.title".localized)
-
-        // fetch practices
-        group.enter()
-        APIClient.default.practicesTypesListRequest { [weak self] (result) in
-            switch result {
-            case let .success(response):
-                self?.businessCardDetailsModel.practices = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
-                group.leave()
-            case let .failure(error):
-                errors.append(error)
-                group.leave()
-            }
-        }
 
         // fetch interests
         group.enter()
@@ -429,10 +417,13 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
 
         switch action {
         case .practice:
-            let selectedPracticeName = cell.textField.text
-            let selectedPractice = businessCardDetailsModel.practices.first(where: { $0.title == selectedPracticeName })
-            businessCardDetailsModel.practiseType = selectedPractice
-
+            let presenter = SearchPracticiesPresenter(isMultiselectEnabled: false)
+            presenter.selectionCompletion = { [weak self] (practice) in
+                cell.textField.text = practice?.title
+                self?.businessCardDetailsModel.practiseType = practice
+            }
+            self.view?.showSearchPracticies(presenter: presenter)
+            
         case .city:
             let filter = GMSAutocompleteFilter()
             filter.type = .city

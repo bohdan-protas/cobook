@@ -56,6 +56,12 @@ class CreateBusinessCardViewController: BaseViewController {
 
 extension CreateBusinessCardViewController: CreateBusinessCardView {
 
+    func showSearchPracticies(presenter: SearchPracticiesPresenter) {
+        let searchViewController = SearchViewController(presenter: presenter)
+        let navigation = CustomNavigationController(rootViewController: searchViewController)
+        presentPanModal(navigation)
+    }
+    
     func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
@@ -77,7 +83,7 @@ extension CreateBusinessCardViewController: CreateBusinessCardView {
         autocompleteViewController.autocompleteFilter = filter
         autocompleteViewController.delegate = self
 
-        present(autocompleteViewController, animated: true, completion: nil)
+        presentPanModal(autocompleteViewController)
     }
 
     func showSearchEmployersControlelr() {

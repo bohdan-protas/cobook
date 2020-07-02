@@ -14,7 +14,7 @@ fileprivate enum Layout {
     static let footerHeight: CGFloat = 84
 }
 
-class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetailsView {
+class PersonalCardDetailsViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
 
@@ -57,14 +57,19 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         presenter?.share()
     }
 
-    // MARK: - PersonalCardDetailsView
 
+}
+
+// MARK: - PersonalCardDetailsView
+
+extension PersonalCardDetailsViewController: PersonalCardDetailsView {
+    
     func setupLayout() {
         navigationItem.title = "PersonalCard.title".localized
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_share"), style: .plain, target: self, action: #selector(shareTapped))
         tableView.delegate = self
     }
-
+    
     func setupEditView() {
         tableView.tableFooterView = editCardView
     }
@@ -93,14 +98,8 @@ class PersonalCardDetailsViewController: BaseViewController, PersonalCardDetails
         controller.presenter = CreateArticlePresenter(cardID: cardID)
         self.navigationController?.pushViewController(controller, animated: true)
     }
-
-
-}
-
-// MARK: - Privates
-
-private extension PersonalCardDetailsViewController {
-
+    
+    
 }
 
 // MARK: - UITableViewDelegate
@@ -114,5 +113,6 @@ extension PersonalCardDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
+    
 
 }

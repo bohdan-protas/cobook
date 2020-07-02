@@ -133,20 +133,11 @@ extension CreateBusinessCardPresenter {
             // actionFieldConfigurator
             viewDataSourceConfigurator.actionFieldConfigurator = TableCellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
-                cell.dataSource = self
                 cell.textField.text = model.text
                 cell.textField.placeholder = model.placeholder
                 cell.actionIdentifier = model.actionTypeId
-
-                if let action = CreateBusinessCard.ActionType(rawValue: model.actionTypeId ?? "") {
-                    switch action {
-                    case .practice:
-                        cell.textField.inputView = cell.pickerView
-                    default:
-                        cell.actionControlView.isUserInteractionEnabled = true
-                        cell.textField.isUserInteractionEnabled = false
-                    }
-                }
+                cell.actionControlView.isUserInteractionEnabled = true
+                cell.textField.isUserInteractionEnabled = false
                 return cell
             }
 
