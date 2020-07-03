@@ -31,6 +31,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
     var buttonCellConfigurator: TableCellConfigurator<ButtonCellModel, AccentButtonTableViewCell>
     var commentCellConfigurator: TableCellConfigurator<FeedbackItemApiModel, CommentTableViewCell>
     var publishCellConfigurator: TableCellConfigurator<PublishCellModel, PublishTableViewCell>
+    var photoCollageConfigurator: TableCellConfigurator<Void?, PhotoCollageTableViewCell>
     
     // MARK: - Cell configurator
 
@@ -76,6 +77,8 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
             return commentCellConfigurator.reuseIdentifier
         case .publish:
             return publishCellConfigurator.reuseIdentifier
+        case .photoCollage:
+            return photoCollageConfigurator.reuseIdentifier
         }
     }
 
@@ -140,6 +143,9 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
             
         case .publish(let model):
             return publishCellConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
+            
+        case .photoCollage:
+            return photoCollageConfigurator.configuredCell(for: nil, tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -164,6 +170,7 @@ struct BusinessCardDetailsDataSourceConfigurator: TableCellConfiguratorType {
         buttonCellConfigurator.registerCells(in: tableView)
         commentCellConfigurator.registerCells(in: tableView)
         publishCellConfigurator.registerCells(in: tableView)
+        photoCollageConfigurator.registerCells(in: tableView)
     }
 
 
@@ -363,6 +370,13 @@ extension BusinessCardDetailsPresenter {
                 return cell
             }
             
+            let photoCollageConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> PhotoCollageTableViewCell in
+                cell.dataSource = self
+                cell.delegate = self
+                cell.prepareLayout()
+                return cell
+            }
+            
             let configurator = BusinessCardDetailsDataSourceConfigurator(headerInfoCellConfigurator: headerInfoCellConfigurator,
                                                                          sectionTitleConfigurator: sectionTitleConfigurator,
                                                                          sectionHeaderConfigurator: sectionHeaderConfigurator,
@@ -382,7 +396,8 @@ extension BusinessCardDetailsPresenter {
                                                                          commentPlaceholderCellConfigurator: commentPlaceholderCellConfigurator,
                                                                          buttonCellConfigurator: buttonCellConfigurator,
                                                                          commentCellConfigurator: commentCellConfigurator,
-                                                                         publishCellConfigurator: publishCellConfigurator)
+                                                                         publishCellConfigurator: publishCellConfigurator,
+                                                                         photoCollageConfigurator: photoCollageConfigurator)
             
             return configurator
         }

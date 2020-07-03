@@ -150,7 +150,6 @@ extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegat
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        debugPrint(error.localizedDescription)
         viewController.dismiss(animated: true, completion: { [weak self] in
             self?.errorAlert(message: error.localizedDescription)
         })

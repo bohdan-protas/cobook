@@ -21,7 +21,8 @@ struct CreateBusinessCardDataSourceConfigurator: TableCellConfiguratorType {
     var backgroundImageManagmentConfigurator: TableCellConfigurator<BackgroundManagmentImageCellModel, CardBackgroundManagmentTableViewCell>?
     var employersSearchCellConfigurator: TableCellConfigurator<Void?, SearchTableViewCell>?
     var employersListCellConfigurator: TableCellConfigurator<Void?, EmployersPreviewHorizontalListTableViewCell>?
-
+    var companyDescriptionCellConfigurator: TableCellConfigurator<ButtonCellModel, AccentButtonTableViewCell>?
+    
     // MARK: - CellConfiguratorType
 
     func reuseIdentifier(for item: CreateBusinessCard.Cell, indexPath: IndexPath) -> String {
@@ -46,6 +47,8 @@ struct CreateBusinessCardDataSourceConfigurator: TableCellConfiguratorType {
             return employersSearchCellConfigurator?.reuseIdentifier ?? ""
         case .employersList:
             return employersListCellConfigurator?.reuseIdentifier ?? ""
+        case .companyDescription:
+            return companyDescriptionCellConfigurator?.reuseIdentifier ?? ""
         }
     }
 
@@ -73,6 +76,8 @@ struct CreateBusinessCardDataSourceConfigurator: TableCellConfiguratorType {
             return employersSearchCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         case .employersList:
             return employersListCellConfigurator?.configuredCell(for: nil, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
+        case .companyDescription(model: let model):
+            return companyDescriptionCellConfigurator?.configuredCell(for: model, tableView: tableView, indexPath: indexPath) ?? UITableViewCell()
         }
     }
 
@@ -88,6 +93,7 @@ struct CreateBusinessCardDataSourceConfigurator: TableCellConfiguratorType {
         backgroundImageManagmentConfigurator?.registerCells(in: tableView)
         employersSearchCellConfigurator?.registerCells(in: tableView)
         employersListCellConfigurator?.registerCells(in: tableView)
+        companyDescriptionCellConfigurator?.registerCells(in: tableView)
     }
 
 
@@ -133,20 +139,11 @@ extension CreateBusinessCardPresenter {
             // actionFieldConfigurator
             viewDataSourceConfigurator.actionFieldConfigurator = TableCellConfigurator { (cell, model: ActionFieldModel, tableView, indexPath) -> TextFieldTableViewCell in
                 cell.delegate = self
-                cell.dataSource = self
                 cell.textField.text = model.text
                 cell.textField.placeholder = model.placeholder
                 cell.actionIdentifier = model.actionTypeId
-
-                if let action = CreateBusinessCard.ActionType(rawValue: model.actionTypeId ?? "") {
-                    switch action {
-                    case .practice:
-                        cell.textField.inputView = cell.pickerView
-                    default:
-                        cell.actionControlView.isUserInteractionEnabled = true
-                        cell.textField.isUserInteractionEnabled = false
-                    }
-                }
+                cell.actionControlView.isUserInteractionEnabled = true
+                cell.textField.isUserInteractionEnabled = false
                 return cell
             }
 
@@ -200,6 +197,13 @@ extension CreateBusinessCardPresenter {
                 cell.dataSource = self
                 cell.delegate = self
                 cell.collectionView.reloadData()
+                return cell
+            }
+            
+            // buttonCellConfigurator
+            viewDataSourceConfigurator.companyDescriptionCellConfigurator = TableCellConfigurator { (cell, model: ButtonCellModel, tableView, indexPath) -> AccentButtonTableViewCell in
+                cell.accentButton.setTitle(model.title, for: .normal)
+                cell.buttonActionHandler = model.action
                 return cell
             }
 

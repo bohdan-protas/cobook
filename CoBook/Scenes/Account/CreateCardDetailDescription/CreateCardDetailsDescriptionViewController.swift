@@ -1,0 +1,187 @@
+//
+//  CreateArticleViewController.swift
+//  CoBook
+//
+//  Created by protas on 4/30/20.
+//  Copyright © 2020 CoBook. All rights reserved.
+//
+
+import UIKit
+
+
+class CreateCardDetailsDescriptionViewController: BaseViewController, UITextViewDelegate {
+
+    @IBOutlet var photosCollectionView: UICollectionView!
+    @IBOutlet var photosFlowLayout: UICollectionViewFlowLayout!
+
+    @Localized("Article.addPhotoButton.normalTitle")
+    @IBOutlet var addPhotoButton: UIButton!
+
+    @Localized("TextInput.placeholder.detailDescription")
+    @IBOutlet var descriptionTextView: DesignableTextView!
+
+    @Localized("Button.save.normalTitle")
+    @IBOutlet var saveButton: LoaderDesignableButton!
+
+    @IBOutlet var imageContainerView: UIView!
+
+
+    /// picker that manage fetching images from gallery
+    private lazy var imagePicker: ImagePicker = {
+        let imagePicker = ImagePicker(presentationController: self, allowsEditing: false)
+        return imagePicker
+    }()
+
+    /// placeholder when photos is empty
+    private lazy var photosPlacholderView: UIView = {
+        return PhotosPlaceholderView(frame: photosCollectionView.frame)
+    }()
+
+    var presenter: CreateCardDetailsDescriptionPresenter?
+
+    // MARK: - Actions
+
+    func textViewDidChange(_ textView: UITextView) {
+        if textView === self.descriptionTextView {
+            presenter?.update(description: textView.text)
+        }
+    }
+
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        presenter?.save()
+    }
+
+    @IBAction func addPhotoTapped(_ sender: Any) {
+        self.imagePicker.onImagePicked = { [weak self] image in
+            self?.presenter?.uploadImage(image: image) { [weak self] (imageMetadata) in
+                guard let item = self?.presenter?.photos.count else { return }
+                self?.presenter?.addPhoto(data: imageMetadata)
+                self?.photosCollectionView.performBatchUpdates({
+                    let indexPath = IndexPath(item: item, section: 0)
+                    self?.photosCollectionView.insertItems(at: [indexPath])
+                }, completion: { finished in
+                    let indexPath = IndexPath(item: item, section: 0)
+                    self?.photosCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+                    self?.photosCollectionView.backgroundView = nil
+                })
+            }
+        }
+        imagePicker.present()
+    }
+
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupLayout()
+        presenter?.attachView(self)
+        presenter?.setup()
+    }
+
+
+}
+
+// MARK: - CreateCardDetailsDescriptionView
+
+extension CreateCardDetailsDescriptionViewController: CreateCardDetailsDescriptionView {
+    
+    func set(description: String?) {
+        self.descriptionTextView.text = description
+    }
+    
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func reloadPhotos() {
+        if self.presenter?.photos.isEmpty ?? true {
+            self.photosCollectionView.backgroundView = self.photosPlacholderView
+        } else {
+            self.photosCollectionView.backgroundView = nil
+        }
+        photosCollectionView.reloadData()
+    }
+
+}
+
+// MARK: - Privates
+
+private extension CreateCardDetailsDescriptionViewController {
+
+    func setupLayout() {
+        self.navigationItem.title = "Card.DetailsDescription.title".localized
+        
+        descriptionTextView.isScrollEnabled = false
+        descriptionTextView.delegate = self
+
+        photosCollectionView.dataSource = self
+        photosCollectionView.delegate = self
+        photosCollectionView.register(PostEditablePhotoCollectionViewCell.nib, forCellWithReuseIdentifier: PostEditablePhotoCollectionViewCell.identifier)
+        photosCollectionView.backgroundView = photosPlacholderView
+    }
+    
+
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension CreateCardDetailsDescriptionViewController: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter?.photos.count ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostEditablePhotoCollectionViewCell.identifier, for: indexPath) as! PostEditablePhotoCollectionViewCell
+        let model = presenter?.photos[indexPath.item]
+        cell.photoImageView.setImage(withPath: model)
+        cell.delegate = self
+        return cell
+    }
+
+
+}
+
+// MARK: - PostEditablePhotoCollectionViewCellDelegate
+
+extension CreateCardDetailsDescriptionViewController: PostEditablePhotoCollectionViewCellDelegate {
+
+    func delete(_ cell: PostEditablePhotoCollectionViewCell) {
+        if let indexPath = photosCollectionView.indexPath(for: cell) {
+            self.presenter?.deletePhoto(at: indexPath.item)
+            if self.presenter?.photos.isEmpty ?? true {
+                self.photosCollectionView.backgroundView = self.photosPlacholderView
+            }
+            photosCollectionView.performBatchUpdates({
+                self.photosCollectionView.deleteItems(at: [indexPath])
+            }, completion: nil)
+        }
+    }
+
+
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension CreateCardDetailsDescriptionViewController: UICollectionViewDelegate {
+
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension CreateCardDetailsDescriptionViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.height)
+    }
+
+
+}

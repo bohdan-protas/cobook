@@ -18,6 +18,8 @@ protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func setupSaveCardView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func showSearchEmployersControlelr()
+    func showSearchPracticies(presenter: SearchPracticiesPresenter)
+    func showDescriptionCreationForm(presenter: CreateCardDetailsDescriptionPresenter)
 }
 
 // MARK: - Defaults
@@ -47,7 +49,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
                 !(businessCardDetailsModel.backgroudImage == nil) &&
                 !(businessCardDetailsModel.companyName ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.practiseType == nil) &&
-                !(businessCardDetailsModel.contactTelephone ?? "").isEmpty &&
+                !(businessCardDetailsModel.contactTelephone ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.companyEmail ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.companyWebSite ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.city == nil) &&
@@ -210,15 +212,17 @@ extension CreateBusinessCardPresenter {
                                              keyboardType: .default))
         ])
 
-        let aboutCompacySection = Section<CreateBusinessCard.Cell>(items: [
+        let companyDescriptionSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "BusinessCard.section.aboutCompany.title".localized),
-            .textView(model: TextFieldModel(text: businessCardDetailsModel.description,
-                                            placeholder: "TextInput.placeholder.detailDescription".localized,
-                                            associatedKeyPath: \CreateBusinessCard.DetailsModel.description,
-                                            keyboardType: .default))
+            .companyDescription(model: ButtonCellModel(title: isEditing ? "Button.editDetailDescr.normalTitle".localized : "Button.addDetailDescr.normalTitle".localized, action: { [unowned self] in
+                let presenter = CreateCardDetailsDescriptionPresenter(photosDataList: self.businessCardDetailsModel.descriptionPhotos,
+                                                                      description: self.businessCardDetailsModel.description ?? "")
+                presenter.delegate = self
+                self.view?.showDescriptionCreationForm(presenter: presenter)
+            }))
         ])
-
+        
         let socialSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "BusinessCard.section.companyInSocials.title".localized),
@@ -233,14 +237,14 @@ extension CreateBusinessCardPresenter {
         if !businessCardDetailsModel.employers.isEmpty {
             employersSection.items.append(.employersList)
         }
+        
+//        let interestsSection = Section<CreateBusinessCard.Cell>(items: [
+//            .sectionHeader,
+//            .title(text: "BusinessCard.section.interests.title".localized),
+//            .interests
+//        ])
 
-        let interestsSection = Section<CreateBusinessCard.Cell>(items: [
-            .sectionHeader,
-            .title(text: "BusinessCard.section.interests.title".localized),
-            .interests
-        ])
-
-        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, employersSection, interestsSection]
+        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, companyDescriptionSection, socialSection, employersSection, /*interestsSection*/]
     }
 
 
@@ -295,19 +299,6 @@ private extension CreateBusinessCardPresenter {
         var errors = [Error]()
 
         view?.startLoading(text: "Loading.loading.title".localized)
-
-        // fetch practices
-        group.enter()
-        APIClient.default.practicesTypesListRequest { [weak self] (result) in
-            switch result {
-            case let .success(response):
-                self?.businessCardDetailsModel.practices = (response ?? []).compactMap { PracticeModel(id: $0.id, title: $0.title) }
-                group.leave()
-            case let .failure(error):
-                errors.append(error)
-                group.leave()
-            }
-        }
 
         // fetch interests
         group.enter()
@@ -429,10 +420,13 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
 
         switch action {
         case .practice:
-            let selectedPracticeName = cell.textField.text
-            let selectedPractice = businessCardDetailsModel.practices.first(where: { $0.title == selectedPracticeName })
-            businessCardDetailsModel.practiseType = selectedPractice
-
+            let presenter = SearchPracticiesPresenter(isMultiselectEnabled: false)
+            presenter.selectionCompletion = { [weak self] (practice) in
+                cell.textField.text = practice?.title
+                self?.businessCardDetailsModel.practiseType = practice
+            }
+            self.view?.showSearchPracticies(presenter: presenter)
+            
         case .city:
             let filter = GMSAutocompleteFilter()
             filter.type = .city
@@ -556,4 +550,14 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
 
 }
 
+// MARK: - CreateCardDetailsDescriptionDelegate
 
+extension CreateBusinessCardPresenter: CreateCardDetailsDescriptionDelegate {
+    
+    func onFinishEditing(description: String, photosDataList: [FileDataApiModel]) {
+        businessCardDetailsModel.description = description
+        businessCardDetailsModel.descriptionPhotos = photosDataList
+    }
+    
+    
+}
