@@ -25,6 +25,7 @@ struct CreateBusinessCardParametersApiModel {
     var contactEmail: String?
     var socialNetworks: [SocialNetworkApiModel] = []
     var employeeIds: [String] = []
+    var attachmentIds: [String] = []
 
     init(model: CreateBusinessCard.DetailsModel) {
         self.id = model.cardId
@@ -55,6 +56,7 @@ struct CreateBusinessCardParametersApiModel {
         }
 
         self.employeeIds = model.employers.compactMap { $0.userId }
+        self.attachmentIds = model.descriptionPhotos.compactMap { $0.id }
     }
 }
 
@@ -77,7 +79,7 @@ extension CreateBusinessCardParametersApiModel: Encodable {
         case contactEmail = "contact_email"
         case socialNetworks = "social_networks"
         case employeeIds = "employee_ids"
-
+        case attachmentIds = "attachment_ids"
     }
 
 }

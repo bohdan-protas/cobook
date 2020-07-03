@@ -17,14 +17,14 @@ class CreateCardDetailsDescriptionViewController: BaseViewController, UITextView
     @Localized("Article.addPhotoButton.normalTitle")
     @IBOutlet var addPhotoButton: UIButton!
 
-    @Localized("Article.description.placeholder")
+    @Localized("TextInput.placeholder.detailDescription")
     @IBOutlet var descriptionTextView: DesignableTextView!
 
-    @Localized("Article.publicButton.normalTitle")
+    @Localized("Button.save.normalTitle")
     @IBOutlet var saveButton: LoaderDesignableButton!
 
     @IBOutlet var imageContainerView: UIView!
-    @IBOutlet var albumImageView: DesignableImageView!
+
 
     /// picker that manage fetching images from gallery
     private lazy var imagePicker: ImagePicker = {
@@ -32,40 +32,41 @@ class CreateCardDetailsDescriptionViewController: BaseViewController, UITextView
         return imagePicker
     }()
 
+    /// placeholder when photos is empty
     private lazy var photosPlacholderView: UIView = {
         return PhotosPlaceholderView(frame: photosCollectionView.frame)
     }()
 
-    //var presenter: CreateArticlePresenter?
+    var presenter: CreateCardDetailsDescriptionPresenter?
 
     // MARK: - Actions
 
     func textViewDidChange(_ textView: UITextView) {
         if textView === self.descriptionTextView {
-            //presenter?.update(body: textView.text)
+            presenter?.update(description: textView.text)
         }
     }
 
-    @IBAction func publicButtonTapped(_ sender: Any) {
-        //presenter?.onPublicButtonTapped()
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        presenter?.save()
     }
 
     @IBAction func addPhotoTapped(_ sender: Any) {
-//        self.imagePicker.onImagePicked = { [weak self] image in
-//            self?.presenter?.uploadImage(image: image) { [weak self] (imageMetadata) in
-//                guard let item = self?.presenter?.photos.count else { return }
-//                self?.presenter?.addPhoto(data: imageMetadata)
-//                self?.photosCollectionView.performBatchUpdates({
-//                    let indexPath = IndexPath(item: item, section: 0)
-//                    self?.photosCollectionView.insertItems(at: [indexPath])
-//                }, completion: { finished in
-//                    let indexPath = IndexPath(item: item, section: 0)
-//                    self?.photosCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
-//                    self?.photosCollectionView.backgroundView = nil
-//                })
-//            }
-//        }
-//        imagePicker.present()
+        self.imagePicker.onImagePicked = { [weak self] image in
+            self?.presenter?.uploadImage(image: image) { [weak self] (imageMetadata) in
+                guard let item = self?.presenter?.photos.count else { return }
+                self?.presenter?.addPhoto(data: imageMetadata)
+                self?.photosCollectionView.performBatchUpdates({
+                    let indexPath = IndexPath(item: item, section: 0)
+                    self?.photosCollectionView.insertItems(at: [indexPath])
+                }, completion: { finished in
+                    let indexPath = IndexPath(item: item, section: 0)
+                    self?.photosCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+                    self?.photosCollectionView.backgroundView = nil
+                })
+            }
+        }
+        imagePicker.present()
     }
 
     // MARK: - Lifecycle
@@ -73,23 +74,32 @@ class CreateCardDetailsDescriptionViewController: BaseViewController, UITextView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-
+        presenter?.attachView(self)
+        presenter?.setup()
     }
 
 
 }
 
-// MARK: - CreateArticleView
+// MARK: - CreateCardDetailsDescriptionView
 
-extension CreateCardDetailsDescriptionViewController {
+extension CreateCardDetailsDescriptionViewController: CreateCardDetailsDescriptionView {
+    
+    func set(description: String?) {
+        self.descriptionTextView.text = description
+    }
+    
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     func reloadPhotos() {
-//        if self.presenter?.photos.isEmpty ?? true {
-//            self.photosCollectionView.backgroundView = self.photosPlacholderView
-//        } else {
-//            self.photosCollectionView.backgroundView = nil
-//        }
-//        photosCollectionView.reloadData()
+        if self.presenter?.photos.isEmpty ?? true {
+            self.photosCollectionView.backgroundView = self.photosPlacholderView
+        } else {
+            self.photosCollectionView.backgroundView = nil
+        }
+        photosCollectionView.reloadData()
     }
 
 }
@@ -99,7 +109,7 @@ extension CreateCardDetailsDescriptionViewController {
 private extension CreateCardDetailsDescriptionViewController {
 
     func setupLayout() {
-        self.navigationItem.title = "Детальний опис"
+        self.navigationItem.title = "Card.DetailsDescription.title".localized
         
         descriptionTextView.isScrollEnabled = false
         descriptionTextView.delegate = self
@@ -118,14 +128,14 @@ private extension CreateCardDetailsDescriptionViewController {
 extension CreateCardDetailsDescriptionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return presenter?.photos.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostEditablePhotoCollectionViewCell.identifier, for: indexPath) as! PostEditablePhotoCollectionViewCell
-//        let model = presenter?.photos[indexPath.item]
-//        cell.photoImageView.setImage(withPath: model)
-//        cell.delegate = self
+        let model = presenter?.photos[indexPath.item]
+        cell.photoImageView.setImage(withPath: model)
+        cell.delegate = self
         return cell
     }
 
@@ -138,10 +148,10 @@ extension CreateCardDetailsDescriptionViewController: PostEditablePhotoCollectio
 
     func delete(_ cell: PostEditablePhotoCollectionViewCell) {
         if let indexPath = photosCollectionView.indexPath(for: cell) {
-//            self.presenter?.deletePhoto(at: indexPath.item)
-//            if self.presenter?.photos.isEmpty ?? true {
-//                self.photosCollectionView.backgroundView = self.photosPlacholderView
-//            }
+            self.presenter?.deletePhoto(at: indexPath.item)
+            if self.presenter?.photos.isEmpty ?? true {
+                self.photosCollectionView.backgroundView = self.photosPlacholderView
+            }
             photosCollectionView.performBatchUpdates({
                 self.photosCollectionView.deleteItems(at: [indexPath])
             }, completion: nil)

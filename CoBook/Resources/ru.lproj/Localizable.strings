@@ -78,13 +78,14 @@
 "Button.email.normalTitle" = "Написать";
 "Button.telephone.normalTitle" = "Позвонить";
 "Button.mapDirectiron.normalTitle" = "Проложить маршрут";
-
 "Button.changePhoto.normalTitle" = "Изменить фото";
 "Button.changeLogo.normalTitle" = "Изменить логотип компании";
 "Button.addPhoto.normalTitle" = "Добавить фото";
 "Button.addLogo.normalTitle" = "Добавить логотип компании";
 "Button.done.normalTitle" = "Готово";
 "Button.cancel.normalTitle" = "Отменить";
+"Button.addDetailDescr.normalTitle" = "Додать детальное описание";
+"Button.editDetailDescr.normalTitle" = "Изменить детальное описание";
 
 "Label.addPhoto.text" = "Добавить фото";
 "Label.contacts.text" = "Связь:";
@@ -384,3 +385,6 @@
 "Finance.Statistics.businessAccountCreated.title" = "Створили бізнес аккаунти";
 "Finance.Statistics.businessAccountCreated.value" = "%li користувач(-ів)";
 "Finance.Statistics.ratingOfUserBonuses.title" = "Рейтинг бонусів користувачів";
+
+// MARK: - CardDetails description
+"Card.DetailsDescription.title" = "Детальное описание";

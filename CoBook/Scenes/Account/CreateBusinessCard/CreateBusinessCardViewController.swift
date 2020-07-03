@@ -55,6 +55,13 @@ class CreateBusinessCardViewController: BaseViewController {
 // MARK: - CreateBusinessCardView
 
 extension CreateBusinessCardViewController: CreateBusinessCardView {
+    
+    func showDescriptionCreationForm(presenter: CreateCardDetailsDescriptionPresenter) {
+        let controller: CreateCardDetailsDescriptionViewController = UIStoryboard.account.initiateViewControllerFromType()
+        controller.presenter = presenter
+        let navigation = CustomNavigationController(rootViewController: controller)
+        self.presentPanModal(navigation)
+    }
 
     func showSearchPracticies(presenter: SearchPracticiesPresenter) {
         let searchViewController = SearchViewController(presenter: presenter)
@@ -90,12 +97,6 @@ extension CreateBusinessCardViewController: CreateBusinessCardView {
         let searchNavigationController: SearchNavigationController = UIStoryboard.search.initiateViewControllerFromType()
         searchNavigationController.searchTableViewControllerDelegate = self
         self.present(searchNavigationController, animated: true, completion: nil)
-    }
-    
-    func showDescriptionCreationForm() {
-        let controller: CreateCardDetailsDescriptionViewController = UIStoryboard.account.initiateViewControllerFromType()
-        let navigation = CustomNavigationController(rootViewController: controller)
-        self.presentPanModal(navigation)
     }
 
 

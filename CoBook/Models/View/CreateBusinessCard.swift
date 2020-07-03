@@ -59,6 +59,8 @@ enum CreateBusinessCard {
         var socials: [Social.ListItem] = []
         var practices: [PracticeModel] = []
 
+        var descriptionPhotos: [FileDataApiModel] = []
+        
         init() {}
 
         init(apiModel: CardDetailsApiModel) {
@@ -83,6 +85,8 @@ enum CreateBusinessCard {
 
             self.interests = apiModel.interests?.compactMap { TagModel(id: $0.id, title: $0.title, isSelected: true) } ?? []
             self.socials = apiModel.socialNetworks?.compactMap { Social.ListItem.view(model: .init(title: $0.title, url: $0.link)) } ?? []
+            
+            self.descriptionPhotos = apiModel.attachments ?? []
         }
 
 

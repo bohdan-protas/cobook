@@ -19,7 +19,7 @@ protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func showSearchEmployersControlelr()
     func showSearchPracticies(presenter: SearchPracticiesPresenter)
-    func showDescriptionCreationForm()
+    func showDescriptionCreationForm(presenter: CreateCardDetailsDescriptionPresenter)
 }
 
 // MARK: - Defaults
@@ -215,8 +215,11 @@ extension CreateBusinessCardPresenter {
         let companyDescriptionSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "BusinessCard.section.aboutCompany.title".localized),
-            .companyDescription(model: ButtonCellModel(title: "Додати детальний опис", action: { [unowned self] in
-                self.view?.showDescriptionCreationForm()
+            .companyDescription(model: ButtonCellModel(title: isEditing ? "Button.editDetailDescr.normalTitle".localized : "Button.addDetailDescr.normalTitle".localized, action: { [unowned self] in
+                let presenter = CreateCardDetailsDescriptionPresenter(photosDataList: self.businessCardDetailsModel.descriptionPhotos,
+                                                                      description: self.businessCardDetailsModel.description ?? "")
+                presenter.delegate = self
+                self.view?.showDescriptionCreationForm(presenter: presenter)
             }))
         ])
         
@@ -547,4 +550,14 @@ extension CreateBusinessCardPresenter: SocialsListTableViewCellDelegate, Socials
 
 }
 
+// MARK: - CreateCardDetailsDescriptionDelegate
 
+extension CreateBusinessCardPresenter: CreateCardDetailsDescriptionDelegate {
+    
+    func onFinishEditing(description: String, photosDataList: [FileDataApiModel]) {
+        businessCardDetailsModel.description = description
+        businessCardDetailsModel.descriptionPhotos = photosDataList
+    }
+    
+    
+}
