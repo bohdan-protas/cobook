@@ -100,7 +100,7 @@ class FinanceStatisticsPresenter: BasePresenter {
         }
         
         group.enter()
-        let params = APIRequestParameters.Bonuses.LeaderbordStats(regionID: nil, limit: 0, offset: 50)
+        let params = APIRequestParameters.Bonuses.LeaderbordStats(regionID: nil, limit: 50, offset: 0)
         APIClient.default.getBonusesRatings(params: params) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -139,7 +139,7 @@ class FinanceStatisticsPresenter: BasePresenter {
     
     func fetchInRegionRating() {
         self.view?.startLoading()
-        let params = APIRequestParameters.Bonuses.LeaderbordStats(regionID: nil, limit: 0, offset: 50)
+        let params = APIRequestParameters.Bonuses.LeaderbordStats(regionID: nil, limit: 50, offset: 0)
         APIClient.default.getBonusesRatings(params: params) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.stopLoading()
@@ -162,7 +162,7 @@ class FinanceStatisticsPresenter: BasePresenter {
     
     func fetchAverageRating() {
         self.view?.startLoading()
-        let params = APIRequestParameters.Bonuses.LeaderbordStats(regionID: nil, limit: 0, offset: 50)
+        let params = APIRequestParameters.Bonuses.LeaderbordStats(regionID: nil, limit: 50, offset: 0)
         APIClient.default.getBonusesRatings(params: params) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.stopLoading()
