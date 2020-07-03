@@ -203,6 +203,12 @@ extension BusinessCardDetailsViewController: BusinessCardDetailsView {
     func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams) {
          presenter.presentPaymentByCard(on: self, params: params, showReceiptScreen: true)
     }
+    
+    func openPhotoGallery(photos: [String], activedPhotoIndex: Int) {
+        let galleryController = PhotoGalleryViewController(photos: photos, selectedPhotoIndex: activedPhotoIndex)
+        let navController = CustomNavigationController(rootViewController: galleryController)
+        present(navController, animated: true, completion: nil)
+    }
 
 }
 

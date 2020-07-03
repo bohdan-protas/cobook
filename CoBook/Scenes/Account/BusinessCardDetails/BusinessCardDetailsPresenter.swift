@@ -30,6 +30,7 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter)
     func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams)
     func businessCardPayment(cardID: Int)
+    func openPhotoGallery(photos: [String], activedPhotoIndex: Int)
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -65,10 +66,10 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         self.businessCardId = id
         self.barItems = [
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.general.rawValue, title: "BarItem.generalInfo".localized),
-            //BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.services.rawValue, title: "BarItem.services".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.products.rawValue, title: "BarItem.shop".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.team.rawValue, title: "BarItem.team".localized),
-            //BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
+            BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.responds.rawValue, title: "BarItem.feedbacks".localized),
             BarItem(index: BusinessCardDetails.BarSectionsTypeIndex.contacts.rawValue, title: "BarItem.contacts".localized),
         ].sorted { $0.index < $1.index }
         self.selectedBarItem = barItems.first!
@@ -86,7 +87,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
 
     func attachView(_ view: BusinessCardDetailsView) {
         self.view = view
-
     }
 
     func detachView() {
@@ -445,11 +445,26 @@ private extension BusinessCardDetailsPresenter {
         if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
             switch item {
             case .general:
-                dataSource?[.cardDetails].items = [.companyDescription(model: TitleDescrModel(title: cardDetails?.company?.name, descr: cardDetails?.description)),
-                                                   .getInTouch,
-                                                   .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule)),
-                                                   .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? ""),
-                                                   .mapDirection]
+                if !(cardDetails?.attachments?.isEmpty ?? true) {
+                    dataSource?[.cardDetails].items.append(
+                        .photoCollage
+                    )
+                }
+                dataSource?[.cardDetails].items.append(
+                    .companyDescription(model: TitleDescrModel(title: cardDetails?.company?.name, descr: cardDetails?.description))
+                )
+                dataSource?[.cardDetails].items.append(
+                    .getInTouch
+                )
+                dataSource?[.cardDetails].items.append(
+                    .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule))
+                )
+                dataSource?[.cardDetails].items.append(
+                    .map(centerPlaceID: cardDetails?.address?.googlePlaceId ?? "")
+                )
+                dataSource?[.cardDetails].items.append(
+                    .mapDirection
+                )
             case .contacts:
                 dataSource?[.cardDetails].items.append(.contacts(model: ContactsModel(telNumber: cardDetails?.contactTelephone?.number, website: cardDetails?.companyWebSite, email: cardDetails?.contactEmail?.address)))
                 dataSource?[.cardDetails].items.append(.getInTouch)
@@ -513,7 +528,7 @@ extension BusinessCardDetailsPresenter: HorizontalItemsBarViewDelegate {
         }
         selectedBarItem = barItems[index]
         let insertionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .left : .right
-        let deletionAnimation: UITableView.RowAnimation = index > selectedBarItem.index ? .right : .left
+        let deletionAnimation: UITableView.RowAnimation = index < selectedBarItem.index ? .right : .left
         
         var deletionIndexPaths = [IndexPath]()
         for row in 0..<dataSource![.cardDetails].items.count {
@@ -636,6 +651,29 @@ extension BusinessCardDetailsPresenter: AlbumPreviewItemsViewDelegate, AlbumPrev
         case .albumPreviews:
             return albumPreviewSection?.items ?? []
         }
+    }
+
+
+}
+
+// MARK: - PhotoCollageTableViewCellDataSource
+
+extension BusinessCardDetailsPresenter: PhotoCollageTableViewCellDataSource {
+
+    func photoCollage(_ view: PhotoCollageTableViewCell) -> [String?] {
+        return cardDetails?.attachments?.compactMap { $0.sourceUrl } ?? []
+    }
+
+
+}
+
+// MARK: - PhotoCollageTableViewCellDelegate
+
+extension BusinessCardDetailsPresenter: PhotoCollageTableViewCellDelegate {
+
+    func photoCollage(_ view: PhotoCollageTableViewCell, selectedPhotoAt index: Int) {
+        let photos = cardDetails?.attachments?.compactMap { $0.sourceUrl } ?? []
+        self.view?.openPhotoGallery(photos: photos, activedPhotoIndex: index)
     }
 
 
