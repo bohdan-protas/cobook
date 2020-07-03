@@ -91,6 +91,12 @@ extension CreateBusinessCardViewController: CreateBusinessCardView {
         searchNavigationController.searchTableViewControllerDelegate = self
         self.present(searchNavigationController, animated: true, completion: nil)
     }
+    
+    func showDescriptionCreationForm() {
+        let controller: CreateCardDetailsDescriptionViewController = UIStoryboard.account.initiateViewControllerFromType()
+        let navigation = CustomNavigationController(rootViewController: controller)
+        self.presentPanModal(navigation)
+    }
 
 
 }

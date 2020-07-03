@@ -11,6 +11,8 @@
 		6D3E467824AE16AC005FF2CF /* FinanceStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */; };
 		6D3E467A24AE16CE005FF2CF /* FinanceHistoryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */; };
 		6D3E467C24AE39B3005FF2CF /* ReferalStatsAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467B24AE39B3005FF2CF /* ReferalStatsAPIModel.swift */; };
+		6D3E468124AE5671005FF2CF /* CreateCardDetailsDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E468024AE5671005FF2CF /* CreateCardDetailsDescriptionViewController.swift */; };
+		6D3E468324AE5686005FF2CF /* CreateCardDetailsDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E468224AE5686005FF2CF /* CreateCardDetailsDescriptionPresenter.swift */; };
 		6D48C6F424A0F57100594632 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D48C6F324A0F57100594632 /* QRCodeViewController.swift */; };
 		6D513BA724A502A500FD89C2 /* PartnershipInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */; };
 		6D513BA924A5038500FD89C2 /* PartnershipInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */; };
@@ -426,6 +428,8 @@
 		6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatistics.swift; sourceTree = "<group>"; };
 		6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceHistoryItemModel.swift; sourceTree = "<group>"; };
 		6D3E467B24AE39B3005FF2CF /* ReferalStatsAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferalStatsAPIModel.swift; sourceTree = "<group>"; };
+		6D3E468024AE5671005FF2CF /* CreateCardDetailsDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardDetailsDescriptionViewController.swift; sourceTree = "<group>"; };
+		6D3E468224AE5686005FF2CF /* CreateCardDetailsDescriptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardDetailsDescriptionPresenter.swift; sourceTree = "<group>"; };
 		6D48C6F324A0F57100594632 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoViewController.swift; sourceTree = "<group>"; };
 		6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoPresenter.swift; sourceTree = "<group>"; };
@@ -857,6 +861,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D3E467F24AE55BA005FF2CF /* CreateCardDetailDescription */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E468024AE5671005FF2CF /* CreateCardDetailsDescriptionViewController.swift */,
+				6D3E468224AE5686005FF2CF /* CreateCardDetailsDescriptionPresenter.swift */,
+			);
+			path = CreateCardDetailDescription;
+			sourceTree = "<group>";
+		};
 		6D48C6F224A0F55500594632 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1126,6 +1139,7 @@
 			isa = PBXGroup;
 			children = (
 				B82200B9240FB8A400A17D2C /* Account.storyboard */,
+				6D3E467F24AE55BA005FF2CF /* CreateCardDetailDescription */,
 				6D48C6F224A0F55500594632 /* QRCode */,
 				6D725368249F606000EFDC32 /* CardStatictics */,
 				6DE35FF1249BEBB600DC08C5 /* AddFeedback */,
@@ -2792,6 +2806,7 @@
 				B823A6BB23FDD4B7007540D0 /* CreatePasswordViewController.swift in Sources */,
 				B823B08F242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift in Sources */,
 				B82200B7240FB87000A17D2C /* MainTabBarController.swift in Sources */,
+				6D3E468124AE5671005FF2CF /* CreateCardDetailsDescriptionViewController.swift in Sources */,
 				B823B0A1242D46EF0012529D /* CreatePersonalCard.swift in Sources */,
 				B81F18992460317D003CBC84 /* CreateAlbumViewController.swift in Sources */,
 				B8AB3F0B2422FF1B00E06E53 /* NavigableView.swift in Sources */,
@@ -3020,6 +3035,7 @@
 				B82A211724212CB600D0D9F5 /* Logger.swift in Sources */,
 				B8DE5E4B2418E99900F4F60B /* SectionTitleTableViewCell.swift in Sources */,
 				6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */,
+				6D3E468324AE5686005FF2CF /* CreateCardDetailsDescriptionPresenter.swift in Sources */,
 				B825FC42247ED02E00DB035D /* PaginationPage.swift in Sources */,
 				6D3E467A24AE16CE005FF2CF /* FinanceHistoryItemModel.swift in Sources */,
 				B8249250243DE79B00A1AC39 /* CardsOverviewNavigationController.swift in Sources */,

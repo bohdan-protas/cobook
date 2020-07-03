@@ -22,6 +22,7 @@ enum CreateBusinessCard {
         case interests
         case employersSearch
         case employersList
+        case companyDescription(model: ButtonCellModel)
     }
 
     enum ActionType: String {

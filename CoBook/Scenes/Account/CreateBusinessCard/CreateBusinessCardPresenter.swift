@@ -19,6 +19,7 @@ protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func showSearchEmployersControlelr()
     func showSearchPracticies(presenter: SearchPracticiesPresenter)
+    func showDescriptionCreationForm()
 }
 
 // MARK: - Defaults
@@ -48,7 +49,7 @@ class CreateBusinessCardPresenter: NSObject, BasePresenter {
                 !(businessCardDetailsModel.backgroudImage == nil) &&
                 !(businessCardDetailsModel.companyName ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.practiseType == nil) &&
-                !(businessCardDetailsModel.contactTelephone ?? "").isEmpty &&
+                !(businessCardDetailsModel.contactTelephone ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.companyEmail ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.companyWebSite ?? "").trimmingCharacters(in: whitespaceCharacterSet).isEmpty &&
                 !(businessCardDetailsModel.city == nil) &&
@@ -211,15 +212,14 @@ extension CreateBusinessCardPresenter {
                                              keyboardType: .default))
         ])
 
-        let aboutCompacySection = Section<CreateBusinessCard.Cell>(items: [
+        let companyDescriptionSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "BusinessCard.section.aboutCompany.title".localized),
-            .textView(model: TextFieldModel(text: businessCardDetailsModel.description,
-                                            placeholder: "TextInput.placeholder.detailDescription".localized,
-                                            associatedKeyPath: \CreateBusinessCard.DetailsModel.description,
-                                            keyboardType: .default))
+            .companyDescription(model: ButtonCellModel(title: "Додати детальний опис", action: { [unowned self] in
+                self.view?.showDescriptionCreationForm()
+            }))
         ])
-
+        
         let socialSection = Section<CreateBusinessCard.Cell>(items: [
             .sectionHeader,
             .title(text: "BusinessCard.section.companyInSocials.title".localized),
@@ -234,14 +234,14 @@ extension CreateBusinessCardPresenter {
         if !businessCardDetailsModel.employers.isEmpty {
             employersSection.items.append(.employersList)
         }
-
+        
 //        let interestsSection = Section<CreateBusinessCard.Cell>(items: [
 //            .sectionHeader,
 //            .title(text: "BusinessCard.section.interests.title".localized),
 //            .interests
 //        ])
 
-        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, aboutCompacySection, socialSection, employersSection, /*interestsSection*/]
+        viewDataSource?.sections = [photosSection, mainDataSection, companyActivitySection, companyDescriptionSection, socialSection, employersSection, /*interestsSection*/]
     }
 
 
