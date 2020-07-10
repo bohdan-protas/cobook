@@ -91,7 +91,7 @@
                 <outlet property="showMoreButtonHeightConstraint" destination="vPR-lP-brl" id="ufc-LP-JaY"/>
                 <outlet property="titleLabel" destination="vFX-2q-3nM" id="oL9-Ow-dAn"/>
             </connections>
-            <point key="canvasLocation" x="139.13043478260872" y="185.49107142857142"/>
+            <point key="canvasLocation" x="141" y="188"/>
         </tableViewCell>
     </objects>
     <resources>

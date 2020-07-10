@@ -49,7 +49,10 @@ struct CardDetailsApiModel: Decodable {
     var region: PlaceApiModel?
     var address: PlaceApiModel?
     var schedule: String?
+    
     var description: String?
+    var descriptionToShow: String?
+    
     var contactTelephone: TelephoneApiModel?
     var contactEmail: EmailApiModel?
     var socialNetworks: [SocialNetworkApiModel]?

@@ -193,7 +193,6 @@ extension BusinessCardDetailsPresenter {
                 cell.professionLabel.text = model?.practiceType?.title
                 cell.telNumberLabel.text = model?.telephone
                 cell.saveButton.isHidden = true
-
                 return cell
             }
 
@@ -236,8 +235,13 @@ extension BusinessCardDetailsPresenter {
 
             // expandableDescriptionCellConfigurator
             let expandableDescriptionCellConfigurator = TableCellConfigurator { (cell, model: TitleDescrModel?, tableView, indexPath) -> ExpandableDescriptionTableViewCell in
-                cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "", attributes: [.foregroundColor: UIColor.Theme.blackMiddle, .font: UIFont.SFProDisplay_Medium(size: 20)])
-                cell.set(descriptionText: model?.descr ?? "", useCollaping: true)
+                cell.titleLabel.attributedText = NSAttributedString(string: model?.title ?? "",
+                                                                    attributes: [.foregroundColor: UIColor.Theme.blackMiddle,
+                                                                                 .font: UIFont.SFProDisplay_Medium(size: 20)])
+                cell.desctiptionTextView.text = model?.descr
+                cell.showMoreButton.isHidden = model?.isDescriptionExpanded ?? true
+    
+                cell.delegate = self.view
                 return cell
             }
 

@@ -89,6 +89,13 @@ class BusinessCardDetailsViewController: BaseViewController {
 
 extension BusinessCardDetailsViewController: BusinessCardDetailsView {
     
+    func onExpandTapped(_ cell: ExpandableDescriptionTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            presenter?.expandDescription(at: indexPath)
+            tableView.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+    
     func businessCardPayment(cardID: Int) {
         paymentService.businessCardPayment(cardID: "\(cardID)", presentingView: self, delegate: self)
     }

@@ -12,7 +12,7 @@ import GooglePlaces
 import FirebaseDynamicLinks
 import PortmoneSDKEcom
 
-protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView, BusinessCardHeaderInfoTableViewCellDelegate {
+protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, NavigableView, MessagingCallingView, MapDirectionTableViewCellDelegate, ShareableView, BusinessCardHeaderInfoTableViewCellDelegate, ExpandableDescriptionTableViewCellDelegate {
     func set(dataSource: TableDataSource<BusinessCardDetailsDataSourceConfigurator>?)
     func reload(section: BusinessCardDetails.SectionAccessoryIndex, animation: UITableView.RowAnimation)
     func reload()
@@ -31,6 +31,10 @@ protocol BusinessCardDetailsView: AlertDisplayableView, LoadDisplayableView, Nav
     func showPaymentCard(presenter: PaymentPresenter, params: PaymentParams)
     func businessCardPayment(cardID: Int)
     func openPhotoGallery(photos: [String], activedPhotoIndex: Int)
+}
+
+fileprivate enum Layout {
+    static let maxCollapsedDescrCount: Int = 200
 }
 
 class BusinessCardDetailsPresenter: NSObject, BasePresenter {
@@ -184,6 +188,11 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
             }
         }
     }
+    
+    func expandDescription(at indexPath: IndexPath) {
+        cardDetails?.descriptionToShow = cardDetails?.description
+        updateViewDataSource()
+    }
 
 
 }
@@ -239,9 +248,18 @@ private extension BusinessCardDetailsPresenter {
         // Fetch card details
         group.enter()
         APIClient.default.getCardInfo(id: businessCardId) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case let .success(response):
-                self?.cardDetails = response
+                self.cardDetails = response
+                switch self.cardDetails?.description?.count ?? 0 {
+                case 0..<Layout.maxCollapsedDescrCount:
+                    self.cardDetails?.descriptionToShow = response?.description
+                default:
+                    self.cardDetails?.descriptionToShow = response?.description?
+                        .prefix(Layout.maxCollapsedDescrCount)
+                        .appending("...")
+                }
                 group.leave()
             case let .failure(error):
                 errors.append(error)
@@ -450,9 +468,15 @@ private extension BusinessCardDetailsPresenter {
                         .photoCollage
                     )
                 }
+                
+                // MARK: Trimmed text
+                let companyDescriptionModel = TitleDescrModel(title: cardDetails?.company?.name,
+                                                              descr: cardDetails?.descriptionToShow,
+                                                              isDescriptionExpanded: cardDetails?.descriptionToShow?.count ?? 0 > Layout.maxCollapsedDescrCount)
                 dataSource?[.cardDetails].items.append(
-                    .companyDescription(model: TitleDescrModel(title: cardDetails?.company?.name, descr: cardDetails?.description))
+                    .companyDescription(model: companyDescriptionModel)
                 )
+                
                 dataSource?[.cardDetails].items.append(
                     .getInTouch
                 )
