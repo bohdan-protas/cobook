@@ -87,6 +87,7 @@ struct CompanyPreviewHeaderModel {
 struct TitleDescrModel {
     var title: String?
     var descr: String?
+    var isDescriptionExpanded: Bool = true
 }
 
 struct ProductPreviewSectionModel {

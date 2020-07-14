@@ -8,15 +8,35 @@
 
 import UIKit
 
+fileprivate enum Layout {
+    static let trimmedStringMaxLength: Int = 100
+}
+
+protocol ExpandableDescriptionTableViewCellDelegate: class {
+    func onExpandTapped(_ cell: ExpandableDescriptionTableViewCell)
+}
+
 class ExpandableDescriptionTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var desctiptionTextView: SelfSizingTextView!
-
+    @IBOutlet var showMoreButton: UIButton!
+    @IBOutlet var showMoreButtonHeightConstraint: NSLayoutConstraint!
+    
+    weak var delegate: ExpandableDescriptionTableViewCellDelegate?
+    
+    // MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         desctiptionTextView.textContainer.lineFragmentPadding = 0
     }
-
+    
+    // MARK: - Actions
+    
+    @IBAction func showMoreButtonTapped(_ sender: Any) {
+        delegate?.onExpandTapped(self)
+    }
+    
     
 }
