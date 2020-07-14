@@ -194,7 +194,6 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
         cardDetails?.descriptionToShow = descr
         cardDetails?.isDescriptionExpanded = true
         updateViewDataSource()
-        view?.reload()
     }
 
 
