@@ -52,6 +52,7 @@ struct CardDetailsApiModel: Decodable {
     
     var description: String?
     var descriptionToShow: String?
+    var isDescriptionExpanded: Bool = true
     
     var contactTelephone: TelephoneApiModel?
     var contactEmail: EmailApiModel?

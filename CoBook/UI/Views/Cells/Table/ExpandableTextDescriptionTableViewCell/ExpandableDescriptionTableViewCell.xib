@@ -26,40 +26,45 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFX-2q-3nM">
-                        <rect key="frame" x="16" y="12" width="288" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Rcr-fY-gLG"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
-                        <color key="textColor" name="Theme_TextField-text"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iRG-37-xzO" customClass="SelfSizingTextView" customModule="CoBook" customModuleProvider="target">
-                        <rect key="frame" x="16" y="42" width="288" height="37"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" name="Theme_Green-Dark"/>
-                        <color key="textColor" name="Theme_Black-Middle"/>
-                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
-                    </textView>
-                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSx-nu-7C2">
-                        <rect key="frame" x="0.0" y="79" width="320" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="vPR-lP-brl"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                        <color key="tintColor" name="Theme_Green"/>
-                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="Показати більше" image="ic_arrow_down">
-                            <color key="titleColor" name="Theme_Green-Dark"/>
-                        </state>
-                        <connections>
-                            <action selector="showMoreButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="W4E-8r-hXt"/>
-                        </connections>
-                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QYA-yf-rUb">
+                        <rect key="frame" x="16" y="16" width="296" height="113"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFX-2q-3nM">
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Rcr-fY-gLG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="Theme_TextField-text"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iRG-37-xzO" customClass="SelfSizingTextView" customModule="CoBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="25" width="296" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="Theme_Green-Dark"/>
+                                <color key="textColor" name="Theme_Black-Middle"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSx-nu-7C2">
+                                <rect key="frame" x="0.0" y="63" width="296" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vPR-lP-brl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                <color key="tintColor" name="Theme_Green"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Показати більше" image="ic_arrow_down">
+                                    <color key="titleColor" name="Theme_Green-Dark"/>
+                                </state>
+                                <connections>
+                                    <action selector="showMoreButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="W4E-8r-hXt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GzW-ab-dVn" userLabel="Separator View">
                         <rect key="frame" x="8" y="129" width="304" height="1"/>
                         <color key="backgroundColor" name="Theme_Gray-Background"/>
@@ -69,19 +74,13 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bSx-nu-7C2" firstAttribute="top" secondItem="iRG-37-xzO" secondAttribute="bottom" id="0fh-RZ-Ygp"/>
-                    <constraint firstItem="iRG-37-xzO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1jw-Yc-GG2"/>
-                    <constraint firstItem="vFX-2q-3nM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="4Os-d9-cA9"/>
-                    <constraint firstItem="bSx-nu-7C2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Atg-V9-mR3"/>
-                    <constraint firstAttribute="trailing" secondItem="vFX-2q-3nM" secondAttribute="trailing" constant="16" id="DtZ-kX-eZg"/>
+                    <constraint firstItem="QYA-yf-rUb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Acm-z3-m5Y"/>
                     <constraint firstAttribute="trailing" secondItem="GzW-ab-dVn" secondAttribute="trailing" constant="8" id="IDm-fy-xb3"/>
-                    <constraint firstAttribute="trailing" secondItem="bSx-nu-7C2" secondAttribute="trailing" id="VoU-6b-SnF"/>
+                    <constraint firstItem="GzW-ab-dVn" firstAttribute="top" secondItem="QYA-yf-rUb" secondAttribute="bottom" id="QGm-Jv-Omk"/>
+                    <constraint firstAttribute="trailing" secondItem="QYA-yf-rUb" secondAttribute="trailing" constant="8" id="TlJ-gx-YwK"/>
                     <constraint firstAttribute="bottom" secondItem="GzW-ab-dVn" secondAttribute="bottom" id="VrZ-vY-f5r"/>
-                    <constraint firstAttribute="trailing" secondItem="iRG-37-xzO" secondAttribute="trailing" constant="16" id="aA4-sV-Xle"/>
+                    <constraint firstItem="QYA-yf-rUb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="atc-VK-C3n"/>
                     <constraint firstItem="GzW-ab-dVn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="jld-gX-mgU"/>
-                    <constraint firstItem="iRG-37-xzO" firstAttribute="top" secondItem="vFX-2q-3nM" secondAttribute="bottom" constant="10" id="tLb-gt-U2U"/>
-                    <constraint firstItem="GzW-ab-dVn" firstAttribute="top" secondItem="bSx-nu-7C2" secondAttribute="bottom" id="u6W-3I-DUh"/>
-                    <constraint firstItem="vFX-2q-3nM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="xNv-mI-lXN"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

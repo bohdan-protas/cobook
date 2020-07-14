@@ -190,8 +190,11 @@ class BusinessCardDetailsPresenter: NSObject, BasePresenter {
     }
     
     func expandDescription(at indexPath: IndexPath) {
-        cardDetails?.descriptionToShow = cardDetails?.description
+        let descr = cardDetails?.description
+        cardDetails?.descriptionToShow = descr
+        cardDetails?.isDescriptionExpanded = true
         updateViewDataSource()
+        view?.reload()
     }
 
 
@@ -254,8 +257,10 @@ private extension BusinessCardDetailsPresenter {
                 self.cardDetails = response
                 switch self.cardDetails?.description?.count ?? 0 {
                 case 0..<Layout.maxCollapsedDescrCount:
+                    self.cardDetails?.isDescriptionExpanded = true
                     self.cardDetails?.descriptionToShow = response?.description
                 default:
+                    self.cardDetails?.isDescriptionExpanded = false
                     self.cardDetails?.descriptionToShow = response?.description?
                         .prefix(Layout.maxCollapsedDescrCount)
                         .appending("...")
@@ -402,6 +407,8 @@ private extension BusinessCardDetailsPresenter {
 private extension BusinessCardDetailsPresenter {
     
     func updateViewDataSource() {
+        
+        /// Payment section
         dataSource?[.userHeader].items = []
         if isUserOwner {
             switch cardDetails?.subscriptionEndDate {
@@ -445,7 +452,7 @@ private extension BusinessCardDetailsPresenter {
                                                                                                    telephoneNumber: cardDetails?.contactTelephone?.number,
                                                                                                    websiteAddress: cardDetails?.companyWebSite,
                                                                                                    isSaved: cardDetails?.isSaved ?? false)))
-        // Post preview section
+        /// Post preview section
         albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
         
         dataSource?[.postPreview].items.removeAll()
@@ -458,7 +465,7 @@ private extension BusinessCardDetailsPresenter {
             dataSource?[.postPreview].items.append(.postPreview(model: albumPreviewSection))
         }
 
-        // card details section
+        /// card details section
         dataSource?[.cardDetails].items.removeAll()
         if let item = BusinessCardDetails.BarSectionsTypeIndex(rawValue: selectedBarItem.index) {
             switch item {
@@ -469,10 +476,10 @@ private extension BusinessCardDetailsPresenter {
                     )
                 }
                 
-                // MARK: Trimmed text
+                /// Trimmed text
                 let companyDescriptionModel = TitleDescrModel(title: cardDetails?.company?.name,
                                                               descr: cardDetails?.descriptionToShow,
-                                                              isDescriptionExpanded: cardDetails?.descriptionToShow?.count ?? 0 > Layout.maxCollapsedDescrCount)
+                                                              isDescriptionExpanded: cardDetails?.isDescriptionExpanded ?? true)
                 dataSource?[.cardDetails].items.append(
                     .companyDescription(model: companyDescriptionModel)
                 )
