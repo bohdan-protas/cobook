@@ -94,6 +94,10 @@ extension FinanceStatisticsViewController: FinanceStatisticsView {
 
 extension FinanceStatisticsViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let financeStatisticsSection = FinanceStatistics.Section(rawValue: section)
         switch financeStatisticsSection {

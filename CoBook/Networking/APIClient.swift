@@ -913,7 +913,7 @@ extension APIClient {
     }
     
     @discardableResult
-    func getBonusesRatings(params: APIRequestParameters.Bonuses.LeaderbordStats, completion: @escaping (Result<[CardBonusApiModel]?>) -> Void) -> DataRequest {
+    func getBonusesRatings(params: APIRequestParameters.Bonuses.LeaderbordStats, completion: @escaping (Result<[LeaderboardStatAPIModel]?>) -> Void) -> DataRequest {
         let endpoint = BonusesEndpoint.getLeaderbordStats(params: params)
         return performRequest(endpoint: endpoint, completion: completion)
     }

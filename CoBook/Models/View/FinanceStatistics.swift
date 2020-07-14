@@ -15,7 +15,7 @@ enum FinanceStatistics {
     }
     
     enum Item {
-        case ratingItem(model: FinanceHistoryItemModel)
+        case ratingItem(model: LeaderboardStatAPIModel)
     }
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 struct FinanceStatisticsConfigurator: TableCellConfiguratorType {
     
-    let cardHistoryPreviewCellConfigurator: TableCellConfigurator<FinanceHistoryItemModel, CardPreviewTableViewCell>
+    let cardHistoryPreviewCellConfigurator: TableCellConfigurator<LeaderboardStatAPIModel, CardPreviewTableViewCell>
     
     func reuseIdentifier(for item: FinanceStatistics.Item, indexPath: IndexPath) -> String {
         switch item {

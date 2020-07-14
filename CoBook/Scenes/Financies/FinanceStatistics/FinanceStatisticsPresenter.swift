@@ -20,7 +20,7 @@ class FinanceStatisticsPresenter: BasePresenter {
     
     weak var view: FinanceStatisticsView?
     
-    private var ratingCardItems: [FinanceHistoryItemModel] = []
+    private var ratingCardItems: [LeaderboardStatAPIModel] = []
     private var numberOfAppDownloadingCount: Int = 0
     private var numberOfBusinessAccountCreatingCount: Int = 0
     
@@ -29,29 +29,13 @@ class FinanceStatisticsPresenter: BasePresenter {
     // MARK: - Lifecycle
     
     init() {
-        let cardHistoryPreviewCellConfigurator = TableCellConfigurator { (cell, model: FinanceHistoryItemModel, tableView, indexPath) -> CardPreviewTableViewCell in
-            switch model.type {
-            case .none:
-                 cell.titleImageView.image = nil
-                 cell.titleLabel.text = ""
-            case .some(let value):
-                switch value {
-                case .personal:
-                    let nameAbbr = "\(model.cardCreator?.firstName?.first?.uppercased() ?? "") \(model.cardCreator?.lastName?.first?.uppercased() ?? "")"
-                    let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
-                    cell.titleImageView.setImage(withPath: model.avatarURL, placeholderImage: textPlaceholderImage)
-                    cell.titleLabel.text = "\(model.cardCreator?.firstName ?? "") \(model.cardCreator?.lastName ?? "")"
-                case .business:
-                    let textPlaceholderImage = (model.companyName ?? "").image(size: cell.titleImageView.frame.size)
-                    cell.titleImageView.setImage(withPath: model.avatarURL, placeholderImage: textPlaceholderImage)
-                    cell.titleLabel.text = model.companyName
-                }
-            }
-            
-            cell.proffesionLabel.text = model.practiceType
-            cell.telephoneNumberLabel.text = model.telephone
+        let cardHistoryPreviewCellConfigurator = TableCellConfigurator { (cell, model: LeaderboardStatAPIModel, tableView, indexPath) -> CardPreviewTableViewCell in
+            let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
+            let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
+            cell.titleImageView.setImage(withPath: model.avatar?.sourceUrl, placeholderImage: textPlaceholderImage)
+            cell.titleLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
             cell.detailLabel.isHidden = false
-            cell.detailLabel.text = "+\(model.moneyIncome ?? 0)"
+            cell.detailLabel.text = "+\(model.score ?? 0)"
             return cell
         }
         let configurator = FinanceStatisticsConfigurator(cardHistoryPreviewCellConfigurator: cardHistoryPreviewCellConfigurator)
@@ -105,13 +89,7 @@ class FinanceStatisticsPresenter: BasePresenter {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                self.ratingCardItems = (response ?? []).compactMap { FinanceHistoryItemModel(id: $0.id,
-                                                                                             type: $0.type,
-                                                                                             cardCreator: $0.cardCreator,
-                                                                                             companyName: $0.company?.name,
-                                                                                             avatarURL: $0.avatar?.sourceUrl,
-                                                                                             practiceType: $0.practiceType?.title,
-                                                                                             moneyIncome: $0.moneyIncome) }
+                self.ratingCardItems = response ?? []
                 group.leave()
             case .failure(let error):
                 errors.append(error)
@@ -145,13 +123,7 @@ class FinanceStatisticsPresenter: BasePresenter {
             self.view?.stopLoading()
             switch result {
             case .success(let response):
-                self.ratingCardItems = (response ?? []).compactMap { FinanceHistoryItemModel(id: $0.id,
-                                                                                      type: $0.type,
-                                                                                      cardCreator: $0.cardCreator,
-                                                                                      companyName: $0.company?.name,
-                                                                                      avatarURL: $0.avatar?.sourceUrl,
-                                                                                      practiceType: $0.practiceType?.title,
-                                                                                      moneyIncome: $0.moneyIncome) }
+                self.ratingCardItems = response ?? []
                 self.updateViewLayout()
                 self.view?.reload(section: .rating)
             case .failure(let error):
@@ -168,13 +140,7 @@ class FinanceStatisticsPresenter: BasePresenter {
             self.view?.stopLoading()
             switch result {
             case .success(let response):
-                self.ratingCardItems = (response ?? []).compactMap { FinanceHistoryItemModel(id: $0.id,
-                                                                                      type: $0.type,
-                                                                                      cardCreator: $0.cardCreator,
-                                                                                      companyName: $0.company?.name,
-                                                                                      avatarURL: $0.avatar?.sourceUrl,
-                                                                                      practiceType: $0.practiceType?.title,
-                                                                                      moneyIncome: $0.moneyIncome) }
+                self.ratingCardItems = response ?? []
                 self.updateViewLayout()
                 self.view?.reload(section: .rating)
             case .failure(let error):
