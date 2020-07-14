@@ -49,6 +49,7 @@
 		6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */; };
 		6DE35FFC249C0FB200DC08C5 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */; };
 		6DF1A2EA24BD99D300D94280 /* LeaderboardStatAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF1A2E924BD99D300D94280 /* LeaderboardStatAPIModel.swift */; };
+		6DF1A2EC24BDA5FD00D94280 /* UserBallanceAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF1A2EB24BDA5FD00D94280 /* UserBallanceAPIModel.swift */; };
 		6DF6606724A376CC00E078DF /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606624A376CC00E078DF /* PaymentService.swift */; };
 		6DF6606B24A3F22000E078DF /* PublishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606924A3F22000E078DF /* PublishTableViewCell.swift */; };
 		6DF6606C24A3F22000E078DF /* PublishTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */; };
@@ -467,6 +468,7 @@
 		6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		6DF1A2E924BD99D300D94280 /* LeaderboardStatAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardStatAPIModel.swift; sourceTree = "<group>"; };
+		6DF1A2EB24BDA5FD00D94280 /* UserBallanceAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBallanceAPIModel.swift; sourceTree = "<group>"; };
 		6DF6606624A376CC00E078DF /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
 		6DF6606924A3F22000E078DF /* PublishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishTableViewCell.swift; sourceTree = "<group>"; };
 		6DF6606A24A3F22000E078DF /* PublishTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishTableViewCell.xib; sourceTree = "<group>"; };
@@ -1915,6 +1917,7 @@
 				6D86CBC024A622E300B29761 /* CardBonusApiModel.swift */,
 				6D3E467B24AE39B3005FF2CF /* ReferalStatsAPIModel.swift */,
 				6DF1A2E924BD99D300D94280 /* LeaderboardStatAPIModel.swift */,
+				6DF1A2EB24BDA5FD00D94280 /* UserBallanceAPIModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2842,6 +2845,7 @@
 				6D86CBC124A622E300B29761 /* CardBonusApiModel.swift in Sources */,
 				B828C34B240CE0A800F8C371 /* AuthEndpoint.swift in Sources */,
 				B822D6FE245832B800883BE8 /* SelfSizingTextView.swift in Sources */,
+				6DF1A2EC24BDA5FD00D94280 /* UserBallanceAPIModel.swift in Sources */,
 				B8AB83F62428293D0041B879 /* MockupEndpoind.swift in Sources */,
 				B8559F98243CD69B00787349 /* HorizontalItemsBarView.swift in Sources */,
 				B8A3B0A224507D65007C4F05 /* CreateServicePresenter.swift in Sources */,

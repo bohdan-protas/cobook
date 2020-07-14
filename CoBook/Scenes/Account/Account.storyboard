@@ -890,7 +890,7 @@
                                                                                         <cells/>
                                                                                     </collectionView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdf-lY-krq">
-                                                                                        <rect key="frame" x="103" y="12" width="244" height="30"/>
+                                                                                        <rect key="frame" x="96" y="12" width="251" height="30"/>
                                                                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="30" id="hjH-yz-YCy"/>

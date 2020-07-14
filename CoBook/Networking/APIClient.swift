@@ -924,5 +924,11 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
     
+    @discardableResult
+    func getUserBallace(completion: @escaping (Result<UserBallanceAPIModel?>) -> Void) -> DataRequest {
+        let endpoint = BonusesEndpoint.getUserBallance
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
     
 }

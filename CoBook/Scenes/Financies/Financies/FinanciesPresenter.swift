@@ -21,6 +21,8 @@ class FinanciesPresenter: BasePresenter {
     weak var view: FinanciesView?
     
     private var cardBonuseItems: [FinanceHistoryItemModel] = []
+    private var userBallance: UserBallanceAPIModel?
+    
     private var dataSource: TableDataSource<FinanciesCellsConfigurator>?
     private var configurator: FinanciesCellsConfigurator
     
@@ -71,8 +73,13 @@ class FinanciesPresenter: BasePresenter {
     
     func setup() {
         view?.startLoading(text: "Financies.loadingTitle".localized)
+        
+        let group = DispatchGroup()
+        
+        group.enter()
         APIClient.default.getCardBonusesStats { [weak self] (result) in
             guard let self = self else { return }
+            
             self.view?.stopLoading()
             switch result {
             case .success(let response):
@@ -84,13 +91,31 @@ class FinanciesPresenter: BasePresenter {
                                                                                            avatarURL: $0.avatar?.sourceUrl,
                                                                                            practiceType: $0.practiceType?.title,
                                                                                            moneyIncome: $0.moneyIncome) }
-                
-                self.updateViewLayout()
-                self.view?.reload()
+                group.leave()
+
             case .failure(let error):
+                group.leave()
                 self.view?.errorAlert(message: error.localizedDescription)
             }
         }
+        
+        group.enter()
+        APIClient.default.getUserBallace { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                break
+            case .failure(let error):
+                break
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.updateViewLayout()
+            self.view?.reload()
+        }
+        
+        
+
     }
 
     
@@ -105,9 +130,9 @@ private extension FinanciesPresenter {
         bonuseItemsSection.items = cardBonuseItems.compactMap { Financies.Item.bonusHistoryItem(model: $0) }
         dataSource?.sections = [bonuseItemsSection]
         
-        view?.set(exportedSumm: 0)
-        view?.set(currentBalance: 0)
-        view?.set(minExportSumm: 0)
+        view?.set(exportedSumm: self.userBallance?.totalWithdraw ?? 0)
+        view?.set(currentBalance: self.userBallance?.totalIncome ?? 0)
+        view?.set(minExportSumm: self.userBallance?.minWithdraw ?? 0)
     }
     
     

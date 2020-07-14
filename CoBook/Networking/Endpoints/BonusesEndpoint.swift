@@ -13,6 +13,7 @@ enum BonusesEndpoint: EndpointConfigurable {
     case getCardBonusesStats
     case getLeaderbordStats(params: APIRequestParameters.Bonuses.LeaderbordStats)
     case getReferalStats
+    case getUserBallance
     
     var useAuthirizationToken: Bool {
         return true
@@ -26,6 +27,8 @@ enum BonusesEndpoint: EndpointConfigurable {
             return .post
         case .getReferalStats:
             return .post
+        case .getUserBallance:
+            return .post
         }
     }
     
@@ -36,7 +39,9 @@ enum BonusesEndpoint: EndpointConfigurable {
         case .getLeaderbordStats:
             return "/bonuses/leaderboard"
         case .getReferalStats:
-            return "bonuses/referral_stats"
+            return "/bonuses/referral_stats"
+        case .getUserBallance:
+            return "/bonuses/balance"
         }
     }
     
