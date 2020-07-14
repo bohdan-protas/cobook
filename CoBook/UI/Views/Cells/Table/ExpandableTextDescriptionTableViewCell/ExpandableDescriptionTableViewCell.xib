@@ -27,7 +27,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QYA-yf-rUb">
-                        <rect key="frame" x="16" y="16" width="288" height="113"/>
+                        <rect key="frame" x="16" y="8" width="288" height="121"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFX-2q-3nM">
                                 <rect key="frame" x="0.0" y="0.0" width="288" height="20"/>
@@ -46,7 +46,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iRG-37-xzO" customClass="SelfSizingTextView" customModule="CoBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="25" width="288" height="38"/>
+                                <rect key="frame" x="0.0" y="25" width="288" height="96"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="Theme_Green-Dark"/>
                                 <color key="textColor" name="Theme_Black-Middle"/>
@@ -54,8 +54,8 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSx-nu-7C2">
-                                <rect key="frame" x="0.0" y="63" width="288" height="50"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSx-nu-7C2">
+                                <rect key="frame" x="0.0" y="121" width="288" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="vPR-lP-brl"/>
                                 </constraints>
@@ -81,7 +81,7 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="QYA-yf-rUb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Acm-z3-m5Y"/>
+                    <constraint firstItem="QYA-yf-rUb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Acm-z3-m5Y"/>
                     <constraint firstAttribute="trailing" secondItem="GzW-ab-dVn" secondAttribute="trailing" constant="8" id="IDm-fy-xb3"/>
                     <constraint firstItem="GzW-ab-dVn" firstAttribute="top" secondItem="QYA-yf-rUb" secondAttribute="bottom" id="QGm-Jv-Omk"/>
                     <constraint firstAttribute="trailing" secondItem="QYA-yf-rUb" secondAttribute="trailing" constant="16" id="TlJ-gx-YwK"/>
