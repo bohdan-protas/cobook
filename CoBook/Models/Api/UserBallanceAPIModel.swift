@@ -10,7 +10,7 @@ import Foundation
 
 struct UserBallanceAPIModel: Decodable {
     var totalIncome: Int?
-    var totalWithdraw: Int?
+    var totalWithdraw: String?
     var minWithdraw: Int?
     
     enum CodingKeys: String, CodingKey {

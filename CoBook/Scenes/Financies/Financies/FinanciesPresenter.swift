@@ -73,7 +73,6 @@ class FinanciesPresenter: BasePresenter {
     
     func setup() {
         view?.startLoading(text: "Financies.loadingTitle".localized)
-        
         let group = DispatchGroup()
         
         group.enter()
@@ -92,7 +91,6 @@ class FinanciesPresenter: BasePresenter {
                                                                                            practiceType: $0.practiceType?.title,
                                                                                            moneyIncome: $0.moneyIncome) }
                 group.leave()
-
             case .failure(let error):
                 group.leave()
                 self.view?.errorAlert(message: error.localizedDescription)
@@ -101,11 +99,14 @@ class FinanciesPresenter: BasePresenter {
         
         group.enter()
         APIClient.default.getUserBallace { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let response):
-                break
+                self.userBallance = response
+                group.leave()
             case .failure(let error):
-                break
+                self.view?.errorAlert(message: error.localizedDescription)
+                group.leave()
             }
         }
         
@@ -113,9 +114,6 @@ class FinanciesPresenter: BasePresenter {
             self.updateViewLayout()
             self.view?.reload()
         }
-        
-        
-
     }
 
     
@@ -130,7 +128,7 @@ private extension FinanciesPresenter {
         bonuseItemsSection.items = cardBonuseItems.compactMap { Financies.Item.bonusHistoryItem(model: $0) }
         dataSource?.sections = [bonuseItemsSection]
         
-        view?.set(exportedSumm: self.userBallance?.totalWithdraw ?? 0)
+        view?.set(exportedSumm: Int(self.userBallance?.totalWithdraw ?? "") ?? 0)
         view?.set(currentBalance: self.userBallance?.totalIncome ?? 0)
         view?.set(minExportSumm: self.userBallance?.minWithdraw ?? 0)
     }
