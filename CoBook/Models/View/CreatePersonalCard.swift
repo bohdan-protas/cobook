@@ -55,6 +55,7 @@ enum CreatePersonalCard {
             self.city = PlaceModel(googlePlaceId: apiModel.city?.googlePlaceId, name: apiModel.city?.name)
             self.region = PlaceModel(googlePlaceId: apiModel.region?.googlePlaceId, name: apiModel.region?.name)
             self.description = apiModel.description
+            self.company = CompanyApiModel(id: apiModel.workplace?.id, name: apiModel.workplace?.company?.name)
             self.contactTelephone = apiModel.contactTelephone?.number
             self.contactEmail = apiModel.contactEmail?.address
             self.interests = apiModel.interests?.compactMap { TagModel(id: $0.id, title: $0.title, isSelected: true) } ?? []
