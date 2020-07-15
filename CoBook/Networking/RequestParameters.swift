@@ -143,12 +143,12 @@ enum APIRequestParameters {
     enum Bonuses {
         
         struct LeaderbordStats: Encodable {
-            var regionID: Int?
+            var inMyRegion: Bool
             var limit: Int?
             var offset: Int?
             
             enum CodingKeys: String, CodingKey {
-                case regionID = "region_id"
+                case inMyRegion = "in_my_region"
                 case limit
                 case offset
             }
