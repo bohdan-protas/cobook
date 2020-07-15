@@ -42,6 +42,11 @@ struct CardCreatorApiModel: Codable {
     }
 }
 
+struct CompanySearchAPIModel: Codable {
+    var id: Int?
+    var company: CompanyApiModel?
+}
+
 struct CompanyApiModel: Codable {
     var id: Int?
     var name: String?

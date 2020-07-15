@@ -15,22 +15,19 @@ enum CardsEndpoint: EndpointConfigurable {
     case createPersonalCard(parameters: CreatePersonalCardParametersApiModel)
     case getCardInfo(id: Int)
     case getCardsList(type: String?, interestsIds: [Int]? = nil, practiseTypeIds: [Int]? = nil, search: String? = nil, limit: UInt? = nil, offset: UInt? = nil)
-
     case getCardLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
     case getSavedCardsLocationsInRegion(topLeftRectCoordinate: CoordinateApiModel, bottomRightRectCoordinate: CoordinateApiModel)
-
     case addCardToFavourite(cardID: Int, tagID: Int? = nil)
     case deleteCardFromFavourite(cardID: Int)
     case getSavedCardList(tagID: Int?, type: String?, limit: Int?, offset: Int?)
     case getFolders(limit: Int?, offset: Int?)
-
     case createFolder(title: String)
     case deleteFolder(id: Int)
     case updateFolder(id: Int, title: String)
-    
     case statistics
     case incrementStatisticCount(cardID: Int)
-
+    case searchCompanies(name: String?)
+    
     var useAuthirizationToken: Bool {
         return true
     }
@@ -69,6 +66,8 @@ enum CardsEndpoint: EndpointConfigurable {
             return .post
         case .incrementStatisticCount:
             return .get
+        case .searchCompanies:
+            return .post
         }
     }
 
@@ -96,6 +95,8 @@ enum CardsEndpoint: EndpointConfigurable {
             return "/cards/statistics"
         case .incrementStatisticCount:
             return "/cards/share/increment"
+        case .searchCompanies:
+            return "/cards/business/search"
         }
     }
 
@@ -213,6 +214,10 @@ enum CardsEndpoint: EndpointConfigurable {
         case .statistics:
             return ["type": ""]
             
+        case .searchCompanies(let name):
+            return ["search": name ?? ""]
+            
+
         default: return nil
         }
     }

@@ -68,7 +68,13 @@ private extension CreatePersonalCardViewController {
 // MARK: - CreatePersonalCardView
 
 extension CreatePersonalCardViewController: CreatePersonalCardView {
-
+    
+    func showSearchCompanies(presenter: SearchCompaniesPresenter) {
+        let searchViewController = SearchViewController(presenter: presenter)
+        let navigation = CustomNavigationController(rootViewController: searchViewController)
+        presentPanModal(navigation)
+    }
+    
     func showSearchPracticies(presenter: SearchPracticiesPresenter) {
         let searchViewController = SearchViewController(presenter: presenter)
         let navigation = CustomNavigationController(rootViewController: searchViewController)

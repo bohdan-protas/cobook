@@ -22,6 +22,7 @@ enum CreatePersonalCard {
     }
 
     enum ActionType: String {
+        case company
         case practiceType
         case placeOfLiving
         case activityRegion
@@ -36,7 +37,9 @@ enum CreatePersonalCard {
         var city: PlaceModel?
         var region: PlaceModel?
         var description: String?
-
+        
+        var company: CompanyApiModel?
+        
         var contactTelephone: String?
         var contactEmail: String?
 

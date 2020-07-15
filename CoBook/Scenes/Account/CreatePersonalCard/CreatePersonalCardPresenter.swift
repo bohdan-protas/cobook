@@ -19,6 +19,7 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     func setupSaveCardView()
 
     func showSearchPracticies(presenter: SearchPracticiesPresenter)
+    func showSearchCompanies(presenter: SearchCompaniesPresenter)
 }
 
 fileprivate enum Defaults {
@@ -139,6 +140,9 @@ private extension CreatePersonalCardPresenter {
             .actionField(model: ActionFieldModel(text: personalCardDetailsModel.practiseType?.title,
                                                  placeholder: "TextInput.placeholder.activityType".localized,
                                                  actionTypeId: CreatePersonalCard.ActionType.practiceType.rawValue)),
+            .actionField(model: ActionFieldModel(text: personalCardDetailsModel.company?.name,
+                                                 placeholder: "TextInput.placeholder.company".localized,
+                                                 actionTypeId: CreatePersonalCard.ActionType.company.rawValue)),
             .actionField(model: ActionFieldModel(text: personalCardDetailsModel.city?.name,
                                                  placeholder: "TextInput.placeholder.cityOfResidence".localized,
                                                  actionTypeId: CreatePersonalCard.ActionType.placeOfLiving.rawValue)),
@@ -297,6 +301,14 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
                     self?.personalCardDetailsModel.region = PlaceModel(googlePlaceId: regionId, name: fetchedRegion.name)
                 }
             })
+            
+        case .company:
+            let presenter = SearchCompaniesPresenter()
+//            presenter.selectionCompletion = { [weak self] (practice) in
+//                cell.textField.text = practice?.title
+//                self?.businessCardDetailsModel.practiseType = practice
+//            }
+            self.view?.showSearchCompanies(presenter: presenter)
         }
     }
 

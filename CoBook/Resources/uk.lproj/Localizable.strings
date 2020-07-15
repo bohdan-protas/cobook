@@ -70,6 +70,7 @@
 "TextInput.placeholder.socialName" = "Назва";
 "TextInput.placeholder.socialLink" = "Посилання, https://link.com";
 "TextInput.placeholder.listName" = "Назва";
+"TextInput.placeholder.company" = "Компанія";
 
 "Button.addFilter.normalTitle" = "Додати фільтр";
 "Button.continue.normalTitle" = "Продовжити";

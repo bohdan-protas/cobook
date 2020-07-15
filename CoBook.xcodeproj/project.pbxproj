@@ -48,6 +48,7 @@
 		6DE35FF7249C07C700DC08C5 /* FeedbackApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */; };
 		6DE35FFB249C0FB200DC08C5 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */; };
 		6DE35FFC249C0FB200DC08C5 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */; };
+		6DEDE84F24BE0A90008A051D /* SearchCompaniesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEDE84E24BE0A90008A051D /* SearchCompaniesPresenter.swift */; };
 		6DF1A2EA24BD99D300D94280 /* LeaderboardStatAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF1A2E924BD99D300D94280 /* LeaderboardStatAPIModel.swift */; };
 		6DF1A2EC24BDA5FD00D94280 /* UserBallanceAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF1A2EB24BDA5FD00D94280 /* UserBallanceAPIModel.swift */; };
 		6DF6606724A376CC00E078DF /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6606624A376CC00E078DF /* PaymentService.swift */; };
@@ -467,6 +468,7 @@
 		6DE35FF6249C07C700DC08C5 /* FeedbackApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackApiModel.swift; sourceTree = "<group>"; };
 		6DE35FF9249C0FB200DC08C5 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		6DE35FFA249C0FB200DC08C5 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		6DEDE84E24BE0A90008A051D /* SearchCompaniesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCompaniesPresenter.swift; sourceTree = "<group>"; };
 		6DF1A2E924BD99D300D94280 /* LeaderboardStatAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardStatAPIModel.swift; sourceTree = "<group>"; };
 		6DF1A2EB24BDA5FD00D94280 /* UserBallanceAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBallanceAPIModel.swift; sourceTree = "<group>"; };
 		6DF6606624A376CC00E078DF /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
@@ -1858,7 +1860,6 @@
 		B84B94EB24032A760007EB60 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				B84B94E72403299F0007EB60 /* EndpointConfigurable.swift */,
 				B84B94EC24032ADE0007EB60 /* SignUpEndpoint.swift */,
 				B8357DB2240C6372006AB78E /* SignInEndpoint.swift */,
 				B828C34A240CE0A800F8C371 /* AuthEndpoint.swift */,
@@ -2105,6 +2106,7 @@
 				B870198423ED50EA00625D61 /* AppDelegate.swift */,
 				B84B94E9240329D50007EB60 /* Constants.swift */,
 				B8DFB744248FB90400924838 /* Core */,
+				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B850DA1A2486768F002D8F99 /* Property Wrappers */,
 				B826B0F023F45973009041DD /* Services */,
@@ -2144,6 +2146,7 @@
 			children = (
 				B884B6A5248AAD46000848A7 /* SearchPresenter.swift */,
 				B884B6AC248AB4B7000848A7 /* SearchPracticiesPresenter.swift */,
+				6DEDE84E24BE0A90008A051D /* SearchCompaniesPresenter.swift */,
 			);
 			path = SearchPresenter;
 			sourceTree = "<group>";
@@ -2160,6 +2163,7 @@
 		B88906B523FFD4EA002E91F7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				B84B94E72403299F0007EB60 /* EndpointConfigurable.swift */,
 				B8307F262406FFF300AFE578 /* AnyOptional.swift */,
 				B88906C1240020F4002E91F7 /* BasePresenter.swift */,
 				B88906C324003B6B002E91F7 /* LoadDisplayableView.swift */,
@@ -2415,7 +2419,6 @@
 		B8DFB744248FB90400924838 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B8DFB749248FC2E100924838 /* CollectionCellConfigurator.swift */,
 				B8DC630C2434FC1000A2ED58 /* TableCellConfigurator.swift */,
 				B8DC630E2434FC3A00A2ED58 /* TableDataSource.swift */,
@@ -2930,6 +2933,7 @@
 				6D725372249F6CA400EFDC32 /* CardStatistics.swift in Sources */,
 				B83050AB247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift in Sources */,
 				B8212A62241BCDDF0066700C /* InterestsEndpoint.swift in Sources */,
+				6DEDE84F24BE0A90008A051D /* SearchCompaniesPresenter.swift in Sources */,
 				6DFDF11324AA7395001F358F /* PaymentStatus.swift in Sources */,
 				B825742D23F592F600C8CBF8 /* SignUpPresenter.swift in Sources */,
 				6DF6606B24A3F22000E078DF /* PublishTableViewCell.swift in Sources */,
