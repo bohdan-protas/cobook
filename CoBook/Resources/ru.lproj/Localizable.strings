@@ -70,6 +70,7 @@
 "TextInput.placeholder.socialName" = "Название";
 "TextInput.placeholder.socialLink" = "Ссылка, https://link.com";
 "TextInput.placeholder.listName" = "Название";
+"TextInput.placeholder.company" = "Компания";
 
 "Button.addFilter.normalTitle" = "Добавить фильтр";
 "Button.continue.normalTitle" = "Продолжить";
@@ -92,6 +93,7 @@
 "Label.changeBgPhoto.text" = "Изменить фото обложки";
 "Label.addBgPhoto.text" = "Добавить фото обложки";
 "Label.showAll.text" = "Показать все";
+"Label.in" = "in";
 
 "SearchBar.placeholder.employers" = "Поиск работников CoBook";
 "SearchBar.placeholder.search" = "Поиск";

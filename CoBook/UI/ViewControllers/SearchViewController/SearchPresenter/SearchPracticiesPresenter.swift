@@ -121,7 +121,6 @@ private extension SearchPracticiesPresenter {
                     let titleOne = a.title ?? ""
                     let titleTwo = b.title ?? ""
                     return titleOne.localizedCaseInsensitiveCompare(titleTwo) == .orderedAscending
-                    //return a.title ?? "" > b.title ?? ""
                 }
                 self.filteredPracticies = self.practicies
                 self.updateViewDataSource()

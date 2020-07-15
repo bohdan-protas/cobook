@@ -109,8 +109,6 @@ extension AppDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        //IQKeyboardManager.shared.shouldToolbarUsesTextFieldTintColor = true
-        //IQKeyboardManager.shared.disabledToolbarClasses.append(ConfirmTelephoneNumberViewController.self)
 
         // Google services
         GMSServices.provideAPIKey(Constants.Google.placesApiKey)
@@ -118,8 +116,7 @@ extension AppDelegate {
 
         // Firebase & Dynamic links
         FirebaseApp.configure()
-        //FirebaseConfiguration.shared.setLoggerLevel(.debug)
-        //DynamicLinks.performDiagnostics(completion: nil)
+
     }
 
     func setupAppearence() {

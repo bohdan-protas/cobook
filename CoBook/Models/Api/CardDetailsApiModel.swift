@@ -24,6 +24,7 @@ struct CardDetailsApiModel: Decodable {
         case region
         case address
         case schedule
+        case workplace = "work_place"
         case description
         case contactTelephone = "contact_telephone"
         case contactEmail = "contact_email"
@@ -49,6 +50,7 @@ struct CardDetailsApiModel: Decodable {
     var region: PlaceApiModel?
     var address: PlaceApiModel?
     var schedule: String?
+    var workplace: WorkplaceAPIModel?
     
     var description: String?
     var descriptionToShow: String?

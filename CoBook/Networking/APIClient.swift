@@ -574,7 +574,20 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
 
+    /**
+     Request for searching companies
 
+     - parameters:
+        - name: the name of searching company
+     - returns: runned DataRequest
+     */
+    @discardableResult
+    func getCompanies(name: String?, completion: @escaping (Result<[CompanySearchAPIModel]?>) -> Void) -> DataRequest {
+        let endpoint = CardsEndpoint.searchCompanies(name: name)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    
 }
 
 // MARK: - ContentManagerEndpoint requests

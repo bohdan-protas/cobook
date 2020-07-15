@@ -70,6 +70,7 @@
 "TextInput.placeholder.socialName" = "The name";
 "TextInput.placeholder.socialLink" = "The link, https://link.com";
 "TextInput.placeholder.listName" = "The name";
+"TextInput.placeholder.company" = "Company";
 
 "Button.addFilter.normalTitle" = "Add filter";
 "Button.continue.normalTitle" = "Continue";
@@ -92,6 +93,7 @@
 "Label.changeBgPhoto.text" = " Change cover photo";
 "Label.addBgPhoto.text" = " Add cover photo ";
 "Label.showAll.text" = "Show all";
+"Label.in" = "in";
 
 "SearchBar.placeholder.employers" = "Search CoBook employees";
 "SearchBar.placeholder.search" = "Search";

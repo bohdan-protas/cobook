@@ -233,6 +233,14 @@ extension PersonalCardDetailsPresenter: GetInTouchTableViewCellDelegate {
 
 extension PersonalCardDetailsPresenter: PersonalCardUserInfoTableViewCellDelegate {
 
+    func onOpenCompany(_ cell: PersonalCardUserInfoTableViewCell) {
+        let businessCardDetailsViewController: BusinessCardDetailsViewController = UIStoryboard.account.initiateViewControllerFromType()
+        if let id = cardDetails?.workplace?.company?.id {
+            businessCardDetailsViewController.presenter = BusinessCardDetailsPresenter(id: id)
+            view?.push(controller: businessCardDetailsViewController, animated: true)
+        }
+    }
+    
     func onSaveCard(cell: PersonalCardUserInfoTableViewCell) {
         let state = cardDetails?.isSaved ?? false
 
