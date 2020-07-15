@@ -12,6 +12,7 @@ struct CreatePersonalCardParametersApiModel: Encodable {
     var avatarId: String?
     var cityPlaceId: String?
     var regionPlaceId: String?
+    var workPlaceCardId: Int?
     var position: String?
     var description: String?
     var practiceTypeId: Int?
@@ -24,6 +25,7 @@ struct CreatePersonalCardParametersApiModel: Encodable {
         self.avatarId = model.avatarImage?.id
         self.cityPlaceId = model.city?.googlePlaceId
         self.regionPlaceId = model.region?.googlePlaceId
+        self.workPlaceCardId = model.company?.id
         self.position = model.position
         self.description = model.description?.trimmingCharacters(in: CharacterSet.whitespaces)
         self.practiceTypeId = model.practiseType?.id
@@ -42,6 +44,7 @@ struct CreatePersonalCardParametersApiModel: Encodable {
     }
 
     enum CodingKeys: String, CodingKey {
+        case workPlaceCardId = "work_place_card_id"
         case avatarId  = "avatar_id"
         case cityPlaceId = "city_place_id"
         case regionPlaceId = "region_place_id"

@@ -29,6 +29,9 @@
 		6D725372249F6CA400EFDC32 /* CardStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D725371249F6CA400EFDC32 /* CardStatistics.swift */; };
 		6D725376249F6DB500EFDC32 /* CardStatisticItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D725374249F6DB500EFDC32 /* CardStatisticItemTableViewCell.swift */; };
 		6D725377249F6DB500EFDC32 /* CardStatisticItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D725375249F6DB500EFDC32 /* CardStatisticItemTableViewCell.xib */; };
+		6D8589D424BF3699009AC6CF /* WorkplaceAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8589D324BF3699009AC6CF /* WorkplaceAPIModel.swift */; };
+		6D8589D624BF3DF5009AC6CF /* String + Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8589D524BF3DF5009AC6CF /* String + Format.swift */; };
+		6D8589D824BF3E15009AC6CF /* UILabel + Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8589D724BF3E15009AC6CF /* UILabel + Index.swift */; };
 		6D86CBB624A5D66100B29761 /* Financies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D86CBB524A5D66100B29761 /* Financies.storyboard */; };
 		6D86CBB924A5DA7900B29761 /* FinanciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBB824A5DA7900B29761 /* FinanciesViewController.swift */; };
 		6D86CBBB24A5DA8A00B29761 /* FinanciesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D86CBBA24A5DA8A00B29761 /* FinanciesPresenter.swift */; };
@@ -449,6 +452,9 @@
 		6D725371249F6CA400EFDC32 /* CardStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatistics.swift; sourceTree = "<group>"; };
 		6D725374249F6DB500EFDC32 /* CardStatisticItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStatisticItemTableViewCell.swift; sourceTree = "<group>"; };
 		6D725375249F6DB500EFDC32 /* CardStatisticItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardStatisticItemTableViewCell.xib; sourceTree = "<group>"; };
+		6D8589D324BF3699009AC6CF /* WorkplaceAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkplaceAPIModel.swift; sourceTree = "<group>"; };
+		6D8589D524BF3DF5009AC6CF /* String + Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Format.swift"; sourceTree = "<group>"; };
+		6D8589D724BF3E15009AC6CF /* UILabel + Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Index.swift"; sourceTree = "<group>"; };
 		6D86CBB524A5D66100B29761 /* Financies.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Financies.storyboard; sourceTree = "<group>"; };
 		6D86CBB824A5DA7900B29761 /* FinanciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanciesViewController.swift; sourceTree = "<group>"; };
 		6D86CBBA24A5DA8A00B29761 /* FinanciesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanciesPresenter.swift; sourceTree = "<group>"; };
@@ -1314,6 +1320,8 @@
 				B825B22A244897E9007C70DF /* String + ImageGeneration.swift */,
 				B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */,
 				B83050AC247C391C0060D9BE /* URL + Extensions.swift */,
+				6D8589D524BF3DF5009AC6CF /* String + Format.swift */,
+				6D8589D724BF3E15009AC6CF /* UILabel + Index.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1919,6 +1927,7 @@
 				6D3E467B24AE39B3005FF2CF /* ReferalStatsAPIModel.swift */,
 				6DF1A2E924BD99D300D94280 /* LeaderboardStatAPIModel.swift */,
 				6DF1A2EB24BDA5FD00D94280 /* UserBallanceAPIModel.swift */,
+				6D8589D324BF3699009AC6CF /* WorkplaceAPIModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2780,6 +2789,7 @@
 				B8C5C8FC2432AAA0004A3F30 /* OpenGraphFetcher.swift in Sources */,
 				B8970B4924505763006676DF /* Service.swift in Sources */,
 				6D72536E249F66F600EFDC32 /* CardStatisticInfoApiModel.swift in Sources */,
+				6D8589D824BF3E15009AC6CF /* UILabel + Index.swift in Sources */,
 				B824DA75245B3B0300700319 /* ArticlesEndpoint.swift in Sources */,
 				B824E1B42437C5940091C491 /* CreatePersonalCardParametersApiModel.swift in Sources */,
 				B81F18A124604506003CBC84 /* SelectAlbumPresenter.swift in Sources */,
@@ -2890,6 +2900,7 @@
 				B8CB0E8224057B1700AF431B /* ValidationManager.swift in Sources */,
 				B8AB83EA24280ECB0041B879 /* PersonalCardDetailsViewController.swift in Sources */,
 				B823B088242CD4F30012529D /* AccountHeaderTableViewCell.swift in Sources */,
+				6D8589D424BF3699009AC6CF /* WorkplaceAPIModel.swift in Sources */,
 				B8559F75243B785800787349 /* BusinessCardHeaderInfoTableViewCell.swift in Sources */,
 				B8559F80243C809D00787349 /* MapTableViewCell.swift in Sources */,
 				B8559F57243A75FE00787349 /* EmployersPreviewHorizontalListTableViewCell.swift in Sources */,
@@ -3003,6 +3014,7 @@
 				B824DA64245AE9A700700319 /* CreateArticleViewController.swift in Sources */,
 				B828C34D240CEAB400F8C371 /* RefreshTokenAPIResponseData.swift in Sources */,
 				B8307F292407001800AFE578 /* AlertDisplayableView.swift in Sources */,
+				6D8589D624BF3DF5009AC6CF /* String + Format.swift in Sources */,
 				B82B4D44245632970061A98B /* CreateServiceApiModel.swift in Sources */,
 				B8A3B0A424507D75007C4F05 /* CreateServiceDataSourceConfigurator.swift in Sources */,
 				B8909FC12464AAA800AA56F7 /* PhotoCollageItemCollectionViewCell.swift in Sources */,

@@ -93,6 +93,7 @@
 "Label.changeBgPhoto.text" = " Change cover photo";
 "Label.addBgPhoto.text" = " Add cover photo ";
 "Label.showAll.text" = "Show all";
+"Label.in" = "in";
 
 "SearchBar.placeholder.employers" = "Search CoBook employees";
 "SearchBar.placeholder.search" = "Search";

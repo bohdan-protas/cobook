@@ -18,6 +18,7 @@ class SearchCompaniesPresenter: SearchPresenter {
     private var filteredCompanies: [CompanyApiModel] = []
     
     var isMultiselectEnabled: Bool = false
+    var selectionCompletion: ((_ practice: CompanyApiModel?) -> Void)?
     
     init() {
         var configurator = SearchCellsConfigurator()
@@ -51,7 +52,8 @@ class SearchCompaniesPresenter: SearchPresenter {
     
     func selectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?) {
         if let index = companies.firstIndex(where: { $0.id == filteredCompanies[safe: indexPath.item]?.id }) {
-            
+            selectionCompletion?(companies[index])
+            completion?(true)
         }
     }
     
@@ -83,7 +85,7 @@ private extension SearchCompaniesPresenter {
             self.view?.stopLoading()
             switch result {
             case .success(let response):
-                self.companies = (response ?? []).compactMap { $0.company }
+                self.companies = (response ?? []).compactMap { CompanyApiModel(id: $0.id, name: $0.company?.name) }
                 self.companies.sort { (a, b) -> Bool in
                     let titleOne = a.name ?? ""
                     let titleTwo = b.name ?? ""
