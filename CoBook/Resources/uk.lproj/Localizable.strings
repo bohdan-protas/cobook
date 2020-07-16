@@ -94,6 +94,7 @@
 "Label.addBgPhoto.text" = "Додати фото обкладинки";
 "Label.showAll.text" = "Показати всі";
 "Label.in" = "in";
+"Label.add" = "Додати";
 
 "SearchBar.placeholder.employers" = "Пошук працівників CoBook";
 "SearchBar.placeholder.search" = "Пошук";

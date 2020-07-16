@@ -111,6 +111,7 @@ extension AppDelegate {
             $0.dataLoader = NukeAlamofirePlugin.AlamofireDataLoader()
             $0.imageCache = ImageCache.shared
         }
+        ImageLoadingOptions.shared.transition = .fadeIn(duration: 0.3)
         ImagePipeline.shared = pipeline
         
         // IQKeyboard manager

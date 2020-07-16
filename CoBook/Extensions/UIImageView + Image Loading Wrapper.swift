@@ -17,6 +17,7 @@ extension UIImageView {
 
         guard let stringPath = string, let url = URL.init(string: stringPath) else {
             self.image = placeholderImage
+            completion?(.failure(ImagePipeline.Error.dataLoadingFailed(NSError.instantiate(code: -1, localizedMessage: "URL have unexpected format"))))
             return
         }
         
@@ -24,6 +25,25 @@ extension UIImageView {
             placeholder: placeholderImage,
             transition: .fadeIn(duration: 0.3)
         )
+        
+        Nuke.loadImage(with: url, options: options, into: self, completion: completion)
+    }
+    
+    
+    public func setImage(withURL url: URL?,
+                         placeholderImage: UIImage? = nil,
+                         completion: ImageTask.Completion? = nil) {
+        
+        let options = ImageLoadingOptions(
+            placeholder: placeholderImage,
+            transition: .fadeIn(duration: 0.3)
+        )
+        
+        guard let url = url else {
+            self.image = placeholderImage
+            completion?(.failure(ImagePipeline.Error.dataLoadingFailed(NSError.instantiate(code: -1, localizedMessage: "URL have unexpected format"))))
+            return
+        }
         
         Nuke.loadImage(with: url, options: options, into: self, completion: completion)
     }
