@@ -90,7 +90,7 @@ extension CreateAlbumViewController: CreateAlbumView {
         }
 
         albumImageView?.setImage(withPath: avatarPath) { [weak self] (response) in
-            switch response.result {
+            switch response {
             case .success:
                 self?.photoPlaceholderView.isHidden = true
             case .failure:

@@ -26,10 +26,5 @@ class ArticleHeaderTableViewCell: UITableViewCell {
         self.delegate?.moreButtonAction(self)
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        avatarImageView.cancelImageRequest()
-        avatarImageView.image = nil
-    }
     
 }

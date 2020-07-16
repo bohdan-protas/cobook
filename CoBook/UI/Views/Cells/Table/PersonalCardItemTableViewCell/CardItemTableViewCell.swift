@@ -67,8 +67,6 @@ class CardItemTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatarImageView.cancelImageRequest()
-        avatarImageView.image = nil
         nameLabel.text = ""
         professionLabel.text = ""
         telNumberLabel.text = ""

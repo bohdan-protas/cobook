@@ -31,11 +31,5 @@ class PostEditablePhotoCollectionViewCell: UICollectionViewCell {
         delegate?.delete(self)
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        photoImageView.cancelImageRequest()
-        photoImageView.image = nil
-    }
-
 
 }

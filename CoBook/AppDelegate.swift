@@ -12,6 +12,8 @@ import GooglePlaces
 import GoogleMaps
 import Firebase
 import FirebaseDynamicLinks
+import Nuke
+import NukeAlamofirePlugin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -104,6 +106,12 @@ extension AppDelegate {
     }
 
     func setupDepencencies() {
+        // Nuke
+        let pipeline = ImagePipeline {
+            $0.dataLoader = NukeAlamofirePlugin.AlamofireDataLoader()
+            $0.imageCache = ImageCache.shared
+        }
+        ImagePipeline.shared = pipeline
         
         // IQKeyboard manager
         IQKeyboardManager.shared.enable = true

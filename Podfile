@@ -4,7 +4,8 @@ target 'CoBook' do
   use_frameworks!
 
   pod 'Alamofire', '~> 5.0'
-  pod 'AlamofireImage', '~> 4.0'
+  pod 'Nuke', '~> 9.0'
+  pod 'Nuke-Alamofire-Plugin', '~> 5.0'
   pod 'IQKeyboardManagerSwift'
   pod 'PanModal'
   pod 'JGProgressHUD'

@@ -113,8 +113,6 @@ extension CreateArticleViewController: CreateArticleView {
 
     func set(albumTitle: String?, albumImage: String?) {
         albumTitleLabel.text = albumTitle ?? "Виберіть альбом"
-        albumImageView.cancelImageRequest()
-        albumImageView.image = nil
         albumImageView.setImage(withPath: albumImage)
     }
 

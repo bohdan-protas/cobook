@@ -37,8 +37,6 @@ class EmployerPreviewHorizontalListItemCollectionViewCell: UICollectionViewCell 
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatarTextPlaceholderImageView.af.cancelImageRequest()
-        avatarTextPlaceholderImageView.image = nil
         titleLabel.text = ""
         professionLabel.text = ""
         telNumberLabel.text = ""

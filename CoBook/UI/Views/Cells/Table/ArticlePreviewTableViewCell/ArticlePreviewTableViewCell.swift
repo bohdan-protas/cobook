@@ -13,11 +13,4 @@ class ArticlePreviewTableViewCell: UITableViewCell {
     @IBOutlet var articleImageView: UIImageView!
     @IBOutlet var articleTitle: UILabel!
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        articleImageView.cancelImageRequest()
-        articleImageView.image = nil
-    }
-
-
 }

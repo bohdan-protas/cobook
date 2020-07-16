@@ -23,9 +23,6 @@ class ServiceListItemTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-
-        titleImageView.image = nil
-        titleImageView.cancelImageRequest()
         titleLabel.text = ""
         subtitleLabel.text = ""
     }

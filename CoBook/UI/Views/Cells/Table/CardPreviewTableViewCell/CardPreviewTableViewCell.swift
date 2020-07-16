@@ -18,8 +18,6 @@ class CardPreviewTableViewCell: UITableViewCell {
     @IBOutlet var separatorView: UIView!
 
     override func prepareForReuse() {
-        titleImageView.cancelImageRequest()
-        titleImageView.image = nil
         titleLabel.text = ""
         detailLabel.isHidden = true
         detailLabel.text = ""

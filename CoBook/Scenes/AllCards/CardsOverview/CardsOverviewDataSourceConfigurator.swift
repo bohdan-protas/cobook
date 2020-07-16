@@ -61,8 +61,8 @@ extension CardsOverviewViewPresenter {
             // cardItemCellConfigurator
             dataSourceConfigurator.cardItemCellConfigurator = TableCellConfigurator { (cell, model: CardItemViewModel, tableView, indexPath) -> CardItemTableViewCell in
                 cell.delegate = self.view
-                cell.avatarImageView.setImage(withPath: model.avatarPath,
-                                              placeholderImage: model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size))
+                cell.avatarImageView.setImage(withPath: model.avatarPath, placeholderImage: model.nameAbbreviation?.image(size: cell.avatarImageView.frame.size))
+                
                 cell.type = model.type
                 switch model.type {
                 case .personal:

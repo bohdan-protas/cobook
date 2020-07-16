@@ -17,8 +17,6 @@ class AlbumPreviewItemCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        titleImageView.cancelImageRequest()
-        titleImageView.image = nil
         textLabel.text = ""
         arrowIndicatorImageView.isHidden = true
     }

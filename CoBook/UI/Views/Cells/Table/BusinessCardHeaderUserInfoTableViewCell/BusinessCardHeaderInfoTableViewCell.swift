@@ -47,10 +47,6 @@ class BusinessCardHeaderInfoTableViewCell: UITableViewCell {
         professionLabel.text = ""
         telephoneNumberLabel.text = ""
         websiteLabel.text = ""
-        bgImageView.cancelImageRequest()
-        avatarImageView.cancelImageRequest()
-        bgImageView.image = nil
-        avatarImageView.image = nil
     }
 
     // MARK: - Actions

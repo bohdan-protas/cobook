@@ -31,10 +31,5 @@ class SelectAlbumTableViewCell: UITableViewCell {
         }
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        albumImageView.cancelImageRequest()
-        albumImageView.image = nil
-    }
 
 }

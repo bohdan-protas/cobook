@@ -14,13 +14,6 @@ class CompanyPreviewHeaderTableViewCell: UITableViewCell {
     @IBOutlet var avatarImageView: DesignableImageView!
     @IBOutlet var nameLabel: UILabel!
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        avatarImageView.cancelImageRequest()
-        avatarImageView.image = nil
-    }
-
     override func awakeFromNib() {
         super.awakeFromNib()
         topCorneredView.clipsToBounds = true

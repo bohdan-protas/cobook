@@ -12,11 +12,4 @@ class PhotoCollageItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var photoImageView: UIImageView!
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        photoImageView.cancelImageRequest()
-        photoImageView.image = nil
-    }
-
 }

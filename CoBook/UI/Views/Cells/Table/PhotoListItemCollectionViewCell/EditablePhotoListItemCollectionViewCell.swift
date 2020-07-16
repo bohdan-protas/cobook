@@ -12,12 +12,4 @@ class EditablePhotoListItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var titleImageView: UIImageView!
 
-    // MARK: - View Life Cycle
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        titleImageView.cancelImageRequest()
-        titleImageView.image = nil
-    }
-
 }

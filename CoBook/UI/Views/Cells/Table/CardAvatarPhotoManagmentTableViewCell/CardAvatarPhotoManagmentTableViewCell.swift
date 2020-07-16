@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 protocol CardAvatarPhotoManagmentTableViewCellDelegate: class {
     func didChangeAvatarPhoto(_ view: CardAvatarPhotoManagmentTableViewCell)
@@ -81,12 +82,16 @@ class CardAvatarPhotoManagmentTableViewCell: UITableViewCell {
             return
         }
         
-        avatarImageView.setImage(withPath: str, placeholderImage: UIImage(named: "ic_user")) { response in
-            self.avatarSelectionButton.isSelected = response.error == nil
-            self.avatarSelectionButton.isSelected = true
+        avatarImageView.setImage(withPath: str, placeholderImage: UIImage(named: "ic_user")) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.avatarSelectionButton.isSelected = true
+            case .failure:
+                self?.avatarSelectionButton.isSelected = false
+            }
         }
     }
-
+    
     func set(image: UIImage?) {
         avatarImageView.image = image
         avatarSelectionButton.isSelected = image != nil

@@ -21,8 +21,6 @@ class ProductPreviewItemCollectionViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        titleImageView.cancelImageRequest()
-        titleImageView.image = nil
         productNameLabel.text = ""
         productPriceLabel.text = ""
     }

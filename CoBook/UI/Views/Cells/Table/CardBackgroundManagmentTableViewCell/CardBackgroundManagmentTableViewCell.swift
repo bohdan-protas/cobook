@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import Nuke
 
 protocol CardBackgroundManagmentTableViewCellDelegate: class {
     func didChangeBackgroundPhoto(_ view: CardBackgroundManagmentTableViewCell)
@@ -47,18 +47,14 @@ class CardBackgroundManagmentTableViewCell: UITableViewCell {
         currentState = .empty
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        bgImageView.cancelImageRequest()
-        bgImageView.image = nil
-        photoStatusLabel.text = ""
-        photoSizeLabel.text = ""
-    }
-
+    // MARK: - Actions
+    
     @IBAction func changePhotoTapped(_ sender: Any) {
         delegate?.didChangeBackgroundPhoto(self)
     }
 
+    // MARK: - Public
+    
     func set(image: UIImage?) {
         bgImageView.image = image
         currentState = image == nil ? .empty : .filled
@@ -66,9 +62,15 @@ class CardBackgroundManagmentTableViewCell: UITableViewCell {
 
     func set(imagePath: String?) {
         if let url = URL(string: imagePath ?? "") {
-            bgImageView?.af.setImage(withURL: url) { [weak self] (response) in
-                self?.currentState = response.value == nil ? .empty : .filled
+            Nuke.loadImage(with: url, into: bgImageView) { (result) in
+                switch result {
+                case .success:
+                    self.currentState = .filled
+                case .failure:
+                    self.currentState = .empty
+                }
             }
+
         } else {
             currentState = .empty
         }

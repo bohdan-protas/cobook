@@ -37,11 +37,4 @@ class CardStatisticItemTableViewCell: UITableViewCell {
         telephoneLabel.text = ""
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        avatarImageView.cancelImageRequest()
-        avatarImageView.image = nil
-    }
-
-    
 }

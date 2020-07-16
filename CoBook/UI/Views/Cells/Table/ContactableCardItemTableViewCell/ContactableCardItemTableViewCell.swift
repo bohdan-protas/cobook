@@ -62,8 +62,6 @@ class ContactableCardItemTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatarImageView.cancelImageRequest()
-        avatarImageView.image = nil
         headerLabel.text = ""
         bodyLabel.text = ""
         telNumberLabel.text = ""

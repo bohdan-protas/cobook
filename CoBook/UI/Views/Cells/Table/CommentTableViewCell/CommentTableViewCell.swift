@@ -22,8 +22,6 @@ class CommentTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatarImageView.cancelImageRequest()
-        avatarImageView.image = nil
         titleLabel.text = nil
         descriptionLabel.text = nil
     }

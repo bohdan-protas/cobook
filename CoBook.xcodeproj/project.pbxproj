@@ -132,7 +132,7 @@
 		B823AB7F23F1602100DE13EA /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */; };
 		B823B088242CD4F30012529D /* AccountHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B086242CD4F30012529D /* AccountHeaderTableViewCell.swift */; };
 		B823B089242CD4F30012529D /* AccountHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B823B087242CD4F30012529D /* AccountHeaderTableViewCell.xib */; };
-		B823B08B242CEFDF0012529D /* UIImageView + AFImageWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B08A242CEFDF0012529D /* UIImageView + AFImageWrappers.swift */; };
+		B823B08B242CEFDF0012529D /* UIImageView + Image Loading Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B08A242CEFDF0012529D /* UIImageView + Image Loading Wrapper.swift */; };
 		B823B08F242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B08D242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift */; };
 		B823B090242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B823B08E242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib */; };
 		B823B093242D3DA90012529D /* CreateBusinessCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823B092242D3DA90012529D /* CreateBusinessCardViewController.swift */; };
@@ -554,7 +554,7 @@
 		B823AB7E23F1602100DE13EA /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		B823B086242CD4F30012529D /* AccountHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B823B087242CD4F30012529D /* AccountHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeaderTableViewCell.xib; sourceTree = "<group>"; };
-		B823B08A242CEFDF0012529D /* UIImageView + AFImageWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + AFImageWrappers.swift"; sourceTree = "<group>"; };
+		B823B08A242CEFDF0012529D /* UIImageView + Image Loading Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Image Loading Wrapper.swift"; sourceTree = "<group>"; };
 		B823B08D242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAvatarPhotoManagmentTableViewCell.swift; sourceTree = "<group>"; };
 		B823B08E242D1B210012529D /* CardAvatarPhotoManagmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardAvatarPhotoManagmentTableViewCell.xib; sourceTree = "<group>"; };
 		B823B092242D3DA90012529D /* CreateBusinessCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBusinessCardViewController.swift; sourceTree = "<group>"; };
@@ -1315,7 +1315,7 @@
 				B8AB3EFE2422973C00E06E53 /* UIApplication + Extensions.swift */,
 				B8AB3F022422B38300E06E53 /* Data + Extensions.swift */,
 				B8AB3F062422D5B900E06E53 /* NSError + Extensions.swift */,
-				B823B08A242CEFDF0012529D /* UIImageView + AFImageWrappers.swift */,
+				B823B08A242CEFDF0012529D /* UIImageView + Image Loading Wrapper.swift */,
 				B823C6202431F585002CFB02 /* UIImage + AverageColor.swift */,
 				B825B22A244897E9007C70DF /* String + ImageGeneration.swift */,
 				B80B0A482471C9FB00C72607 /* Notifications + Extensions.swift */,
@@ -2980,7 +2980,7 @@
 				B824DA6F245B073200700319 /* AlbumPreviewItemCollectionViewCell.swift in Sources */,
 				6D513BA724A502A500FD89C2 /* PartnershipInfoViewController.swift in Sources */,
 				B826B0F223F459A1009041DD /* Onboarding.swift in Sources */,
-				B823B08B242CEFDF0012529D /* UIImageView + AFImageWrappers.swift in Sources */,
+				B823B08B242CEFDF0012529D /* UIImageView + Image Loading Wrapper.swift in Sources */,
 				B825B6FA24391448002A27EC /* SearchTableViewCell.swift in Sources */,
 				B8909F9A2464121A00AA56F7 /* ArticleDetailsViewController.swift in Sources */,
 				B834BD662483F8450037C623 /* LocalizedKeyProvided.swift in Sources */,

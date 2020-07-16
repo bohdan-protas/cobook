@@ -105,7 +105,6 @@ class PersonalCardUserInfoTableViewCell: UITableViewCell {
 private extension PersonalCardUserInfoTableViewCell {
     
     func clearLayout() {
-        avatarImageView.cancelImageRequest()
         userNameLabel.text = ""
         practiceTypeLabel.text = ""
         positionLabel.text = ""

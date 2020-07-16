@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import AlamofireImage
 
 public enum Result<T> {
     case success(T)
@@ -38,7 +37,6 @@ class APIClient {
     // MARK: - Initializer
 
     private init(session: Session) {
-        ImageResponseSerializer.addAcceptableImageContentTypes(Constants.API.additionalAcceptableImageContentTypes)
         self.session = session
     }
 
