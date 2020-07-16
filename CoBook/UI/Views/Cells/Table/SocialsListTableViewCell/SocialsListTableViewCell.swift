@@ -49,6 +49,7 @@ class SocialsListTableViewCell: UITableViewCell {
 
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         collectionView.register(SocialListItemCollectionViewCell.nib, forCellWithReuseIdentifier: SocialListItemCollectionViewCell.identifier)
 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))

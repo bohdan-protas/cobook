@@ -11,7 +11,6 @@ target 'CoBook' do
   pod 'JGProgressHUD'
   pod 'GooglePlaces'
   pod 'GoogleMaps'
-  pod 'SwiftSoup'
   pod 'CropViewController'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
