@@ -191,13 +191,15 @@ extension APIClient {
      - parameters:
         - login:  user telephone number
         - password:  user account password
+        - deviceID: device id for push notifications needs
         - completion: parsed response from server
      */
     func signUpFinishRequest(accessToken: String,
                              password: String,
+                             deviceID: String?,
                              completion: @escaping (Result<RegisterAPIResponseData?>) -> Void) {
 
-        let endpoint = SignUpEndpoint.finish(accessToken: accessToken, password: password)
+        let endpoint = SignUpEndpoint.finish(accessToken: accessToken, password: password, deviceID: deviceID)
         performRequest(endpoint: endpoint, completion: completion)
     }
 
@@ -213,10 +215,12 @@ extension APIClient {
      - parameters:
         - login:  user telephone number
         - password:  user account password
+        - deviceID:  deviceID for push notifications needs
         - completion: parsed response from server
      */
     func signInRequest(login: String,
                        password: String,
+                       deviceID: String?,
                        completion: @escaping (Result<RegisterAPIResponseData?>) -> Void) {
 
         let customFormatter = DateFormatter()
@@ -224,7 +228,7 @@ extension APIClient {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(customFormatter)
         
-        let endpoint = SignInEndpoint.login(login: login, password: password)
+        let endpoint = SignInEndpoint.login(login: login, password: password, deviceID: deviceID)
         performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
 }

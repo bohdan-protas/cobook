@@ -17,7 +17,7 @@ enum SignInEndpoint: EndpointConfigurable {
         - login: The users telephone
         - password: The users password str
      */
-    case login(login: String, password: String)
+    case login(login: String, password: String, deviceID: String?)
 
     // MARK: - Auth token usage
     var useAuthirizationToken: Bool {
@@ -41,10 +41,11 @@ enum SignInEndpoint: EndpointConfigurable {
     var bodyParameters: Parameters? {
         switch self {
 
-        case let .login(login, password):
+        case let .login(login, password, deviceID):
             return [
                 Constants.API.ParameterKey.login: login,
                 Constants.API.ParameterKey.password: password,
+                Constants.API.ParameterKey.deviceID: deviceID ?? ""
             ]
 
 

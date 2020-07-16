@@ -45,9 +45,14 @@ class SignInPresenter: BasePresenter {
             view?.infoAlert(title: nil, message: validationErrorDescription)
             return
         }
-
+        
+        let deviceID = UIDevice.current.identifierForVendor?.uuidString
+        if deviceID == nil {
+            Log.error("device ID is not defined!")
+        }
+        
         view?.startLoading()
-        APIClient.default.signInRequest(login: self.login, password: self.password) { [weak self] (result) in
+        APIClient.default.signInRequest(login: self.login, password: self.password, deviceID: deviceID) { [weak self] (result) in
             self?.view?.stopLoading()
             switch result {
             case let .success(response):

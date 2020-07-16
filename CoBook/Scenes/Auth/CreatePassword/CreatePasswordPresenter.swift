@@ -46,7 +46,12 @@ class CreatePasswordPresenter: BasePresenter {
             return
         }
 
-        APIClient.default.signUpFinishRequest(accessToken: AppStorage.Auth.accessToken ?? "", password: self.password) { (result) in
+        let deviceID = UIDevice.current.identifierForVendor?.uuidString
+        if deviceID == nil {
+            Log.error("device ID is not defined!")
+        }
+        
+        APIClient.default.signUpFinishRequest(accessToken: AppStorage.Auth.accessToken ?? "", password: self.password, deviceID: deviceID) { (result) in
             switch result {
             case let .success(response):
                 AppStorage.Auth.accessToken = response?.assessToken

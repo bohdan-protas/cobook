@@ -44,6 +44,7 @@ enum Constants {
             static let login        = "login"
             static let refreshToken = "refresh_token"
             static let id           = "id"
+            static let deviceID     =  "device_id"
         }
 
         enum ContentType: String {

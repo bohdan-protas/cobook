@@ -17,7 +17,7 @@ enum SignUpEndpoint: EndpointConfigurable {
     case verify(smsCode: Int, accessToken: String)
 
     ///Finish registration session
-    case finish(accessToken: String, password: String)
+    case finish(accessToken: String, password: String, deviceID: String?)
 
     ///Request resend sms
     case resend(accessToken: String)
@@ -62,10 +62,11 @@ enum SignUpEndpoint: EndpointConfigurable {
                 Constants.API.ParameterKey.token: accessToken
             ]
 
-        case .finish(let accessToken, let password):
+        case .finish(let accessToken, let password, let deviceID):
             return [
                 Constants.API.ParameterKey.token: accessToken,
-                Constants.API.ParameterKey.password: password
+                Constants.API.ParameterKey.password: password,
+                Constants.API.ParameterKey.deviceID: deviceID ?? ""
             ]
 
         case .resend(let accessToken):
