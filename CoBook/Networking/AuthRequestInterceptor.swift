@@ -18,11 +18,6 @@ final class AuthRequestInterceptor: RequestInterceptor {
 
         switch response.statusCode {
         case 401:
-            DispatchQueue.main.async {
-                self.showSignInController()
-            }
-            completion(.doNotRetry)
-        case 403:
             if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
                 AppStorage.Auth.accessToken = nil
                 APIClient.default.refreshTokenRequest(refreshToken: refreshToken) { (result) in
