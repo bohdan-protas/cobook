@@ -289,6 +289,20 @@ extension APIClient {
         let endpoint = AuthEndpoint.logout
         return performRequest(endpoint: endpoint, completion: completion)
     }
+    
+    /**
+     Request for logout
+
+     - parameters:
+        - fcmToken: Device token from firebase client server
+        - completion: void result response
+     */
+    @discardableResult
+    func updateDeviceToken(fcmToken: String, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = AuthEndpoint.updateDeviceToken(fcmToken: fcmToken)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
 
 }
 

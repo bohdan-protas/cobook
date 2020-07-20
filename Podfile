@@ -14,6 +14,7 @@ target 'CoBook' do
   pod 'CropViewController'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
   pod 'Firebase/DynamicLinks'
   pod 'PortmoneSDKEcom'
   
