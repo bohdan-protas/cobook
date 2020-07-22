@@ -32,7 +32,6 @@ extension AppDelegate {
     }
     
     func setupScreenToOpen(on window: UIWindow?) {
-        
         if AppStorage.User.Profile?.userId == nil {
             if AppStorage.User.isTutorialShown {
                 let signUpNavigationController: SignUpNavigationController = UIStoryboard.auth.initiateViewControllerFromType()

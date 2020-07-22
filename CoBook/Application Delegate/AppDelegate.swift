@@ -49,7 +49,6 @@ extension AppDelegate: UIApplicationDelegate {
         setupDepencencies(for: application)
         registerForPushNotifications(application: application)
         
-        
         return true
     }
 
