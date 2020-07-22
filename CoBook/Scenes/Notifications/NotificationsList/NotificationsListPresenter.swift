@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol NotificationsListView: class, AlertDisplayableView, LoadDisplayableView {
+protocol NotificationsListView: AlertDisplayableView, LoadDisplayableView, NotificationItemCellDelegate, NotificationItemCellDataSource {
     func set(dataSource: TableDataSource<NotificationsListConfigurator>?)
     func reload()
 }
@@ -19,31 +19,13 @@ class NotificationsListPresenter: BasePresenter {
     
     private var dataSource: TableDataSource<NotificationsListConfigurator>?
     private var notifications: [NotificationsList.Model] = []
-    
-    // MARK: - Initializators
-    
-    init() {
-        let notificationItemConfigurator = TableCellConfigurator { (cell, model: NotificationsList.Model, tableView, indexPath) -> NotificationItemTableViewCell in
-            cell.titleLabel.text = model.title
-            cell.bodyLabel.text = model.body
-            if let date = model.createdAt {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd.MM.yyyy"
-                cell.dateLabel.text = formatter.string(from: date)
-            } else {
-                cell.dateLabel.text = ""
-            }
-            return cell
-        }
-        let configurator = NotificationsListConfigurator(notificationItemConfigurator: notificationItemConfigurator)
-        self.dataSource = TableDataSource(sections: [], configurator: configurator)
-    }
-    
+        
     // MARK: - Base Presenter
     
     func attachView(_ view: NotificationsListView) {
         self.view = view
-        view.set(dataSource: dataSource)
+        self.dataSource = TableDataSource(sections: [], configurator: configurator)
+        self.view?.set(dataSource: dataSource)
     }
     
     func detachView() {
@@ -77,6 +59,20 @@ class NotificationsListPresenter: BasePresenter {
                 })
             }
         }
+    }
+    
+    func photosList(at indexPath: IndexPath) -> [String] {
+        guard let item = dataSource?.sections[safe: indexPath.section]?.items[safe: indexPath.item] else {
+            return []
+        }
+        switch item {
+        case .notification(let model):
+            return model.photos ?? []
+        }
+    }
+    
+    func onNotificationPhotoTap(at indexPath: IndexPath) {
+        
     }
     
     

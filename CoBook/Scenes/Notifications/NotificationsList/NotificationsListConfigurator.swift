@@ -29,3 +29,36 @@ struct NotificationsListConfigurator: TableCellConfiguratorType {
     func registerCells(in tableView: UITableView) {}
     
 }
+
+extension NotificationsListPresenter {
+    
+    var configurator: NotificationsListConfigurator {
+        get {
+            let notificationItemConfigurator = TableCellConfigurator { [weak self] (cell, model: NotificationsList.Model, tableView, indexPath) -> NotificationItemTableViewCell in
+                cell.titleLabel.text = model.title
+                cell.bodyLabel.text = model.body
+                cell.associatedIndexPath = indexPath
+                cell.delegate = self?.view
+                cell.dataSource = self?.view
+                cell.photosCollectionView.reloadData()
+                
+                if let date = model.createdAt {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "dd.MM.yyyy"
+                    cell.dateLabel.text = formatter.string(from: date)
+                } else {
+                    cell.dateLabel.text = ""
+                }
+                return cell
+            }
+            
+            let configurator = NotificationsListConfigurator(notificationItemConfigurator: notificationItemConfigurator)
+            return configurator
+        }
+    }
+    
+}
+
+
+
+

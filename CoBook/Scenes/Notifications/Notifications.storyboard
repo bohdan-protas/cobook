@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -20,22 +20,22 @@
             <objects>
                 <viewController storyboardIdentifier="NotificationsListViewController" id="S6U-iG-MbX" customClass="NotificationsListViewController" customModule="CoBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yvt-w8-sYT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="agt-O3-Z1Y">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" name="Theme_Gray-Background"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationItemTableViewCell" rowHeight="260" id="HaJ-0b-pZh" customClass="NotificationItemTableViewCell" customModule="CoBook" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="260"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="260"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HaJ-0b-pZh" id="aMb-L0-Ait">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plv-Fy-qi0" userLabel="Container View">
-                                                    <rect key="frame" x="16" y="20" width="382" height="216"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plv-Fy-qi0" userLabel="Container View">
+                                                    <rect key="frame" x="16" y="20" width="343" height="216"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cobook_logo" translatesAutoresizingMaskIntoConstraints="NO" id="G7F-qL-rZR" customClass="DesignableImageView" customModule="CoBook" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -51,10 +51,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="TBV-bs-hz9">
-                                                            <rect key="frame" x="64" y="0.0" width="318" height="216"/>
+                                                            <rect key="frame" x="64" y="0.0" width="279" height="216"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8N-Yn-Edx" userLabel="Title Label">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="318" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="279" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="24" id="yYb-Li-U7k"/>
                                                                     </constraints>
@@ -62,56 +62,61 @@
                                                                     <color key="textColor" name="Theme_Black-Middle"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNZ-WU-ECg" userLabel="Images Container">
-                                                                    <rect key="frame" x="0.0" y="28" width="318" height="140"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3It-YB-LM5">
+                                                                    <rect key="frame" x="0.0" y="28" width="279" height="144"/>
                                                                     <subviews>
-                                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ewo-w5-ri4">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="318" height="140"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                            <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Izl-2t-d1E">
-                                                                                <size key="itemSize" width="303" height="137"/>
+                                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-LD-i8U">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="279" height="144"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="hWk-mk-psJ">
+                                                                                <size key="itemSize" width="140" height="140"/>
+                                                                                <size key="estimatedItemSize" width="1" height="1"/>
                                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                             </collectionViewFlowLayout>
                                                                             <cells>
-                                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NotificationItemImageCollectionViewCell" id="0RH-hD-xw9" customClass="NotificationItemImageCollectionViewCell" customModule="CoBook" customModuleProvider="target">
-                                                                                    <rect key="frame" x="7.5" y="0.0" width="303" height="137"/>
-                                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                    <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wje-Yt-I7i">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="303" height="137"/>
-                                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="NotificationItemImageCollectionViewCell" id="B1I-Yp-6CN" customClass="NotificationItemImageCollectionViewCell" customModule="CoBook" customModuleProvider="target">
+                                                                                    <rect key="frame" x="0.0" y="2" width="140" height="140"/>
+                                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                                    <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hKR-pE-hh9">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
+                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                         <subviews>
-                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W1X-HA-C6f">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="303" height="137"/>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ipp-oM-OSF">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                                                                             </imageView>
                                                                                         </subviews>
                                                                                         <constraints>
-                                                                                            <constraint firstItem="W1X-HA-C6f" firstAttribute="top" secondItem="wje-Yt-I7i" secondAttribute="top" id="FiA-lG-aAg"/>
-                                                                                            <constraint firstAttribute="trailing" secondItem="W1X-HA-C6f" secondAttribute="trailing" id="Imj-nQ-q5y"/>
-                                                                                            <constraint firstItem="W1X-HA-C6f" firstAttribute="leading" secondItem="wje-Yt-I7i" secondAttribute="leading" id="eoC-c7-TSQ"/>
-                                                                                            <constraint firstAttribute="bottom" secondItem="W1X-HA-C6f" secondAttribute="bottom" id="sNJ-GL-H0K"/>
+                                                                                            <constraint firstItem="Ipp-oM-OSF" firstAttribute="top" secondItem="hKR-pE-hh9" secondAttribute="top" id="3eK-8r-K4P"/>
+                                                                                            <constraint firstItem="Ipp-oM-OSF" firstAttribute="leading" secondItem="hKR-pE-hh9" secondAttribute="leading" id="BUf-sH-f3M"/>
+                                                                                            <constraint firstAttribute="trailing" secondItem="Ipp-oM-OSF" secondAttribute="trailing" id="b1K-T8-hg4"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="Ipp-oM-OSF" secondAttribute="bottom" id="sbn-la-Gxe"/>
                                                                                         </constraints>
                                                                                     </collectionViewCellContentView>
-                                                                                    <size key="customSize" width="303" height="137"/>
                                                                                     <connections>
-                                                                                        <outlet property="mainImageView" destination="W1X-HA-C6f" id="nWC-jV-nEI"/>
+                                                                                        <outlet property="mainImageView" destination="Ipp-oM-OSF" id="Pl2-Ot-E7O"/>
                                                                                     </connections>
                                                                                 </collectionViewCell>
                                                                             </cells>
                                                                         </collectionView>
+                                                                        <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="HHN-dy-tUG">
+                                                                            <rect key="frame" x="104" y="107" width="71" height="37"/>
+                                                                        </pageControl>
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="Ewo-w5-ri4" secondAttribute="trailing" id="Cft-Ip-BhY"/>
-                                                                        <constraint firstAttribute="width" secondItem="eNZ-WU-ECg" secondAttribute="height" multiplier="273:120" id="DVz-Ez-hco"/>
-                                                                        <constraint firstItem="Ewo-w5-ri4" firstAttribute="leading" secondItem="eNZ-WU-ECg" secondAttribute="leading" id="VhC-5a-1gT"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="Ewo-w5-ri4" secondAttribute="bottom" id="eNR-8C-D7S"/>
-                                                                        <constraint firstItem="Ewo-w5-ri4" firstAttribute="top" secondItem="eNZ-WU-ECg" secondAttribute="top" id="ma8-fr-55J"/>
+                                                                        <constraint firstItem="HHN-dy-tUG" firstAttribute="centerX" secondItem="3It-YB-LM5" secondAttribute="centerX" id="43c-di-QrN"/>
+                                                                        <constraint firstItem="aLB-LD-i8U" firstAttribute="top" secondItem="3It-YB-LM5" secondAttribute="top" id="HcW-40-Kjx"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="aLB-LD-i8U" secondAttribute="bottom" id="I4t-0e-Qws"/>
+                                                                        <constraint firstAttribute="width" secondItem="3It-YB-LM5" secondAttribute="height" multiplier="31:16" id="UHi-Ju-Hma"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="HHN-dy-tUG" secondAttribute="bottom" id="n9g-DS-Usa"/>
+                                                                        <constraint firstItem="aLB-LD-i8U" firstAttribute="leading" secondItem="3It-YB-LM5" secondAttribute="leading" id="oEu-tY-sfl"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="aLB-LD-i8U" secondAttribute="trailing" id="uUx-6x-lSc"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duf-EH-tBL" userLabel="Body Label">
-                                                                    <rect key="frame" x="0.0" y="172" width="318" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="176" width="279" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="b0z-9A-6Re"/>
                                                                     </constraints>
@@ -120,7 +125,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2L-x6-36r" userLabel="Date Label">
-                                                                    <rect key="frame" x="0.0" y="200" width="318" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="200" width="279" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="FBB-SW-qyB"/>
                                                                     </constraints>
@@ -153,7 +158,8 @@
                                             <outlet property="avatarImageView" destination="G7F-qL-rZR" id="4Z0-nr-yu3"/>
                                             <outlet property="bodyLabel" destination="duf-EH-tBL" id="Owg-Cn-Kc8"/>
                                             <outlet property="dateLabel" destination="h2L-x6-36r" id="uRB-rP-h7Y"/>
-                                            <outlet property="imagesListCollectionView" destination="Ewo-w5-ri4" id="NbC-jY-Pgx"/>
+                                            <outlet property="pageControl" destination="HHN-dy-tUG" id="n0B-IC-BEc"/>
+                                            <outlet property="photosCollectionView" destination="aLB-LD-i8U" id="NQI-XB-eFd"/>
                                             <outlet property="titleLabel" destination="B8N-Yn-Edx" id="rkx-oL-82D"/>
                                         </connections>
                                     </tableViewCell>

@@ -54,6 +54,17 @@ extension NotificationsListViewController: UITableViewDelegate {
 // MARK: - NotificationsListView
 
 extension NotificationsListViewController: NotificationsListView {
+
+    func notificationItemCell(_ cell: NotificationItemTableViewCell, didSelectedSocialItem item: Social.ListItem) {
+
+    }
+    
+    func photosList(_ cell: NotificationItemTableViewCell, associatedIndexPath: IndexPath?) -> [String] {
+        guard let indexPath = associatedIndexPath else {
+            return []
+        }
+        return presenter.photosList(at: indexPath)
+    }
     
     func set(dataSource: TableDataSource<NotificationsListConfigurator>?) {
         dataSource?.connect(to: tableView)
@@ -65,3 +76,6 @@ extension NotificationsListViewController: NotificationsListView {
     
     
 }
+
+
+

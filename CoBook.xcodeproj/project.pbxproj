@@ -912,26 +912,10 @@
 		6D041A6724C864B900DBB80E /* views */ = {
 			isa = PBXGroup;
 			children = (
-				6D041A6B24C8662500DBB80E /* NotificationItemImageCollectionViewCell */,
-				6D041A6824C864BF00DBB80E /* NotificationItemTableViewCell */,
-			);
-			path = views;
-			sourceTree = "<group>";
-		};
-		6D041A6824C864BF00DBB80E /* NotificationItemTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
 				6D041A6924C864E000DBB80E /* NotificationItemTableViewCell.swift */,
-			);
-			path = NotificationItemTableViewCell;
-			sourceTree = "<group>";
-		};
-		6D041A6B24C8662500DBB80E /* NotificationItemImageCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
 				6D041A6C24C8664600DBB80E /* NotificationItemImageCollectionViewCell.swift */,
 			);
-			path = NotificationItemImageCollectionViewCell;
+			path = views;
 			sourceTree = "<group>";
 		};
 		6D23D65E24C712C4009E51EE /* Supporting FIles */ = {
