@@ -15,6 +15,7 @@
 "Tabbar.allCards.title" = "Все визитки";
 "Tabbar.account.title" = "Аккаунт";
 "Tabbar.saved.title" = "Сохраненные";
+"Tabbar.notifications.title" = "Оповещения";
 
 "AlertAction.Save" = "Сохранить";
 "AlertAction.Unsave" = "Удалить их сохраненных";
@@ -393,3 +394,6 @@
 
 // MARK: - CardDetails description
 "Card.DetailsDescription.title" = "Детальное описание";
+
+// MARK: - Notifications List
+"NotificationsList.title" = "Оповещения";

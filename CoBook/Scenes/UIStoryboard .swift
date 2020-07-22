@@ -37,6 +37,10 @@ extension UIStoryboard {
     static var financies: UIStoryboard {
         return UIStoryboard(name: "Financies", bundle: nil)
     }
+    
+    static var notifications: UIStoryboard {
+        return UIStoryboard(name: "Notifications", bundle: nil)
+    }
 
 
 }

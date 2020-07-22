@@ -16,10 +16,25 @@ class NotificationsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupLayout()
         // Do any additional setup after loading the view.
     }
     
+
+}
+
+// MARK: - Privates
+
+private extension NotificationsListViewController {
+
+    func setupLayout() {
+//        self.tableView.delegate = self
+//        self.tableView.refreshControl = refreshControl
+        self.navigationItem.title = "NotificationsList.title".localized
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
+    }
+
 
 }
 

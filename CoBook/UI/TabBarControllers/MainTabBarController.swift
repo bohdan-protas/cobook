@@ -11,21 +11,37 @@ import FirebaseDynamicLinks
 
 class MainTabBarController: UITabBarController {
 
+    lazy var allCardsController: UIViewController = {
+        let allCardsController: CardsOverviewNavigationController = UIStoryboard.allCards.initiateViewControllerFromType()
+        allCardsController.tabBarItem = UITabBarItem(title: "Tabbar.allCards.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_allcards_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_allcards_active"))
+        return allCardsController
+    }()
+    
+    lazy var savedContentController: UIViewController = {
+        let savedContentController: SavedContentNavigationController = UIStoryboard.saved.initiateViewControllerFromType()
+        savedContentController.tabBarItem = UITabBarItem(title: "Tabbar.saved.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_saved_unactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_saved_active"))
+        return savedContentController
+    }()
+    
+    lazy var notificationsController: UIViewController = {
+        let notificationsListController: NotificationsListViewController = UIStoryboard.notifications.initiateViewControllerFromType()
+        let notificationsNavigation = CustomNavigationController(rootViewController: notificationsListController)
+        notificationsNavigation.tabBarItem = UITabBarItem(title: "Tabbar.notifications.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_notifications_unactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_notifications_active"))
+        return notificationsNavigation
+    }()
+    
+    lazy var accountController: UIViewController = {
+        let accountController: AccountNavigationController = UIStoryboard.account.initiateViewControllerFromType()
+        accountController.tabBarItem = UITabBarItem(title: "Tabbar.account.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_account_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_account_active"))
+        return accountController
+    }()
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let allCardsController: CardsOverviewNavigationController = UIStoryboard.allCards.initiateViewControllerFromType()
-        allCardsController.tabBarItem = UITabBarItem(title: "Tabbar.allCards.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_allcards_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_allcards_active"))
-
-        let savedContentController: SavedContentNavigationController = UIStoryboard.saved.initiateViewControllerFromType()
-        savedContentController.tabBarItem = UITabBarItem(title: "Tabbar.saved.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_saved_unactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_saved_active"))
-
-        let accountController: AccountNavigationController = UIStoryboard.account.initiateViewControllerFromType()
-        accountController.tabBarItem = UITabBarItem(title: "Tabbar.account.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_account_inactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_account_active"))
-
-        self.viewControllers = [allCardsController, savedContentController, accountController]
+        self.viewControllers = [allCardsController, savedContentController, notificationsController, accountController]
         self.selectedViewController = allCardsController
 
         // If pending dynamic link exists - its time to show it
@@ -37,7 +53,7 @@ class MainTabBarController: UITabBarController {
     // MARK: - Dynamic link handling
 
     func handleDynamicLink(_ dynamicLink: DynamicLink) {
-        // clear the current pending state url
+        // clear the current pending state
         AppStorage.State.pendingDynamicLink = nil
 
         // regognize contoller to push from dynamic link
@@ -60,6 +76,13 @@ class MainTabBarController: UITabBarController {
         }
     }
     
+    // MARK: - Notification tap handling
+    
+    func handleNofitication() {
+        Log.debug("Handle notifications tap")
+        self.selectedViewController = notificationsController
+    }
+    
 
 }
 
@@ -73,7 +96,7 @@ private extension MainTabBarController {
         if let rootController = currentControllersStack?.first {
             currentNavigationController?.setViewControllers([rootController, recognizedController], animated: true)
         } else {
-            Log.error("Current dynamic links")
+            Log.error("Cannot define current contollers stack")
         }
     }
 

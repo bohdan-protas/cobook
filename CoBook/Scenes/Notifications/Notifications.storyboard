@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +22,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Theme_Gray-Background"/>
                         <constraints>
                             <constraint firstItem="agt-O3-Z1Y" firstAttribute="trailing" secondItem="LHe-1R-9Sw" secondAttribute="trailing" id="CJs-73-3jn"/>
                             <constraint firstItem="agt-O3-Z1Y" firstAttribute="bottom" secondItem="LHe-1R-9Sw" secondAttribute="bottom" id="SIo-zS-8ZP"/>
@@ -39,4 +40,9 @@
             <point key="canvasLocation" x="-117.39130434782609" y="138.61607142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Theme_Gray-Background">
+            <color red="0.96899998188018799" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

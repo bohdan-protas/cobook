@@ -1568,6 +1568,7 @@
 		B824D14F246B123800911629 /* SavedContent */ = {
 			isa = PBXGroup;
 			children = (
+				B824D152246B134300911629 /* SavedContentNavigationController.swift */,
 				B82B6B8A246E8C1A0041134F /* views */,
 				B824D150246B127200911629 /* SavedContentViewController.swift */,
 				B8205C2F246D8FBE003C39F4 /* SavedContentPresenter.swift */,
@@ -1793,7 +1794,6 @@
 			isa = PBXGroup;
 			children = (
 				B82200BB240FB99D00A17D2C /* AccountNavigationController.swift */,
-				B824D152246B134300911629 /* SavedContentNavigationController.swift */,
 				B824924F243DE79B00A1AC39 /* CardsOverviewNavigationController.swift */,
 				B82200B5240FB84B00A17D2C /* TabBarControllers */,
 				B8255A1C243A264E00C4169D /* Search */,

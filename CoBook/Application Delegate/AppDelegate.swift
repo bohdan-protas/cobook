@@ -98,7 +98,8 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
-        // TODO: Handle background data of notification
+        
+        (window?.rootViewController as? MainTabBarController)?.handleNofitication()
     }
     
     func application(_ application: UIApplication,
@@ -111,6 +112,8 @@ extension AppDelegate: UIApplicationDelegate {
             Log.debug("Message ID: \(messageID)")
         }
         Log.info(userInfo)
+        
+        (window?.rootViewController as? MainTabBarController)?.handleNofitication()
     }
     
     func application(_ application: UIApplication,
@@ -153,7 +156,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         guard response.actionIdentifier == UNNotificationDefaultActionIdentifier else {
             return
         }
-        
+        (window?.rootViewController as? MainTabBarController)?.handleNofitication()
     }
 
     // Foreground notification handler
