@@ -97,8 +97,6 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        
-        
         (window?.rootViewController as? MainTabBarController)?.handleNofitication()
     }
     
@@ -107,12 +105,6 @@ extension AppDelegate: UIApplicationDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         defer { completionHandler(UIBackgroundFetchResult.newData) }
-        
-        if let messageID = userInfo["gcm.message_id"] {
-            Log.debug("Message ID: \(messageID)")
-        }
-        Log.info(userInfo)
-        
         (window?.rootViewController as? MainTabBarController)?.handleNofitication()
     }
     

@@ -79,7 +79,7 @@ class MainTabBarController: UITabBarController {
     // MARK: - Notification tap handling
     
     func handleNofitication() {
-        Log.debug("Handle notifications tap")
+        Log.debug("Handled notifications tap")
         self.selectedViewController = notificationsController
     }
     
