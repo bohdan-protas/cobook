@@ -10,24 +10,22 @@ import UIKit
 
 struct NotificationsListConfigurator: TableCellConfiguratorType {
 
-    //let cardHistoryPreviewCellConfigurator: TableCellConfigurator<LeaderboardStatAPIModel, CardPreviewTableViewCell>
+    let notificationItemConfigurator: TableCellConfigurator<NotificationsList.Model, NotificationItemTableViewCell>
     
     func reuseIdentifier(for item: NotificationsList.Item, indexPath: IndexPath) -> String {
         switch item {
         case .notification:
-            return ""
+            return notificationItemConfigurator.reuseIdentifier
         }
     }
 
     func configuredCell(for item: NotificationsList.Item, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         switch item {
         case .notification(let model):
-            return UITableViewCell()
+            return notificationItemConfigurator.configuredCell(for: model, tableView: tableView, indexPath: indexPath)
         }
     }
     
-    func registerCells(in tableView: UITableView) {
-        
-    }
+    func registerCells(in tableView: UITableView) {}
     
 }

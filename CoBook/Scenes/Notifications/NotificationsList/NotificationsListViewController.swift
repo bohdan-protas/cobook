@@ -11,7 +11,6 @@ import UIKit
 class NotificationsListViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
-    
     var presenter: NotificationsListPresenter = NotificationsListPresenter()
     
     // MARK: - Lifecycle
@@ -57,7 +56,11 @@ extension NotificationsListViewController: UITableViewDelegate {
 extension NotificationsListViewController: NotificationsListView {
     
     func set(dataSource: TableDataSource<NotificationsListConfigurator>?) {
-        
+        dataSource?.connect(to: tableView)
+    }
+    
+    func reload() {
+        tableView.reloadData()
     }
     
     

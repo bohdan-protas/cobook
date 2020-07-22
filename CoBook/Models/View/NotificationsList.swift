@@ -16,8 +16,9 @@ enum NotificationsList {
     
     struct Model {
         var id: Int?
+        var title: String?
+        var body: String?
         var createdAt: Date?
-        var isRead: Bool = false
         var creator: CardCreatorApiModel?
         var photos: [String]?
     }

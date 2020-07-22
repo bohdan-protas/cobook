@@ -6,30 +6,36 @@
 //  Copyright © 2020 CoBook. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol NotificationsListView: class, AlertDisplayableView, LoadDisplayableView {
     func set(dataSource: TableDataSource<NotificationsListConfigurator>?)
+    func reload()
 }
 
 class NotificationsListPresenter: BasePresenter {
     
     weak var view: NotificationsListView?
+    
     private var dataSource: TableDataSource<NotificationsListConfigurator>?
+    private var notifications: [NotificationsList.Model] = []
     
     // MARK: - Initializators
     
     init() {
-//        let cardHistoryPreviewCellConfigurator = TableCellConfigurator { (cell, model: LeaderboardStatAPIModel, tableView, indexPath) -> CardPreviewTableViewCell in
-//            let nameAbbr = "\(model.firstName?.first?.uppercased() ?? "") \(model.lastName?.first?.uppercased() ?? "")"
-//            let textPlaceholderImage = nameAbbr.image(size: cell.titleImageView.frame.size)
-//            cell.titleImageView.setImage(withPath: model.avatar?.sourceUrl, placeholderImage: textPlaceholderImage)
-//            cell.titleLabel.text = "\(model.firstName ?? "") \(model.lastName ?? "")"
-//            cell.detailLabel.isHidden = false
-//            cell.detailLabel.text = "+\(model.score ?? 0)"
-//            return cell
-//        }
-        let configurator = NotificationsListConfigurator()
+        let notificationItemConfigurator = TableCellConfigurator { (cell, model: NotificationsList.Model, tableView, indexPath) -> NotificationItemTableViewCell in
+            cell.titleLabel.text = model.title
+            cell.bodyLabel.text = model.body
+            if let date = model.createdAt {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd.MM.yyyy"
+                cell.dateLabel.text = formatter.string(from: date)
+            } else {
+                cell.dateLabel.text = ""
+            }
+            return cell
+        }
+        let configurator = NotificationsListConfigurator(notificationItemConfigurator: notificationItemConfigurator)
         self.dataSource = TableDataSource(sections: [], configurator: configurator)
     }
     
@@ -37,6 +43,7 @@ class NotificationsListPresenter: BasePresenter {
     
     func attachView(_ view: NotificationsListView) {
         self.view = view
+        view.set(dataSource: dataSource)
     }
     
     func detachView() {
@@ -46,33 +53,44 @@ class NotificationsListPresenter: BasePresenter {
     // MARK: - Public
     
     func setup() {
+        view?.startLoading()
         APIClient.default.getNofificationsList(limit: 0, offset: 15) { [weak self] (result) in
             guard let self = self else { return }
+            self.view?.stopLoading()
             switch result {
             case .success(let list):
-                break
+                self.notifications = (list ?? []).compactMap {
+                    NotificationsList.Model(
+                        id: $0.id,
+                        title: $0.title,
+                        body: $0.body,
+                        createdAt: $0.createdAt,
+                        creator: $0.createdBy,
+                        photos: $0.photos?.compactMap { $0.sourceUrl }
+                    )
+                }
+                self.updateViewLayout()
+                self.view?.reload()
             case .failure(let error):
-                self.view?.errorAlert(message: error.localizedDescription)
+                self.view?.stopLoading(success: false, completion: {
+                    self.view?.errorAlert(message: error.localizedDescription)
+                })
             }
         }
     }
+    
     
 }
 
 // MARK: - Privates
 
-private extension FinanceStatisticsPresenter {
+private extension NotificationsListPresenter {
     
     func updateViewLayout() {
-//        view?.set(appDownloaderCount: self.numberOfAppDownloadingCount)
-//        view?.set(businessAccountCreatedCount: self.numberOfBusinessAccountCreatingCount)
-//
-//        var cardRatingSection = Section<FinanceStatistics.Item>(accessoryIndex: FinanceStatistics.Section.rating.rawValue, items: [])
-//        cardRatingSection.items = ratingCardItems.compactMap {
-//            .ratingItem(model: $0)
-//        }
-//        dataSource?.sections = [cardRatingSection]
-        
+        let notificationsSection = Section<NotificationsList.Item>(
+            items: notifications.compactMap { .notification(model: $0) }
+        )
+        dataSource?.sections = [notificationsSection]
     }
     
     

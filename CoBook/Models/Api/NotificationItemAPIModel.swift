@@ -12,17 +12,17 @@ struct NotificationItemAPIModel: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case id
+        case title
         case body
         case createdAt = "created_at"
-        case isRead = "read"
         case createdBy = "created_by"
         case photos = "attachments"
     }
     
     var id: Int?
+    var title: String?
     var body: String?
     var createdAt: Date?
-    var isRead: Bool = false
     var createdBy: CardCreatorApiModel?
     var photos: [FileDataApiModel]?
         
