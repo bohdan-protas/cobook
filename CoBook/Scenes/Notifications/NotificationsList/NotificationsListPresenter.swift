@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol NotificationsListView: class {
+protocol NotificationsListView: class, AlertDisplayableView, LoadDisplayableView {
     func set(dataSource: TableDataSource<NotificationsListConfigurator>?)
 }
 
@@ -46,7 +46,15 @@ class NotificationsListPresenter: BasePresenter {
     // MARK: - Public
     
     func setup() {
-        
+        APIClient.default.getNofificationsList(limit: 0, offset: 15) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let list):
+                break
+            case .failure(let error):
+                self.view?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
     
 }

@@ -97,6 +97,7 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        
         (window?.rootViewController as? MainTabBarController)?.handleNofitication()
     }
     

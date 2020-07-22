@@ -8,16 +8,24 @@
 
 import UIKit
 
-class NotificationsListViewController: UIViewController {
+class NotificationsListViewController: BaseViewController {
 
     @IBOutlet var tableView: UITableView!
+    
+    var presenter: NotificationsListPresenter = NotificationsListPresenter()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        // Do any additional setup after loading the view.
+        
+        presenter.attachView(self)
+        presenter.setup()
+    }
+    
+    deinit {
+        presenter.detachView()
     }
     
 
@@ -28,7 +36,7 @@ class NotificationsListViewController: UIViewController {
 private extension NotificationsListViewController {
 
     func setupLayout() {
-//        self.tableView.delegate = self
+        self.tableView.delegate = self
 //        self.tableView.refreshControl = refreshControl
         self.navigationItem.title = "NotificationsList.title".localized
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -36,6 +44,12 @@ private extension NotificationsListViewController {
     }
 
 
+}
+
+// MARK: - UITableViewDelegate
+
+extension NotificationsListViewController: UITableViewDelegate {
+    
 }
 
 // MARK: - NotificationsListView
