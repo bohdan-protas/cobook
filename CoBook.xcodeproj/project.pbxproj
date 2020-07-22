@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D23D66124C713E8009E51EE /* AppDelegate + Appearence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D23D66024C713E8009E51EE /* AppDelegate + Appearence.swift */; };
 		6D3E467624AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467524AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift */; };
 		6D3E467824AE16AC005FF2CF /* FinanceStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */; };
 		6D3E467A24AE16CE005FF2CF /* FinanceHistoryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */; };
@@ -16,6 +17,7 @@
 		6D48C6F424A0F57100594632 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D48C6F324A0F57100594632 /* QRCodeViewController.swift */; };
 		6D513BA724A502A500FD89C2 /* PartnershipInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */; };
 		6D513BA924A5038500FD89C2 /* PartnershipInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */; };
+		6D54955D24C74726004EB12A /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54955C24C74726004EB12A /* NotificationDelegate.swift */; };
 		6D6EF0C924ABACB900E6E776 /* FinanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6EF0C824ABACB900E6E776 /* FinanceStatisticsViewController.swift */; };
 		6D6EF0CB24ABACD400E6E776 /* FinanceStatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6EF0CA24ABACD400E6E776 /* FinanceStatisticsPresenter.swift */; };
 		6D6EF0CE24ABB01300E6E776 /* FinanceStatisticsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6EF0CD24ABB01300E6E776 /* FinanceStatisticsHeaderView.xib */; };
@@ -437,6 +439,7 @@
 
 /* Begin PBXFileReference section */
 		5EAA0B323D42D9D8EC7633F5 /* Pods-CoBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoBook.debug.xcconfig"; path = "Target Support Files/Pods-CoBook/Pods-CoBook.debug.xcconfig"; sourceTree = "<group>"; };
+		6D23D66024C713E8009E51EE /* AppDelegate + Appearence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate + Appearence.swift"; sourceTree = "<group>"; };
 		6D3E467524AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatisticsConfigurator.swift; sourceTree = "<group>"; };
 		6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatistics.swift; sourceTree = "<group>"; };
 		6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceHistoryItemModel.swift; sourceTree = "<group>"; };
@@ -446,6 +449,7 @@
 		6D48C6F324A0F57100594632 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		6D513BA624A502A500FD89C2 /* PartnershipInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoViewController.swift; sourceTree = "<group>"; };
 		6D513BA824A5038400FD89C2 /* PartnershipInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnershipInfoPresenter.swift; sourceTree = "<group>"; };
+		6D54955C24C74726004EB12A /* NotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
 		6D6EF0C824ABACB900E6E776 /* FinanceStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatisticsViewController.swift; sourceTree = "<group>"; };
 		6D6EF0CA24ABACD400E6E776 /* FinanceStatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatisticsPresenter.swift; sourceTree = "<group>"; };
 		6D6EF0CD24ABB01300E6E776 /* FinanceStatisticsHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceStatisticsHeaderView.xib; sourceTree = "<group>"; };
@@ -774,7 +778,7 @@
 		B870198423ED50EA00625D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B870198D23ED50EC00625D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B870199023ED50EC00625D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B870199223ED50EC00625D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = CoBook/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
+		B870199223ED50EC00625D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "CoBook/Supporting FIles/Info.plist"; sourceTree = SOURCE_ROOT; };
 		B881A47C2400590400D0C9EA /* OnboardingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataManager.swift; sourceTree = "<group>"; };
 		B884AAE0245F720D00ACC0D7 /* PhotosPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosPlaceholderView.xib; sourceTree = "<group>"; };
 		B884AAE2245F722800ACC0D7 /* PhotosPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPlaceholderView.swift; sourceTree = "<group>"; };
@@ -887,6 +891,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D23D65E24C712C4009E51EE /* Supporting FIles */ = {
+			isa = PBXGroup;
+			children = (
+				B84B94E9240329D50007EB60 /* Constants.swift */,
+				B8B7FB9A2476B92900D19C5E /* GoogleService-Info.plist */,
+				B870199223ED50EC00625D61 /* Info.plist */,
+			);
+			path = "Supporting FIles";
+			sourceTree = "<group>";
+		};
+		6D23D65F24C713CB009E51EE /* Application Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				B870198423ED50EA00625D61 /* AppDelegate.swift */,
+				6D23D66024C713E8009E51EE /* AppDelegate + Appearence.swift */,
+			);
+			path = "Application Delegate";
+			sourceTree = "<group>";
+		};
 		6D3E467F24AE55BA005FF2CF /* CreateCardDetailDescription */ = {
 			isa = PBXGroup;
 			children = (
@@ -1301,8 +1324,6 @@
 		B823AB6923F156C600DE13EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B870199223ED50EC00625D61 /* Info.plist */,
-				B8B7FB9A2476B92900D19C5E /* GoogleService-Info.plist */,
 				B8AB83F12428280D0041B879 /* MockupData */,
 				B82573FD23F561D100C8CBF8 /* Fonts */,
 				B870198D23ED50EC00625D61 /* Assets.xcassets */,
@@ -1662,6 +1683,7 @@
 				B824AD7F2445FAE700410C23 /* ImagePicker.swift */,
 				B83050AA247BC87E0060D9BE /* DynamicLinkCoordinatorService.swift */,
 				6DF6606624A376CC00E078DF /* PaymentService.swift */,
+				6D54955C24C74726004EB12A /* NotificationDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1669,6 +1691,7 @@
 		B826B0F323F45ED8009041DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B850DA1A2486768F002D8F99 /* Property Wrappers */,
 				B825FC41247ED02E00DB035D /* PaginationPage.swift */,
 				B84B94F224033B030007EB60 /* Api */,
 				B8359CD7241ECE570080263E /* View */,
@@ -2141,12 +2164,10 @@
 			isa = PBXGroup;
 			children = (
 				B8B7FB992476B1A300D19C5E /* CoBook.entitlements */,
-				B870198423ED50EA00625D61 /* AppDelegate.swift */,
-				B84B94E9240329D50007EB60 /* Constants.swift */,
+				6D23D65F24C713CB009E51EE /* Application Delegate */,
 				B8DFB744248FB90400924838 /* Core */,
 				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
-				B850DA1A2486768F002D8F99 /* Property Wrappers */,
 				B826B0F023F45973009041DD /* Services */,
 				B8298805248159C000E6838B /* Localization */,
 				B8307F1F2406FED000AFE578 /* Persistance */,
@@ -2154,6 +2175,7 @@
 				B826B0F323F45ED8009041DD /* Models */,
 				B82A2118242135C200D0D9F5 /* UI */,
 				B823AB6A23F156D600DE13EA /* Scenes */,
+				6D23D65E24C712C4009E51EE /* Supporting FIles */,
 				B823AB6923F156C600DE13EA /* Resources */,
 			);
 			path = CoBook;
@@ -2952,6 +2974,7 @@
 				B8CB0E7C24053E6B00AF431B /* KeychainItemAccessibility.swift in Sources */,
 				B8249247243DE64A00A1AC39 /* CardsOverviewPresenter.swift in Sources */,
 				B8AB840C242845380041B879 /* PersonalCardDetails.swift in Sources */,
+				6D23D66124C713E8009E51EE /* AppDelegate + Appearence.swift in Sources */,
 				B83050AD247C391C0060D9BE /* URL + Extensions.swift in Sources */,
 				6D3E467624AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift in Sources */,
 				B823A6C023FDE244007540D0 /* SignInViewController.swift in Sources */,
@@ -3087,6 +3110,7 @@
 				B824E1B224378B530091C491 /* CreatePersonalCardDataSourceConfigurator.swift in Sources */,
 				B825742E23F592F600C8CBF8 /* SignUpViewController.swift in Sources */,
 				B8249245243DE63B00A1AC39 /* CardsOverviewViewController.swift in Sources */,
+				6D54955D24C74726004EB12A /* NotificationDelegate.swift in Sources */,
 				B828E3442473CEFD00032C88 /* ChangePasswordViewController.swift in Sources */,
 				B823A6AD23FD3924007540D0 /* RegularExpression.swift in Sources */,
 				B870198523ED50EA00625D61 /* AppDelegate.swift in Sources */,
@@ -3276,7 +3300,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = CoBook/Resources/Info.plist;
+				INFOPLIST_FILE = "CoBook/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3303,7 +3327,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = CoBook/Resources/Info.plist;
+				INFOPLIST_FILE = "CoBook/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -11,11 +11,10 @@ import Foundation
 extension Notification.Name {
     static let cardSaved: Notification.Name = Notification.Name("saveCardNotificationName")
     static let cardUnsaved: Notification.Name = Notification.Name("unsaveCardNotificationName")
-
     static let articleSaved: Notification.Name = Notification.Name("saveArticleNotificationName")
     static let articleUnsaved: Notification.Name = Notification.Name("unsaveArticleNotificationName")
-
     static let profideDataUpdated: Notification.Name = Notification.Name("profideDataUpdatedNotificationName")
+    static let fcmTokenUpdated: Notification.Name = Notification.Name("FCMTokenNotificationName")
 }
 
 extension Notification {
@@ -24,6 +23,7 @@ extension Notification {
         static let controllerID: String = "controllerID"
         static let cardID: String = "cardID"
         static let articleID: String = "articleID"
+        static let fcmToken: String = "fcmToken"
     }
 
 }

@@ -52,9 +52,9 @@ extension AlbumPreviewItemsTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumPreviewItemCollectionViewCell.identifier, for: indexPath) as! AlbumPreviewItemCollectionViewCell
         if let dataSourceItem = dataSource?.albumPreviewItemsView(self, dataSourceID: dataSourceID)[safe: indexPath.item] {
             switch dataSourceItem {
-            case .add(let model):
-                cell.titleImageView.setImage(withPath: model.imagePath)
-                cell.textLabel.text = model.title
+            case .add(let title, let imagePath):
+                cell.titleImageView.setImage(withPath: imagePath)
+                cell.textLabel.text = title
                 cell.textLabel.textColor = UIColor.Theme.greenDark
                 cell.addItemIndicator.isHidden = false
             case .view(let model):
