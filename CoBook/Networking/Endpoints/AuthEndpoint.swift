@@ -14,7 +14,8 @@ enum AuthEndpoint: EndpointConfigurable {
     case refresh(refreshToken: String)
     case changeCredengials(parameters: APIRequestParameters.Auth.Credentials)
     case logout
-
+    case updateDeviceToken(fcmToken: String)
+    
     // MARK: - Auth token usage
     
     var useAuthirizationToken: Bool {
@@ -22,6 +23,8 @@ enum AuthEndpoint: EndpointConfigurable {
         case .forgotPassword, .refresh:
             return false
         case .changeCredengials, .logout:
+            return true
+        case .updateDeviceToken:
             return true
         }
     }
@@ -38,6 +41,8 @@ enum AuthEndpoint: EndpointConfigurable {
             return .put
         case .logout:
             return .post
+        case .updateDeviceToken:
+            return .patch
         }
     }
 
@@ -53,6 +58,8 @@ enum AuthEndpoint: EndpointConfigurable {
             return "/credentials"
         case .logout:
             return "/logout"
+        case .updateDeviceToken:
+            return "/devices"
         }
     }
 
@@ -74,6 +81,11 @@ enum AuthEndpoint: EndpointConfigurable {
         case .changeCredengials(let parameters):
             return parameters.dictionary
 
+        case .updateDeviceToken(let fcmToken):
+            return [
+                "fcm_token": fcmToken
+            ]
+            
         default: return nil
 
         }

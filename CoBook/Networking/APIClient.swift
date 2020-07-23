@@ -289,6 +289,20 @@ extension APIClient {
         let endpoint = AuthEndpoint.logout
         return performRequest(endpoint: endpoint, completion: completion)
     }
+    
+    /**
+     Request for logout
+
+     - parameters:
+        - fcmToken: Device token from firebase client server
+        - completion: void result response
+     */
+    @discardableResult
+    func updateDeviceToken(fcmToken: String, completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = AuthEndpoint.updateDeviceToken(fcmToken: fcmToken)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
 
 }
 
@@ -922,7 +936,6 @@ extension APIClient {
     
     @discardableResult
     func getCardBonusesStats(completion: @escaping (Result<[CardBonusApiModel]?>) -> Void) -> DataRequest {
-        
         let endpoint = BonusesEndpoint.getCardBonusesStats
         return performRequest(endpoint: endpoint, completion: completion)
     }
@@ -943,6 +956,28 @@ extension APIClient {
     func getUserBallace(completion: @escaping (Result<UserBallanceAPIModel?>) -> Void) -> DataRequest {
         let endpoint = BonusesEndpoint.getUserBallance
         return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    
+}
+
+// MARK: - News endpoint requests
+
+extension APIClient {
+    
+    @discardableResult
+    func getNofificationsList(limit: Int?,
+                              offset: Int?,
+                              completion: @escaping (Result<[NotificationItemAPIModel]?>) -> Void) -> DataRequest {
+        
+        let customFormatter = DateFormatter()
+        customFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(customFormatter)
+        
+        let endpoint = NewsEndpoint.getNewsRecord(limit: limit, offset: offset)
+        return performRequest(endpoint: endpoint, decoder: decoder, completion: completion)
     }
     
     

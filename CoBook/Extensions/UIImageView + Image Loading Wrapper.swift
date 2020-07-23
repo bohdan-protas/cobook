@@ -21,9 +21,10 @@ extension UIImageView {
             return
         }
         
+        
         let options = ImageLoadingOptions(
             placeholder: placeholderImage,
-            transition: .fadeIn(duration: 0.3)
+            contentModes: ImageLoadingOptions.ContentModes.init(success: .scaleAspectFill, failure: .scaleToFill, placeholder: .scaleAspectFit)
         )
         
         Nuke.loadImage(with: url, options: options, into: self, completion: completion)
@@ -36,7 +37,7 @@ extension UIImageView {
         
         let options = ImageLoadingOptions(
             placeholder: placeholderImage,
-            transition: .fadeIn(duration: 0.3)
+            contentModes: ImageLoadingOptions.ContentModes.init(success: .scaleAspectFill, failure: .scaleToFill, placeholder: .scaleAspectFit)
         )
         
         guard let url = url else {

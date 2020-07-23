@@ -15,6 +15,7 @@
 "Tabbar.allCards.title" = "All cards";
 "Tabbar.account.title" = "Account";
 "Tabbar.saved.title" = "Saved";
+"Tabbar.notifications.title" = "Notifications";
 
 "AlertAction.Save" = "Save";
 "AlertAction.Unsave" = "Delete from saved";
@@ -392,3 +393,6 @@
 
 // MARK: - CardDetails description
 "Card.DetailsDescription.title" = "Detail description";
+
+// MARK: - Notifications List
+"NotificationsList.title" = "Notifications";
