@@ -1723,6 +1723,7 @@
 		B826B0F023F45973009041DD /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B834BD672483FB620037C623 /* Localized.swift */,
 				6D949C5424C04CAC00593906 /* Favicon */,
 				B823A6AC23FD3924007540D0 /* RegularExpression.swift */,
 				B8CB0E8124057B1700AF431B /* ValidationManager.swift */,
@@ -1794,16 +1795,6 @@
 				B82A62A224753C520052D6B2 /* ChangePasswordCellsConfigurator.swift */,
 			);
 			path = ChangePassword;
-			sourceTree = "<group>";
-		};
-		B8298805248159C000E6838B /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				B834BD632483F8190037C623 /* Localizable.swift */,
-				B834BD672483FB620037C623 /* Localized.swift */,
-				B834BD652483F8450037C623 /* LocalizedKeyProvided.swift */,
-			);
-			path = Localization;
 			sourceTree = "<group>";
 		};
 		B82A2118242135C200D0D9F5 /* UI */ = {
@@ -2220,7 +2211,6 @@
 				B88906B523FFD4EA002E91F7 /* Protocols */,
 				B823AB6B23F156DE00DE13EA /* Extensions */,
 				B826B0F023F45973009041DD /* Services */,
-				B8298805248159C000E6838B /* Localization */,
 				B8307F1F2406FED000AFE578 /* Persistance */,
 				B823AB6C23F156EE00DE13EA /* Networking */,
 				B826B0F323F45ED8009041DD /* Models */,
@@ -2274,6 +2264,8 @@
 		B88906B523FFD4EA002E91F7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				B834BD652483F8450037C623 /* LocalizedKeyProvided.swift */,
+				B834BD632483F8190037C623 /* Localizable.swift */,
 				B84B94E72403299F0007EB60 /* EndpointConfigurable.swift */,
 				B8307F262406FFF300AFE578 /* AnyOptional.swift */,
 				B88906C1240020F4002E91F7 /* BasePresenter.swift */,
@@ -3356,7 +3348,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 55;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3383,7 +3375,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoBook/CoBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 55;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YN9JYF5WNS;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
