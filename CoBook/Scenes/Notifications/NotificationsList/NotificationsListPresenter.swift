@@ -34,8 +34,10 @@ class NotificationsListPresenter: BasePresenter {
     
     // MARK: - Public
     
-    func setup() {
-        view?.startLoading()
+    func fetchNotifications(usingLoader: Bool) {
+        if usingLoader {
+            view?.startLoading()
+        }
         APIClient.default.getNofificationsList(limit: 0, offset: 15) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.stopLoading()

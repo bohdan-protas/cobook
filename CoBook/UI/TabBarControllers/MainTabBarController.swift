@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDynamicLinks
+import Firebase
 
 class MainTabBarController: UITabBarController {
 
@@ -48,6 +49,13 @@ class MainTabBarController: UITabBarController {
         if let pendingDynamicLink = AppStorage.State.pendingDynamicLink {
             handleDynamicLink(pendingDynamicLink)
         }
+        
+        // If device token failed to refresh in app delegate(due the authorization reson), we will refresh again in after login
+        if AppStorage.State.isNeedToUpdateDeviceToken {
+            updateFCMToken()
+            AppStorage.State.isNeedToUpdateDeviceToken = false
+        }
+        
     }
 
     // MARK: - Dynamic link handling
@@ -76,10 +84,28 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    // MARK: - Notification tap handling
+    // MARK: - Notifications
+    
+    func updateFCMToken() {
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instance ID: \(error)")
+            } else if let result = result {
+                let token = result.token
+                APIClient.default.updateDeviceToken(fcmToken: token) { (result) in
+                    switch result {
+                    case .success:
+                        Log.info("Success updated token in application server: \(token)")
+                    case .failure(let erorr):
+                        Log.error(erorr.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
     
     func handleNofitication() {
-        Log.debug("Handled notifications tap")
+        /// Post notification about FCM token updating
         self.selectedViewController = notificationsController
     }
     

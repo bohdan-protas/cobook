@@ -13,6 +13,14 @@ class NotificationsListViewController: BaseViewController {
     @IBOutlet var tableView: UITableView!
     var presenter: NotificationsListPresenter = NotificationsListPresenter()
     
+    /// pull refresh controll
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.Theme.grayUI
+        refreshControl.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
+        return refreshControl
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -20,11 +28,21 @@ class NotificationsListViewController: BaseViewController {
         setupLayout()
         
         presenter.attachView(self)
-        presenter.setup()
+        presenter.fetchNotifications(usingLoader: true)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshHandler), name: .notificationReceived, object: nil)
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self, name: .notificationReceived, object: nil)
         presenter.detachView()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func refreshHandler(_ sender: Any) {
+        self.refreshControl.endRefreshing()
+        presenter.fetchNotifications(usingLoader: false)
     }
     
 
@@ -36,7 +54,7 @@ private extension NotificationsListViewController {
 
     func setupLayout() {
         self.tableView.delegate = self
-//        self.tableView.refreshControl = refreshControl
+        self.tableView.refreshControl = refreshControl
         self.navigationItem.title = "NotificationsList.title".localized
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
@@ -54,9 +72,15 @@ extension NotificationsListViewController: UITableViewDelegate {
 // MARK: - NotificationsListView
 
 extension NotificationsListViewController: NotificationsListView {
-
-    func notificationItemCell(_ cell: NotificationItemTableViewCell, didSelectedSocialItem item: Social.ListItem) {
-
+    
+    func notificationItemCell(_ cell: NotificationItemTableViewCell, didTappedPhoto atItem: Int) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        let galeryViewController = PhotoGalleryViewController(photos: presenter.photosList(at: indexPath), selectedPhotoIndex: atItem)
+        let galleryNavigationController = CustomNavigationController(rootViewController: galeryViewController)
+        present(galleryNavigationController, animated: true, completion: nil)
     }
     
     func photosList(_ cell: NotificationItemTableViewCell, associatedIndexPath: IndexPath?) -> [String] {

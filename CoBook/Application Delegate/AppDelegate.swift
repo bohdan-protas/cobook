@@ -41,11 +41,9 @@ extension AppDelegate: UIApplicationDelegate {
             AppStorage.State.isFirstAppLaunch = false
         }
         
-        /// Setup  appearence
         setupAppearence()
         setupScreenToOpen(on: window)
         
-        //
         setupDepencencies(for: application)
         registerForPushNotifications(application: application)
         
@@ -63,6 +61,7 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
         if let incomingURL = userActivity.webpageURL {
             let isLinkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { [weak self] (dynamiclink, error) in
                 guard error == nil else {
@@ -99,6 +98,7 @@ extension AppDelegate: UIApplicationDelegate {
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
         (window?.rootViewController as? MainTabBarController)?.handleNofitication()
+        NotificationCenter.default.post(name: Notification.Name.notificationReceived, object: nil, userInfo: nil)
     }
     
     func application(_ application: UIApplication,
@@ -107,6 +107,7 @@ extension AppDelegate: UIApplicationDelegate {
         
         defer { completionHandler(UIBackgroundFetchResult.newData) }
         (window?.rootViewController as? MainTabBarController)?.handleNofitication()
+        NotificationCenter.default.post(name: Notification.Name.notificationReceived, object: nil, userInfo: nil)
     }
     
     func application(_ application: UIApplication,
@@ -131,6 +132,10 @@ extension AppDelegate: MessagingDelegate {
         
         /// Post notification about FCM token updating
         NotificationCenter.default.post(name: Notification.Name.fcmTokenUpdated, object: nil, userInfo: [Notification.Key.fcmToken: fcmToken])
+        
+        /// Update token in application server
+        handleFCMToken(fcmToken: fcmToken)
+
         Log.info("Firebase registration token updated: \(fcmToken)")
     }
     
@@ -145,17 +150,22 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
+        
         defer { completionHandler() }
         guard response.actionIdentifier == UNNotificationDefaultActionIdentifier else {
             return
         }
+        
         (window?.rootViewController as? MainTabBarController)?.handleNofitication()
+        NotificationCenter.default.post(name: Notification.Name.notificationReceived, object: nil, userInfo: nil)
     }
 
     // Foreground notification handler
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        NotificationCenter.default.post(name: Notification.Name.notificationReceived, object: nil, userInfo: nil)
         completionHandler([.alert, .badge, .sound])
     }
     
@@ -171,7 +181,6 @@ extension AppDelegate {
             $0.dataLoader = NukeAlamofirePlugin.AlamofireDataLoader()
             $0.imageCache = ImageCache.shared
         }
-        ImageLoadingOptions.shared.transition = .fadeIn(duration: 0.3)
         ImagePipeline.shared = pipeline
         
         // IQKeyboard manager
@@ -193,22 +202,20 @@ extension AppDelegate {
         center.requestAuthorization(options: [.badge, .sound, .alert]) { granted, _ in
             guard granted else { return }
             center.delegate = self
-            NotificationCenter.default.addObserver(self, selector: #selector(self.handleFCMToken), name: Notification.Name.fcmTokenUpdated, object: nil)
             DispatchQueue.main.async {
                 application.registerForRemoteNotifications()
             }
         }
     }
     
-    @objc func handleFCMToken(_ notification: Notification) {
-        if let data = notification.userInfo as? [String: Any], let token = data[Notification.Key.fcmToken] as? String {
-            APIClient.default.updateDeviceToken(fcmToken: token) { (result) in
-                switch result {
-                case .success:
-                    Log.info("Success updated token in application server")
-                case .failure(let erorr):
-                    Log.error(erorr.localizedDescription)
-                }
+    func handleFCMToken(fcmToken: String) {
+        APIClient.default.updateDeviceToken(fcmToken: fcmToken) { (result) in
+            switch result {
+            case .success:
+                Log.info("Success updated token in application server")
+            case .failure(let erorr):
+                AppStorage.State.isNeedToUpdateDeviceToken = true
+                Log.error(erorr.localizedDescription)
             }
         }
     }

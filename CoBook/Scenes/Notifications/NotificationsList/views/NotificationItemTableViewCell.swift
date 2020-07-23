@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NotificationItemCellDelegate: class {
-    func notificationItemCell(_ cell: NotificationItemTableViewCell, didSelectedSocialItem item: Social.ListItem)
+    func notificationItemCell(_ cell: NotificationItemTableViewCell, didTappedPhoto atItem: Int)
 }
 
 protocol NotificationItemCellDataSource: class {
@@ -54,7 +54,7 @@ class NotificationItemTableViewCell: UITableViewCell {
 extension NotificationItemTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        delegate?.notificationItemCell(self, didTappedPhoto: indexPath.item)
     }
     
 }

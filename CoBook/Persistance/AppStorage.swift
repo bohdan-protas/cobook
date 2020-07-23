@@ -23,6 +23,7 @@ enum AppStorage {
         case isNeedToUpdateAccountData
         case filters
         case pendingDynamicLink
+        case isNeedToUpdateDeviceToken
     }
 
     enum State {
@@ -34,6 +35,9 @@ enum AppStorage {
 
         @UserDefaultObjectStorageWrapper(key: Keys.pendingDynamicLink.rawValue, defaultValue: nil)
         static var pendingDynamicLink: DynamicLinkContainer?
+        
+        @UserDefaultValueStorageWrapper(key: Keys.isNeedToUpdateDeviceToken.rawValue, defaultValue: false)
+        static var isNeedToUpdateDeviceToken: Bool
     }
 
     enum User {

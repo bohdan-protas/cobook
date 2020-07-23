@@ -15,6 +15,7 @@ extension Notification.Name {
     static let articleUnsaved: Notification.Name = Notification.Name("unsaveArticleNotificationName")
     static let profideDataUpdated: Notification.Name = Notification.Name("profideDataUpdatedNotificationName")
     static let fcmTokenUpdated: Notification.Name = Notification.Name("FCMTokenNotificationName")
+    static let notificationReceived: Notification.Name = Notification.Name("notificationReceivedNotificationName")
 }
 
 extension Notification {
