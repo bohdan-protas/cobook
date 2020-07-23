@@ -21,6 +21,11 @@ class NotificationsListViewController: BaseViewController {
         return refreshControl
     }()
     
+    lazy var bottomLoaderView: BottomLoaderView = {
+        let bottomLoader = BottomLoaderView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 50)))
+        return bottomLoader
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -55,6 +60,7 @@ private extension NotificationsListViewController {
     func setupLayout() {
         self.tableView.delegate = self
         self.tableView.refreshControl = refreshControl
+        
         self.navigationItem.title = "NotificationsList.title".localized
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
@@ -67,11 +73,24 @@ private extension NotificationsListViewController {
 
 extension NotificationsListViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        presenter.cellWillDisplayAt(indexPath: indexPath)
+    }
+    
+
 }
 
 // MARK: - NotificationsListView
 
 extension NotificationsListViewController: NotificationsListView {
+    
+    func showBottomLoaderView() {
+        tableView.tableFooterView = bottomLoaderView
+    }
+    
+    func hideBottomLoaderView() {
+        tableView.tableFooterView = nil
+    }
     
     func notificationItemCell(_ cell: NotificationItemTableViewCell, didTappedPhoto atItem: Int) {
         guard let indexPath = tableView.indexPath(for: cell) else {
