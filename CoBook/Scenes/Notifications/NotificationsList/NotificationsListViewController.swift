@@ -83,6 +83,7 @@ extension NotificationsListViewController: UITableViewDelegate {
 // MARK: - NotificationsListView
 
 extension NotificationsListViewController: NotificationsListView {
+    
     func reload(withScrollingToTop: Bool) {
         tableView.reloadData()
         if withScrollingToTop {

@@ -50,7 +50,9 @@ class NotificationsListPresenter: BasePresenter {
             view?.startLoading()
         }
 
+        notifications = PaginationPage(pageSize: Defaults.paginationPageSize, items:  [])
         notifications.isFetching = true
+        
         fetchNotifications(by: notifications) { [weak self] (result) in
             guard let self = self else { return }
             
@@ -59,7 +61,7 @@ class NotificationsListPresenter: BasePresenter {
             
             switch result {
             case .success(let notifications):
-                self.notifications = PaginationPage(pageSize: Defaults.paginationPageSize, items: notifications ?? [])
+                self.notifications.append(items: notifications ?? [])
                 self.updateViewSections()
                 self.view?.reload(withScrollingToTop: true)
             case .failure(let error):
