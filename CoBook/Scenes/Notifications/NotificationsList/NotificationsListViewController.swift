@@ -83,6 +83,12 @@ extension NotificationsListViewController: UITableViewDelegate {
 // MARK: - NotificationsListView
 
 extension NotificationsListViewController: NotificationsListView {
+    func reload(withScrollingToTop: Bool) {
+        tableView.reloadData()
+        if withScrollingToTop {
+            tableView.setContentOffset(.zero, animated: false)
+        }
+    }
     
     func showBottomLoaderView() {
         tableView.tableFooterView = bottomLoaderView
@@ -111,10 +117,6 @@ extension NotificationsListViewController: NotificationsListView {
     
     func set(dataSource: TableDataSource<NotificationsListConfigurator>?) {
         dataSource?.connect(to: tableView)
-    }
-    
-    func reload() {
-        tableView.reloadData()
     }
     
     

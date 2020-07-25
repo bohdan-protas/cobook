@@ -10,7 +10,7 @@ import UIKit
 
 protocol NotificationsListView: AlertDisplayableView, LoadDisplayableView, NotificationItemCellDelegate, NotificationItemCellDataSource {
     func set(dataSource: TableDataSource<NotificationsListConfigurator>?)
-    func reload()
+    func reload(withScrollingToTop: Bool)
     
     func showBottomLoaderView()
     func hideBottomLoaderView()
@@ -61,7 +61,7 @@ class NotificationsListPresenter: BasePresenter {
             case .success(let notifications):
                 self.notifications = PaginationPage(pageSize: Defaults.paginationPageSize, items: notifications ?? [])
                 self.updateViewSections()
-                self.view?.reload()
+                self.view?.reload(withScrollingToTop: true)
             case .failure(let error):
                 self.view?.errorAlert(message: error.localizedDescription)
             }
@@ -84,7 +84,7 @@ class NotificationsListPresenter: BasePresenter {
                 case .success(let notifications):
                     self.notifications.append(items: notifications ?? [])
                     self.updateViewSections()
-                    self.view?.reload()
+                    self.view?.reload(withScrollingToTop: false)
                 case .failure(let error):
                     self.view?.errorAlert(message: error.localizedDescription)
                 }
