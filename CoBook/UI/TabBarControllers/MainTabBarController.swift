@@ -45,15 +45,15 @@ class MainTabBarController: UITabBarController {
         self.viewControllers = [allCardsController, savedContentController, notificationsController, accountController]
         self.selectedViewController = allCardsController
 
-        // If pending dynamic link exists - its time to show it
+        // If pending dynamic link exists - its time to show recognized controller
         if let pendingDynamicLink = AppStorage.State.pendingDynamicLink {
             handleDynamicLink(pendingDynamicLink)
         }
         
         // If device token failed to refresh in app delegate(due the authorization reson), we will refresh again in after login
         if AppStorage.State.isNeedToUpdateDeviceToken {
-            updateFCMToken()
             AppStorage.State.isNeedToUpdateDeviceToken = false
+            updateFCMToken()
         }
         
     }
@@ -105,7 +105,6 @@ class MainTabBarController: UITabBarController {
     }
     
     func handleNofitication() {
-        /// Post notification about FCM token updating
         self.selectedViewController = notificationsController
     }
     

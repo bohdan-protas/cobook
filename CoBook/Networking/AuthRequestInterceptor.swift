@@ -16,6 +16,12 @@ final class AuthRequestInterceptor: RequestInterceptor {
             return completion(.doNotRetryWithError(error))
         }
 
+        // Do not retry device token request
+        if request.request?.url?.absoluteString == AuthEndpoint.updateDeviceToken(fcmToken: "").urlRequest?.url?.absoluteString {
+            completion(.doNotRetry)
+            return
+        }
+        
         switch response.statusCode {
         case 401:
             if let refreshToken = AppStorage.Auth.refreshToken, !refreshToken.isEmpty {
