@@ -13,13 +13,16 @@ import GooglePlaces
 protocol CreateBusinessCardView: AlertDisplayableView, LoadDisplayableView, NavigableView, CardAvatarPhotoManagmentTableViewCellDelegate, CardBackgroundManagmentTableViewCellDelegate {
     var tableView: UITableView! { get set }
     func set(dataSource: TableDataSource<CreateBusinessCardDataSourceConfigurator>?)
-
-    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setupSaveCardView()
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func showSearchEmployersControlelr()
     func showSearchPracticies(presenter: SearchPracticiesPresenter)
     func showDescriptionCreationForm(presenter: CreateCardDetailsDescriptionPresenter)
+    
+    func showRegionAutocompleteController(completion: ((GMSPlace) -> Void)?)
+    func showCityAutocompleteController(completion: ((GMSPlace) -> Void)?)
+    func showAddressAutocompleteController(completion: ((GMSPlace) -> Void)?)
+    
 }
 
 // MARK: - Defaults
@@ -428,29 +431,23 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
             self.view?.showSearchPracticies(presenter: presenter)
             
         case .city:
-            let filter = GMSAutocompleteFilter()
-            filter.type = .city
-            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedCity) in
+            view?.showCityAutocompleteController(completion: { [weak self] (fetchedCity) in
                 if let id = fetchedCity.placeID {
                     cell.textField.text = fetchedCity.name
                     self?.businessCardDetailsModel.city = PlaceModel(googlePlaceId: id, name: fetchedCity.name)
                 }
             })
-
+            
         case .region:
-            let filter = GMSAutocompleteFilter()
-            filter.type = .region
-            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedRegion) in
+            view?.showRegionAutocompleteController(completion: { [weak self] (fetchedRegion) in
                 if let id = fetchedRegion.placeID {
                     cell.textField.text = fetchedRegion.name
                     self?.businessCardDetailsModel.region = PlaceModel(googlePlaceId: id, name: fetchedRegion.name)
                 }
             })
-
+            
         case .address:
-            let filter = GMSAutocompleteFilter()
-            filter.type = .address
-            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedAddress) in
+            view?.showAddressAutocompleteController(completion: { [weak self] (fetchedAddress) in
                 if let id = fetchedAddress.placeID {
                     cell.textField.text = fetchedAddress.name
                     self?.businessCardDetailsModel.address = PlaceModel(googlePlaceId: id, name: fetchedAddress.name)
@@ -458,8 +455,8 @@ extension CreateBusinessCardPresenter: TextFieldTableViewCellDelegate, TextField
             })
         }
     }
-
-
+    
+    
 }
 
 // MARK: - TextViewTableViewCellDelegate

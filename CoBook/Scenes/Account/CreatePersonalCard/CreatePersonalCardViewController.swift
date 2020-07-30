@@ -32,6 +32,30 @@ class CreatePersonalCardViewController: BaseViewController {
         return imagePicker
     }()
 
+    private lazy var regionAutocompleteController: GMSAutocompleteViewController = {
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.modalPresentationStyle = .overFullScreen
+        autocompleteViewController.delegate = self
+        
+        let filter = GMSAutocompleteFilter()
+        filter.type = .region
+        autocompleteViewController.autocompleteFilter = filter
+        
+        return autocompleteViewController
+    }()
+    
+    private lazy var cityAutocompleteController: GMSAutocompleteViewController = {
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.modalPresentationStyle = .overFullScreen
+        autocompleteViewController.delegate = self
+        
+        let filter = GMSAutocompleteFilter()
+        filter.type = .city
+        autocompleteViewController.autocompleteFilter = filter
+        
+        return autocompleteViewController
+    }()
+
     var presenter = CreatePersonalCardPresenter()
     private var placeCompletion: ((GMSPlace) -> Void)?
 
@@ -89,16 +113,16 @@ extension CreatePersonalCardViewController: CreatePersonalCardView {
         tableView.tableFooterView = cardSaveView
     }
 
-    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?) {
+    func showSearchCity(completion: ((GMSPlace) -> Void)?) {
         view.endEditing(true)
         placeCompletion = completion
-
-        let autocompleteViewController = GMSAutocompleteViewController()
-        autocompleteViewController.modalPresentationStyle = .overFullScreen
-        autocompleteViewController.autocompleteFilter = filter
-        autocompleteViewController.delegate = self
-
-        presentPanModal(autocompleteViewController)
+        presentPanModal(cityAutocompleteController)
+    }
+    
+    func showSearchRegion(completion: ((GMSPlace) -> Void)?) {
+        view.endEditing(true)
+        placeCompletion = completion
+        presentPanModal(regionAutocompleteController)
     }
 
     func setSaveButtonEnabled(_ isEnabled: Bool) {
@@ -156,12 +180,14 @@ extension CreatePersonalCardViewController: GMSAutocompleteViewControllerDelegat
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        placeCompletion = nil
         viewController.dismiss(animated: true, completion: { [weak self] in
             self?.errorAlert(message: error.localizedDescription)
         })
     }
 
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        placeCompletion = nil
         viewController.dismiss(animated: true, completion: nil)
     }
 

@@ -32,6 +32,43 @@ class CreateBusinessCardViewController: BaseViewController {
         return imagePicker
     }()
 
+    private lazy var cityAutocompleteController: GMSAutocompleteViewController = {
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.delegate = self
+        autocompleteViewController.modalPresentationStyle = .currentContext
+        
+        let filter = GMSAutocompleteFilter()
+        filter.type = .city
+        autocompleteViewController.autocompleteFilter = filter
+        
+        return autocompleteViewController
+    }()
+    
+    private lazy var regionAutocompleteController: GMSAutocompleteViewController = {
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.delegate = self
+        autocompleteViewController.modalPresentationStyle = .currentContext
+        
+        let filter = GMSAutocompleteFilter()
+        filter.type = .region
+        autocompleteViewController.autocompleteFilter = filter
+        
+        return autocompleteViewController
+    }()
+    
+    private lazy var addressAutocompleteController: GMSAutocompleteViewController = {
+        let autocompleteViewController = GMSAutocompleteViewController()
+                
+        autocompleteViewController.delegate = self
+        autocompleteViewController.modalPresentationStyle = .currentContext
+                
+        let filter = GMSAutocompleteFilter()
+        filter.type = .address
+        autocompleteViewController.autocompleteFilter = filter
+        
+        return autocompleteViewController
+    }()
+    
     var presenter = CreateBusinessCardPresenter()
     private var placeCompletion: ((GMSPlace) -> Void)?
 
@@ -80,17 +117,23 @@ extension CreateBusinessCardViewController: CreateBusinessCardView {
     func setSaveButtonEnabled(_ isEnabled: Bool) {
         cardSaveView.saveButton.isEnabled = isEnabled
     }
-
-    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?) {
+    
+    func showRegionAutocompleteController(completion: ((GMSPlace) -> Void)?) {
         view.endEditing(true)
         placeCompletion = completion
-
-        let autocompleteViewController = GMSAutocompleteViewController()
-        autocompleteViewController.modalPresentationStyle = .currentContext
-        autocompleteViewController.autocompleteFilter = filter
-        autocompleteViewController.delegate = self
-
-        presentPanModal(autocompleteViewController)
+        presentPanModal(regionAutocompleteController)
+    }
+    
+    func showCityAutocompleteController(completion: ((GMSPlace) -> Void)?) {
+        view.endEditing(true)
+        placeCompletion = completion
+        presentPanModal(cityAutocompleteController)
+    }
+    
+    func showAddressAutocompleteController(completion: ((GMSPlace) -> Void)?) {
+        view.endEditing(true)
+        placeCompletion = completion
+        presentPanModal(addressAutocompleteController)
     }
 
     func showSearchEmployersControlelr() {
@@ -194,13 +237,14 @@ extension CreateBusinessCardViewController: GMSAutocompleteViewControllerDelegat
     }
 
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        debugPrint(error.localizedDescription)
+        placeCompletion = nil
         viewController.dismiss(animated: true, completion: { [weak self] in
             self?.errorAlert(message: error.localizedDescription)
         })
     }
 
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        placeCompletion = nil
         viewController.dismiss(animated: true, completion: nil)
     }
 
