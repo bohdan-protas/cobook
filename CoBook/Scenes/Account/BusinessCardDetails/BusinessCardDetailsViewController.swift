@@ -291,7 +291,9 @@ extension BusinessCardDetailsViewController: PaymentPresenterDelegate {
         
         if let bill = pendingPaymentStatus?.bill {
             Log.debug(bill)
+            
             self.infoAlert(title: "Payment.success.title".localized, message: "Payment.success.description".localized)
+            Log.Firebase.businessCardPurchase(billID: bill.billId, value: "\(bill.billAmount)")
         }
         self.pendingPaymentStatus = nil
         self.presenter?.onViewWillAppear()
