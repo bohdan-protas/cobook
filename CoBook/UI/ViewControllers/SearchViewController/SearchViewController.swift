@@ -117,6 +117,10 @@ extension SearchViewController: SearchView {
     func set(dataSource: TableDataSource<SearchCellsConfigurator>?) {
         dataSource?.connect(to: tableView)
     }
+    
+    func set(searchBarText: String?) {
+        self.searchController.searchBar.text = searchBarText
+    }
 
     
 }

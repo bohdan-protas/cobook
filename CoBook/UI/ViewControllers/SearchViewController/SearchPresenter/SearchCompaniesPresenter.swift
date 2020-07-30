@@ -20,26 +20,31 @@ class SearchCompaniesPresenter: SearchPresenter {
     var isMultiselectEnabled: Bool = false
     var selectionCompletion: ((_ practice: CompanyApiModel?) -> Void)?
     
-    init() {
+    private var selectedCompany: CompanyApiModel?
+    
+    init(selectedCompany: CompanyApiModel?) {
         var configurator = SearchCellsConfigurator()
         configurator.companiesConfigurator = TableCellConfigurator(configurator: { (cell, model: CompanyApiModel, tableView, index) -> FilterItemTableViewCell in
             cell.titleLabel?.text = model.name
             return cell
         })
         self.viewDataSource = TableDataSource(sections: [], configurator: configurator)
+        self.selectedCompany = selectedCompany
     }
     
     func setup() {
-        fetchCompanies()
         view?.set(dataSource: viewDataSource)
+        fetchCompanies()
     }
     
     func prepareForDismiss() {
+        selectionCompletion?(selectedCompany)
     }
     
     func searchBy(text: String?) {
         guard let text = text, !text.isEmpty else {
             filteredCompanies = companies
+            selectedCompany = nil
             updateViewDataSource()
             view?.reload()
             return
@@ -52,26 +57,16 @@ class SearchCompaniesPresenter: SearchPresenter {
     
     func selectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?) {
         if let index = companies.firstIndex(where: { $0.id == filteredCompanies[safe: indexPath.item]?.id }) {
-            selectionCompletion?(companies[index])
+            selectedCompany = companies[index]
             completion?(true)
         }
     }
     
-    func deselectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?) {}
-    
-    
-}
-
-// MARK: - View updating
-
-extension SearchCompaniesPresenter {
-
-    func updateViewDataSource() {
-        let companiesSection = Section<SearchContent.Item>(items: filteredCompanies.compactMap { .company(model: $0) })
-        viewDataSource?.sections = [companiesSection]
+    func deselectedAt(indexPath: IndexPath, completion: ((Bool) -> Void)?) {
+        
     }
-
-
+    
+    
 }
 
 // MARK: - Privates
@@ -92,11 +87,27 @@ private extension SearchCompaniesPresenter {
                     return titleOne.localizedCaseInsensitiveCompare(titleTwo) == .orderedAscending
                 }
                 self.updateViewDataSource()
-                self.view?.reload()
+                if let name = self.selectedCompany?.name {
+                    self.view?.set(searchBarText: name)
+                } else {
+                    self.view?.reload()
+                }
             case .failure(let erorr):
                 self.view?.errorAlert(message: erorr.localizedDescription)
             }
         }
+    }
+
+
+}
+
+// MARK: - View updating
+
+extension SearchCompaniesPresenter {
+
+    func updateViewDataSource() {
+        let companiesSection = Section<SearchContent.Item>(items: filteredCompanies.compactMap { .company(model: $0) })
+        viewDataSource?.sections = [companiesSection]
     }
 
 

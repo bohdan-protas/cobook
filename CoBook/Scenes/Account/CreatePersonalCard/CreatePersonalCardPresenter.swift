@@ -303,10 +303,10 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             })
             
         case .company:
-            let presenter = SearchCompaniesPresenter()
+            let presenter = SearchCompaniesPresenter(selectedCompany: self.personalCardDetailsModel.company)
             presenter.selectionCompletion = { [weak self] (company) in
-                cell.textField.text = company?.name
                 self?.personalCardDetailsModel.company = company
+                cell.textField.text = company?.name
             }
             self.view?.showSearchCompanies(presenter: presenter)
         }
