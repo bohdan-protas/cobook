@@ -8,12 +8,15 @@
 
 import Alamofire
 
+
 enum BonusesEndpoint: EndpointConfigurable {
     
     case getCardBonusesStats
     case getLeaderbordStats(params: APIRequestParameters.Bonuses.LeaderbordStats)
     case getReferalStats
     case getUserBallance
+    case getWithdrawRecords(status: WithdrawStatus)
+    case initWithdrawRecords
     
     var useAuthirizationToken: Bool {
         return true
@@ -29,6 +32,10 @@ enum BonusesEndpoint: EndpointConfigurable {
             return .post
         case .getUserBallance:
             return .post
+        case .getWithdrawRecords:
+            return .get
+        case .initWithdrawRecords:
+            return .post
         }
     }
     
@@ -42,6 +49,18 @@ enum BonusesEndpoint: EndpointConfigurable {
             return "/bonuses/referral_stats"
         case .getUserBallance:
             return "/bonuses/balance"
+        case .getWithdrawRecords:
+            return "/bonuses/withdraw"
+        case .initWithdrawRecords:
+            return "/bonuses/withdraw"
+        }
+    }
+    
+    var urlParameters: [String : String]? {
+        switch self {
+        case .getWithdrawRecords(let status):
+            return ["status": status.rawValue]
+        default: return nil
         }
     }
     

@@ -958,6 +958,18 @@ extension APIClient {
         return performRequest(endpoint: endpoint, completion: completion)
     }
     
+    @discardableResult
+    func getWithdrawRecords(status: WithdrawStatus, completion: @escaping (Result<[WithdrawRecord]?>) -> Void) -> DataRequest {
+        let endpoint = BonusesEndpoint.getWithdrawRecords(status: status)
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    @discardableResult
+    func initExportSum(completion: @escaping (Result<VoidResponseData?>) -> Void) -> DataRequest {
+        let endpoint = BonusesEndpoint.initWithdrawRecords
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
     
 }
 

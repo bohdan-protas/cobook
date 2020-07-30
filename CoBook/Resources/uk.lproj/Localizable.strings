@@ -368,9 +368,13 @@
 
 // MARK: - Financies
 "Financies.title" = "Фінанси";
+"Financies.header.exportOnCard" = "Вивести на карту";
 "Financies.loadingTitle" = "Збір інформації про фінанси...";
 "Financies.header.currentBallance" = "Поточний Баланс рахунку";
 "Financies.header.exportOnCard" = "Вивести на карту";
+"Financies.header.requestInProress" = "Запит в обробці";
+"Financies.header.requestSended" = "Запит успішно відправлено";
+"Financies.request.loader" = "Запит відправляється...";
 "Financies.header.mininumExportSum" = "Мінімальна сума для виведення, %li";
 "Financies.header.exportedAverage" = "Всього було виведено %li";
 "Financies.Settings.title" = "Фінанси / Налаштування ";

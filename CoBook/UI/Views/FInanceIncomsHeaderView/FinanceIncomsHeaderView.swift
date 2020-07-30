@@ -8,18 +8,22 @@
 
 import UIKit
 
+protocol FinanceIncomsHeaderViewDelegate: class {
+    func onExportSum(_ view: FinanceIncomsHeaderView)
+}
+
 class FinanceIncomsHeaderView: BaseFromNibView {
 
     @Localized("Financies.header.currentBallance")
     @IBOutlet var currentBallanceInfoLabel: UILabel!
     
-    @Localized("Financies.header.exportOnCard")
     @IBOutlet var exportIncomsButton: LoaderDesignableButton!
-    
     @IBOutlet var currentBallanceValueLabel: UILabel!
     @IBOutlet var maxSumForExportLabel: UILabel!
     @IBOutlet var averageSumOfExportsLabel: UILabel!
     @IBOutlet var topCorneredView: UIView!
+    
+    weak var delegate: FinanceIncomsHeaderViewDelegate?
     
     // MARK: Lifecycle
     
@@ -32,5 +36,12 @@ class FinanceIncomsHeaderView: BaseFromNibView {
         topCorneredView.layer.cornerRadius = 10
         topCorneredView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func exportButtonTapped(_ sender: UIButton) {
+        delegate?.onExportSum(self)
+    }
+    
 
 }

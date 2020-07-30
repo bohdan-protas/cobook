@@ -13,6 +13,9 @@ protocol FinanciesView: class, LoadDisplayableView, AlertDisplayableView {
     func set(currentBalance: Int)
     func set(minExportSumm: Int)
     func set(exportedSumm: Int)
+    func set(exportSumButtonActived: Bool)
+    func set(exportSumButtonTitle: String)
+    func setHidden(topCorneredView idHidden: Bool)
     func reload()
 }
 
@@ -25,6 +28,7 @@ class FinanciesPresenter: BasePresenter {
     
     private var dataSource: TableDataSource<FinanciesCellsConfigurator>?
     private var configurator: FinanciesCellsConfigurator
+    private var isPendingRequestsAviable: Bool = false
     
     // MARK: - Lifecycle
     
@@ -110,6 +114,19 @@ class FinanciesPresenter: BasePresenter {
             }
         }
         
+        group.enter()
+        APIClient.default.getWithdrawRecords(status: .pending) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                self.isPendingRequestsAviable = !(response?.isEmpty ?? true)
+                group.leave()
+            case .failure(let error):
+                self.view?.errorAlert(message: error.localizedDescription)
+                group.leave()
+            }
+        }
+        
         group.notify(queue: .main) {
             self.updateViewLayout()
             self.view?.reload()
@@ -131,6 +148,41 @@ private extension FinanciesPresenter {
         view?.set(exportedSumm: Int(self.userBallance?.totalWithdraw ?? "") ?? 0)
         view?.set(currentBalance: self.userBallance?.totalIncome ?? 0)
         view?.set(minExportSumm: self.userBallance?.minWithdraw ?? 0)
+        view?.setHidden(topCorneredView: cardBonuseItems.isEmpty)
+        
+        switch isPendingRequestsAviable {
+        case true:
+            view?.set(exportSumButtonTitle: "Financies.header.requestInProress".localized)
+            view?.set(exportSumButtonActived: false)
+        case false:
+            view?.set(exportSumButtonTitle: "Financies.header.exportOnCard".localized)
+            view?.set(exportSumButtonActived: (self.userBallance?.totalIncome ?? 0) >= (self.userBallance?.minWithdraw ?? -1))
+        }
+    }
+    
+    
+}
+
+// MARK: - FinanceIncomsHeaderViewDelegate
+
+extension FinanciesPresenter: FinanceIncomsHeaderViewDelegate {
+    
+    func onExportSum(_ view: FinanceIncomsHeaderView) {
+        self.view?.startLoading(text: "Financies.request.loader".localized)
+        APIClient.default.initExportSum { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.view?.stopLoading(success: true, completion: {
+                    self?.view?.set(exportSumButtonTitle: "Financies.header.requestInProress".localized)
+                    self?.view?.set(exportSumButtonActived: false)
+                    self?.view?.infoAlert(title: "", message: "Financies.header.requestSended".localized)
+                })
+            case .failure(let erorr):
+                self?.view?.stopLoading(success: false, completion: {
+                    self?.view?.errorAlert(message: erorr.localizedDescription)
+                })
+            }
+        }
     }
     
     

@@ -16,6 +16,7 @@ class FinanciesViewController: BaseViewController {
     
     private lazy var headerInfoView: FinanceIncomsHeaderView = {
         let view = FinanceIncomsHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.size.width, height: 244)))
+        view.delegate = presenter
         return view
     }()
     
@@ -53,6 +54,18 @@ private extension FinanciesViewController {
 // MARK: - FinanciesView
 
 extension FinanciesViewController: FinanciesView {
+    
+    func setHidden(topCorneredView idHidden: Bool) {
+        headerInfoView.topCorneredView.isHidden = idHidden
+    }
+    
+    func set(exportSumButtonActived: Bool) {
+        headerInfoView.exportIncomsButton.isEnabled = exportSumButtonActived
+    }
+    
+    func set(exportSumButtonTitle: String) {
+        headerInfoView.exportIncomsButton.setTitle(exportSumButtonTitle, for: [])
+    }
     
     func set(currentBalance: Int) {
         headerInfoView.currentBallanceValueLabel.text = "\(currentBalance)"
