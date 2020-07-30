@@ -14,10 +14,12 @@ protocol CreatePersonalCardView: AlertDisplayableView, LoadDisplayableView, Navi
     var tableView: UITableView! { get set }
 
     func set(dataSource: TableDataSource<CreatePersonalCardDataSourceConfigurator>?)
-    func showAutocompleteController(filter: GMSAutocompleteFilter, completion: ((GMSPlace) -> Void)?)
     func setSaveButtonEnabled(_ isEnabled: Bool)
     func setupSaveCardView()
 
+    func showSearchCity(completion: ((GMSPlace) -> Void)?)
+    func showSearchRegion(completion: ((GMSPlace) -> Void)?)
+    
     func showSearchPracticies(presenter: SearchPracticiesPresenter)
     func showSearchCompanies(presenter: SearchCompaniesPresenter)
 }
@@ -283,9 +285,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             self.view?.showSearchPracticies(presenter: presenter)
 
         case .placeOfLiving:
-            let filter = GMSAutocompleteFilter()
-            filter.type = .city
-            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedCity) in
+            view?.showSearchCity(completion: { [weak self] (fetchedCity) in
                 if let cityId = fetchedCity.placeID {
                     cell.textField.text = fetchedCity.name
                     self?.personalCardDetailsModel.city = PlaceModel(googlePlaceId: cityId, name: fetchedCity.name)
@@ -293,9 +293,7 @@ extension CreatePersonalCardPresenter: TextFieldTableViewCellDelegate {
             })
 
         case .activityRegion:
-            let filter = GMSAutocompleteFilter()
-            filter.type = .region
-            view?.showAutocompleteController(filter: filter, completion: { [weak self] (fetchedRegion) in
+            view?.showSearchRegion(completion: { [weak self] (fetchedRegion) in
                 if let regionId = fetchedRegion.placeID {
                     cell.textField.text = fetchedRegion.name
                     self?.personalCardDetailsModel.region = PlaceModel(googlePlaceId: regionId, name: fetchedRegion.name)
