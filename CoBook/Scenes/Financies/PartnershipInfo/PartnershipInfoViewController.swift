@@ -85,7 +85,10 @@ extension PartnershipInfoViewController: PaymentPresenterDelegate {
             self.errorAlert(message: error.localizedDescription)
         }
         
-        if (pendingPaymentResult?.bill) != nil {
+        if let bill = pendingPaymentResult?.bill {
+            
+            Log.Firebase.franchisePurchase(billID: bill.billId, value: "\(bill.billAmount)")
+            
             let presenter = PartnershipInfoPresenter(type: .finish)
             let controller: PartnershipInfoViewController = UIStoryboard.financies.initiateViewControllerFromType()
             controller.presenter = presenter

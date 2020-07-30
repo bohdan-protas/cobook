@@ -61,6 +61,9 @@ class CreatePasswordPresenter: BasePresenter {
                 AppStorage.User.isUserInitiatedRegistration = false
                 AppStorage.User.Profile = response?.profile
 
+                // Log about sign up
+                Log.Firebase.signUp(userID: response?.profile?.userId, name: "\(response?.profile?.firstName ?? "") \(response?.profile?.lastName ?? "")", telephone: response?.profile?.telephone.number)
+                
                 self.view?.goToMainTabbar()
             case let .failure(error):
                 self.view?.errorAlert(message: error.localizedDescription.description, handler: nil)

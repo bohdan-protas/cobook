@@ -59,6 +59,9 @@ class SignInPresenter: BasePresenter {
                 AppStorage.User.Profile = response?.profile
                 AppStorage.Auth.accessToken = response?.assessToken
                 AppStorage.Auth.refreshToken = response?.refreshToken
+                
+                Log.Firebase.login(userID: response?.profile?.userId, name: "\(response?.profile?.firstName ?? "") \(response?.profile?.lastName ?? "")", telephone: response?.profile?.telephone.number)
+                
                 self?.view?.goToMainTabbar()
             case let .failure(error):
                 self?.view?.errorAlert(message: error.localizedDescription.description)
