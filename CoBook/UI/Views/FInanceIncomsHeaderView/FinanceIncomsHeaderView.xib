@@ -43,7 +43,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="800" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzd-I4-jEk">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzd-I4-jEk">
                             <rect key="frame" x="0.0" y="28" width="414" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="8ON-Zx-K9L"/>
@@ -81,6 +81,9 @@
                             <color key="value" name="Theme_Button-main-bg-disabled"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="exportButtonTapped:" destination="-1" eventType="touchUpInside" id="0S7-W4-1VX"/>
+                    </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="roU-X8-Set">
                     <rect key="frame" x="16" y="156" width="382" height="56"/>
