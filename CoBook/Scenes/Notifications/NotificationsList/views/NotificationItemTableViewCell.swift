@@ -24,6 +24,7 @@ class NotificationItemTableViewCell: UITableViewCell {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var pageControl: UIPageControl!
     
+    @IBOutlet var photosContainerView: UIView!
     @IBOutlet var photosCollectionView: UICollectionView!
     
     var associatedIndexPath: IndexPath?

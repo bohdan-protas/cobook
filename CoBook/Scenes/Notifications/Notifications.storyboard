@@ -160,6 +160,7 @@
                                             <outlet property="dateLabel" destination="h2L-x6-36r" id="uRB-rP-h7Y"/>
                                             <outlet property="pageControl" destination="HHN-dy-tUG" id="n0B-IC-BEc"/>
                                             <outlet property="photosCollectionView" destination="aLB-LD-i8U" id="NQI-XB-eFd"/>
+                                            <outlet property="photosContainerView" destination="3It-YB-LM5" id="V5T-bu-qwR"/>
                                             <outlet property="titleLabel" destination="B8N-Yn-Edx" id="rkx-oL-82D"/>
                                         </connections>
                                     </tableViewCell>

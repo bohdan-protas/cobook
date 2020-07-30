@@ -41,6 +41,7 @@ extension NotificationsListPresenter {
                 cell.delegate = self?.view
                 cell.dataSource = self?.view
                 cell.photosCollectionView.reloadData()
+                cell.photosContainerView.isHidden = model.photos?.isEmpty ?? true
                 
                 if let date = model.createdAt {
                     let formatter = DateFormatter()
