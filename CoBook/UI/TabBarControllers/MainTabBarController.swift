@@ -23,13 +23,13 @@ class MainTabBarController: UITabBarController {
         savedContentController.tabBarItem = UITabBarItem(title: "Tabbar.saved.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_saved_unactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_saved_active"))
         return savedContentController
     }()
-    
-    lazy var notificationsController: UIViewController = {
-        let notificationsListController: NotificationsListViewController = UIStoryboard.notifications.initiateViewControllerFromType()
-        let notificationsNavigation = CustomNavigationController(rootViewController: notificationsListController)
-        notificationsNavigation.tabBarItem = UITabBarItem(title: "Tabbar.notifications.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_notifications_unactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_notifications_active"))
-        return notificationsNavigation
-    }()
+//
+//    lazy var notificationsController: UIViewController = {
+//        let notificationsListController: NotificationsListViewController = UIStoryboard.notifications.initiateViewControllerFromType()
+//        let notificationsNavigation = CustomNavigationController(rootViewController: notificationsListController)
+//        notificationsNavigation.tabBarItem = UITabBarItem(title: "Tabbar.notifications.title".localized, image: #imageLiteral(resourceName: "ic_tabbar_notifications_unactive"), selectedImage: #imageLiteral(resourceName: "ic_tabbar_notifications_active"))
+//        return notificationsNavigation
+//    }()
     
     lazy var accountController: UIViewController = {
         let accountController: AccountNavigationController = UIStoryboard.account.initiateViewControllerFromType()
@@ -42,7 +42,7 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.viewControllers = [allCardsController, savedContentController, notificationsController, accountController]
+        self.viewControllers = [allCardsController, savedContentController, /*notificationsController, */ accountController]
         self.selectedViewController = allCardsController
 
         // If pending dynamic link exists - its time to show recognized controller
@@ -105,7 +105,7 @@ class MainTabBarController: UITabBarController {
     }
     
     func handleNofitication() {
-        self.selectedViewController = notificationsController
+        //self.selectedViewController = notificationsController
     }
     
 
