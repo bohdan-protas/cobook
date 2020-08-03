@@ -282,7 +282,7 @@
 "PersonalCard.createNewAlbum.text" = "Ваш пост";
 "PersonalCard.section.contacts.title" = "Связаться:";
 "PersonalCard.section.articles.title" = "Созданные статьи:";
-"PersonalCard.section.ownerArticles.title" = "Мой дневник:";
+"PersonalCard.section.ownerArticles.title" = "Блог:";
 
 "PersonalCard.Creation.title" = "Создание персональной визитки";
 "PersonalCard.Creation.section.activity" = "Деятельность:";

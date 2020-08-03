@@ -285,7 +285,7 @@
 "PersonalCard.createNewAlbum.text" = "Ваш пост";
 "PersonalCard.section.contacts.title" = "Зв’язатись:";
 "PersonalCard.section.articles.title" = "Створені статті:";
-"PersonalCard.section.ownerArticles.title" = "Мій щоденник:";
+"PersonalCard.section.ownerArticles.title" = "Блог:";
 
 "PersonalCard.Creation.title" = "Створення персональної візитки";
 "PersonalCard.Creation.section.activity" = "Діяльність:";
