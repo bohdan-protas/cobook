@@ -140,6 +140,7 @@
 "Error.Validation.telephone" = "Phone number must be in the format +380XXXXXXXXX";
 "Error.Validation.password" = " Password should contain at least 3 letters but not more than 25";
 "Error.maxSelectedElements" = "Maximum allowed selected elements - %li";
+"Error.startMakingMoney.message" = "Для початку створіть персональну візитку";
 
 // MARK: - Onboarding
 "Onboarding.Subtitle01" = "Create your Personal Business Card in 5 minutes";
