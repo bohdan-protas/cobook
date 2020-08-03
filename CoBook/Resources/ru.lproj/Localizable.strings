@@ -140,6 +140,7 @@
 "Error.Validation.telephone" = "Номер телефона должен быть в формате +380XXXXXXXXX";
 "Error.Validation.password" = "Пароль должен состоять как минимум из 3 символов, но не больше 25";
 "Error.maxSelectedElements" = "Максимльное количество выбранных елементов - %li";
+"Error.startMakingMoney.message" = "Для початку створіть персональну візитку";
 
 // MARK: - Onboarding
 "Onboarding.Subtitle01" = "Создай свою Персональную визитку за 5 минут";
@@ -265,7 +266,7 @@
 
 // MARK: - Business Card
 "BusinessCard.title" = "Бизнес визитка";
-"BusinessCard.section.createdAlbums.title" = "Созданные альбомы:";
+"BusinessCard.section.createdAlbums.title" = "Блог:";
 "BusinessCard.section.socials.title" = "Социальные сети:";
 "BusinessCard.createNewAlbum.text" = "Ваш пост";
 
@@ -282,7 +283,7 @@
 "PersonalCard.createNewAlbum.text" = "Ваш пост";
 "PersonalCard.section.contacts.title" = "Связаться:";
 "PersonalCard.section.articles.title" = "Созданные статьи:";
-"PersonalCard.section.ownerArticles.title" = "Мой дневник:";
+"PersonalCard.section.ownerArticles.title" = "Блог:";
 
 "PersonalCard.Creation.title" = "Создание персональной визитки";
 "PersonalCard.Creation.section.activity" = "Деятельность:";

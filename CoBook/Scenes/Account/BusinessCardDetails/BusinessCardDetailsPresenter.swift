@@ -451,18 +451,18 @@ private extension BusinessCardDetailsPresenter {
                                                                                                    telephoneNumber: cardDetails?.contactTelephone?.number,
                                                                                                    websiteAddress: cardDetails?.companyWebSite,
                                                                                                    isSaved: cardDetails?.isSaved ?? false)))
-        /// Post preview section
-        albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
-        
-        dataSource?[.postPreview].items.removeAll()
-        dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "BusinessCard.section.createdAlbums.title".localized, counter: self.albumPreviewItems.count)))
-        if isUserOwner {
-            albumPreviewSection?.items.append(.add(title: "BusinessCard.createNewAlbum.text".localized, imagePath: cardDetails?.avatar?.sourceUrl))
-        }
-        albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { PostPreview.Item.view($0) })
-        if !(albumPreviewSection?.items.isEmpty ?? true) {
-            dataSource?[.postPreview].items.append(.postPreview(model: albumPreviewSection))
-        }
+//        /// Post preview section
+//        albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
+//
+//        dataSource?[.postPreview].items.removeAll()
+//        dataSource?[.postPreview].items.append(.actionTitle(model: ActionTitleModel(title: "BusinessCard.section.createdAlbums.title".localized, counter: self.albumPreviewItems.count)))
+//        if isUserOwner {
+//            albumPreviewSection?.items.append(.add(title: "BusinessCard.createNewAlbum.text".localized, imagePath: cardDetails?.avatar?.sourceUrl))
+//        }
+//        albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { PostPreview.Item.view($0) })
+//        if !(albumPreviewSection?.items.isEmpty ?? true) {
+//            dataSource?[.postPreview].items.append(.postPreview(model: albumPreviewSection))
+//        }
 
         /// card details section
         dataSource?[.cardDetails].items.removeAll()
@@ -486,6 +486,19 @@ private extension BusinessCardDetailsPresenter {
                 dataSource?[.cardDetails].items.append(
                     .getInTouch
                 )
+                
+                
+                /// Post preview section
+                albumPreviewSection = PostPreview.Section(dataSourceID: BusinessCardDetails.PostPreviewDataSourceID.albumPreviews.rawValue, items: [])
+                dataSource?[.cardDetails].items.append(.actionTitle(model: ActionTitleModel(title: "BusinessCard.section.createdAlbums.title".localized, counter: self.albumPreviewItems.count)))
+                if isUserOwner {
+                    albumPreviewSection?.items.append(.add(title: "BusinessCard.createNewAlbum.text".localized, imagePath: cardDetails?.avatar?.sourceUrl))
+                }
+                albumPreviewSection?.items.append(contentsOf: albumPreviewItems.compactMap { PostPreview.Item.view($0) })
+                if !(albumPreviewSection?.items.isEmpty ?? true) {
+                    dataSource?[.cardDetails].items.append(.postPreview(model: albumPreviewSection))
+                }
+                
                 dataSource?[.cardDetails].items.append(
                     .addressInfo(model: AddressInfoCellModel(mainAddress: cardDetails?.region?.name, subAdress: cardDetails?.city?.name, schedule: cardDetails?.schedule))
                 )

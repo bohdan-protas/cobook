@@ -14,7 +14,7 @@ class PaymentService: StyleSourceModel {
     
     enum Pricing {
         static let businessCardInUSD: Double = 20
-        static let franchiseInUSD: Double = 100
+        static let franchiseInUSD: Double = 20
     }
         
     func businessCardPayment(cardID: String, presentingView: UIViewController, delegate: PaymentPresenterDelegate) {

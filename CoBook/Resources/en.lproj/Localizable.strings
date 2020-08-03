@@ -140,6 +140,7 @@
 "Error.Validation.telephone" = "Phone number must be in the format +380XXXXXXXXX";
 "Error.Validation.password" = " Password should contain at least 3 letters but not more than 25";
 "Error.maxSelectedElements" = "Maximum allowed selected elements - %li";
+"Error.startMakingMoney.message" = "Для початку створіть персональну візитку";
 
 // MARK: - Onboarding
 "Onboarding.Subtitle01" = "Create your Personal Business Card in 5 minutes";
@@ -264,7 +265,7 @@
 
 // MARK: - Business Card
 "BusinessCard.title" = "Business card";
-"BusinessCard.section.createdAlbums.title" = "Created albums:";
+"BusinessCard.section.createdAlbums.title" = "Blog:";
 "BusinessCard.section.socials.title" = "Social networks:";
 "BusinessCard.createNewAlbum.text" = "Your post";
 
@@ -281,7 +282,7 @@
 "PersonalCard.createNewAlbum.text" = "your post";
 "PersonalCard.section.contacts.title" = "Contact:";
 "PersonalCard.section.articles.title" = "Created articles:";
-"PersonalCard.section.ownerArticles.title" = "My diary:";
+"PersonalCard.section.ownerArticles.title" = "Blog:";
 
 "PersonalCard.Creation.title" = "Creating personal cards";
 "PersonalCard.Creation.section.activity" = "Business:";

@@ -186,10 +186,12 @@ private extension AccountPresenter {
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.inviteFriends".localized,
                                                           image: UIImage(named: "ic_account_createparsonalcard"),
                                                           actiontype: .inviteFriends)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized, image: UIImage(named: "ic_account_statistics"), actiontype: .staticticsOfCards)),
-            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized,
-                                                          image: UIImage(named: "ic_account_qrcode"),
-                                                          actiontype: .generateQrCode)),
+            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statictics".localized,
+                                                          image: UIImage(named: "ic_account_statistics"),
+                                                          actiontype: .staticticsOfCards)),
+//            .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.generateQrCode".localized,
+//                                                          image: UIImage(named: "ic_account_qrcode"),
+//                                                          actiontype: .generateQrCode)),
             .menuItem(model: Account.AccountMenuItemModel(title: "Account.item.faq".localized,
                                                           image: UIImage(named: "ic_account_faq"),
                                                           actiontype: .faq)),
@@ -214,9 +216,9 @@ private extension AccountPresenter {
                 menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.referal".localized,
                                                                                             image: UIImage(named: "ic_account_faq"),
                                                                                             actiontype: .referalLink)))
-                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
-                                                                                            image: UIImage(named: "ic_account_faq"),
-                                                                                            actiontype: .financies)))
+//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
+//                                                                                            image: UIImage(named: "ic_account_faq"),
+//                                                                                            actiontype: .financies)))
                 menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
                                                                                             image: UIImage(named: "ic_account_faq"),
                                                                                             actiontype: .staticticsOfPartnership)))

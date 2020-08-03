@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,6 +23,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P31-6H-NTQ">
+                        <rect key="frame" x="16" y="95" width="288" height="1"/>
+                        <color key="backgroundColor" name="Theme_Separator"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="GHi-0M-Nvf"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89e-AF-Lhx">
                         <rect key="frame" x="24" y="24" width="272" height="48"/>
                         <subviews>
@@ -86,8 +93,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="89e-AF-Lhx" secondAttribute="trailing" constant="24" id="2CM-kz-Mhj"/>
+                    <constraint firstAttribute="bottom" secondItem="P31-6H-NTQ" secondAttribute="bottom" id="70D-HK-Qk9"/>
+                    <constraint firstItem="P31-6H-NTQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="BiL-aI-dGA"/>
                     <constraint firstAttribute="bottom" secondItem="89e-AF-Lhx" secondAttribute="bottom" constant="24" id="LSp-Dm-doD"/>
                     <constraint firstItem="89e-AF-Lhx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="iwy-NC-eKB"/>
+                    <constraint firstAttribute="trailing" secondItem="P31-6H-NTQ" secondAttribute="trailing" constant="16" id="khk-eu-Vff"/>
                     <constraint firstItem="89e-AF-Lhx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="yTf-Xo-lAM"/>
                 </constraints>
             </tableViewCellContentView>
@@ -104,6 +114,9 @@
         <image name="ic_get-in-touch_tel" width="16" height="16"/>
         <namedColor name="Theme_Green-Dark">
             <color red="0.29399999976158142" green="0.62000000476837158" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Theme_Separator">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
