@@ -264,7 +264,7 @@
 
 // MARK: - Business Card
 "BusinessCard.title" = "Business card";
-"BusinessCard.section.createdAlbums.title" = "Created albums:";
+"BusinessCard.section.createdAlbums.title" = "Blog:";
 "BusinessCard.section.socials.title" = "Social networks:";
 "BusinessCard.createNewAlbum.text" = "Your post";
 

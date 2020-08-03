@@ -268,7 +268,7 @@
 
 // MARK: - Business Card
 "BusinessCard.title" = "Бізнес візитка";
-"BusinessCard.section.createdAlbums.title" = "Створені альбоми:";
+"BusinessCard.section.createdAlbums.title" = "Блог:";
 "BusinessCard.section.socials.title" = "Соціальні мережі:";
 "BusinessCard.createNewAlbum.text" = "Ваш пост";
 
