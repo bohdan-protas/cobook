@@ -191,7 +191,7 @@
 "Account.item.createBusinessCard" = " Create business card ";
 "Account.item.createAnotherOneBusinessCard" = " Create another business card";
 "Account.item.inviteFriends" = "Invite friends";
-"Account.item.statictics" = "Statistics";
+"Account.item.statictics" = "Statistics of cards";
 "Account.item.generateQrCode" = "GenerateQR-code";
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Start making money with CoBook";

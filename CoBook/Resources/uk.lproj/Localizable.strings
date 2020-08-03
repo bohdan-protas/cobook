@@ -195,7 +195,7 @@
 "Account.item.createBusinessCard" = "Створити бізнес візитку";
 "Account.item.createAnotherOneBusinessCard" = "Створити ще одну бізнес візитку";
 "Account.item.inviteFriends" = "Запросити друзів";
-"Account.item.statictics" = "Статистика";
+"Account.item.statictics" = "Статистика візиток";
 "Account.item.generateQrCode" = "Згенерувати QR-code";
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Почати заробляти з CoBook";
@@ -204,6 +204,7 @@
 "Account.item.referal" = "Реферальне посилання";
 "Account.item.financies" = "Фінанси";
 "Account.item.statisticsPartnership" = "Статистика партнерства";
+"Account.section.myCards.title" = "Мої карти:";
 
 // MARK: - Settings
 "Settings.title" = "Налаштування";
