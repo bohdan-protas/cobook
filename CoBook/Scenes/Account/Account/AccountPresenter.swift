@@ -219,9 +219,9 @@ private extension AccountPresenter {
 //                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.financies".localized,
 //                                                                                            image: UIImage(named: "ic_account_faq"),
 //                                                                                            actiontype: .financies)))
-//                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
-//                                                                                            image: UIImage(named: "ic_account_faq"),
-//                                                                                            actiontype: .staticticsOfPartnership)))
+                menuItemsSection.items.append(.menuItem(model: Account.AccountMenuItemModel(title: "Account.item.statisticsPartnership".localized,
+                                                                                            image: UIImage(named: "ic_account_faq"),
+                                                                                            actiontype: .staticticsOfPartnership)))
             }
         }
         
