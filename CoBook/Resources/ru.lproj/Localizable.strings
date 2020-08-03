@@ -192,7 +192,7 @@
 "Account.item.createBusinessCard" = " Создать бизнес визитку";
 "Account.item.createAnotherOneBusinessCard" = " Создать еще одну бизнес визитку ";
 "Account.item.inviteFriends" = "Пригласить друзей";
-"Account.item.statictics" = "Статистика";
+"Account.item.statictics" = "Статистика визиток";
 "Account.item.generateQrCode" = "Сгенерировать QR-code";
 "Account.item.faq" = "FAQ";
 "Account.item.startMakingMoney" = "Начать зарабатывать с CoBook";
