@@ -994,3 +994,16 @@ extension APIClient {
     
     
 }
+
+// MARK: - Pricing info requests
+
+extension APIClient {
+    
+    @discardableResult
+    func getPricesInfo(completion: @escaping (Result<PricesInfoAPIModel?>) -> Void) -> DataRequest {
+        let endpoint = PricesEndpoint.getPrices
+        return performRequest(endpoint: endpoint, completion: completion)
+    }
+    
+    
+}

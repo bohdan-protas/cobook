@@ -11,66 +11,119 @@ import PortmoneSDKEcom
 
 
 class PaymentService: StyleSourceModel {
-    
-    enum Pricing {
-        static let businessCardInUSD: Double = 20
-        static let franchiseInUSD: Double = 20
-    }
+            
+    func businessCardPayment(cardID: String,
+                             presentingView: UIViewController,
+                             loadProgressView: LoadDisplayableView,
+                             delegate: PaymentPresenterDelegate) {
         
-    func businessCardPayment(cardID: String, presentingView: UIViewController, delegate: PaymentPresenterDelegate) {
-        let billNumb = "BC\(Int(Date().timeIntervalSince1970))"
-        let flowType = PaymentFlowType(payWithCard: false, payWithApplePay: false, withoutCVV: false)
-        let language = PortmoneSDKEcom.Language(rawValue: NSLocale.current.languageCode ?? "") ?? .english
+        loadProgressView.startLoading()
+        APIClient.default.getPricesInfo { [weak self] (result) in
+            guard let self = self else { return }
+            loadProgressView.stopLoading()
+            
+            switch result {
+            case .success(let pricingInfo):
+                
+                guard let price = pricingInfo?.businessCard?.value else {
+                    delegate.didFinishPayment(bill: nil, error: NSError.instantiate(code: -1, localizedMessage: "Pricing info is not defined"))
+                    return
+                }
+                
+                guard let currency = pricingInfo?.businessCard?.currency, let portmoneCurrency = Currency(rawValue: currency) else {
+                    delegate.didFinishPayment(bill: nil, error: NSError.instantiate(code: -1, localizedMessage: "Pricing currency is not defined"))
+                    return
+                }
+                
+                let billNumb = "BC\(Int(Date().timeIntervalSince1970))"
+                let flowType = PaymentFlowType(payWithCard: false, payWithApplePay: false, withoutCVV: false)
+                let language = PortmoneSDKEcom.Language(rawValue: NSLocale.current.languageCode ?? "") ?? .english
 
-        let params = PaymentParams(description: "Payment.description.businessCard".localized,
-                                   attribute1: Constants.Payment.ContentType.card.rawValue,
-                                   attribute2: AppStorage.User.Profile?.userId ?? "",
-                                   attribute3: cardID,
-                                   billNumber: billNumb,
-                                   preauthFlag: false,
-                                   billCurrency: .usd,
-                                   billAmount: Pricing.businessCardInUSD,
-                                   billAmountWcvv: 0,
-                                   payeeId: Constants.Payment.payeeID,
-                                   type: .payment,
-                                   paymentFlowType: flowType)
+                let params = PaymentParams(description: "Payment.description.businessCard".localized,
+                                           attribute1: Constants.Payment.ContentType.card.rawValue,
+                                           attribute2: AppStorage.User.Profile?.userId ?? "",
+                                           attribute3: cardID,
+                                           billNumber: billNumb,
+                                           preauthFlag: false,
+                                           billCurrency: portmoneCurrency,
+                                           billAmount: price,
+                                           billAmountWcvv: 0,
+                                           payeeId: Constants.Payment.payeeID,
+                                           type: .payment,
+                                           paymentFlowType: flowType)
+
+
+                let paymentPresenter = PaymentPresenter(delegate: delegate,
+                                                        styleSource: self,
+                                                        language: language,
+                                                        biometricAuth: false,
+                                                        customUid: Constants.Payment.customUid)
+
+                paymentPresenter.presentPaymentByCard(on: presentingView, params: params, showReceiptScreen: true)
+                
+                
+            case .failure(let error):
+                delegate.didFinishPayment(bill: nil, error: error)
+            }
+        }
         
-        
-        let paymentPresenter = PaymentPresenter(delegate: delegate,
-                                                styleSource: self,
-                                                language: language,
-                                                biometricAuth: false,
-                                                customUid: Constants.Payment.customUid)
-        
-        paymentPresenter.presentPaymentByCard(on: presentingView, params: params, showReceiptScreen: true)
+
     }
     
-    func franchisePayment(presentingView: UIViewController, delegate: PaymentPresenterDelegate) {
-        let billNumb = "FR\(Int(Date().timeIntervalSince1970))"
-        let flowType = PaymentFlowType(payWithCard: false, payWithApplePay: false, withoutCVV: false)
-        let language = PortmoneSDKEcom.Language(rawValue: NSLocale.current.languageCode ?? "") ?? .english
+    func franchisePayment(presentingView: UIViewController,
+                          loadProgressView: LoadDisplayableView,
+                          delegate: PaymentPresenterDelegate) {
+        
+        loadProgressView.startLoading()
+        APIClient.default.getPricesInfo { [weak self] (result) in
+            guard let self = self else { return }
+            loadProgressView.stopLoading()
+            
+            switch result {
+            case .success(let pricingInfo):
+                
+                guard let price = pricingInfo?.franchise?.value else {
+                    delegate.didFinishPayment(bill: nil, error: NSError.instantiate(code: -1, localizedMessage: "Pricing info is not defined"))
+                    return
+                }
+                
+                guard let currency = pricingInfo?.franchise?.currency, let portmoneCurrency = Currency(rawValue: currency) else {
+                    delegate.didFinishPayment(bill: nil, error: NSError.instantiate(code: -1, localizedMessage: "Pricing currency is not defined"))
+                    return
+                }
+                
+                let billNumb = "FR\(Int(Date().timeIntervalSince1970))"
+                let flowType = PaymentFlowType(payWithCard: false, payWithApplePay: false, withoutCVV: false)
+                let language = PortmoneSDKEcom.Language(rawValue: NSLocale.current.languageCode ?? "") ?? .english
 
-        let params = PaymentParams(description: "Payment.description.franchise".localized,
-                                   attribute1: Constants.Payment.ContentType.franchise.rawValue,
-                                   attribute2: AppStorage.User.Profile?.userId ?? "",
-                                   attribute3: "",
-                                   billNumber: billNumb,
-                                   preauthFlag: false,
-                                   billCurrency: .usd,
-                                   billAmount: Pricing.franchiseInUSD,
-                                   billAmountWcvv: 0,
-                                   payeeId: Constants.Payment.payeeID,
-                                   type: .payment,
-                                   paymentFlowType: flowType)
+                let params = PaymentParams(description: "Payment.description.franchise".localized,
+                                           attribute1: Constants.Payment.ContentType.franchise.rawValue,
+                                           attribute2: AppStorage.User.Profile?.userId ?? "",
+                                           attribute3: "",
+                                           billNumber: billNumb,
+                                           preauthFlag: false,
+                                           billCurrency: portmoneCurrency,
+                                           billAmount: price,
+                                           billAmountWcvv: 0,
+                                           payeeId: Constants.Payment.payeeID,
+                                           type: .payment,
+                                           paymentFlowType: flowType)
+                
+                
+                let paymentPresenter = PaymentPresenter(delegate: delegate,
+                                                        styleSource: self,
+                                                        language: language,
+                                                        biometricAuth: false,
+                                                        customUid: Constants.Payment.customUid)
+                
+                paymentPresenter.presentPaymentByCard(on: presentingView, params: params, showReceiptScreen: true)
+                
+            case .failure(let error):
+                delegate.didFinishPayment(bill: nil, error: error)
+            }
+        }
         
         
-        let paymentPresenter = PaymentPresenter(delegate: delegate,
-                                                styleSource: self,
-                                                language: language,
-                                                biometricAuth: false,
-                                                customUid: Constants.Payment.customUid)
-        
-        paymentPresenter.presentPaymentByCard(on: presentingView, params: params, showReceiptScreen: true)
     }
     
     // MARK: - StyleSourceModel

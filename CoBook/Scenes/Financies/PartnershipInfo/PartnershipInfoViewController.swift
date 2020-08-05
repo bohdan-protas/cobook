@@ -70,7 +70,7 @@ extension PartnershipInfoViewController: PartnershipInfoView {
     }
     
     func francisePayment() {
-        paymentService.franchisePayment(presentingView: self, delegate: self)
+        paymentService.franchisePayment(presentingView: self, loadProgressView: self, delegate: self)
     }
     
     

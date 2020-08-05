@@ -10,6 +10,8 @@
 		6D041A6A24C864E100DBB80E /* NotificationItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041A6924C864E000DBB80E /* NotificationItemTableViewCell.swift */; };
 		6D041A6D24C8664600DBB80E /* NotificationItemImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041A6C24C8664600DBB80E /* NotificationItemImageCollectionViewCell.swift */; };
 		6D23D66124C713E8009E51EE /* AppDelegate + Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D23D66024C713E8009E51EE /* AppDelegate + Setup.swift */; };
+		6D387B1824DAB4DE00619C7D /* PricesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D387B1724DAB4DE00619C7D /* PricesEndpoint.swift */; };
+		6D387B1A24DAB92900619C7D /* PricingInfoAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D387B1924DAB92900619C7D /* PricingInfoAPIModel.swift */; };
 		6D3C280024D2A52D00C49641 /* WithdrawModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3C27FF24D2A52D00C49641 /* WithdrawModel.swift */; };
 		6D3E467624AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467524AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift */; };
 		6D3E467824AE16AC005FF2CF /* FinanceStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */; };
@@ -452,6 +454,8 @@
 		6D041A6924C864E000DBB80E /* NotificationItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItemTableViewCell.swift; sourceTree = "<group>"; };
 		6D041A6C24C8664600DBB80E /* NotificationItemImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItemImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		6D23D66024C713E8009E51EE /* AppDelegate + Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate + Setup.swift"; sourceTree = "<group>"; };
+		6D387B1724DAB4DE00619C7D /* PricesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesEndpoint.swift; sourceTree = "<group>"; };
+		6D387B1924DAB92900619C7D /* PricingInfoAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingInfoAPIModel.swift; sourceTree = "<group>"; };
 		6D3C27FF24D2A52D00C49641 /* WithdrawModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawModel.swift; sourceTree = "<group>"; };
 		6D3E467524AE15F5005FF2CF /* FinanceStatisticsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatisticsConfigurator.swift; sourceTree = "<group>"; };
 		6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStatistics.swift; sourceTree = "<group>"; };
@@ -1977,6 +1981,7 @@
 				6DBE3686249BE2E4005383C5 /* FeedbackEndpoint.swift */,
 				6D86CBBE24A621CD00B29761 /* BonusesEndpoint.swift */,
 				6DE043F924C82B6600667E11 /* NewsEndpoint.swift */,
+				6D387B1724DAB4DE00619C7D /* PricesEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -2025,6 +2030,7 @@
 				6D8589D324BF3699009AC6CF /* WorkplaceAPIModel.swift */,
 				6DE043F524C8125B00667E11 /* NotificationItemAPIModel.swift */,
 				6D3C27FF24D2A52D00C49641 /* WithdrawModel.swift */,
+				6D387B1924DAB92900619C7D /* PricingInfoAPIModel.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2862,6 +2868,7 @@
 				B8559F6C243B280500787349 /* AccountDataSourceConfigurator.swift in Sources */,
 				B8307F272406FFF300AFE578 /* AnyOptional.swift in Sources */,
 				B81F189624602ECF003CBC84 /* SelectAlbumTableViewCell.swift in Sources */,
+				6D387B1824DAB4DE00619C7D /* PricesEndpoint.swift in Sources */,
 				B828E3482473CF2500032C88 /* UpdateAccountCellsConfigurator.swift in Sources */,
 				B823E8A3243F590200EE1830 /* PermissionService.swift in Sources */,
 				B828E3402473C63B00032C88 /* SettingsTableViewController.swift in Sources */,
@@ -3096,6 +3103,7 @@
 				6D949C5E24C04CBE00593906 /* Detection.swift in Sources */,
 				B834BD662483F8450037C623 /* LocalizedKeyProvided.swift in Sources */,
 				B82B4D57245668340061A98B /* ServiceDetailsViewController.swift in Sources */,
+				6D387B1A24DAB92900619C7D /* PricingInfoAPIModel.swift in Sources */,
 				6DFDF11124AA5E6F001F358F /* FinanceSettingsPresenter.swift in Sources */,
 				B850DA1124866049002D8F99 /* PhotoGalleryViewController.swift in Sources */,
 				B8B8B9072459DA6700162224 /* ProductDetailsPresenter.swift in Sources */,

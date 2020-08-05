@@ -97,7 +97,7 @@ extension BusinessCardDetailsViewController: BusinessCardDetailsView {
     }
     
     func businessCardPayment(cardID: Int) {
-        paymentService.businessCardPayment(cardID: "\(cardID)", presentingView: self, delegate: self)
+        paymentService.businessCardPayment(cardID: "\(cardID)", presentingView: self, loadProgressView: self, delegate: self)
     }
     
     func setupEditCardView() {

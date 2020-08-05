@@ -58,7 +58,7 @@ class FinanceSettingsViewController: BaseViewController {
     // MARK: - Actions
     
     @IBAction func continueCooperationTapped(_ sender: Any) {
-        paymentService.franchisePayment(presentingView: self, delegate: self)
+        paymentService.franchisePayment(presentingView: self, loadProgressView: self, delegate: self)
         pendingPaymentResult = nil
     }
     
