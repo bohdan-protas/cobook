@@ -11,7 +11,7 @@ import UIKit
 class CardsOverviewViewDataSourceConfigurator: TableCellConfiguratorType {
 
     var cardItemCellConfigurator: TableCellConfigurator<CardItemViewModel, CardItemTableViewCell>?
-    var mapCellConfigurator: TableCellConfigurator<Void?, MapTableViewCell>?
+    var mapCellConfigurator: TableCellConfigurator<[CardMapMarker]?, MapTableViewCell>?
     var postPreviewConfigurator: TableCellConfigurator<PostPreview.Section?, AlbumPreviewItemsTableViewCell>?
 
     // MARK: - Cell configurator
@@ -56,6 +56,7 @@ extension CardsOverviewViewPresenter {
 
     var dataSourceConfigurator: CardsOverviewViewDataSourceConfigurator {
         get {
+            
             let dataSourceConfigurator = CardsOverviewViewDataSourceConfigurator()
 
             // cardItemCellConfigurator
@@ -78,11 +79,14 @@ extension CardsOverviewViewPresenter {
             }
 
             // mapCellConfigurator
-            dataSourceConfigurator.mapCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
+            dataSourceConfigurator.mapCellConfigurator = TableCellConfigurator { (cell, model: [CardMapMarker]?, tableView, indexPath) -> MapTableViewCell in
                 cell.heightConstraint.constant = tableView.frame.height - 58 - AlbumPreviewItemsTableViewCell.height
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
                 cell.delegate = self.view
+                if let markers = model, !markers.isEmpty {
+                    cell.setupMarkers(markers.compactMap { $0.marker }, forceFitCamera: true)
+                }
                 return cell
             }
 

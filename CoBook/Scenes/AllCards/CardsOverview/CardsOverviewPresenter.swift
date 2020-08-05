@@ -501,7 +501,7 @@ private extension CardsOverviewViewPresenter {
                     let cardsToShow = cards[index]?.items ?? []
                     dataSource?[.cards].items = cardsToShow.compactMap { .cardItem(model: $0) }
                 case .inMyRegionCards:
-                    dataSource?[.cards].items = [.map]
+                    dataSource?[.cards].items = [.map(markers: cardMapMarkers)]
             }
         }
 

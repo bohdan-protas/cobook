@@ -12,7 +12,7 @@ enum CardsOverview {
 
     enum Items {
         case cardItem(model: CardItemViewModel)
-        case map
+        case map(markers: [CardMapMarker])
         case postPreview(model: PostPreview.Section?)
     }
 
@@ -31,8 +31,5 @@ enum CardsOverview {
 
     static let postsDataSourceID: String = "postsDataSourceID"
 
-    struct MapCellModel {
-    
-    }
 
 }
