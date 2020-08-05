@@ -45,7 +45,7 @@ extension AppDelegate: UIApplicationDelegate {
         setupScreenToOpen(on: window)
         
         setupDepencencies(for: application)
-        //registerForPushNotifications(application: application)
+        registerForPushNotifications(application: application)
         
         return true
     }
