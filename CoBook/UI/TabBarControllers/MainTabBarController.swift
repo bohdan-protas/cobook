@@ -105,7 +105,7 @@ class MainTabBarController: UITabBarController {
     }
     
     func handleNofitication() {
-        //self.selectedViewController = notificationsController
+        self.selectedViewController = notificationsController
     }
     
 
