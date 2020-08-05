@@ -79,7 +79,7 @@ extension CardsOverviewViewPresenter {
 
             // mapCellConfigurator
             dataSourceConfigurator.mapCellConfigurator = TableCellConfigurator { (cell, model: Void?, tableView, indexPath) -> MapTableViewCell in
-                cell.heightConstraint.constant = tableView.frame.height - 58
+                cell.heightConstraint.constant = tableView.frame.height - 58 - AlbumPreviewItemsTableViewCell.height
                 cell.mapView.settings.myLocationButton = true
                 cell.mapView.isMyLocationEnabled = true
                 cell.delegate = self.view

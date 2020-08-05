@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import GoogleMaps
 
 class CardsOverviewViewController: BaseViewController {
 
@@ -381,12 +382,16 @@ extension CardsOverviewViewController: CardItemTableViewCellDelegate {
 // MARK: - MapTableViewCellDelegate
 
 extension CardsOverviewViewController: MapTableViewCellDelegate {
+    
+    func mapTableViewCell(_ cell: MapTableViewCell, didTappedOnMarker marker: GMSMarker) {
+        presenter.onMarkerTap(marker)
+    }
 
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
         let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
         let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
         presenter.fetchMapMarkersInRegionFittedBy(topLeft: topLeftRectCoordinate, bottomRight: bottomRightRectCoordinate) { markers in
-            cell.markers = markers
+            cell.setupMarkers(markers)
         }
     }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import GoogleMaps
 
 class SavedContentViewController: BaseViewController {
 
@@ -235,11 +236,15 @@ extension SavedContentViewController: HorizontalItemsBarViewDelegate {
 
 extension SavedContentViewController: MapTableViewCellDelegate {
 
+    func mapTableViewCell(_ cell: MapTableViewCell, didTappedOnMarker marker: GMSMarker) {
+        
+    }
+    
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?) {
         let topLeftRectCoordinate = CoordinateApiModel(latitude: topLeft?.latitude, longitude: topLeft?.longitude)
         let bottomRightRectCoordinate = CoordinateApiModel(latitude: bottomRight?.latitude, longitude: bottomRight?.longitude)
         presenter.fetchMapMarkersInRegionFittedBy(topLeft: topLeftRectCoordinate, bottomRight: bottomRightRectCoordinate) { markers in
-            cell.markers = markers
+            cell.setupMarkers(markers)
         }
     }
 

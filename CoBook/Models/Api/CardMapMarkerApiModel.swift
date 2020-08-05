@@ -8,17 +8,8 @@
 
 import Foundation
 
-struct CardMapMarkerApiModel {
-    var id: Int
-    var type: CardType
-    var latitide: Double?
-    var longiture: Double?
-    var placeId: String?
-    var name: String?
-}
-
-extension CardMapMarkerApiModel: Decodable {
-
+struct CardMapMarkerApiModel: Decodable {
+    
     enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -27,5 +18,11 @@ extension CardMapMarkerApiModel: Decodable {
         case placeId = "place_id"
         case name
     }
-
+    
+    var id: Int
+    var type: CardType
+    var latitide: Double?
+    var longiture: Double?
+    var placeId: String?
+    var name: String?
 }

@@ -13,9 +13,10 @@ import GooglePlaces
 protocol MapTableViewCellDelegate: class {
     func mapTableViewCell(_ cell: MapTableViewCell, didUpdateVisibleRectBounds topLeft: CLLocationCoordinate2D?, bottomRight: CLLocationCoordinate2D?)
     func openSettingsAction(_ cell: MapTableViewCell)
+    func mapTableViewCell(_ cell: MapTableViewCell, didTappedOnMarker marker: GMSMarker)
 }
 
-class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
+class MapTableViewCell: UITableViewCell {
 
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     @IBOutlet var mapView: GMSMapView!
@@ -29,32 +30,12 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
         return view
     }()
 
-    var locationManager = CLLocationManager()
-    var currentLocation: CLLocation?
-    var zoomLevel: Float = 10.0
+    private var locationManager = CLLocationManager()
+    private var currentLocation: CLLocation?
+    private var zoomLevel: Float = 10.0
 
-    private var isCameraFitted: Bool = false
-
-    var markers: [GMSMarker] = [] {
-        willSet {
-            markers.forEach { $0.map = nil }
-        }
-        didSet {
-            markers.forEach { $0.map = mapView }
-
-            if !isCameraFitted {
-                var bounds = GMSCoordinateBounds()
-                for marker in self.markers {
-                    bounds = bounds.includingCoordinate(marker.position)
-                }
-
-                let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 150.0 , left: 150.0 ,bottom: 150.0 ,right: 150.0))
-                mapView.animate(with: cameraUpdate)
-                isCameraFitted = true
-            }
-        }
-    }
-
+    private var markers: [GMSMarker] = []
+    private var isInitialSetup: Bool = true
     weak var delegate: MapTableViewCellDelegate?
 
     // MARK: - View Object Lifecycle
@@ -74,9 +55,36 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
         // Add the map to the view, hide it until we've got a location update.
         mapView.isHidden = true
     }
+    
+    func setupMarkers(_ markers: [GMSMarker], forceFitCamera: Bool = false) {
+        self.markers.forEach { $0.map = nil }
+        self.markers = markers
+        self.markers.forEach { $0.map = mapView }
+        
+        if isInitialSetup || forceFitCamera  {
+            var bounds = GMSCoordinateBounds()
+            for marker in self.markers {
+                bounds = bounds.includingCoordinate(marker.position)
+            }
 
-    // MARK: - GMSMapViewDelegate
+            let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 50.0 , left: 50.0 ,bottom: 50.0 ,right: 50.0))
+            mapView.animate(with: cameraUpdate)
+        }
 
+        isInitialSetup = false
+    }
+
+}
+
+// MARK: - GMSMapViewDelegate
+
+extension MapTableViewCell: GMSMapViewDelegate {
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        delegate?.mapTableViewCell(self, didTappedOnMarker: marker)
+        return false
+    }
+    
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
@@ -88,11 +96,10 @@ class MapTableViewCell: UITableViewCell, GMSMapViewDelegate {
                 break
             }
         } else {
-            print("Location services are not enabled")
+            Log.error("Location services are not enabled")
         }
     }
-
-
+    
 }
 
 

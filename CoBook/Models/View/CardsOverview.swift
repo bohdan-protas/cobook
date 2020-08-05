@@ -31,5 +31,8 @@ enum CardsOverview {
 
     static let postsDataSourceID: String = "postsDataSourceID"
 
+    struct MapCellModel {
+    
+    }
 
 }

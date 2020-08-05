@@ -26,6 +26,7 @@ class AlbumPreviewItemsTableViewCell: UITableViewCell {
     weak var delegate: AlbumPreviewItemsViewDelegate?
     weak var dataSource: AlbumPreviewItemsViewDataSource?
 
+    static var height: CGFloat = 136
     var dataSourceID: String?
 
     override func awakeFromNib() {

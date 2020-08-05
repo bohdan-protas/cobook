@@ -61,6 +61,7 @@
 		6DBE3684249BC272005383C5 /* AccentButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE3682249BC272005383C5 /* AccentButtonTableViewCell.swift */; };
 		6DBE3685249BC272005383C5 /* AccentButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE3683249BC272005383C5 /* AccentButtonTableViewCell.xib */; };
 		6DBE3687249BE2E5005383C5 /* FeedbackEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE3686249BE2E4005383C5 /* FeedbackEndpoint.swift */; };
+		6DD56EF224DB48D2002FC5F0 /* CardMapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD56EF124DB48D2002FC5F0 /* CardMapMarker.swift */; };
 		6DE043ED24C80EEE00667E11 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DE043EC24C80EEE00667E11 /* Notifications.storyboard */; };
 		6DE043F024C80F4B00667E11 /* NotificationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE043EF24C80F4B00667E11 /* NotificationsListViewController.swift */; };
 		6DE043F224C80F6E00667E11 /* NotificationsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE043F124C80F6E00667E11 /* NotificationsListPresenter.swift */; };
@@ -505,6 +506,7 @@
 		6DBE3682249BC272005383C5 /* AccentButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButtonTableViewCell.swift; sourceTree = "<group>"; };
 		6DBE3683249BC272005383C5 /* AccentButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccentButtonTableViewCell.xib; sourceTree = "<group>"; };
 		6DBE3686249BE2E4005383C5 /* FeedbackEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackEndpoint.swift; sourceTree = "<group>"; };
+		6DD56EF124DB48D2002FC5F0 /* CardMapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMapMarker.swift; sourceTree = "<group>"; };
 		6DE043EC24C80EEE00667E11 /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		6DE043EF24C80F4B00667E11 /* NotificationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsListViewController.swift; sourceTree = "<group>"; };
 		6DE043F124C80F6E00667E11 /* NotificationsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsListPresenter.swift; sourceTree = "<group>"; };
@@ -1905,6 +1907,7 @@
 				6D3E467724AE16AC005FF2CF /* FinanceStatistics.swift */,
 				6D3E467924AE16CE005FF2CF /* FinanceHistoryItemModel.swift */,
 				6DE043F724C8133300667E11 /* NotificationsList.swift */,
+				6DD56EF124DB48D2002FC5F0 /* CardMapMarker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3198,6 +3201,7 @@
 				B8DE5E552419262600F4F60B /* TextViewTableViewCell.swift in Sources */,
 				6DBE367F249B9D0F005383C5 /* PlaceholderTableViewCell.swift in Sources */,
 				6D949C6224C04CBE00593906 /* XML.swift in Sources */,
+				6DD56EF224DB48D2002FC5F0 /* CardMapMarker.swift in Sources */,
 				B84B94EA240329D50007EB60 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

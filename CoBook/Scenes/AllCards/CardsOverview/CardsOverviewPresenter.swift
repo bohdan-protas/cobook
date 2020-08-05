@@ -17,11 +17,13 @@ protocol CardsOverviewView: AlertDisplayableView, LoadDisplayableView, Navigable
     func reload()
     func set(searchDataSource: TableDataSource<CardsOverviewViewDataSourceConfigurator>?)
     func reloadSearch(resultText: String)
+
+    func showBottomLoaderView()
+    func hideBottomLoaderView()
+    
     func goToBusinessCardDetails(presenter: BusinessCardDetailsPresenter?)
     func goToPersonalCardDetails(presenter: PersonalCardDetailsPresenter?)
     func goToArticleDetails(presenter: ArticleDetailsPresenter?)
-    func showBottomLoaderView()
-    func hideBottomLoaderView()
 }
 
 fileprivate enum Defaults {
@@ -44,7 +46,8 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
     private var searchCards: [CardItemViewModel] = []
     private var cards: [CardsOverview.BarSectionsTypeIndex: PaginationPage<CardItemViewModel>] = [:]
     private var albumPreviewSection: PostPreview.Section?
-
+    private var cardMapMarkers: [CardMapMarker] = []
+    
     /// Current pin request work item
     private var pendingCardMapMarkersRequestWorkItem: DispatchWorkItem?
 
@@ -232,31 +235,45 @@ class CardsOverviewViewPresenter: NSObject, BasePresenter {
         updateViewDataSource()
     }
 
+    func onMarkerTap(_ marker: GMSMarker) {
+        guard let selectedMapMarker = cardMapMarkers.first(where: { $0.marker == marker }) else { return }
+        switch selectedMapMarker.cardType {
+        case .personal:
+            let presenter = PersonalCardDetailsPresenter(id: selectedMapMarker.cardID)
+            view?.goToPersonalCardDetails(presenter: presenter)
+        case .business:
+            let presenter = BusinessCardDetailsPresenter(id: selectedMapMarker.cardID)
+            view?.goToBusinessCardDetails(presenter: presenter)
+        }
+    }
 
 }
 
 // MARK: - Data fetching
 
 extension CardsOverviewViewPresenter {
-
+    
     func fetchMapMarkersInRegionFittedBy(topLeft: CoordinateApiModel, bottomRight: CoordinateApiModel, completion: (([GMSMarker]) -> Void)?) {
         pendingCardMapMarkersRequestWorkItem?.cancel()
         pendingCardMapMarkersRequestWorkItem = DispatchWorkItem { [weak self] in
             APIClient.default.getCardLocationsInRegion(topLeftRectCoordinate: topLeft, bottomRightRectCoordinate: bottomRight) { [weak self] (result) in
                 switch result {
-                case .success(let response):
-                    let markers: [GMSMarker] = (response ?? []).compactMap { apiModel in
+                case .success(let cardMapMarkers):
+                    self?.cardMapMarkers = (cardMapMarkers ?? []).compactMap { apiModel in
+                        var mapMarker: GMSMarker?
                         if let latitide = apiModel.latitide, let longiture = apiModel.longiture {
                             let position = CLLocationCoordinate2D(latitude: latitide, longitude: longiture)
-                            let marker = GMSMarker(position: position)
+                            mapMarker = GMSMarker(position: position)
                             switch apiModel.type {
-                                case .personal: marker.icon = UIImage(named: "ic_mapmarker_personal")
-                                case .business: marker.icon = UIImage(named: "ic_mapmarker_business")
+                            case .personal:
+                                mapMarker?.icon = UIImage(named: "ic_mapmarker_personal")
+                            case .business:
+                                mapMarker?.icon = UIImage(named: "ic_mapmarker_business")
                             }
-                            return marker
-                        } else { return nil }
+                        }
+                        return CardMapMarker(cardID: apiModel.id, cardType: apiModel.type, marker: mapMarker)
                     }
-                    completion?(markers)
+                    completion?(self?.cardMapMarkers.compactMap { $0.marker } ?? [])
                 case .failure(let error):
                     self?.view?.errorAlert(message: error.localizedDescription)
                 }
@@ -513,12 +530,11 @@ private extension CardsOverviewViewPresenter {
     func goToItem(_ item: CardsOverview.Items) {
         switch item {
         case .cardItem(let model):
+            
             switch model.type {
-
             case .personal:
                 let presenter = PersonalCardDetailsPresenter(id: model.id)
                 view?.goToPersonalCardDetails(presenter: presenter)
-
             case .business:
                 let presenter = BusinessCardDetailsPresenter(id: model.id)
                 view?.goToBusinessCardDetails(presenter: presenter)
